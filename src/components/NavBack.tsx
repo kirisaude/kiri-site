@@ -11,7 +11,7 @@ export function NavBack({ label, href }: NavBackProps) {
   const router = useRouter();
 
   return (
-    <div className="flex items-center gap-3 px-4 py-1">
+    <div className="flex items-center gap-3">
       <button
         onClick={() => (href ? router.push(href) : router.back())}
         className="w-9 h-9 rounded-full bg-white border border-linha flex items-center justify-center flex-shrink-0 cursor-pointer"
@@ -28,7 +28,7 @@ export function NavBack({ label, href }: NavBackProps) {
         </svg>
       </button>
       {label && (
-        <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
+        <span className="text-[15px] font-medium text-cinza-texto">
           {label}
         </span>
       )}
