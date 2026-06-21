@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "descricao": "Seed de 20 profissionais de exemplo para a versão de teste da Kiri. Dados fictícios (registros/CRM/RQE são ilustrativos). Áreas de atuação restritas a TEA e TDAH nesta fase.",
+    "profissoes": ["Psiquiatra da infância e adolescência","Neuropediatra","Neuropsicólogo","Psicólogo","Fonoaudiólogo","Terapeuta ocupacional","Fisioterapeuta","Nutricionista"]
+  },
+  "profissionais": [
+    {
+      "id": "kiri-001", "nome": "Dra. Helena Marques", "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência", "registro_conselho": "CRM 134256-SP", "rqe": "RQE 28714",
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Presencial e online", "cidade": "São Paulo, SP — Vila Mariana",
+      "faixa_etaria": "Crianças e adolescentes · 0–18 anos",
+      "sobre": "Atende crianças e adolescentes com foco em TEA e TDAH, com avaliação diagnóstica cuidadosa e acompanhamento contínuo. Trabalho em conjunto com a família e a escola, em linguagem clara e sem pressa.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "Universidade de São Paulo (USP) · 2010"},
+        {"curso": "Residência em Psiquiatria", "instituicao_ano": "UNIFESP · 2014"},
+        {"curso": "Especialização em Psiquiatria da Infância e Adolescência", "instituicao_ano": "IPq-HCFMUSP · 2016"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 450, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-002", "nome": "Dr. André Lemos", "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência", "registro_conselho": "CRM 88214-PR", "rqe": "RQE 19033",
+      "areas_atuacao": ["TDAH"], "modalidade": "Somente online", "cidade": "Curitiba, PR",
+      "faixa_etaria": "Crianças e adolescentes · 6–18 anos",
+      "sobre": "Foco em TDAH em idade escolar, com manejo medicamentoso criterioso e orientação à família e à escola.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "UFPR · 2009"},
+        {"curso": "Residência em Psiquiatria", "instituicao_ano": "HC-UFPR · 2013"}
+      ],
+      "valor_formato": "faixa", "valor_min": 450, "valor_max": 600,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-003", "nome": "Dra. Sofia Brandão", "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência", "registro_conselho": "CRM 71140-MG", "rqe": "RQE 15820",
+      "areas_atuacao": ["TEA"], "modalidade": "Somente presencial", "cidade": "Belo Horizonte, MG",
+      "faixa_etaria": "Crianças · 2–12 anos",
+      "sobre": "Avaliação e acompanhamento de TEA na primeira infância, com olhar para sono, alimentação e comportamento.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "UFMG · 2008"},
+        {"curso": "Especialização em Psiquiatria da Infância e Adolescência", "instituicao_ano": "UFMG · 2014"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 480, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-004", "nome": "Dra. Lúcia Andrade", "profissao": "Neuropediatra",
+      "titulo_exibicao": "Neuropediatra", "registro_conselho": "CRM 95012-RJ", "rqe": "RQE 22107",
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Presencial e online", "cidade": "Rio de Janeiro, RJ — Botafogo",
+      "faixa_etaria": "Crianças e adolescentes · 0–16 anos",
+      "sobre": "Neurologia pediátrica com foco em atrasos do desenvolvimento, TEA e TDAH; investigação diagnóstica integrada.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "UERJ · 2007"},
+        {"curso": "Residência em Neurologia Pediátrica", "instituicao_ano": "IPPMG-UFRJ · 2012"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 500, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-005", "nome": "Dr. Paulo Vieira", "profissao": "Neuropediatra",
+      "titulo_exibicao": "Neuropediatra", "registro_conselho": "CRM 142880-SP", "rqe": "RQE 30214",
+      "areas_atuacao": ["TEA"], "modalidade": "Somente presencial", "cidade": "São Paulo, SP — Pinheiros",
+      "faixa_etaria": "Crianças · 0–10 anos",
+      "sobre": "Diagnóstico precoce de TEA e seguimento do neurodesenvolvimento nos primeiros anos.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "USP · 2006"},
+        {"curso": "Residência em Neurologia Pediátrica", "instituicao_ano": "HC-FMUSP · 2011"}
+      ],
+      "valor_formato": "faixa", "valor_min": 500, "valor_max": 650,
+      "convenio_info": "Particular · atende alguns convênios", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-006", "nome": "Dra. Carmen Rocha", "profissao": "Neuropediatra",
+      "titulo_exibicao": "Neuropediatra", "registro_conselho": "CRM 60331-PE", "rqe": "RQE 12044",
+      "areas_atuacao": ["TDAH"], "modalidade": "Somente online", "cidade": "Recife, PE",
+      "faixa_etaria": "Crianças e adolescentes · 6–17 anos",
+      "sobre": "Acompanhamento de TDAH e dificuldades escolares, com foco em qualidade de vida da família.",
+      "formacao": [
+        {"curso": "Graduação em Medicina", "instituicao_ano": "UFPE · 2009"},
+        {"curso": "Residência em Neurologia Pediátrica", "instituicao_ano": "IMIP · 2014"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 460, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-007", "nome": "Dra. Beatriz Nogueira", "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicóloga", "registro_conselho": "CRP 06/98421", "rqe": null,
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Somente online", "cidade": "São Paulo, SP",
+      "faixa_etaria": "Crianças e adolescentes · 5–17 anos",
+      "sobre": "Avaliação neuropsicológica para TEA e TDAH, com devolutiva detalhada e orientações práticas.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "PUC-SP · 2011"},
+        {"curso": "Título de Especialista em Neuropsicologia (CFP)", "instituicao_ano": "CFP · 2017"}
+      ],
+      "valor_formato": "faixa", "valor_min": 380, "valor_max": 520,
+      "convenio_info": "Particular · avaliação fechada em pacote", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-008", "nome": "Thiago Barros", "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicólogo", "registro_conselho": "CRP 08/21190", "rqe": null,
+      "areas_atuacao": ["TDAH"], "modalidade": "Presencial e online", "cidade": "Curitiba, PR",
+      "faixa_etaria": "Crianças e adolescentes · 6–18 anos",
+      "sobre": "Avaliação de TDAH e funções executivas; relatórios voltados à escola e ao tratamento.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "UFPR · 2012"},
+        {"curso": "Título de Especialista em Neuropsicologia (CFP)", "instituicao_ano": "CFP · 2018"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 380, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-009", "nome": "Daniela Castro", "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicóloga", "registro_conselho": "CRP 07/30551", "rqe": null,
+      "areas_atuacao": ["TEA"], "modalidade": "Somente presencial", "cidade": "Porto Alegre, RS",
+      "faixa_etaria": "Crianças · 4–12 anos",
+      "sobre": "Avaliação neuropsicológica infantil com foco em TEA e perfil de aprendizagem.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "UFRGS · 2010"},
+        {"curso": "Título de Especialista em Neuropsicologia (CFP)", "instituicao_ano": "CFP · 2016"}
+      ],
+      "valor_formato": "faixa", "valor_min": 400, "valor_max": 560,
+      "convenio_info": "Particular · avaliação fechada em pacote", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-010", "nome": "Rafael Tavares", "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo infantil", "registro_conselho": "CRP 08/14722", "rqe": null,
+      "areas_atuacao": ["TDAH"], "modalidade": "Somente online", "cidade": "Curitiba, PR",
+      "faixa_etaria": "Crianças e adolescentes · 6–17 anos",
+      "sobre": "Terapia cognitivo-comportamental (TCC) para TDAH, com foco em rotina, organização e autoestima.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "PUC-PR · 2013"},
+        {"curso": "Formação em TCC", "instituicao_ano": "Instituto de TCC · 2016"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 200, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-011", "nome": "Marina Salles", "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicóloga · ABA", "registro_conselho": "CRP 02/19884", "rqe": null,
+      "areas_atuacao": ["TEA"], "modalidade": "Presencial e online", "cidade": "Recife, PE",
+      "faixa_etaria": "Crianças · 2–12 anos",
+      "sobre": "Intervenção em TEA com base em Análise do Comportamento (ABA), em parceria com a família.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "UFPE · 2012"},
+        {"curso": "Formação em Análise do Comportamento Aplicada (ABA)", "instituicao_ano": "2017"}
+      ],
+      "valor_formato": "faixa", "valor_min": 220, "valor_max": 320,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-012", "nome": "Bruno Carvalho", "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo infantil", "registro_conselho": "CRP 07/25610", "rqe": null,
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Somente presencial", "cidade": "Porto Alegre, RS",
+      "faixa_etaria": "Crianças e adolescentes · 5–16 anos",
+      "sobre": "Acompanhamento psicológico de TEA e TDAH, com foco em regulação emocional e habilidades sociais.",
+      "formacao": [
+        {"curso": "Graduação em Psicologia", "instituicao_ano": "PUCRS · 2011"},
+        {"curso": "Formação em TCC", "instituicao_ano": "2015"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 210, "valor_max": null,
+      "convenio_info": "Particular · atende alguns convênios", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-013", "nome": "Dra. Beatriz Lima", "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudióloga", "registro_conselho": "CRFa 2-11045", "rqe": null,
+      "areas_atuacao": ["TEA"], "modalidade": "Presencial e online", "cidade": "São Paulo, SP — Moema",
+      "faixa_etaria": "Crianças · 1–10 anos",
+      "sobre": "Linguagem e comunicação no TEA, incluindo comunicação alternativa quando necessário.",
+      "formacao": [
+        {"curso": "Graduação em Fonoaudiologia", "instituicao_ano": "PUC-SP · 2012"},
+        {"curso": "Especialização em Linguagem", "instituicao_ano": "CFFa · 2016"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 220, "valor_max": null,
+      "convenio_info": "Particular · atende alguns convênios", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-014", "nome": "Tiago Mendes", "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudiólogo", "registro_conselho": "CRFa 5-8820", "rqe": null,
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Somente online", "cidade": "Salvador, BA",
+      "faixa_etaria": "Crianças e adolescentes · 4–15 anos",
+      "sobre": "Fala e linguagem com foco em compreensão, narrativa e leitura; apoio a dificuldades escolares.",
+      "formacao": [
+        {"curso": "Graduação em Fonoaudiologia", "instituicao_ano": "UFBA · 2013"},
+        {"curso": "Especialização em Linguagem", "instituicao_ano": "CFFa · 2017"}
+      ],
+      "valor_formato": "faixa", "valor_min": 200, "valor_max": 280,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-015", "nome": "Renata Alves", "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudióloga", "registro_conselho": "CRFa 6-9912", "rqe": null,
+      "areas_atuacao": ["TDAH"], "modalidade": "Somente presencial", "cidade": "Belo Horizonte, MG",
+      "faixa_etaria": "Crianças · 5–12 anos",
+      "sobre": "Processamento auditivo e linguagem associados ao TDAH, com plano terapêutico individualizado.",
+      "formacao": [
+        {"curso": "Graduação em Fonoaudiologia", "instituicao_ano": "UFMG · 2011"},
+        {"curso": "Especialização em Audiologia", "instituicao_ano": "CFFa · 2015"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 210, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-016", "nome": "Letícia Prado", "profissao": "Terapeuta ocupacional",
+      "titulo_exibicao": "Terapeuta ocupacional", "registro_conselho": "CREFITO-3 30214-TO", "rqe": null,
+      "areas_atuacao": ["TEA"], "modalidade": "Somente presencial", "cidade": "São Paulo, SP — Tatuapé",
+      "faixa_etaria": "Crianças · 2–12 anos",
+      "sobre": "Integração sensorial e autonomia nas atividades de vida diária (AVDs) para crianças no TEA.",
+      "formacao": [
+        {"curso": "Graduação em Terapia Ocupacional", "instituicao_ano": "USP · 2012"},
+        {"curso": "Formação em Integração Sensorial", "instituicao_ano": "2016"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 240, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-017", "nome": "Camila Nunes", "profissao": "Terapeuta ocupacional",
+      "titulo_exibicao": "Terapeuta ocupacional", "registro_conselho": "CREFITO-2 21887-TO", "rqe": null,
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Presencial e online", "cidade": "Rio de Janeiro, RJ — Tijuca",
+      "faixa_etaria": "Crianças e adolescentes · 3–15 anos",
+      "sobre": "Integração sensorial e regulação para TEA e TDAH, com orientação à rotina familiar.",
+      "formacao": [
+        {"curso": "Graduação em Terapia Ocupacional", "instituicao_ano": "UFRJ · 2013"},
+        {"curso": "Formação em Integração Sensorial", "instituicao_ano": "2017"}
+      ],
+      "valor_formato": "faixa", "valor_min": 240, "valor_max": 330,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-018", "nome": "Diego Farias", "profissao": "Fisioterapeuta",
+      "titulo_exibicao": "Fisioterapeuta", "registro_conselho": "CREFITO-6 41200-F", "rqe": null,
+      "areas_atuacao": ["TDAH"], "modalidade": "Somente online", "cidade": "Fortaleza, CE",
+      "faixa_etaria": "Crianças e adolescentes · 6–16 anos",
+      "sobre": "Fisioterapia motora e psicomotricidade, apoiando coordenação e organização corporal no TDAH.",
+      "formacao": [
+        {"curso": "Graduação em Fisioterapia", "instituicao_ano": "UFC · 2012"},
+        {"curso": "Especialização em Fisioterapia Neurofuncional", "instituicao_ano": "COFFITO · 2016"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 200, "valor_max": null,
+      "convenio_info": "Particular · atende alguns convênios", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-019", "nome": "Natália Souza", "profissao": "Fisioterapeuta",
+      "titulo_exibicao": "Fisioterapeuta", "registro_conselho": "CREFITO-10 12877-F", "rqe": null,
+      "areas_atuacao": ["TEA","TDAH"], "modalidade": "Presencial e online", "cidade": "Florianópolis, SC",
+      "faixa_etaria": "Crianças · 1–10 anos",
+      "sobre": "Fisioterapia neuropediátrica e desenvolvimento motor; trabalho integrado com TO e fono.",
+      "formacao": [
+        {"curso": "Graduação em Fisioterapia", "instituicao_ano": "UFSC · 2011"},
+        {"curso": "Especialização em Fisioterapia Neurofuncional", "instituicao_ano": "COFFITO · 2015"}
+      ],
+      "valor_formato": "faixa", "valor_min": 200, "valor_max": 290,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    },
+    {
+      "id": "kiri-020", "nome": "Carla Bittencourt", "profissao": "Nutricionista",
+      "titulo_exibicao": "Nutricionista", "registro_conselho": "CRN-3 41122", "rqe": null,
+      "areas_atuacao": ["TEA"], "modalidade": "Somente online", "cidade": "São Paulo, SP",
+      "faixa_etaria": "Crianças e adolescentes · 2–17 anos",
+      "sobre": "Seletividade alimentar no TEA e aspectos nutricionais do neurodesenvolvimento, com abordagem gentil.",
+      "formacao": [
+        {"curso": "Graduação em Nutrição", "instituicao_ano": "USP · 2013"},
+        {"curso": "Especialização em Nutrição Materno-Infantil", "instituicao_ano": "CRN · 2017"}
+      ],
+      "valor_formato": "a_partir_de", "valor_min": 250, "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso", "verificado": true, "foto_url": null
+    }
+  ]
+}
