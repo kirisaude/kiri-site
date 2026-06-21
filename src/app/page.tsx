@@ -86,7 +86,7 @@ export default function Home() {
                 <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#6E8893" strokeWidth="1.6" strokeLinejoin="round" />
                 <circle cx="10" cy="7.6" r="2.1" stroke="#6E8893" strokeWidth="1.6" />
               </svg>
-              <span className="text-[12px] md:text-[12.5px] font-semibold text-cinza-texto">São Paulo</span>
+              <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto">São Paulo</span>
             </button>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
@@ -141,7 +141,7 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-center justify-center self-stretch" style={{ minWidth: 180 }}>
+          <div className="hidden md:flex flex-none items-start justify-center self-start pt-2" style={{ minWidth: 180 }}>
             <KiriLogo size={180} />
           </div>
         </div>
@@ -189,7 +189,11 @@ export default function Home() {
             className="flex items-center gap-4 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-6 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
           >
             <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white border border-borda-quente flex items-center justify-center">
-              <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+              <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
+                <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="#BE6E4E" strokeWidth="1.7" strokeLinecap="round" />
+                <circle cx="10" cy="14.7" r="1.05" fill="#BE6E4E" />
+              </svg>
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="none" className="hidden md:block">
                 <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="#BE6E4E" strokeWidth="1.7" strokeLinecap="round" />
                 <circle cx="10" cy="14.7" r="1.05" fill="#BE6E4E" />
               </svg>
@@ -217,7 +221,7 @@ export default function Home() {
               activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
-            <span className="text-[13px] md:text-[14.5px] font-semibold whitespace-nowrap">
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
               {activeProfissao ? activeProfissao.split(" ")[0] : "Tipo de profissional"}
             </span>
             {activeProfissao ? (
@@ -234,7 +238,7 @@ export default function Home() {
               activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
-            <span className="text-[13px] md:text-[14.5px] font-semibold whitespace-nowrap">
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
               {activeModalidade ? modalidadeCurta(activeModalidade) : "Modalidade"}
             </span>
             {activeModalidade ? (
