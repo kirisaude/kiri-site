@@ -468,18 +468,18 @@ export default function Home() {
             {/* Por que selecionada */}
             <Link
               href="/como-selecionamos"
-              className="block bg-white border border-borda-azulada rounded-[15px] md:rounded-[16px] p-4 md:p-5 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow"
+              className="flex flex-col justify-center bg-white border border-borda-azulada rounded-[15px] md:rounded-[16px] p-4 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow"
             >
               <div className="flex items-center gap-2.5 mb-3">
                 <svg width="16" height="16" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
                   <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
                   <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="font-serif text-[16px] md:text-[18px] font-semibold text-carvao">
+                <span className="font-serif text-[17px] md:text-[18px] font-semibold text-carvao">
                   Por que é uma rede selecionada
                 </span>
               </div>
-              <p className="text-[13px] md:text-[14px] leading-[1.6] text-cinza-texto m-0">
+              <p className="text-[14px] md:text-[15px] leading-[1.6] text-cinza-texto m-0">
                 Registro no conselho e formação conferidos, um a um. Uma rede pequena, para você decidir com segurança.
               </p>
               <div className="mt-3 flex flex-col gap-2">
@@ -493,14 +493,14 @@ export default function Home() {
                       <circle cx="10" cy="10" r="8.4" stroke="#6E8893" strokeWidth="1.3" />
                       <path d="M6.3 10.2 L8.8 12.7 L13.8 7" stroke="#6E8893" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-[12.5px] md:text-[13px] leading-[1.5] text-cinza-texto2">{item}</span>
+                    <span className="text-[13px] md:text-[14px] leading-[1.5] text-cinza-texto2">{item}</span>
                   </div>
                 ))}
               </div>
             </Link>
 
             {/* Como funciona */}
-            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 md:p-5 flex flex-col justify-center">
+            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 flex flex-col justify-center">
               <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Como funciona</div>
               <div className="flex flex-col gap-0">
                 {[
