@@ -25,7 +25,7 @@ export default function ComoSelecionamosPage() {
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         {/* Título */}
-        <div className="px-[22px] pt-2">
+        <div className="px-[22px] pt-8">
           <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Como selecionamos os profissionais
           </h1>
