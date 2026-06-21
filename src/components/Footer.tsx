@@ -2,7 +2,7 @@ import { KiriLogo } from "./KiriLogo";
 
 export function Footer({ className = "" }: { className?: string }) {
   return (
-    <div className={`pt-4 border-t border-linha flex items-center justify-between gap-2 ${className}`}>
+    <div className={`w-full pt-4 border-t border-linha flex items-center justify-between gap-2 ${className}`}>
       <div className="flex items-center gap-2">
         <KiriLogo size={20} />
         <span className="text-[13px] text-muted">Kiri · Rede selecionada de neurodesenvolvimento</span>
