@@ -238,12 +238,12 @@ export default async function PerfilPage({ params }: PageProps) {
             <div className="pt-2 pb-1">
               <Link
                 href={`/reportar/${p.id}`}
-                className="inline-flex items-center gap-1.5 text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline"
+                className="inline-flex items-center gap-2 text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[9px] px-3.5 py-2 no-underline hover:bg-[#EFE6D6] transition-colors"
               >
-                <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="10" r="8.2" stroke="#9A8C78" strokeWidth="1.4" />
-                  <line x1="10" y1="9" x2="10" y2="14" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="10" cy="6.3" r="1.05" fill="#9A8C78" />
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                  <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
+                  <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="10" cy="6.3" r="1.05" fill="#8A7E6A" />
                 </svg>
                 Reportar erro ou perfil
               </Link>
