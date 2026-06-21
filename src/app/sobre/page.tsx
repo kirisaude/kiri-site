@@ -5,7 +5,7 @@ export default function SobrePage() {
   return (
     <div className="min-h-screen bg-creme">
       {/* Nav — fora do container para ficar no canto esquerdo da tela */}
-      <div className="max-w-3xl mx-auto w-full px-4 pt-4 pb-2">
+      <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Sobre a Kiri" />
       </div>
 

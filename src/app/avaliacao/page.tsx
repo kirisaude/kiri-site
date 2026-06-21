@@ -5,7 +5,7 @@ import { NavBack } from "@/components/NavBack";
 export default function AvaliacaoPage() {
   return (
     <div className="min-h-screen bg-creme flex flex-col">
-      <div className="max-w-3xl mx-auto w-full px-4 pt-4 pb-2">
+      <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Avaliação do neurodesenvolvimento" />
       </div>
 

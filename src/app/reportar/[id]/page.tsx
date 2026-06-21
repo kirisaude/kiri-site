@@ -30,7 +30,7 @@ function ReportarContent() {
 
   return (
     <div className="min-h-screen bg-creme">
-      <div className="max-w-2xl mx-auto w-full px-4 pt-4 pb-2">
+      <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Reportar perfil" />
       </div>
 

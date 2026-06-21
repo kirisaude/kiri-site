@@ -19,7 +19,7 @@ const ITENS = [
 export default function ComoSelecionamosPage() {
   return (
     <div className="min-h-screen bg-creme">
-      <div className="max-w-3xl mx-auto w-full px-4 pt-4 pb-2">
+      <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Sobre a rede" />
       </div>
 
@@ -62,13 +62,21 @@ export default function ComoSelecionamosPage() {
         </div>
 
         {/* O que significa */}
-        <div className="mx-[22px] mt-[26px]">
-          <div className="text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">
-            O que isso significa para você
+        <div className="mx-[18px] mt-[26px] bg-white border border-[#E8D5C4] rounded-[16px] overflow-hidden">
+          <div className="flex items-center gap-[9px] bg-[#F5EAE0] px-4 py-[13px]">
+            <svg width="18" height="18" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+              <circle cx="11" cy="11" r="10" stroke="#A05040" strokeWidth="1.4" />
+              <path d="M7 11.5 L10 14.5 L15.5 8" stroke="#A05040" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-[14.5px] font-bold tracking-[0.03em] text-[#7A3820]">
+              O que isso significa para você
+            </span>
           </div>
-          <p className="text-[16.5px] md:text-[17px] leading-[1.65] text-carvao-sutil m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Todo profissional aqui teve formação e registro verificados, um a um. Não classificamos quem é "melhor" — garantimos que cada um cumpre um critério real e transparente, para você escolher com segurança o profissional certo para o seu caso.
-          </p>
+          <div className="px-4 py-4">
+            <p className="text-[16px] md:text-[16.5px] leading-[1.65] text-carvao-sutil m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Todo profissional aqui teve formação e registro verificados, um a um. Não classificamos quem é "melhor" — garantimos que cada um cumpre um critério real e transparente, para você escolher com segurança o profissional certo para o seu caso.
+            </p>
+          </div>
         </div>
 
         {/* Responsabilidade */}
