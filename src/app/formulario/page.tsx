@@ -48,7 +48,7 @@ function FormularioContent() {
           <h1 className="font-serif text-[23px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você procura
           </h1>
-          <p className="text-[13.5px] leading-[1.5] text-cinza-texto2 mt-1 mb-0">
+          <p className="text-[15.5px] leading-[1.55] text-cinza-texto2 mt-2 mb-0">
             O preenchimento é rápido. Suas respostas nos ajudam a encontrar o especialista ideal para a sua necessidade.
           </p>
         </div>
@@ -106,10 +106,10 @@ function FormularioContent() {
             <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
           </svg>
           <div>
-            <p className="text-[13px] leading-[1.5] text-ambar-texto m-0">
+            <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
               Esta triagem é orientação e encaminhamento — não é avaliação clínica nem diagnóstico.
             </p>
-            <p className="text-[13px] leading-[1.5] text-ambar-texto font-semibold mt-0.5 m-0">
+            <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold mt-0.5 m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.
             </p>
           </div>
