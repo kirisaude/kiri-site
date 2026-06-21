@@ -88,10 +88,10 @@ export default function Home() {
               </svg>
               <span className="text-[12px] md:text-[12.5px] font-semibold text-cinza-texto">São Paulo</span>
             </button>
-            <Link href="/como-selecionamos" className="hidden md:block text-[13px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+            <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
             </Link>
-            <Link href="/sobre" className="hidden md:block text-[13px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+            <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
             </Link>
           </div>
@@ -102,39 +102,47 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
 
         {/* Hero */}
-        <div className="pt-6 md:pt-14 md:pb-2">
-          <h1
-            className="font-serif text-[27px] md:text-[46px] lg:text-[55px] xl:text-[60px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao"
-            style={{ textWrap: "balance" } as React.CSSProperties}
-          >
-            Encontre o profissional certo para o desenvolvimento do seu filho.
-          </h1>
-          <p
-            className="mt-3 md:mt-6 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
-            style={{ textWrap: "pretty" } as React.CSSProperties}
-          >
-            Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
-            em que a formação de cada profissional é verificada — para você não se perder numa lista infinita.
-          </p>
+        <div className="pt-6 md:pt-14 md:pb-2 flex items-start gap-8 md:gap-12">
+          {/* Texto */}
+          <div className="flex-1 min-w-0">
+            <h1
+              className="font-serif text-[27px] md:text-[46px] lg:text-[55px] xl:text-[60px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao"
+              style={{ textWrap: "balance" } as React.CSSProperties}
+            >
+              Encontre o profissional certo para o desenvolvimento do seu filho.
+            </h1>
+            <p
+              className="mt-2 md:mt-5 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
+              style={{ textWrap: "pretty" } as React.CSSProperties}
+            >
+              Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
+              em que a formação de cada profissional é verificada — para você não se perder numa lista infinita.
+            </p>
 
-          {/* Search — mobile only (inline) */}
-          <div className="md:hidden mt-5">
-            <div className="flex items-center gap-2.5 bg-white border border-linha rounded-[13px] px-[15px] py-3.5 shadow-[0_2px_10px_-6px_rgba(60,55,45,0.28)]">
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-                <circle cx="8.6" cy="8.6" r="6" stroke="#9A8C78" strokeWidth="1.6" />
-                <line x1="13.2" y1="13.2" x2="17.5" y2="17.5" stroke="#9A8C78" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar por condição ou profissional"
-                className="flex-1 text-[14.5px] text-carvao placeholder:text-muted bg-transparent outline-none"
-              />
-              {search && (
-                <button onClick={() => setSearch("")} className="text-muted text-lg leading-none">×</button>
-              )}
+            {/* Search — mobile only (inline) */}
+            <div className="md:hidden mt-5">
+              <div className="flex items-center gap-2.5 bg-white border border-linha rounded-[13px] px-[15px] py-3.5 shadow-[0_2px_10px_-6px_rgba(60,55,45,0.28)]">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                  <circle cx="8.6" cy="8.6" r="6" stroke="#9A8C78" strokeWidth="1.6" />
+                  <line x1="13.2" y1="13.2" x2="17.5" y2="17.5" stroke="#9A8C78" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Buscar por condição ou profissional"
+                  className="flex-1 text-[14.5px] text-carvao placeholder:text-muted bg-transparent outline-none"
+                />
+                {search && (
+                  <button onClick={() => setSearch("")} className="text-muted text-lg leading-none">×</button>
+                )}
+              </div>
             </div>
+          </div>
+
+          {/* Pássaros — desktop only */}
+          <div className="hidden md:flex flex-none items-center justify-center self-stretch" style={{ minWidth: 180 }}>
+            <KiriLogo size={180} />
           </div>
         </div>
 
@@ -150,7 +158,7 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1.5 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-5 cursor-pointer transition-all ${
+                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-5 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
@@ -160,7 +168,7 @@ export default function Home() {
                   {cond}
                 </span>
                 <span className={`text-[11.5px] md:text-[18px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
-                  {cond === "TEA" ? "Espectro autista" : "Atenção e hiperatividade"}
+                  {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
             ))}
@@ -190,7 +198,7 @@ export default function Home() {
               <div className="text-[14.5px] md:text-[19px] font-bold text-ferrugem-escura leading-[1.2]">
                 Não sei por onde começar
               </div>
-              <div className="text-[12.5px] md:text-[15px] text-cinza-texto mt-0.5 md:mt-1">
+              <div className="text-[12.5px] md:text-[17px] text-cinza-texto mt-0.5 md:mt-1">
                 Quero uma avaliação do neurodesenvolvimento
               </div>
             </div>
