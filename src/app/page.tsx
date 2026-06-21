@@ -131,7 +131,7 @@ export default function Home() {
       </header>
 
       {/* ═══ CONTEÚDO PRINCIPAL ═══ */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
         <div className="pt-6 md:pt-14 md:pb-2 flex items-start gap-8 md:gap-12">
