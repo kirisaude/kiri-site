@@ -49,7 +49,7 @@ function FormularioContent() {
             Conte o que você procura
           </h1>
           <p className="text-[13.5px] leading-[1.5] text-cinza-texto2 mt-1 mb-0">
-            Leva poucos minutos. Quanto mais você contar, melhor o encaminhamento.
+            O preenchimento é rápido. Suas respostas nos ajudam a encontrar o especialista ideal para a sua necessidade.
           </p>
         </div>
 
