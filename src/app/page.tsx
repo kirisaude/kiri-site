@@ -104,13 +104,13 @@ export default function Home() {
         {/* Hero */}
         <div className="pt-6 md:pt-14 md:pb-2">
           <h1
-            className="font-serif text-[27px] md:text-[40px] lg:text-[46px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao md:max-w-3xl"
-            style={{ textWrap: "pretty" } as React.CSSProperties}
+            className="font-serif text-[27px] md:text-[48px] lg:text-[58px] xl:text-[64px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao md:max-w-5xl"
+            style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Encontre o profissional certo para o desenvolvimento do seu filho.
           </h1>
           <p
-            className="mt-3 md:mt-5 text-[14.5px] md:text-[16.5px] leading-[1.55] md:leading-[1.65] text-cinza-texto md:max-w-2xl"
+            className="mt-3 md:mt-6 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto md:max-w-3xl"
             style={{ textWrap: "pretty" } as React.CSSProperties}
           >
             Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
@@ -140,7 +140,7 @@ export default function Home() {
 
         {/* Filtros por condição */}
         <div className="pt-6 md:pt-10">
-          <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 md:mb-4">
+          <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 md:mb-4">
             Buscar por condição
           </div>
 
@@ -150,16 +150,16 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[16px] px-4 py-4 md:py-6 cursor-pointer transition-all ${
+                className={`flex flex-col gap-1.5 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-8 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
                 }`}
               >
-                <span className={`text-[17px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[17px] md:text-[28px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[11.5px] md:text-[13px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`text-[11.5px] md:text-[16px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Espectro autista" : "Atenção e hiperatividade"}
                 </span>
               </button>
@@ -178,19 +178,19 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-3 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[16px] px-4 py-4 md:py-5 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
+            className="flex items-center gap-4 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-6 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
           >
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-full flex-shrink-0 bg-white border border-borda-quente flex items-center justify-center">
+            <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white border border-borda-quente flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
                 <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="#BE6E4E" strokeWidth="1.7" strokeLinecap="round" />
                 <circle cx="10" cy="14.7" r="1.05" fill="#BE6E4E" />
               </svg>
             </div>
             <div className="flex-1">
-              <div className="text-[14.5px] md:text-[15px] font-bold text-ferrugem-escura leading-[1.2]">
+              <div className="text-[14.5px] md:text-[19px] font-bold text-ferrugem-escura leading-[1.2]">
                 Não sei por onde começar
               </div>
-              <div className="text-[12.5px] md:text-[13px] text-cinza-texto mt-0.5">
+              <div className="text-[12.5px] md:text-[15px] text-cinza-texto mt-0.5 md:mt-1">
                 Quero uma avaliação do neurodesenvolvimento
               </div>
             </div>
@@ -209,7 +209,7 @@ export default function Home() {
               activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
-            <span className="text-[13px] font-semibold whitespace-nowrap">
+            <span className="text-[13px] md:text-[14.5px] font-semibold whitespace-nowrap">
               {activeProfissao ? activeProfissao.split(" ")[0] : "Tipo de profissional"}
             </span>
             {activeProfissao ? (
@@ -226,7 +226,7 @@ export default function Home() {
               activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
-            <span className="text-[13px] font-semibold whitespace-nowrap">
+            <span className="text-[13px] md:text-[14.5px] font-semibold whitespace-nowrap">
               {activeModalidade ? modalidadeCurta(activeModalidade) : "Modalidade"}
             </span>
             {activeModalidade ? (
@@ -291,18 +291,18 @@ export default function Home() {
                   <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
                   <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="font-serif text-[17px] md:text-[19px] font-semibold text-carvao">
+                <span className="font-serif text-[17px] md:text-[21px] font-semibold text-carvao">
                   Por que é uma rede selecionada
                 </span>
               </div>
-              <p className="text-[13.5px] md:text-[14.5px] leading-[1.6] text-cinza-texto m-0">
+              <p className="text-[13.5px] md:text-[16px] leading-[1.6] text-cinza-texto m-0">
                 Registro no conselho e formação conferidos, um a um. Uma rede pequena, para você decidir com segurança.
               </p>
             </Link>
 
             {/* Como funciona */}
             <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[18px] p-4 md:p-6">
-              <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-4">Como funciona</div>
+              <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-4">Como funciona</div>
               <div className="flex flex-col gap-0">
                 {[
                   { n: "1", texto: "Conte o que procura.", linha: true },
@@ -316,7 +316,7 @@ export default function Home() {
                       </div>
                       {passo.linha && <div className="w-[1.5px] h-[24px] bg-borda-quente" />}
                     </div>
-                    <div className="text-[14px] md:text-[14.5px] leading-[1.45] text-carvao-sutil pt-1 pb-3.5">
+                    <div className="text-[14px] md:text-[16.5px] leading-[1.45] text-carvao-sutil pt-1 pb-3.5">
                       {passo.texto}
                     </div>
                   </div>
@@ -392,14 +392,20 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
       href={`/profissional/${p.id}`}
       className="w-full h-full bg-white border border-linha rounded-[15px] p-3.5 md:p-5 shadow-[0_5px_16px_-11px_rgba(60,55,45,0.32)] cursor-pointer no-underline block hover:shadow-[0_8px_24px_-10px_rgba(60,55,45,0.4)] transition-shadow"
     >
-      <div className="flex items-center gap-[11px]">
+      <div className="flex items-center gap-[11px] md:gap-3.5">
         <PlaceholderPhoto size={46} radius={11} />
         <div className="min-w-0 flex-1">
-          <span className="font-serif text-[15.5px] font-semibold text-carvao leading-[1.12] block">
+          <span className="font-serif text-[15.5px] md:text-[17px] font-semibold text-carvao leading-[1.12] block">
             {p.nome}
           </span>
-          <div className="mt-1">
-            <SeloMini />
+          <div className="mt-1 inline-flex items-center gap-1">
+            <svg width="13" height="13" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+              <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
+              <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-[10px] md:text-[11.5px] font-semibold tracking-[0.06em] uppercase text-ardosia-escura">
+              Verificada
+            </span>
           </div>
         </div>
       </div>
@@ -408,14 +414,14 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         {p.areas_atuacao.map((area) => (
           <span
             key={area}
-            className="text-[10.5px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 py-0.5 rounded-[6px]"
+            className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
           >
             {area}
           </span>
         ))}
       </div>
 
-      <div className="flex items-center gap-1.5 mt-[11px] text-[11.5px] text-cinza-texto2">
+      <div className="flex items-center gap-1.5 mt-[11px] text-[11.5px] md:text-[13px] text-cinza-texto2">
         <svg width="12" height="12" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
           <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#9A8C78" strokeWidth="1.5" strokeLinejoin="round" />
           <circle cx="10" cy="7.6" r="2" stroke="#9A8C78" strokeWidth="1.5" />
