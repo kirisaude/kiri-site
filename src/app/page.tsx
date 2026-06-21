@@ -213,11 +213,11 @@ export default function Home() {
         </div>
 
         {/* Filtros adicionais */}
-        <div className="pt-4 md:pt-5 overflow-x-auto scrollbar-hide flex gap-2 md:flex-wrap md:overflow-visible">
+        <div className="pt-4 md:pt-5 overflow-x-auto scrollbar-hide flex gap-2 md:grid md:grid-cols-5 md:overflow-visible">
           {/* Tipo de profissional */}
           <button
             onClick={() => { setShowProfissaoOptions((v) => !v); setShowModalidadeOptions(false); }}
-            className={`flex-none inline-flex items-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
               activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -234,7 +234,7 @@ export default function Home() {
           {/* Modalidade */}
           <button
             onClick={() => { setShowModalidadeOptions((v) => !v); setShowProfissaoOptions(false); }}
-            className={`flex-none inline-flex items-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
               activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -249,8 +249,8 @@ export default function Home() {
           </button>
 
           {["Cidade", "Faixa de valor", "Particular / convênio"].map((f) => (
-            <button key={f} className="flex-none inline-flex items-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2 cursor-pointer">
-              <span className="text-[13px] font-semibold text-cinza-texto whitespace-nowrap">{f}</span>
+            <button key={f} className="flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2.5 cursor-pointer">
+              <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto whitespace-nowrap">{f}</span>
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
           ))}
