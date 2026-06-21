@@ -52,31 +52,32 @@ export default function AvaliacaoPage() {
             </div>
           </div>
 
-          {/* Aviso */}
-          <div className="mt-4 flex gap-[9px] items-start px-0.5">
-            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-              <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
-              <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <p className="text-[13px] leading-[1.55] text-muted m-0">
-              Esta é uma orientação para ajudar você a encontrar o caminho — não é uma avaliação nem um diagnóstico feito aqui. Suas informações são tratadas com sigilo.
-            </p>
-          </div>
         </div>
 
-        {/* Termos */}
-        <div className="px-[22px] pb-2 text-center">
-          <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
-        </div>
-
-        {/* Botão fixo */}
-        <div className="px-[22px] pt-3.5 pb-8 bg-gradient-to-t from-creme via-creme/90 to-transparent">
+        {/* Botão */}
+        <div className="px-[22px] pt-4 pb-4">
           <Link
             href="/formulario"
             className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-4 cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
           >
             Começar — leva poucos minutos
           </Link>
+        </div>
+
+        {/* Aviso */}
+        <div className="px-[22px] pb-3 flex gap-[9px] items-start">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+            <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
+            <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <p className="text-[13px] leading-[1.55] text-muted m-0">
+            Esta é uma orientação para ajudar você a encontrar o caminho — não é uma avaliação nem um diagnóstico feito aqui. Suas informações são tratadas com sigilo.
+          </p>
+        </div>
+
+        {/* Termos */}
+        <div className="px-[22px] pb-8 text-center">
+          <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
         </div>
       </div>
     </div>
