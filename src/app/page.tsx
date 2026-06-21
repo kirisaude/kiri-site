@@ -38,6 +38,8 @@ export default function Home() {
   const [showModalidadeOptions, setShowModalidadeOptions] = useState(false);
   const [showPagamentoOptions, setShowPagamentoOptions] = useState(false);
   const [activePagamento, setActivePagamento] = useState<string | null>(null);
+  const [showCidadeOptions, setShowCidadeOptions] = useState(false);
+  const [activeCidade, setActiveCidade] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
   const VALOR_TOTAL_MAX = 600;
   const [valorMin, setValorMin] = useState(0);
@@ -48,6 +50,7 @@ export default function Home() {
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
+      if (activeCidade && !p.cidade.toLowerCase().includes(activeCidade.toLowerCase())) return false;
       if (activePagamento) {
         const conv = p.convenio_info.toLowerCase();
         if (activePagamento === "Particular" && conv.includes("não aceita")) return false;
@@ -67,7 +70,7 @@ export default function Home() {
       }
       return true;
     });
-  }, [search, activeCond, activeProfissao, activeModalidade, activePagamento, valorMin, valorMax]);
+  }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activePagamento, valorMin, valorMax]);
 
   const sections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
@@ -75,7 +78,7 @@ export default function Home() {
   })).filter((s) => s.pros.length > 0);
 
   const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activePagamento || valorAtivo || search.trim());
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activePagamento || valorAtivo || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
@@ -138,7 +141,7 @@ export default function Home() {
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
-              className="font-serif text-[27px] md:text-[46px] lg:text-[55px] xl:text-[60px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao"
+              className="font-serif text-[27px] md:text-[41px] lg:text-[50px] xl:text-[54px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               Encontre o profissional certo para o desenvolvimento do seu filho.
@@ -173,7 +176,7 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-start justify-center self-start" style={{ minWidth: 180 }}>
+          <div className="hidden md:flex flex-none items-start justify-center self-start -mt-6" style={{ minWidth: 180 }}>
             <KiriLogo size={180} />
           </div>
         </div>
@@ -190,16 +193,16 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-5 cursor-pointer transition-all ${
+                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
                 }`}
               >
-                <span className={`text-[17px] md:text-[28px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[17px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[11.5px] md:text-[18px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`text-[11.5px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
@@ -280,9 +283,21 @@ export default function Home() {
             )}
           </button>
 
-          <button className="flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2.5 cursor-pointer">
-            <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto whitespace-nowrap">Cidade</span>
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          {/* Cidade */}
+          <button
+            onClick={() => { setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); }}
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+              activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+            }`}
+          >
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+              {activeCidade ?? "Cidade"}
+            </span>
+            {activeCidade ? (
+              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveCidade(null); }}>×</span>
+            ) : (
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            )}
           </button>
 
           {/* Faixa de valor */}
@@ -319,6 +334,23 @@ export default function Home() {
             )}
           </button>
         </div>
+
+        {/* Opções inline de cidade */}
+        {showCidadeOptions && (
+          <div className="pt-2 flex flex-wrap gap-2">
+            {["São Paulo"].map((c) => (
+              <button
+                key={c}
+                onClick={() => { setActiveCidade(activeCidade === c ? null : c); setShowCidadeOptions(false); }}
+                className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
+                  activeCidade === c ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Opções inline de profissão */}
         {showProfissaoOptions && (
@@ -468,7 +500,7 @@ export default function Home() {
             </Link>
 
             {/* Como funciona */}
-            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 md:p-5">
+            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 md:p-5 flex flex-col justify-center">
               <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Como funciona</div>
               <div className="flex flex-col gap-0">
                 {[
@@ -499,7 +531,7 @@ export default function Home() {
             <p className="text-[15px] text-cinza-texto2">Nenhum profissional encontrado para esse filtro.</p>
             <button
               className="mt-4 text-[13px] font-semibold text-ferrugem underline cursor-pointer"
-              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
+              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActiveCidade(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
             >
               Limpar filtros
             </button>
