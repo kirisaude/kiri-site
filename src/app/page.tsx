@@ -29,8 +29,6 @@ function EmBreve() {
 }
 
 export default function Home() {
-  if (process.env.NODE_ENV === "production") return <EmBreve />;
-
   const [search, setSearch] = useState("");
   const [activeCond, setActiveCond] = useState<string | null>(null);
   const [activeProfissao, setActiveProfissao] = useState<string | null>(null);
