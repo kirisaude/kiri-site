@@ -504,9 +504,9 @@ export default function Home() {
               <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Como funciona</div>
               <div className="flex flex-col gap-0">
                 {[
-                  { n: "1", texto: "Conte o que procura.", linha: true },
-                  { n: "2", texto: "Veja profissionais com formação verificada.", linha: true },
-                  { n: "3", texto: "Escolha com quem começar.", linha: false },
+                  { n: "1", titulo: "Você responde a algumas perguntas", desc: "Nos conte, em poucos passos, o que tem observado no comportamento da criança.", linha: true },
+                  { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
+                  { n: "3", titulo: "Você escolhe com quem começar", desc: "Avalie os perfis verificados e agende a consulta diretamente com o especialista escolhido.", linha: false },
                 ].map((passo) => (
                   <div key={passo.n} className="flex gap-3 items-start">
                     <div className="flex flex-col items-center flex-none">
@@ -515,8 +515,9 @@ export default function Home() {
                       </div>
                       {passo.linha && <div className="w-[1.5px] h-[20px] bg-borda-quente" />}
                     </div>
-                    <div className="text-[13.5px] md:text-[15px] leading-[1.45] text-carvao-sutil pt-0.5 pb-3">
-                      {passo.texto}
+                    <div className="pt-0.5 pb-3">
+                      <div className="text-[13.5px] md:text-[15px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>
+                      <div className="text-[12.5px] md:text-[13.5px] leading-[1.5] text-cinza-texto mt-0.5">{passo.desc}</div>
                     </div>
                   </div>
                 ))}

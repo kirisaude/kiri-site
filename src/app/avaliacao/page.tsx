@@ -32,19 +32,20 @@ export default function AvaliacaoPage() {
             </div>
             <div className="flex flex-col gap-0">
               {[
-                { n: "1", texto: "Você conta, em poucas perguntas, o que tem observado.", linha: true },
-                { n: "2", texto: "A gente te orienta e indica profissionais da nossa rede para uma avaliação.", linha: true },
-                { n: "3", texto: "Você escolhe com quem quer começar.", linha: false },
+                { n: "1", titulo: "Você responde a algumas perguntas", desc: "Nos conte, em poucos passos, o que tem observado no comportamento da criança.", linha: true },
+                { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
+                { n: "3", titulo: "Você escolhe com quem começar", desc: "Avalie os perfis verificados e agende a consulta diretamente com o especialista escolhido.", linha: false },
               ].map((passo) => (
                 <div key={passo.n} className="flex gap-[13px] items-start">
                   <div className="flex flex-col items-center flex-none">
                     <div className="w-[30px] h-[30px] rounded-full bg-wash-quente border border-borda-quente flex items-center justify-center font-serif text-[15px] font-semibold text-ferrugem">
                       {passo.n}
                     </div>
-                    {passo.linha && <div className="w-[1.5px] h-[22px] bg-borda-quente" />}
+                    {passo.linha && <div className="w-[1.5px] h-[28px] bg-borda-quente" />}
                   </div>
-                  <div className="text-[16px] md:text-[17px] leading-[1.5] text-carvao-sutil pt-[5px] pb-[14px]">
-                    {passo.texto}
+                  <div className="pt-[5px] pb-[14px]">
+                    <div className="text-[16px] md:text-[17px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>
+                    <div className="text-[14px] md:text-[15px] leading-[1.55] text-cinza-texto mt-1">{passo.desc}</div>
                   </div>
                 </div>
               ))}
