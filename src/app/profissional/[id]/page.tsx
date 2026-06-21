@@ -132,19 +132,25 @@ export default async function PerfilPage({ params }: PageProps) {
             </div>
 
             {/* CTA desktop (visível só em md+) */}
-            <div className="hidden md:block mt-5">
+            <div className="hidden md:flex md:flex-col gap-2.5 mt-5">
               <Link
                 href={`/formulario?profissional=${p.id}`}
-                className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
+                className="block w-full text-center font-semibold text-[16px] text-white bg-ardosia-escura rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(44,70,80,0.35)] no-underline"
               >
                 Quero ser encaminhado
+              </Link>
+              <Link
+                href={`/reportar/${p.id}`}
+                className="block w-full text-center text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[11px] py-2.5 no-underline hover:bg-[#EFE6D6] transition-colors"
+              >
+                Reportar perfil
               </Link>
             </div>
 
           </div>
 
           {/* ─── COLUNA DIREITA (conteúdo) ─── */}
-          <div className="mt-7 md:mt-0 flex flex-col gap-7">
+          <div className="mt-7 md:mt-2 flex flex-col gap-7">
 
             {/* Sobre */}
             <div>
@@ -225,27 +231,20 @@ export default async function PerfilPage({ params }: PageProps) {
               </div>
 
               {/* CTA mobile */}
-              <Link
-                href={`/formulario?profissional=${p.id}`}
-                className="md:hidden mt-3.5 block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
-              >
-                Quero ser encaminhado
-              </Link>
-            </div>
-
-            {/* Reportar */}
-            <div className="pt-2 pb-1">
-              <Link
-                href={`/reportar/${p.id}`}
-                className="inline-flex items-center gap-2 text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[9px] px-3.5 py-2 no-underline hover:bg-[#EFE6D6] transition-colors"
-              >
-                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-                  <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
-                  <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="10" cy="6.3" r="1.05" fill="#8A7E6A" />
-                </svg>
-                Reportar erro ou perfil
-              </Link>
+              <div className="md:hidden mt-3.5 flex flex-col gap-2.5">
+                <Link
+                  href={`/formulario?profissional=${p.id}`}
+                  className="block w-full text-center font-semibold text-[16px] text-white bg-ardosia-escura rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(44,70,80,0.35)] no-underline"
+                >
+                  Quero ser encaminhado
+                </Link>
+                <Link
+                  href={`/reportar/${p.id}`}
+                  className="block w-full text-center text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[11px] py-2.5 no-underline hover:bg-[#EFE6D6] transition-colors"
+                >
+                  Reportar perfil
+                </Link>
+              </div>
             </div>
 
           </div>
