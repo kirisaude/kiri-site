@@ -65,6 +65,11 @@ export default function AvaliacaoPage() {
           </div>
         </div>
 
+        {/* Termos */}
+        <div className="px-[22px] pb-2 text-center">
+          <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
+        </div>
+
         {/* Botão fixo */}
         <div className="px-[22px] pt-3.5 pb-8 bg-gradient-to-t from-creme via-creme/90 to-transparent">
           <Link
