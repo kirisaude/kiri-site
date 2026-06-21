@@ -8,6 +8,7 @@ import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS, cidadeCurta, modalidadeCurta } from "@/types";
+import { Footer } from "@/components/Footer";
 
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
@@ -576,15 +577,7 @@ export default function Home() {
             ))}
 
             {/* Rodapé */}
-            <div className="mt-12 md:mt-16 pt-5 border-t border-linha text-center pb-12 flex flex-col items-center gap-2">
-              <div className="inline-flex items-center gap-1.5">
-                <KiriLogo size={18} />
-                <span className="text-[12px] text-muted">Kiri · Rede selecionada de neurodesenvolvimento</span>
-              </div>
-              <Link href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">
-                Termos de Uso
-              </Link>
-            </div>
+            <Footer className="mt-12 md:mt-16 mb-12" />
           </>
         )}
       </div>
