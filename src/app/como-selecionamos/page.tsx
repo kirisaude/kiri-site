@@ -80,10 +80,10 @@ export default function ComoSelecionamosPage() {
           </svg>
           <div className="flex flex-col gap-2.5">
             <p className="text-[14px] leading-[1.6] text-[#6E5326] m-0">
-              Verificamos a qualificação e o registro de cada profissional. A escolha de com quem seguir e a condução do cuidado continuam sendo decisão da família, em conjunto com o profissional. A responsabilidade técnica pelo atendimento — diagnóstico, conduta e acompanhamento — é integralmente do profissional de saúde escolhido.
+              Verificamos a qualificação e o registro de cada profissional, periodicamente. A data da última checagem está indicada em cada perfil (Mês/Ano). A Kiri não monitora alterações em tempo real — recomendamos consultar o conselho de classe competente para confirmar a situação atual do profissional antes de iniciar qualquer atendimento.
             </p>
             <p className="text-[14px] leading-[1.6] text-[#6E5326] m-0">
-              A verificação é periódica. A data da última checagem está indicada em cada perfil (Mês/Ano). A Kiri não monitora alterações em tempo real — recomendamos consultar o conselho de classe competente para confirmar a situação atual do profissional antes de iniciar qualquer atendimento.
+              A escolha de com quem seguir e a condução do cuidado continuam sendo decisão da família, em conjunto com o profissional. A responsabilidade técnica pelo atendimento — diagnóstico, conduta e acompanhamento — é integralmente do profissional de saúde escolhido.
             </p>
           </div>
         </div>
