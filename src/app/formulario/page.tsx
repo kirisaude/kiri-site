@@ -106,10 +106,10 @@ function FormularioContent() {
             <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
           </svg>
           <div>
-            <p className="text-[12.5px] leading-[1.5] text-ambar-texto m-0">
+            <p className="text-[13px] leading-[1.5] text-ambar-texto m-0">
               Esta triagem é orientação e encaminhamento — não é avaliação clínica nem diagnóstico.
             </p>
-            <p className="text-[12.5px] leading-[1.5] text-ambar-texto font-semibold mt-1.5 m-0">
+            <p className="text-[13px] leading-[1.5] text-ambar-texto font-semibold mt-0.5 m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.
             </p>
           </div>
