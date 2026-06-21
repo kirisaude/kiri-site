@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Kiri — Rede selecionada de neurodesenvolvimento infantil";
+export const alt = "Kiri — Rede selecionada de cuidado ao neurodesenvolvimento infantil";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -22,7 +22,7 @@ function EmBreve() {
       </div>
       <p className="mt-4 text-[16px] md:text-[18px] text-cinza-texto text-center max-w-sm leading-[1.6]"
         style={{ textWrap: "balance" } as React.CSSProperties}>
-        Em breve. Uma rede selecionada de neurodesenvolvimento infantil.
+        Em breve. Uma rede selecionada de cuidado ao neurodesenvolvimento infantil.
       </p>
     </div>
   );
