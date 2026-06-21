@@ -47,30 +47,10 @@ export default async function Image() {
           }}
         />
 
-        {/* Logo — dois pássaros em SVG */}
-        <svg
-          width="96"
-          height="96"
-          viewBox="0 0 120 120"
-          fill="none"
-          style={{ overflow: "visible" }}
-        >
-          {/* pássaro de cima — ferrugem */}
-          <path
-            d="M20 38 C28 20 52 14 72 22 C88 28 100 24 108 16 C104 32 92 42 74 40 C88 44 96 54 92 66 C80 52 58 48 40 54 C48 44 38 36 20 38 Z"
-            fill="none"
-            stroke="#BE6E4E"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
-          {/* pássaro de baixo — ardósia */}
-          <path
-            d="M12 82 C20 64 44 58 64 66 C80 72 92 68 100 60 C96 76 84 86 66 84 C80 88 88 98 84 110 C72 96 50 92 32 98 C40 88 30 80 12 82 Z"
-            fill="none"
-            stroke="#44606C"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
-          />
+        {/* Logo — símbolo Kiri */}
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <path d="M19 52 C31 37 43 37 52 50 C61 37 73 37 84 52" fill="none" stroke="#BE6E4E" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M38 88 C50 73 62 73 71 86 C80 73 92 73 104 88" fill="none" stroke="#44606C" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
 
         {/* Nome */}

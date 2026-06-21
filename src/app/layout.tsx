@@ -18,7 +18,7 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kiri-site.vercel.app"),
+  metadataBase: new URL("https://kirisaude.com.br"),
   title: "Kiri — Rede selecionada de neurodesenvolvimento infantil",
   description:
     "Diretório curado de profissionais de neurodesenvolvimento infantil especializados em TEA e TDAH. Formação verificada, contato pela Kiri.",
