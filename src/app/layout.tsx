@@ -18,9 +18,24 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kiri-site.vercel.app"),
   title: "Kiri — Rede selecionada de neurodesenvolvimento infantil",
   description:
     "Diretório curado de profissionais de neurodesenvolvimento infantil especializados em TEA e TDAH. Formação verificada, contato pela Kiri.",
+  openGraph: {
+    title: "Kiri — Rede selecionada de neurodesenvolvimento infantil",
+    description:
+      "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
+    siteName: "Kiri",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kiri — Rede selecionada de neurodesenvolvimento infantil",
+    description:
+      "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
+  },
 };
 
 export default function RootLayout({
