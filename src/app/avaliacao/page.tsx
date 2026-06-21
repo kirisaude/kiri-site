@@ -64,7 +64,7 @@ export default function AvaliacaoPage() {
           </Link>
           <a
             href="/termos"
-            className="block w-full text-center font-semibold text-[15px] text-cinza-texto bg-white border border-linha rounded-[13px] py-3.5 no-underline hover:bg-areia transition-colors"
+            className="block w-full text-center font-semibold text-[15px] text-cinza-texto bg-wash-quente border border-borda-quente rounded-[13px] py-3.5 no-underline hover:bg-[#EFE6D6] transition-colors"
           >
             Termos de Uso
           </a>
