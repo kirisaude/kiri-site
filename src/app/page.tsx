@@ -19,12 +19,19 @@ export default function Home() {
   const [activeModalidade, setActiveModalidade] = useState<string | null>(null);
   const [showProfissaoOptions, setShowProfissaoOptions] = useState(false);
   const [showModalidadeOptions, setShowModalidadeOptions] = useState(false);
+  const [showPagamentoOptions, setShowPagamentoOptions] = useState(false);
+  const [activePagamento, setActivePagamento] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     return profissionais.filter((p) => {
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
+      if (activePagamento) {
+        const conv = p.convenio_info.toLowerCase();
+        if (activePagamento === "Particular" && conv.includes("não aceita")) return false;
+        if (activePagamento === "Convênio" && !conv.includes("aceita")) return false;
+      }
       if (search.trim()) {
         const q = search.toLowerCase();
         const match =
@@ -43,7 +50,7 @@ export default function Home() {
     pros: filtered.filter((p) => p.profissao === prof),
   })).filter((s) => s.pros.length > 0);
 
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || search.trim());
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activePagamento || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
@@ -248,12 +255,29 @@ export default function Home() {
             )}
           </button>
 
-          {["Cidade", "Faixa de valor", "Particular / convênio"].map((f) => (
+          {["Cidade", "Faixa de valor"].map((f) => (
             <button key={f} className="flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2.5 cursor-pointer">
               <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto whitespace-nowrap">{f}</span>
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </button>
           ))}
+
+          {/* Particular / convênio */}
+          <button
+            onClick={() => { setShowPagamentoOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); }}
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+              activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+            }`}
+          >
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+              {activePagamento ?? "Particular / convênio"}
+            </span>
+            {activePagamento ? (
+              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActivePagamento(null); }}>×</span>
+            ) : (
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            )}
+          </button>
         </div>
 
         {/* Opções inline de profissão */}
@@ -285,6 +309,23 @@ export default function Home() {
                 }`}
               >
                 {m}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Opções inline de pagamento */}
+        {showPagamentoOptions && (
+          <div className="pt-2 flex flex-wrap gap-2">
+            {["Particular", "Convênio"].map((opt) => (
+              <button
+                key={opt}
+                onClick={() => { setActivePagamento(activePagamento === opt ? null : opt); setShowPagamentoOptions(false); }}
+                className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
+                  activePagamento === opt ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                }`}
+              >
+                {opt}
               </button>
             ))}
           </div>
@@ -344,7 +385,7 @@ export default function Home() {
             <p className="text-[15px] text-cinza-texto2">Nenhum profissional encontrado para esse filtro.</p>
             <button
               className="mt-4 text-[13px] font-semibold text-ferrugem underline cursor-pointer"
-              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); }}
+              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActivePagamento(null); }}
             >
               Limpar filtros
             </button>
