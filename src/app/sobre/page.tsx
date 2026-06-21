@@ -21,7 +21,8 @@ export default function SobrePage() {
 
         {/* Manifesto */}
         <div className="px-[30px] pt-[30px] flex flex-col gap-5">
-          <p className="font-serif text-[24px] md:text-[26px] leading-[1.45] font-normal text-carvao m-0 text-center" style={{ textWrap: "balance" } as React.CSSProperties}>
+
+          <p className="font-serif text-[24px] md:text-[26px] leading-[1.45] font-normal text-carvao m-0 text-center mb-5" style={{ textWrap: "balance" } as React.CSSProperties}>
             Encontrar o apoio certo para uma criança com TEA ou TDAH não devia ser um voo solitário.
           </p>
 
