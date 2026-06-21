@@ -141,7 +141,7 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-start justify-center self-start pt-2" style={{ minWidth: 180 }}>
+          <div className="hidden md:flex flex-none items-start justify-center self-start" style={{ minWidth: 180 }}>
             <KiriLogo size={180} />
           </div>
         </div>
