@@ -43,8 +43,8 @@ const SECOES = [
   {
     titulo: "6. Limitação de responsabilidade",
     texto: [
-      "Na máxima extensão permitida pela legislação aplicável, a Kiri não se responsabiliza por danos diretos, indiretos, incidentais ou consequentes decorrentes: (a) do uso ou da incapacidade de uso da plataforma; (b) da conduta, competência ou resultado do atendimento prestado por qualquer profissional listado; (c) de informações incorretas ou desatualizadas fornecidas por profissionais no momento do cadastro.",
-      "Em nenhuma hipótese a responsabilidade total da Kiri perante o usuário excederá o valor eventualmente pago pelo usuário pelo uso da plataforma.",
+      "A Kiri atua exclusivamente como provedora de tecnologia e facilitação de busca, não prestando serviços de saúde, diagnóstico ou tratamentos clínicos.",
+      "Na máxima extensão permitida pela legislação brasileira aplicável, a Kiri não será responsabilizada por: (a) danos decorrentes do uso ou da incapacidade de uso da plataforma; (b) pela conduta, erro médico, imperícia, negligência ou resultado do atendimento prestado por qualquer profissional listado; (c) por informações incorretas ou desatualizadas fornecidas por terceiros, resguardado o compromisso da plataforma de corrigir eventuais inconsistências assim que formalmente notificada.",
     ],
   },
   {
