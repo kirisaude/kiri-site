@@ -42,9 +42,9 @@ export default function SobrePage() {
         </div>
 
         {/* Assinatura */}
-        <div className="mx-[30px] mt-[30px] bg-[#EFE6D6] rounded-[16px] px-6 py-6 text-center">
-          <p className="font-serif text-[22px] md:text-[24px] italic leading-[1.4] text-carvao m-0">
-            Kiri. Precisão no encontro,<br />acolhimento na jornada.
+        <div className="mx-[30px] mt-[30px] bg-[#EFE6D6] rounded-[14px] px-6 py-4 text-center">
+          <p className="font-serif text-[18px] md:text-[20px] italic leading-[1.4] text-carvao m-0 whitespace-nowrap">
+            Kiri. Precisão no encontro, acolhimento na jornada.
           </p>
         </div>
 
