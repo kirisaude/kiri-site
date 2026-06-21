@@ -12,7 +12,24 @@ import { PROFISSOES_ORDENADAS, cidadeCurta, modalidadeCurta } from "@/types";
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
 
+function EmBreve() {
+  return (
+    <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
+      <KiriLogo size={72} />
+      <div className="font-serif text-[38px] md:text-[48px] font-medium text-ferrugem tracking-[-0.01em] mt-4">
+        Kiri
+      </div>
+      <p className="mt-4 text-[16px] md:text-[18px] text-cinza-texto text-center max-w-sm leading-[1.6]"
+        style={{ textWrap: "balance" } as React.CSSProperties}>
+        Em breve. Uma rede selecionada de neurodesenvolvimento infantil.
+      </p>
+    </div>
+  );
+}
+
 export default function Home() {
+  if (process.env.NODE_ENV === "production") return <EmBreve />;
+
   const [search, setSearch] = useState("");
   const [activeCond, setActiveCond] = useState<string | null>(null);
   const [activeProfissao, setActiveProfissao] = useState<string | null>(null);
