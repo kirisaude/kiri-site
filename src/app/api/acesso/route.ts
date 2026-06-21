@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   const { senha } = await request.json();
   const senhaCorreta = process.env.KIRI_SENHA;
 
-  if (!senhaCorreta || senha !== senhaCorreta) {
+  if (!senhaCorreta || senha.trim() !== senhaCorreta.trim()) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
