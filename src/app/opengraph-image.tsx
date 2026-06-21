@@ -17,75 +17,18 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "Georgia, serif",
-          position: "relative",
+          gap: "0px",
         }}
       >
-        {/* Círculo decorativo fundo */}
-        <div
-          style={{
-            position: "absolute",
-            width: "520px",
-            height: "520px",
-            borderRadius: "50%",
-            backgroundColor: "#EDE3D3",
-            top: "-120px",
-            right: "-80px",
-            opacity: 0.5,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            backgroundColor: "#E2D6C0",
-            bottom: "-80px",
-            left: "-60px",
-            opacity: 0.4,
-          }}
-        />
-
-        {/* Nome */}
-        <div
-          style={{
-            fontSize: "110px",
-            fontWeight: "500",
-            color: "#BE6E4E",
-            letterSpacing: "-0.02em",
-            lineHeight: 1,
-            fontFamily: "Georgia, serif",
-          }}
-        >
+        <div style={{ fontSize: "120px", fontWeight: "500", color: "#BE6E4E", letterSpacing: "-0.02em", lineHeight: 1, fontFamily: "Georgia, serif", display: "flex" }}>
           Kiri
         </div>
-
-        {/* Linha decorativa */}
-        <div
-          style={{
-            width: "64px",
-            height: "3px",
-            backgroundColor: "#BE6E4E",
-            marginTop: "24px",
-            borderRadius: "2px",
-          }}
-        />
-
-        {/* Tagline */}
-        <div
-          style={{
-            fontSize: "28px",
-            color: "#44606C",
-            marginTop: "24px",
-            fontFamily: "system-ui, sans-serif",
-            fontWeight: "500",
-            textAlign: "center",
-            maxWidth: "680px",
-            lineHeight: 1.4,
-          }}
-        >
+        <div style={{ width: "56px", height: "3px", backgroundColor: "#BE6E4E", marginTop: "28px", borderRadius: "2px", display: "flex" }} />
+        <div style={{ fontSize: "30px", color: "#44606C", marginTop: "28px", fontFamily: "system-ui, sans-serif", fontWeight: "500", textAlign: "center", lineHeight: 1.4, display: "flex" }}>
           Rede selecionada de neurodesenvolvimento infantil
+        </div>
+        <div style={{ fontSize: "20px", color: "#9A8C78", marginTop: "32px", fontFamily: "system-ui, sans-serif", display: "flex" }}>
+          kirisaude.com.br
         </div>
       </div>
     ),
