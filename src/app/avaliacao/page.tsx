@@ -21,7 +21,7 @@ export default function AvaliacaoPage() {
             Você não precisa ter um diagnóstico para começar.
           </h1>
 
-          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="mt-8 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Muitas famílias chegam aqui só com a sensação de que algo está diferente — no jeito de se comunicar, de se relacionar, de aprender ou de se desenvolver. Está tudo bem não ter um nome ainda. A gente ajuda você a encontrar o profissional certo para entender melhor.
           </p>
 
