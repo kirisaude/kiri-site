@@ -45,7 +45,7 @@ function FormularioContent() {
 
       <div className="max-w-2xl mx-auto pb-12 w-full">
         <div className="px-[18px] pt-8">
-          <h1 className="font-serif text-[23px] font-medium leading-[1.25] text-carvao m-0">
+          <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você procura
           </h1>
           <p className="text-[15.5px] leading-[1.55] text-cinza-texto2 mt-2 mb-0">
