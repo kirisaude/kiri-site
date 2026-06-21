@@ -54,18 +54,24 @@ export default function AvaliacaoPage() {
 
         </div>
 
-        {/* Botão */}
-        <div className="px-[22px] pt-4 pb-4">
+        {/* Botões */}
+        <div className="px-[22px] pt-4 pb-2 flex flex-col gap-3">
           <Link
             href="/formulario"
             className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-4 cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
           >
             Começar — leva poucos minutos
           </Link>
+          <a
+            href="/termos"
+            className="block w-full text-center font-semibold text-[15px] text-cinza-texto bg-white border border-linha rounded-[13px] py-3.5 no-underline hover:bg-areia transition-colors"
+          >
+            Termos de Uso
+          </a>
         </div>
 
         {/* Aviso */}
-        <div className="px-[22px] pb-3 flex gap-[9px] items-start">
+        <div className="px-[22px] pt-2 pb-8 flex gap-[9px] items-start">
           <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
             <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -73,11 +79,6 @@ export default function AvaliacaoPage() {
           <p className="text-[13px] leading-[1.55] text-muted m-0">
             Esta etapa serve exclusivamente para orientar você a encontrar o caminho ideal. Não realizamos avaliações clínicas ou diagnósticos na plataforma. Seus dados são protegidos com total sigilo e privacidade, em conformidade com a LGPD.
           </p>
-        </div>
-
-        {/* Termos */}
-        <div className="px-[22px] pb-8 text-center">
-          <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
         </div>
       </div>
     </div>
