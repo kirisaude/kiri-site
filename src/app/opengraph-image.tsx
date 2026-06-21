@@ -5,48 +5,32 @@ export const alt = "Kiri — Rede selecionada de neurodesenvolvimento infantil";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const SIMBOLO_B64 = "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLaXJpIj4KICA8cGF0aCBkPSJNMTkgNTIgQzMxIDM3IDQzIDM3IDUyIDUwIEM2MSAzNyA3MyAzNyA4NCA1MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQkU2RTRFIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjwvcGF0aD4KICA8cGF0aCBkPSJNMzggODggQzUwIDczIDYyIDczIDcxIDg2IEM4MCA3MyA5MiA3MyAxMDQgODgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0NjA2QyIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48L3BhdGg+Cjwvc3ZnPg==";
+
 export default async function Image() {
   const fontRes = await fetch("https://fonts.gstatic.com/s/newsreader/v20/cY9qfjOCX1hbuyalUrK8iaYLGAQ.woff2");
-  const fontBuf = await fontRes.arrayBuffer();
-  const fontB64 = Buffer.from(fontBuf).toString("base64");
-
-  // OG image inteiro como SVG — evita limitações do Satori com texto e stroke
-  const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
-  <defs>
-    <style>
-      @font-face {
-        font-family: 'Newsreader';
-        font-weight: 500;
-        src: url('data:font/woff2;base64,${fontB64}') format('woff2');
-      }
-    </style>
-  </defs>
-  <rect width="1200" height="630" fill="#F5EFE6"/>
-
-  <!-- Logo horizontal: símbolo à esquerda, Kiri à direita, centrado em y=255 -->
-  <svg x="390" y="178" width="100" height="100" viewBox="0 0 120 120">
-    <path d="M19 52 C31 37 43 37 52 50 C61 37 73 37 84 52" fill="none" stroke="#BE6E4E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M38 88 C50 73 62 73 71 86 C80 73 92 73 104 88" fill="none" stroke="#44606C" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-  <text x="510" y="268" font-family="Newsreader, serif" font-size="120" font-weight="500" fill="#BE6E4E">Kiri</text>
-
-  <!-- Linha divisória -->
-  <rect x="476" y="318" width="248" height="2" rx="1" fill="#D8C7B0"/>
-
-  <!-- Tagline -->
-  <text x="600" y="370" text-anchor="middle" font-family="Newsreader, serif" font-size="26" font-weight="400" fill="#44606C">Rede selecionada de neurodesenvolvimento infantil</text>
-
-  <!-- URL -->
-  <text x="600" y="414" text-anchor="middle" font-family="Newsreader, serif" font-size="18" font-weight="400" fill="#9A8C78">kirisaude.com.br</text>
-</svg>`;
-
-  const ogB64 = Buffer.from(ogSvg).toString("base64");
+  const newsreaderData = await fontRes.arrayBuffer();
 
   return new ImageResponse(
     (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img src={`data:image/svg+xml;base64,${ogB64}`} width={1200} height={630} alt="Kiri" />
+      <div style={{ width: "1200px", height: "630px", backgroundColor: "#F5EFE6", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "0px" }}>
+        {/* Logo horizontal */}
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "28px" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`data:image/svg+xml;base64,${SIMBOLO_B64}`} width={88} height={88} alt="" />
+          <div style={{ fontSize: "108px", fontWeight: "500", color: "#BE6E4E", fontFamily: "Newsreader", letterSpacing: "-0.01em", lineHeight: 1, display: "flex" }}>
+            Kiri
+          </div>
+        </div>
+        {/* Tagline */}
+        <div style={{ fontSize: "24px", color: "#44606C", marginTop: "28px", fontFamily: "Newsreader", fontWeight: "400", lineHeight: 1.4, display: "flex", wordSpacing: "0px" }}>
+          Rede selecionada de cuidado ao neurodesenvolvimento infantil
+        </div>
+      </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: "Newsreader", data: newsreaderData, weight: 500, style: "normal" }],
+    }
   );
 }
