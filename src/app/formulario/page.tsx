@@ -92,7 +92,7 @@ function FormularioContent() {
                 <circle cx="10" cy="6.3" r="1.05" fill="#9A8C78" />
               </svg>
               <p className="text-[12px] leading-[1.55] text-muted m-0">
-                É a sua preferência. A curadoria da Kiri confirma a disponibilidade e, se fizer sentido para o caso, segue com este profissional.
+                Nossa equipe valida a disponibilidade do profissional e direciona o caso para que o seu atendimento comece o quanto antes.
               </p>
             </div>
           </div>
