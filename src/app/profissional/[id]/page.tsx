@@ -40,21 +40,8 @@ export default async function PerfilPage({ params }: PageProps) {
     <div className="min-h-screen bg-creme">
       {/* Nav */}
       <div className="w-full px-4 md:px-8 pt-4 pb-0">
-        <div className="flex items-center justify-between pb-3">
+        <div className="flex items-center pb-3">
           <NavBack href="/" />
-          <div className="flex gap-2">
-            <button className="w-9 h-9 rounded-full bg-white border border-linha flex items-center justify-center cursor-pointer">
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                <path d="M5 9 L5 16 C5 16.6 5.4 17 6 17 L14 17 C14.6 17 15 16.6 15 16 L15 9" stroke="#564F45" strokeWidth="1.5" />
-                <path d="M10 3 L10 12 M6.5 6 L10 2.6 L13.5 6" stroke="#564F45" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <button className="w-9 h-9 rounded-full bg-white border border-linha flex items-center justify-center cursor-pointer">
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                <path d="M5 3 L15 3 C15.6 3 16 3.4 16 4 L16 17 L10 13 L4 17 L4 4 C4 3.4 4.4 3 5 3 Z" stroke="#564F45" strokeWidth="1.5" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
 
