@@ -104,13 +104,13 @@ export default function Home() {
         {/* Hero */}
         <div className="pt-6 md:pt-14 md:pb-2">
           <h1
-            className="font-serif text-[27px] md:text-[48px] lg:text-[58px] xl:text-[64px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao md:max-w-5xl"
+            className="font-serif text-[27px] md:text-[46px] lg:text-[55px] xl:text-[60px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Encontre o profissional certo para o desenvolvimento do seu filho.
           </h1>
           <p
-            className="mt-3 md:mt-6 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto md:max-w-3xl"
+            className="mt-3 md:mt-6 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
             style={{ textWrap: "pretty" } as React.CSSProperties}
           >
             Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
@@ -150,7 +150,7 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1.5 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-8 cursor-pointer transition-all ${
+                className={`flex flex-col gap-1.5 items-start rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-5 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
@@ -159,7 +159,7 @@ export default function Home() {
                 <span className={`text-[17px] md:text-[28px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[11.5px] md:text-[16px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`text-[11.5px] md:text-[18px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Espectro autista" : "Atenção e hiperatividade"}
                 </span>
               </button>
