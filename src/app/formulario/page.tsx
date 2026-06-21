@@ -60,7 +60,7 @@ function FormularioContent() {
               <div className="text-[10.5px] font-semibold tracking-[0.1em] uppercase text-muted mb-[10px]">
                 Encaminhamento para
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3">
                 <PlaceholderPhoto size={54} radius={12} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5">
