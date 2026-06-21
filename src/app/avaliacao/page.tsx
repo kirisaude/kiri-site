@@ -36,12 +36,12 @@ export default function AvaliacaoPage() {
                 { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
                 { n: "3", titulo: "Você escolhe com quem começar", desc: "Avalie os perfis verificados e agende a consulta diretamente com o especialista escolhido.", linha: false },
               ].map((passo) => (
-                <div key={passo.n} className="flex gap-[13px] items-start">
-                  <div className="flex flex-col items-center flex-none">
-                    <div className="w-[30px] h-[30px] rounded-full bg-wash-quente border border-borda-quente flex items-center justify-center font-serif text-[15px] font-semibold text-ferrugem">
+                <div key={passo.n} className="flex gap-[13px]">
+                  <div className="flex flex-col items-center flex-none self-stretch">
+                    <div className="w-[30px] h-[30px] rounded-full bg-wash-quente border border-borda-quente flex items-center justify-center font-serif text-[15px] font-semibold text-ferrugem flex-none">
                       {passo.n}
                     </div>
-                    {passo.linha && <div className="w-[1.5px] h-[28px] bg-borda-quente" />}
+                    {passo.linha && <div className="flex-1 w-[1.5px] bg-borda-quente mt-1" />}
                   </div>
                   <div className="pt-[5px] pb-[14px]">
                     <div className="text-[16px] md:text-[17px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>

@@ -92,8 +92,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-3.5 flex items-center gap-3 md:gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-none no-underline">
-            <KiriLogo size={24} />
-            <span className="font-serif text-[22px] font-medium text-ferrugem leading-none">Kiri</span>
+            <KiriLogo size={30} />
+            <span className="font-serif text-[26px] font-semibold text-ferrugem leading-none">Kiri</span>
           </Link>
 
           {/* Search — desktop only, in header */}
@@ -508,12 +508,12 @@ export default function Home() {
                   { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
                   { n: "3", titulo: "Você escolhe com quem começar", desc: "Avalie os perfis verificados e agende a consulta diretamente com o especialista escolhido.", linha: false },
                 ].map((passo) => (
-                  <div key={passo.n} className="flex gap-3 items-start">
-                    <div className="flex flex-col items-center flex-none">
-                      <div className="w-6 h-6 rounded-full bg-white border border-borda-quente flex items-center justify-center font-serif text-[13px] font-semibold text-ferrugem">
+                  <div key={passo.n} className="flex gap-3">
+                    <div className="flex flex-col items-center flex-none self-stretch">
+                      <div className="w-6 h-6 rounded-full bg-white border border-borda-quente flex items-center justify-center font-serif text-[13px] font-semibold text-ferrugem flex-none">
                         {passo.n}
                       </div>
-                      {passo.linha && <div className="w-[1.5px] h-[20px] bg-borda-quente" />}
+                      {passo.linha && <div className="flex-1 w-[1.5px] bg-borda-quente mt-1" />}
                     </div>
                     <div className="pt-0.5 pb-3">
                       <div className="text-[13.5px] md:text-[15px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>
