@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 const profissionais = data.profissionais as Profissional[];
 
 // Substitua pela URL real do Tally após criar o formulário
-const TALLY_FORM_ID = "PENDENTE"; // ex: "wgZKkP"
+const TALLY_FORM_ID = "obglDe";
 
 export default function ReportarPage() {
   return (
