@@ -5,7 +5,7 @@ export default function SobrePage() {
   return (
     <div className="min-h-screen bg-creme">
       {/* Nav — fora do container para ficar no canto esquerdo da tela */}
-      <div className="px-4 pt-4 pb-2">
+      <div className="max-w-3xl mx-auto w-full px-4 pt-4 pb-2">
         <NavBack label="Sobre a Kiri" />
       </div>
 
@@ -21,7 +21,7 @@ export default function SobrePage() {
 
         {/* Manifesto */}
         <div className="px-[30px] pt-[30px] flex flex-col gap-5">
-          <p className="font-serif text-[24px] md:text-[26px] leading-[1.45] font-normal text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="font-serif text-[24px] md:text-[26px] leading-[1.45] font-normal text-carvao m-0 text-center" style={{ textWrap: "balance" } as React.CSSProperties}>
             Encontrar o apoio certo para uma criança com TEA ou TDAH não devia ser um voo solitário.
           </p>
 
