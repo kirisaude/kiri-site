@@ -71,16 +71,21 @@ export default function ComoSelecionamosPage() {
           </p>
         </div>
 
-        {/* Nota final */}
+        {/* Responsabilidade */}
         <div className="mx-[18px] mt-[26px] bg-[#EFE6D6] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
             <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
             <circle cx="10" cy="6.3" r="1.05" fill="#8A7E6A" />
           </svg>
-          <p className="text-[14px] leading-[1.6] text-[#6E5326] m-0">
-            Verificamos a qualificação e o registro de cada profissional. A escolha de com quem seguir e a condução do cuidado continuam sendo decisão da família, em conjunto com o profissional.
-          </p>
+          <div className="flex flex-col gap-2.5">
+            <p className="text-[14px] leading-[1.6] text-[#6E5326] m-0">
+              Verificamos a qualificação e o registro de cada profissional. A escolha de com quem seguir e a condução do cuidado continuam sendo decisão da família, em conjunto com o profissional. A responsabilidade técnica pelo atendimento — diagnóstico, conduta e acompanhamento — é integralmente do profissional de saúde escolhido.
+            </p>
+            <p className="text-[14px] leading-[1.6] text-[#6E5326] m-0">
+              A verificação é periódica. A data da última checagem está indicada em cada perfil (Mês/Ano). A Kiri não monitora alterações em tempo real — recomendamos consultar o conselho de classe competente para confirmar a situação atual do profissional antes de iniciar qualquer atendimento.
+            </p>
+          </div>
         </div>
 
         {/* Rodapé */}
