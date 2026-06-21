@@ -1,4 +1,5 @@
 import { KiriLogo } from "@/components/KiriLogo";
+import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 
 const SECOES = [
@@ -119,11 +120,7 @@ export default function TermosPage() {
           ))}
         </div>
 
-        {/* Rodapé */}
-        <div className="mx-[22px] mt-12 pt-5 border-t border-linha flex items-center gap-2">
-          <KiriLogo size={18} />
-          <span className="text-[12.5px] text-muted">Kiri · Rede selecionada de neurodesenvolvimento infantil</span>
-        </div>
+        <Footer className="mx-[22px] mt-12" />
       </div>
     </div>
   );

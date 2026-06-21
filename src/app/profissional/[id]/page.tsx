@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { KiriLogo } from "@/components/KiriLogo";
 import { NavBack } from "@/components/NavBack";
+import { Footer } from "@/components/Footer";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
@@ -140,14 +141,7 @@ export default async function PerfilPage({ params }: PageProps) {
               </Link>
             </div>
 
-            {/* Rodapé esq — só desktop */}
-            <div className="hidden md:flex mt-6 pt-4 border-t border-linha items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <KiriLogo size={18} />
-                <span className="text-[12px] text-muted">Perfil verificado na rede Kiri</span>
-              </div>
-              <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos</a>
-            </div>
+            <Footer className="hidden md:flex mt-6" />
           </div>
 
           {/* ─── COLUNA DIREITA (conteúdo) ─── */}
@@ -255,14 +249,7 @@ export default async function PerfilPage({ params }: PageProps) {
               </Link>
             </div>
 
-            {/* Rodapé mob */}
-            <div className="md:hidden pt-4 border-t border-linha flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <KiriLogo size={20} />
-                <span className="text-[12px] text-muted">Perfil verificado na rede Kiri</span>
-              </div>
-              <a href="/termos" className="text-[12px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos</a>
-            </div>
+            <Footer className="md:hidden" />
           </div>
         </div>
       </div>

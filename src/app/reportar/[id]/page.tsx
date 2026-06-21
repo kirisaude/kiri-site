@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import Script from "next/script";
 import { NavBack } from "@/components/NavBack";
+import { Footer } from "@/components/Footer";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
@@ -72,6 +73,7 @@ function ReportarContent() {
           marginWidth={0}
           title="Reportar perfil Kiri"
         />
+        <Footer className="mt-6 mb-8" />
       </div>
     </div>
   );

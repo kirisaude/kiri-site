@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import { NavBack } from "@/components/NavBack";
+import { Footer } from "@/components/Footer";
 
 export default function AvaliacaoPage() {
   return (
@@ -80,6 +81,7 @@ export default function AvaliacaoPage() {
             Esta etapa serve exclusivamente para orientar você a encontrar o caminho ideal. Não realizamos avaliações clínicas ou diagnósticos na plataforma. Seus dados são protegidos com total sigilo e privacidade, em conformidade com a LGPD.
           </p>
         </div>
+        <Footer className="mx-[22px] mb-8" />
       </div>
     </div>
   );

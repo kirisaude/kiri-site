@@ -1,4 +1,5 @@
 import { KiriLogo } from "@/components/KiriLogo";
+import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 
 const ITENS = [
@@ -96,14 +97,7 @@ export default function ComoSelecionamosPage() {
           </div>
         </div>
 
-        {/* Rodapé */}
-        <div className="mx-[18px] mt-7 pt-4 border-t border-linha flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <KiriLogo size={20} />
-            <span className="text-[13px] text-muted">Kiri · Rede selecionada de neurodesenvolvimento</span>
-          </div>
-          <a href="/termos" className="text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
-        </div>
+        <Footer className="mx-[18px] mt-7" />
       </div>
     </div>
   );

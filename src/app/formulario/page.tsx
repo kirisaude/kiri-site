@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Script from "next/script";
 import { NavBack } from "@/components/NavBack";
+import { Footer } from "@/components/Footer";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
@@ -127,6 +128,7 @@ function FormularioContent() {
             title="Encaminhamento Kiri"
           />
         </div>
+        <Footer className="mx-[18px] mt-6 mb-8" />
       </div>
     </div>
   );
