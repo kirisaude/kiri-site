@@ -24,7 +24,7 @@ export function SeloEtiqueta() {
     <span className="inline-flex items-center gap-1 bg-wash-azulado border border-borda-azulada rounded-full px-2 py-0.5">
       <CheckIcon size={13} />
       <span className="text-[10px] font-semibold tracking-[0.06em] uppercase text-ardosia-escura">
-        Verificada
+        Verificado
       </span>
     </span>
   );
@@ -46,7 +46,7 @@ export function SeloMini() {
     <span className="inline-flex items-center gap-1">
       <CheckIcon size={13} />
       <span className="text-[10px] font-semibold tracking-[0.06em] uppercase text-ardosia-escura">
-        Verificada
+        Verificado
       </span>
     </span>
   );

@@ -35,7 +35,7 @@ const SECOES = [
   {
     titulo: "5. Selo 'Verificado' — alcance e limitações",
     texto: [
-      "O selo 'Verificado' ou 'Verificada' exibido nos perfis atesta exclusivamente que, na data da última checagem periódica indicada no perfil (Mês/Ano), os documentos e registros apresentados pelo profissional — incluindo registro ativo no conselho de classe competente, formação declarada e ausência de pendências éticas identificáveis — estavam válidos e em conformidade com os critérios da plataforma.",
+      "O selo 'Verificado' exibido nos perfis atesta exclusivamente que, na data da última checagem periódica indicada no perfil (Mês/Ano), os documentos e registros apresentados pelo profissional — incluindo registro ativo no conselho de classe competente, formação declarada e ausência de pendências éticas identificáveis — estavam válidos e em conformidade com os critérios da plataforma.",
       "A verificação é realizada periodicamente e de forma pontual. A Kiri não monitora em tempo real eventuais alterações no status profissional, cancelamentos de registro, abertura de processos éticos ou quaisquer outras mudanças ocorridas após a data da última checagem. O usuário é encorajado a consultar diretamente o conselho de classe competente para confirmar a situação atual do profissional antes de iniciar qualquer atendimento.",
       "A Kiri não se responsabiliza por alterações imediatas de status profissional ocorridas entre os intervalos de verificação.",
     ],

@@ -606,7 +606,7 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
               <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-[10px] md:text-[11.5px] font-semibold tracking-[0.06em] uppercase text-ardosia-escura">
-              Verificada
+              Verificado
             </span>
           </div>
         </div>
