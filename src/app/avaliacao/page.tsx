@@ -5,13 +5,11 @@ import { NavBack } from "@/components/NavBack";
 export default function AvaliacaoPage() {
   return (
     <div className="min-h-screen bg-creme flex flex-col">
-      <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 px-2">
-        {/* Nav */}
-        <div className="flex items-center justify-between px-2 pt-1 pb-1">
-          <NavBack label="Avaliação do neurodesenvolvimento" />
-          <div className="w-9 h-9" />
-        </div>
+      <div className="px-4 pt-4 pb-2">
+        <NavBack label="Avaliação do neurodesenvolvimento" />
+      </div>
 
+      <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 px-2">
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
           {/* Emblema */}

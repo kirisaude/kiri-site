@@ -4,11 +4,12 @@ import { NavBack } from "@/components/NavBack";
 export default function SobrePage() {
   return (
     <div className="min-h-screen bg-creme">
+      {/* Nav — fora do container para ficar no canto esquerdo da tela */}
+      <div className="px-4 pt-4 pb-2">
+        <NavBack label="Sobre a Kiri" />
+      </div>
+
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
-        {/* Nav */}
-        <div className="flex items-center gap-3 px-2 pt-1 pb-1">
-          <NavBack label="Sobre a Kiri" />
-        </div>
 
         {/* Logo centralizado */}
         <div className="px-[26px] pt-[22px] flex flex-col items-center text-center">

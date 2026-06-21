@@ -37,8 +37,8 @@ export default async function PerfilPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-creme">
       {/* Nav */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between pt-1 pb-3">
+      <div className="px-4 pt-4 pb-0">
+        <div className="flex items-center justify-between pb-3">
           <NavBack href="/" />
           <div className="flex gap-2">
             <button className="w-9 h-9 rounded-full bg-white border border-linha flex items-center justify-center cursor-pointer">

@@ -19,12 +19,11 @@ const ITENS = [
 export default function ComoSelecionamosPage() {
   return (
     <div className="min-h-screen bg-creme">
-      <div className="max-w-3xl mx-auto pb-10 w-full px-2">
-        {/* Nav */}
-        <div className="flex items-center gap-3 px-2 pt-1 pb-2.5">
-          <NavBack label="Sobre a rede" />
-        </div>
+      <div className="px-4 pt-4 pb-2">
+        <NavBack label="Sobre a rede" />
+      </div>
 
+      <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         {/* Título */}
         <div className="px-[22px] pt-2">
           <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>

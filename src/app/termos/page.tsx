@@ -70,11 +70,11 @@ const SECOES = [
 export default function TermosPage() {
   return (
     <div className="min-h-screen bg-creme">
+      <div className="px-4 pt-4 pb-2">
+        <NavBack label="Termos de Uso" />
+      </div>
+
       <div className="max-w-3xl mx-auto pb-16 w-full px-2">
-        {/* Nav */}
-        <div className="flex items-center px-2 pt-1 pb-2">
-          <NavBack label="Termos de Uso" />
-        </div>
 
         {/* Cabeçalho */}
         <div className="px-[22px] pt-4 pb-2">
