@@ -68,11 +68,19 @@ export default async function PerfilPage({ params }: PageProps) {
 
               <div className="flex items-center gap-[7px] mt-[14px]">
                 <span className="font-serif text-[25px] md:text-[27px] font-semibold text-carvao leading-[1.1]">{p.nome}</span>
-                <svg width="19" height="19" viewBox="0 0 22 22" fill="none" aria-label="Formação verificada" style={{ flexShrink: 0 }}>
-                  <title>Formação verificada</title>
-                  <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
-                  <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                {/* Selo verificado com tooltip */}
+                <div className="relative group flex-none">
+                  <svg width="19" height="19" viewBox="0 0 22 22" fill="none" aria-label="Verificado" style={{ flexShrink: 0, cursor: "default" }}>
+                    <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
+                    <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10 pointer-events-none">
+                    <div className="bg-carvao text-white text-[11.5px] leading-[1.4] rounded-[8px] px-3 py-2 whitespace-nowrap shadow-lg">
+                      Cadastro validado junto ao conselho<br />de classe em {p.verificacao_data}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-carvao" />
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="text-[15px] text-cinza-texto mt-1.5 leading-[1.3]">{p.titulo_exibicao}</div>
@@ -104,8 +112,8 @@ export default async function PerfilPage({ params }: PageProps) {
                   <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
                   <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="text-[13.5px] font-bold tracking-[0.03em] text-ardosia-escura">Formação verificada</span>
-                <span className="ml-auto text-[11.5px] text-ardosia-texto">Conferida pela Kiri</span>
+                <span className="text-[13.5px] font-bold tracking-[0.03em] text-ardosia-escura">Verificado pela Kiri</span>
+                <span className="ml-auto text-[11.5px] text-ardosia-texto">em {p.verificacao_data}</span>
               </div>
               <div className="px-4 pb-1.5">
                 {credenciais.map((c, i) => (
@@ -230,6 +238,21 @@ export default async function PerfilPage({ params }: PageProps) {
               >
                 Quero ser encaminhado
               </Link>
+            </div>
+
+            {/* Reportar */}
+            <div className="pt-2 pb-1">
+              <a
+                href={`mailto:contato@kirisaude.com.br?subject=Reportar perfil: ${encodeURIComponent(p.nome)}&body=Olá, gostaria de reportar um erro ou inconsistência no perfil de ${encodeURIComponent(p.nome)} (ID: ${p.id}).%0A%0ADescrição:%0A`}
+                className="inline-flex items-center gap-1.5 text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline"
+              >
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="8.2" stroke="#9A8C78" strokeWidth="1.4" />
+                  <line x1="10" y1="9" x2="10" y2="14" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="10" cy="6.3" r="1.05" fill="#9A8C78" />
+                </svg>
+                Reportar erro ou perfil
+              </a>
             </div>
 
             {/* Rodapé mob */}

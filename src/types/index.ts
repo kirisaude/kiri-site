@@ -21,6 +21,7 @@ export interface Profissional {
   valor_max: number | null;
   convenio_info: string;
   verificado: boolean;
+  verificacao_data: string;
   foto_url: string | null;
 }
 

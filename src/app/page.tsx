@@ -221,7 +221,7 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[16px] px-4 md:px-7 py-4 md:py-6 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
+            className="flex items-center gap-4 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
           >
             <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white border border-borda-quente flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
