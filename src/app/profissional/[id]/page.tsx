@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { KiriLogo } from "@/components/KiriLogo";
 import { NavBack } from "@/components/NavBack";
 import { Footer } from "@/components/Footer";
+import { SaveButton } from "@/components/SaveButton";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
@@ -98,12 +99,7 @@ export default async function PerfilPage({ params }: PageProps) {
                 ))}
               </div>
 
-              <button className="mt-[18px] w-full font-semibold text-[13px] text-cinza-texto bg-white border border-linha rounded-[11px] py-[11px] cursor-pointer inline-flex items-center justify-center gap-[7px]">
-                <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-                  <path d="M5 3 L15 3 C15.6 3 16 3.4 16 4 L16 17 L10 13 L4 17 L4 4 C4 3.4 4.4 3 5 3 Z" stroke="#9A8C78" strokeWidth="1.5" strokeLinejoin="round" />
-                </svg>
-                Salvar para depois
-              </button>
+              <SaveButton profissionalId={p.id} />
             </div>
 
             {/* Formação verificada */}
