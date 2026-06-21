@@ -71,7 +71,7 @@ export default function AvaliacaoPage() {
             <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <p className="text-[13px] leading-[1.55] text-muted m-0">
-            Esta é uma orientação para ajudar você a encontrar o caminho — não é uma avaliação nem um diagnóstico feito aqui. Suas informações são tratadas com sigilo.
+            Esta etapa serve exclusivamente para orientar você a encontrar o caminho ideal. Não realizamos avaliações clínicas ou diagnósticos na plataforma. Seus dados são protegidos com total sigilo e privacidade, em conformidade com a LGPD.
           </p>
         </div>
 
