@@ -485,7 +485,7 @@ export default function Home() {
               <p className="text-[14px] md:text-[15px] leading-[1.6] text-cinza-texto m-0 mt-1">
                 Uma rede pequena, para você decidir com segurança.
               </p>
-              <div className="mt-3 flex flex-col gap-2">
+              <div className="mt-5 flex flex-col gap-2">
                 {[
                   "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
