@@ -34,17 +34,16 @@ function FormularioContent() {
     <div className="min-h-screen bg-creme">
       <Script src="https://tally.so/widgets/embed.js" strategy="lazyOnload" />
 
-      <div className="max-w-2xl mx-auto pb-12 w-full">
-        {/* Nav */}
-        <div className="flex items-center justify-between px-4 pt-4 pb-2 w-full">
-          <NavBack />
-          <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
-            Pré-cadastro · triagem
-          </span>
-          <div className="w-9 h-9" />
-        </div>
+      <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
+        <NavBack />
+        <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
+          Pré-cadastro · triagem
+        </span>
+        <div className="w-9 h-9" />
+      </div>
 
-        <div className="px-[18px] pt-1">
+      <div className="max-w-2xl mx-auto pb-12 w-full">
+        <div className="px-[18px] pt-8">
           <h1 className="font-serif text-[23px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você procura
           </h1>
