@@ -134,7 +134,7 @@ export default async function PerfilPage({ params }: PageProps) {
             <div className="hidden md:block mt-5">
               <Link
                 href={`/formulario?profissional=${p.id}`}
-                className="block w-full text-center font-semibold text-[16px] text-creme bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
+                className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
               >
                 Quero ser encaminhado
               </Link>
@@ -234,7 +234,7 @@ export default async function PerfilPage({ params }: PageProps) {
               {/* CTA mobile */}
               <Link
                 href={`/formulario?profissional=${p.id}`}
-                className="md:hidden mt-3.5 block w-full text-center font-semibold text-[16px] text-creme bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
+                className="md:hidden mt-3.5 block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
               >
                 Quero ser encaminhado
               </Link>

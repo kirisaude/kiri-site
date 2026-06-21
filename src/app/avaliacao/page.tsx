@@ -74,7 +74,7 @@ export default function AvaliacaoPage() {
         <div className="px-[22px] pt-3.5 pb-8 bg-gradient-to-t from-creme via-creme/90 to-transparent">
           <Link
             href="/formulario"
-            className="block w-full text-center font-semibold text-[16px] text-creme bg-ferrugem rounded-[13px] py-4 cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
+            className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-4 cursor-pointer shadow-[0_8px_20px_-10px_rgba(160,70,90,0.6)] no-underline"
           >
             Começar — leva poucos minutos
           </Link>
