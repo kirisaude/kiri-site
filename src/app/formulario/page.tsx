@@ -79,7 +79,7 @@ function FormularioContent() {
                 <button
                   type="button"
                   onClick={() => router.push("/formulario")}
-                  className="flex-none text-[13px] font-semibold text-ferrugem cursor-pointer"
+                  className="flex-none text-[13px] font-semibold text-ferrugem cursor-pointer mr-1"
                 >
                   Trocar
                 </button>
