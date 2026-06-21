@@ -72,7 +72,7 @@ export default function TermosPage() {
     <div className="min-h-screen bg-creme">
       <div className="max-w-3xl mx-auto pb-16 w-full px-2">
         {/* Nav */}
-        <div className="flex items-center px-4 pt-3 pb-2">
+        <div className="flex items-center px-2 pt-1 pb-2">
           <NavBack label="Termos de Uso" />
         </div>
 

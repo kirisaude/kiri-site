@@ -36,7 +36,7 @@ function FormularioContent() {
 
       <div className="max-w-2xl mx-auto pb-12 w-full">
         {/* Nav */}
-        <div className="flex items-center justify-between px-4 pt-5 pb-2">
+        <div className="flex items-center justify-between px-2 pt-1 pb-2">
           <NavBack />
           <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
             Pré-cadastro · triagem

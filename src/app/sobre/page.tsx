@@ -6,7 +6,7 @@ export default function SobrePage() {
     <div className="min-h-screen bg-creme">
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         {/* Nav */}
-        <div className="flex items-center gap-3 px-4 pt-3 pb-1">
+        <div className="flex items-center gap-3 px-2 pt-1 pb-1">
           <NavBack label="Sobre a Kiri" />
         </div>
 

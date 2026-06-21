@@ -7,7 +7,7 @@ export default function AvaliacaoPage() {
     <div className="min-h-screen bg-creme flex flex-col">
       <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 px-2">
         {/* Nav */}
-        <div className="flex items-center justify-between px-4 pt-3 pb-1">
+        <div className="flex items-center justify-between px-2 pt-1 pb-1">
           <NavBack label="Avaliação do neurodesenvolvimento" />
           <div className="w-9 h-9" />
         </div>
