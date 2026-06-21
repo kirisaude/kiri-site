@@ -38,6 +38,10 @@ export default function Home() {
   const [showModalidadeOptions, setShowModalidadeOptions] = useState(false);
   const [showPagamentoOptions, setShowPagamentoOptions] = useState(false);
   const [activePagamento, setActivePagamento] = useState<string | null>(null);
+  const [showValorOptions, setShowValorOptions] = useState(false);
+  const VALOR_TOTAL_MAX = 600;
+  const [valorMin, setValorMin] = useState(0);
+  const [valorMax, setValorMax] = useState(VALOR_TOTAL_MAX);
 
   const filtered = useMemo(() => {
     return profissionais.filter((p) => {
@@ -48,6 +52,9 @@ export default function Home() {
         const conv = p.convenio_info.toLowerCase();
         if (activePagamento === "Particular" && conv.includes("não aceita")) return false;
         if (activePagamento === "Convênio" && !conv.includes("aceita")) return false;
+      }
+      if (valorMin > 0 || valorMax < VALOR_TOTAL_MAX) {
+        if (p.valor_min < valorMin || p.valor_min > valorMax) return false;
       }
       if (search.trim()) {
         const q = search.toLowerCase();
@@ -60,14 +67,15 @@ export default function Home() {
       }
       return true;
     });
-  }, [search, activeCond, activeProfissao, activeModalidade]);
+  }, [search, activeCond, activeProfissao, activeModalidade, activePagamento, valorMin, valorMax]);
 
   const sections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
     pros: filtered.filter((p) => p.profissao === prof),
   })).filter((s) => s.pros.length > 0);
 
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activePagamento || search.trim());
+  const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activePagamento || valorAtivo || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
@@ -272,12 +280,27 @@ export default function Home() {
             )}
           </button>
 
-          {["Cidade", "Faixa de valor"].map((f) => (
-            <button key={f} className="flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2.5 cursor-pointer">
-              <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto whitespace-nowrap">{f}</span>
+          <button className="flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 bg-white border border-linha rounded-full px-[13px] py-2.5 cursor-pointer">
+            <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto whitespace-nowrap">Cidade</span>
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+
+          {/* Faixa de valor */}
+          <button
+            onClick={() => { setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); }}
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+              valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+            }`}
+          >
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+              {valorAtivo ? `R$${valorMin}–${valorMax === VALOR_TOTAL_MAX ? "600+" : valorMax}` : "Faixa de valor"}
+            </span>
+            {valorAtivo ? (
+              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}>×</span>
+            ) : (
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-          ))}
+            )}
+          </button>
 
           {/* Particular / convênio */}
           <button
@@ -348,45 +371,119 @@ export default function Home() {
           </div>
         )}
 
+        {/* Range slider de valor */}
+        {showValorOptions && (
+          <div className="pt-3 px-1">
+            <div className="bg-white border border-linha rounded-[16px] p-4 md:p-5 max-w-sm">
+              <div className="flex justify-between items-baseline mb-3">
+                <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
+                <span className="text-[14px] font-semibold text-ardosia-escura">
+                  R${valorMin} — {valorMax >= VALOR_TOTAL_MAX ? "R$600+" : `R$${valorMax}`}
+                </span>
+              </div>
+
+              {/* Track container */}
+              <div className="relative h-6 flex items-center">
+                {/* Track fundo */}
+                <div className="absolute left-0 right-0 h-[5px] bg-areia rounded-full" />
+                {/* Track ativo */}
+                <div
+                  className="absolute h-[5px] bg-ardosia rounded-full pointer-events-none"
+                  style={{
+                    left: `${(valorMin / VALOR_TOTAL_MAX) * 100}%`,
+                    right: `${100 - (valorMax / VALOR_TOTAL_MAX) * 100}%`,
+                  }}
+                />
+                {/* Input min — invisível, por cima */}
+                <input
+                  type="range" min={0} max={VALOR_TOTAL_MAX} step={50}
+                  value={valorMin}
+                  onChange={(e) => { const v = Number(e.target.value); if (v <= valorMax - 50) setValorMin(v); }}
+                  className="absolute w-full h-full opacity-0 cursor-pointer"
+                  style={{ zIndex: valorMin > VALOR_TOTAL_MAX - 100 ? 5 : 3 }}
+                />
+                {/* Input max — invisível, por baixo */}
+                <input
+                  type="range" min={0} max={VALOR_TOTAL_MAX} step={50}
+                  value={valorMax}
+                  onChange={(e) => { const v = Number(e.target.value); if (v >= valorMin + 50) setValorMax(v); }}
+                  className="absolute w-full h-full opacity-0 cursor-pointer"
+                  style={{ zIndex: 4 }}
+                />
+                {/* Thumb visual mín */}
+                <div
+                  className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                  style={{ left: `calc(${(valorMin / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }}
+                />
+                {/* Thumb visual máx */}
+                <div
+                  className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                  style={{ left: `calc(${(valorMax / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }}
+                />
+              </div>
+
+              <div className="flex justify-between mt-1">
+                <span className="text-[11.5px] text-muted">R$0</span>
+                <span className="text-[11.5px] text-muted">R$600+</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Trust banner + Como funciona — visível quando sem filtros */}
         {!hasFilters && (
-          <div className="pt-8 md:pt-12 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="pt-8 md:pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             {/* Por que selecionada */}
             <Link
               href="/como-selecionamos"
-              className="block bg-white border border-borda-azulada rounded-[15px] md:rounded-[18px] p-4 md:p-6 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow"
+              className="block bg-white border border-borda-azulada rounded-[15px] md:rounded-[16px] p-4 md:p-5 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow"
             >
-              <div className="flex items-center gap-2.5 mb-2.5 md:mb-3">
-                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+              <div className="flex items-center gap-2.5 mb-3">
+                <svg width="16" height="16" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
                   <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
                   <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="font-serif text-[17px] md:text-[21px] font-semibold text-carvao">
+                <span className="font-serif text-[16px] md:text-[18px] font-semibold text-carvao">
                   Por que é uma rede selecionada
                 </span>
               </div>
-              <p className="text-[13.5px] md:text-[16px] leading-[1.6] text-cinza-texto m-0">
+              <p className="text-[13px] md:text-[14px] leading-[1.6] text-cinza-texto m-0">
                 Registro no conselho e formação conferidos, um a um. Uma rede pequena, para você decidir com segurança.
               </p>
+              <div className="mt-3 flex flex-col gap-2">
+                {[
+                  "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
+                  "Formação na área e atuação em neurodesenvolvimento infantil",
+                  "Situação ética regular — sem pendências no conselho",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                      <circle cx="10" cy="10" r="8.4" stroke="#6E8893" strokeWidth="1.3" />
+                      <path d="M6.3 10.2 L8.8 12.7 L13.8 7" stroke="#6E8893" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-[12.5px] md:text-[13px] leading-[1.5] text-cinza-texto2">{item}</span>
+                  </div>
+                ))}
+              </div>
             </Link>
 
             {/* Como funciona */}
-            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[18px] p-4 md:p-6">
-              <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-4">Como funciona</div>
+            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 md:p-5">
+              <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Como funciona</div>
               <div className="flex flex-col gap-0">
                 {[
                   { n: "1", texto: "Conte o que procura.", linha: true },
                   { n: "2", texto: "Veja profissionais com formação verificada.", linha: true },
                   { n: "3", texto: "Escolha com quem começar.", linha: false },
                 ].map((passo) => (
-                  <div key={passo.n} className="flex gap-3.5 items-start">
+                  <div key={passo.n} className="flex gap-3 items-start">
                     <div className="flex flex-col items-center flex-none">
-                      <div className="w-7 h-7 rounded-full bg-white border border-borda-quente flex items-center justify-center font-serif text-[14px] font-semibold text-ferrugem">
+                      <div className="w-6 h-6 rounded-full bg-white border border-borda-quente flex items-center justify-center font-serif text-[13px] font-semibold text-ferrugem">
                         {passo.n}
                       </div>
-                      {passo.linha && <div className="w-[1.5px] h-[24px] bg-borda-quente" />}
+                      {passo.linha && <div className="w-[1.5px] h-[20px] bg-borda-quente" />}
                     </div>
-                    <div className="text-[14px] md:text-[16.5px] leading-[1.45] text-carvao-sutil pt-1 pb-3.5">
+                    <div className="text-[13.5px] md:text-[15px] leading-[1.45] text-carvao-sutil pt-0.5 pb-3">
                       {passo.texto}
                     </div>
                   </div>
@@ -402,7 +499,7 @@ export default function Home() {
             <p className="text-[15px] text-cinza-texto2">Nenhum profissional encontrado para esse filtro.</p>
             <button
               className="mt-4 text-[13px] font-semibold text-ferrugem underline cursor-pointer"
-              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActivePagamento(null); }}
+              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
             >
               Limpar filtros
             </button>
