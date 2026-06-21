@@ -242,8 +242,8 @@ export default async function PerfilPage({ params }: PageProps) {
 
             {/* Reportar */}
             <div className="pt-2 pb-1">
-              <a
-                href={`mailto:contato@kirisaude.com.br?subject=Reportar perfil: ${encodeURIComponent(p.nome)}&body=Olá, gostaria de reportar um erro ou inconsistência no perfil de ${encodeURIComponent(p.nome)} (ID: ${p.id}).%0A%0ADescrição:%0A`}
+              <Link
+                href={`/reportar/${p.id}`}
                 className="inline-flex items-center gap-1.5 text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline"
               >
                 <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
@@ -252,7 +252,7 @@ export default async function PerfilPage({ params }: PageProps) {
                   <circle cx="10" cy="6.3" r="1.05" fill="#9A8C78" />
                 </svg>
                 Reportar erro ou perfil
-              </a>
+              </Link>
             </div>
 
             {/* Rodapé mob */}
