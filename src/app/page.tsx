@@ -468,7 +468,7 @@ export default function Home() {
             {/* Por que selecionada */}
             <Link
               href="/como-selecionamos"
-              className="flex flex-col justify-center bg-white border border-borda-azulada rounded-[15px] md:rounded-[16px] p-4 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow"
+              className="flex flex-col justify-center items-center bg-white border border-borda-azulada rounded-[15px] md:rounded-[16px] px-6 py-4 cursor-pointer no-underline hover:shadow-[0_6px_24px_-10px_rgba(68,96,108,0.2)] transition-shadow text-center"
             >
               <div className="flex items-center gap-2.5 mb-3">
                 <svg width="16" height="16" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
@@ -482,7 +482,7 @@ export default function Home() {
               <p className="text-[14px] md:text-[15px] leading-[1.6] text-cinza-texto m-0">
                 Registro no conselho e formação conferidos, um a um. Uma rede pequena, para você decidir com segurança.
               </p>
-              <div className="mt-3 flex flex-col gap-2">
+              <div className="mt-3 flex flex-col gap-2 text-left">
                 {[
                   "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
@@ -500,9 +500,9 @@ export default function Home() {
             </Link>
 
             {/* Como funciona */}
-            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] p-4 flex flex-col justify-center">
-              <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Como funciona</div>
-              <div className="flex flex-col gap-0">
+            <div className="bg-wash-quente border border-borda-quente rounded-[15px] md:rounded-[16px] px-6 py-4 flex flex-col justify-center items-center">
+              <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 text-center">Como funciona</div>
+              <div className="flex flex-col gap-0 w-full max-w-[340px] md:max-w-none">
                 {[
                   { n: "1", titulo: "Você responde a algumas perguntas", desc: "Nos conte, em poucos passos, o que tem observado no comportamento da criança.", linha: true },
                   { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
