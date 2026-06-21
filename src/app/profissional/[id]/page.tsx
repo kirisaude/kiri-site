@@ -141,7 +141,6 @@ export default async function PerfilPage({ params }: PageProps) {
               </Link>
             </div>
 
-            <Footer className="hidden md:flex mt-6" />
           </div>
 
           {/* ─── COLUNA DIREITA (conteúdo) ─── */}
@@ -249,9 +248,9 @@ export default async function PerfilPage({ params }: PageProps) {
               </Link>
             </div>
 
-            <Footer className="md:hidden" />
           </div>
         </div>
+        <Footer className="mt-8" />
       </div>
     </div>
   );
