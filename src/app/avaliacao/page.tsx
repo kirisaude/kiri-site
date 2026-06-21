@@ -19,17 +19,17 @@ export default function AvaliacaoPage() {
             <KiriLogo size={38} />
           </div>
 
-          <h1 className="font-serif text-[26px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao text-center mt-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao text-center mt-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Você não precisa ter um diagnóstico para começar.
           </h1>
 
-          <p className="mt-3.5 text-[14.5px] leading-[1.6] text-cinza-texto text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Muitas famílias chegam aqui só com a sensação de que algo está diferente — no jeito de se comunicar, de se relacionar, de aprender ou de se desenvolver. Está tudo bem não ter um nome ainda. A gente ajuda você a encontrar o profissional certo para entender melhor.
           </p>
 
           {/* Como funciona */}
           <div className="mt-6 bg-white border border-linha rounded-[16px] px-4 py-[18px]">
-            <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3.5">
+            <div className="text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3.5">
               Como funciona
             </div>
             <div className="flex flex-col gap-0">
@@ -45,7 +45,7 @@ export default function AvaliacaoPage() {
                     </div>
                     {passo.linha && <div className="w-[1.5px] h-[22px] bg-borda-quente" />}
                   </div>
-                  <div className="text-[14px] leading-[1.45] text-carvao-sutil pt-[5px] pb-[14px]">
+                  <div className="text-[16px] md:text-[17px] leading-[1.5] text-carvao-sutil pt-[5px] pb-[14px]">
                     {passo.texto}
                   </div>
                 </div>
@@ -55,11 +55,11 @@ export default function AvaliacaoPage() {
 
           {/* Aviso */}
           <div className="mt-4 flex gap-[9px] items-start px-0.5">
-            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
               <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
               <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <p className="text-[11.5px] leading-[1.5] text-muted m-0">
+            <p className="text-[13px] leading-[1.55] text-muted m-0">
               Esta é uma orientação para ajudar você a encontrar o caminho — não é uma avaliação nem um diagnóstico feito aqui. Suas informações são tratadas com sigilo.
             </p>
           </div>
