@@ -115,6 +115,25 @@ function FormularioContent() {
           </div>
         </div>
 
+        {/* Aviso de privacidade */}
+        <div className="mx-[18px] mt-3 bg-white border border-linha rounded-[13px] px-[14px] py-[13px] flex gap-[11px]">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+            <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
+            <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <p className="text-[12.5px] leading-[1.6] text-muted m-0">
+            Seus dados são usados exclusivamente para encaminhamento ao profissional indicado. As respostas são armazenadas pelo Tally.so e acessadas apenas pela equipe Kiri. Você pode solicitar acesso, correção ou exclusão pelo e-mail{" "}
+            <a href="mailto:kirisaude@gmail.com" className="underline text-cinza-texto2">
+              kirisaude@gmail.com
+            </a>
+            . Conforme a{" "}
+            <a href="/politica-de-privacidade" className="underline text-cinza-texto2">
+              Política de Privacidade
+            </a>
+            .
+          </p>
+        </div>
+
         {/* Tally embed */}
         <div className="mx-[18px] mt-5">
           <iframe

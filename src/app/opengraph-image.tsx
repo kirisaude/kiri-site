@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Kiri — Rede selecionada de cuidado ao neurodesenvolvimento infantil";
+export const alt = "Kiri — Rede de cuidado ao neurodesenvolvimento infantil";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,7 +21,7 @@ export default async function Image() {
         </div>
         {/* Tagline */}
         <div style={{ fontSize: "24px", color: "#44606C", marginTop: "32px", fontFamily: "Georgia, serif", fontWeight: "400", lineHeight: 1, display: "flex" }}>
-          Rede selecionada de cuidado ao neurodesenvolvimento infantil
+          Rede de cuidado ao neurodesenvolvimento infantil
         </div>
       </div>
     ),

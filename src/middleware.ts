@@ -7,6 +7,9 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/acesso") ||
     pathname.startsWith("/api/acesso") ||
+    pathname.startsWith("/profissionais") ||
+    pathname.startsWith("/politica-de-privacidade") ||
+    pathname.startsWith("/termos") ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
     pathname.startsWith("/icon") ||

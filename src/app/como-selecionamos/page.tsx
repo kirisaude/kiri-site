@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
@@ -97,7 +98,23 @@ export default function ComoSelecionamosPage() {
           </div>
         </div>
 
-        <Footer className="mx-[18px] mt-7" />
+        {/* CTA para profissionais */}
+        <div className="mx-[18px] mt-[26px] flex flex-col items-center text-center gap-3 py-6 border-t border-linha">
+          <p className="text-[14.5px] leading-[1.6] text-cinza-texto m-0">
+            É profissional de saúde e quer fazer parte da rede?
+          </p>
+          <Link
+            href="/profissionais/inscricao"
+            className="inline-flex items-center gap-2 font-semibold text-[15px] text-white bg-ardosia-escura rounded-[12px] px-6 py-3 no-underline shadow-[0_6px_18px_-8px_rgba(44,70,80,0.4)]"
+          >
+            Quero fazer parte da rede
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+              <path d="M7 4 L13 10 L7 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </div>
+
+        <Footer className="mx-[18px] mt-4" />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Newsreader, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -17,13 +17,19 @@ const hankenGrotesk = Hanken_Grotesk({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kirisaude.com.br"),
-  title: "Kiri — Rede selecionada de cuidado ao neurodesenvolvimento infantil",
+  title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
   description:
     "Diretório curado de profissionais de neurodesenvolvimento infantil especializados em TEA e TDAH. Formação verificada, contato pela Kiri.",
   openGraph: {
-    title: "Kiri — Rede selecionada de cuidado ao neurodesenvolvimento infantil",
+    title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
     description:
       "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
     siteName: "Kiri",
@@ -32,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiri — Rede selecionada de cuidado ao neurodesenvolvimento infantil",
+    title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
     description:
       "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
   },

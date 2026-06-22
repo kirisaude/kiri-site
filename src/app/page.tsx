@@ -22,7 +22,7 @@ function EmBreve() {
       </div>
       <p className="mt-4 text-[16px] md:text-[18px] text-cinza-texto text-center max-w-sm leading-[1.6]"
         style={{ textWrap: "balance" } as React.CSSProperties}>
-        Em breve. Uma rede selecionada de cuidado ao neurodesenvolvimento infantil.
+        Em breve. Uma rede de cuidado ao neurodesenvolvimento infantil.
       </p>
     </div>
   );
@@ -40,6 +40,7 @@ export default function Home() {
   const [showCidadeOptions, setShowCidadeOptions] = useState(false);
   const [activeCidade, setActiveCidade] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const VALOR_TOTAL_MAX = 600;
   const [valorMin, setValorMin] = useState(0);
   const [valorMax, setValorMax] = useState(VALOR_TOTAL_MAX);
@@ -128,8 +129,47 @@ export default function Home() {
             <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
             </Link>
+            {/* Hambúrguer — mobile only */}
+            <button
+              onClick={() => setShowMenu((v) => !v)}
+              className="md:hidden flex flex-col items-center justify-center w-9 h-9 gap-[5px] cursor-pointer flex-none"
+              aria-label="Menu"
+            >
+              {showMenu ? (
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <line x1="3" y1="3" x2="17" y2="17" stroke="#564F45" strokeWidth="1.8" strokeLinecap="round" />
+                  <line x1="17" y1="3" x2="3" y2="17" stroke="#564F45" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <>
+                  <span className="block w-[18px] h-[1.8px] bg-cinza-texto rounded-full" />
+                  <span className="block w-[18px] h-[1.8px] bg-cinza-texto rounded-full" />
+                  <span className="block w-[18px] h-[1.8px] bg-cinza-texto rounded-full" />
+                </>
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Menu mobile dropdown */}
+        {showMenu && (
+          <div className="md:hidden border-t border-linha bg-creme/98 px-4 py-2 flex flex-col">
+            <Link
+              href="/como-selecionamos"
+              onClick={() => setShowMenu(false)}
+              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
+            >
+              Como selecionamos
+            </Link>
+            <Link
+              href="/sobre"
+              onClick={() => setShowMenu(false)}
+              className="py-3.5 text-[16px] font-semibold text-cinza-texto no-underline"
+            >
+              Sobre
+            </Link>
+          </div>
+        )}
       </header>
 
       {/* ═══ CONTEÚDO PRINCIPAL ═══ */}
@@ -146,7 +186,7 @@ export default function Home() {
               Encontre o profissional certo para o desenvolvimento do seu filho.
             </h1>
             <p
-              className="mt-2 md:mt-5 text-[14.5px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
+              className="mt-2 md:mt-5 text-[15px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
               style={{ textWrap: "pretty" } as React.CSSProperties}
             >
               Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
@@ -251,7 +291,7 @@ export default function Home() {
           {/* Tipo de profissional */}
           <button
             onClick={() => { setShowProfissaoOptions((v) => !v); setShowModalidadeOptions(false); }}
-            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -268,7 +308,7 @@ export default function Home() {
           {/* Modalidade */}
           <button
             onClick={() => { setShowModalidadeOptions((v) => !v); setShowProfissaoOptions(false); }}
-            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -285,7 +325,7 @@ export default function Home() {
           {/* Cidade */}
           <button
             onClick={() => { setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); }}
-            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -302,7 +342,7 @@ export default function Home() {
           {/* Faixa de valor */}
           <button
             onClick={() => { setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); }}
-            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -319,7 +359,7 @@ export default function Home() {
           {/* Particular / convênio */}
           <button
             onClick={() => { setShowPagamentoOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); }}
-            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2.5 cursor-pointer border transition-all ${
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
           >
@@ -559,7 +599,7 @@ export default function Home() {
                 {/* Mobile: scroll horizontal */}
                 <div className="-mx-4 md:hidden overflow-x-auto scrollbar-hide flex gap-3 px-4 pb-1.5">
                   {sec.pros.map((p) => (
-                    <div key={p.id} className="flex-none w-[204px]">
+                    <div key={p.id} className="flex-none w-[220px]">
                       <MiniCard profissional={p} />
                     </div>
                   ))}

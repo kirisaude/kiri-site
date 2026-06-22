@@ -24,7 +24,7 @@ export function SaveButton({ profissionalId }: { profissionalId: string }) {
   return (
     <button
       onClick={toggle}
-      className={`mt-[18px] w-full font-semibold text-[13px] border rounded-[11px] py-[11px] cursor-pointer inline-flex items-center justify-center gap-[7px] transition-colors ${
+      className={`mt-[18px] w-full font-semibold text-[14px] border rounded-[11px] py-3 cursor-pointer inline-flex items-center justify-center gap-[7px] transition-colors ${
         saved
           ? "text-white bg-ferrugem border-ferrugem"
           : "text-cinza-texto bg-white border-linha hover:bg-areia"

@@ -46,7 +46,7 @@ export default async function PerfilPage({ params }: PageProps) {
       </div>
 
       {/* ═══ LAYOUT PRINCIPAL ═══ */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-14">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-28 md:pb-14">
         <div className="md:grid md:grid-cols-[340px_1fr] lg:grid-cols-[380px_1fr] md:gap-10 lg:gap-14 md:items-start">
 
           {/* ─── COLUNA ESQUERDA (identidade + credenciais) ─── */}
@@ -213,14 +213,8 @@ export default async function PerfilPage({ params }: PageProps) {
                 </p>
               </div>
 
-              {/* CTA mobile */}
-              <div className="md:hidden mt-3.5 flex flex-col gap-2.5">
-                <Link
-                  href={`/formulario?profissional=${p.id}`}
-                  className="block w-full text-center font-semibold text-[16px] text-white bg-ardosia-escura rounded-[13px] py-[15px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(44,70,80,0.35)] no-underline"
-                >
-                  Quero ser encaminhado
-                </Link>
+              {/* Reportar perfil — mobile (CTA principal fica na barra fixa) */}
+              <div className="md:hidden mt-3.5">
                 <Link
                   href={`/reportar/${p.id}`}
                   className="block w-full text-center text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[11px] py-2.5 no-underline hover:bg-[#EFE6D6] transition-colors"
@@ -233,6 +227,16 @@ export default async function PerfilPage({ params }: PageProps) {
           </div>
         </div>
         <Footer className="mt-8" />
+      </div>
+
+      {/* Barra CTA fixa — mobile only */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-creme/95 backdrop-blur-sm border-t border-linha px-4 py-3 flex flex-col gap-2">
+        <Link
+          href={`/formulario?profissional=${p.id}`}
+          className="block w-full text-center font-semibold text-[16px] text-white bg-ardosia-escura rounded-[13px] py-[14px] cursor-pointer shadow-[0_8px_20px_-10px_rgba(44,70,80,0.35)] no-underline"
+        >
+          Quero ser encaminhado
+        </Link>
       </div>
     </div>
   );
