@@ -116,12 +116,26 @@ export default function Home() {
 
           {/* Right side */}
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
-            <button className="inline-flex items-center gap-1.5 bg-white border border-linha rounded-full px-3 py-1.5 cursor-pointer">
-              <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
-                <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#6E8893" strokeWidth="1.6" strokeLinejoin="round" />
-                <circle cx="10" cy="7.6" r="2.1" stroke="#6E8893" strokeWidth="1.6" />
-              </svg>
-              <span className="text-[13px] md:text-[15px] font-semibold text-cinza-texto">São Paulo</span>
+            <button
+              onClick={() => setActiveCidade(activeCidade === "São Paulo" ? null : "São Paulo")}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 cursor-pointer border transition-colors ${
+                activeCidade === "São Paulo"
+                  ? "bg-ardosia-escura border-ardosia text-white"
+                  : "bg-white border-linha text-cinza-texto"
+              }`}
+            >
+              {activeCidade === "São Paulo" ? (
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+                  <line x1="4" y1="4" x2="16" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <line x1="16" y1="4" x2="4" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#6E8893" strokeWidth="1.6" strokeLinejoin="round" />
+                  <circle cx="10" cy="7.6" r="2.1" stroke="#6E8893" strokeWidth="1.6" />
+                </svg>
+              )}
+              <span className="text-[13px] md:text-[15px] font-semibold">São Paulo</span>
             </button>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos

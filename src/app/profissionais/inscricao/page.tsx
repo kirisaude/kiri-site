@@ -37,6 +37,7 @@ export default function InscricaoProfissionalPage() {
   const [sitePerfil, setSitePerfil] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
+  const [aceitaTermos, setAceitaTermos] = useState(false);
   const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
@@ -157,6 +158,20 @@ export default function InscricaoProfissionalPage() {
         </div>
 
         <form onSubmit={enviar} className="mt-6 flex flex-col gap-5 pb-12">
+
+          {/* Aceite dos termos */}
+          <div className="bg-white border border-linha rounded-[13px] px-4 py-4">
+            <label className="flex gap-3 cursor-pointer">
+              <input type="checkbox" checked={aceitaTermos} onChange={(e) => setAceitaTermos(e.target.checked)} className="mt-0.5 w-4 h-4 flex-none accent-ardosia" />
+              <span className="text-[13px] leading-[1.6] text-cinza-texto2">
+                Li e aceito os{" "}
+                <a href="/termos" className="underline text-cinza-texto2" target="_blank">Termos de Uso</a>
+                {" "}e a{" "}
+                <a href="/politica-de-privacidade" className="underline text-cinza-texto2" target="_blank">Política de Privacidade</a>
+                {" "}da plataforma Kiri.
+              </span>
+            </label>
+          </div>
 
           {/* Dados profissionais */}
           <div className="flex flex-col gap-1.5">
@@ -327,7 +342,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
