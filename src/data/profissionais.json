@@ -683,6 +683,35 @@
       "foto_url": null,
       "verificacao_data": "Junho/2026",
       "whatsapp_agendamento": null
+    },
+    {
+      "id": "kiri-021",
+      "nome": "teste",
+      "profissao": "teste",
+      "titulo_exibicao": "teste",
+      "registro_conselho": "teste",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "sao paulo",
+      "faixa_etaria": "Bebês (0–2 anos)",
+      "sobre": "teste",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "teste"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "whatsapp_agendamento": "11999999999",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "junho de 2026"
     }
   ]
 }
