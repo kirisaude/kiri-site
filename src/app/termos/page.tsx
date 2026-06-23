@@ -1,4 +1,4 @@
-import { KiriLogo } from "@/components/KiriLogo";
+import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 
@@ -51,7 +51,7 @@ const SECOES = [
   {
     titulo: "7. Dados pessoais",
     texto: [
-      "O tratamento de dados pessoais coletados pela plataforma obedece à Lei Geral de Proteção de Dados Pessoais (Lei n.º 13.709/2018 — LGPD). As informações fornecidas no formulário de encaminhamento são utilizadas exclusivamente para a triagem e o contato com o profissional indicado, não sendo compartilhadas com terceiros sem consentimento do titular, exceto quando exigido por lei.",
+      "O tratamento de dados pessoais coletados pela plataforma obedece à Lei Geral de Proteção de Dados Pessoais (Lei n.º 13.709/2018 — LGPD). Todos os dados coletados são armazenados no Brasil. As informações fornecidas nos formulários são utilizadas exclusivamente para as finalidades descritas em cada formulário, não sendo compartilhadas com terceiros sem consentimento do titular, exceto quando exigido por lei. Para detalhes completos sobre coleta, uso, armazenamento e direitos do titular, consulte nossa Política de Privacidade.",
     ],
   },
   {
@@ -112,7 +112,14 @@ export default function TermosPage() {
               <div className="flex flex-col gap-3">
                 {s.texto.map((p, i) => (
                   <p key={i} className="text-[15.5px] md:text-[16.5px] leading-[1.7] text-cinza-texto m-0">
-                    {p}
+                    {p.includes("Política de Privacidade") ? (
+                      <>
+                        {p.replace("Política de Privacidade", "").trimEnd().replace(/\.$/, "")}{" "}
+                        <Link href="/politica-de-privacidade" className="underline text-cinza-texto">
+                          Política de Privacidade
+                        </Link>.
+                      </>
+                    ) : p}
                   </p>
                 ))}
               </div>
