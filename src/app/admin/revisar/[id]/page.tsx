@@ -32,6 +32,8 @@ export default function RevisarPage() {
   const [inscricao, setInscricao] = useState<Inscricao | null>(null);
   const [erro, setErro] = useState("");
   const [publicando, setPublicando] = useState(false);
+  const [rejeitando, setRejeitando] = useState(false);
+  const [excluindo, setExcluindo] = useState(false);
   const [sucesso, setSucesso] = useState("");
 
   const [nome, setNome] = useState("");
@@ -79,6 +81,28 @@ export default function RevisarPage() {
         if (formacoesIniciais.length > 0) setFormacao(formacoesIniciais);
       });
   }, [id]);
+
+  async function rejeitar() {
+    if (!confirm("Rejeitar esta inscrição?")) return;
+    setRejeitando(true);
+    await fetch("/api/admin/inscricoes", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status: "rejeitado" }),
+    });
+    router.push("/admin");
+  }
+
+  async function excluir() {
+    if (!confirm("Excluir esta inscrição permanentemente?")) return;
+    setExcluindo(true);
+    await fetch("/api/admin/inscricoes", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    router.push("/admin");
+  }
 
   async function publicar(e: React.FormEvent) {
     e.preventDefault();
@@ -252,6 +276,17 @@ export default function RevisarPage() {
             {publicando ? "Publicando…" : "Publicar profissional"}
           </button>
         </form>
+
+        <div className="mt-4 pt-4 border-t border-linha flex items-center justify-between">
+          <button onClick={rejeitar} disabled={rejeitando}
+            className="text-[13px] text-ferrugem font-semibold cursor-pointer hover:underline disabled:opacity-50">
+            {rejeitando ? "Rejeitando…" : "Rejeitar inscrição"}
+          </button>
+          <button onClick={excluir} disabled={excluindo}
+            className="text-[13px] text-muted font-medium cursor-pointer hover:underline disabled:opacity-50">
+            {excluindo ? "Excluindo…" : "Excluir formulário"}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     blocos: [
       { tipo: "p", texto: "A Kiri consiste em um ecossistema digital que atua como provedor de tecnologia, oferecendo um catálogo organizado e facilitação de contato inicial entre famílias e profissionais de saúde independentes e autônomos, especializados na área de neurodesenvolvimento infantil." },
       { tipo: "destaque", texto: "Capacidade e Representação" },
-      { tipo: "p", texto: "Ao aceitar estes termos, o usuário declara ser maior de 18 anos ou emancipado, possuir plena capacidade civil e, quando aplicável, deter a legítima representação legal, guarda ou pátrio poder sobre o menor de idade cujos dados ou histórico venham a ser informados para fins de contato." },
+      { tipo: "p", texto: "Ao aceitar estes termos, o usuário declara ser maior de 18 anos ou emancipado, possuir plena capacidade civil e, quando aplicável, deter a legítima representação legal, guarda ou poder familiar sobre o menor de idade cujos dados ou histórico venham a ser informados para fins de contato." },
       { tipo: "destaque", texto: "Ausência de Vínculo" },
       { tipo: "p", texto: "O uso da plataforma, o preenchimento de campos de mensagem ou o envio de dados para contato não cria, sob nenhuma hipótese ou pretexto, qualquer vínculo terapêutico, clínico, assistencial, consumerista de saúde ou hospitalar entre a Kiri e o usuário." },
     ],
@@ -37,7 +37,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "3. Autonomia Profissional e Ausência de Vínculo",
     blocos: [
-      { tipo: "p", texto: "A responsabilidade técnica pelo diagnóstico, pela linha de intervenção adotada, pela conduta, evolução e pelo sigilo absoluto das informações clínicas é integralmente do profissional de saúde escolhido de forma soberana pelo usuário, nos termos da legislação brasileira (Lei n.º 8.080/1990) e dos respectivos Códigos de Ética Profissional (CFM, CFP, CREFITO, CRFa, etc.)." },
+      { tipo: "p", texto: "A responsabilidade técnica pelo diagnóstico, pela linha de intervenção adotada, pela conduta, evolução e pelo sigilo absoluto das informações clínicas é integralmente do profissional de saúde escolhido de forma soberana pelo usuário, nos termos da legislação brasileira (Lei n.º 8.080/1990) e dos respectivos Códigos de Ética Profissional (CFM, CFP, CREFITO, CRFa, CRN, etc.)." },
       { tipo: "p", texto: "A Kiri não possui qualquer ingerência, não orienta, não supervisiona, não audita e não responde pelas decisões clínicas tomadas pelo profissional ou pelas escolhas feitas pela família. Os honorários, agendamentos e a prestação dos serviços de saúde subsequentes ocorrem em ambiente totalmente externo, físico ou digital, alheio e independente da plataforma Kiri." },
     ],
   },

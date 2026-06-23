@@ -54,7 +54,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
       { tipo: "destaque", texto: "Dados de Famílias" },
       { tipo: "p", texto: "As informações dos formulários de direcionamento são retidas pelo prazo máximo de 12 (doze) meses a partir do preenchimento, para fins de suporte e verificação de fluxo, ou até que o titular solicite sua exclusão, o que ocorrer primeiro." },
       { tipo: "destaque", texto: "Dados de Profissionais" },
-      { tipo: "p", texto: "As informações são retidas e exibidas enquanto o profissional mantiver seu perfil ativo e compuser a rede Kiri. Em caso de candidaturas não aprovadas no piloto, os dados correspondentes serão integralmente excluídos em até 6 (seis) meses após a comunicação da negativa." },
+      { tipo: "p", texto: "As informações são retidas e exibidas enquanto o profissional mantiver seu perfil ativo e compuser a rede Kiri. Em caso de candidaturas não aprovadas, os dados correspondentes serão integralmente excluídos em até 6 (seis) meses após a comunicação da negativa." },
       { tipo: "destaque", texto: "Término do Tratamento" },
       { tipo: "p", texto: "Após os prazos estipulados ou mediante revogação do consentimento, os dados são eliminados definitivamente dos servidores, salvo nas hipóteses de guarda obrigatória autorizadas pelo art. 16 da LGPD." },
     ],
@@ -67,7 +67,8 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
         "(a) Confirmar a existência de tratamento e acessar seus dados pessoais de forma clara;",
         "(b) Corrigir dados incompletos, inexatos ou desatualizados;",
         "(c) Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei;",
-        "(d) Revogar o consentimento previamente fornecido, sendo informado sobre as consequências da negativa (como a impossibilidade de utilizar o fluxo de contato).",
+        "(d) Solicitar a portabilidade dos dados a outro fornecedor de serviço, nos termos da regulamentação da ANPD;",
+        "(e) Revogar o consentimento previamente fornecido, sendo informado sobre as consequências da negativa (como a impossibilidade de utilizar o fluxo de contato).",
       ]},
       { tipo: "p", texto: "Para exercer estes direitos, envie uma mensagem para contato@kirisaude.com.br com o assunto \"Direitos LGPD\". Suas solicitações serão analisadas e respondidas gratuitamente no prazo legal de até 15 (quinze) dias." },
     ],
@@ -75,7 +76,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "6. Cookies Técnicos",
     blocos: [
-      { tipo: "p", texto: "A Kiri utiliza um único cookie estritamente técnico e de sessão (kiri_acesso) para controle interno de segurança e navegação na plataforma. Este cookie possui a propriedade httpOnly (o que impede o acesso ou manipulação por scripts de terceiros ou códigos JavaScript maliciosos), não rastreia hábitos de consumo ou navegação externa e é automaticamente invalidado após 30 dias ou mediante a limpeza de dados do seu navegador." },
+      { tipo: "p", texto: "A Kiri utiliza um único cookie estritamente técnico e de sessão para controle de acesso ao painel administrativo interno da plataforma. Este cookie possui a propriedade httpOnly (o que impede o acesso ou manipulação por scripts de terceiros ou códigos JavaScript maliciosos), não é coletado de usuários finais, não rastreia hábitos de consumo ou navegação externa e é automaticamente invalidado após 30 dias ou mediante a limpeza de dados do navegador." },
     ],
   },
   {
@@ -99,7 +100,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "9. Alterações desta Política",
     blocos: [
-      { tipo: "p", texto: "Esta Política de Privacidade poderá ser atualizada periodicamente para refletir melhorias técnicas ou mudanças legislativas. Sempre que uma alteração material for realizada, a data da \"Última atualização\" no topo deste documento será modificada. O uso contínuo dos serviços após a publicação das alterações constituirá o seu conhecimento sobre os novos termos." },
+      { tipo: "p", texto: "Esta Política de Privacidade poderá ser atualizada periodicamente para refletir melhorias técnicas ou mudanças legislativas. Sempre que uma alteração material for realizada, a data da \"Última atualização\" no topo deste documento será modificada. O uso contínuo dos serviços após a publicação das alterações constituirá aceitação tácita das novas condições." },
     ],
   },
 ];
