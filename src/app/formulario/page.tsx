@@ -263,8 +263,8 @@ function FormularioContent() {
                   Política de Privacidade
                 </a>
                 . Os dados são armazenados no Brasil e posso solicitar acesso, correção ou exclusão pelo e-mail{" "}
-                <a href="mailto:kirisaude@gmail.com" className="underline text-cinza-texto2">
-                  kirisaude@gmail.com
+                <a href="mailto:contato@kirisaude.com.br" className="underline text-cinza-texto2">
+                  contato@kirisaude.com.br
                 </a>
                 .
               </span>

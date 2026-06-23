@@ -278,7 +278,7 @@ export default function InscricaoProfissionalPage() {
                 Concordo que os dados informados sejam usados pela equipe Kiri exclusivamente para análise da minha candidatura, conforme a{" "}
                 <a href="/politica-de-privacidade" className="underline text-cinza-texto2" target="_blank">Política de Privacidade</a>.
                 Os dados são armazenados no Brasil e posso solicitar acesso, correção ou exclusão pelo e-mail{" "}
-                <a href="mailto:kirisaude@gmail.com" className="underline text-cinza-texto2">kirisaude@gmail.com</a>.
+                <a href="mailto:contato@kirisaude.com.br" className="underline text-cinza-texto2">contato@kirisaude.com.br</a>.
               </span>
             </label>
           </div>

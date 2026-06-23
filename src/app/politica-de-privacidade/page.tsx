@@ -6,7 +6,7 @@ const SECOES = [
     titulo: "1. Quem somos",
     texto: [
       "A Kiri é uma plataforma digital de busca e facilitação de contato entre famílias e profissionais de saúde especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como controladora dos dados pessoais coletados pela plataforma, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei n.º 13.709/2018 — LGPD).",
-      "Dúvidas ou solicitações relacionadas a dados pessoais podem ser enviadas para: kirisaude@gmail.com",
+      "Dúvidas ou solicitações relacionadas a dados pessoais podem ser enviadas para: contato@kirisaude.com.br",
     ],
   },
   {
@@ -40,7 +40,7 @@ const SECOES = [
     titulo: "5. Seus direitos como titular",
     texto: [
       "Nos termos da LGPD (art. 18), você tem direito a: (a) confirmar a existência de tratamento; (b) acessar seus dados; (c) corrigir dados incompletos, inexatos ou desatualizados; (d) solicitar a anonimização, bloqueio ou eliminação de dados desnecessários; (e) obter informações sobre o compartilhamento com terceiros; (f) revogar o consentimento a qualquer momento.",
-      "Para exercer qualquer desses direitos, envie um e-mail para kirisaude@gmail.com com o assunto 'Direitos LGPD'. Responderemos em até 15 dias úteis.",
+      "Para exercer qualquer desses direitos, envie um e-mail para contato@kirisaude.com.br com o assunto 'Direitos LGPD'. Responderemos em até 15 dias úteis.",
     ],
   },
   {
