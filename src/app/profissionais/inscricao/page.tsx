@@ -5,6 +5,16 @@ import { useRouter } from "next/navigation";
 import { NavBack } from "@/components/NavBack";
 import { Footer } from "@/components/Footer";
 
+const PROFISSOES = [
+  "Psiquiatra da infância e adolescência",
+  "Neuropediatra",
+  "Neuropsicólogo",
+  "Psicólogo",
+  "Fonoaudiólogo",
+  "Terapeuta ocupacional",
+  "Fisioterapeuta",
+  "Nutricionista",
+];
 const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aumentativa", "Dificuldades de aprendizagem", "Ansiedade infantil", "Comportamento", "Outro"];
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
 
@@ -156,7 +166,22 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Profissão <span className="text-ferrugem">*</span></label>
-            <input type="text" value={profissao} onChange={(e) => setProfissao(e.target.value)} required placeholder="Ex: Fonoaudióloga, Psicóloga, Pediatra" className={inputClass} />
+            <div className="flex flex-wrap gap-2">
+              {PROFISSOES.map((op) => (
+                <button
+                  key={op}
+                  type="button"
+                  onClick={() => setProfissao(profissao === op ? "" : op)}
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                    profissao === op
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-carvao border-linha"
+                  }`}
+                >
+                  {op}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
