@@ -96,7 +96,7 @@ export default function ProPage() {
 
         <div className="bg-[#F6E6CC] border border-ambar-borda rounded-[14px] px-4 py-3">
           <p className="text-[13px] text-ambar-texto leading-[1.6]">
-            Esta área é exclusiva para profissionais verificados da rede Kiri. Os contatos aqui exibidos são para uso interno de encaminhamentos entre colegas. Mantenha a confidencialidade.
+            Esta área é exclusiva para profissionais verificados da rede Kiri. Os contatos aqui exibidos são para conexão direta entre colegas — troca de experiências, dúvidas e colaboração multiprofissional. Não compartilhe dados de pacientes por nenhum canal desta plataforma.
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export default function ProPage() {
                 const digits = (p.whatsapp_agendamento ?? "").replace(/\D/g, "");
                 const numero = digits.startsWith("55") ? digits : `55${digits}`;
                 const waUrl = digits.length >= 10
-                  ? `https://wa.me/${numero}?text=${encodeURIComponent(`Olá, ${p.nome.split(" ")[0]}! Aqui é [seu nome], também faço parte da rede Kiri. Gostaria de conversar sobre um encaminhamento.`)}`
+                  ? `https://wa.me/${numero}?text=${encodeURIComponent(`Olá, ${p.nome.split(" ")[0]}! Aqui é [seu nome], também faço parte da rede Kiri. Gostaria de me conectar com você.`)}`
                   : null;
 
                 return (
