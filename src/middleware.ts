@@ -4,6 +4,11 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Admin tem autenticação própria — não passa pelo acesso geral
+  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
+    return NextResponse.next();
+  }
+
   if (
     pathname.startsWith("/acesso") ||
     pathname.startsWith("/api/acesso") ||
