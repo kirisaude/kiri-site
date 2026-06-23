@@ -26,6 +26,7 @@ export default function InscricaoProfissionalPage() {
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
+  const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
@@ -72,6 +73,7 @@ export default function InscricaoProfissionalPage() {
         apresentacao: apresentacao.trim() || null,
         site_perfil: sitePerfil.trim() || null,
         como_conheceu: comoConheceu.trim() || null,
+        whatsapp_agendamento: whatsappAgendamento.trim() || null,
         grupo_whatsapp: grupoWhatsapp,
         consentimento: true,
       }),
@@ -131,7 +133,7 @@ export default function InscricaoProfissionalPage() {
             {[
               "Registro ativo e regular no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
               "Formação na área e atuação em neurodesenvolvimento infantil",
-              "Situação ética regular — sem pendências no conselho",
+              "Registro ativo e regular perante o conselho de classe",
             ].map((item) => (
               <div key={item} className="flex items-start gap-2">
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
@@ -260,6 +262,21 @@ export default function InscricaoProfissionalPage() {
             <input type="text" value={comoConheceu} onChange={(e) => setComoConheceu(e.target.value)} placeholder="Indicação, Instagram, busca…" className={inputClass} />
           </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>WhatsApp para agendamento <span className="text-ferrugem">*</span></label>
+            <input
+              type="tel"
+              value={whatsappAgendamento}
+              onChange={(e) => setWhatsappAgendamento(e.target.value)}
+              required
+              placeholder="(11) 99999-9999"
+              className={inputClass}
+            />
+            <p className="text-[12px] text-muted leading-[1.5]">
+              Número que a Kiri usará para encaminhar as famílias diretamente para você. Não aparecerá no seu perfil público.
+            </p>
+          </div>
+
           {/* Grupo WhatsApp */}
           <div className="bg-white border border-linha rounded-[13px] px-4 py-4">
             <label className="flex gap-3 cursor-pointer">
@@ -285,10 +302,12 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao}
+          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
+
           </button>
+
         </form>
 
         <Footer className="mt-2 mb-8" />

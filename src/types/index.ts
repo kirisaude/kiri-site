@@ -23,6 +23,7 @@ export interface Profissional {
   verificado: boolean;
   verificacao_data: string;
   foto_url: string | null;
+  whatsapp_agendamento: string | null;
 }
 
 export const PROFISSOES_ORDENADAS = [

@@ -23,6 +23,7 @@ interface Inscricao {
   apresentacao: string | null;
   site_perfil: string | null;
   como_conheceu: string | null;
+  whatsapp_agendamento: string | null;
 }
 
 export default function RevisarPage() {
@@ -44,6 +45,7 @@ export default function RevisarPage() {
   const [sobre, setSobre] = useState("");
   const [valorMin, setValorMin] = useState("");
   const [convenio, setConvenio] = useState("");
+  const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [formacao, setFormacao] = useState([{ curso: "", instituicao_ano: "" }]);
 
   useEffect(() => {
@@ -69,6 +71,7 @@ export default function RevisarPage() {
         setSobre(s.apresentacao ?? "");
         setValorMin(s.valor_medio?.replace(/\D/g, "") ?? "");
         setConvenio(s.aceita_convenio === true ? "Particular e convênio" : "Particular · emite recibo para reembolso");
+        setWhatsappAgendamento(s.whatsapp_agendamento ?? "");
 
         const formacoesIniciais = [];
         if (s.graduacao) formacoesIniciais.push({ curso: "Graduação", instituicao_ano: s.graduacao });
@@ -102,6 +105,7 @@ export default function RevisarPage() {
       valor_min: isNaN(valorNum) ? null : valorNum,
       valor_max: null,
       convenio_info: convenio.trim(),
+      whatsapp_agendamento: whatsappAgendamento.trim() || null,
       verificado: true,
       foto_url: null,
       verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }),
@@ -179,6 +183,7 @@ export default function RevisarPage() {
               ["Apresentação", inscricao.apresentacao],
               ["Site/perfil", inscricao.site_perfil],
               ["Como conheceu", inscricao.como_conheceu],
+              ["WhatsApp agendamento", inscricao.whatsapp_agendamento],
             ].filter(([, v]) => v).map(([label, valor]) => (
               <div key={label as string} className="flex gap-2 text-[13px]">
                 <span className="text-cinza-texto min-w-[130px] flex-none">{label}</span>
@@ -206,6 +211,7 @@ export default function RevisarPage() {
             { label: "Faixa etária", value: faixaEtaria, set: setFaixaEtaria, required: true },
             { label: "Valor mínimo (só número)", value: valorMin, set: setValorMin },
             { label: "Convênio e pagamento", value: convenio, set: setConvenio, required: true },
+            { label: "WhatsApp para agendamento (privado)", value: whatsappAgendamento, set: setWhatsappAgendamento, required: false },
           ].map(({ label, value, set, required }) => (
             <div key={label} className="flex flex-col gap-1">
               <label className="text-[12.5px] font-medium text-cinza-texto">{label}</label>
