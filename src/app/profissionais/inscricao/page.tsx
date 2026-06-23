@@ -20,7 +20,7 @@ export default function InscricaoProfissionalPage() {
   const [modalidade, setModalidade] = useState("");
   const [cidade, setCidade] = useState("");
   const [valorMedio, setValorMedio] = useState("");
-  const [aceitaConvenio, setAceitaConvenio] = useState<boolean | null>(null);
+  const [aceitaConvenio, setAceitaConvenio] = useState("");
   const [graduacao, setGraduacao] = useState("");
   const [posGraduacao, setPosGraduacao] = useState("");
   const [apresentacao, setApresentacao] = useState("");
@@ -67,7 +67,7 @@ export default function InscricaoProfissionalPage() {
         modalidade: modalidade || null,
         cidade: cidade.trim() || null,
         valor_medio: valorMedio.trim() || null,
-        aceita_convenio: aceitaConvenio,
+        aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
         graduacao: graduacao.trim() || null,
         pos_graduacao: posGraduacao.trim() || null,
         apresentacao: apresentacao.trim() || null,
@@ -223,8 +223,8 @@ export default function InscricaoProfissionalPage() {
             <div className="flex gap-2">
               {["Sim", "Não", "Apenas alguns"].map((op) => (
                 <button key={op} type="button"
-                  onClick={() => setAceitaConvenio(op === "Sim" ? true : op === "Não" ? false : null)}
-                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${(op === "Sim" && aceitaConvenio === true) || (op === "Não" && aceitaConvenio === false) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                  onClick={() => setAceitaConvenio(aceitaConvenio === op ? "" : op)}
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${aceitaConvenio === op ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
                   {op}
                 </button>
               ))}
