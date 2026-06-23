@@ -209,7 +209,7 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className={labelClass}>Cidade e bairro onde atende</label>
+            <label className={labelClass}>Cidade e bairro onde atende <span className="text-ferrugem">*</span></label>
             <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Ex: São Paulo, SP — Pinheiros" className={inputClass} />
           </div>
 
@@ -302,7 +302,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento}
+          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
