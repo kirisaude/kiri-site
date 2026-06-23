@@ -163,11 +163,11 @@ function FormularioContent() {
             <line x1="10" y1="9" x2="10" y2="14" stroke="#BE8A3E" strokeWidth="1.6" strokeLinecap="round" />
             <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
           </svg>
-          <div>
+          <div className="flex flex-col gap-2.5">
             <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
               Este formulário é para direcionamento e encaminhamento — não é avaliação clínica nem diagnóstico.
             </p>
-            <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold mt-0.5 m-0">
+            <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.
             </p>
           </div>
