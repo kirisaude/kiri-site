@@ -30,7 +30,15 @@ interface Encaminhamento {
   status: string | null;
 }
 
-type Aba = "inscricoes" | "encaminhamentos";
+interface Reporte {
+  id: string;
+  criado_em: string;
+  profissional_id: string;
+  tipo_problema: string;
+  descricao: string | null;
+}
+
+type Aba = "inscricoes" | "encaminhamentos" | "reportes";
 
 function pareceWhatsApp(contato: string): boolean {
   const digits = contato.replace(/\D/g, "");
@@ -257,17 +265,20 @@ export default function AdminPage() {
 
   const [inscricoes, setInscricoes] = useState<Inscricao[]>([]);
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
+  const [reportes, setReportes] = useState<Reporte[]>([]);
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
-    const [resI, resE] = await Promise.all([
+    const [resI, resE, resR] = await Promise.all([
       fetch("/api/admin/inscricoes"),
       fetch("/api/admin/encaminhamentos"),
+      fetch("/api/admin/reportes"),
     ]);
     if (resI.ok) setInscricoes(await resI.json());
     if (resE.ok) setEncaminhamentos(await resE.json());
+    if (resR.ok) setReportes(await resR.json());
     setBuscando(false);
   }, []);
 
@@ -326,6 +337,16 @@ export default function AdminPage() {
     });
   }
 
+  async function excluirReporte(id: string) {
+    if (!confirm("Excluir este reporte permanentemente?")) return;
+    setReportes((prev) => prev.filter((r) => r.id !== id));
+    await fetch("/api/admin/reportes", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+  }
+
   useEffect(() => {
     fetch("/api/admin/inscricoes").then((r) => {
       if (r.ok) { setAuthed(true); buscarDados(); }
@@ -376,12 +397,18 @@ export default function AdminPage() {
 
       {/* Abas */}
       <div className="border-b border-linha px-6 flex gap-6">
-        {(["inscricoes", "encaminhamentos"] as Aba[]).map((a) => (
-          <button key={a} onClick={() => setAba(a)}
-            className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === a ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-            {a === "inscricoes" ? `Profissionais (${pendentes.length})` : `Encaminhamentos (${encaminhamentos.length})`}
-          </button>
-        ))}
+        <button onClick={() => setAba("inscricoes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "inscricoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Profissionais ({pendentes.length})
+        </button>
+        <button onClick={() => setAba("encaminhamentos")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Encaminhamentos ({encaminhamentos.length})
+        </button>
+        <button onClick={() => setAba("reportes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
+        </button>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -552,6 +579,64 @@ export default function AdminPage() {
 
           </div>
         )}
+
+        {/* ABA REPORTES */}
+        {aba === "reportes" && (
+          <div>
+            <h2 className="font-serif text-[18px] font-semibold text-carvao mb-1">
+              Reportes de perfil
+            </h2>
+            <p className="text-[13px] text-muted mb-5">Enviados por usuários da plataforma.</p>
+            {reportes.length === 0 ? (
+              <p className="text-[14px] text-muted">Nenhum reporte recebido ainda.</p>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {reportes.map((r) => {
+                  const prof = profissionais.find((p) => p.id === r.profissional_id);
+                  return (
+                    <div key={r.id} className="bg-white border border-linha rounded-[14px] px-4 py-4">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <div className="min-w-0">
+                          <div className="font-serif text-[15px] font-semibold text-carvao">
+                            {prof ? prof.nome : r.profissional_id}
+                          </div>
+                          {prof && (
+                            <div className="text-[12.5px] text-muted">{prof.titulo_exibicao}</div>
+                          )}
+                        </div>
+                        <span className="text-[12px] text-muted flex-none">
+                          {new Date(r.criado_em).toLocaleDateString("pt-BR")}
+                        </span>
+                      </div>
+                      <div className="inline-block bg-wash-quente border border-borda-quente text-ferrugem text-[12.5px] font-semibold px-2.5 py-1 rounded-[7px] mb-2">
+                        {r.tipo_problema}
+                      </div>
+                      {r.descricao && (
+                        <p className="text-[13px] text-cinza-texto italic mt-1">"{r.descricao}"</p>
+                      )}
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-linha-sutil">
+                        <Link
+                          href={`/admin/revisar/${r.profissional_id}`}
+                          className="text-[13px] font-semibold text-ardosia no-underline"
+                        >
+                          Ver perfil ↗
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => excluirReporte(r.id)}
+                          className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline"
+                        >
+                          Excluir reporte
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
       </div>
     </div>
   );
