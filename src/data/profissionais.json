@@ -712,6 +712,35 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "junho de 2026"
+    },
+    {
+      "id": "kiri-022",
+      "nome": "teste",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "teste",
+      "rqe": null,
+      "areas_atuacao": [
+        "restetesd"
+      ],
+      "modalidade": "fdsfasd",
+      "cidade": "teste",
+      "faixa_etaria": "fsddfss",
+      "sobre": "teste",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "teste"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "whatsapp_agendamento": "11111111111",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "junho de 2026"
     }
   ]
 }
