@@ -92,9 +92,9 @@ export default function InscricaoProfissionalPage() {
             <path d="M5 12.5 L9.5 17 L19 7" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <h1 className="font-serif text-[26px] font-medium text-carvao mb-3">Inscrição recebida</h1>
+        <h1 className="font-serif text-[26px] font-medium text-carvao mb-3">Recebemos sua inscrição.</h1>
         <p className="text-[15px] leading-[1.6] text-cinza-texto2 max-w-[320px]">
-          Analisamos cada candidatura individualmente. Se o seu perfil atender aos critérios, entraremos em contato em até 15 dias.
+          Obrigada pelo interesse em fazer parte da Kiri. Analisamos cada perfil individualmente e retornamos em breve.
         </p>
         <button onClick={() => router.push("/")} className="mt-8 text-[14px] font-semibold text-ardosia cursor-pointer">
           ← Voltar ao início
