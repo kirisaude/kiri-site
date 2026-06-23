@@ -27,6 +27,7 @@ interface Encaminhamento {
   modalidade: string | null;
   profissional_solicitado: string | null;
   observacoes: string | null;
+  status: string | null;
 }
 
 type Aba = "inscricoes" | "encaminhamentos";
@@ -45,16 +46,18 @@ function buildWaFamilia(contato: string, nome: string, profissionalId: string): 
   return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 }
 
-function CardEspecifico({ e, expandido, onToggle }: {
+function CardEspecifico({ e, expandido, onToggle, onEncaminhar }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
+  onEncaminhar: (id: string, novoStatus: string) => void;
 }) {
   const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
   const temWa = pareceWhatsApp(e.contato);
+  const encaminhado = e.status === "encaminhado";
 
   return (
-    <div className="bg-white border border-borda-azulada rounded-[14px] overflow-hidden">
+    <div className={`border rounded-[14px] overflow-hidden transition-opacity ${encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
       {/* Cabeçalho sempre visível */}
       <button
         type="button"
@@ -64,9 +67,11 @@ function CardEspecifico({ e, expandido, onToggle }: {
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
-            <span className="text-[11px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 py-0.5 rounded-[6px]">
-              Pedido específico
-            </span>
+            {encaminhado && (
+              <span className="text-[11px] font-semibold text-[#2E7D4F] bg-[#E8F5EC] border border-[#B8D8C0] px-2 py-0.5 rounded-[6px]">
+                encaminhado
+              </span>
+            )}
           </div>
           <div className="text-[13px] text-cinza-texto mt-0.5">
             {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
@@ -98,35 +103,50 @@ function CardEspecifico({ e, expandido, onToggle }: {
           </div>
 
           {/* Botão de resposta */}
-          <div className="mt-4">
-            {temWa && e.profissional_solicitado ? (
-              <a
-                href={buildWaFamilia(e.contato, e.nome_responsavel, e.profissional_solicitado)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[13px] no-underline"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                  <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
-                </svg>
-                Enviar card via WhatsApp
-              </a>
-            ) : (
-              <p className="text-[12.5px] text-muted text-center">
-                Contato por e-mail — responda em{" "}
-                <a href={`mailto:${e.contato}`} className="underline text-cinza-texto">{e.contato}</a>
-                {e.profissional_solicitado && (
-                  <>
-                    {" "}· Link do card:{" "}
-                    <Link href={`/card/${e.profissional_solicitado}`} className="underline text-ardosia" target="_blank">
-                      /card/{e.profissional_solicitado}
-                    </Link>
-                  </>
-                )}
-              </p>
-            )}
-          </div>
+          {!encaminhado && (
+            <div className="mt-4">
+              {temWa && e.profissional_solicitado ? (
+                <a
+                  href={buildWaFamilia(e.contato, e.nome_responsavel, e.profissional_solicitado)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[13px] no-underline"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
+                  </svg>
+                  Enviar card via WhatsApp
+                </a>
+              ) : (
+                <p className="text-[12.5px] text-muted text-center">
+                  Contato por e-mail — responda em{" "}
+                  <a href={`mailto:${e.contato}`} className="underline text-cinza-texto">{e.contato}</a>
+                  {e.profissional_solicitado && (
+                    <>
+                      {" "}· Link do card:{" "}
+                      <Link href={`/card/${e.profissional_solicitado}`} className="underline text-ardosia" target="_blank">
+                        /card/{e.profissional_solicitado}
+                      </Link>
+                    </>
+                  )}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Checkbox de encaminhamento */}
+          <label className={`flex items-center gap-2.5 cursor-pointer mt-4 pt-3.5 border-t border-linha-sutil ${encaminhado ? "mt-3" : ""}`}>
+            <input
+              type="checkbox"
+              checked={encaminhado}
+              onChange={() => onEncaminhar(e.id, encaminhado ? "pendente" : "encaminhado")}
+              className="w-4 h-4 accent-ardosia-escura cursor-pointer"
+            />
+            <span className={`text-[13px] font-medium ${encaminhado ? "text-[#2E7D4F]" : "text-cinza-texto"}`}>
+              {encaminhado ? "Encaminhado — clique para desfazer" : "Marcar como encaminhado"}
+            </span>
+          </label>
         </div>
       )}
     </div>
@@ -241,6 +261,15 @@ export default function AdminPage() {
       if (novo.has(id)) novo.delete(id);
       else novo.add(id);
       return novo;
+    });
+  }
+
+  async function atualizarEncaminhamento(id: string, status: string) {
+    setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status } : e));
+    await fetch("/api/admin/encaminhamentos", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
     });
   }
 
@@ -383,42 +412,70 @@ export default function AdminPage() {
         {aba === "encaminhamentos" && (
           <div className="flex flex-col gap-10">
 
-            {/* Pedidos com profissional específico */}
+            {/* Pedidos com profissional específico — pendentes */}
             <div>
-              <div className="flex items-baseline gap-2 mb-3">
-                <h2 className="font-serif text-[18px] font-semibold text-carvao">
-                  Pedido específico
-                </h2>
-                <span className="text-[14px] text-muted">({comProfissional.length})</span>
+              <div className="flex items-baseline gap-2 mb-1">
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">Pedido específico</h2>
+                <span className="text-[14px] text-muted">
+                  ({comProfissional.filter((e) => e.status !== "encaminhado").length} pendentes)
+                </span>
               </div>
-              <p className="text-[13px] text-muted mb-4 -mt-1">
-                Família solicitou um profissional já visto na plataforma. Resposta: enviar o card.
+              <p className="text-[13px] text-muted mb-4">
+                Família solicitou um profissional da plataforma. Resposta: enviar o card.
               </p>
-              {comProfissional.length === 0 ? (
-                <p className="text-[14px] text-muted">Nenhum pedido específico ainda.</p>
+              {comProfissional.filter((e) => e.status !== "encaminhado").length === 0 ? (
+                <p className="text-[14px] text-muted">Nenhum pedido pendente.</p>
               ) : (
                 <div className="flex flex-col gap-3">
-                  {comProfissional.map((e) => (
-                    <CardEspecifico
-                      key={e.id}
-                      e={e}
-                      expandido={expandidos.has(e.id)}
-                      onToggle={() => toggleExpandido(e.id)}
-                    />
-                  ))}
+                  {comProfissional
+                    .filter((e) => e.status !== "encaminhado")
+                    .map((e) => (
+                      <CardEspecifico
+                        key={e.id}
+                        e={e}
+                        expandido={expandidos.has(e.id)}
+                        onToggle={() => toggleExpandido(e.id)}
+                        onEncaminhar={atualizarEncaminhamento}
+                      />
+                    ))}
+                </div>
+              )}
+
+              {/* Subcategoria: encaminhados */}
+              {comProfissional.filter((e) => e.status === "encaminhado").length > 0 && (
+                <div className="mt-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">
+                      Encaminhados
+                    </span>
+                    <span className="text-[12px] text-muted">
+                      ({comProfissional.filter((e) => e.status === "encaminhado").length})
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {comProfissional
+                      .filter((e) => e.status === "encaminhado")
+                      .map((e) => (
+                        <CardEspecifico
+                          key={e.id}
+                          e={e}
+                          expandido={expandidos.has(e.id)}
+                          onToggle={() => toggleExpandido(e.id)}
+                          onEncaminhar={atualizarEncaminhamento}
+                        />
+                      ))}
+                  </div>
                 </div>
               )}
             </div>
 
             {/* Busca geral */}
             <div>
-              <div className="flex items-baseline gap-2 mb-3">
-                <h2 className="font-serif text-[18px] font-semibold text-carvao">
-                  Busca geral
-                </h2>
+              <div className="flex items-baseline gap-2 mb-1">
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">Busca geral</h2>
                 <span className="text-[14px] text-muted">({semProfissional.length})</span>
               </div>
-              <p className="text-[13px] text-muted mb-4 -mt-1">
+              <p className="text-[13px] text-muted mb-4">
                 Família sem profissional escolhido. Requer análise antes de responder.
               </p>
               {semProfissional.length === 0 ? (
