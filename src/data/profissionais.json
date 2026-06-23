@@ -712,35 +712,6 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "junho de 2026"
-    },
-    {
-      "id": "kiri-022",
-      "nome": "teste",
-      "profissao": "Psiquiatra da infância e adolescência",
-      "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "teste",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Presencial",
-      "cidade": "teste",
-      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
-      "sobre": "teste",
-      "formacao": [
-        {
-          "curso": "Graduação",
-          "instituicao_ano": "teste"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": null,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "whatsapp_agendamento": "77998442627",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "junho de 2026"
     }
   ]
 }
