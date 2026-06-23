@@ -219,7 +219,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-carvao">Modalidade de atendimento</label>
+            <label className="text-[13px] font-semibold text-carvao">Modalidade de atendimento <span className="text-ferrugem">*</span></label>
             <div className="flex gap-2 flex-wrap">
               {["Presencial", "Online", "Sem preferência"].map((op) => (
                 <button
@@ -280,7 +280,7 @@ function FormularioContent() {
 
           <button
             type="submit"
-            disabled={enviando || !consentimento || !nome || !contato}
+            disabled={enviando || !consentimento || !nome || !contato || !modalidade}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
