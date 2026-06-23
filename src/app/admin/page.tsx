@@ -3,6 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
+import data from "@/data/profissionais.json";
+import type { Profissional } from "@/types";
+
+const profissionais = data.profissionais as Profissional[];
 
 interface Inscricao {
   id: string;
@@ -19,13 +23,167 @@ interface Encaminhamento {
   criado_em: string;
   nome_responsavel: string;
   contato: string;
-  cidade: string;
-  modalidade: string;
-  profissional_solicitado: string;
-  observacoes: string;
+  cidade: string | null;
+  modalidade: string | null;
+  profissional_solicitado: string | null;
+  observacoes: string | null;
 }
 
 type Aba = "inscricoes" | "encaminhamentos";
+
+function pareceWhatsApp(contato: string): boolean {
+  const digits = contato.replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 13;
+}
+
+function buildWaFamilia(contato: string, nome: string, profissionalId: string): string {
+  const digits = contato.replace(/\D/g, "");
+  const numero = digits.startsWith("55") ? digits : `55${digits}`;
+  const primeiro = nome.split(" ")[0];
+  const cardUrl = `${window.location.origin}/card/${profissionalId}`;
+  const msg = `Olá, ${primeiro}! Aqui é a equipe Kiri. Preparamos o card com as informações e o contato para agendamento direto com o profissional que você pediu. Segue o link: ${cardUrl}`;
+  return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+}
+
+function CardEspecifico({ e, expandido, onToggle }: {
+  e: Encaminhamento;
+  expandido: boolean;
+  onToggle: () => void;
+}) {
+  const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
+  const temWa = pareceWhatsApp(e.contato);
+
+  return (
+    <div className="bg-white border border-borda-azulada rounded-[14px] overflow-hidden">
+      {/* Cabeçalho sempre visível */}
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full text-left px-4 py-3.5 flex items-start justify-between gap-3 cursor-pointer"
+      >
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
+            <span className="text-[11px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 py-0.5 rounded-[6px]">
+              Pedido específico
+            </span>
+          </div>
+          <div className="text-[13px] text-cinza-texto mt-0.5">
+            {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
+          </div>
+          {prof && (
+            <div className="text-[13px] text-ardosia font-medium mt-0.5">
+              → {prof.nome}
+            </div>
+          )}
+          {!prof && e.profissional_solicitado && (
+            <div className="text-[13px] text-muted mt-0.5">→ ID: {e.profissional_solicitado}</div>
+          )}
+        </div>
+        <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
+      </button>
+
+      {/* Detalhes expandidos */}
+      {expandido && (
+        <div className="px-4 pb-4 border-t border-linha-sutil">
+          <div className="flex flex-col gap-1.5 mt-3 text-[13px] text-cinza-texto">
+            {e.cidade && <div><span className="font-medium text-carvao">Cidade:</span> {e.cidade}</div>}
+            {e.modalidade && <div><span className="font-medium text-carvao">Modalidade:</span> {e.modalidade}</div>}
+            {e.observacoes && (
+              <div>
+                <span className="font-medium text-carvao">O que procura:</span>{" "}
+                <span className="italic">"{e.observacoes}"</span>
+              </div>
+            )}
+          </div>
+
+          {/* Botão de resposta */}
+          <div className="mt-4">
+            {temWa && e.profissional_solicitado ? (
+              <a
+                href={buildWaFamilia(e.contato, e.nome_responsavel, e.profissional_solicitado)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[13px] no-underline"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
+                </svg>
+                Enviar card via WhatsApp
+              </a>
+            ) : (
+              <p className="text-[12.5px] text-muted text-center">
+                Contato por e-mail — responda em{" "}
+                <a href={`mailto:${e.contato}`} className="underline text-cinza-texto">{e.contato}</a>
+                {e.profissional_solicitado && (
+                  <>
+                    {" "}· Link do card:{" "}
+                    <Link href={`/card/${e.profissional_solicitado}`} className="underline text-ardosia" target="_blank">
+                      /card/{e.profissional_solicitado}
+                    </Link>
+                  </>
+                )}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CardGeral({ e, expandido, onToggle }: {
+  e: Encaminhamento;
+  expandido: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="bg-white border border-linha rounded-[14px] overflow-hidden">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full text-left px-4 py-3.5 flex items-start justify-between gap-3 cursor-pointer"
+      >
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
+            <span className="text-[11px] font-semibold text-ferrugem bg-wash-quente border border-borda-quente px-2 py-0.5 rounded-[6px]">
+              Busca geral
+            </span>
+          </div>
+          <div className="text-[13px] text-cinza-texto mt-0.5">
+            {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
+          </div>
+          {e.observacoes && (
+            <div className="text-[12.5px] text-muted mt-0.5 truncate max-w-[320px]">
+              {e.observacoes}
+            </div>
+          )}
+        </div>
+        <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
+      </button>
+
+      {expandido && (
+        <div className="px-4 pb-4 border-t border-linha-sutil">
+          <div className="flex flex-col gap-1.5 mt-3 text-[13px] text-cinza-texto">
+            {e.cidade && <div><span className="font-medium text-carvao">Cidade:</span> {e.cidade}</div>}
+            {e.modalidade && <div><span className="font-medium text-carvao">Modalidade:</span> {e.modalidade}</div>}
+            {e.observacoes && (
+              <div>
+                <span className="font-medium text-carvao">O que procura:</span>{" "}
+                <span className="italic">"{e.observacoes}"</span>
+              </div>
+            )}
+          </div>
+          <p className="mt-3 text-[12px] text-muted">
+            Requer análise para direcionamento — contato: <strong className="text-cinza-texto">{e.contato}</strong>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
@@ -37,6 +195,7 @@ export default function AdminPage() {
   const [inscricoes, setInscricoes] = useState<Inscricao[]>([]);
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [buscando, setBuscando] = useState(false);
+  const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
@@ -76,6 +235,15 @@ export default function AdminPage() {
     setInscricoes((prev) => prev.map((i) => i.id === id ? { ...i, status } : i));
   }
 
+  function toggleExpandido(id: string) {
+    setExpandidos((prev) => {
+      const novo = new Set(prev);
+      if (novo.has(id)) novo.delete(id);
+      else novo.add(id);
+      return novo;
+    });
+  }
+
   useEffect(() => {
     fetch("/api/admin/inscricoes").then((r) => {
       if (r.ok) { setAuthed(true); buscarDados(); }
@@ -109,6 +277,9 @@ export default function AdminPage() {
   const aprovados = inscricoes.filter((i) => i.status === "aprovado");
   const rejeitados = inscricoes.filter((i) => i.status === "rejeitado");
 
+  const comProfissional = encaminhamentos.filter((e) => !!e.profissional_solicitado);
+  const semProfissional = encaminhamentos.filter((e) => !e.profissional_solicitado);
+
   return (
     <div className="min-h-screen bg-creme">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center justify-between">
@@ -136,7 +307,6 @@ export default function AdminPage() {
         {/* ABA INSCRICOES */}
         {aba === "inscricoes" && (
           <div className="flex flex-col gap-8">
-            {/* Pendentes */}
             <div>
               <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">
                 Pendentes <span className="text-[14px] font-sans font-normal text-muted">({pendentes.length})</span>
@@ -166,7 +336,6 @@ export default function AdminPage() {
               )}
             </div>
 
-            {/* Aprovados */}
             {aprovados.length > 0 && (
               <div>
                 <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">
@@ -186,7 +355,6 @@ export default function AdminPage() {
               </div>
             )}
 
-            {/* Rejeitados */}
             {rejeitados.length > 0 && (
               <div>
                 <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">
@@ -213,31 +381,62 @@ export default function AdminPage() {
 
         {/* ABA ENCAMINHAMENTOS */}
         {aba === "encaminhamentos" && (
-          <div>
-            <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">
-              Pedidos recebidos <span className="text-[14px] font-sans font-normal text-muted">({encaminhamentos.length})</span>
-            </h2>
-            {encaminhamentos.length === 0 ? (
-              <p className="text-[14px] text-muted">Nenhum encaminhamento recebido ainda.</p>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {encaminhamentos.map((e) => (
-                  <div key={e.id} className="bg-white border border-linha rounded-[14px] px-4 py-4">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</div>
-                      <span className="text-[12px] text-muted flex-none">{new Date(e.criado_em).toLocaleDateString("pt-BR")}</span>
-                    </div>
-                    <div className="flex flex-col gap-1 text-[13px] text-cinza-texto">
-                      <div><span className="font-medium">Contato:</span> {e.contato}</div>
-                      {e.cidade && <div><span className="font-medium">Cidade:</span> {e.cidade}</div>}
-                      {e.modalidade && <div><span className="font-medium">Modalidade:</span> {e.modalidade}</div>}
-                      {e.profissional_solicitado && <div><span className="font-medium">Profissional:</span> {e.profissional_solicitado}</div>}
-                      {e.observacoes && <div className="mt-1 text-carvao italic">"{e.observacoes}"</div>}
-                    </div>
-                  </div>
-                ))}
+          <div className="flex flex-col gap-10">
+
+            {/* Pedidos com profissional específico */}
+            <div>
+              <div className="flex items-baseline gap-2 mb-3">
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">
+                  Pedido específico
+                </h2>
+                <span className="text-[14px] text-muted">({comProfissional.length})</span>
               </div>
-            )}
+              <p className="text-[13px] text-muted mb-4 -mt-1">
+                Família solicitou um profissional já visto na plataforma. Resposta: enviar o card.
+              </p>
+              {comProfissional.length === 0 ? (
+                <p className="text-[14px] text-muted">Nenhum pedido específico ainda.</p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {comProfissional.map((e) => (
+                    <CardEspecifico
+                      key={e.id}
+                      e={e}
+                      expandido={expandidos.has(e.id)}
+                      onToggle={() => toggleExpandido(e.id)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Busca geral */}
+            <div>
+              <div className="flex items-baseline gap-2 mb-3">
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">
+                  Busca geral
+                </h2>
+                <span className="text-[14px] text-muted">({semProfissional.length})</span>
+              </div>
+              <p className="text-[13px] text-muted mb-4 -mt-1">
+                Família sem profissional escolhido. Requer análise antes de responder.
+              </p>
+              {semProfissional.length === 0 ? (
+                <p className="text-[14px] text-muted">Nenhuma busca geral ainda.</p>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  {semProfissional.map((e) => (
+                    <CardGeral
+                      key={e.id}
+                      e={e}
+                      expandido={expandidos.has(e.id)}
+                      onToggle={() => toggleExpandido(e.id)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
         )}
       </div>
