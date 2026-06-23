@@ -8,7 +8,7 @@ import { valorDisplay } from "@/types";
 const profissionais = data.profissionais as Profissional[];
 
 export function generateStaticParams() {
-  return profissionais.map((p) => ({ id: p.id }));
+  return profissionais.map((p) => ({ token: p.card_token }));
 }
 
 function buildWaUrl(numero: string, nome: string): string {
@@ -20,9 +20,9 @@ function buildWaUrl(numero: string, nome: string): string {
   return `https://wa.me/${comPais}?text=${msg}`;
 }
 
-export default async function CardPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const p = profissionais.find((pro) => pro.id === id);
+export default async function CardPage({ params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
+  const p = profissionais.find((pro) => pro.card_token === token);
   if (!p) notFound();
 
   const waUrl = p.whatsapp_agendamento ? buildWaUrl(p.whatsapp_agendamento, p.nome) : null;

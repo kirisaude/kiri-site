@@ -46,11 +46,11 @@ function pareceWhatsApp(contato: string): boolean {
   return digits.length >= 10 && digits.length <= 13;
 }
 
-function buildWaFamilia(contato: string, nome: string, profissionalId: string): string {
+function buildWaFamilia(contato: string, nome: string, cardToken: string): string {
   const digits = contato.replace(/\D/g, "");
   const numero = digits.startsWith("55") ? digits : `55${digits}`;
   const primeiro = nome.split(" ")[0];
-  const cardUrl = `${window.location.origin}/card/${profissionalId}`;
+  const cardUrl = `${window.location.origin}/card/${cardToken}`;
   const msg = `Olá, ${primeiro}! Aqui é a equipe Kiri. Preparamos o card com as informações e o contato para agendamento direto com o profissional que você pediu. Segue o link: ${cardUrl}`;
   return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 }
@@ -115,9 +115,9 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
           {/* Botão de resposta */}
           {!encaminhado && (
             <div className="mt-4">
-              {temWa && e.profissional_solicitado ? (
+              {temWa && e.profissional_solicitado && prof ? (
                 <a
-                  href={buildWaFamilia(e.contato, e.nome_responsavel, e.profissional_solicitado)}
+                  href={buildWaFamilia(e.contato, e.nome_responsavel, prof.card_token)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[13px] no-underline"
@@ -132,11 +132,11 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
                 <p className="text-[12.5px] text-muted text-center">
                   Contato por e-mail — responda em{" "}
                   <a href={`mailto:${e.contato}`} className="underline text-cinza-texto">{e.contato}</a>
-                  {e.profissional_solicitado && (
+                  {e.profissional_solicitado && prof && (
                     <>
                       {" "}· Link do card:{" "}
-                      <Link href={`/card/${e.profissional_solicitado}`} className="underline text-ardosia" target="_blank">
-                        /card/{e.profissional_solicitado}
+                      <Link href={`/card/${prof.card_token}`} className="underline text-ardosia" target="_blank">
+                        /card/{prof.card_token.slice(0, 8)}…
                       </Link>
                     </>
                   )}

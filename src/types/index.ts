@@ -24,6 +24,7 @@ export interface Profissional {
   verificacao_data: string;
   foto_url: string | null;
   whatsapp_agendamento: string | null;
+  card_token: string;
 }
 
 export const PROFISSOES_ORDENADAS = [
