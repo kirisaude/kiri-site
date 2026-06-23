@@ -336,6 +336,16 @@ export default function AdminPage() {
     setInscricoes((prev) => prev.map((i) => i.id === id ? { ...i, status } : i));
   }
 
+  async function excluirInscricao(id: string) {
+    if (!confirm("Excluir este formulário permanentemente?")) return;
+    setInscricoes((prev) => prev.filter((i) => i.id !== id));
+    await fetch("/api/admin/inscricoes", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+  }
+
   function toggleExpandido(id: string) {
     setExpandidos((prev) => {
       const novo = new Set(prev);
@@ -485,6 +495,10 @@ export default function AdminPage() {
                           className="text-[13px] font-semibold text-cinza-texto bg-wash-quente border border-borda-quente rounded-[9px] px-3 py-1.5 cursor-pointer">
                           Rejeitar
                         </button>
+                        <button onClick={() => excluirInscricao(i.id)}
+                          className="text-[13px] font-semibold text-ferrugem cursor-pointer hover:underline">
+                          Excluir
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -504,7 +518,13 @@ export default function AdminPage() {
                         <div className="text-[14.5px] font-semibold text-carvao">{i.nome}</div>
                         <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
                       </div>
-                      <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
+                        <button onClick={() => excluirInscricao(i.id)}
+                          className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline">
+                          Excluir
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -523,10 +543,16 @@ export default function AdminPage() {
                         <div className="text-[14.5px] font-semibold text-carvao">{i.nome}</div>
                         <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
                       </div>
-                      <button onClick={() => atualizarStatus(i.id, "pendente")}
-                        className="text-[12px] text-ferrugem font-semibold cursor-pointer">
-                        Desfazer
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <button onClick={() => atualizarStatus(i.id, "pendente")}
+                          className="text-[12px] text-ferrugem font-semibold cursor-pointer">
+                          Desfazer
+                        </button>
+                        <button onClick={() => excluirInscricao(i.id)}
+                          className="text-[12px] text-muted font-medium cursor-pointer hover:underline">
+                          Excluir
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
