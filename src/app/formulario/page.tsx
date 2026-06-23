@@ -31,7 +31,8 @@ function FormularioContent() {
   const [contato, setContato] = useState("");
   const [cidade, setCidade] = useState("");
   const [modalidade, setModalidade] = useState("");
-  const [observacoes, setObservacoes] = useState("");
+  const [opcoesBusca, setOpcoesBusca] = useState<string[]>([]);
+  const [detalhesBusca, setDetalhesBusca] = useState("");
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
@@ -54,7 +55,10 @@ function FormularioContent() {
         contato: contato.trim(),
         cidade: cidade.trim() || null,
         modalidade: modalidade || null,
-        observacoes: observacoes.trim() || null,
+        observacoes: [
+          opcoesBusca.join(", "),
+          detalhesBusca.trim() ? detalhesBusca.trim() : "",
+        ].filter(Boolean).join(" — ") || null,
         profissional_solicitado: profissionalId ?? null,
         consentimento: true,
       }),
@@ -238,17 +242,45 @@ function FormularioContent() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label className="text-[13px] font-semibold text-carvao">
               O que você procura? <span className="text-ferrugem">*</span>
             </label>
-            <textarea
-              value={observacoes}
-              onChange={(e) => setObservacoes(e.target.value)}
-              rows={4}
-              placeholder="Idade da criança, dúvidas, o que motivou a busca… conte o que quiser."
-              className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted resize-none"
-            />
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Avaliação diagnóstica (TEA, TDAH…)",
+                "Acompanhamento terapêutico",
+                "Orientação para pais",
+                "Laudo ou relatório",
+                "Não sei ao certo",
+              ].map((op) => (
+                <button
+                  key={op}
+                  type="button"
+                  onClick={() =>
+                    setOpcoesBusca((prev) =>
+                      prev.includes(op) ? prev.filter((o) => o !== op) : [...prev, op]
+                    )
+                  }
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                    opcoesBusca.includes(op)
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-carvao border-linha"
+                  }`}
+                >
+                  {op}
+                </button>
+              ))}
+            </div>
+            {opcoesBusca.includes("Não sei ao certo") && (
+              <textarea
+                value={detalhesBusca}
+                onChange={(e) => setDetalhesBusca(e.target.value)}
+                rows={3}
+                placeholder="Conta um pouco mais o que está acontecendo…"
+                className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted resize-none mt-1"
+              />
+            )}
           </div>
 
           {/* Consentimento LGPD */}
@@ -280,7 +312,7 @@ function FormularioContent() {
 
           <button
             type="submit"
-            disabled={enviando || !consentimento || !nome || !contato || !modalidade || !observacoes.trim()}
+            disabled={enviando || !consentimento || !nome || !contato || !modalidade || opcoesBusca.length === 0}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
