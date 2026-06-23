@@ -528,7 +528,7 @@ export default function Home() {
                 {[
                   "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
-                  "Situação ética regular — sem pendências no conselho",
+                  "Registro ativo e regular perante o conselho de classe",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>

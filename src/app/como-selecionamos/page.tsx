@@ -13,8 +13,8 @@ const ITENS = [
     detalhe: "Título ou RQE quando aplicável, e atuação em neurodesenvolvimento infantil.",
   },
   {
-    titulo: "Situação ética regular",
-    detalhe: "Sem pendências que impeçam o exercício da profissão.",
+    titulo: "Registro ativo e regular perante o conselho",
+    detalhe: "Verificado junto ao conselho de classe competente na data da checagem periódica.",
   },
 ];
 

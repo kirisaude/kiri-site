@@ -96,7 +96,7 @@ function FormularioContent() {
       <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
         <NavBack />
         <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
-          Pré-cadastro · triagem
+          Direcionamento
         </span>
         <div className="w-9 h-9" />
       </div>
@@ -165,7 +165,7 @@ function FormularioContent() {
           </svg>
           <div>
             <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
-              Esta triagem é orientação e encaminhamento — não é avaliação clínica nem diagnóstico.
+              Este formulário é para direcionamento e encaminhamento — não é avaliação clínica nem diagnóstico.
             </p>
             <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold mt-0.5 m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.

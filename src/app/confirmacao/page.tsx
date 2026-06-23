@@ -30,7 +30,7 @@ export default function ConfirmacaoPage() {
           </h1>
 
           <p className="mt-4 text-[14.5px] leading-[1.6] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Agora uma pessoa da nossa equipe vai ler com atenção o que você contou e selecionar os profissionais mais adequados para o seu caso. Você recebe esse retorno por WhatsApp ou e-mail em até 3 dias úteis.
+            Agora uma pessoa da nossa equipe vai ler com atenção o que você contou e identificar os profissionais da rede mais alinhados ao que você descreveu. Você recebe esse retorno por WhatsApp ou e-mail em até 3 dias úteis.
           </p>
 
           {/* Reforço */}
