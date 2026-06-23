@@ -36,6 +36,17 @@ export const PROFISSOES_ORDENADAS = [
   "Nutricionista",
 ] as const;
 
+export const PROFISSAO_PLURAL: Record<string, string> = {
+  "Psiquiatra da infância e adolescência": "Psiquiatras da infância e adolescência",
+  "Neuropediatra": "Neuropediatras",
+  "Neuropsicólogo": "Neuropsicólogos",
+  "Psicólogo": "Psicólogos",
+  "Fonoaudiólogo": "Fonoaudiólogos",
+  "Terapeuta ocupacional": "Terapeutas ocupacionais",
+  "Fisioterapeuta": "Fisioterapeutas",
+  "Nutricionista": "Nutricionistas",
+};
+
 export function valorDisplay(p: Pick<Profissional, "valor_formato" | "valor_min" | "valor_max">): string {
   if (p.valor_formato === "a_partir_de") {
     return `a partir de R$ ${p.valor_min}`;

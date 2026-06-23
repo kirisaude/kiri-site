@@ -7,7 +7,7 @@ import { SeloMini } from "@/components/SeloVerificado";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
-import { PROFISSOES_ORDENADAS, cidadeCurta, modalidadeCurta } from "@/types";
+import { PROFISSOES_ORDENADAS, PROFISSAO_PLURAL, cidadeCurta, modalidadeCurta } from "@/types";
 import { Footer } from "@/components/Footer";
 
 const profissionais = data.profissionais as Profissional[];
@@ -402,7 +402,7 @@ export default function Home() {
                   activeProfissao === p ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
                 }`}
               >
-                {p}
+                {PROFISSAO_PLURAL[p] ?? p}
               </button>
             ))}
           </div>
@@ -586,7 +586,7 @@ export default function Home() {
                 {/* Header da seção */}
                 <div className="flex items-baseline justify-between gap-3.5 mb-4 md:mb-5">
                   <span className="font-serif text-[19px] md:text-[22px] font-semibold text-carvao leading-[1.2]">
-                    {sec.nome}
+                    {PROFISSAO_PLURAL[sec.nome] ?? sec.nome}
                   </span>
                   <button
                     className="flex-none text-[13px] font-semibold text-ferrugem whitespace-nowrap cursor-pointer hover:underline"
