@@ -66,7 +66,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
   const encaminhado = e.status === "encaminhado";
 
   return (
-    <div className={`border rounded-[14px] overflow-hidden transition-opacity ${encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
+    <div className={`border rounded-[14px] overflow-hidden ${encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
       {/* Cabeçalho sempre visível */}
       <button
         type="button"
@@ -173,14 +173,17 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
   );
 }
 
-function CardGeral({ e, expandido, onToggle, onExcluir }: {
+function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
   onExcluir: (id: string) => void;
+  onResolver: (id: string, novoStatus: string) => void;
 }) {
+  const respondido = e.status === "respondido";
+
   return (
-    <div className="bg-white border border-linha rounded-[14px] overflow-hidden">
+    <div className={`border rounded-[14px] overflow-hidden ${respondido ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-linha"}`}>
       <button
         type="button"
         onClick={onToggle}
@@ -189,14 +192,20 @@ function CardGeral({ e, expandido, onToggle, onExcluir }: {
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
-            <span className="text-[11px] font-semibold text-ferrugem bg-wash-quente border border-borda-quente px-2 py-0.5 rounded-[6px]">
-              Busca geral
-            </span>
+            {respondido ? (
+              <span className="text-[11px] font-semibold text-[#2E7D4F] bg-[#E8F5EC] border border-[#B8D8C0] px-2 py-0.5 rounded-[6px]">
+                respondido
+              </span>
+            ) : (
+              <span className="text-[11px] font-semibold text-ferrugem bg-wash-quente border border-borda-quente px-2 py-0.5 rounded-[6px]">
+                Busca geral
+              </span>
+            )}
           </div>
           <div className="text-[13px] text-cinza-texto mt-0.5">
             {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
-          {e.observacoes && (
+          {e.observacoes && !respondido && (
             <div className="text-[12.5px] text-muted mt-0.5 truncate max-w-[320px]">
               {e.observacoes}
             </div>
@@ -217,7 +226,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir }: {
               </div>
             )}
           </div>
-          <div className="flex justify-end mb-2">
+          <div className="flex justify-end mb-2 mt-3">
             <button
               type="button"
               onClick={() => onExcluir(e.id)}
@@ -227,7 +236,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir }: {
             </button>
           </div>
 
-          <div className="pt-3.5 border-t border-linha-sutil">
+          {!respondido && <div className="pt-3.5 border-t border-linha-sutil">
             {pareceWhatsApp(e.contato) ? (
               <a
                 href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(`Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`)}`}
@@ -249,7 +258,20 @@ function CardGeral({ e, expandido, onToggle, onExcluir }: {
                 Responder por e-mail
               </a>
             )}
-          </div>
+          </div>}
+
+          {/* Checkbox respondido */}
+          <label className="flex items-center gap-2.5 cursor-pointer mt-3 pt-3.5 border-t border-linha-sutil">
+            <input
+              type="checkbox"
+              checked={respondido}
+              onChange={() => onResolver(e.id, respondido ? "pendente" : "respondido")}
+              className="w-4 h-4 accent-ardosia-escura cursor-pointer"
+            />
+            <span className={`text-[13px] font-medium ${respondido ? "text-[#2E7D4F]" : "text-cinza-texto"}`}>
+              {respondido ? "Respondido — clique para desfazer" : "Marcar como respondido"}
+            </span>
+          </label>
         </div>
       )}
     </div>
@@ -555,24 +577,55 @@ export default function AdminPage() {
             <div>
               <div className="flex items-baseline gap-2 mb-1">
                 <h2 className="font-serif text-[18px] font-semibold text-carvao">Busca geral</h2>
-                <span className="text-[14px] text-muted">({semProfissional.length})</span>
+                <span className="text-[14px] text-muted">
+                  ({semProfissional.filter((e) => e.status !== "respondido").length} pendentes)
+                </span>
               </div>
               <p className="text-[13px] text-muted mb-4">
                 Família sem profissional escolhido. Requer análise antes de responder.
               </p>
-              {semProfissional.length === 0 ? (
-                <p className="text-[14px] text-muted">Nenhuma busca geral ainda.</p>
+              {semProfissional.filter((e) => e.status !== "respondido").length === 0 ? (
+                <p className="text-[14px] text-muted">Nenhuma busca pendente.</p>
               ) : (
                 <div className="flex flex-col gap-3">
-                  {semProfissional.map((e) => (
-                    <CardGeral
-                      key={e.id}
-                      e={e}
-                      expandido={expandidos.has(e.id)}
-                      onToggle={() => toggleExpandido(e.id)}
-                      onExcluir={excluirEncaminhamento}
-                    />
-                  ))}
+                  {semProfissional
+                    .filter((e) => e.status !== "respondido")
+                    .map((e) => (
+                      <CardGeral
+                        key={e.id}
+                        e={e}
+                        expandido={expandidos.has(e.id)}
+                        onToggle={() => toggleExpandido(e.id)}
+                        onExcluir={excluirEncaminhamento}
+                        onResolver={atualizarEncaminhamento}
+                      />
+                    ))}
+                </div>
+              )}
+
+              {/* Respondidos */}
+              {semProfissional.filter((e) => e.status === "respondido").length > 0 && (
+                <div className="mt-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">Respondidos</span>
+                    <span className="text-[12px] text-muted">
+                      ({semProfissional.filter((e) => e.status === "respondido").length})
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {semProfissional
+                      .filter((e) => e.status === "respondido")
+                      .map((e) => (
+                        <CardGeral
+                          key={e.id}
+                          e={e}
+                          expandido={expandidos.has(e.id)}
+                          onToggle={() => toggleExpandido(e.id)}
+                          onExcluir={excluirEncaminhamento}
+                          onResolver={atualizarEncaminhamento}
+                        />
+                      ))}
+                  </div>
                 </div>
               )}
             </div>
