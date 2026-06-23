@@ -9,9 +9,12 @@ type Bloco =
 
 const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
-    titulo: "1. Objeto da Plataforma",
+    titulo: "1. Objeto da Plataforma e Capacidade Civil",
     blocos: [
       { tipo: "p", texto: "A Kiri consiste em um ecossistema digital que atua como provedor de tecnologia, oferecendo um catálogo organizado e facilitação de contato inicial entre famílias e profissionais de saúde independentes e autônomos, especializados na área de neurodesenvolvimento infantil." },
+      { tipo: "destaque", texto: "Capacidade e Representação" },
+      { tipo: "p", texto: "Ao aceitar estes termos, o usuário declara ser maior de 18 anos ou emancipado, possuir plena capacidade civil e, quando aplicável, deter a legítima representação legal, guarda ou pátrio poder sobre o menor de idade cujos dados ou histórico venham a ser informados para fins de contato." },
+      { tipo: "destaque", texto: "Ausência de Vínculo" },
       { tipo: "p", texto: "O uso da plataforma, o preenchimento de campos de mensagem ou o envio de dados para contato não cria, sob nenhuma hipótese ou pretexto, qualquer vínculo terapêutico, clínico, assistencial, consumerista de saúde ou hospitalar entre a Kiri e o usuário." },
     ],
   },
@@ -44,14 +47,14 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     ],
   },
   {
-    titulo: "5. Parâmetros do Selo \"Verificado\"",
+    titulo: "5. Parâmetros do Selo \"Verificado\" e Exclusão de Monitoramento",
     blocos: [
       { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (explicitada no perfil do profissional), o especialista apresentou documentos válidos que comprovavam:" },
       { tipo: "lista", itens: [
         "(a) registro ativo e regular perante o seu respectivo conselho de classe profissional; e",
         "(b) titulação, especialização ou formação declarada condizente com o escopo da plataforma.",
       ]},
-      { tipo: "destaque", texto: "Exclusão de Monitoramento em Tempo Real" },
+      { tipo: "destaque", texto: "Inexistência de Monitoramento em Tempo Real" },
       { tipo: "p", texto: "Esta verificação é um procedimento meramente burocrático, pontual e periódico. A Kiri não monitora em tempo real e não responde por alterações supervenientes de status profissional, suspensões de registro, cassações, processos éticos em andamento (visto que correm sob sigilo legal nos conselhos de classe) ou encerramento de atividades ocorridos após a data da última checagem. É dever e responsabilidade do usuário confirmar a regularidade atual do profissional perante o respectivo conselho antes do início de qualquer ato clínico." },
     ],
   },
@@ -154,6 +157,9 @@ export default function TermosPage() {
             <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
           </svg>
           <div className="flex flex-col gap-2">
+            <p className="text-[12px] font-bold tracking-[0.06em] uppercase text-ambar-texto m-0">
+              Aviso de Limitação de Responsabilidade (Art. 54, §4º do CDC)
+            </p>
             <p className="text-[14px] leading-[1.6] text-ambar-texto m-0">
               <strong>A Kiri é exclusivamente uma ferramenta tecnológica de classificados e facilitação de busca de contatos.</strong> Não somos uma clínica, não prestamos serviços de saúde de qualquer natureza, não realizamos triagens clínicas e não elaboramos diagnósticos. Toda responsabilidade técnica, ética, administrativa e civil pelo atendimento, condutas e acompanhamento clínico é exclusiva do profissional de saúde selecionado de forma independente pelo usuário.
             </p>
