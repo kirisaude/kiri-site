@@ -115,8 +115,8 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
               <div className="text-center py-3">
                 <p className="text-[13px] text-muted leading-[1.5]">
                   Contato não disponível ainda.<br />Fale com a equipe Kiri:{" "}
-                  <a href="https://wa.me/5511993197202" className="underline text-cinza-texto">
-                    (11) 99319-7202
+                  <a href="mailto:contato@kirisaude.com.br" className="underline text-cinza-texto">
+                    contato@kirisaude.com.br
                   </a>
                 </p>
               </div>
