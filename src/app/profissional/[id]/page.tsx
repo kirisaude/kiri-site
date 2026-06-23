@@ -209,7 +209,7 @@ export default async function PerfilPage({ params }: PageProps) {
                   <span className="text-[14px] text-cinza-texto">{p.convenio_info}</span>
                 </div>
                 <p className="mt-3 text-[12px] leading-[1.5] text-muted">
-                  Os valores podem variar conforme o caso e são confirmados com o próprio profissional.
+                  Os valores podem variar conforme o caso e devem ser confirmados no momento do agendamento com o próprio profissional.
                 </p>
               </div>
 
