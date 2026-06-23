@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
+import { createHash } from "crypto";
 
 const tentativas = new Map<string, { count: number; resetAt: number }>();
 
 function getIp(req: Request) {
   return (req.headers as Headers).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+}
+
+function hashSenha(senha: string) {
+  return createHash("sha256").update(senha).digest("hex");
 }
 
 export async function POST(request: Request) {
@@ -31,7 +36,7 @@ export async function POST(request: Request) {
   tentativas.delete(ip);
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.set("kiri_pro", "ok", {
+  response.cookies.set("kiri_pro", hashSenha(senhaCorreta), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

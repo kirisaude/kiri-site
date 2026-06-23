@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
+import { createHash } from "crypto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 
 function isProAuthed(request: Request) {
+  const senhaCorreta = process.env.KIRI_PRO_SENHA;
+  if (!senhaCorreta) return false;
+  const hash = createHash("sha256").update(senhaCorreta).digest("hex");
   const cookie = request.headers.get("cookie") ?? "";
-  return cookie.includes("kiri_pro=ok");
+  return cookie.includes(`kiri_pro=${hash}`);
 }
 
 export async function GET(request: Request) {
