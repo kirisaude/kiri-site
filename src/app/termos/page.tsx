@@ -5,7 +5,8 @@ import { NavBack } from "@/components/NavBack";
 type Bloco =
   | { tipo: "p"; texto: string }
   | { tipo: "destaque"; texto: string }
-  | { tipo: "lista"; itens: string[] };
+  | { tipo: "lista"; itens: string[] }
+  | { tipo: "alineas"; itens: string[] };
 
 const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
@@ -22,7 +23,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     titulo: "2. Natureza e Limitações do Serviço",
     blocos: [
       { tipo: "destaque", texto: "O que a Kiri disponibiliza" },
-      { tipo: "lista", itens: [
+      { tipo: "alineas", itens: [
         "(a) Acesso a uma listagem organizada de profissionais de saúde que atendem aos critérios objetivos de verificação de regularidade documental da plataforma;",
         "(b) Uma ferramenta tecnológica de mensageria para que o próprio usuário, por sua livre escolha, envie sua demanda inicial diretamente ao especialista escolhido; e",
         "(c) Conteúdos informativos de caráter estritamente educativo, sem qualquer caráter de recomendação individualizada.",
@@ -50,7 +51,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     titulo: "5. Parâmetros do Selo \"Verificado\" e Exclusão de Monitoramento",
     blocos: [
       { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (explicitada no perfil do profissional), o especialista apresentou documentos válidos que comprovavam:" },
-      { tipo: "lista", itens: [
+      { tipo: "alineas", itens: [
         "(a) registro ativo e regular perante o seu respectivo conselho de classe profissional; e",
         "(b) titulação, especialização ou formação declarada condizente com o escopo da plataforma.",
       ]},
@@ -107,6 +108,17 @@ function Bloco({ bloco }: { bloco: Bloco }) {
           </li>
         ))}
       </ul>
+    );
+  }
+  if (bloco.tipo === "alineas") {
+    return (
+      <div className="flex flex-col gap-2.5 pl-2">
+        {bloco.itens.map((item, i) => (
+          <p key={i} className="text-[15px] md:text-[16px] leading-[1.7] text-cinza-texto m-0">
+            {item}
+          </p>
+        ))}
+      </div>
     );
   }
   if (bloco.texto.includes("Política de Privacidade")) {
