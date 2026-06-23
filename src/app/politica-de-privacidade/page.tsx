@@ -1,77 +1,147 @@
+import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 
-const SECOES = [
+type Bloco =
+  | { tipo: "p"; texto: string }
+  | { tipo: "destaque"; texto: string }
+  | { tipo: "lista"; itens: string[] };
+
+const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
-    titulo: "1. Quem somos",
-    texto: [
-      "A Kiri é uma plataforma digital de busca e facilitação de contato entre famílias e profissionais de saúde especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como controladora dos dados pessoais coletados pela plataforma, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei n.º 13.709/2018 — LGPD).",
-      "Dúvidas ou solicitações relacionadas a dados pessoais podem ser enviadas para: contato@kirisaude.com.br",
+    titulo: "1. Quem Somos e Canal de Contato",
+    blocos: [
+      { tipo: "p", texto: "A Kiri é uma plataforma digital de curadoria voltada a organizar o fluxo de busca e facilitar o contato entre famílias e profissionais de saúde especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como Controladora dos dados pessoais coletados pela plataforma, nos termos da LGPD." },
+      { tipo: "p", texto: "Qualquer dúvida, reclamação ou solicitação relacionada aos seus dados pessoais pode ser enviada diretamente para o nosso Encarregado de Proteção de Dados através do e-mail oficial: contato@kirisaude.com.br" },
     ],
   },
   {
-    titulo: "2. Quais dados coletamos e por quê",
-    texto: [
-      "Formulário de encaminhamento (famílias): coletamos nome completo do responsável, contato (WhatsApp ou e-mail), cidade e modalidade de preferência. Esses dados são utilizados exclusivamente para realizar o encaminhamento ao profissional indicado e para o contato inicial da equipe Kiri. As respostas incluem contexto de saúde implícito (busca por profissional de neurodesenvolvimento), classificado como dado sensível pela LGPD — categoria especial (art. 11). A base legal utilizada é o consentimento livre, informado e inequívoco do titular (art. 11, I).",
-      "Formulário de inscrição de profissionais: coletamos nome, profissão, número de registro no conselho, especialidade, áreas de atuação, formação acadêmica, localização e contato. Esses dados são utilizados exclusivamente para análise da candidatura à rede Kiri. A base legal é o consentimento do titular.",
-      "Formulário de reporte de perfil: coletamos o tipo de problema reportado e o identificador do profissional em questão. O reporte é processado de forma anônima pela equipe Kiri.",
-      "Acesso à plataforma: não armazenamos senhas. O acesso é verificado por uma credencial de sessão (cookie httpOnly) que expira em 30 dias.",
-      "Dados de navegação: não utilizamos ferramentas de rastreamento (analytics, pixels de terceiros) neste momento.",
+    titulo: "2. Dados Coletados, Finalidades e Bases Legais",
+    blocos: [
+      { tipo: "destaque", texto: "Formulário de Direcionamento (Famílias)" },
+      { tipo: "p", texto: "Coletamos o nome completo do responsável legal, informações de contato (WhatsApp ou e-mail), cidade e modalidade de atendimento de preferência. Esses dados são utilizados exclusivamente para viabilizar e facilitar o contato com o profissional escolhido. As respostas contêm contexto de saúde implícito (busca por atendimento em neurodesenvolvimento), caracterizando dados pessoais sensíveis (art. 5º, II da LGPD) e dados de crianças ou adolescentes (art. 14 da LGPD)." },
+      { tipo: "p", texto: "Base Legal: Tratamento realizado com base no consentimento livre, informado e inequívoco do responsável legal, manifestado em observância ao melhor interesse da criança (art. 11, I e art. 14, § 1º da LGPD)." },
+      { tipo: "destaque", texto: "Formulário de Inscrição de Profissionais" },
+      { tipo: "p", texto: "Coletamos nome completo, profissão, número de registro no respectivo conselho de classe profissional, especialidade, áreas de atuação, formação acadêmica, localização e contatos profissionais. Esses dados são utilizados para a análise de elegibilidade técnica e preenchimento do perfil público na rede Kiri." },
+      { tipo: "p", texto: "Base Legal: Consentimento livre e inequívoco do titular (art. 7º, I da LGPD)." },
+      { tipo: "destaque", texto: "Formulário de Reporte de Perfil" },
+      { tipo: "p", texto: "Coletamos a descrição do problema relatado e o identificador do profissional em questão. O reporte é processado de forma anônima pela equipe Kiri para fins de controle de qualidade e auditoria interna da plataforma." },
+      { tipo: "destaque", texto: "Credenciais de Acesso" },
+      { tipo: "p", texto: "Não coletamos nem armazenamos senhas. O controle de acesso administrativo à plataforma é verificado exclusivamente por uma credencial de sessão técnica (cookie httpOnly) que expira automaticamente em 30 (trinta) dias." },
+      { tipo: "destaque", texto: "Dados de Navegação" },
+      { tipo: "p", texto: "Em respeito à sua privacidade, não utilizamos ferramentas invasivas de rastreamento de comportamento, mapas de calor, pixels de terceiros ou serviços analíticos (analytics) nesta etapa da plataforma." },
     ],
   },
   {
-    titulo: "3. Com quem compartilhamos os dados",
-    texto: [
-      "Todos os dados coletados pelos formulários da plataforma são armazenados no Brasil, em servidores da Supabase Inc. com região configurada em São Paulo (South America — sa-east-1). A Supabase atua como operadora dos dados, nos termos do art. 39 da LGPD. Não há transferência internacional de dados pessoais.",
-      "A Kiri não vende, cede nem compartilha dados pessoais com terceiros para fins comerciais ou publicitários.",
-      "Os dados podem ser compartilhados com o profissional de saúde solicitado, exclusivamente para viabilizar o encaminhamento. O profissional, ao receber o contato, passa a ser responsável pelo tratamento dos dados no âmbito do atendimento clínico.",
-      "Em casos exigidos por lei ou ordem judicial, os dados podem ser divulgados às autoridades competentes.",
+    titulo: "3. Compartilhamento e Operação de Dados",
+    blocos: [
+      { tipo: "destaque", texto: "Armazenamento e Infraestrutura" },
+      { tipo: "p", texto: "Todos os dados coletados através da plataforma são armazenados no Brasil, utilizando a infraestrutura de servidores da Supabase Inc., com região configurada em São Paulo (South America — sa-east-1). A Supabase atua estritamente como Operadora dos dados, seguindo nossas diretrizes de segurança (art. 39 da LGPD). Não há transferência internacional de dados." },
+      { tipo: "destaque", texto: "Comercialização Proibida" },
+      { tipo: "p", texto: "A Kiri não vende, não cede, não aluga e não compartilha dados pessoais com terceiros para fins comerciais, publicitários ou de marketing." },
+      { tipo: "destaque", texto: "Fluxo de Contato com Profissionais" },
+      { tipo: "p", texto: "Os dados de contato fornecidos pelas famílias serão compartilhados unicamente com o profissional de saúde selecionado pela própria família para viabilizar o agendamento ou contato inicial." },
+      { tipo: "destaque", texto: "Isenção de Responsabilidade Clínica" },
+      { tipo: "p", texto: "A partir do momento em que o contato é iniciado, o profissional de saúde passa a ser o único e exclusivo Controlador e responsável pelo tratamento dos dados subsequentes, sujeitos ao sigilo profissional e às normas ético-clínicas de seus respectivos conselhos de classe (CFM, CFP, CREFITO, CRFa, etc.). A Kiri não possui acesso, ingerência ou responsabilidade sobre consultas, prontuários ou comunicações externas à plataforma." },
+      { tipo: "destaque", texto: "Cumprimento Legal" },
+      { tipo: "p", texto: "Os dados poderão ser compartilhados com autoridades públicas competentes caso haja estrita obrigação legal ou ordem judicial válida." },
     ],
   },
   {
-    titulo: "4. Por quanto tempo armazenamos os dados",
-    texto: [
-      "Formulário de famílias: as respostas são retidas por até 12 meses a partir da data de preenchimento, ou até a solicitação de exclusão pelo titular, o que ocorrer primeiro.",
-      "Formulário de inscrição de profissionais: as respostas são retidas enquanto a candidatura estiver em análise ou enquanto o profissional compuser a rede Kiri. Candidaturas não aprovadas são excluídas em até 6 meses após a comunicação.",
-      "Após os prazos acima, os dados são excluídos do banco de dados Supabase mediante solicitação da equipe Kiri.",
+    titulo: "4. Período de Retenção e Descarte",
+    blocos: [
+      { tipo: "destaque", texto: "Dados de Famílias" },
+      { tipo: "p", texto: "As informações dos formulários de direcionamento são retidas pelo prazo máximo de 12 (doze) meses a partir do preenchimento, para fins de suporte e verificação de fluxo, ou até que o titular solicite sua exclusão, o que ocorrer primeiro." },
+      { tipo: "destaque", texto: "Dados de Profissionais" },
+      { tipo: "p", texto: "As informações são retidas e exibidas enquanto o profissional mantiver seu perfil ativo e compuser a rede Kiri. Em caso de candidaturas não aprovadas no piloto, os dados correspondentes serão integralmente excluídos em até 6 (seis) meses após a comunicação da negativa." },
+      { tipo: "destaque", texto: "Término do Tratamento" },
+      { tipo: "p", texto: "Após os prazos estipulados ou mediante revogação do consentimento, os dados são eliminados definitivamente dos servidores, salvo nas hipóteses de guarda obrigatória autorizadas pelo art. 16 da LGPD." },
     ],
   },
   {
-    titulo: "5. Seus direitos como titular",
-    texto: [
-      "Nos termos da LGPD (art. 18), você tem direito a: (a) confirmar a existência de tratamento; (b) acessar seus dados; (c) corrigir dados incompletos, inexatos ou desatualizados; (d) solicitar a anonimização, bloqueio ou eliminação de dados desnecessários; (e) obter informações sobre o compartilhamento com terceiros; (f) revogar o consentimento a qualquer momento.",
-      "Para exercer qualquer desses direitos, envie um e-mail para contato@kirisaude.com.br com o assunto 'Direitos LGPD'. Responderemos em até 15 dias úteis.",
+    titulo: "5. Direitos dos Titulares de Dados",
+    blocos: [
+      { tipo: "p", texto: "Em conformidade com o artigo 18 da LGPD, qualquer usuário da plataforma (seja profissional ou responsável legal) pode, a qualquer momento, exercer seus direitos de:" },
+      { tipo: "lista", itens: [
+        "Confirmar a existência de tratamento e acessar seus dados pessoais de forma clara;",
+        "Corrigir dados incompletos, inexatos ou desatualizados;",
+        "Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei;",
+        "Revogar o consentimento previamente fornecido, sendo informado sobre as consequências da negativa (como a impossibilidade de utilizar o fluxo de contato).",
+      ]},
+      { tipo: "p", texto: "Para exercer estes direitos, envie uma mensagem para contato@kirisaude.com.br com o assunto \"Direitos LGPD\". Suas solicitações serão analisadas e respondidas gratuitamente no prazo legal de até 15 (quinze) dias." },
     ],
   },
   {
-    titulo: "6. Cookies",
-    texto: [
-      "Utilizamos um único cookie de sessão (kiri_acesso) para controle de acesso à plataforma. Esse cookie é httpOnly (não acessível por JavaScript), não rastreia comportamento de navegação e expira em 30 dias ou ao limpar os dados do navegador.",
-      "Não utilizamos cookies de terceiros, pixels de rastreamento ou ferramentas de publicidade.",
+    titulo: "6. Cookies Técnicos",
+    blocos: [
+      { tipo: "p", texto: "A Kiri utiliza um único cookie estritamente técnico e de sessão (kiri_acesso) para controle interno de segurança e navegação na plataforma. Este cookie possui a propriedade httpOnly (o que impede o acesso ou manipulação por scripts de terceiros ou códigos JavaScript maliciosos), não rastreia hábitos de consumo ou navegação externa e é automaticamente invalidado após 30 dias ou mediante a limpeza de dados do seu navegador." },
     ],
   },
   {
-    titulo: "7. Segurança",
-    texto: [
-      "Adotamos medidas técnicas adequadas para proteger os dados contra acesso não autorizado, perda ou divulgação indevida, incluindo comunicação via HTTPS, armazenamento com controle de acesso por Row Level Security (Supabase) e acesso restrito às credenciais de produção.",
-      "Como toda plataforma digital, não podemos garantir segurança absoluta. Em caso de incidente relevante, notificaremos os titulares afetados e a Autoridade Nacional de Proteção de Dados (ANPD) nos prazos legais.",
+    titulo: "7. Medidas de Segurança da Informação",
+    blocos: [
+      { tipo: "p", texto: "Implementamos práticas de segurança técnicas e administrativas adequadas para proteger os dados pessoais contra acessos não autorizados, destruição, perda, alteração ou comunicação indevida. Isso inclui:" },
+      { tipo: "lista", itens: [
+        "Criptografia de dados em trânsito através de protocolo seguro HTTPS;",
+        "Controle estrito de acessos aos bancos de dados por meio de políticas de segurança a nível de linha (Row Level Security — RLS no Supabase);",
+        "Políticas de dupla autenticação (2FA) em todas as ferramentas administrativas.",
+      ]},
+      { tipo: "p", texto: "Embora adotemos padrões rígidos de proteção, a segurança absoluta em ambiente de internet não pode ser garantida contra ataques cibernéticos extraordinários. Na remota hipótese de um incidente de segurança que possa acarretar risco ou dano relevante aos titulares, comunicaremos imediatamente os afetados e a Autoridade Nacional de Proteção de Dados (ANPD), nos termos da lei." },
     ],
   },
   {
-    titulo: "8. Crianças e adolescentes",
-    texto: [
-      "A plataforma Kiri é destinada a responsáveis legais de crianças e adolescentes. Não coletamos dados diretamente de menores. O responsável legal, ao preencher o formulário, declara ter capacidade legal para fazê-lo em nome do menor.",
-      "O tratamento de dados relacionados a crianças é realizado com cuidado redobrado, observando o interesse superior do menor conforme art. 14 da LGPD.",
+    titulo: "8. Proteção de Crianças e Adolescentes",
+    blocos: [
+      { tipo: "p", texto: "A Kiri é uma plataforma direcionada a adultos (pais e responsáveis legais). Não coletamos intencionalmente ou de forma direta dados inseridos por menores de idade. Ao preencher qualquer formulário, o usuário declara expressamente possuir capacidade civil e ser o detentor da autoridade parental ou tutela legal sobre o menor envolvido, assumindo total responsabilidade pelas informações inseridas." },
     ],
   },
   {
-    titulo: "9. Alterações nesta Política",
-    texto: [
-      "Esta Política pode ser atualizada periodicamente. Alterações relevantes serão comunicadas na plataforma. O uso continuado após a publicação implica aceite das novas condições.",
-      "Última atualização: junho de 2026.",
+    titulo: "9. Alterações desta Política",
+    blocos: [
+      { tipo: "p", texto: "Esta Política de Privacidade poderá ser atualizada periodicamente para refletir melhorias técnicas ou mudanças legislativas. Sempre que uma alteração material for realizada, a data da \"Última atualização\" no topo deste documento será modificada. O uso contínuo dos serviços após a publicação das alterações constituirá o seu conhecimento sobre os novos termos." },
     ],
   },
 ];
+
+function Bloco({ bloco }: { bloco: Bloco }) {
+  if (bloco.tipo === "destaque") {
+    return (
+      <p className="text-[15.5px] md:text-[16.5px] leading-[1.7] text-carvao font-semibold m-0 mt-1">
+        {bloco.texto}
+      </p>
+    );
+  }
+  if (bloco.tipo === "lista") {
+    return (
+      <ul className="flex flex-col gap-2 pl-1">
+        {bloco.itens.map((item, i) => (
+          <li key={i} className="flex gap-2.5 text-[15px] md:text-[16px] leading-[1.7] text-cinza-texto">
+            <span className="text-muted mt-[2px] flex-shrink-0">—</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  const hasEmail = bloco.texto.includes("contato@kirisaude.com.br");
+  if (hasEmail) {
+    const parts = bloco.texto.split("contato@kirisaude.com.br");
+    return (
+      <p className="text-[15.5px] md:text-[16.5px] leading-[1.7] text-cinza-texto m-0">
+        {parts[0]}
+        <Link href="mailto:contato@kirisaude.com.br" className="underline text-cinza-texto">
+          contato@kirisaude.com.br
+        </Link>
+        {parts[1]}
+      </p>
+    );
+  }
+  return (
+    <p className="text-[15.5px] md:text-[16.5px] leading-[1.7] text-cinza-texto m-0">
+      {bloco.texto}
+    </p>
+  );
+}
 
 export default function PoliticaPrivacidadePage() {
   return (
@@ -89,9 +159,9 @@ export default function PoliticaPrivacidadePage() {
             Última atualização: junho de 2026
           </p>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
-            Esta Política descreve como a Kiri coleta, usa, armazena e protege
-            os dados pessoais de quem usa a plataforma, em conformidade com a
-            Lei Geral de Proteção de Dados (LGPD — Lei n.º 13.709/2018).
+            Esta Política de Privacidade descreve como a Kiri coleta, usa, armazena e protege
+            os dados pessoais de quem utiliza nossa plataforma, em estrita conformidade com a
+            Lei Geral de Proteção de Dados Pessoais (LGPD — Lei n.º 13.709/2018).
           </p>
         </div>
 
@@ -101,11 +171,9 @@ export default function PoliticaPrivacidadePage() {
               <h2 className="font-serif text-[20px] md:text-[22px] font-semibold text-carvao leading-[1.25] mb-3">
                 {s.titulo}
               </h2>
-              <div className="flex flex-col gap-3">
-                {s.texto.map((p, i) => (
-                  <p key={i} className="text-[15.5px] md:text-[16.5px] leading-[1.7] text-cinza-texto m-0">
-                    {p}
-                  </p>
+              <div className="flex flex-col gap-2.5">
+                {s.blocos.map((b, i) => (
+                  <Bloco key={i} bloco={b} />
                 ))}
               </div>
             </div>
