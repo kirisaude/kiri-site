@@ -26,6 +26,7 @@ export default function InscricaoProfissionalPage() {
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
+  const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
@@ -71,6 +72,7 @@ export default function InscricaoProfissionalPage() {
         apresentacao: apresentacao.trim() || null,
         site_perfil: sitePerfil.trim() || null,
         como_conheceu: comoConheceu.trim() || null,
+        grupo_whatsapp: grupoWhatsapp,
         consentimento: true,
       }),
     });
@@ -256,6 +258,16 @@ export default function InscricaoProfissionalPage() {
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Como conheceu a Kiri? <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
             <input type="text" value={comoConheceu} onChange={(e) => setComoConheceu(e.target.value)} placeholder="Indicação, Instagram, busca…" className={inputClass} />
+          </div>
+
+          {/* Grupo WhatsApp */}
+          <div className="bg-white border border-linha rounded-[13px] px-4 py-4">
+            <label className="flex gap-3 cursor-pointer">
+              <input type="checkbox" checked={grupoWhatsapp} onChange={(e) => setGrupoWhatsapp(e.target.checked)} className="mt-0.5 w-4 h-4 flex-none accent-ardosia" />
+              <span className="text-[13px] leading-[1.6] text-cinza-texto2">
+                Tenho interesse em participar do grupo de profissionais da Rede Kiri no WhatsApp, para troca de informações e novidades entre os membros da rede.
+              </span>
+            </label>
           </div>
 
           {/* Consentimento */}

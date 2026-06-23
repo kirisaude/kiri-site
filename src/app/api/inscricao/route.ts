@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     nome, profissao, registro_conselho, rqe,
     areas_atuacao, faixa_etaria, modalidade, cidade,
     valor_medio, aceita_convenio, graduacao, pos_graduacao,
-    apresentacao, site_perfil, como_conheceu, consentimento,
+    apresentacao, site_perfil, como_conheceu, grupo_whatsapp, consentimento,
   } = body;
 
   if (!nome || !profissao || !registro_conselho || consentimento !== true) {
@@ -42,6 +42,7 @@ export async function POST(request: Request) {
       apresentacao: apresentacao || null,
       site_perfil: site_perfil || null,
       como_conheceu: como_conheceu || null,
+      grupo_whatsapp: grupo_whatsapp ?? false,
       consentimento: true,
       status: "pendente",
     }),
