@@ -22,7 +22,7 @@ const SECOES = [
   {
     titulo: "3. Com quem compartilhamos os dados",
     texto: [
-      "Os dados coletados pelos formulários são armazenados e processados pelo Tally.so (Tally Solutions Inc.), plataforma de formulários com sede nos Estados Unidos. O Tally atua como operador dos dados, nos termos do art. 39 da LGPD. A transferência internacional é realizada com base em cláusulas contratuais adequadas.",
+      "Os dados do formulário de encaminhamento (famílias) são armazenados no Brasil, em servidores da Supabase Inc. com região configurada em São Paulo (South America). O formulário de inscrição de profissionais é processado pelo Tally.so (Tally Solutions Inc.), plataforma com sede nos Estados Unidos, com transferência internacional baseada em cláusulas contratuais adequadas. Ambos os serviços atuam como operadores dos dados, nos termos do art. 39 da LGPD.",
       "A Kiri não vende, cede nem compartilha dados pessoais com terceiros para fins comerciais ou publicitários.",
       "Os dados podem ser compartilhados com o profissional de saúde solicitado, exclusivamente para viabilizar o encaminhamento. O profissional, ao receber o contato, passa a ser responsável pelo tratamento dos dados no âmbito do atendimento clínico.",
       "Em casos exigidos por lei ou ordem judicial, os dados podem ser divulgados às autoridades competentes.",
@@ -33,7 +33,7 @@ const SECOES = [
     texto: [
       "Formulário de famílias: as respostas são retidas por até 12 meses a partir da data de preenchimento, ou até a solicitação de exclusão pelo titular, o que ocorrer primeiro.",
       "Formulário de inscrição de profissionais: as respostas são retidas enquanto a candidatura estiver em análise ou enquanto o profissional compuser a rede Kiri. Candidaturas não aprovadas são excluídas em até 6 meses após a comunicação.",
-      "Após os prazos acima, os dados são excluídos dos sistemas do Tally mediante solicitação da equipe Kiri.",
+      "Após os prazos acima, os dados são excluídos do banco de dados Supabase e dos sistemas do Tally mediante solicitação da equipe Kiri.",
     ],
   },
   {
@@ -53,7 +53,7 @@ const SECOES = [
   {
     titulo: "7. Segurança",
     texto: [
-      "Adotamos medidas técnicas adequadas para proteger os dados contra acesso não autorizado, perda ou divulgação indevida, incluindo comunicação via HTTPS e controle de acesso restrito aos dados do Tally.",
+      "Adotamos medidas técnicas adequadas para proteger os dados contra acesso não autorizado, perda ou divulgação indevida, incluindo comunicação via HTTPS, armazenamento com controle de acesso por Row Level Security (Supabase) e acesso restrito às credenciais de produção.",
       "Como toda plataforma digital, não podemos garantir segurança absoluta. Em caso de incidente relevante, notificaremos os titulares afetados e a Autoridade Nacional de Proteção de Dados (ANPD) nos prazos legais.",
     ],
   },
