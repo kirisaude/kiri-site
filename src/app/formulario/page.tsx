@@ -192,16 +192,19 @@ function FormularioContent() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-semibold text-carvao">
-              Como prefere ser contactado? <span className="text-ferrugem">*</span>
+              WhatsApp ou e-mail <span className="text-ferrugem">*</span>
             </label>
             <input
               type="text"
               value={contato}
               onChange={(e) => setContato(e.target.value)}
               required
-              placeholder="WhatsApp ou e-mail"
+              placeholder="(11) 99999-9999 ou seu@email.com"
               className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
             />
+            <p className="text-[12px] text-muted leading-[1.5]">
+              Canal pelo qual entraremos em contato com o retorno.
+            </p>
           </div>
 
           <div className="flex flex-col gap-1.5">
