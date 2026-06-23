@@ -9,71 +9,71 @@ type Bloco =
 
 const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
-    titulo: "1. O que é a Kiri",
+    titulo: "1. Objeto da Plataforma",
     blocos: [
-      { tipo: "p", texto: "A Kiri é uma plataforma digital que atua como um facilitador de busca e canal de contato inicial entre famílias e profissionais de saúde independentes, especializados em neurodesenvolvimento infantil." },
-      { tipo: "p", texto: "O uso da plataforma, o preenchimento de formulários ou o direcionamento de contatos não cria, sob nenhuma hipótese, vínculo terapêutico, clínico, assistencial ou hospitalar entre a Kiri e o usuário." },
+      { tipo: "p", texto: "A Kiri consiste em um ecossistema digital que atua como provedor de tecnologia, oferecendo um catálogo organizado e facilitação de contato inicial entre famílias e profissionais de saúde independentes e autônomos, especializados na área de neurodesenvolvimento infantil." },
+      { tipo: "p", texto: "O uso da plataforma, o preenchimento de campos de mensagem ou o envio de dados para contato não cria, sob nenhuma hipótese ou pretexto, qualquer vínculo terapêutico, clínico, assistencial, consumerista de saúde ou hospitalar entre a Kiri e o usuário." },
     ],
   },
   {
-    titulo: "2. Natureza e Escopo do Serviço",
+    titulo: "2. Natureza e Limitações do Serviço",
     blocos: [
-      { tipo: "destaque", texto: "O que a Kiri oferece" },
-      { tipo: "p", texto: "(a) Acesso a uma listagem curada de profissionais de saúde que declaram atender aos critérios de verificação documental da plataforma; (b) Um canal técnico de direcionamento para que a família envie sua demanda inicial ao especialista escolhido; e (c) Disponibilização de informações e conteúdos de caráter estritamente educativo e informativo sobre as diferentes especialidades da área de neurodesenvolvimento." },
+      { tipo: "destaque", texto: "O que a Kiri disponibiliza" },
+      { tipo: "p", texto: "(a) Acesso a uma listagem organizada de profissionais de saúde que atendem aos critérios objetivos de verificação de regularidade documental da plataforma; (b) Uma ferramenta tecnológica de mensageria para que o próprio usuário, por sua livre escolha, envie sua demanda inicial diretamente ao especialista escolhido; e (c) Conteúdos informativos de caráter estritamente educativo, sem qualquer caráter de recomendação individualizada." },
       { tipo: "destaque", texto: "O que a Kiri NÃO realiza" },
-      { tipo: "p", texto: "Avaliações clínicas, consultas, triagens diagnósticas, prescrições médicas ou terapêuticas, emissão de laudos, acompanhamento ou qualquer outro ato privativo de profissionais de saúde legalmente habilitados." },
+      { tipo: "p", texto: "Avaliações clínicas, consultas, triagens diagnósticas, indicação imperativa de condutas, prescrições médicas ou terapêuticas, emissão de laudos, exames ou qualquer outro ato privativo de profissionais de saúde legalmente habilitados." },
       { tipo: "destaque", texto: "Inexistência de Aconselhamento" },
-      { tipo: "p", texto: "Nenhuma informação veiculada na plataforma — incluindo textos explicativos, nomenclaturas de filtros, descrições de perfis ou automações de direcionamento — deve ser interpretada como aconselhamento médico, psicológico ou terapêutico." },
+      { tipo: "p", texto: "Nenhuma informação veiculada na plataforma — incluindo textos de apoio, e-mails informativos, respostas automáticas, filtros de busca ou descrições textuais de perfis — constitui ou substitui o aconselhamento médico, psicológico ou terapêutico." },
     ],
   },
   {
-    titulo: "3. Responsabilidade Técnica e Autonomia Profissional",
+    titulo: "3. Autonomia Profissional e Ausência de Vínculo",
     blocos: [
-      { tipo: "p", texto: "A responsabilidade técnica pelo diagnóstico, pela linha terapêutica adotada, pela conduta e pelo sigilo das informações clínicas é integralmente do profissional de saúde escolhido de forma soberana pelo usuário, nos termos da legislação brasileira (Lei n.º 8.080/1990) e dos respectivos Códigos de Ética Profissional (CFM, CFP, CREFITO, CRFa, etc.)." },
-      { tipo: "p", texto: "A Kiri não interfere, não orienta, não supervisiona, não audita e não responde pelas decisões clínicas tomadas pelo profissional ou pelas escolhas feitas pela família durante ou após o atendimento. O agendamento, honorários e o tratamento subsequente ocorrem em ambiente totalmente externo e alheio à plataforma." },
+      { tipo: "p", texto: "A responsabilidade técnica pelo diagnóstico, pela linha de intervenção adotada, pela conduta, evolução e pelo sigilo absoluto das informações clínicas é integralmente do profissional de saúde escolhido de forma soberana pelo usuário, nos termos da legislação brasileira (Lei n.º 8.080/1990) e dos respectivos Códigos de Ética Profissional (CFM, CFP, CREFITO, CRFa, etc.)." },
+      { tipo: "p", texto: "A Kiri não possui qualquer ingerência, não orienta, não supervisiona, não audita e não responde pelas decisões clínicas tomadas pelo profissional ou pelas escolhas feitas pela família. Os honorários, agendamentos e a prestação dos serviços de saúde subsequentes ocorrem em ambiente totalmente externo, físico ou digital, alheio e independente da plataforma Kiri." },
     ],
   },
   {
     titulo: "4. Ausência de Garantia de Resultados Clínicos",
     blocos: [
-      { tipo: "p", texto: "O usuário reconhece que as condições ligadas ao neurodesenvolvimento infantil (como o TEA e o TDAH) possuem alta variabilidade individual e demandam acompanhamento especializado, contínuo e multiprofissional. A Kiri não garante, não promete e não insinua qualquer resultado clínico, cura, melhora, eficácia de métodos específicos ou prognóstico decorrente da utilização da plataforma ou do contato com os profissionais listados." },
+      { tipo: "p", texto: "O usuário declara estar ciente de que as condições ligadas ao neurodesenvolvimento infantil (como o TEA e o TDAH) possuem alta variabilidade individual e demandam acompanhamento especializado, contínuo e eminentemente multidisciplinar. A Kiri atua como mero facilitador de busca de contatos e, por isso, não garante, não promete e não assegura qualquer resultado clínico, melhora, eficácia de abordagens terapêuticas ou prognóstico específico." },
     ],
   },
   {
-    titulo: "5. Selo \"Verificado\" — Alcance e Limitações",
+    titulo: "5. Parâmetros do Selo \"Verificado\"",
     blocos: [
-      { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (conforme indicado no perfil), o profissional apresentou documentos comprobatórios válidos de: (a) registro ativo e regular perante o seu respectivo conselho de classe; e (b) especialização ou formação declarada aplicável ao escopo da plataforma." },
-      { tipo: "destaque", texto: "Limitação da Verificação" },
-      { tipo: "p", texto: "Esta verificação é um procedimento pontual e periódico. A Kiri não monitora em tempo real e não se responsabiliza por alterações imediatas de status profissional, suspensões de registro, processos administrativos ou judiciais supervenientes à data da última checagem. É de responsabilidade do usuário confirmar a regularidade atual do profissional junto ao respectivo conselho de classe antes de iniciar qualquer consulta." },
+      { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (explicitada no perfil do profissional), o especialista apresentou documentos válidos que comprovavam: (a) registro ativo e regular perante o seu respectivo conselho de classe profissional; e (b) titulação, especialização ou formação declarada condizente com o escopo da plataforma." },
+      { tipo: "destaque", texto: "Exclusão de Monitoramento em Tempo Real" },
+      { tipo: "p", texto: "Esta verificação é um procedimento meramente burocrático, pontual e periódico. A Kiri não monitora em tempo real e não responde por alterações supervenientes de status profissional, suspensões de registro, cassações, processos éticos em andamento (visto que correm sob sigilo legal nos conselhos de classe) ou encerramento de atividades ocorridos após a data da última checagem. É dever e responsabilidade do usuário confirmar a regularidade atual do profissional perante o respectivo conselho antes do início de qualquer ato clínico." },
     ],
   },
   {
-    titulo: "6. Limitação de Responsabilidade Civil",
+    titulo: "6. Exclusão de Responsabilidade Civil da Plataforma",
     blocos: [
-      { tipo: "p", texto: "Na máxima extensão permitida pela legislação brasileira aplicável (incluindo o Código de Defesa do Consumidor e o Marco Civil da Internet), a Kiri, na qualidade de provedora de tecnologia e busca, não será responsabilizada por:" },
+      { tipo: "p", texto: "Na máxima extensão permitida pela legislação brasileira aplicável, por atuar estritamente como provedora de tecnologia e busca (inteligência do art. 18 e 19 do Marco Civil da Internet e diretrizes do CDC), a Kiri não responde por:" },
       { tipo: "lista", itens: [
-        "Qualquer dano, direto ou indireto, decorrente de indisponibilidades técnicas temporárias da plataforma;",
-        "Erros médicos, imperícia, imprudência, negligência, quebra de sigilo profissional ou falhas contratuais cometidas pelos profissionais de saúde listados;",
-        "Conteúdos, descrições clínicas ou dados biográficos incorretos inseridos pelos próprios profissionais em seus perfis, comprometendo-se a plataforma a corrigir eventuais inconsistências assim que formalmente notificada.",
+        "Quaisquer danos decorrentes de indisponibilidades técnicas temporárias, instabilidades de rede ou manutenção da plataforma;",
+        "Atos de imperícia, imprudência, negligência, erro de diagnóstico, quebra de sigilo profissional ou quebras contratuais cometidas pelos profissionais de saúde contatados pelo usuário;",
+        "Dados biográficos, descrições clínicas ou contatos desatualizados ou incorretos fornecidos voluntariamente pelos próprios profissionais em seus perfis, comprometendo-se a plataforma a retificar as informações assim que formalmente notificada.",
       ]},
     ],
   },
   {
     titulo: "7. Proteção de Dados Pessoais",
     blocos: [
-      { tipo: "p", texto: "O tratamento de dados pessoais na plataforma ocorre em estrita observância à Lei Geral de Proteção de Dados (Lei n.º 13.709/2018 — LGPD), com armazenamento seguro em território nacional. Para compreender detalhadamente como seus dados de contato e dados sensíveis de saúde são protegidos, retidos e como exercer seus direitos de titular, consulte a nossa Política de Privacidade." },
+      { tipo: "p", texto: "O tratamento de dados pessoais no âmbito da plataforma ocorre em estrita observância à Lei Geral de Proteção de Dados (Lei n.º 13.709/2018 — LGPD). Para compreender de forma detalhada como seus dados de contato e dados sensíveis de saúde são protegidos, armazenados ou eliminados, consulte a nossa Política de Privacidade, que integra este documento para todos os fins de direito." },
     ],
   },
   {
     titulo: "8. Alterações destes Termos",
     blocos: [
-      { tipo: "p", texto: "A Kiri reserva-se o direito de atualizar ou modificar estes Termos de Uso a qualquer momento, visando refletir melhorias técnicas ou ajustes operacionais. Alterações materiais serão informadas diretamente na plataforma. O uso continuado dos nossos serviços após a publicação dos termos atualizados constituirá sua aceitação tácita das novas condições." },
+      { tipo: "p", texto: "A Kiri reserva-se o direito de atualizar ou modificar estes Termos de Uso a qualquer momento para refletir melhorias técnicas, novas funcionalidades ou ajustes regulatórios. Alterações materiais serão informadas visivelmente na interface da plataforma. O uso continuado dos nossos serviços após a publicação dos termos atualizados constituirá sua aceitação inequívoca das novas condições." },
     ],
   },
   {
-    titulo: "9. Legislação Aplicável e Foro",
+    titulo: "9. Legislação Aplicável e Foro Eleito",
     blocos: [
-      { tipo: "p", texto: "Estes Termos são regidos e interpretados de acordo com as leis da República Federativa do Brasil. Para dirimir quaisquer controvérsias decorrentes deste instrumento, fica eleito o foro da Comarca de São Paulo — SP, com expressa renúncia a qualquer outro, por mais privilegiado que seja ou venha a ser." },
+      { tipo: "p", texto: "Estes Termos de Uso são regidos, interpretados e executados de acordo com as leis da República Federativa do Brasil. Para dirimir quaisquer controvérsias ou litígios decorrentes deste instrumento, as partes elegem o foro da Comarca de São Paulo — SP, com expressa e irrevogável renúncia a qualquer outro, por mais privilegiado que seja ou venha a ser." },
     ],
   },
 ];
@@ -145,9 +145,14 @@ export default function TermosPage() {
             <line x1="10" y1="9" x2="10" y2="14" stroke="#BE8A3E" strokeWidth="1.6" strokeLinecap="round" />
             <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
           </svg>
-          <p className="text-[14px] leading-[1.6] text-ambar-texto m-0">
-            <strong>A Kiri não é uma clínica e não realiza diagnósticos.</strong> Toda responsabilidade técnica, ética e civil pelo atendimento, conduta e acompanhamento clínico é exclusiva do profissional de saúde selecionado pelo usuário. Em caso de urgência, emergência, crise ou risco imediato à integridade física, procure o pronto-socorro mais próximo ou ligue para os serviços públicos de emergência (192 / 193).
-          </p>
+          <div className="flex flex-col gap-2">
+            <p className="text-[14px] leading-[1.6] text-ambar-texto m-0">
+              <strong>A Kiri é exclusivamente uma ferramenta tecnológica de classificados e facilitação de busca de contatos.</strong> Não somos uma clínica, não prestamos serviços de saúde de qualquer natureza, não realizamos triagens clínicas e não elaboramos diagnósticos. Toda responsabilidade técnica, ética, administrativa e civil pelo atendimento, condutas e acompanhamento clínico é exclusiva do profissional de saúde selecionado de forma independente pelo usuário.
+            </p>
+            <p className="text-[14px] leading-[1.6] text-ambar-texto font-semibold m-0">
+              Em caso de urgência, emergência, crise de saúde mental ou risco imediato à integridade física, procure o pronto-socorro mais próximo ou acione os serviços públicos de emergência (192 / 193).
+            </p>
+          </div>
         </div>
 
         <div className="px-[22px] mt-8 flex flex-col gap-8">
