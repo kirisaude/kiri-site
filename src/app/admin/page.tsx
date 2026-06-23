@@ -5,6 +5,7 @@ import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
+import { PROFISSOES_ORDENADAS } from "@/types";
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -38,7 +39,7 @@ interface Reporte {
   descricao: string | null;
 }
 
-type Aba = "inscricoes" | "encaminhamentos" | "reportes";
+type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais";
 
 function pareceWhatsApp(contato: string): boolean {
   const digits = contato.replace(/\D/g, "");
@@ -288,6 +289,10 @@ export default function AdminPage() {
   const [inscricoes, setInscricoes] = useState<Inscricao[]>([]);
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [reportes, setReportes] = useState<Reporte[]>([]);
+  const [profPublicados, setProfPublicados] = useState<Profissional[]>(
+    (data.profissionais as Profissional[]).filter((p) => p.verificado)
+  );
+  const [excluindo, setExcluindo] = useState<string | null>(null);
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
 
@@ -369,6 +374,22 @@ export default function AdminPage() {
     });
   }
 
+  async function excluirProfissional(id: string, nome: string) {
+    if (!confirm(`Remover "${nome}" da plataforma? Esta ação não pode ser desfeita.`)) return;
+    setExcluindo(id);
+    const res = await fetch("/api/admin/profissionais", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    if (res.ok) {
+      setProfPublicados((prev) => prev.filter((p) => p.id !== id));
+    } else {
+      alert("Erro ao excluir. Tente novamente.");
+    }
+    setExcluindo(null);
+  }
+
   useEffect(() => {
     fetch("/api/admin/inscricoes").then((r) => {
       if (r.ok) { setAuthed(true); buscarDados(); }
@@ -430,6 +451,10 @@ export default function AdminPage() {
         <button onClick={() => setAba("reportes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
+        </button>
+        <button onClick={() => setAba("profissionais")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Plataforma ({profPublicados.length})
         </button>
       </div>
 
@@ -686,6 +711,77 @@ export default function AdminPage() {
                   );
                 })}
               </div>
+            )}
+          </div>
+        )}
+
+        {/* ABA PROFISSIONAIS PUBLICADOS */}
+        {aba === "profissionais" && (
+          <div className="flex flex-col gap-8">
+            <div>
+              <h2 className="font-serif text-[18px] font-semibold text-carvao mb-1">
+                Profissionais na plataforma
+              </h2>
+              <p className="text-[13px] text-muted mb-1">
+                {profPublicados.length} profissional{profPublicados.length !== 1 ? "is" : ""} publicado{profPublicados.length !== 1 ? "s" : ""}. Exclusões entram em vigor após ~1 min (rebuild automático).
+              </p>
+            </div>
+
+            {PROFISSOES_ORDENADAS.map((prof) => {
+              const grupo = profPublicados.filter((p) => p.profissao === prof);
+              if (grupo.length === 0) return null;
+              return (
+                <div key={prof}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-[14px] font-bold tracking-[0.04em] uppercase text-muted">{prof}</h3>
+                    <span className="text-[13px] text-muted">({grupo.length})</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {grupo.map((p) => (
+                      <div key={p.id} className="bg-white border border-linha rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{p.nome}</span>
+                            <span className="text-[11px] text-muted font-mono">{p.id}</span>
+                          </div>
+                          <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
+                            <span>{p.cidade}</span>
+                            <span>·</span>
+                            <span>{p.modalidade}</span>
+                            {p.verificacao_data && (
+                              <>
+                                <span>·</span>
+                                <span>verificado em {p.verificacao_data}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 flex-none">
+                          <Link
+                            href={`/profissional/${p.id}`}
+                            target="_blank"
+                            className="text-[12.5px] font-medium text-ardosia no-underline"
+                          >
+                            Ver ↗
+                          </Link>
+                          <button
+                            type="button"
+                            disabled={excluindo === p.id}
+                            onClick={() => excluirProfissional(p.id, p.nome)}
+                            className="text-[12.5px] font-semibold text-white bg-ferrugem rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50"
+                          >
+                            {excluindo === p.id ? "Removendo…" : "Excluir"}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+
+            {profPublicados.length === 0 && (
+              <p className="text-[14px] text-muted">Nenhum profissional publicado ainda.</p>
             )}
           </div>
         )}
