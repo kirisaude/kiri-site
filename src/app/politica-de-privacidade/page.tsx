@@ -5,13 +5,14 @@ import { NavBack } from "@/components/NavBack";
 type Bloco =
   | { tipo: "p"; texto: string }
   | { tipo: "destaque"; texto: string }
-  | { tipo: "lista"; itens: string[] };
+  | { tipo: "lista"; itens: string[] }
+  | { tipo: "alineas"; itens: string[] };
 
 const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "1. Quem Somos e Canal de Contato",
     blocos: [
-      { tipo: "p", texto: "A Kiri é uma plataforma digital de curadoria voltada a organizar o fluxo de busca e facilitar o contato entre famílias e profissionais de saúde especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como Controladora dos dados pessoais coletados pela plataforma, nos termos da LGPD." },
+      { tipo: "p", texto: "A Kiri é uma plataforma digital voltada a organizar o fluxo de busca e facilitar o contato direto entre famílias e profissionais de saúde independentes, especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como Controladora dos dados pessoais coletados pela plataforma, nos termos da LGPD." },
       { tipo: "p", texto: "Qualquer dúvida, reclamação ou solicitação relacionada aos seus dados pessoais pode ser enviada diretamente para o nosso Encarregado de Proteção de Dados através do e-mail oficial: contato@kirisaude.com.br" },
     ],
   },
@@ -40,9 +41,9 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
       { tipo: "destaque", texto: "Comercialização Proibida" },
       { tipo: "p", texto: "A Kiri não vende, não cede, não aluga e não compartilha dados pessoais com terceiros para fins comerciais, publicitários ou de marketing." },
       { tipo: "destaque", texto: "Fluxo de Contato com Profissionais" },
-      { tipo: "p", texto: "Os dados de contato fornecidos pelas famílias serão compartilhados unicamente com o profissional de saúde selecionado pela própria família para viabilizar o agendamento ou contato inicial." },
+      { tipo: "p", texto: "Os dados de contato fornecidos pelas famílias serão compartilhados unicamente com o profissional de saúde selecionado de forma autônoma pela própria família para viabilizar o agendamento ou contato inicial." },
       { tipo: "destaque", texto: "Isenção de Responsabilidade Clínica" },
-      { tipo: "p", texto: "A partir do momento em que o contato é iniciado, o profissional de saúde passa a ser o único e exclusivo Controlador e responsável pelo tratamento dos dados subsequentes, sujeitos ao sigilo profissional e às normas ético-clínicas de seus respectivos conselhos de classe (CFM, CFP, CREFITO, CRFa, etc.). A Kiri não possui acesso, ingerência ou responsabilidade sobre consultas, prontuários ou comunicações externas à plataforma." },
+      { tipo: "p", texto: "A partir do momento em que o contato é iniciado, o profissional de saúde passa a ser o único e exclusivo Controlador e responsável pelo tratamento dos dados subsequentes, os quais estarão integralmente sujeitos ao sigilo profissional e às normas ético-clínicas de seus respectivos conselhos de classe (CFM, CFP, CREFITO, CRFa, CRN, etc.). A Kiri não possui acesso, ingerência ou responsabilidade sobre consultas, prontuários ou comunicações externas à plataforma." },
       { tipo: "destaque", texto: "Cumprimento Legal" },
       { tipo: "p", texto: "Os dados poderão ser compartilhados com autoridades públicas competentes caso haja estrita obrigação legal ou ordem judicial válida." },
     ],
@@ -62,11 +63,11 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     titulo: "5. Direitos dos Titulares de Dados",
     blocos: [
       { tipo: "p", texto: "Em conformidade com o artigo 18 da LGPD, qualquer usuário da plataforma (seja profissional ou responsável legal) pode, a qualquer momento, exercer seus direitos de:" },
-      { tipo: "lista", itens: [
-        "Confirmar a existência de tratamento e acessar seus dados pessoais de forma clara;",
-        "Corrigir dados incompletos, inexatos ou desatualizados;",
-        "Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei;",
-        "Revogar o consentimento previamente fornecido, sendo informado sobre as consequências da negativa (como a impossibilidade de utilizar o fluxo de contato).",
+      { tipo: "alineas", itens: [
+        "(a) Confirmar a existência de tratamento e acessar seus dados pessoais de forma clara;",
+        "(b) Corrigir dados incompletos, inexatos ou desatualizados;",
+        "(c) Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a lei;",
+        "(d) Revogar o consentimento previamente fornecido, sendo informado sobre as consequências da negativa (como a impossibilidade de utilizar o fluxo de contato).",
       ]},
       { tipo: "p", texto: "Para exercer estes direitos, envie uma mensagem para contato@kirisaude.com.br com o assunto \"Direitos LGPD\". Suas solicitações serão analisadas e respondidas gratuitamente no prazo legal de até 15 (quinze) dias." },
     ],
@@ -86,7 +87,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
         "Controle estrito de acessos aos bancos de dados por meio de políticas de segurança a nível de linha (Row Level Security — RLS no Supabase);",
         "Políticas de dupla autenticação (2FA) em todas as ferramentas administrativas.",
       ]},
-      { tipo: "p", texto: "Embora adotemos padrões rígidos de proteção, a segurança absoluta em ambiente de internet não pode ser garantida contra ataques cibernéticos extraordinários. Na remota hipótese de um incidente de segurança que possa acarretar risco ou dano relevante aos titulares, comunicaremos imediatamente os afetados e a Autoridade Nacional de Proteção de Dados (ANPD), nos termos da lei." },
+      { tipo: "p", texto: "Nota de Realidade Digital: Embora adotemos padrões rígidos de proteção, a segurança absoluta em ambiente de internet não pode ser garantida contra ataques cibernéticos extraordinários. Na remota hipótese de um incidente de segurança que possa acarretar risco ou dano relevante aos titulares, comunicaremos imediatamente os afetados e a Autoridade Nacional de Proteção de Dados (ANPD), nos termos da lei." },
     ],
   },
   {
@@ -121,6 +122,17 @@ function Bloco({ bloco }: { bloco: Bloco }) {
           </li>
         ))}
       </ul>
+    );
+  }
+  if (bloco.tipo === "alineas") {
+    return (
+      <div className="flex flex-col gap-2.5 pl-2">
+        {bloco.itens.map((item, i) => (
+          <p key={i} className="text-[15px] md:text-[16px] leading-[1.7] text-cinza-texto m-0">
+            {item}
+          </p>
+        ))}
+      </div>
     );
   }
   const hasEmail = bloco.texto.includes("contato@kirisaude.com.br");
