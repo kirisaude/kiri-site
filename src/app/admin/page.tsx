@@ -46,11 +46,12 @@ function buildWaFamilia(contato: string, nome: string, profissionalId: string): 
   return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 }
 
-function CardEspecifico({ e, expandido, onToggle, onEncaminhar }: {
+function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
   onEncaminhar: (id: string, novoStatus: string) => void;
+  onExcluir: (id: string) => void;
 }) {
   const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
   const temWa = pareceWhatsApp(e.contato);
@@ -135,8 +136,19 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar }: {
             </div>
           )}
 
+          {/* Excluir */}
+          <div className="flex justify-end mt-3">
+            <button
+              type="button"
+              onClick={() => onExcluir(e.id)}
+              className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline"
+            >
+              Excluir formulário
+            </button>
+          </div>
+
           {/* Checkbox de encaminhamento */}
-          <label className={`flex items-center gap-2.5 cursor-pointer mt-4 pt-3.5 border-t border-linha-sutil ${encaminhado ? "mt-3" : ""}`}>
+          <label className={`flex items-center gap-2.5 cursor-pointer mt-2 pt-3.5 border-t border-linha-sutil ${encaminhado ? "mt-3" : ""}`}>
             <input
               type="checkbox"
               checked={encaminhado}
@@ -153,10 +165,11 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar }: {
   );
 }
 
-function CardGeral({ e, expandido, onToggle }: {
+function CardGeral({ e, expandido, onToggle, onExcluir }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
+  onExcluir: (id: string) => void;
 }) {
   return (
     <div className="bg-white border border-linha rounded-[14px] overflow-hidden">
@@ -196,7 +209,17 @@ function CardGeral({ e, expandido, onToggle }: {
               </div>
             )}
           </div>
-          <div className="mt-3 pt-3.5 border-t border-linha-sutil">
+          <div className="flex justify-end mb-2">
+            <button
+              type="button"
+              onClick={() => onExcluir(e.id)}
+              className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline"
+            >
+              Excluir formulário
+            </button>
+          </div>
+
+          <div className="pt-3.5 border-t border-linha-sutil">
             {pareceWhatsApp(e.contato) ? (
               <a
                 href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(`Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`)}`}
@@ -290,6 +313,16 @@ export default function AdminPage() {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),
+    });
+  }
+
+  async function excluirEncaminhamento(id: string) {
+    if (!confirm("Excluir este formulário permanentemente?")) return;
+    setEncaminhamentos((prev) => prev.filter((e) => e.id !== id));
+    await fetch("/api/admin/encaminhamentos", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
     });
   }
 
@@ -456,6 +489,7 @@ export default function AdminPage() {
                         expandido={expandidos.has(e.id)}
                         onToggle={() => toggleExpandido(e.id)}
                         onEncaminhar={atualizarEncaminhamento}
+                        onExcluir={excluirEncaminhamento}
                       />
                     ))}
                 </div>
@@ -482,6 +516,7 @@ export default function AdminPage() {
                           expandido={expandidos.has(e.id)}
                           onToggle={() => toggleExpandido(e.id)}
                           onEncaminhar={atualizarEncaminhamento}
+                          onExcluir={excluirEncaminhamento}
                         />
                       ))}
                   </div>
@@ -508,6 +543,7 @@ export default function AdminPage() {
                       e={e}
                       expandido={expandidos.has(e.id)}
                       onToggle={() => toggleExpandido(e.id)}
+                      onExcluir={excluirEncaminhamento}
                     />
                   ))}
                 </div>
