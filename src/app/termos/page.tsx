@@ -19,7 +19,11 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
     titulo: "2. Natureza e Limitações do Serviço",
     blocos: [
       { tipo: "destaque", texto: "O que a Kiri disponibiliza" },
-      { tipo: "p", texto: "(a) Acesso a uma listagem organizada de profissionais de saúde que atendem aos critérios objetivos de verificação de regularidade documental da plataforma; (b) Uma ferramenta tecnológica de mensageria para que o próprio usuário, por sua livre escolha, envie sua demanda inicial diretamente ao especialista escolhido; e (c) Conteúdos informativos de caráter estritamente educativo, sem qualquer caráter de recomendação individualizada." },
+      { tipo: "lista", itens: [
+        "(a) Acesso a uma listagem organizada de profissionais de saúde que atendem aos critérios objetivos de verificação de regularidade documental da plataforma;",
+        "(b) Uma ferramenta tecnológica de mensageria para que o próprio usuário, por sua livre escolha, envie sua demanda inicial diretamente ao especialista escolhido; e",
+        "(c) Conteúdos informativos de caráter estritamente educativo, sem qualquer caráter de recomendação individualizada.",
+      ]},
       { tipo: "destaque", texto: "O que a Kiri NÃO realiza" },
       { tipo: "p", texto: "Avaliações clínicas, consultas, triagens diagnósticas, indicação imperativa de condutas, prescrições médicas ou terapêuticas, emissão de laudos, exames ou qualquer outro ato privativo de profissionais de saúde legalmente habilitados." },
       { tipo: "destaque", texto: "Inexistência de Aconselhamento" },
@@ -36,13 +40,17 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "4. Ausência de Garantia de Resultados Clínicos",
     blocos: [
-      { tipo: "p", texto: "O usuário declara estar ciente de que as condições ligadas ao neurodesenvolvimento infantil (como o TEA e o TDAH) possuem alta variabilidade individual e demandam acompanhamento especializado, contínuo e eminentemente multidisciplinar. A Kiri atua como mero facilitador de busca de contatos e, por isso, não garante, não promete e não assegura qualquer resultado clínico, melhora, eficácia de abordagens terapêuticas ou prognóstico específico." },
+      { tipo: "p", texto: "O usuário declara estar ciente de que as condições ligadas ao neurodesenvolvimento infantil (como o TEA e o TDAH) possuem alta variabilidade individual e demandam acompanhamento especializado, contínuo e necessariamente multidisciplinar. A Kiri atua como mero facilitador de busca de contatos e, por isso, não garante, não promete e não assegura qualquer resultado clínico, melhora, eficácia de abordagens terapêuticas ou prognóstico específico." },
     ],
   },
   {
     titulo: "5. Parâmetros do Selo \"Verificado\"",
     blocos: [
-      { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (explicitada no perfil do profissional), o especialista apresentou documentos válidos que comprovavam: (a) registro ativo e regular perante o seu respectivo conselho de classe profissional; e (b) titulação, especialização ou formação declarada condizente com o escopo da plataforma." },
+      { tipo: "p", texto: "O selo \"Verificado\" exibido nos perfis dos profissionais atesta exclusivamente que, na data da última checagem periódica realizada pela plataforma (explicitada no perfil do profissional), o especialista apresentou documentos válidos que comprovavam:" },
+      { tipo: "lista", itens: [
+        "(a) registro ativo e regular perante o seu respectivo conselho de classe profissional; e",
+        "(b) titulação, especialização ou formação declarada condizente com o escopo da plataforma.",
+      ]},
       { tipo: "destaque", texto: "Exclusão de Monitoramento em Tempo Real" },
       { tipo: "p", texto: "Esta verificação é um procedimento meramente burocrático, pontual e periódico. A Kiri não monitora em tempo real e não responde por alterações supervenientes de status profissional, suspensões de registro, cassações, processos éticos em andamento (visto que correm sob sigilo legal nos conselhos de classe) ou encerramento de atividades ocorridos após a data da última checagem. É dever e responsabilidade do usuário confirmar a regularidade atual do profissional perante o respectivo conselho antes do início de qualquer ato clínico." },
     ],
@@ -50,7 +58,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "6. Exclusão de Responsabilidade Civil da Plataforma",
     blocos: [
-      { tipo: "p", texto: "Na máxima extensão permitida pela legislação brasileira aplicável, por atuar estritamente como provedora de tecnologia e busca (inteligência do art. 18 e 19 do Marco Civil da Internet e diretrizes do CDC), a Kiri não responde por:" },
+      { tipo: "p", texto: "Na máxima extensão permitida pela legislação brasileira aplicável, por atuar estritamente como provedora de tecnologia e busca (nos termos dos artigos 18 e 19 do Marco Civil da Internet e diretrizes do Código de Defesa do Consumidor), a Kiri não responde por:" },
       { tipo: "lista", itens: [
         "Quaisquer danos decorrentes de indisponibilidades técnicas temporárias, instabilidades de rede ou manutenção da plataforma;",
         "Atos de imperícia, imprudência, negligência, erro de diagnóstico, quebra de sigilo profissional ou quebras contratuais cometidas pelos profissionais de saúde contatados pelo usuário;",
@@ -91,7 +99,7 @@ function Bloco({ bloco }: { bloco: Bloco }) {
       <ul className="flex flex-col gap-2 pl-1">
         {bloco.itens.map((item, i) => (
           <li key={i} className="flex gap-2.5 text-[15px] md:text-[16px] leading-[1.7] text-cinza-texto">
-            <span className="text-muted mt-[2px] flex-shrink-0">—</span>
+            <span className="text-muted mt-[3px] flex-shrink-0 text-[10px]">●</span>
             <span>{item}</span>
           </li>
         ))}
