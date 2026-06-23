@@ -240,7 +240,7 @@ function FormularioContent() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-semibold text-carvao">
-              O que você procura?
+              O que você procura? <span className="text-ferrugem">*</span>
             </label>
             <textarea
               value={observacoes}
@@ -280,7 +280,7 @@ function FormularioContent() {
 
           <button
             type="submit"
-            disabled={enviando || !consentimento || !nome || !contato || !modalidade}
+            disabled={enviando || !consentimento || !nome || !contato || !modalidade || !observacoes.trim()}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
