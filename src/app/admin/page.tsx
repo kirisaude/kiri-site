@@ -196,9 +196,29 @@ function CardGeral({ e, expandido, onToggle }: {
               </div>
             )}
           </div>
-          <p className="mt-3 text-[12px] text-muted">
-            Requer análise para direcionamento — contato: <strong className="text-cinza-texto">{e.contato}</strong>
-          </p>
+          <div className="mt-3 pt-3.5 border-t border-linha-sutil">
+            {pareceWhatsApp(e.contato) ? (
+              <a
+                href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(`Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[12px] no-underline"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
+                </svg>
+                Responder via WhatsApp
+              </a>
+            ) : (
+              <a
+                href={`mailto:${e.contato}?subject=Kiri — Retorno sobre sua busca&body=Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`}
+                className="flex items-center justify-center gap-2 w-full bg-ardosia-escura text-white font-semibold text-[14px] rounded-[11px] py-[12px] no-underline"
+              >
+                Responder por e-mail
+              </a>
+            )}
+          </div>
         </div>
       )}
     </div>
