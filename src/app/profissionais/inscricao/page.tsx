@@ -196,7 +196,7 @@ export default function InscricaoProfissionalPage() {
 
           {/* Áreas */}
           <div className="flex flex-col gap-2">
-            <label className={labelClass}>Áreas de atuação</label>
+            <label className={labelClass}>Áreas de atuação <span className="text-ferrugem">*</span></label>
             <div className="flex flex-wrap gap-2">
               {AREAS.map((area) => (
                 <button key={area} type="button" onClick={() => toggleArea(area)}
@@ -209,7 +209,7 @@ export default function InscricaoProfissionalPage() {
 
           {/* Faixa etária */}
           <div className="flex flex-col gap-2">
-            <label className={labelClass}>Faixa etária atendida</label>
+            <label className={labelClass}>Faixa etária atendida <span className="text-ferrugem">*</span></label>
             <div className="flex flex-wrap gap-2">
               {FAIXAS.map((faixa) => (
                 <button key={faixa} type="button" onClick={() => toggleFaixa(faixa)}
@@ -222,7 +222,7 @@ export default function InscricaoProfissionalPage() {
 
           {/* Modalidade */}
           <div className="flex flex-col gap-2">
-            <label className={labelClass}>Modalidade de atendimento</label>
+            <label className={labelClass}>Modalidade de atendimento <span className="text-ferrugem">*</span></label>
             <div className="flex gap-2 flex-wrap">
               {["Presencial", "Online", "Presencial e online"].map((op) => (
                 <button key={op} type="button" onClick={() => setModalidade(modalidade === op ? "" : op)}
@@ -327,7 +327,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade}
+          <button type="submit" disabled={enviando || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
