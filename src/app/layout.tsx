@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/kiri-og.png",
+        url: "/kiri-og.png?v=2",
         width: 1200,
         height: 630,
       },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
     description:
       "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
-    images: ["/kiri-og.png"],
+    images: ["/kiri-og.png?v=2"],
   },
 };
 
