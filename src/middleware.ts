@@ -20,7 +20,10 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
     pathname.startsWith("/icon") ||
-    pathname.startsWith("/opengraph")
+    pathname.startsWith("/opengraph") ||
+    pathname.startsWith("/kiri-og") ||
+    pathname.startsWith("/kiri-icon") ||
+    /\.(png|jpg|jpeg|svg|ico|webp)$/.test(pathname)
   ) {
     return NextResponse.next();
   }
