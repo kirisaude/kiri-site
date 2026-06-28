@@ -1,4 +1,4 @@
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoFull } from "@/components/KiriLogoFull";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 
@@ -14,10 +14,7 @@ export default function SobrePage() {
 
         {/* Logo centralizado */}
         <div className="px-[26px] pt-[22px] flex flex-col items-center text-center">
-          <KiriLogo size={88} />
-          <div className="font-serif text-[36px] font-medium text-ferrugem tracking-[-0.01em] mt-3.5">
-            Kiri
-          </div>
+          <KiriLogoFull height={80} />
         </div>
 
         {/* Manifesto */}

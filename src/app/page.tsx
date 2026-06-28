@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import { SeloMini } from "@/components/SeloVerificado";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
@@ -92,8 +93,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-3.5 flex items-center gap-3 md:gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-none no-underline">
-            <KiriLogo size={30} />
-            <span className="font-serif text-[26px] font-semibold text-ferrugem leading-none">Kiri</span>
+            <KiriLogoCompact height={38} />
           </Link>
 
           {/* Search — desktop only, in header */}
@@ -116,27 +116,7 @@ export default function Home() {
 
           {/* Right side */}
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
-            <button
-              onClick={() => setActiveCidade(activeCidade === "São Paulo" ? null : "São Paulo")}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 cursor-pointer border transition-colors ${
-                activeCidade === "São Paulo"
-                  ? "bg-ardosia-escura border-ardosia text-white"
-                  : "bg-white border-linha text-cinza-texto"
-              }`}
-            >
-              {activeCidade === "São Paulo" ? (
-                <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
-                  <line x1="4" y1="4" x2="16" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <line x1="16" y1="4" x2="4" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              ) : (
-                <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
-                  <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#6E8893" strokeWidth="1.6" strokeLinejoin="round" />
-                  <circle cx="10" cy="7.6" r="2.1" stroke="#6E8893" strokeWidth="1.6" />
-                </svg>
-              )}
-              <span className="text-[13px] md:text-[15px] font-semibold">São Paulo</span>
-            </button>
+
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
             </Link>

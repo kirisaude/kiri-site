@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 
 interface Inscricao {
   id: string;
@@ -182,8 +182,7 @@ export default function RevisarPage() {
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center gap-3">
         <Link href="/admin" className="text-[13px] font-semibold text-ardosia no-underline">← Admin</Link>
         <div className="flex items-center gap-2 ml-auto">
-          <KiriLogo size={22} />
-          <span className="font-serif text-[17px] font-medium text-ferrugem">Revisar inscrição</span>
+          <KiriLogoCompact height={28} />
         </div>
       </header>
 

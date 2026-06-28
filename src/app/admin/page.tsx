@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
@@ -411,8 +411,7 @@ export default function AdminPage() {
       <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
         <div className="flex flex-col items-center gap-6 w-full max-w-[320px]">
           <div className="flex items-center gap-2.5">
-            <KiriLogo size={28} />
-            <span className="font-serif text-[22px] font-medium text-ferrugem">Admin</span>
+            <KiriLogoCompact height={34} />
           </div>
           <form onSubmit={login} className="w-full flex flex-col gap-3">
             <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)}
@@ -440,8 +439,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-creme">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <KiriLogo size={24} />
-          <span className="font-serif text-[18px] font-medium text-ferrugem">Admin</span>
+          <KiriLogoCompact height={28} />
         </div>
         <button onClick={buscarDados} className="text-[13px] font-semibold text-ardosia cursor-pointer">
           {buscando ? "Atualizando…" : "↻ Atualizar"}

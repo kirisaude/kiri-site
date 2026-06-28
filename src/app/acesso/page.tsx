@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 
 export default function AcessoPage() {
   const [senha, setSenha] = useState("");
@@ -34,8 +34,7 @@ export default function AcessoPage() {
     <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
       <div className="flex flex-col items-center gap-6 w-full max-w-[340px]">
         <div className="flex items-center gap-3">
-          <KiriLogo size={28} />
-          <span className="font-serif text-[24px] font-medium text-ferrugem leading-none">Kiri</span>
+          <KiriLogoCompact height={38} />
         </div>
 
         <p className="text-[14px] text-cinza-texto text-center leading-[1.55]">

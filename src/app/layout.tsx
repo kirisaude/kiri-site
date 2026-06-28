@@ -25,22 +25,38 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kirisaude.com.br"),
-  title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
+  title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
   description:
-    "Diretório curado de profissionais de neurodesenvolvimento infantil especializados em TEA e TDAH. Formação verificada, contato pela Kiri.",
+    "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+  icons: {
+    icon: [
+      { url: "/kiri-icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: { url: "/kiri-icon-512.png", sizes: "512x512", type: "image/png" },
+  },
   openGraph: {
-    title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
+    title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
     description:
-      "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
+      "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+    url: "https://kirisaude.com.br",
     siteName: "Kiri",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "/kiri-og.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiri — Rede de cuidado ao neurodesenvolvimento infantil",
+    title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
     description:
-      "Encontre o profissional certo para o desenvolvimento do seu filho. Formação verificada, contato pela Kiri.",
+      "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+    images: ["/kiri-og.png"],
   },
 };
 

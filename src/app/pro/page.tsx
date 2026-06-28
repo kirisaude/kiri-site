@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
 
@@ -48,8 +48,7 @@ export default function ProPage() {
       <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
         <div className="flex flex-col items-center gap-6 w-full max-w-[320px]">
           <div className="flex flex-col items-center gap-2">
-            <KiriLogo size={32} />
-            <span className="font-serif text-[22px] font-medium text-ferrugem">Rede Kiri</span>
+            <KiriLogoCompact height={36} />
             <p className="text-[13px] text-muted text-center leading-[1.5]">
               Acesso exclusivo para profissionais da rede
             </p>
@@ -86,8 +85,7 @@ export default function ProPage() {
     <div className="min-h-screen bg-creme">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <KiriLogo size={22} />
-          <span className="font-serif text-[17px] font-medium text-ferrugem">Rede Kiri</span>
+          <KiriLogoCompact height={28} />
         </div>
         <span className="text-[12px] text-muted ml-auto">{profissionais.length} profissionais</span>
       </header>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
-import { KiriLogo } from "@/components/KiriLogo";
+import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { valorDisplay } from "@/types";
@@ -33,8 +33,7 @@ export default async function CardPage({ params }: { params: Promise<{ token: st
 
         {/* Header Kiri */}
         <div className="flex items-center justify-center gap-2 mb-8">
-          <KiriLogo size={20} />
-          <span className="font-serif text-[18px] font-semibold text-ferrugem tracking-[-0.01em]">Kiri</span>
+          <KiriLogoCompact height={30} />
         </div>
 
         {/* Card principal */}
