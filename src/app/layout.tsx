@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kirisaude.com.br"),
-  title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
+  title: "Kiri — rede de cuidado ao neurodesenvolvimento",
   description:
     "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
   icons: {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     apple: { url: "/kiri-icon-512.png", sizes: "512x512", type: "image/png" },
   },
   openGraph: {
-    title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
+    title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
       "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
     url: "https://kirisaude.com.br",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/kiri-og.png?v=2",
+        url: "/kiri-og-2.png",
         width: 1200,
         height: 630,
       },
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiri — rede selecionada de neurodesenvolvimento infantil",
+    title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
       "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
-    images: ["/kiri-og.png?v=2"],
+    images: ["/kiri-og-2.png"],
   },
 };
 
