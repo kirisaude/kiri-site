@@ -12,6 +12,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/acesso") ||
     pathname.startsWith("/api/acesso") ||
+    pathname.startsWith("/api/inscricao") ||
     pathname.startsWith("/card") ||
     pathname.startsWith("/profissional") ||
     pathname.startsWith("/profissionais") ||
