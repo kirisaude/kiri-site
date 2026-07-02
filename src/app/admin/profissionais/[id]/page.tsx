@@ -70,7 +70,7 @@ export default function EditarProfissionalPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          profissional_id: profOriginal.id,
+          profissional_id: id,
           filename: file.name,
           content_base64: base64,
         }),
@@ -99,7 +99,7 @@ export default function EditarProfissionalPage() {
     const valorMaxNum = valorMax ? parseInt(valorMax.replace(/\D/g, ""), 10) : null;
 
     const payload: Partial<Profissional> & { id: string } = {
-      id: profOriginal.id,
+      id,
       nome: nome.trim(),
       profissao: profissao.trim(),
       titulo_exibicao: tituloExibicao.trim(),
