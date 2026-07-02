@@ -1,9 +1,31 @@
 interface PlaceholderPhotoProps {
   size?: number;
   radius?: number;
+  url?: string | null;
 }
 
-export function PlaceholderPhoto({ size = 46, radius = 11 }: PlaceholderPhotoProps) {
+export function PlaceholderPhoto({ size = 46, radius = 11, url }: PlaceholderPhotoProps) {
+  if (url) {
+    return (
+      <div
+        style={{
+          width: size,
+          height: size,
+          borderRadius: radius,
+          flexShrink: 0,
+          overflow: "hidden",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={url}
+          alt=""
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       style={{

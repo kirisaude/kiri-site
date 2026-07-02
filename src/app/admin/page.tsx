@@ -788,6 +788,12 @@ export default function AdminPage() {
                           >
                             Ver ↗
                           </Link>
+                          <Link
+                            href={`/admin/profissionais/${p.id}`}
+                            className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline"
+                          >
+                            Editar
+                          </Link>
                           <button
                             type="button"
                             disabled={excluindo === p.id}

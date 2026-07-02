@@ -53,7 +53,7 @@ export default async function PerfilPage({ params }: PageProps) {
           <div className="md:sticky md:top-6">
             {/* Cabeçalho centralizado */}
             <div className="flex flex-col items-center text-center pt-2 md:pt-0">
-              <PlaceholderPhoto size={100} radius={24} />
+              <PlaceholderPhoto size={100} radius={24} url={p.foto_url} />
 
               <div className="flex items-center gap-[7px] mt-[14px]">
                 <span className="font-serif text-[25px] md:text-[27px] font-semibold text-carvao leading-[1.1]">{p.nome}</span>

@@ -8,7 +8,7 @@ import { valorDisplay } from "@/types";
 const profissionais = data.profissionais as Profissional[];
 
 export function generateStaticParams() {
-  return profissionais.map((p) => ({ token: p.card_token }));
+  return profissionais.filter((p) => !!p.card_token).map((p) => ({ token: p.card_token }));
 }
 
 function buildWaUrl(numero: string, nome: string): string {
@@ -41,7 +41,7 @@ export default async function CardPage({ params }: { params: Promise<{ token: st
 
           {/* Cabeçalho do profissional */}
           <div className="flex flex-col items-center text-center px-6 pt-8 pb-6 border-b border-linha-sutil">
-            <PlaceholderPhoto size={88} radius={20} />
+            <PlaceholderPhoto size={88} radius={20} url={p.foto_url} />
             <h1 className="font-serif text-[22px] font-semibold text-carvao mt-4 leading-[1.2]">
               {p.nome}
             </h1>

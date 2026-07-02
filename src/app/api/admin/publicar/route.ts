@@ -70,6 +70,9 @@ export async function POST(request: Request) {
   const proximoNum = ids.length > 0 ? Math.max(...ids) + 1 : 1;
   novoProfissional.id = `kiri-${String(proximoNum).padStart(3, "0")}`;
   novoProfissional.verificado = true;
+  if (!novoProfissional.card_token) {
+    novoProfissional.card_token = crypto.randomUUID().replace(/-/g, "").slice(0, 16);
+  }
 
   // Adiciona e serializa
   conteudoAtual.profissionais.push(novoProfissional);
