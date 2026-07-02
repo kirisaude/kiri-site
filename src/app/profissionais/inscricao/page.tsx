@@ -66,39 +66,48 @@ export default function InscricaoProfissionalPage() {
     setEnviando(true);
     setErro("");
 
-    const res = await fetch("/api/inscricao", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nome: nome.trim(),
-        profissao: profissao.trim(),
-        registro_conselho: registroConselho.trim(),
-        rqe: rqe.trim() || null,
-        tempo_atuacao: tempoAtuacao || null,
-        areas_atuacao: areasAtuacao.join(", ") || null,
-        faixa_etaria: faixaEtaria.join(", ") || null,
-        modalidade: modalidade || null,
-        cidade: cidade.trim() || null,
-        valor_medio: valorMedio.trim() || null,
-        aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
-        graduacao: graduacao.trim() || null,
-        pos_graduacao: posGraduacao.trim() || null,
-        apresentacao: apresentacao.trim() || null,
-        site_perfil: sitePerfil.trim() || null,
-        como_conheceu: comoConheceu.trim() || null,
-        whatsapp_agendamento: whatsappAgendamento.trim() || null,
-        grupo_whatsapp: grupoWhatsapp,
-        consentimento: true,
-      }),
-    });
+    try {
+      const res = await fetch("/api/inscricao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: nome.trim(),
+          profissao: profissao.trim(),
+          registro_conselho: registroConselho.trim(),
+          rqe: rqe.trim() || null,
+          tempo_atuacao: tempoAtuacao || null,
+          areas_atuacao: areasAtuacao.join(", ") || null,
+          faixa_etaria: faixaEtaria.join(", ") || null,
+          modalidade: modalidade || null,
+          cidade: cidade.trim() || null,
+          valor_medio: valorMedio.trim() || null,
+          aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
+          graduacao: graduacao.trim() || null,
+          pos_graduacao: posGraduacao.trim() || null,
+          apresentacao: apresentacao.trim() || null,
+          site_perfil: sitePerfil.trim() || null,
+          como_conheceu: comoConheceu.trim() || null,
+          whatsapp_agendamento: whatsappAgendamento.trim() || null,
+          grupo_whatsapp: grupoWhatsapp,
+          consentimento: true,
+        }),
+      });
 
-    if (res.ok) {
-      setEnviado(true);
-    } else {
-      const data = await res.json();
-      setErro(data.erro ?? "Ocorreu um erro. Tente novamente.");
+      if (res.ok) {
+        setEnviado(true);
+      } else {
+        let mensagem = "Ocorreu um erro. Tente novamente.";
+        try {
+          const data = await res.json();
+          mensagem = data.erro ?? mensagem;
+        } catch { /* resposta não-JSON */ }
+        setErro(mensagem);
+      }
+    } catch {
+      setErro("Erro de conexão. Verifique sua internet e tente novamente.");
+    } finally {
+      setEnviando(false);
     }
-    setEnviando(false);
   }
 
   if (enviado) {
