@@ -30,6 +30,7 @@ export default function InscricaoProfissionalPage() {
   const [tempoAtuacao, setTempoAtuacao] = useState("");
   const [modalidade, setModalidade] = useState("");
   const [cidade, setCidade] = useState("");
+  const [bairro, setBairro] = useState("");
   const [valorMedio, setValorMedio] = useState("");
   const [aceitaConvenio, setAceitaConvenio] = useState("");
   const [graduacao, setGraduacao] = useState("");
@@ -80,6 +81,7 @@ export default function InscricaoProfissionalPage() {
           faixa_etaria: faixaEtaria.join(", ") || null,
           modalidade: modalidade || null,
           cidade: cidade.trim() || null,
+          bairro: bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
           graduacao: graduacao.trim() || null,
@@ -273,7 +275,12 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Cidade de atendimento presencial <span className="text-ferrugem">*</span></label>
-            <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Ex: São Paulo, SP — Pinheiros" className={inputClass} />
+            <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Ex: São Paulo, SP" className={inputClass} />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>Bairro <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+            <input type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} placeholder="Ex: Pinheiros" className={inputClass} />
           </div>
 
           <div className="flex flex-col gap-1.5">

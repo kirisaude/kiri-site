@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const {
     nome, profissao, registro_conselho, rqe, tempo_atuacao,
-    areas_atuacao, faixa_etaria, modalidade, cidade,
+    areas_atuacao, faixa_etaria, modalidade, cidade, bairro,
     valor_medio, aceita_convenio, graduacao, pos_graduacao,
     apresentacao, site_perfil, como_conheceu, whatsapp_agendamento,
     grupo_whatsapp, consentimento,
@@ -37,6 +37,7 @@ export async function POST(request: Request) {
       faixa_etaria: faixa_etaria || null,
       modalidade: modalidade || null,
       cidade: cidade || null,
+      bairro: bairro || null,
       valor_medio: valor_medio || null,
       aceita_convenio: aceita_convenio ?? null,
       graduacao: graduacao || null,
