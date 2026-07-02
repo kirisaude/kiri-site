@@ -12,6 +12,7 @@ interface Inscricao {
   profissao: string;
   registro_conselho: string;
   rqe: string | null;
+  tempo_atuacao: string | null;
   areas_atuacao: string | null;
   faixa_etaria: string | null;
   modalidade: string | null;
@@ -195,6 +196,7 @@ export default function RevisarPage() {
               ["Profissão", inscricao.profissao],
               ["Registro", inscricao.registro_conselho],
               ["RQE", inscricao.rqe],
+              ["Tempo de atuação", inscricao.tempo_atuacao],
               ["Áreas", inscricao.areas_atuacao],
               ["Faixa etária", inscricao.faixa_etaria],
               ["Modalidade", inscricao.modalidade],
