@@ -13,9 +13,23 @@ import { Footer } from "@/components/Footer";
 
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
-const CIDADES_DISPONIVEIS = [...new Set(
-  profissionais.map((p) => cidadeCurta(p.cidade)).filter(Boolean)
-)].sort();
+
+function normCidade(s: string) {
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+}
+
+// Deduplica por nome normalizado; para cada grupo, mantém a versão mais completa (mais longa)
+const CIDADES_DISPONIVEIS = (() => {
+  const mapa = new Map<string, string>();
+  for (const p of profissionais) {
+    const curta = cidadeCurta(p.cidade);
+    if (!curta) continue;
+    const chave = normCidade(curta);
+    const atual = mapa.get(chave);
+    if (!atual || curta.length > atual.length) mapa.set(chave, curta);
+  }
+  return [...mapa.values()].sort();
+})();
 
 function EmBreve() {
   return (
@@ -63,7 +77,7 @@ export default function Home() {
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
-      if (activeCidade && !p.cidade.toLowerCase().includes(activeCidade.toLowerCase())) return false;
+      if (activeCidade && !normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
       if (activePagamento) {
         const conv = p.convenio_info.toLowerCase();
         if (activePagamento === "Particular" && conv.includes("não aceita")) return false;

@@ -9,6 +9,7 @@ import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
 
 const CONVENIOS_COMUNS = ["Unimed", "Bradesco Saúde", "Amil", "SulAmérica", "Notre Dame Intermédica", "Hapvida", "Porto Seguro Saúde", "Prevent Senior", "Golden Cross"];
+const TEMPO_ATUACAO_OPCOES = ["Menos de 1 ano", "1 a 3 anos", "3 a 5 anos", "Mais de 5 anos"];
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -25,7 +26,11 @@ export default function EditarProfissionalPage() {
   const [rqe, setRqe] = useState(profOriginal?.rqe ?? "");
   const [areas, setAreas] = useState(profOriginal?.areas_atuacao.join(", ") ?? "");
   const [modalidade, setModalidade] = useState(profOriginal?.modalidade ?? "");
-  const [cidade, setCidade] = useState(profOriginal?.cidade ?? "");
+  const [tempoAtuacao, setTempoAtuacao] = useState(profOriginal?.tempo_atuacao ?? "");
+  const _cidadeRaw = profOriginal?.cidade ?? "";
+  const _cidadePartes = _cidadeRaw.split(" — ");
+  const [cidadeBase, setCidadeBase] = useState(_cidadePartes[0]?.trim() ?? "");
+  const [bairro, setBairro] = useState(_cidadePartes[1]?.trim() ?? "");
   const [faixaEtaria, setFaixaEtaria] = useState(profOriginal?.faixa_etaria ?? "");
   const [sobre, setSobre] = useState(profOriginal?.sobre ?? "");
   const [valorFormato, setValorFormato] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato ?? "a_partir_de");
@@ -118,8 +123,9 @@ export default function EditarProfissionalPage() {
       rqe: rqe.trim() || null,
       areas_atuacao: areasLista,
       modalidade: modalidade.trim(),
-      cidade: cidade.trim(),
+      cidade: bairro.trim() ? `${cidadeBase.trim()} — ${bairro.trim()}` : cidadeBase.trim(),
       faixa_etaria: faixaEtaria.trim(),
+      tempo_atuacao: tempoAtuacao || null,
       sobre: sobre.trim(),
       formacao: formacao.filter((f) => f.curso || f.instituicao_ano),
       valor_formato: valorFormato,
@@ -235,7 +241,6 @@ export default function EditarProfissionalPage() {
             { label: "RQE (só médicos — deixe vazio se não se aplica)", value: rqe, set: setRqe },
             { label: "Áreas de atuação (separadas por vírgula)", value: areas, set: setAreas, required: true },
             { label: "Modalidade", value: modalidade, set: setModalidade, required: true },
-            { label: "Cidade e bairro", value: cidade, set: setCidade, required: true },
             { label: "Faixa etária", value: faixaEtaria, set: setFaixaEtaria, required: true },
             { label: "Convênio e pagamento", value: convenio, set: setConvenio, required: true },
             { label: "WhatsApp para agendamento (privado)", value: whatsapp, set: setWhatsapp },
@@ -252,6 +257,50 @@ export default function EditarProfissionalPage() {
               />
             </div>
           ))}
+
+          {/* Cidade e bairro */}
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Cidade de atendimento</label>
+            <input
+              type="text"
+              value={cidadeBase}
+              onChange={(e) => setCidadeBase(e.target.value)}
+              required
+              placeholder="Ex: São Paulo, SP"
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">
+              Bairro <span className="text-[11px] text-muted">(opcional)</span>
+            </label>
+            <input
+              type="text"
+              value={bairro}
+              onChange={(e) => setBairro(e.target.value)}
+              placeholder="Ex: Pinheiros"
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+            />
+          </div>
+
+          {/* Tempo de atuação — campo interno */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[12.5px] font-medium text-cinza-texto">
+              Tempo de atuação <span className="text-[11px] text-muted">(interno — não aparece no perfil público)</span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {TEMPO_ATUACAO_OPCOES.map((op) => (
+                <button
+                  key={op}
+                  type="button"
+                  onClick={() => setTempoAtuacao((prev) => (prev === op ? "" : op))}
+                  className={`px-3 py-1.5 rounded-[8px] text-[13px] font-medium border transition-colors cursor-pointer ${tempoAtuacao === op ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
+                >
+                  {op}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Valor */}
           <div className="flex flex-col gap-2">
