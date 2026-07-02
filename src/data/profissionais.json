@@ -763,13 +763,14 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": 28000,
+      "valor_min": 280,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "whatsapp_agendamento": "11911097447",
       "verificado": true,
       "foto_url": null,
-      "verificacao_data": "julho de 2026"
+      "verificacao_data": "julho de 2026",
+      "card_token": "ac7d5ad5908c4ecf"
     }
   ]
 }
