@@ -685,7 +685,7 @@ export default function Home() {
             {/* Ações */}
             <div className="px-5 py-4 flex flex-col gap-2.5">
               <a
-                href={`https://wa.me/?text=${encodeURIComponent("Conhece a Kiri?\n\nÉ uma plataforma de profissionais *verificados* para TEA, TDAH e neurodesenvolvimento infantil — com psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais.\n\nCada registro no conselho é conferido um a um. Sem lista infinita.\n\nkirisaude.com.br")}`}
+                href={`https://wa.me/?text=${encodeURIComponent("https://kirisaude.com.br")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold text-[15px] rounded-[13px] py-[14px] no-underline"
