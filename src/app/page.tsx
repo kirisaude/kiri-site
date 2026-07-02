@@ -13,6 +13,9 @@ import { Footer } from "@/components/Footer";
 
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
+const CIDADES_DISPONIVEIS = [...new Set(
+  profissionais.map((p) => cidadeCurta(p.cidade)).filter(Boolean)
+)].sort();
 
 function EmBreve() {
   return (
@@ -371,7 +374,7 @@ export default function Home() {
         {/* Opções inline de cidade */}
         {showCidadeOptions && (
           <div className="pt-2 flex flex-wrap gap-2">
-            {["São Paulo"].map((c) => (
+            {CIDADES_DISPONIVEIS.map((c) => (
               <button
                 key={c}
                 onClick={() => { setActiveCidade(activeCidade === c ? null : c); setShowCidadeOptions(false); }}
