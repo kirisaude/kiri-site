@@ -20,6 +20,7 @@ export interface Profissional {
   valor_min: number;
   valor_max: number | null;
   convenio_info: string;
+  convenios?: string[] | null;
   verificado: boolean;
   verificacao_data: string;
   foto_url: string | null;

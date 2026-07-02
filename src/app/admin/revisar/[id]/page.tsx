@@ -130,6 +130,7 @@ export default function RevisarPage() {
       valor_min: isNaN(valorNum) ? null : valorNum,
       valor_max: null,
       convenio_info: convenio.trim(),
+      convenios: null,
       whatsapp_agendamento: whatsappAgendamento.trim() || null,
       verificado: true,
       foto_url: null,

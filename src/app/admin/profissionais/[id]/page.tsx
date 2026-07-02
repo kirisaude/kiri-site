@@ -8,6 +8,8 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
 
+const CONVENIOS_COMUNS = ["Unimed", "Bradesco Saúde", "Amil", "SulAmérica", "Notre Dame Intermédica", "Hapvida", "Porto Seguro Saúde", "Prevent Senior", "Golden Cross"];
+
 const profissionais = data.profissionais as Profissional[];
 
 export default function EditarProfissionalPage() {
@@ -35,6 +37,8 @@ export default function EditarProfissionalPage() {
   const [formacao, setFormacao] = useState(
     profOriginal?.formacao.length ? profOriginal.formacao : [{ curso: "", instituicao_ano: "" }]
   );
+  const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
+  const [convenioCustom, setConvenioCustom] = useState("");
   const [fotoUrl, setFotoUrl] = useState(profOriginal?.foto_url ?? "");
   const [fotoPreview, setFotoPreview] = useState<string | null>(profOriginal?.foto_url ?? null);
   const [uploadandoFoto, setUploadandoFoto] = useState(false);
@@ -53,6 +57,13 @@ export default function EditarProfissionalPage() {
         </div>
       </div>
     );
+  }
+
+  function adicionarConvenio() {
+    const termo = convenioCustom.trim();
+    if (!termo) return;
+    if (!convenios.includes(termo)) setConvenios((prev) => [...prev, termo]);
+    setConvenioCustom("");
   }
 
   async function handleFotoChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -115,6 +126,7 @@ export default function EditarProfissionalPage() {
       valor_min: isNaN(valorMinNum) ? 0 : valorMinNum,
       valor_max: valorMaxNum && !isNaN(valorMaxNum) ? valorMaxNum : null,
       convenio_info: convenio.trim(),
+      convenios: convenios.length ? convenios : null,
       whatsapp_agendamento: whatsapp.trim() || null,
       verificacao_data: verificacaoData.trim(),
       foto_url: fotoUrl || null,
@@ -340,6 +352,54 @@ export default function EditarProfissionalPage() {
             >
               + Adicionar linha
             </button>
+          </div>
+
+          {/* Convênios */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[12.5px] font-medium text-cinza-texto">
+              Convênios atendidos <span className="text-[11px] text-muted">(opcional)</span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {CONVENIOS_COMUNS.map((conv) => (
+                <button
+                  key={conv}
+                  type="button"
+                  onClick={() => setConvenios((prev) => prev.includes(conv) ? prev.filter((c) => c !== conv) : [...prev, conv])}
+                  className={`px-3 py-1.5 rounded-[8px] text-[13px] font-medium border transition-colors cursor-pointer ${convenios.includes(conv) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
+                >
+                  {conv}
+                </button>
+              ))}
+              {convenios.filter((c) => !CONVENIOS_COMUNS.includes(c)).map((conv) => (
+                <button
+                  key={conv}
+                  type="button"
+                  onClick={() => setConvenios((prev) => prev.filter((c) => c !== conv))}
+                  className="px-3 py-1.5 rounded-[8px] text-[13px] font-medium border bg-ardosia-escura text-white border-ardosia-escura cursor-pointer flex items-center gap-1.5"
+                >
+                  {conv}
+                  <span className="text-white/70 text-[15px] leading-none">×</span>
+                </button>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={convenioCustom}
+                onChange={(e) => setConvenioCustom(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); adicionarConvenio(); } }}
+                placeholder="Outro convênio…"
+                className="flex-1 border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+              />
+              <button
+                type="button"
+                onClick={adicionarConvenio}
+                disabled={!convenioCustom.trim()}
+                className="px-4 py-[10px] rounded-[10px] text-[13.5px] font-semibold bg-ardosia-escura text-white border border-ardosia-escura cursor-pointer disabled:opacity-40 transition-opacity"
+              >
+                + Adicionar
+              </button>
+            </div>
           </div>
 
           {erro && <p className="text-[13px] text-ferrugem">{erro}</p>}

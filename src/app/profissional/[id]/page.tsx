@@ -208,6 +208,18 @@ export default async function PerfilPage({ params }: PageProps) {
                   </svg>
                   <span className="text-[14px] text-cinza-texto">{p.convenio_info}</span>
                 </div>
+                {p.convenios && p.convenios.length > 0 && (
+                  <div className="mt-[13px]">
+                    <div className="text-[11.5px] font-semibold text-muted mb-2">Convênios atendidos</div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.convenios.map((c) => (
+                        <span key={c} className="text-[12.5px] font-medium text-carvao-sutil bg-[#F5F2ED] border border-linha rounded-[7px] px-2.5 py-[4px]">
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <p className="mt-3 text-[12px] leading-[1.5] text-muted">
                   Os valores podem variar conforme o caso e devem ser confirmados no momento do agendamento com o próprio profissional.
                 </p>

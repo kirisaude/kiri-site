@@ -45,6 +45,15 @@ export default function Home() {
   const [activeCidade, setActiveCidade] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showCompartilhar, setShowCompartilhar] = useState(false);
+  const [copiado, setCopiado] = useState(false);
+
+  function copiarLink() {
+    navigator.clipboard.writeText("https://kirisaude.com.br").then(() => {
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 2000);
+    });
+  }
   const VALOR_TOTAL_MAX = 600;
   const [valorMin, setValorMin] = useState(0);
   const [valorMax, setValorMax] = useState(VALOR_TOTAL_MAX);
@@ -126,6 +135,19 @@ export default function Home() {
             <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
             </Link>
+            <button
+              onClick={() => setShowCompartilhar(true)}
+              className="hidden md:flex items-center gap-1.5 text-[14px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada rounded-[9px] px-3.5 py-2 cursor-pointer hover:bg-borda-azulada/40 transition-colors"
+            >
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <circle cx="4" cy="10" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <circle cx="16" cy="16" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <line x1="6.2" y1="8.8" x2="13.8" y2="5.2" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                <line x1="6.2" y1="11.2" x2="13.8" y2="14.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              Divulgue a Kiri
+            </button>
             {/* Hambúrguer — mobile only */}
             <button
               onClick={() => setShowMenu((v) => !v)}
@@ -161,10 +183,23 @@ export default function Home() {
             <Link
               href="/sobre"
               onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-cinza-texto no-underline"
+              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >
               Sobre
             </Link>
+            <button
+              onClick={() => { setShowMenu(false); setShowCompartilhar(true); }}
+              className="py-3.5 text-[16px] font-semibold text-ardosia-escura text-left cursor-pointer flex items-center gap-2"
+            >
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <circle cx="4" cy="10" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <circle cx="16" cy="16" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                <line x1="6.2" y1="8.8" x2="13.8" y2="5.2" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                <line x1="6.2" y1="11.2" x2="13.8" y2="14.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              Divulgue a Kiri
+            </button>
           </div>
         )}
       </header>
@@ -616,6 +651,82 @@ export default function Home() {
           </>
         )}
       </div>
+
+      {/* ═══ MODAL: DIVULGUE A KIRI ═══ */}
+      {showCompartilhar && (
+        <div
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/40 backdrop-blur-[2px] px-4 pb-6 md:pb-0"
+          onClick={() => setShowCompartilhar(false)}
+        >
+          <div
+            className="w-full max-w-sm bg-creme rounded-[20px] overflow-hidden shadow-[0_20px_60px_-10px_rgba(40,35,25,0.4)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Card de divulgação */}
+            <div className="bg-ardosia-escura px-6 pt-7 pb-6">
+              <div className="mb-4" style={{ filter: "brightness(0) invert(1)" }}>
+                <KiriLogoCompact height={28} />
+              </div>
+              <p className="font-serif text-[22px] font-medium leading-[1.25] text-white">
+                Uma rede de profissionais verificados para neurodesenvolvimento infantil.
+              </p>
+              <p className="mt-3 text-[14px] leading-[1.55] text-white/75">
+                Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.
+              </p>
+              <div className="mt-4 flex items-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 22 22" fill="none">
+                  <circle cx="11" cy="11" r="10" stroke="white" strokeWidth="1.4" opacity="0.7" />
+                  <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" opacity="0.7" />
+                </svg>
+                <span className="text-[13px] font-semibold text-white/60 tracking-[0.03em]">kirisaude.com.br</span>
+              </div>
+            </div>
+
+            {/* Ações */}
+            <div className="px-5 py-4 flex flex-col gap-2.5">
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent("Conhece a Kiri?\n\nÉ uma plataforma de profissionais *verificados* para TEA, TDAH e neurodesenvolvimento infantil — com psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais.\n\nCada registro no conselho é conferido um a um. Sem lista infinita.\n\nkirisaude.com.br")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold text-[15px] rounded-[13px] py-[14px] no-underline"
+              >
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="white">
+                  <path d="M17.47 14.38c-.28-.14-1.67-.82-1.93-.92-.26-.09-.45-.14-.64.14-.19.28-.74.92-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.19-.44-2.27-1.4-.84-.75-1.4-1.67-1.57-1.95-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.46.09-.19.05-.35-.02-.49-.07-.14-.64-1.54-.88-2.1-.23-.55-.47-.47-.64-.48-.17-.01-.36-.01-.55-.01s-.5.07-.76.35c-.26.28-1 1-1 2.42s1.02 2.81 1.16 3c.14.19 2 3.06 4.85 4.29.68.29 1.21.47 1.62.6.68.21 1.3.18 1.79.11.55-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.08-1.34A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.69 0-3.26-.49-4.59-1.33l-.32-.2-3.02.79.81-2.95-.21-.34A8 8 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z" />
+                </svg>
+                Compartilhar no WhatsApp
+              </a>
+              <button
+                onClick={copiarLink}
+                className="flex items-center justify-center gap-2 bg-white border border-linha text-carvao font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer"
+              >
+                {copiado ? (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                      <path d="M4 10.5 L8 14.5 L16 6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Link copiado!
+                  </>
+                ) : (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                      <rect x="7" y="7" width="9" height="9" rx="2" stroke="#9A8C78" strokeWidth="1.4" />
+                      <path d="M4 13 L4 4 L13 4" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Copiar link
+                  </>
+                )}
+              </button>
+              <button
+                onClick={() => setShowCompartilhar(false)}
+                className="text-[13px] text-muted cursor-pointer py-1"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
