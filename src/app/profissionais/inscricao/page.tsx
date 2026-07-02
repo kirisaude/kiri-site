@@ -46,10 +46,21 @@ export default function InscricaoProfissionalPage() {
   const [erro, setErro] = useState("");
   const [enviado, setEnviado] = useState(false);
 
+  const [areaCustom, setAreaCustom] = useState("");
+
   function toggleArea(area: string) {
     setAreasAtuacao((prev) =>
       prev.includes(area) ? prev.filter((a) => a !== area) : [...prev, area]
     );
+  }
+
+  function adicionarAreaCustom() {
+    const termo = areaCustom.trim();
+    if (!termo) return;
+    if (!areasAtuacao.includes(termo)) {
+      setAreasAtuacao((prev) => [...prev, termo]);
+    }
+    setAreaCustom("");
   }
 
   function toggleFaixa(faixa: string) {
@@ -244,6 +255,31 @@ export default function InscricaoProfissionalPage() {
                   {area}
                 </button>
               ))}
+              {areasAtuacao.filter((a) => !AREAS.includes(a)).map((area) => (
+                <button key={area} type="button" onClick={() => toggleArea(area)}
+                  className="px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer bg-ardosia-escura text-white border-ardosia-escura flex items-center gap-1.5">
+                  {area}
+                  <span className="text-white/70 text-[15px] leading-none">×</span>
+                </button>
+              ))}
+            </div>
+            <div className="flex gap-2 mt-1">
+              <input
+                type="text"
+                value={areaCustom}
+                onChange={(e) => setAreaCustom(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); adicionarAreaCustom(); } }}
+                placeholder="Outra área (ex: Estimulação precoce)…"
+                className="flex-1 border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+              />
+              <button
+                type="button"
+                onClick={adicionarAreaCustom}
+                disabled={!areaCustom.trim()}
+                className="px-4 py-[10px] rounded-[10px] text-[13.5px] font-semibold bg-ardosia-escura text-white border border-ardosia-escura cursor-pointer disabled:opacity-40 transition-opacity"
+              >
+                + Adicionar
+              </button>
             </div>
           </div>
 
