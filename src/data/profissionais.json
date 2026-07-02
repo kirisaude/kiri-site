@@ -733,6 +733,43 @@
       "foto_url": null,
       "verificacao_data": "junho de 2026",
       "card_token": "99cc91af2afb4414"
+    },
+    {
+      "id": "kiri-022",
+      "nome": "Gabriela Machado",
+      "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudiólogo",
+      "registro_conselho": "CRFa 2-12094-4",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Comunicação aumentativa",
+        "Dificuldades de aprendizagem",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "São Paulo, Barra Funda",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos)",
+      "sobre": "Fonoaudióloga com mais de 11 anos de experiência clínica, docente e pesquisadora em linguagem e transtorno do espectro autista. Apaixonada pelo desenvolvimento infantil!\nJá ajudou muitas crianças a desenvolverem a fala e a linguagem.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Fonoaudiologia - UNEB"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Doutora em Processos Interativos dos Órgãos e Sistemas, Especialista em Audiologia pelo CFFa, Especialização em Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional, Especialização em ABA para Autismo e Deficiência Intelectual."
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 28000,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "whatsapp_agendamento": "11911097447",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026"
     }
   ]
 }
