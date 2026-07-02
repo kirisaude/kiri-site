@@ -749,7 +749,7 @@
         "Atraso de desenvolvimento"
       ],
       "modalidade": "Presencial",
-      "cidade": "São Paulo, Barra Funda",
+      "cidade": "São Paulo",
       "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos)",
       "sobre": "Fonoaudióloga com mais de 11 anos de experiência clínica, docente e pesquisadora em linguagem e transtorno do espectro autista. Apaixonada pelo desenvolvimento infantil!\nJá ajudou muitas crianças a desenvolverem a fala e a linguagem.",
       "formacao": [
@@ -770,7 +770,8 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "ac7d5ad5908c4ecf"
+      "card_token": "ac7d5ad5908c4ecf",
+      "convenios": null
     }
   ]
 }
