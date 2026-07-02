@@ -254,28 +254,28 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-4 bg-wash-quente border border-borda-quente rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer no-underline transition-all hover:shadow-[0_4px_16px_-8px_rgba(160,90,40,0.25)]"
+            className="flex items-center gap-4 mt-3 md:mt-4 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer no-underline transition-all hover:opacity-90"
           >
-            <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white border border-borda-quente flex items-center justify-center">
+            <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
-                <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="#BE6E4E" strokeWidth="1.7" strokeLinecap="round" />
-                <circle cx="10" cy="14.7" r="1.05" fill="#BE6E4E" />
+                <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
+                <circle cx="10" cy="14.7" r="1.05" fill="white" />
               </svg>
               <svg width="24" height="24" viewBox="0 0 20 20" fill="none" className="hidden md:block">
-                <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="#BE6E4E" strokeWidth="1.7" strokeLinecap="round" />
-                <circle cx="10" cy="14.7" r="1.05" fill="#BE6E4E" />
+                <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
+                <circle cx="10" cy="14.7" r="1.05" fill="white" />
               </svg>
             </div>
             <div className="flex-1">
-              <div className="text-[14.5px] md:text-[19px] font-bold text-ferrugem-escura leading-[1.2]">
+              <div className="text-[14.5px] md:text-[19px] font-bold text-white leading-[1.2]">
                 Não sei por onde começar
               </div>
-              <div className="text-[12.5px] md:text-[17px] text-cinza-texto mt-0.5 md:mt-1">
+              <div className="text-[12.5px] md:text-[17px] text-white/80 mt-0.5 md:mt-1">
                 Quero uma avaliação do neurodesenvolvimento
               </div>
             </div>
             <svg width="17" height="17" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-              <path d="M7 4 L13 10 L7 16" stroke="#BE6E4E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M7 4 L13 10 L7 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </div>

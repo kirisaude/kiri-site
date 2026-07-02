@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
   const body = await request.json();
   const {
-    nome, profissao, registro_conselho, rqe,
+    nome, profissao, registro_conselho, rqe, tempo_atuacao,
     areas_atuacao, faixa_etaria, modalidade, cidade,
     valor_medio, aceita_convenio, graduacao, pos_graduacao,
     apresentacao, site_perfil, como_conheceu, whatsapp_agendamento,
@@ -32,6 +32,7 @@ export async function POST(request: Request) {
     body: JSON.stringify({
       nome, profissao, registro_conselho,
       rqe: rqe || null,
+      tempo_atuacao: tempo_atuacao || null,
       areas_atuacao: areas_atuacao || null,
       faixa_etaria: faixa_etaria || null,
       modalidade: modalidade || null,

@@ -27,6 +27,7 @@ export default function InscricaoProfissionalPage() {
   const [rqe, setRqe] = useState("");
   const [areasAtuacao, setAreasAtuacao] = useState<string[]>([]);
   const [faixaEtaria, setFaixaEtaria] = useState<string[]>([]);
+  const [tempoAtuacao, setTempoAtuacao] = useState("");
   const [modalidade, setModalidade] = useState("");
   const [cidade, setCidade] = useState("");
   const [valorMedio, setValorMedio] = useState("");
@@ -73,6 +74,7 @@ export default function InscricaoProfissionalPage() {
         profissao: profissao.trim(),
         registro_conselho: registroConselho.trim(),
         rqe: rqe.trim() || null,
+        tempo_atuacao: tempoAtuacao || null,
         areas_atuacao: areasAtuacao.join(", ") || null,
         faixa_etaria: faixaEtaria.join(", ") || null,
         modalidade: modalidade || null,
@@ -209,6 +211,18 @@ export default function InscricaoProfissionalPage() {
             <input type="text" value={rqe} onChange={(e) => setRqe(e.target.value)} placeholder="Ex: RQE 28714" className={inputClass} />
           </div>
 
+          <div className="flex flex-col gap-2">
+            <label className={labelClass}>Tempo de atuação na área <span className="text-ferrugem">*</span></label>
+            <div className="flex flex-wrap gap-2">
+              {["Menos de 1 ano", "1 a 3 anos", "3 a 5 anos", "Mais de 5 anos"].map((op) => (
+                <button key={op} type="button" onClick={() => setTempoAtuacao(tempoAtuacao === op ? "" : op)}
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${tempoAtuacao === op ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                  {op}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Áreas */}
           <div className="flex flex-col gap-2">
             <label className={labelClass}>Áreas de atuação <span className="text-ferrugem">*</span></label>
@@ -249,7 +263,7 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className={labelClass}>Cidade e bairro onde atende <span className="text-ferrugem">*</span></label>
+            <label className={labelClass}>Cidade de atendimento presencial <span className="text-ferrugem">*</span></label>
             <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Ex: São Paulo, SP — Pinheiros" className={inputClass} />
           </div>
 
@@ -272,6 +286,13 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           {/* Formação */}
+          <div className="bg-wash-azulado border border-borda-azulada rounded-[14px] px-4 py-4">
+            <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ardosia-texto mb-2">Comprovação de formação</div>
+            <p className="text-[13.5px] leading-[1.6] text-ardosia-escura">
+              Os documentos que comprovem as formações e especializações listadas abaixo serão solicitados pela equipe Kiri após o contato inicial. O envio ocorre em etapa posterior ao preenchimento deste formulário.
+            </p>
+          </div>
+
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Graduação <span className="text-ferrugem">*</span></label>
             <input type="text" value={graduacao} onChange={(e) => setGraduacao(e.target.value)} required placeholder="Ex: Fonoaudiologia — USP · 2015" className={inputClass} />
@@ -328,21 +349,30 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           {/* Consentimento */}
-          <div className="bg-white border border-linha rounded-[13px] px-4 py-4">
+          <div className="bg-wash-azulado border border-borda-azulada rounded-[13px] px-4 py-4 flex flex-col gap-3">
+            <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ardosia-texto">Declaração de consentimento</p>
+            <p className="text-[13px] leading-[1.65] text-cinza-texto2 italic">
+              Ao preencher este formulário e marcar a opção abaixo, o profissional declara ter lido, compreendido e concordado integralmente com os{" "}
+              <a href="/termos" className="underline not-italic" target="_blank">Termos de Uso</a>
+              {" "}e a{" "}
+              <a href="/politica-de-privacidade" className="underline not-italic" target="_blank">Política de Privacidade</a>
+              {" "}da plataforma Kiri, dando seu consentimento livre, informado e inequívoco para o tratamento dos dados fornecidos, nos termos da Lei Geral de Proteção de Dados (Lei n.º 13.709/2018 — LGPD).
+            </p>
             <label className="flex gap-3 cursor-pointer">
               <input type="checkbox" checked={consentimento} onChange={(e) => setConsentimento(e.target.checked)} className="mt-0.5 w-4 h-4 flex-none accent-ardosia" />
               <span className="text-[13px] leading-[1.6] text-cinza-texto2">
-                Concordo que os dados informados sejam usados pela equipe Kiri exclusivamente para análise da minha candidatura, conforme a{" "}
-                <a href="/politica-de-privacidade" className="underline text-cinza-texto2" target="_blank">Política de Privacidade</a>.
-                Os dados são armazenados no Brasil e posso solicitar acesso, correção ou exclusão pelo e-mail{" "}
-                <a href="mailto:contato@kirisaude.com.br" className="underline text-cinza-texto2">contato@kirisaude.com.br</a>.
+                Li e concordo com os{" "}
+                <a href="/termos" className="underline text-cinza-texto2" target="_blank">Termos de Uso</a>
+                {" "}e a{" "}
+                <a href="/politica-de-privacidade" className="underline text-cinza-texto2" target="_blank">Política de Privacidade</a>
+                {" "}e dou meu consentimento para o tratamento dos dados fornecidos.
               </span>
             </label>
           </div>
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !graduacao || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacao || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
