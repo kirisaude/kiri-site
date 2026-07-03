@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
@@ -61,36 +61,18 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
-  const [shareReady, setShareReady] = useState(false);
-  const shareBlobRef = useRef<Blob | null>(null);
 
-  useEffect(() => {
-    if (!showCompartilhar) { setShareReady(false); return; }
-    shareBlobRef.current = null;
-    setShareReady(false);
-    fetch("/api/share-card")
-      .then((r) => r.blob())
-      .then((blob) => { shareBlobRef.current = blob; setShareReady(true); })
-      .catch(() => { setShareReady(true); }); // permite fallback mesmo se falhar
-  }, [showCompartilhar]);
+  const SHARE_URL = "https://kirisaude.com.br/compartilhar";
 
   function copiarLink() {
-    navigator.clipboard.writeText("https://kirisaude.com.br").then(() => {
+    navigator.clipboard.writeText(SHARE_URL).then(() => {
       setCopiado(true);
       setTimeout(() => setCopiado(false), 2000);
     });
   }
 
   function compartilharWhatsApp() {
-    const blob = shareBlobRef.current;
-    if (blob) {
-      const file = new File([blob], "kiri.png", { type: "image/png" });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], text: "https://kirisaude.com.br" }).catch(() => {});
-        return;
-      }
-    }
-    window.open(`https://wa.me/?text=${encodeURIComponent("https://kirisaude.com.br")}`, "_blank");
+    window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
   }
   const VALOR_TOTAL_MAX = 600;
   const [valorMin, setValorMin] = useState(0);
@@ -724,20 +706,13 @@ export default function Home() {
             <div className="px-5 py-4 flex flex-col gap-2.5">
               <button
                 onClick={compartilharWhatsApp}
-                disabled={!shareReady}
-                className="flex items-center justify-center gap-2.5 bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 w-full transition-opacity"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold text-[15px] rounded-[13px] py-[14px] cursor-pointer w-full"
               >
-                {!shareReady ? (
-                  <span className="text-[14px] text-white/70">Preparando…</span>
-                ) : (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                      <circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" strokeOpacity="0.7" />
-                      <path d="M7.5 11.2 L10 13.7 L14.5 8.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.7" />
-                    </svg>
-                    kirisaude.com.br
-                  </>
-                )}
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="white">
+                  <path d="M17.47 14.38c-.28-.14-1.67-.82-1.93-.92-.26-.09-.45-.14-.64.14-.19.28-.74.92-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.19-.44-2.27-1.4-.84-.75-1.4-1.67-1.57-1.95-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.46.09-.19.05-.35-.02-.49-.07-.14-.64-1.54-.88-2.1-.23-.55-.47-.47-.64-.48-.17-.01-.36-.01-.55-.01s-.5.07-.76.35c-.26.28-1 1-1 2.42s1.02 2.81 1.16 3c.14.19 2 3.06 4.85 4.29.68.29 1.21.47 1.62.6.68.21 1.3.18 1.79.11.55-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.08-1.34A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.69 0-3.26-.49-4.59-1.33l-.32-.2-3.02.79.81-2.95-.21-.34A8 8 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z" />
+                </svg>
+                Compartilhar no WhatsApp
               </button>
               <button
                 onClick={copiarLink}

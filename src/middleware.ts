@@ -13,6 +13,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/acesso") ||
     pathname.startsWith("/api/acesso") ||
     pathname.startsWith("/api/inscricao") ||
+    pathname.startsWith("/api/share-card") ||
+    pathname.startsWith("/compartilhar") ||
     pathname.startsWith("/card") ||
     pathname.startsWith("/profissional") ||
     pathname.startsWith("/profissionais") ||
