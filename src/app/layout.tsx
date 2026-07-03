@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kirisaude.com.br"),
+  metadataBase: new URL("https://www.kirisaude.com.br"),
   title: "Kiri — rede de cuidado ao neurodesenvolvimento",
   description:
     "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
