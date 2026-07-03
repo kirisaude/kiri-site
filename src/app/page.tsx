@@ -64,6 +64,7 @@ export default function Home() {
   const [shareReady, setShareReady] = useState(false);
   const shareBlobRef = useRef<Blob | null>(null);
 
+  const SITE_URL = "https://kirisaude.com.br";
   const SHARE_URL = "https://www.kirisaude.com.br/compartilhar";
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function Home() {
   }, [showCompartilhar]);
 
   function copiarLink() {
-    navigator.clipboard.writeText(SHARE_URL).then(() => {
+    navigator.clipboard.writeText(SITE_URL).then(() => {
       setCopiado(true);
       setTimeout(() => setCopiado(false), 2000);
     });
@@ -87,7 +88,7 @@ export default function Home() {
     if (blob && navigator.share) {
       const file = new File([blob], "kiri.png", { type: "image/png" });
       // Tenta enviar o arquivo diretamente (mostra a imagem no WhatsApp)
-      navigator.share({ files: [file], url: SHARE_URL }).catch(() =>
+      navigator.share({ files: [file], url: SITE_URL }).catch(() =>
         navigator.share({ files: [file] }).catch(() =>
           navigator.share({ url: SHARE_URL }).catch(() =>
             window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank")
