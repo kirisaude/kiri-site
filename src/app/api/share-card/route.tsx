@@ -1,10 +1,18 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
-const SIMBOLO_B64 = "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLaXJpIj4KICA8cGF0aCBkPSJNMTkgNTIgQzMxIDM3IDQzIDM3IDUyIDUwIEM2MSAzNyA3MyAzNyA4NCA1MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQkU2RTRFIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjwvcGF0aD4KICA8cGF0aCBkPSJNMzggODggQzUwIDczIDYyIDczIDcxIDg2IEM4MCA3MyA5MiA3MyAxMDQgODgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0NjA2QyIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48L3BhdGg+Cjwvc3ZnPg==";
+const SIMBOLO_B64 =
+  "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLaXJpIj4KICA8cGF0aCBkPSJNMTkgNTIgQzMxIDM3IDQzIDM3IDUyIDUwIEM2MSAzNyA3MyAzNyA4NCA1MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQkU2RTRFIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjwvcGF0aD4KICA8cGF0aCBkPSJNMzggODggQzUwIDczIDYyIDczIDcxIDg2IEM4MCA3MyA5MiA3MyAxMDQgODgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ0NjA2QyIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48L3BhdGg+Cjwvc3ZnPg==";
 
 export async function GET() {
+  const [fontMedium, fontRegular] = await Promise.all([
+    readFile(join(process.cwd(), "public/fonts/Newsreader-Medium.ttf")),
+    readFile(join(process.cwd(), "public/fonts/Newsreader-Regular.ttf")),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -19,15 +27,15 @@ export async function GET() {
         }}
       >
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`data:image/svg+xml;base64,${SIMBOLO_B64}`} width={56} height={56} alt="" />
+          <img src={`data:image/svg+xml;base64,${SIMBOLO_B64}`} width={52} height={52} alt="" />
           <div
             style={{
-              fontSize: "64px",
-              fontWeight: "500",
+              fontSize: "56px",
+              fontWeight: 500,
               color: "#BE6E4E",
-              fontFamily: "Georgia, serif",
+              fontFamily: "Newsreader",
               lineHeight: 1,
               display: "flex",
             }}
@@ -39,11 +47,11 @@ export async function GET() {
         {/* Título */}
         <div
           style={{
-            fontSize: "96px",
-            fontWeight: "600",
+            fontSize: "88px",
+            fontWeight: 500,
             color: "white",
-            fontFamily: "Georgia, serif",
-            lineHeight: 1.18,
+            fontFamily: "Newsreader",
+            lineHeight: 1.2,
             letterSpacing: "-0.01em",
             display: "flex",
             flex: 1,
@@ -54,37 +62,38 @@ export async function GET() {
         </div>
 
         {/* Descrição + URL */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           <div
             style={{
-              fontSize: "38px",
+              fontSize: "36px",
+              fontWeight: 400,
               color: "rgba(255,255,255,0.65)",
-              fontFamily: "sans-serif",
-              lineHeight: 1.5,
+              fontFamily: "Newsreader",
+              lineHeight: 1.55,
               display: "flex",
             }}
           >
-            Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida.
+            Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-            <div
-              style={{
-                width: "28px",
-                height: "28px",
-                borderRadius: "50%",
-                border: "2.5px solid rgba(255,255,255,0.4)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+
+          {/* URL com ícone de check */}
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 22 22"
+              fill="none"
+              style={{ flexShrink: 0 }}
             >
-              <div style={{ color: "rgba(255,255,255,0.4)", fontSize: "18px", display: "flex" }}>✓</div>
-            </div>
+              <circle cx="11" cy="11" r="10" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" />
+              <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="rgba(255,255,255,0.45)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             <div
               style={{
-                fontSize: "34px",
+                fontSize: "32px",
                 color: "rgba(255,255,255,0.45)",
-                fontFamily: "sans-serif",
+                fontFamily: "Newsreader",
+                fontWeight: 400,
                 display: "flex",
               }}
             >
@@ -94,6 +103,13 @@ export async function GET() {
         </div>
       </div>
     ),
-    { width: 1080, height: 1080 }
+    {
+      width: 1080,
+      height: 1080,
+      fonts: [
+        { name: "Newsreader", data: fontMedium, weight: 500, style: "normal" },
+        { name: "Newsreader", data: fontRegular, weight: 400, style: "normal" },
+      ],
+    }
   );
 }
