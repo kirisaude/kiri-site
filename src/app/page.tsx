@@ -87,16 +87,13 @@ export default function Home() {
     if (blob && navigator.share) {
       const file = new File([blob], "kiri.png", { type: "image/png" });
       // Tenta enviar o arquivo diretamente (mostra a imagem no WhatsApp)
-      navigator.share({ files: [file] }).catch(() => {
-        // Se o envio de arquivo falhar, cai para compartilhamento de URL
-        if (navigator.share) {
-          navigator.share({ url: SHARE_URL }).catch(() => {
-            window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
-          });
-        } else {
-          window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
-        }
-      });
+      navigator.share({ files: [file], url: SHARE_URL }).catch(() =>
+        navigator.share({ files: [file] }).catch(() =>
+          navigator.share({ url: SHARE_URL }).catch(() =>
+            window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank")
+          )
+        )
+      );
       return;
     }
     if (navigator.share) {
