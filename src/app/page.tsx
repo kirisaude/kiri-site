@@ -62,7 +62,7 @@ export default function Home() {
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
 
-  const SHARE_URL = "https://kirisaude.com.br/compartilhar";
+  const SHARE_URL = "https://www.kirisaude.com.br/compartilhar";
 
   function copiarLink() {
     navigator.clipboard.writeText(SHARE_URL).then(() => {
@@ -72,7 +72,13 @@ export default function Home() {
   }
 
   function compartilharWhatsApp() {
-    window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
+    if (navigator.share) {
+      navigator.share({ url: SHARE_URL }).catch(() => {
+        window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
+      });
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_URL)}`, "_blank");
+    }
   }
   const VALOR_TOTAL_MAX = 600;
   const [valorMin, setValorMin] = useState(0);
