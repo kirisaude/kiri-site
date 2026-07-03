@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/opengraph") ||
     pathname.startsWith("/kiri-og") ||
     pathname.startsWith("/kiri-icon") ||
-    /\.(png|jpg|jpeg|svg|ico|webp)$/.test(pathname)
+    /\.(png|jpg|jpeg|svg|ico|webp|ttf|woff|woff2)$/.test(pathname)
   ) {
     return NextResponse.next();
   }
