@@ -77,31 +77,51 @@ export default function EditarProfissionalPage() {
     setErroFoto("");
     setUploadandoFoto(true);
 
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const base64 = (reader.result as string).split(",")[1];
-      setFotoPreview(reader.result as string);
+    // Redimensiona e comprime via Canvas antes de enviar (evita payload > 4MB)
+    const base64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          const MAX = 500;
+          const ratio = Math.min(MAX / img.width, MAX / img.height, 1);
+          const w = Math.round(img.width * ratio);
+          const h = Math.round(img.height * ratio);
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          canvas.getContext("2d")!.drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL("image/jpeg", 0.82).split(",")[1]);
+        };
+        img.onerror = reject;
+        img.src = reader.result as string;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    }).catch(() => "");
 
-      const res = await fetch("/api/admin/foto", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          profissional_id: id,
-          filename: file.name,
-          content_base64: base64,
-        }),
-      });
-
-      if (res.ok) {
-        const { foto_url } = await res.json();
-        setFotoUrl(foto_url);
-      } else {
-        const err = await res.json();
-        setErroFoto(err.error ?? "Erro no upload");
-      }
+    if (!base64) {
+      setErroFoto("Não foi possível processar a imagem");
       setUploadandoFoto(false);
-    };
-    reader.readAsDataURL(file);
+      return;
+    }
+
+    setFotoPreview(`data:image/jpeg;base64,${base64}`);
+
+    const res = await fetch("/api/admin/foto", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ profissional_id: id, filename: `${id}.jpg`, content_base64: base64 }),
+    });
+
+    if (res.ok) {
+      const { foto_url } = await res.json();
+      setFotoUrl(foto_url);
+    } else {
+      const err = await res.json().catch(() => ({}));
+      setErroFoto(err.error ?? "Erro no upload");
+    }
+    setUploadandoFoto(false);
   }
 
   async function salvar(e: React.FormEvent) {
