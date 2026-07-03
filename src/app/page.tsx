@@ -61,17 +61,17 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
-  const [compartilhando, setCompartilhando] = useState(false);
+  const [shareReady, setShareReady] = useState(false);
   const shareBlobRef = useRef<Blob | null>(null);
 
-  // Pré-busca a imagem assim que o modal abre
   useEffect(() => {
-    if (!showCompartilhar) return;
+    if (!showCompartilhar) { setShareReady(false); return; }
     shareBlobRef.current = null;
+    setShareReady(false);
     fetch("/api/share-card")
       .then((r) => r.blob())
-      .then((blob) => { shareBlobRef.current = blob; })
-      .catch(() => {});
+      .then((blob) => { shareBlobRef.current = blob; setShareReady(true); })
+      .catch(() => { setShareReady(true); }); // permite fallback mesmo se falhar
   }, [showCompartilhar]);
 
   function copiarLink() {
@@ -724,13 +724,20 @@ export default function Home() {
             <div className="px-5 py-4 flex flex-col gap-2.5">
               <button
                 onClick={compartilharWhatsApp}
-                className="flex items-center justify-center gap-2.5 bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer w-full"
+                disabled={!shareReady}
+                className="flex items-center justify-center gap-2.5 bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 w-full transition-opacity"
               >
-                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                  <circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" strokeOpacity="0.7" />
-                  <path d="M7.5 11.2 L10 13.7 L14.5 8.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.7" />
-                </svg>
-                kirisaude.com.br
+                {!shareReady ? (
+                  <span className="text-[14px] text-white/70">Preparando…</span>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                      <circle cx="11" cy="11" r="9" stroke="white" strokeWidth="1.5" strokeOpacity="0.7" />
+                      <path d="M7.5 11.2 L10 13.7 L14.5 8.5" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.7" />
+                    </svg>
+                    kirisaude.com.br
+                  </>
+                )}
               </button>
               <button
                 onClick={copiarLink}
