@@ -754,8 +754,8 @@
       "sobre": "Fonoaudióloga com mais de 11 anos de experiência clínica, docente e pesquisadora em linguagem e transtorno do espectro autista. Apaixonada pelo desenvolvimento infantil!\nJá ajudou muitas crianças a desenvolverem a fala e a linguagem.",
       "formacao": [
         {
-          "curso": "Graduação",
-          "instituicao_ano": "Fonoaudiologia - UNEB"
+          "curso": "Graduação em Fonoaudiologia ",
+          "instituicao_ano": "UNEB"
         },
         {
           "curso": "Especialização",
@@ -771,7 +771,8 @@
       "foto_url": null,
       "verificacao_data": "julho de 2026",
       "card_token": "ac7d5ad5908c4ecf",
-      "convenios": null
+      "convenios": null,
+      "tempo_atuacao": null
     }
   ]
 }
