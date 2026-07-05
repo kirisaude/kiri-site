@@ -719,7 +719,7 @@ export default function Home() {
                 <KiriLogoCompact height={28} />
               </div>
               <p className="font-serif text-[22px] font-medium leading-[1.25] text-white">
-                Uma rede de profissionais verificados para neurodesenvolvimento infantil.
+                Uma rede de profissionais verificados que atuam com neurodesenvolvimento infantil.
               </p>
               <p className="mt-3 text-[14px] leading-[1.55] text-white/75">
                 Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.kirisaude.com.br"),
   title: "Kiri — rede de cuidado ao neurodesenvolvimento",
   description:
-    "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+    "Encontre profissionais com formação verificada que atuam com TEA, TDAH e neurodesenvolvimento infantil.",
   icons: {
     icon: [
       { url: "/kiri-icon-512.png", sizes: "512x512", type: "image/png" },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
-      "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+      "Encontre profissionais com formação verificada que atuam com TEA, TDAH e neurodesenvolvimento infantil.",
     url: "https://kirisaude.com.br",
     siteName: "Kiri",
     locale: "pt_BR",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
-      "Encontre profissionais com formação verificada para TEA, TDAH e neurodesenvolvimento infantil.",
+      "Encontre profissionais com formação verificada que atuam com TEA, TDAH e neurodesenvolvimento infantil.",
     images: ["/kiri-og-2.png"],
   },
 };

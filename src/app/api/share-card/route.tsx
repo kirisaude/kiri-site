@@ -61,7 +61,7 @@ export async function GET() {
             alignItems: "center",
           }}
         >
-          Uma rede de profissionais verificados para neurodesenvolvimento infantil.
+          Uma rede de profissionais verificados que atuam com neurodesenvolvimento infantil.
         </div>
 
         {/* Descrição + URL */}

@@ -12,7 +12,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "1. Objeto da Plataforma e Capacidade Civil",
     blocos: [
-      { tipo: "p", texto: "A Kiri consiste em um ecossistema digital que atua como provedor de tecnologia, oferecendo um catálogo organizado e facilitação de contato inicial entre famílias e profissionais de saúde independentes e autônomos, especializados na área de neurodesenvolvimento infantil." },
+      { tipo: "p", texto: "A Kiri consiste em um ecossistema digital que atua como provedor de tecnologia, oferecendo um catálogo organizado e facilitação de contato inicial entre famílias e profissionais de saúde independentes e autônomos que atuam com neurodesenvolvimento infantil." },
       { tipo: "destaque", texto: "Capacidade e Representação" },
       { tipo: "p", texto: "Ao aceitar estes termos, o usuário declara ser maior de 18 anos ou emancipado, possuir plena capacidade civil e, quando aplicável, deter a legítima representação legal, guarda ou poder familiar sobre o menor de idade cujos dados ou histórico venham a ser informados para fins de contato." },
       { tipo: "destaque", texto: "Ausência de Vínculo" },

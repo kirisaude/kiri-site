@@ -12,7 +12,7 @@ const SECOES: { titulo: string; blocos: Bloco[] }[] = [
   {
     titulo: "1. Quem Somos e Canal de Contato",
     blocos: [
-      { tipo: "p", texto: "A Kiri é uma plataforma digital voltada a organizar o fluxo de busca e facilitar o contato direto entre famílias e profissionais de saúde independentes, especializados em neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como Controladora dos dados pessoais coletados pela plataforma, nos termos da LGPD." },
+      { tipo: "p", texto: "A Kiri é uma plataforma digital voltada a organizar o fluxo de busca e facilitar o contato direto entre famílias e profissionais de saúde independentes que atuam com neurodesenvolvimento infantil. Para os fins desta Política, a Kiri atua como Controladora dos dados pessoais coletados pela plataforma, nos termos da LGPD." },
       { tipo: "p", texto: "Qualquer dúvida, reclamação ou solicitação relacionada aos seus dados pessoais pode ser enviada diretamente para o nosso Encarregado de Proteção de Dados através do e-mail oficial: contato@kirisaude.com.br" },
     ],
   },
