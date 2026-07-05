@@ -773,6 +773,43 @@
       "card_token": "ac7d5ad5908c4ecf",
       "convenios": null,
       "tempo_atuacao": null
+    },
+    {
+      "id": "kiri-023",
+      "nome": "Sheila Silva Siqueira",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "06/151196",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Cotia, SP",
+      "faixa_etaria": "Crianças (6–12 anos), Pré-escola (3–5 anos)",
+      "sobre": "Sou mãe de uma criança autista nível 3 de suporte e Psicóloga especializada em Terapia Aba para Autismo e TDAH. \nAtuo na área e venho me especializando com cursos e supervisões de profissionais referência no campo da Análise do Comportamento Aplicada desde 2018.\nDesde então, dedico-me a contribuir com o\ndesenvolvimento pleno de crianças de até os 13 anos de idade com mais variados perfis e a apoiar os cuidadores nos desafios diários de uma vida atípica.\nO meu propósito é garantir que as crianças alcancem o máximo de seu potencial e minimizem comportamentosdesafiadores que impedem seu\nprogresso. Criar oportunidades de aprendizado para que os cuidadores tenham ferramentas\npara aumentar a frequencia dos comportamentos desejados e diminuir os indesejados.\nRealizo atendimento a crianças com Transtorno do Espectro Autista (TEA), deficiência intelectual ou TDAH de até 13 anos de idade.\nUtilizo os protocolos VB-Mapp, ABLLS, Social Skills Solutions, Socially Savvy, Essential For Living nos processos avaliativos de acordo com a especificidade de cada caso.\nAtuo com intervenção ABA em consultório e online; treinamento parental para os cuidadores, assim como orientação para escolas e acompanhantes terapêuticos (ATs).",
+      "formacao": [
+        {
+          "curso": "Graduação em Psicologia",
+          "instituicao_ano": "Universidade Paulista, 2015"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Pós graduada em Análise do Comportamento Aplicada- CBI OF Miami \nMestranda em Educação Especial- Universidade Federal de São Carlos (Ufscar)"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 150,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "11945454557",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "7a4670beac9c4c65"
     }
   ]
 }
