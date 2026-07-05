@@ -361,40 +361,6 @@
       "card_token": "7e6bdc09b5dc39ed"
     },
     {
-      "id": "kiri-011",
-      "nome": "Marina Salles",
-      "profissao": "Psicólogo",
-      "titulo_exibicao": "Psicóloga · ABA",
-      "registro_conselho": "CRP 02/19884",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Recife, PE",
-      "faixa_etaria": "Crianças · 2–12 anos",
-      "sobre": "Intervenção em TEA com base em Análise do Comportamento (ABA), em parceria com a família.",
-      "formacao": [
-        {
-          "curso": "Graduação em Psicologia",
-          "instituicao_ano": "UFPE · 2012"
-        },
-        {
-          "curso": "Formação em Análise do Comportamento Aplicada (ABA)",
-          "instituicao_ano": "2017"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 220,
-      "valor_max": 320,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "56e18af79e549465"
-    },
-    {
       "id": "kiri-012",
       "nome": "Bruno Carvalho",
       "profissao": "Psicólogo",
