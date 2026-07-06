@@ -33,8 +33,10 @@ export default function InscricaoProfissionalPage() {
   const [bairro, setBairro] = useState("");
   const [valorMedio, setValorMedio] = useState("");
   const [aceitaConvenio, setAceitaConvenio] = useState("");
-  const [graduacao, setGraduacao] = useState("");
-  const [posGraduacao, setPosGraduacao] = useState("");
+  const [graduacaoCurso, setGraduacaoCurso] = useState("");
+  const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
+  const [posGraduacaoTitulo, setPosGraduacaoTitulo] = useState("");
+  const [posGraduacaoInstituicao, setPosGraduacaoInstituicao] = useState("");
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
@@ -95,8 +97,8 @@ export default function InscricaoProfissionalPage() {
           bairro: bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
-          graduacao: graduacao.trim() || null,
-          pos_graduacao: posGraduacao.trim() || null,
+          graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
+          pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
           como_conheceu: comoConheceu.trim() || null,
@@ -347,14 +349,14 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Graduação <span className="text-ferrugem">*</span></label>
-            <input type="text" value={graduacao} onChange={(e) => setGraduacao(e.target.value)} required placeholder="Ex: Fonoaudiologia — USP · 2015" className={inputClass} />
+            <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Ex: Graduação em Psicologia" className={inputClass} />
+            <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} placeholder="Ex: Universidade de São Paulo, 2010" className={inputClass} />
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Pós-graduação, residência ou especialização</label>
-            <textarea value={posGraduacao} onChange={(e) => setPosGraduacao(e.target.value)} rows={3}
-              placeholder="Liste os mais relevantes para sua atuação em neurodesenvolvimento"
-              className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted resize-none w-full" />
+            <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Ex: Pós-especialização em integração sensorial" className={inputClass} />
+            <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Ex: UNIFESP, 2022" className={inputClass} />
           </div>
 
           {/* Apresentação */}
