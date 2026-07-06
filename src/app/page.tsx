@@ -127,7 +127,7 @@ export default function Home() {
         const spRegiao = activeCidade.match(/^São Paulo — (.+)$/);
         if (spRegiao) {
           if (!normCidade(p.cidade).includes("sao paulo")) return false;
-          if (!p.bairro?.includes(spRegiao[1])) return false;
+          if (!p.cidade.includes(spRegiao[1])) return false;
         } else {
           if (!normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
         }

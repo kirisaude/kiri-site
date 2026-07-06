@@ -10,6 +10,18 @@ import { PROFISSOES_ORDENADAS } from "@/types";
 
 const CONVENIOS_COMUNS = ["Unimed", "Bradesco Saúde", "Amil", "SulAmérica", "Notre Dame Intermédica", "Hapvida", "Porto Seguro Saúde", "Prevent Senior", "Golden Cross"];
 const TEMPO_ATUACAO_OPCOES = ["Menos de 1 ano", "1 a 3 anos", "3 a 5 anos", "Mais de 5 anos"];
+const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
+
+function parseBairro(raw: string): { regioes: string[]; texto: string } {
+  const m = raw.match(/^Regiões: ([^—]+?)(?:\s*—\s*(.+))?$/);
+  if (m) return { regioes: m[1].split(", ").map((r) => r.trim()).filter(Boolean), texto: m[2]?.trim() ?? "" };
+  return { regioes: [], texto: raw };
+}
+
+function buildBairro(regioes: string[], texto: string): string {
+  const partes = [regioes.length ? `Regiões: ${regioes.join(", ")}` : null, texto.trim() || null].filter(Boolean);
+  return partes.join(" — ");
+}
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -28,9 +40,16 @@ export default function EditarProfissionalPage() {
   const [modalidade, setModalidade] = useState(profOriginal?.modalidade ?? "");
   const [tempoAtuacao, setTempoAtuacao] = useState(profOriginal?.tempo_atuacao ?? "");
   const _cidadeRaw = profOriginal?.cidade ?? "";
-  const _cidadePartes = _cidadeRaw.split(" — ");
-  const [cidadeBase, setCidadeBase] = useState(_cidadePartes[0]?.trim() ?? "");
-  const [bairro, setBairro] = useState(_cidadePartes[1]?.trim() ?? "");
+  const _sep = _cidadeRaw.indexOf(" — ");
+  const _cidadeBase0 = _sep >= 0 ? _cidadeRaw.slice(0, _sep).trim() : _cidadeRaw.trim();
+  const _bairroRaw = _sep >= 0 ? _cidadeRaw.slice(_sep + 3).trim() : "";
+  const _bairroParsed = parseBairro(_bairroRaw);
+  const [cidadeBase, setCidadeBase] = useState(_cidadeBase0);
+  const [regioesSP, setRegioesSP] = useState<string[]>(_bairroParsed.regioes);
+  const [bairro, setBairro] = useState(_bairroParsed.texto);
+
+  const isSaoPaulo = cidadeBase.toLowerCase().includes("são paulo") || cidadeBase.toLowerCase().includes("sao paulo");
+  function toggleRegiao(r: string) { setRegioesSP((prev) => prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]); }
   const [faixaEtaria, setFaixaEtaria] = useState(profOriginal?.faixa_etaria ?? "");
   const [sobre, setSobre] = useState(profOriginal?.sobre ?? "");
   const [valorFormato, setValorFormato] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato ?? "a_partir_de");
@@ -143,7 +162,7 @@ export default function EditarProfissionalPage() {
       rqe: rqe.trim() || null,
       areas_atuacao: areasLista,
       modalidade: modalidade.trim(),
-      cidade: bairro.trim() ? `${cidadeBase.trim()} — ${bairro.trim()}` : cidadeBase.trim(),
+      cidade: (() => { const b = isSaoPaulo ? buildBairro(regioesSP, bairro) : bairro.trim(); return b ? `${cidadeBase.trim()} — ${b}` : cidadeBase.trim(); })(),
       faixa_etaria: faixaEtaria.trim(),
       tempo_atuacao: tempoAtuacao || null,
       sobre: sobre.trim(),
@@ -290,6 +309,19 @@ export default function EditarProfissionalPage() {
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
             />
           </div>
+          {isSaoPaulo && (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12.5px] font-medium text-cinza-texto">Região <span className="text-[11px] text-muted">(opcional)</span></label>
+              <div className="flex flex-wrap gap-2">
+                {REGIOES_SP.map((r) => (
+                  <button key={r} type="button" onClick={() => toggleRegiao(r)}
+                    className={`px-3 py-1.5 rounded-[8px] text-[13px] font-medium border transition-colors cursor-pointer ${regioesSP.includes(r) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                    {r}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="flex flex-col gap-1">
             <label className="text-[12.5px] font-medium text-cinza-texto">
               Bairro <span className="text-[11px] text-muted">(opcional)</span>
@@ -298,7 +330,7 @@ export default function EditarProfissionalPage() {
               type="text"
               value={bairro}
               onChange={(e) => setBairro(e.target.value)}
-              placeholder="Ex: Pinheiros"
+              placeholder={isSaoPaulo ? "Ex: Pinheiros, Moema…" : "Ex: Pinheiros"}
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
             />
           </div>
