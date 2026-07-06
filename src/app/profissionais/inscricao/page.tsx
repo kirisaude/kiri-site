@@ -333,7 +333,7 @@ export default function InscricaoProfissionalPage() {
 
           {isSaoPaulo && (
             <div className="flex flex-col gap-2">
-              <label className={labelClass}>Região de atendimento <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+              <label className={labelClass}>Região de atendimento <span className="text-ferrugem">*</span></label>
               <div className="flex flex-wrap gap-2">
                 {REGIOES_SP.map((r) => (
                   <button key={r} type="button" onClick={() => toggleRegiao(r)}
@@ -460,7 +460,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
