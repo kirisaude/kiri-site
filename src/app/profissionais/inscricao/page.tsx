@@ -39,6 +39,7 @@ export default function InscricaoProfissionalPage() {
   const [posGraduacaoInstituicao, setPosGraduacaoInstituicao] = useState("");
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
+  const [lattes, setLattes] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [aceitaTermos, setAceitaTermos] = useState(false);
@@ -101,6 +102,7 @@ export default function InscricaoProfissionalPage() {
           pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
+          lattes: lattes.trim() || null,
           como_conheceu: comoConheceu.trim() || null,
           whatsapp_agendamento: whatsappAgendamento.trim() || null,
           grupo_whatsapp: grupoWhatsapp,
@@ -373,6 +375,11 @@ export default function InscricaoProfissionalPage() {
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Site, Instagram ou LinkedIn <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
             <input type="text" value={sitePerfil} onChange={(e) => setSitePerfil(e.target.value)} placeholder="https://" className={inputClass} />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>Currículo Lattes <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+            <input type="text" value={lattes} onChange={(e) => setLattes(e.target.value)} placeholder="http://lattes.cnpq.br/..." className={inputClass} />
           </div>
 
           <div className="flex flex-col gap-1.5">
