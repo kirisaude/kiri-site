@@ -283,6 +283,9 @@ export default function InscricaoProfissionalPage() {
                 + Adicionar
               </button>
             </div>
+            <p className="text-[12.5px] text-muted leading-[1.55]">
+              Algumas áreas exigem formação específica além da graduação — nesses casos, o certificado correspondente será solicitado na etapa de envio de documentos.
+            </p>
           </div>
 
           {/* Faixa etária */}
