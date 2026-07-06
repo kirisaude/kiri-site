@@ -31,6 +31,14 @@ export default function InscricaoProfissionalPage() {
   const [modalidade, setModalidade] = useState("");
   const [cidade, setCidade] = useState("");
   const [bairro, setBairro] = useState("");
+  const [regioesSP, setRegioesSP] = useState<string[]>([]);
+
+  const REGIOES_SP = ["Centro", "Norte", "Sul", "Leste", "Oeste"];
+  const isSaoPaulo = cidade.toLowerCase().includes("são paulo") || cidade.toLowerCase().includes("sao paulo");
+
+  function toggleRegiao(regiao: string) {
+    setRegioesSP((prev) => prev.includes(regiao) ? prev.filter((r) => r !== regiao) : [...prev, regiao]);
+  }
   const [valorMedio, setValorMedio] = useState("");
   const [aceitaConvenio, setAceitaConvenio] = useState("");
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
@@ -95,7 +103,9 @@ export default function InscricaoProfissionalPage() {
           faixa_etaria: faixaEtaria.join(", ") || null,
           modalidade: modalidade || null,
           cidade: cidade.trim() || null,
-          bairro: bairro.trim() || null,
+          bairro: isSaoPaulo
+            ? [regioesSP.length ? `Regiões: ${regioesSP.join(", ")}` : null, bairro.trim() || null].filter(Boolean).join(" — ") || null
+            : bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
@@ -321,9 +331,23 @@ export default function InscricaoProfissionalPage() {
             <input type="text" value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Ex: São Paulo, SP" className={inputClass} />
           </div>
 
+          {isSaoPaulo && (
+            <div className="flex flex-col gap-2">
+              <label className={labelClass}>Região de atendimento <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+              <div className="flex flex-wrap gap-2">
+                {REGIOES_SP.map((r) => (
+                  <button key={r} type="button" onClick={() => toggleRegiao(r)}
+                    className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${regioesSP.includes(r) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                    {r}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Bairro <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
-            <input type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} placeholder="Ex: Pinheiros" className={inputClass} />
+            <input type="text" value={bairro} onChange={(e) => setBairro(e.target.value)} placeholder={isSaoPaulo ? "Ex: Pinheiros, Moema…" : "Ex: Pinheiros"} className={inputClass} />
           </div>
 
           <div className="flex flex-col gap-1.5">
