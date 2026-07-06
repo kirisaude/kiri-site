@@ -15,6 +15,7 @@ export interface Profissional {
   sobre: string;
   modalidade: string;
   cidade: string;
+  bairro?: string | null;
   faixa_etaria: string;
   valor_formato: "a_partir_de" | "faixa";
   valor_min: number;

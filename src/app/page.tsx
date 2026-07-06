@@ -18,6 +18,8 @@ function normCidade(s: string) {
   return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 }
 
+const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
+
 // Deduplica por nome normalizado; para cada grupo, mantém a versão mais completa (mais longa)
 const CIDADES_DISPONIVEIS = (() => {
   const mapa = new Map<string, string>();
@@ -30,6 +32,13 @@ const CIDADES_DISPONIVEIS = (() => {
   }
   return [...mapa.values()].sort();
 })();
+
+// Para São Paulo, expande com sub-opções por região
+const CIDADES_FILTRO: string[] = CIDADES_DISPONIVEIS.flatMap((c) =>
+  normCidade(c) === normCidade("São Paulo")
+    ? [c, ...REGIOES_SP.map((r) => `São Paulo — ${r}`)]
+    : [c]
+);
 
 function EmBreve() {
   return (
@@ -114,7 +123,15 @@ export default function Home() {
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
-      if (activeCidade && !normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
+      if (activeCidade) {
+        const spRegiao = activeCidade.match(/^São Paulo — (.+)$/);
+        if (spRegiao) {
+          if (!normCidade(p.cidade).includes("sao paulo")) return false;
+          if (!p.bairro?.includes(spRegiao[1])) return false;
+        } else {
+          if (!normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
+        }
+      }
       if (activePagamento) {
         const conv = p.convenio_info.toLowerCase();
         if (activePagamento === "Particular" && conv.includes("não aceita")) return false;
@@ -460,13 +477,13 @@ export default function Home() {
         {/* Opções inline de cidade */}
         {showCidadeOptions && (
           <div className="pt-2 flex flex-wrap gap-2">
-            {CIDADES_DISPONIVEIS.map((c) => (
+            {CIDADES_FILTRO.map((c) => (
               <button
                 key={c}
                 onClick={() => { setActiveCidade(activeCidade === c ? null : c); setShowCidadeOptions(false); }}
                 className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
                   activeCidade === c ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
+                } ${c.startsWith("São Paulo — ") ? "ml-1" : ""}`}
               >
                 {c}
               </button>
