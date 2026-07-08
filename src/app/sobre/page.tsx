@@ -17,23 +17,23 @@ export default function SobrePage() {
 
         <div className="px-[30px] pt-[30px] flex flex-col gap-5">
 
-          <p className="font-serif text-[24px] md:text-[26px] leading-[1.45] font-normal text-carvao m-0" style={{ textWrap: "balance" } as React.CSSProperties}>
+          <p className="font-serif text-[19px] md:text-[21px] leading-[1.55] font-normal text-carvao m-0 text-justify">
             Encontrar o profissional certo para uma criança com suspeita de TEA, TDAH ou atraso de desenvolvimento costuma ser, para as famílias, uma segunda jornada tão difícil quanto o próprio diagnóstico.
           </p>
 
-          <p className="text-[17px] md:text-[17.5px] leading-[1.7] text-cinza-texto m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0 text-justify">
             Esse padrão se repete. Na prática clínica, o que se vê com frequência são famílias que chegam ao consultório já exaustas — não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele. Listas desatualizadas, nomes sem contexto, profissionais indicados sem que se saiba ao certo qual é a formação real ou se a atuação com neurodesenvolvimento infantil vai além do autodeclarado. O sistema não organiza esse fluxo — e as famílias acabam tomando decisões importantes com informação insuficiente.
           </p>
 
-          <p className="text-[18px] md:text-[19px] leading-[1.65] text-ardosia font-medium m-0">
+          <p className="text-[17px] md:text-[18px] leading-[1.65] text-ardosia font-medium m-0">
             A Kiri nasceu para mudar isso.
           </p>
 
-          <p className="text-[17px] md:text-[17.5px] leading-[1.7] text-cinza-texto m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0 text-justify">
             Não somos uma lista de nomes. Somos uma rede criteriosamente reunida — cada profissional verificado quanto à formação e à atuação real na área. O objetivo é que a família chegue até o cuidador certo sem ter que percorrer um labirinto para isso.
           </p>
 
-          <p className="text-[17px] md:text-[17.5px] leading-[1.7] text-cinza-texto m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0 text-justify">
             O nome vem do kiri-kiri, o menor dos falcões — de visão aguçada e voo preciso. A ideia é essa: clareza onde costuma haver ruído.
           </p>
 
