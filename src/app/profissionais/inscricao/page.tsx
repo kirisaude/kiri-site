@@ -41,6 +41,7 @@ export default function InscricaoProfissionalPage() {
   }
   const [valorMedio, setValorMedio] = useState("");
   const [aceitaConvenio, setAceitaConvenio] = useState("");
+  const [conveniosNomes, setConveniosNomes] = useState("");
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
   const [graduacaoAno, setGraduacaoAno] = useState("");
@@ -114,6 +115,7 @@ export default function InscricaoProfissionalPage() {
             : bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
+          convenios_nomes: conveniosNomes.trim() || null,
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim(), posGraduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           apresentacao: apresentacao.trim() || null,
@@ -380,6 +382,18 @@ export default function InscricaoProfissionalPage() {
                 Apenas alguns
               </button>
             </div>
+            {(aceitaConvenio === "Sim" || aceitaConvenio === "Apenas alguns") && (
+              <div className="flex flex-col gap-1 mt-1">
+                <span className="text-[11.5px] font-medium text-muted">Quais convênios?</span>
+                <input
+                  type="text"
+                  value={conveniosNomes}
+                  onChange={(e) => setConveniosNomes(e.target.value)}
+                  placeholder="Ex: Unimed, Bradesco Saúde, SulAmérica…"
+                  className={inputClass}
+                />
+              </div>
+            )}
           </div>
 
           {/* Formação */}
