@@ -378,14 +378,18 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Graduação <span className="text-ferrugem">*</span></label>
-            <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Ex: Graduação em Psicologia" className={inputClass} />
-            <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} placeholder="Ex: Universidade de São Paulo, 2010" className={inputClass} />
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Área de graduação" className={`${inputClass} flex-1`} />
+              <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} placeholder="Instituição e data de conclusão do curso" className={`${inputClass} flex-1`} />
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Pós-graduação, residência ou especialização</label>
-            <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Ex: Pós-especialização em integração sensorial" className={inputClass} />
-            <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Ex: UNIFESP, 2022" className={inputClass} />
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Área de especialização" className={`${inputClass} flex-1`} />
+              <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Instituição e data de conclusão" className={`${inputClass} flex-1`} />
+            </div>
           </div>
 
           {/* Apresentação */}
