@@ -86,6 +86,10 @@ export default function InscricaoProfissionalPage() {
       setErro("É necessário aceitar o uso dos seus dados para continuar.");
       return;
     }
+    if (!graduacaoInstituicao.trim()) {
+      setErro("Preencha a instituição e o ano de conclusão da graduação.");
+      return;
+    }
     setEnviando(true);
     setErro("");
 
