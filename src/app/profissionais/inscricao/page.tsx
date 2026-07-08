@@ -380,7 +380,7 @@ export default function InscricaoProfissionalPage() {
             <label className={labelClass}>Graduação <span className="text-ferrugem">*</span></label>
             <div className="flex flex-col sm:flex-row gap-2">
               <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Área de graduação" className={`${inputClass} flex-1`} />
-              <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} placeholder="Instituição e data de conclusão do curso" className={`${inputClass} flex-1`} />
+              <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} required placeholder="Instituição e data de conclusão do curso" className={`${inputClass} flex-1`} />
             </div>
           </div>
 
@@ -464,7 +464,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
