@@ -17,6 +17,7 @@ const PROFISSOES = [
 ];
 const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aumentativa", "Dificuldades de aprendizagem", "Ansiedade infantil", "Comportamento", "Outro"];
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
+const CONVENIOS_LISTA = ["Unimed", "Bradesco Saúde", "SulAmérica", "Amil", "Porto Seguro Saúde", "Hapvida", "Notre Dame Intermédica", "Prevent Senior", "Golden Cross", "Care Plus", "Omint", "Assim Saúde"];
 
 export default function InscricaoProfissionalPage() {
   const router = useRouter();
@@ -41,7 +42,8 @@ export default function InscricaoProfissionalPage() {
   }
   const [valorMedio, setValorMedio] = useState("");
   const [aceitaConvenio, setAceitaConvenio] = useState("");
-  const [conveniosNomes, setConveniosNomes] = useState("");
+  const [conveniosSelecionados, setConveniosSelecionados] = useState<string[]>([]);
+  const [convenioOutro, setConvenioOutro] = useState("");
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
   const [graduacaoAno, setGraduacaoAno] = useState("");
@@ -83,6 +85,12 @@ export default function InscricaoProfissionalPage() {
     );
   }
 
+  function toggleConvenio(nome: string) {
+    setConveniosSelecionados((prev) =>
+      prev.includes(nome) ? prev.filter((c) => c !== nome) : [...prev, nome]
+    );
+  }
+
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
     if (!consentimento) {
@@ -115,7 +123,11 @@ export default function InscricaoProfissionalPage() {
             : bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
-          convenios_nomes: conveniosNomes.trim() || null,
+          convenios_nomes: (() => {
+            const lista = [...conveniosSelecionados];
+            if (convenioOutro.trim()) lista.push(convenioOutro.trim());
+            return lista.length ? lista.join(", ") : null;
+          })(),
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim(), posGraduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           apresentacao: apresentacao.trim() || null,
@@ -383,15 +395,23 @@ export default function InscricaoProfissionalPage() {
               </button>
             </div>
             {(aceitaConvenio === "Sim" || aceitaConvenio === "Apenas alguns") && (
-              <div className="flex flex-col gap-1 mt-1">
+              <div className="flex flex-col gap-1.5 mt-1">
                 <span className="text-[11.5px] font-medium text-muted">Quais convênios?</span>
-                <input
-                  type="text"
-                  value={conveniosNomes}
-                  onChange={(e) => setConveniosNomes(e.target.value)}
-                  placeholder="Ex: Unimed, Bradesco Saúde, SulAmérica…"
-                  className={inputClass}
-                />
+                <div className="flex flex-wrap gap-2">
+                  {CONVENIOS_LISTA.map((conv) => (
+                    <button key={conv} type="button" onClick={() => toggleConvenio(conv)}
+                      className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${conveniosSelecionados.includes(conv) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                      {conv}
+                    </button>
+                  ))}
+                  <input
+                    type="text"
+                    value={convenioOutro}
+                    onChange={(e) => setConvenioOutro(e.target.value)}
+                    placeholder="Outro…"
+                    className="px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border border-linha bg-white text-carvao outline-none focus:border-ardosia transition-colors placeholder:text-muted w-36"
+                  />
+                </div>
               </div>
             )}
           </div>
