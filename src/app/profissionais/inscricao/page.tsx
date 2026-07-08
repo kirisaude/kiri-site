@@ -43,8 +43,10 @@ export default function InscricaoProfissionalPage() {
   const [aceitaConvenio, setAceitaConvenio] = useState("");
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
+  const [graduacaoAno, setGraduacaoAno] = useState("");
   const [posGraduacaoTitulo, setPosGraduacaoTitulo] = useState("");
   const [posGraduacaoInstituicao, setPosGraduacaoInstituicao] = useState("");
+  const [posGraduacaoAno, setPosGraduacaoAno] = useState("");
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [lattes, setLattes] = useState("");
@@ -86,7 +88,7 @@ export default function InscricaoProfissionalPage() {
       setErro("É necessário aceitar o uso dos seus dados para continuar.");
       return;
     }
-    if (!graduacaoInstituicao.trim()) {
+    if (!graduacaoInstituicao.trim() || !graduacaoAno.trim()) {
       setErro("Preencha a instituição e o ano de conclusão da graduação.");
       return;
     }
@@ -112,8 +114,8 @@ export default function InscricaoProfissionalPage() {
             : bairro.trim() || null,
           valor_medio: valorMedio.trim() || null,
           aceita_convenio: aceitaConvenio === "Sim" ? true : aceitaConvenio === "Não" ? false : null,
-          graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
-          pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim()].filter(Boolean).join(" — ") || null,
+          graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
+          pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim(), posGraduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
           lattes: lattes.trim() || null,
@@ -380,19 +382,39 @@ export default function InscricaoProfissionalPage() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label className={labelClass}>Graduação <span className="text-ferrugem">*</span></label>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Área de graduação" className={`${inputClass} flex-1`} />
-              <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} required placeholder="Instituição e data de conclusão do curso" className={`${inputClass} flex-1`} />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Área de graduação <span className="text-ferrugem">*</span></span>
+                <input type="text" value={graduacaoCurso} onChange={(e) => setGraduacaoCurso(e.target.value)} required placeholder="Ex: Psicologia" className={inputClass} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Instituição de graduação <span className="text-ferrugem">*</span></span>
+                <input type="text" value={graduacaoInstituicao} onChange={(e) => setGraduacaoInstituicao(e.target.value)} required placeholder="Ex: USP" className={inputClass} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Ano de conclusão <span className="text-ferrugem">*</span></span>
+                <input type="text" value={graduacaoAno} onChange={(e) => setGraduacaoAno(e.target.value)} required placeholder="Ex: 2015" className={inputClass} />
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label className={labelClass}>Pós-graduação, residência ou especialização</label>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Área de especialização" className={`${inputClass} flex-1`} />
-              <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Instituição e data de conclusão" className={`${inputClass} flex-1`} />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Área de especialização</span>
+                <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Ex: Integração sensorial" className={inputClass} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Instituição</span>
+                <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Ex: UNIFESP" className={inputClass} />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>
+                <input type="text" value={posGraduacaoAno} onChange={(e) => setPosGraduacaoAno(e.target.value)} placeholder="Ex: 2022" className={inputClass} />
+              </div>
             </div>
           </div>
 
@@ -468,7 +490,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
