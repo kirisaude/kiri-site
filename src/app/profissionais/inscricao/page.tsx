@@ -363,8 +363,8 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-2">
             <label className={labelClass}>Aceita convênio? <span className="text-ferrugem">*</span></label>
-            <div className="flex gap-2">
-              {["Sim", "Não", "Apenas alguns"].map((op) => (
+            <div className="flex gap-2 flex-wrap">
+              {(["Sim", "Não", "Apenas alguns"] as const).map((op) => (
                 <button key={op} type="button"
                   onClick={() => setAceitaConvenio(aceitaConvenio === op ? "" : op)}
                   className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${aceitaConvenio === op ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
