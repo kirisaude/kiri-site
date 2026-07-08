@@ -203,6 +203,9 @@ export default function Home() {
             <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
             </Link>
+            <Link href="/profissionais/inscricao" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-3.5 py-2 hover:bg-ferrugem/14 transition-colors no-underline">
+              Faça parte da Kiri
+            </Link>
             <button
               onClick={() => setShowCompartilhar(true)}
               className="hidden md:flex items-center gap-1.5 text-[14px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada rounded-[9px] px-3.5 py-2 cursor-pointer hover:bg-borda-azulada/40 transition-colors"
@@ -254,6 +257,13 @@ export default function Home() {
               className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >
               Sobre
+            </Link>
+            <Link
+              href="/profissionais/inscricao"
+              onClick={() => setShowMenu(false)}
+              className="py-3.5 text-[16px] font-semibold text-ferrugem border-b border-linha-sutil no-underline"
+            >
+              Faça parte da Kiri
             </Link>
             <button
               onClick={() => { setShowMenu(false); setShowCompartilhar(true); }}
