@@ -14,6 +14,7 @@ const PROFISSOES = [
   "Terapeuta ocupacional",
   "Fisioterapeuta",
   "Nutricionista",
+  "Psicopedagogo",
 ];
 const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aumentativa", "Dificuldades de aprendizagem", "Ansiedade infantil", "Comportamento", "Outro"];
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];

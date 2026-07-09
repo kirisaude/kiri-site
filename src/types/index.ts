@@ -38,6 +38,7 @@ export const PROFISSOES_ORDENADAS = [
   "Terapeuta ocupacional",
   "Fisioterapeuta",
   "Nutricionista",
+  "Psicopedagogo",
 ] as const;
 
 export const PROFISSAO_PLURAL: Record<string, string> = {
@@ -49,6 +50,7 @@ export const PROFISSAO_PLURAL: Record<string, string> = {
   "Terapeuta ocupacional": "Terapeutas ocupacionais",
   "Fisioterapeuta": "Fisioterapeutas",
   "Nutricionista": "Nutricionistas",
+  "Psicopedagogo": "Psicopedagogos",
 };
 
 export function valorDisplay(p: Pick<Profissional, "valor_formato" | "valor_min" | "valor_max">): string {
