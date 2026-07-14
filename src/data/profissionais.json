@@ -53,40 +53,6 @@
       "card_token": "1d6918e896b661dd"
     },
     {
-      "id": "kiri-002",
-      "nome": "Dr. André Lemos",
-      "profissao": "Psiquiatra da infância e adolescência",
-      "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "CRM 88214-PR",
-      "rqe": "RQE 19033",
-      "areas_atuacao": [
-        "TDAH"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "Curitiba, PR",
-      "faixa_etaria": "Crianças e adolescentes · 6–18 anos",
-      "sobre": "Foco em TDAH em idade escolar, com manejo medicamentoso criterioso e orientação à família e à escola.",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "UFPR · 2009"
-        },
-        {
-          "curso": "Residência em Psiquiatria",
-          "instituicao_ano": "HC-UFPR · 2013"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 450,
-      "valor_max": 600,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "4b9c0f8e7b48b2c3"
-    },
-    {
       "id": "kiri-003",
       "nome": "Dra. Sofia Brandão",
       "profissao": "Psiquiatra da infância e adolescência",
