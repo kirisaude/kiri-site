@@ -14,45 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-001",
-      "nome": "Dra. Helena Marques",
-      "profissao": "Psiquiatra da infância e adolescência",
-      "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "CRM 134256-SP",
-      "rqe": "RQE 28714",
-      "areas_atuacao": [
-        "TEA",
-        "TDAH"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "São Paulo, SP — Vila Mariana",
-      "faixa_etaria": "Crianças e adolescentes · 0–18 anos",
-      "sobre": "Atende crianças e adolescentes com foco em TEA e TDAH, com avaliação diagnóstica cuidadosa e acompanhamento contínuo. Trabalho em conjunto com a família e a escola, em linguagem clara e sem pressa.",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "Universidade de São Paulo (USP) · 2010"
-        },
-        {
-          "curso": "Residência em Psiquiatria",
-          "instituicao_ano": "UNIFESP · 2014"
-        },
-        {
-          "curso": "Especialização em Psiquiatria da Infância e Adolescência",
-          "instituicao_ano": "IPq-HCFMUSP · 2016"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 450,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "1d6918e896b661dd"
-    },
-    {
       "id": "kiri-003",
       "nome": "Dra. Sofia Brandão",
       "profissao": "Psiquiatra da infância e adolescência",
