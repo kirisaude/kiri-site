@@ -283,7 +283,7 @@ export default function EditarProfissionalPage() {
             { label: "Faixa etária", value: faixaEtaria, set: setFaixaEtaria, required: true },
             { label: "Convênio e pagamento", value: convenio, set: setConvenio, required: true },
             { label: "WhatsApp para agendamento (privado)", value: whatsapp, set: setWhatsapp },
-            { label: "Verificado em (ex: junho de 2026)", value: verificacaoData, set: setVerificacaoData },
+            { label: "Verificado em (ex: Junho de 2026)", value: verificacaoData, set: setVerificacaoData },
           ].map(({ label, value, set, required }) => (
             <div key={label} className="flex flex-col gap-1">
               <label className="text-[12.5px] font-medium text-cinza-texto">{label}</label>

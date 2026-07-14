@@ -134,7 +134,7 @@ export default function RevisarPage() {
       whatsapp_agendamento: whatsappAgendamento.trim() || null,
       verificado: true,
       foto_url: null,
-      verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }),
+      verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }).replace(/^\w/, (c) => c.toUpperCase()),
     };
 
     const res = await fetch("/api/admin/publicar", {
