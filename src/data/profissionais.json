@@ -14,41 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-004",
-      "nome": "Dra. Lúcia Andrade",
-      "profissao": "Neuropediatra",
-      "titulo_exibicao": "Neuropediatra",
-      "registro_conselho": "CRM 95012-RJ",
-      "rqe": "RQE 22107",
-      "areas_atuacao": [
-        "TEA",
-        "TDAH"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Rio de Janeiro, RJ — Botafogo",
-      "faixa_etaria": "Crianças e adolescentes · 0–16 anos",
-      "sobre": "Neurologia pediátrica com foco em atrasos do desenvolvimento, TEA e TDAH; investigação diagnóstica integrada.",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "UERJ · 2007"
-        },
-        {
-          "curso": "Residência em Neurologia Pediátrica",
-          "instituicao_ano": "IPPMG-UFRJ · 2012"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 500,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "ef756e5c261fbb44"
-    },
-    {
       "id": "kiri-005",
       "nome": "Dr. Paulo Vieira",
       "profissao": "Neuropediatra",
