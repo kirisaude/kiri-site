@@ -295,6 +295,7 @@ export default function AdminPage() {
   const [excluindo, setExcluindo] = useState<string | null>(null);
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
+  const [exportando, setExportando] = useState(false);
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
@@ -384,6 +385,18 @@ export default function AdminPage() {
     });
   }
 
+  async function exportarPlanilha() {
+    setExportando(true);
+    const res = await fetch("/api/admin/exportar-planilha", { method: "POST" });
+    const data = await res.json();
+    if (res.ok) {
+      alert(`${data.exportados} inscrição(ões) exportada(s) para a planilha.`);
+    } else {
+      alert(`Erro: ${data.error}`);
+    }
+    setExportando(false);
+  }
+
   async function excluirProfissional(id: string, nome: string) {
     if (!confirm(`Remover "${nome}" da plataforma? Esta ação não pode ser desfeita.`)) return;
     setExcluindo(id);
@@ -471,10 +484,19 @@ export default function AdminPage() {
         {/* ABA INSCRICOES */}
         {aba === "inscricoes" && (
           <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">
+            <div className="flex items-center justify-between">
+              <h2 className="font-serif text-[18px] font-semibold text-carvao">
                 Pendentes <span className="text-[14px] font-sans font-normal text-muted">({pendentes.length})</span>
               </h2>
+              <button
+                onClick={exportarPlanilha}
+                disabled={exportando || inscricoes.length === 0}
+                className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40"
+              >
+                {exportando ? "Exportando…" : "↗ Exportar planilha"}
+              </button>
+            </div>
+            <div>
               {pendentes.length === 0 ? (
                 <p className="text-[14px] text-muted">Nenhuma inscrição pendente.</p>
               ) : (
