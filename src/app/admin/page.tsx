@@ -493,7 +493,7 @@ export default function AdminPage() {
                 disabled={exportando || inscricoes.length === 0}
                 className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40"
               >
-                {exportando ? "Exportando…" : "↗ Exportar planilha"}
+                {exportando ? "Exportando…" : "↗ Exportar para planilha"}
               </button>
             </div>
             <div>
