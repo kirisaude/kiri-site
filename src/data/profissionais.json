@@ -116,40 +116,6 @@
       "card_token": "daadef19bef21404"
     },
     {
-      "id": "kiri-016",
-      "nome": "Letícia Prado",
-      "profissao": "Terapeuta ocupacional",
-      "titulo_exibicao": "Terapeuta ocupacional",
-      "registro_conselho": "CREFITO-3 30214-TO",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Somente presencial",
-      "cidade": "São Paulo, SP — Tatuapé",
-      "faixa_etaria": "Crianças · 2–12 anos",
-      "sobre": "Integração sensorial e autonomia nas atividades de vida diária (AVDs) para crianças no TEA.",
-      "formacao": [
-        {
-          "curso": "Graduação em Terapia Ocupacional",
-          "instituicao_ano": "USP · 2012"
-        },
-        {
-          "curso": "Formação em Integração Sensorial",
-          "instituicao_ano": "2016"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 240,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "016af4d037776aea"
-    },
-    {
       "id": "kiri-017",
       "nome": "Camila Nunes",
       "profissao": "Terapeuta ocupacional",
