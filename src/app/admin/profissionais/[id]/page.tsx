@@ -129,6 +129,7 @@ export default function EditarProfissionalPage() {
 
     const res = await fetch("/api/admin/foto", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ profissional_id: id, filename: `${id}.jpg`, content_base64: base64 }),
     });
@@ -179,6 +180,7 @@ export default function EditarProfissionalPage() {
 
     const res = await fetch("/api/admin/profissionais", {
       method: "PATCH",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
