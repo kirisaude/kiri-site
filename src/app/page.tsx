@@ -821,7 +821,7 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
       className="w-full h-full bg-white border border-linha rounded-[15px] p-3.5 md:p-5 shadow-[0_5px_16px_-11px_rgba(60,55,45,0.32)] cursor-pointer no-underline block hover:shadow-[0_8px_24px_-10px_rgba(60,55,45,0.4)] transition-shadow"
     >
       <div className="flex items-center gap-[11px] md:gap-3.5">
-        <PlaceholderPhoto size={46} radius={11} />
+        <PlaceholderPhoto size={46} radius={11} url={p.foto_url} />
         <div className="min-w-0 flex-1">
           <span className="font-serif text-[15.5px] md:text-[17px] font-semibold text-carvao leading-[1.12] block">
             {p.nome}
