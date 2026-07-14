@@ -14,40 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-005",
-      "nome": "Dr. Paulo Vieira",
-      "profissao": "Neuropediatra",
-      "titulo_exibicao": "Neuropediatra",
-      "registro_conselho": "CRM 142880-SP",
-      "rqe": "RQE 30214",
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Somente presencial",
-      "cidade": "São Paulo, SP — Pinheiros",
-      "faixa_etaria": "Crianças · 0–10 anos",
-      "sobre": "Diagnóstico precoce de TEA e seguimento do neurodesenvolvimento nos primeiros anos.",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "USP · 2006"
-        },
-        {
-          "curso": "Residência em Neurologia Pediátrica",
-          "instituicao_ano": "HC-FMUSP · 2011"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 500,
-      "valor_max": 650,
-      "convenio_info": "Particular · atende alguns convênios",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "390e1294225d453f"
-    },
-    {
       "id": "kiri-008",
       "nome": "Thiago Barros",
       "profissao": "Neuropsicólogo",
