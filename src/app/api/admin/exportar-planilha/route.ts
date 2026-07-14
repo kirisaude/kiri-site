@@ -45,14 +45,18 @@ export async function POST(request: Request) {
 
   let exportados = 0;
   for (const i of inscricoes) {
-    const data = new Date(i.criado_em).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    const dt = new Date(i.criado_em);
+    const data = dt.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    const horario = dt.toLocaleTimeString("pt-BR", { timeZone: "America/Sao_Paulo", hour: "2-digit", minute: "2-digit" });
     try {
       await fetch(sheetsUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           data,
+          horario,
           nome: i.nome || "",
+          email: i.email || "",
           profissao: i.profissao || "",
           cidade: i.cidade || "",
           modalidade: i.modalidade || "",

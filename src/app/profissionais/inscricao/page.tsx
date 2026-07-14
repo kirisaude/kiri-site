@@ -54,6 +54,7 @@ export default function InscricaoProfissionalPage() {
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [lattes, setLattes] = useState("");
+  const [email, setEmail] = useState("");
   const [comoConheceu, setComoConheceu] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [aceitaTermos, setAceitaTermos] = useState(false);
@@ -111,6 +112,7 @@ export default function InscricaoProfissionalPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome: nome.trim(),
+          email: email.trim() || null,
           profissao: profissao.trim(),
           registro_conselho: registroConselho.trim(),
           rqe: rqe.trim() || null,
@@ -485,6 +487,21 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>E-mail <span className="text-ferrugem">*</span></label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="seu@email.com"
+              className={inputClass}
+            />
+            <p className="text-[12px] text-muted leading-[1.5]">
+              Usado pela equipe Kiri para solicitar documentos e comunicar o andamento da inscrição. Não aparecerá no perfil público.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
             <label className={labelClass}>WhatsApp para agendamento <span className="text-ferrugem">*</span></label>
             <input
               type="tel"
@@ -533,7 +550,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
+          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !email || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
 
