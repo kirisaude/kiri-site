@@ -293,40 +293,6 @@
       "card_token": "daadef19bef21404"
     },
     {
-      "id": "kiri-010",
-      "nome": "Rafael Tavares",
-      "profissao": "Psicólogo",
-      "titulo_exibicao": "Psicólogo infantil",
-      "registro_conselho": "CRP 08/14722",
-      "rqe": null,
-      "areas_atuacao": [
-        "TDAH"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "Curitiba, PR",
-      "faixa_etaria": "Crianças e adolescentes · 6–17 anos",
-      "sobre": "Terapia cognitivo-comportamental (TCC) para TDAH, com foco em rotina, organização e autoestima.",
-      "formacao": [
-        {
-          "curso": "Graduação em Psicologia",
-          "instituicao_ano": "PUC-PR · 2013"
-        },
-        {
-          "curso": "Formação em TCC",
-          "instituicao_ano": "Instituto de TCC · 2016"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 200,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "7e6bdc09b5dc39ed"
-    },
-    {
       "id": "kiri-012",
       "nome": "Bruno Carvalho",
       "profissao": "Psicólogo",
