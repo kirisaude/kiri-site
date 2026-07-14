@@ -14,41 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-019",
-      "nome": "Natália Souza",
-      "profissao": "Fisioterapeuta",
-      "titulo_exibicao": "Fisioterapeuta",
-      "registro_conselho": "CREFITO-10 12877-F",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA",
-        "TDAH"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Florianópolis, SC",
-      "faixa_etaria": "Crianças · 1–10 anos",
-      "sobre": "Fisioterapia neuropediátrica e desenvolvimento motor; trabalho integrado com TO e fono.",
-      "formacao": [
-        {
-          "curso": "Graduação em Fisioterapia",
-          "instituicao_ano": "UFSC · 2011"
-        },
-        {
-          "curso": "Especialização em Fisioterapia Neurofuncional",
-          "instituicao_ano": "COFFITO · 2015"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 200,
-      "valor_max": 290,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "c55756053e194f70"
-    },
-    {
       "id": "kiri-020",
       "nome": "Carla Bittencourt",
       "profissao": "Nutricionista",
