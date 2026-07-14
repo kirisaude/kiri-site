@@ -49,7 +49,7 @@ export default function RevisarPage() {
   const [valorMin, setValorMin] = useState("");
   const [convenio, setConvenio] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
-  const [formacao, setFormacao] = useState([{ curso: "", instituicao_ano: "" }]);
+  const [formacao, setFormacao] = useState([{ curso: "", instituicao_ano: "" }, { curso: "", instituicao_ano: "" }]);
 
   useEffect(() => {
     fetch("/api/admin/inscricoes")
@@ -254,16 +254,22 @@ export default function RevisarPage() {
 
           <div className="flex flex-col gap-2">
             <label className="text-[12.5px] font-medium text-cinza-texto">Formação</label>
-            {formacao.map((f, i) => (
-              <div key={i} className="flex gap-2">
-                <input type="text" placeholder="Curso" value={f.curso}
-                  onChange={(e) => { const novo = [...formacao]; novo[i] = { ...novo[i], curso: e.target.value }; setFormacao(novo); }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia" />
-                <input type="text" placeholder="Instituição · Ano" value={f.instituicao_ano}
-                  onChange={(e) => { const novo = [...formacao]; novo[i] = { ...novo[i], instituicao_ano: e.target.value }; setFormacao(novo); }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia" />
-              </div>
-            ))}
+            {formacao.map((f, i) => {
+              const exemplosCurso = ["ex: Pós-graduação em análise do comportamento", "ex: Mestrado em psiquiatria"];
+              const exemplosLocal = ["ex: Universidade de São Paulo, 2010", "ex: Universidade de São Paulo, 2010"];
+              const phCurso = exemplosCurso[i] ?? "ex: Especialização · área";
+              const phLocal = exemplosLocal[i] ?? "ex: Instituição, Ano";
+              return (
+                <div key={i} className="flex gap-2">
+                  <input type="text" placeholder={phCurso} value={f.curso}
+                    onChange={(e) => { const novo = [...formacao]; novo[i] = { ...novo[i], curso: e.target.value }; setFormacao(novo); }}
+                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted" />
+                  <input type="text" placeholder={phLocal} value={f.instituicao_ano}
+                    onChange={(e) => { const novo = [...formacao]; novo[i] = { ...novo[i], instituicao_ano: e.target.value }; setFormacao(novo); }}
+                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted" />
+                </div>
+              );
+            })}
             <button type="button" onClick={() => setFormacao([...formacao, { curso: "", instituicao_ano: "" }])}
               className="text-[13px] text-ardosia font-semibold text-left cursor-pointer">
               + Adicionar linha

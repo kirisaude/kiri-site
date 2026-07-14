@@ -59,7 +59,7 @@ export default function EditarProfissionalPage() {
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
   const [formacao, setFormacao] = useState(
-    profOriginal?.formacao.length ? profOriginal.formacao : [{ curso: "", instituicao_ano: "" }]
+    profOriginal?.formacao.length ? profOriginal.formacao : [{ curso: "", instituicao_ano: "" }, { curso: "", instituicao_ano: "" }]
   );
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
   const [convenioCustom, setConvenioCustom] = useState("");
@@ -440,29 +440,34 @@ export default function EditarProfissionalPage() {
           {/* Formação */}
           <div className="flex flex-col gap-2">
             <label className="text-[12.5px] font-medium text-cinza-texto">Formação</label>
-            {formacao.map((f, i) => (
+            {formacao.map((f, i) => {
+              const exemplosCurso = ["ex: Pós-graduação em análise do comportamento", "ex: Mestrado em psiquiatria"];
+              const exemplosLocal = ["ex: Universidade de São Paulo, 2010", "ex: Universidade de São Paulo, 2010"];
+              const phCurso = exemplosCurso[i] ?? "ex: Especialização · área";
+              const phLocal = exemplosLocal[i] ?? "ex: Instituição, Ano";
+              return (
               <div key={i} className="flex gap-2 items-center">
                 <input
                   type="text"
-                  placeholder="Curso"
+                  placeholder={phCurso}
                   value={f.curso}
                   onChange={(e) => {
                     const novo = [...formacao];
                     novo[i] = { ...novo[i], curso: e.target.value };
                     setFormacao(novo);
                   }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia"
+                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                 />
                 <input
                   type="text"
-                  placeholder="Instituição · Ano"
+                  placeholder={phLocal}
                   value={f.instituicao_ano}
                   onChange={(e) => {
                     const novo = [...formacao];
                     novo[i] = { ...novo[i], instituicao_ano: e.target.value };
                     setFormacao(novo);
                   }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia"
+                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                 />
                 {formacao.length > 1 && (
                   <button
@@ -474,7 +479,8 @@ export default function EditarProfissionalPage() {
                   </button>
                 )}
               </div>
-            ))}
+              );
+            })}
             <button
               type="button"
               onClick={() => setFormacao([...formacao, { curso: "", instituicao_ano: "" }])}
