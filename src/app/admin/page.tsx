@@ -6,6 +6,7 @@ import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
+import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -504,7 +505,7 @@ export default function AdminPage() {
                   {pendentes.map((i) => (
                     <div key={i.id} className="bg-white border border-linha rounded-[14px] px-4 py-3.5 flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="font-serif text-[15.5px] font-semibold text-carvao">{i.nome}</div>
+                        <div className="font-serif text-[15.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
                         <div className="text-[13px] text-cinza-texto mt-0.5">{i.profissao} · {i.cidade || "—"} · {new Date(i.criado_em).toLocaleDateString("pt-BR")}</div>
                       </div>
                       <div className="flex items-center gap-2 flex-none">
@@ -535,7 +536,7 @@ export default function AdminPage() {
                   {aprovados.map((i) => (
                     <div key={i.id} className="bg-white border border-linha rounded-[12px] px-4 py-3 flex items-center justify-between gap-3 opacity-70">
                       <div>
-                        <div className="text-[14.5px] font-semibold text-carvao">{i.nome}</div>
+                        <div className="text-[14.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
                         <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
                       </div>
                       <div className="flex items-center gap-3">
@@ -560,7 +561,7 @@ export default function AdminPage() {
                   {rejeitados.map((i) => (
                     <div key={i.id} className="bg-white border border-linha rounded-[12px] px-4 py-3 flex items-center justify-between gap-3 opacity-50">
                       <div>
-                        <div className="text-[14.5px] font-semibold text-carvao">{i.nome}</div>
+                        <div className="text-[14.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
                         <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
                       </div>
                       <div className="flex items-center gap-3">
@@ -787,7 +788,7 @@ export default function AdminPage() {
                       <div key={p.id} className="bg-white border border-linha rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{p.nome}</span>
+                            <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
                             <span className="text-[11px] text-muted font-mono">{p.id}</span>
                           </div>
                           <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
