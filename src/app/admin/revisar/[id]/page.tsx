@@ -72,7 +72,10 @@ export default function RevisarPage() {
         setCidade(s.cidade ?? "");
         setFaixaEtaria(s.faixa_etaria ?? "");
         setSobre(s.apresentacao ?? "");
-        setValorMin(s.valor_medio?.replace(/\D/g, "") ?? "");
+        const valorRaw = s.valor_medio ?? "";
+        const valorMatch = valorRaw.match(/(\d[\d.]*),\d{2}|(\d+)/);
+        const valorNum = valorMatch ? parseInt((valorMatch[1] || valorMatch[2]).replace(/\./g, ""), 10) : NaN;
+        setValorMin(isNaN(valorNum) ? "" : String(valorNum));
         setConvenio(s.aceita_convenio === true ? "Particular e convênio" : "Particular · emite recibo para reembolso");
         setWhatsappAgendamento(s.whatsapp_agendamento ?? "");
 
