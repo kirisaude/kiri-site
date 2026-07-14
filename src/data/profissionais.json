@@ -660,8 +660,12 @@
           "instituicao_ano": "Universidade Paulista, 2015"
         },
         {
-          "curso": "Especialização",
-          "instituicao_ano": "Pós graduada em Análise do Comportamento Aplicada- CBI OF Miami \nMestranda em Educação Especial- Universidade Federal de São Carlos (Ufscar)"
+          "curso": "Pós graduação em Análise do Comportamento Aplicada para Autismo e Deficiência Intelectual",
+          "instituicao_ano": "CBI OF Miami, 2020"
+        },
+        {
+          "curso": "Mestranda em Educação Especial",
+          "instituicao_ano": " Universidade Federal de São Carlos"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -671,9 +675,10 @@
       "convenios": null,
       "whatsapp_agendamento": "11945454557",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-023.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "7a4670beac9c4c65"
+      "card_token": "7a4670beac9c4c65",
+      "tempo_atuacao": null
     },
     {
       "id": "kiri-024",
