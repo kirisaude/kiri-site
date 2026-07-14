@@ -760,9 +760,10 @@
       "convenios": null,
       "whatsapp_agendamento": "11985101914",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-025.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "c589125763964e01"
+      "card_token": "c589125763964e01",
+      "tempo_atuacao": null
     }
   ]
 }
