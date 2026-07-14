@@ -328,40 +328,6 @@
       "card_token": "3c86afee826ee8c3"
     },
     {
-      "id": "kiri-013",
-      "nome": "Dra. Beatriz Lima",
-      "profissao": "Fonoaudiólogo",
-      "titulo_exibicao": "Fonoaudióloga",
-      "registro_conselho": "CRFa 2-11045",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "São Paulo, SP — Moema",
-      "faixa_etaria": "Crianças · 1–10 anos",
-      "sobre": "Linguagem e comunicação no TEA, incluindo comunicação alternativa quando necessário.",
-      "formacao": [
-        {
-          "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "PUC-SP · 2012"
-        },
-        {
-          "curso": "Especialização em Linguagem",
-          "instituicao_ano": "CFFa · 2016"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 220,
-      "valor_max": null,
-      "convenio_info": "Particular · atende alguns convênios",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "672124ebb92a935b"
-    },
-    {
       "id": "kiri-014",
       "nome": "Tiago Mendes",
       "profissao": "Fonoaudiólogo",
