@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
+import { titleCasePT } from "@/lib/titleCase";
 
 export default function ProPage() {
   const [authed, setAuthed] = useState(false);
@@ -113,7 +114,7 @@ export default function ProPage() {
                   <div key={p.id} className="bg-white border border-borda-azulada rounded-[14px] px-4 py-4 flex flex-col gap-2.5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <div className="font-serif text-[16px] font-semibold text-carvao">{p.nome}</div>
+                        <div className="font-serif text-[16px] font-semibold text-carvao">{titleCasePT(p.nome)}</div>
                         <div className="text-[12.5px] text-muted mt-0.5">{p.cidade} · {p.modalidade}</div>
                       </div>
                       {waUrl && (
