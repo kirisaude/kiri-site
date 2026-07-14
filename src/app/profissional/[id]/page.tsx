@@ -8,15 +8,7 @@ import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { valorDisplay } from "@/types";
-
-const CONECTORES = new Set(["de", "do", "da", "dos", "das", "em", "no", "na", "nos", "nas", "e", "ou", "a", "o", "as", "os", "para", "com", "por", "entre", "ao", "à", "aos", "às", "um", "uma"]);
-function titleCasePT(str: string) {
-  return str.replace(/\S+/g, (word, offset) => {
-    const clean = word.toLowerCase();
-    if (offset === 0 || !CONECTORES.has(clean)) return clean.charAt(0).toUpperCase() + clean.slice(1);
-    return clean;
-  });
-}
+import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -65,7 +57,7 @@ export default async function PerfilPage({ params }: PageProps) {
               <PlaceholderPhoto size={100} radius={24} url={p.foto_url} />
 
               <div className="flex items-center gap-[7px] mt-[14px]">
-                <span className="font-serif text-[25px] md:text-[27px] font-semibold text-carvao leading-[1.1]">{p.nome}</span>
+                <span className="font-serif text-[25px] md:text-[27px] font-semibold text-carvao leading-[1.1]">{titleCasePT(p.nome)}</span>
                 {/* Selo verificado com tooltip */}
                 <div className="relative group flex-none">
                   <svg width="19" height="19" viewBox="0 0 22 22" fill="none" aria-label="Verificado" style={{ flexShrink: 0, cursor: "default" }}>

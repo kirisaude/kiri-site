@@ -10,6 +10,7 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS, PROFISSAO_PLURAL, cidadeCurta, modalidadeCurta } from "@/types";
 import { Footer } from "@/components/Footer";
+import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
@@ -829,7 +830,7 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         <PlaceholderPhoto size={46} radius={11} url={p.foto_url} />
         <div className="min-w-0 flex-1">
           <span className="font-serif text-[15.5px] md:text-[17px] font-semibold text-carvao leading-[1.12] block">
-            {p.nome}
+            {titleCasePT(p.nome)}
           </span>
           <div className="mt-1 inline-flex items-center gap-1">
             <svg width="13" height="13" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
