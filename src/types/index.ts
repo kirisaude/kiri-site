@@ -25,6 +25,7 @@ export interface Profissional {
   verificado: boolean;
   verificacao_data: string;
   foto_url: string | null;
+  foto_posicao?: string | null;
   whatsapp_agendamento: string | null;
   card_token: string;
 }

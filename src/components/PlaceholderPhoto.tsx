@@ -2,9 +2,10 @@ interface PlaceholderPhotoProps {
   size?: number;
   radius?: number;
   url?: string | null;
+  posicao?: string | null;
 }
 
-export function PlaceholderPhoto({ size = 46, radius = 11, url }: PlaceholderPhotoProps) {
+export function PlaceholderPhoto({ size = 46, radius = 11, url, posicao }: PlaceholderPhotoProps) {
   if (url) {
     return (
       <div
@@ -20,7 +21,7 @@ export function PlaceholderPhoto({ size = 46, radius = 11, url }: PlaceholderPho
         <img
           src={url}
           alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: posicao ?? "center top" }}
         />
       </div>
     );

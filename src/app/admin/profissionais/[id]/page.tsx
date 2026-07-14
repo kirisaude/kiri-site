@@ -64,6 +64,7 @@ export default function EditarProfissionalPage() {
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
   const [convenioCustom, setConvenioCustom] = useState("");
   const [fotoUrl, setFotoUrl] = useState(profOriginal?.foto_url ?? "");
+  const [fotoPosicao, setFotoPosicao] = useState(profOriginal?.foto_posicao ?? "center top");
   const [fotoPreview, setFotoPreview] = useState<string | null>(profOriginal?.foto_url ?? null);
   const [uploadandoFoto, setUploadandoFoto] = useState(false);
   const [erroFoto, setErroFoto] = useState("");
@@ -203,6 +204,7 @@ export default function EditarProfissionalPage() {
       whatsapp_agendamento: whatsapp.trim() || null,
       verificacao_data: verificacaoData.trim(),
       foto_url: fotoUrl || null,
+      foto_posicao: fotoPosicao || null,
     };
 
     const res = await fetch("/api/admin/profissionais", {
@@ -258,7 +260,7 @@ export default function EditarProfissionalPage() {
               >
                 {fotoPreview ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={fotoPreview} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+                  <img src={fotoPreview} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: fotoPosicao }} />
                 ) : (
                   <svg width={72} height={72} viewBox="0 0 48 48">
                     <circle cx="24" cy="19" r="8.5" fill="#CDBFA8" />
@@ -283,6 +285,29 @@ export default function EditarProfissionalPage() {
                 <span className="text-[11.5px] text-muted">JPG, PNG ou WebP · recomendado 400×400px</span>
               </div>
             </div>
+            {fotoPreview && (
+              <div className="flex flex-col gap-1.5 mt-2">
+                <span className="text-[11.5px] font-medium text-muted">Posição da foto</span>
+                <div className="flex gap-2 flex-wrap">
+                  {[
+                    { label: "Topo", value: "center top" },
+                    { label: "Centro", value: "center center" },
+                    { label: "Baixo", value: "center bottom" },
+                    { label: "Rosto acima", value: "center 20%" },
+                    { label: "Rosto abaixo", value: "center 70%" },
+                  ].map((op) => (
+                    <button
+                      key={op.value}
+                      type="button"
+                      onClick={() => setFotoPosicao(op.value)}
+                      className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${fotoPosicao === op.value ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
+                    >
+                      {op.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Profissão */}
