@@ -764,6 +764,48 @@
       "verificacao_data": "julho de 2026",
       "card_token": "c589125763964e01",
       "tempo_atuacao": null
+    },
+    {
+      "id": "kiri-026",
+      "nome": "Juliana Reis Faria",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "06/116043",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade infantil",
+        "Comportamento",
+        "Outro",
+        "Altas Habilidades e Superdotação"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou Juliana Reis Faria, psicóloga formada pela Universidade Presbiteriana Mackenzie, com 13 anos de experiência clínica e especializações na área da Análise do Comportamento pela Universidade de São Paulo (USP). Ao longo da minha trajetória, atuei em serviços públicos e privados de saúde, desenvolvendo experiência no atendimento de crianças, adolescentes e suas famílias.\n\nEm 2023, fundei a Clínica Juliana Reis – Intervenção Comportamental, especializada no atendimento de Psicoterapia Comportamental para crianças e adolescentes. Nosso compromisso é oferecer um cuidado ético, acolhedor e baseado em evidências científicas, com intervenções individualizadas e atuação integrada junto à família, à escola e à equipe multidisciplinar.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Terapia Comportamental — USP"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 320,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "11967262820",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "Julho de 2026",
+      "card_token": "19f3779a7e87432d"
     }
   ]
 }
