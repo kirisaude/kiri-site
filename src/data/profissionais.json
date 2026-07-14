@@ -116,41 +116,6 @@
       "card_token": "daadef19bef21404"
     },
     {
-      "id": "kiri-014",
-      "nome": "Tiago Mendes",
-      "profissao": "Fonoaudiólogo",
-      "titulo_exibicao": "Fonoaudiólogo",
-      "registro_conselho": "CRFa 5-8820",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA",
-        "TDAH"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "Salvador, BA",
-      "faixa_etaria": "Crianças e adolescentes · 4–15 anos",
-      "sobre": "Fala e linguagem com foco em compreensão, narrativa e leitura; apoio a dificuldades escolares.",
-      "formacao": [
-        {
-          "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "UFBA · 2013"
-        },
-        {
-          "curso": "Especialização em Linguagem",
-          "instituicao_ano": "CFFa · 2017"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 200,
-      "valor_max": 280,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "423b16477aaebdc2"
-    },
-    {
       "id": "kiri-015",
       "nome": "Renata Alves",
       "profissao": "Fonoaudiólogo",
