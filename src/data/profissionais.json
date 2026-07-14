@@ -116,40 +116,6 @@
       "card_token": "daadef19bef21404"
     },
     {
-      "id": "kiri-015",
-      "nome": "Renata Alves",
-      "profissao": "Fonoaudiólogo",
-      "titulo_exibicao": "Fonoaudióloga",
-      "registro_conselho": "CRFa 6-9912",
-      "rqe": null,
-      "areas_atuacao": [
-        "TDAH"
-      ],
-      "modalidade": "Somente presencial",
-      "cidade": "Belo Horizonte, MG",
-      "faixa_etaria": "Crianças · 5–12 anos",
-      "sobre": "Processamento auditivo e linguagem associados ao TDAH, com plano terapêutico individualizado.",
-      "formacao": [
-        {
-          "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "UFMG · 2011"
-        },
-        {
-          "curso": "Especialização em Audiologia",
-          "instituicao_ano": "CFFa · 2015"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 210,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "4fae558fe835af48"
-    },
-    {
       "id": "kiri-016",
       "nome": "Letícia Prado",
       "profissao": "Terapeuta ocupacional",
