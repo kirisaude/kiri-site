@@ -39,14 +39,6 @@ export default function SobrePage() {
 
         </div>
 
-        {/* Assinatura */}
-        <div className="mx-[30px] mt-[36px] border-t border-linha pt-6 flex flex-col gap-1">
-          <p className="text-[16px] font-semibold text-carvao m-0">Iohana Marques</p>
-          <p className="text-[14px] text-muted m-0">Idealizadora</p>
-          <p className="text-[14px] text-cinza-texto m-0">Médica residente em Psiquiatria · UNIFESP</p>
-          <p className="text-[14px] text-cinza-texto m-0">Engenheira Civil · USP</p>
-        </div>
-
         <Footer className="mx-[30px] mt-7" />
       </div>
     </div>
