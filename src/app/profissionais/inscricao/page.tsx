@@ -48,9 +48,8 @@ export default function InscricaoProfissionalPage() {
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
   const [graduacaoAno, setGraduacaoAno] = useState("");
-  const [posGraduacaoTitulo, setPosGraduacaoTitulo] = useState("");
-  const [posGraduacaoInstituicao, setPosGraduacaoInstituicao] = useState("");
-  const [posGraduacaoAno, setPosGraduacaoAno] = useState("");
+  const [posGraduacoes, setPosGraduacoes] = useState([{ titulo: "", instituicao: "", ano: "" }]);
+  const [mestrados, setMestrados] = useState([{ titulo: "", instituicao: "", ano: "" }]);
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [lattes, setLattes] = useState("");
@@ -132,7 +131,10 @@ export default function InscricaoProfissionalPage() {
             return lista.length ? lista.join(", ") : null;
           })(),
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
-          pos_graduacao: [posGraduacaoTitulo.trim(), posGraduacaoInstituicao.trim(), posGraduacaoAno.trim()].filter(Boolean).join(" — ") || null,
+          pos_graduacao: [
+            ...posGraduacoes.map((p) => [p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
+            ...mestrados.map((m) => ["Mestrado/Doutorado: " + m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
+          ].filter(Boolean).join("\n") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
           lattes: lattes.trim() || null,
@@ -447,20 +449,62 @@ export default function InscricaoProfissionalPage() {
 
           <div className="flex flex-col gap-2">
             <label className={labelClass}>Pós-graduação, residência ou especialização</label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <div className="flex flex-col gap-1">
-                <span className="text-[11.5px] font-medium text-muted">Área de especialização</span>
-                <input type="text" value={posGraduacaoTitulo} onChange={(e) => setPosGraduacaoTitulo(e.target.value)} placeholder="Ex: Integração sensorial" className={inputClass} />
+            {posGraduacoes.map((p, i) => (
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Área de especialização</span>}
+                  <input type="text" value={p.titulo}
+                    onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], titulo: e.target.value }; setPosGraduacoes(n); }}
+                    placeholder="Ex: Pós-graduação em integração sensorial" className={inputClass} />
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Instituição</span>}
+                  <input type="text" value={p.instituicao}
+                    onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], instituicao: e.target.value }; setPosGraduacoes(n); }}
+                    placeholder="Ex: UNIFESP" className={inputClass} />
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>}
+                  <input type="text" value={p.ano}
+                    onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], ano: e.target.value }; setPosGraduacoes(n); }}
+                    placeholder="Ex: 2022" className={inputClass} />
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[11.5px] font-medium text-muted">Instituição</span>
-                <input type="text" value={posGraduacaoInstituicao} onChange={(e) => setPosGraduacaoInstituicao(e.target.value)} placeholder="Ex: UNIFESP" className={inputClass} />
+            ))}
+            <button type="button" onClick={() => setPosGraduacoes([...posGraduacoes, { titulo: "", instituicao: "", ano: "" }])}
+              className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
+              + Adicionar outra
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className={labelClass}>Mestrado, doutorado ou pós-doutorado <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+            {mestrados.map((m, i) => (
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Título / área</span>}
+                  <input type="text" value={m.titulo}
+                    onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], titulo: e.target.value }; setMestrados(n); }}
+                    placeholder="Ex: Mestrado em neurociências" className={inputClass} />
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Instituição</span>}
+                  <input type="text" value={m.instituicao}
+                    onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], instituicao: e.target.value }; setMestrados(n); }}
+                    placeholder="Ex: UNIFESP" className={inputClass} />
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>}
+                  <input type="text" value={m.ano}
+                    onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], ano: e.target.value }; setMestrados(n); }}
+                    placeholder="Ex: 2018" className={inputClass} />
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>
-                <input type="text" value={posGraduacaoAno} onChange={(e) => setPosGraduacaoAno(e.target.value)} placeholder="Ex: 2022" className={inputClass} />
-              </div>
-            </div>
+            ))}
+            <button type="button" onClick={() => setMestrados([...mestrados, { titulo: "", instituicao: "", ano: "" }])}
+              className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
+              + Adicionar outro
+            </button>
           </div>
 
           {/* Apresentação */}
