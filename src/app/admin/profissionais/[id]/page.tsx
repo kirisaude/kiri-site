@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
@@ -71,6 +71,33 @@ export default function EditarProfissionalPage() {
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
+  const [authed, setAuthed] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/inscricoes", { credentials: "include" }).then((r) => {
+      if (r.ok) setAuthed(true);
+      else setAuthed(false);
+    });
+  }, []);
+
+  if (authed === null) {
+    return (
+      <div className="min-h-screen bg-creme flex items-center justify-center">
+        <p className="text-[14px] text-muted">Verificando acesso…</p>
+      </div>
+    );
+  }
+
+  if (authed === false) {
+    return (
+      <div className="min-h-screen bg-creme flex items-center justify-center px-6">
+        <div className="text-center">
+          <p className="text-[15px] text-ferrugem mb-4">Sessão expirada ou não autorizado.</p>
+          <Link href="/admin" className="text-[14px] text-ardosia font-semibold">← Fazer login em /admin</Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!profOriginal) {
     return (
