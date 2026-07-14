@@ -14,40 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-018",
-      "nome": "Diego Farias",
-      "profissao": "Fisioterapeuta",
-      "titulo_exibicao": "Fisioterapeuta",
-      "registro_conselho": "CREFITO-6 41200-F",
-      "rqe": null,
-      "areas_atuacao": [
-        "TDAH"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "Fortaleza, CE",
-      "faixa_etaria": "Crianças e adolescentes · 6–16 anos",
-      "sobre": "Fisioterapia motora e psicomotricidade, apoiando coordenação e organização corporal no TDAH.",
-      "formacao": [
-        {
-          "curso": "Graduação em Fisioterapia",
-          "instituicao_ano": "UFC · 2012"
-        },
-        {
-          "curso": "Especialização em Fisioterapia Neurofuncional",
-          "instituicao_ano": "COFFITO · 2016"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 200,
-      "valor_max": null,
-      "convenio_info": "Particular · atende alguns convênios",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "fdc0f1e16ba5bef3"
-    },
-    {
       "id": "kiri-019",
       "nome": "Natália Souza",
       "profissao": "Fisioterapeuta",
