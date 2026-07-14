@@ -14,40 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-009",
-      "nome": "Daniela Castro",
-      "profissao": "Neuropsicólogo",
-      "titulo_exibicao": "Neuropsicóloga",
-      "registro_conselho": "CRP 07/30551",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Somente presencial",
-      "cidade": "Porto Alegre, RS",
-      "faixa_etaria": "Crianças · 4–12 anos",
-      "sobre": "Avaliação neuropsicológica infantil com foco em TEA e perfil de aprendizagem.",
-      "formacao": [
-        {
-          "curso": "Graduação em Psicologia",
-          "instituicao_ano": "UFRGS · 2010"
-        },
-        {
-          "curso": "Título de Especialista em Neuropsicologia (CFP)",
-          "instituicao_ano": "CFP · 2016"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 400,
-      "valor_max": 560,
-      "convenio_info": "Particular · avaliação fechada em pacote",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "daadef19bef21404"
-    },
-    {
       "id": "kiri-018",
       "nome": "Diego Farias",
       "profissao": "Fisioterapeuta",
