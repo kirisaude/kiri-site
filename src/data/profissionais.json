@@ -48,40 +48,6 @@
       "card_token": "390e1294225d453f"
     },
     {
-      "id": "kiri-006",
-      "nome": "Dra. Carmen Rocha",
-      "profissao": "Neuropediatra",
-      "titulo_exibicao": "Neuropediatra",
-      "registro_conselho": "CRM 60331-PE",
-      "rqe": "RQE 12044",
-      "areas_atuacao": [
-        "TDAH"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "Recife, PE",
-      "faixa_etaria": "Crianças e adolescentes · 6–17 anos",
-      "sobre": "Acompanhamento de TDAH e dificuldades escolares, com foco em qualidade de vida da família.",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "UFPE · 2009"
-        },
-        {
-          "curso": "Residência em Neurologia Pediátrica",
-          "instituicao_ano": "IMIP · 2014"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 460,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "3f66e8b1585d2e34"
-    },
-    {
       "id": "kiri-007",
       "nome": "Dra. Beatriz Nogueira",
       "profissao": "Neuropsicólogo",
