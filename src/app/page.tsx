@@ -815,6 +815,11 @@ export default function Home() {
 }
 
 function MiniCard({ profissional: p }: { profissional: Profissional }) {
+  const [expandido, setExpandido] = useState(false);
+  const LIMITE = 3;
+  const temMais = p.areas_atuacao.length > LIMITE;
+  const areasVisiveis = expandido ? p.areas_atuacao : p.areas_atuacao.slice(0, LIMITE);
+
   return (
     <Link
       href={`/profissional/${p.id}`}
@@ -838,8 +843,8 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         </div>
       </div>
 
-      <div className="flex gap-1.5 flex-wrap mt-[11px] max-h-[52px] overflow-hidden">
-        {p.areas_atuacao.slice(0, 4).map((area) => (
+      <div className="flex gap-1.5 flex-wrap mt-[11px] items-center">
+        {areasVisiveis.map((area) => (
           <span
             key={area}
             className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
@@ -847,10 +852,14 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
             {area}
           </span>
         ))}
-        {p.areas_atuacao.length > 4 && (
-          <span className="text-[10.5px] md:text-[12px] font-semibold text-muted bg-wash border border-linha px-2 md:px-2.5 py-0.5 rounded-[6px]">
-            +{p.areas_atuacao.length - 4}
-          </span>
+        {temMais && (
+          <button
+            type="button"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setExpandido((v) => !v); }}
+            className="text-[10.5px] md:text-[12px] font-semibold text-muted px-1.5 py-0.5 cursor-pointer"
+          >
+            {expandido ? "←" : `+${p.areas_atuacao.length - LIMITE} →`}
+          </button>
         )}
       </div>
 
