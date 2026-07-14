@@ -9,6 +9,15 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { valorDisplay } from "@/types";
 
+const CONECTORES = new Set(["de", "do", "da", "dos", "das", "em", "no", "na", "nos", "nas", "e", "ou", "a", "o", "as", "os", "para", "com", "por", "entre", "ao", "à", "aos", "às", "um", "uma"]);
+function titleCasePT(str: string) {
+  return str.replace(/\S+/g, (word, offset) => {
+    const clean = word.toLowerCase();
+    if (offset === 0 || !CONECTORES.has(clean)) return clean.charAt(0).toUpperCase() + clean.slice(1);
+    return clean;
+  });
+}
+
 const profissionais = data.profissionais as Profissional[];
 
 export function generateStaticParams() {
@@ -177,8 +186,8 @@ export default async function PerfilPage({ params }: PageProps) {
                   <div key={i} className="flex gap-3">
                     <div className="w-[9px] h-[9px] rounded-full border-2 border-ferrugem flex-none mt-1" />
                     <div>
-                      <div className="text-[14.5px] font-semibold text-carvao leading-[1.3] capitalize">{f.curso}</div>
-                      <div className="text-[13px] text-cinza-texto2 mt-0.5 capitalize">{f.instituicao_ano}</div>
+                      <div className="text-[14.5px] font-semibold text-carvao leading-[1.3]">{titleCasePT(f.curso)}</div>
+                      <div className="text-[13px] text-cinza-texto2 mt-0.5">{titleCasePT(f.instituicao_ano)}</div>
                     </div>
                   </div>
                 ))}
