@@ -838,8 +838,8 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         </div>
       </div>
 
-      <div className="flex gap-1.5 flex-wrap mt-[11px]">
-        {p.areas_atuacao.map((area) => (
+      <div className="flex gap-1.5 flex-wrap mt-[11px] max-h-[52px] overflow-hidden">
+        {p.areas_atuacao.slice(0, 4).map((area) => (
           <span
             key={area}
             className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
@@ -847,6 +847,11 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
             {area}
           </span>
         ))}
+        {p.areas_atuacao.length > 4 && (
+          <span className="text-[10.5px] md:text-[12px] font-semibold text-muted bg-wash border border-linha px-2 md:px-2.5 py-0.5 rounded-[6px]">
+            +{p.areas_atuacao.length - 4}
+          </span>
+        )}
       </div>
 
       <div className="flex items-center gap-1.5 mt-[11px] text-[11.5px] md:text-[13px] text-cinza-texto2">
