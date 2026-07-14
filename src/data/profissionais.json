@@ -14,40 +14,6 @@
   },
   "profissionais": [
     {
-      "id": "kiri-020",
-      "nome": "Carla Bittencourt",
-      "profissao": "Nutricionista",
-      "titulo_exibicao": "Nutricionista",
-      "registro_conselho": "CRN-3 41122",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA"
-      ],
-      "modalidade": "Somente online",
-      "cidade": "São Paulo, SP",
-      "faixa_etaria": "Crianças e adolescentes · 2–17 anos",
-      "sobre": "Seletividade alimentar no TEA e aspectos nutricionais do neurodesenvolvimento, com abordagem gentil.",
-      "formacao": [
-        {
-          "curso": "Graduação em Nutrição",
-          "instituicao_ano": "USP · 2013"
-        },
-        {
-          "curso": "Especialização em Nutrição Materno-Infantil",
-          "instituicao_ano": "CRN · 2017"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 250,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "b2e688ce2e4d3a18"
-    },
-    {
       "id": "kiri-021",
       "nome": "teste",
       "profissao": "teste",
