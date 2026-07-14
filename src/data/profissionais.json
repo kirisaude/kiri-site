@@ -901,6 +901,64 @@
       "foto_url": null,
       "verificacao_data": "Julho de 2026",
       "card_token": "fddb7f8748844e26"
+    },
+    {
+      "id": "kiri-029",
+      "nome": "CAIO LEONIDAS OLIVEIRA DE ANDRADE",
+      "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudiólogo",
+      "registro_conselho": "4-11028",
+      "rqe": null,
+      "areas_atuacao": [
+        "TDAH",
+        "TEA",
+        "PEATE/BERA",
+        "Reabilitação vestibular",
+        "Processamento auditivo central",
+        "Avaliação auditiva",
+        "Audiometria/Imitanciometria",
+        "Emissões otoacústicas",
+        "Terapia auditiva",
+        "Triagem auditiva",
+        "Neuromodulação",
+        "Neurofeedback"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "Salvador",
+      "faixa_etaria": "Adolescentes (13–18 anos), Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos)",
+      "sobre": "Pesquisador e professor universitário, com atuação dedicada ao diagnóstico e à intervenção nos transtornos do neurodesenvolvimento. Une sólida formação científica à experiência clínica para oferecer avaliações precisas e condutas individualizadas. Seu trabalho é pautado pela ética, pelo rigor técnico e pelo compromisso em transformar conhecimento em cuidado, proporcionando segurança e acolhimento às famílias.",
+      "formacao": [
+        {
+          "curso": "Graduação em Fonoaudiologia",
+          "instituicao_ano": "2010"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Processos interativos dos órgãos e sistemas. "
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Processos interativos dos órgãos e sistemas."
+        },
+        {
+          "curso": "Especialista em Otoneurologia, Audiologia e Neurofuncional",
+          "instituicao_ano": "CFFa"
+        },
+        {
+          "curso": "Pós graduado em Psicomotricidade e Neurociências e tecnologias aplicadas",
+          "instituicao_ano": ""
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "71992100471",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "Julho de 2026",
+      "card_token": "cae40d636cad421c"
     }
   ]
 }
