@@ -177,8 +177,8 @@ export default async function PerfilPage({ params }: PageProps) {
                   <div key={i} className="flex gap-3">
                     <div className="w-[9px] h-[9px] rounded-full border-2 border-ferrugem flex-none mt-1" />
                     <div>
-                      <div className="text-[14.5px] font-semibold text-carvao leading-[1.3]">{f.curso}</div>
-                      <div className="text-[13px] text-cinza-texto2 mt-0.5">{f.instituicao_ano}</div>
+                      <div className="text-[14.5px] font-semibold text-carvao leading-[1.3] capitalize">{f.curso}</div>
+                      <div className="text-[13px] text-cinza-texto2 mt-0.5 capitalize">{f.instituicao_ano}</div>
                     </div>
                   </div>
                 ))}
