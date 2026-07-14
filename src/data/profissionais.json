@@ -116,41 +116,6 @@
       "card_token": "daadef19bef21404"
     },
     {
-      "id": "kiri-017",
-      "nome": "Camila Nunes",
-      "profissao": "Terapeuta ocupacional",
-      "titulo_exibicao": "Terapeuta ocupacional",
-      "registro_conselho": "CREFITO-2 21887-TO",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA",
-        "TDAH"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Rio de Janeiro, RJ — Tijuca",
-      "faixa_etaria": "Crianças e adolescentes · 3–15 anos",
-      "sobre": "Integração sensorial e regulação para TEA e TDAH, com orientação à rotina familiar.",
-      "formacao": [
-        {
-          "curso": "Graduação em Terapia Ocupacional",
-          "instituicao_ano": "UFRJ · 2013"
-        },
-        {
-          "curso": "Formação em Integração Sensorial",
-          "instituicao_ano": "2017"
-        }
-      ],
-      "valor_formato": "faixa",
-      "valor_min": 240,
-      "valor_max": 330,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "Junho/2026",
-      "whatsapp_agendamento": null,
-      "card_token": "8e931dfba668a129"
-    },
-    {
       "id": "kiri-018",
       "nome": "Diego Farias",
       "profissao": "Fisioterapeuta",
