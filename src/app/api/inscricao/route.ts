@@ -58,5 +58,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ erro: "Falha ao registrar inscrição" }, { status: 500 });
   }
 
+  const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (sheetsUrl) {
+    const agora = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    fetch(sheetsUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        data: agora,
+        nome,
+        profissao,
+        cidade: cidade || "",
+        modalidade: modalidade || "",
+        whatsapp: whatsapp_agendamento || "",
+      }),
+    }).catch(() => {});
+  }
+
   return NextResponse.json({ ok: true });
 }
