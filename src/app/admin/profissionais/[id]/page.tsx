@@ -478,7 +478,7 @@ export default function EditarProfissionalPage() {
                 links.push({ label: "CRFa-4 (Bahia)", url: "https://crefono4.conselho24horas.com.br/pesquisaprofissional" });
               }
               if (["Terapeuta ocupacional", "Fisioterapeuta"].includes(profissao))
-                links.push({ label: "CREFITO-3", url: "https://www.crefito3.org.br/dsn/" });
+                links.push({ label: "CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/detalhes.asp?tb=ni" });
               if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra"].includes(profissao)) {
                 links.push({ label: "CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
                 links.push({ label: "CFM (outros estados)", url: "https://portal.cfm.org.br/busca-medicos/" });
