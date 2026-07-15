@@ -420,27 +420,32 @@
       "formacao": [
         {
           "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "2010"
+          "instituicao_ano": "2010",
+          "verificado": false
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Processos interativos dos órgãos e sistemas. "
+          "instituicao_ano": "Processos interativos dos órgãos e sistemas. ",
+          "verificado": false
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Processos interativos dos órgãos e sistemas."
+          "instituicao_ano": "Processos interativos dos órgãos e sistemas.",
+          "verificado": false
         },
         {
           "curso": "Especialista em Otoneurologia, Audiologia e Neurofuncional",
-          "instituicao_ano": "CFFa"
+          "instituicao_ano": "CFFa",
+          "verificado": false
         },
         {
           "curso": "Pós graduado em Psicomotricidade e Neurociências e tecnologias aplicadas",
-          "instituicao_ano": ""
+          "instituicao_ano": "",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": null,
+      "valor_min": 0,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -448,7 +453,13 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "cae40d636cad421c"
+      "card_token": "cae40d636cad421c",
+      "tempo_atuacao": null,
+      "foto_posicao": "center top",
+      "genero": "M",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-030",
