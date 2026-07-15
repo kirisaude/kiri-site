@@ -557,11 +557,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Universidade Presbiteriana Mackenzie — 2016"
+          "instituicao_ano": "Psicologia — Universidade Presbiteriana Mackenzie — 2016",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada ao Transtorno do Espectro Autista e Desenvolvimento Atípico — Instituto Par — 2024"
+          "instituicao_ano": "Análise do Comportamento Aplicada ao Transtorno do Espectro Autista e Desenvolvimento Atípico — Instituto Par — 2024",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -578,7 +580,8 @@
       "foto_posicao": "75% top",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "F"
     }
   ]
 }
