@@ -9,6 +9,7 @@ interface Inscricao {
   id: string;
   criado_em: string;
   nome: string;
+  email: string | null;
   profissao: string;
   registro_conselho: string;
   rqe: string | null;
@@ -207,6 +208,7 @@ export default function RevisarPage() {
           <div className="text-[12px] font-semibold text-muted uppercase tracking-wide mb-3">Dados enviados pelo profissional</div>
           <div className="flex flex-col gap-2">
             {[
+              ["E-mail", inscricao.email],
               ["Profissão", inscricao.profissao],
               ["Registro", inscricao.registro_conselho],
               ["RQE", inscricao.rqe],

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       "Prefer": "return=minimal",
     },
     body: JSON.stringify({
-      nome, profissao, registro_conselho,
+      nome, email: email || null, profissao, registro_conselho,
       rqe: rqe || null,
       tempo_atuacao: tempo_atuacao || null,
       areas_atuacao: areas_atuacao || null,
