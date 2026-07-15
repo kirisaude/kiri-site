@@ -1,7 +1,7 @@
 const CONECTORES = new Set(["de", "do", "da", "dos", "das", "em", "no", "na", "nos", "nas", "e", "ou", "a", "o", "as", "os", "para", "com", "por", "entre", "ao", "à", "aos", "às", "um", "uma"]);
 
 // Siglas/institutos que sempre ficam em maiúsculas
-const SIGLAS_FIXAS = new Set(["tea", "tdah", "usp", "unifesp", "fmusp", "crp", "crm", "crefito", "coren", "cfp", "rqe", "clasi", "abenepi", "abda", "aba"]);
+const SIGLAS_FIXAS = new Set(["tea", "tdah", "usp", "unifesp", "fmusp", "crp", "crm", "crefito", "coren", "cfp", "rqe", "clasi", "casi", "abenepi", "abda", "aba", "pecs", "dir", "easi", "sipt", "spm"]);
 
 export function titleCasePT(str: string) {
   const todoMaiusculo = str === str.toUpperCase();

@@ -562,12 +562,24 @@ export default function EditarProfissionalPage() {
           {/* Formação */}
           <div className="flex flex-col gap-2">
             <label className="text-[12.5px] font-medium text-cinza-texto">Formação</label>
+            <datalist id="tipos-formacao">
+              <option value="Graduação" />
+              <option value="Especialização" />
+              <option value="Pós-graduação" />
+              <option value="Mestrado" />
+              <option value="Mestrando" />
+              <option value="Doutorado" />
+              <option value="Doutorando" />
+              <option value="Certificação" />
+              <option value="Residência Médica" />
+              <option value="Formação" />
+            </datalist>
             {formacao.map((f, i) => (
               <div key={i} className="flex flex-col gap-0.5">
                 <div className="flex gap-1.5 items-center">
-                  <input type="text" placeholder="Tipo" value={f.tipo}
+                  <input list="tipos-formacao" placeholder="Tipo" value={f.tipo}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], tipo: e.target.value }; setFormacao(n); }}
-                    className="w-[110px] flex-none border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                    className="w-[120px] flex-none border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
                   <input type="text" placeholder="Área" value={f.area}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], area: e.target.value }; setFormacao(n); }}
