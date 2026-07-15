@@ -140,7 +140,8 @@ export default function Home() {
         if (activePagamento === "Convênio" && !conv.includes("aceita")) return false;
       }
       if (valorMin > 0 || valorMax < VALOR_TOTAL_MAX) {
-        if (p.valor_min < valorMin || p.valor_min > valorMax) return false;
+        const vm = p.valor_min ?? 0;
+        if (vm < valorMin || vm > valorMax) return false;
       }
       if (search.trim()) {
         const q = search.toLowerCase();
