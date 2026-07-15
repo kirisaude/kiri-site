@@ -536,7 +536,7 @@
       "verificacao_data": "Julho de 2026",
       "card_token": "4d9d638fa7c448ed",
       "tempo_atuacao": null,
-      "foto_posicao": "center 20%",
+      "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false
