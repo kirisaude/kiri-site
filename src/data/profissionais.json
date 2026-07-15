@@ -494,6 +494,46 @@
       "foto_url": null,
       "verificacao_data": "Julho de 2026",
       "card_token": "7b240576cf0c4514"
+    },
+    {
+      "id": "kiri-032",
+      "nome": "Isabella Conti",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 06/132988",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade infantil",
+        "Comportamento"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "São Paulo, SP",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou psicóloga clínica, graduada pela Universidade Presbiteriana Mackenzie e especialista em Análise do Comportamento Aplicada (ABA), com atuação voltada ao desenvolvimento infantil e ao acompanhamento de crianças e adolescentes, especialmente com Transtorno do Espectro Autista (TEA) e outros transtornos do neurodesenvolvimento.\n\nMinha experiência inclui atuação nos contextos clínico, escolar e domiciliar, desenvolvendo intervenções individualizadas, orientação parental e trabalho integrado com famílias, escolas e equipes multiprofissionais.\nRealizo avaliação clínica utilizando observação estruturada, análise funcional do comportamento e protocolos padronizados, como VB-MAPP, ABLLS-R, AFLS e Socially Savvy, que auxiliam na identificação das necessidades de cada criança e no planejamento de intervenções baseadas em evidências.\n\nAcredito que cada criança possui potencial para aprender e se desenvolver quando encontra um ambiente seguro, acolhedor e individualizado. Por isso, meu trabalho é pautado na construção de vínculo, no respeito à singularidade de cada cliente e em intervenções fundamentadas na ciência.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Universidade Presbiteriana Mackenzie — 2016"
+        },
+        {
+          "curso": "Especialização em Análise do Comportamento Aplicada ao TEA",
+          "instituicao_ano": "Instituto Par — 2024"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 250,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "11977112710",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "Julho de 2026",
+      "card_token": "4d9d638fa7c448ed"
     }
   ]
 }
