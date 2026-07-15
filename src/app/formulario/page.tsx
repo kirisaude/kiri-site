@@ -172,9 +172,12 @@ function FormularioContent() {
         {/* Aviso de triagem */}
         <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[13px] flex flex-col items-center gap-2.5 text-center">
           <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
-            Este formulário é para direcionamento e encaminhamento — não é avaliação clínica nem diagnóstico.
+            Este formulário é para direcionamento e encaminhamento.
           </p>
-          <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold m-0">
+          <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
+            Não é avaliação clínica nem diagnóstico.
+          </p>
+          <p className="text-[16px] leading-[1.5] text-ambar-texto font-semibold m-0">
             Em caso de urgência ou risco, procure um pronto-socorro.
           </p>
         </div>
