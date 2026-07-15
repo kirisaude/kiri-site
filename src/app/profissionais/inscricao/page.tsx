@@ -6,6 +6,7 @@ import { NavBack } from "@/components/NavBack";
 import { Footer } from "@/components/Footer";
 
 const PROFISSOES = [
+  "Psiquiatra",
   "Psiquiatra da infância e adolescência",
   "Neuropediatra",
   "Neuropsicólogo",
@@ -24,6 +25,7 @@ export default function InscricaoProfissionalPage() {
   const router = useRouter();
 
   const [nome, setNome] = useState("");
+  const [genero, setGenero] = useState<"M" | "F" | "">("");
   const [profissao, setProfissao] = useState("");
   const [registroConselho, setRegistroConselho] = useState("");
   const [rqe, setRqe] = useState("");
@@ -111,6 +113,7 @@ export default function InscricaoProfissionalPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome: nome.trim(),
+          genero: genero || null,
           email: email.trim() || null,
           profissao: profissao.trim(),
           registro_conselho: registroConselho.trim(),
@@ -240,6 +243,19 @@ export default function InscricaoProfissionalPage() {
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>Nome completo <span className="text-ferrugem">*</span></label>
             <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required placeholder="Como aparecerá no perfil" className={inputClass} />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>Pronome profissional <span className="text-[12px] font-normal text-muted">(para exibir "Psicóloga" em vez de "Psicólogo", por exemplo)</span></label>
+            <div className="flex gap-2">
+              {(["M", "F"] as const).map((g) => (
+                <button key={g} type="button"
+                  onClick={() => setGenero(genero === g ? "" : g)}
+                  className={`px-4 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${genero === g ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                  {g === "M" ? "Masculino" : "Feminino"}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
