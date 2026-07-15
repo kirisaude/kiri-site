@@ -233,15 +233,29 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
     const prof = profissionais.find((p) => p.id === profId);
     if (!prof) return "";
     const primeiroProfNome = prof.nome.split(" ")[0];
-    const partes = [
-      `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.`,
-      `\nO familiar ${e.nome_responsavel} entrou em contato conosco.`,
-    ];
-    if (e.observacoes) partes.push(`${e.observacoes}.`);
-    if (e.cidade) partes.push(`Cidade: ${e.cidade}.`);
-    if (e.modalidade) partes.push(`Modalidade preferida: ${e.modalidade}.`);
-    partes.push(`\nEnviamos o seu contato a eles para agendamento direto.`);
-    return partes.join(" ");
+    const obs = e.observacoes ?? "";
+
+    const demanda = obs.match(/Demanda: ([^—]+)/)?.[1].trim() ?? null;
+    const faixa = obs.match(/Faixa etária: ([^—]+)/)?.[1].trim() ?? null;
+    const convenio = obs.match(/Convênio: ([^—(]+)/)?.[1].trim() ?? null;
+    const resto = obs
+      .replace(/Demanda: [^—]+(?:—\s*)?/g, "")
+      .replace(/Faixa etária: [^—]+(?:—\s*)?/g, "")
+      .replace(/Convênio: [^—]+(?:—\s*)?/g, "")
+      .replace(/Pagamento: [^—]+(?:—\s*)?/g, "")
+      .replace(/\(aceita particular[^)]*\)/g, "")
+      .replace(/—/g, "")
+      .trim();
+
+    const topicos: string[] = [];
+    if (demanda) topicos.push(`• Queixa central: ${demanda}`);
+    if (faixa) topicos.push(`• Faixa etária: ${faixa}`);
+    if (resto) topicos.push(`• Principal objetivo: ${resto}`);
+    if (e.modalidade) topicos.push(`• Modalidade: ${e.modalidade}`);
+    if (e.cidade) topicos.push(`• Cidade: ${e.cidade}`);
+    if (convenio) topicos.push(`• Convênio: ${convenio}`);
+
+    return `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.\n\nO familiar ${e.nome_responsavel} entrou em contato conosco com o seguinte perfil:\n\n${topicos.join("\n")}\n\nEnviamos o seu contato a eles para agendamento direto.`;
   }
 
   async function copiar(texto: string, chave: string) {
