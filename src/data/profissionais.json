@@ -63,13 +63,28 @@
       "sobre": "Fonoaudióloga com mais de 11 anos de experiência clínica, docente e pesquisadora em linguagem e transtorno do espectro autista. Apaixonada pelo desenvolvimento infantil!\nJá ajudou muitas crianças a desenvolverem a fala e a linguagem.",
       "formacao": [
         {
-          "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "UNEB",
+          "curso": "Graduação em",
+          "instituicao_ano": "Fonoaudiologia — UNEB",
           "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Doutora em Processos Interativos dos Órgãos e Sistemas, Especialista em Audiologia pelo CFFa, Especialização em Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional, Especialização em ABA para Autismo e Deficiência Intelectual.",
+          "instituicao_ano": "Audiologia — CFFa",
+          "verificado": false
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas,",
+          "verificado": false
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional",
+          "verificado": false
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "ABA para Autismo e Deficiência Intelectual",
           "verificado": false
         }
       ],
