@@ -453,19 +453,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Letras — UCSAL — 2007"
+          "instituicao_ano": "Letras — UCSAL — 2007",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Autismo — IEPSIS — 2018"
+          "instituicao_ano": "Autismo — IEPSIS — 2018",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada ao Autismo — IEPSIS — 2019"
+          "instituicao_ano": "Análise do Comportamento Aplicada ao Autismo — IEPSIS — 2019",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuroalfabetização — Faculdade Metropolitana — 2025"
+          "instituicao_ano": "Neuroalfabetização — Faculdade Metropolitana — 2025",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -482,7 +486,8 @@
       "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "F"
     },
     {
       "id": "kiri-031",
