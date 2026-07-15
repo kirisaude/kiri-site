@@ -464,24 +464,31 @@ export default function EditarProfissionalPage() {
             {(() => {
               const links: { label: string; url: string }[] = [];
               if (["Psicólogo", "Neuropsicólogo"].includes(profissao))
-                links.push({ label: "Consultar no CFP", url: "https://cadastro.cfp.org.br/" });
+                links.push({ label: "CFP", url: "https://cadastro.cfp.org.br/" });
               if (profissao === "Fonoaudiólogo") {
                 links.push({ label: "CRFa-SP", url: "https://crfa-sp.implanta.net.br/servicosonline/Publico/ConsultaInscritos/" });
-                links.push({ label: "CRFa-4 (Bahia/outros)", url: "https://crefono4.conselho24horas.com.br/pesquisaprofissional" });
+                links.push({ label: "CRFa-4 (Bahia)", url: "https://crefono4.conselho24horas.com.br/pesquisaprofissional" });
               }
-              if (profissao === "Terapeuta ocupacional")
-                links.push({ label: "Consultar no CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/detalhes.asp?tb=ni" });
-              if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra"].includes(profissao))
-                links.push({ label: "Consultar no CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
+              if (["Terapeuta ocupacional", "Fisioterapeuta"].includes(profissao))
+                links.push({ label: "CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/detalhes.asp?tb=ni" });
+              if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra"].includes(profissao)) {
+                links.push({ label: "CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
+                links.push({ label: "CFM (outros estados)", url: "https://portal.cfm.org.br/busca-medicos/" });
+              }
+              if (profissao === "Nutricionista")
+                links.push({ label: "CFN", url: "https://www.cfn.org.br/index.php/busca-de-nutricionistas/" });
               if (links.length === 0) return null;
               return (
-                <div className="flex gap-3 flex-wrap mt-0.5">
-                  {links.map(l => (
-                    <a key={l.url} href={l.url} target="_blank" rel="noreferrer"
-                      className="text-[12px] text-ardosia underline hover:text-carvao transition-colors">
-                      {l.label} ↗
-                    </a>
-                  ))}
+                <div className="flex flex-col gap-1.5 mt-1">
+                  <span className="text-[11px] text-cinza-texto2 font-medium uppercase tracking-wide">Verificar no conselho — copie o número acima e busque:</span>
+                  <div className="flex gap-2 flex-wrap">
+                    {links.map(l => (
+                      <a key={l.url} href={l.url} target="_blank" rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-ardosia text-[12px] text-ardosia hover:bg-ardosia hover:text-white transition-colors">
+                        {l.label} ↗
+                      </a>
+                    ))}
+                  </div>
                 </div>
               );
             })()}
