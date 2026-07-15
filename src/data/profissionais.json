@@ -254,11 +254,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013"
+          "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — USP"
+          "instituicao_ano": "Terapia Comportamental — USP",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -270,7 +272,13 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "19f3779a7e87432d"
+      "card_token": "19f3779a7e87432d",
+      "tempo_atuacao": null,
+      "foto_posicao": "center top",
+      "genero": "F",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-027",
