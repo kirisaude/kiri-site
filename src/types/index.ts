@@ -19,7 +19,7 @@ export interface Profissional {
   cidade: string;
   faixa_etaria: string;
   valor_formato: "a_partir_de" | "faixa";
-  valor_min: number;
+  valor_min: number | null;
   valor_max: number | null;
   convenio_info: string;
   convenios?: string[] | null;
@@ -61,10 +61,12 @@ export const PROFISSAO_PLURAL: Record<string, string> = {
   "Psicopedagogo": "Psicopedagogos",
 };
 
-export function valorDisplay(p: Pick<Profissional, "valor_formato" | "valor_min" | "valor_max">): string {
+export function valorDisplay(p: Pick<Profissional, "valor_formato" | "valor_min" | "valor_max">): string | null {
+  if (p.valor_min == null || p.valor_min === 0) return null;
   if (p.valor_formato === "a_partir_de") {
     return `a partir de R$ ${p.valor_min}`;
   }
+  if (p.valor_max == null) return `a partir de R$ ${p.valor_min}`;
   return `R$ ${p.valor_min}–${p.valor_max}`;
 }
 
