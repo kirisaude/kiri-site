@@ -183,8 +183,8 @@ export default async function PerfilPage({ params }: PageProps) {
                     titulo = titleCasePT(f.curso);
                     local = partes.filter(Boolean).join(" · ");
                   } else {
-                    const area = partes.length > 1 ? (partes[0]?.trim() ?? "") : "";
-                    local = partes.length > 1 ? partes.slice(1).filter(Boolean).join(" · ") : f.instituicao_ano;
+                    const area = partes[0]?.trim() ?? "";
+                    local = partes.slice(1).filter(Boolean).join(" · ");
                     titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
                   }
                   return (
