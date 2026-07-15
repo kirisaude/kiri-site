@@ -452,6 +452,48 @@
       "foto_url": null,
       "verificacao_data": "Julho de 2026",
       "card_token": "a6cc82ccb7da4e02"
+    },
+    {
+      "id": "kiri-031",
+      "nome": "Valeska Janas Murier",
+      "profissao": "Terapeuta ocupacional",
+      "titulo_exibicao": "Terapeuta ocupacional",
+      "registro_conselho": "Crefito -3/8806-TO",
+      "rqe": null,
+      "areas_atuacao": [
+        "TDAH",
+        "Ansiedade infantil",
+        "TEA",
+        "Outro"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo e São Bernardo do Campo",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou terapeuta ocupacional com atuação em saúde mental e desenvolvimento infantil. Ofereço um atendimento acolhedor, individualizado e baseado em evidências, respeitando as particularidades de cada criança e adolescente. Em parceria com a família, construímos estratégias que favorecem o desenvolvimento, a autonomia e a participação nas atividades do dia a dia.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Terapia Ocupacional"
+        },
+        {
+          "curso": "Especialização em Saúde Mental",
+          "instituicao_ano": ""
+        },
+        {
+          "curso": "Certificação Internacional de Integração Sensorial de Ayres",
+          "instituicao_ano": ""
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "11973152813",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "Julho de 2026",
+      "card_token": "7b240576cf0c4514"
     }
   ]
 }
