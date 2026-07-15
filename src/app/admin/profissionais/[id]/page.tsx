@@ -352,6 +352,10 @@ export default function EditarProfissionalPage() {
                     { label: "Baixo", value: "center bottom" },
                     { label: "Rosto acima", value: "center 20%" },
                     { label: "Rosto abaixo", value: "center 70%" },
+                    { label: "← Esquerda", value: "left center" },
+                    { label: "Direita →", value: "right center" },
+                    { label: "← Esq. acima", value: "left top" },
+                    { label: "Dir. acima →", value: "right top" },
                   ].map((op) => (
                     <button
                       key={op.value}
