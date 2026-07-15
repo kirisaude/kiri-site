@@ -533,21 +533,32 @@ export default function AdminPage() {
                   Aprovados <span className="text-[14px] font-sans font-normal text-muted">({aprovados.length})</span>
                 </h2>
                 <div className="flex flex-col gap-2">
-                  {aprovados.map((i) => (
-                    <div key={i.id} className="bg-white border border-linha rounded-[12px] px-4 py-3 flex items-center justify-between gap-3 opacity-70">
-                      <div>
-                        <div className="text-[14.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
-                        <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
+                  {aprovados.map((i) => {
+                    const profMatch = profPublicados.find(
+                      (p) => p.nome.toLowerCase().trim() === i.nome.toLowerCase().trim()
+                    );
+                    return (
+                      <div key={i.id} className="bg-white border border-linha rounded-[12px] px-4 py-3 flex items-center justify-between gap-3 opacity-70">
+                        <div>
+                          <div className="text-[14.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
+                          <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
+                          {profMatch && (
+                            <Link href={`/admin/profissionais/${profMatch.id}`}
+                              className="text-[12px] text-ardosia font-semibold no-underline cursor-pointer hover:underline">
+                              Editar
+                            </Link>
+                          )}
+                          <button onClick={() => excluirInscricao(i.id)}
+                            className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline">
+                            Excluir
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
-                        <button onClick={() => excluirInscricao(i.id)}
-                          className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline">
-                          Excluir
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
