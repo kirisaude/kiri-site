@@ -546,10 +546,16 @@ export default function AdminPage() {
                         <div className="flex items-center gap-3">
                           <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
                           {profMatch && (
-                            <Link href={`/admin/profissionais/${profMatch.id}`}
-                              className="text-[12px] text-ardosia font-semibold no-underline cursor-pointer hover:underline">
-                              Editar
-                            </Link>
+                            <>
+                              <Link href={`/profissional/${profMatch.id}`} target="_blank"
+                                className="text-[12px] text-muted font-medium no-underline cursor-pointer hover:underline">
+                                Ver perfil ↗
+                              </Link>
+                              <Link href={`/admin/profissionais/${profMatch.id}`}
+                                className="text-[12px] text-ardosia font-semibold no-underline cursor-pointer hover:underline">
+                                Editar
+                              </Link>
+                            </>
                           )}
                           <button onClick={() => excluirInscricao(i.id)}
                             className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline">
