@@ -87,6 +87,8 @@ export default function EditarProfissionalPage() {
   const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
   const [registroVerificado, setRegistroVerificado] = useState(profOriginal?.registro_verificado ?? false);
   const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
+  const [sobreVerificado, setSobreVerificado] = useState(profOriginal?.sobre_verificado ?? false);
+  const [sobreObs, setSobreObs] = useState(profOriginal?.sobre_obs ?? "");
 
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
@@ -227,6 +229,8 @@ export default function EditarProfissionalPage() {
       oculto,
       registro_verificado: registroVerificado,
       registro_obs: registroObs.trim() || undefined,
+      sobre_verificado: sobreVerificado,
+      sobre_obs: sobreObs.trim() || undefined,
     };
 
     const res = await fetch("/api/admin/profissionais", {
@@ -515,6 +519,7 @@ export default function EditarProfissionalPage() {
               required
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none"
             />
+            <VerificacaoRow checked={sobreVerificado} onToggle={() => setSobreVerificado(v => !v)} obs={sobreObs} onObs={setSobreObs} />
           </div>
 
           {/* Formação */}
