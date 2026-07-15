@@ -522,7 +522,7 @@
         },
         {
           "curso": "Especialização em Análise do Comportamento Aplicada ao TEA",
-          "instituicao_ano": "Instituto Par — 2024"
+          "instituicao_ano": "Análise do Comportamento Aplicada ao Transtorno do Espectro Autista e Desenvolvimento Atípico — Instituto Par, 2024"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -532,9 +532,14 @@
       "convenios": null,
       "whatsapp_agendamento": "11977112710",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-032.jpg",
       "verificacao_data": "Julho de 2026",
-      "card_token": "4d9d638fa7c448ed"
+      "card_token": "4d9d638fa7c448ed",
+      "tempo_atuacao": null,
+      "foto_posicao": "center 20%",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     }
   ]
 }
