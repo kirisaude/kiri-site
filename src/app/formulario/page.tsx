@@ -254,7 +254,7 @@ function FormularioContent() {
                 "Precisa de diagnóstico",
                 "Dificuldades de aprendizagem",
                 "Comportamento desafiador",
-                "Ansiedade ou saúde mental",
+                "Ansiedade ou depressão",
                 "Outro",
               ].map((op) => (
                 <button
