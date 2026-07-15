@@ -88,6 +88,7 @@ export default function EditarProfissionalPage() {
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
+  const toStatus = (v?: boolean, p?: boolean): VerificacaoStatus => v ? "verificado" : p ? "pendente" : null;
   type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; status?: VerificacaoStatus; obs?: string };
   const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; pendente?: boolean; obs?: string }): FormacaoEdit => {
     const partes = f.instituicao_ano.split(" — ");
@@ -108,7 +109,6 @@ export default function EditarProfissionalPage() {
   const [erroFoto, setErroFoto] = useState("");
 
   const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
-  const toStatus = (v?: boolean, p?: boolean): VerificacaoStatus => v ? "verificado" : p ? "pendente" : null;
   const [registroStatus, setRegistroStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.registro_verificado, profOriginal?.registro_pendente));
   const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
   const [sobreStatus, setSobreStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.sobre_verificado, profOriginal?.sobre_pendente));
