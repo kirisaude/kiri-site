@@ -103,10 +103,12 @@ export default function ProPage() {
     return arr.includes(item) ? arr.filter((x) => x !== item) : [...arr, item];
   }
 
+  const sem = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
   const filtrado = useMemo(() => {
-    const q = busca.trim().toLowerCase();
+    const q = sem(busca.trim());
     return profissionais.filter((p) => {
-      if (q && !p.nome.toLowerCase().includes(q) && !p.cidade.toLowerCase().includes(q)) return false;
+      if (q && !sem(p.nome).includes(q) && !sem(p.cidade).includes(q)) return false;
       if (profFiltro.length && !profFiltro.includes(p.profissao)) return false;
       if (modalidadeFiltro === "presencial" && !p.modalidade.toLowerCase().includes("presencial")) return false;
       if (modalidadeFiltro === "online" && !p.modalidade.toLowerCase().includes("online")) return false;
