@@ -86,10 +86,9 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "ABA para Autismo e Deficiência Intelectual",
-          "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "instituicao_ano": "ABA para Autismo e Deficiência Intelectual — Primum Faculdade  — atual",
+          "verificado": true,
+          "obs": "em andamento "
         },
         {
           "curso": "Doutorado",
