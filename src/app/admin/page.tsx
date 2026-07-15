@@ -255,7 +255,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
     if (e.cidade) topicos.push(`• Cidade: ${e.cidade}`);
     if (convenio) topicos.push(`• Convênio: ${convenio}`);
 
-    return `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.\n\nO familiar ${e.nome_responsavel} entrou em contato conosco com o seguinte perfil:\n\n${topicos.join("\n")}\n\nEnviamos o seu contato a eles para agendamento direto.`;
+    return `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.\n\nO familiar ${e.nome_responsavel} entrou em contato conosco com o seguinte perfil:\n\n${topicos.join("\n")}\n\nEnviamos o seu contato a eles para agendamento direto. Obrigada pela parceria!`;
   }
 
   async function copiar(texto: string, chave: string) {
