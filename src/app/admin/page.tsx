@@ -210,9 +210,9 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
     const primeiroProfNome = prof.nome.split(" ")[0];
     const partes = [
       `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.`,
-      `\nA família ${e.nome_responsavel} entrou em contato conosco.`,
+      `\nO familiar ${e.nome_responsavel} entrou em contato conosco.`,
     ];
-    if (e.observacoes) partes.push(`Demanda: ${e.observacoes}.`);
+    if (e.observacoes) partes.push(`${e.observacoes}.`);
     if (e.cidade) partes.push(`Cidade: ${e.cidade}.`);
     if (e.modalidade) partes.push(`Modalidade preferida: ${e.modalidade}.`);
     partes.push(`\nEnviamos o seu contato a eles para agendamento direto.`);
