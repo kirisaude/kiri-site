@@ -66,7 +66,7 @@ export default async function PerfilPage({ params }: PageProps) {
                   </svg>
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10 pointer-events-none">
                     <div className="bg-carvao text-white text-[11.5px] leading-[1.4] rounded-[8px] px-3 py-2 whitespace-nowrap shadow-lg">
-                      Cadastro validado junto ao conselho<br />de classe em {p.verificacao_data}
+                      Cadastro validado junto ao conselho<br />de classe em {p.verificacao_data.replace(/^\w/, (c) => c.toUpperCase())}
                       <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-carvao" />
                     </div>
                   </div>
@@ -98,7 +98,7 @@ export default async function PerfilPage({ params }: PageProps) {
                   <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span className="text-[13.5px] font-bold tracking-[0.03em] text-ardosia-escura">Verificado pela Kiri</span>
-                <span className="ml-auto text-[11.5px] text-ardosia-texto">em {p.verificacao_data}</span>
+                <span className="ml-auto text-[11.5px] text-ardosia-texto">em {p.verificacao_data.replace(/^\w/, (c) => c.toUpperCase())}</span>
               </div>
               <div className="px-4 pb-1.5">
                 {credenciais.map((c, i) => (

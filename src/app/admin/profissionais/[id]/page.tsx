@@ -237,7 +237,7 @@ export default function EditarProfissionalPage() {
       convenio_info: convenio.trim(),
       convenios: convenios.length ? convenios : null,
       whatsapp_agendamento: whatsapp.trim() || null,
-      verificacao_data: verificacaoData.trim(),
+      verificacao_data: verificacaoData.trim().toLowerCase(),
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
       oculto,
