@@ -639,7 +639,7 @@ export default function Home() {
               </p>
               <div className="mt-5 flex flex-col gap-2">
                 {[
-                  "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
+                  "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO, CRN ou CBO)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
                   "Registro ativo e regular perante o conselho de classe",
                 ].map((item) => (

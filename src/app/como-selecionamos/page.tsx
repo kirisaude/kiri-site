@@ -6,7 +6,7 @@ import { NavBack } from "@/components/NavBack";
 const ITENS = [
   {
     titulo: "Registro ativo e regular no conselho",
-    detalhe: "CRM, CRP, CFFa, COFFITO ou CRN — conforme a profissão.",
+    detalhe: "CRM, CRP, CFFa, COFFITO, CRN ou CBO — conforme a profissão.",
   },
   {
     titulo: "Formação na área conferida",
