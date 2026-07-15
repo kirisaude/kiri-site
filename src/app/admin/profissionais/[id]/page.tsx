@@ -73,8 +73,15 @@ export default function EditarProfissionalPage() {
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
-  const [formacao, setFormacao] = useState(
-    profOriginal?.formacao.length ? profOriginal.formacao : [{ curso: "", instituicao_ano: "" }, { curso: "", instituicao_ano: "" }]
+  type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; verificado?: boolean; obs?: string };
+  const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; obs?: string }): FormacaoEdit => {
+    const partes = f.instituicao_ano.split(" — ");
+    return { tipo: f.curso, area: partes[0] ?? "", instituicao: partes[1] ?? "", ano: partes[2] ?? "", verificado: f.verificado, obs: f.obs };
+  };
+  const [formacao, setFormacao] = useState<FormacaoEdit[]>(
+    profOriginal?.formacao.length
+      ? profOriginal.formacao.map(parseFormacaoEdit)
+      : [{ tipo: "", area: "", instituicao: "", ano: "" }, { tipo: "", area: "", instituicao: "", ano: "" }]
   );
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
   const [convenioCustom, setConvenioCustom] = useState("");
@@ -216,7 +223,14 @@ export default function EditarProfissionalPage() {
       faixa_etaria: faixaEtaria.trim(),
       tempo_atuacao: tempoAtuacao || null,
       sobre: sobre.trim(),
-      formacao: formacao.filter((f) => f.curso || f.instituicao_ano),
+      formacao: formacao
+        .filter((f) => f.tipo || f.area || f.instituicao)
+        .map((f) => ({
+          curso: f.tipo,
+          instituicao_ano: [f.area, f.instituicao, f.ano].filter(Boolean).join(" — "),
+          verificado: f.verificado,
+          obs: f.obs,
+        })),
       valor_formato: valorFormato,
       valor_min: isNaN(valorMinNum) ? 0 : valorMinNum,
       valor_max: valorMaxNum && !isNaN(valorMaxNum) ? valorMaxNum : null,
@@ -525,44 +539,28 @@ export default function EditarProfissionalPage() {
           {/* Formação */}
           <div className="flex flex-col gap-2">
             <label className="text-[12.5px] font-medium text-cinza-texto">Formação</label>
-            {formacao.map((f, i) => {
-              const exemplosCurso = ["ex: Pós-graduação em análise do comportamento", "ex: Mestrado em psiquiatria"];
-              const exemplosLocal = ["ex: Universidade de São Paulo, 2010", "ex: Universidade de São Paulo, 2010"];
-              const phCurso = exemplosCurso[i] ?? "ex: Especialização · área";
-              const phLocal = exemplosLocal[i] ?? "ex: Instituição, Ano";
-              return (
+            {formacao.map((f, i) => (
               <div key={i} className="flex flex-col gap-0.5">
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="text"
-                    placeholder={phCurso}
-                    value={f.curso}
-                    onChange={(e) => {
-                      const novo = [...formacao];
-                      novo[i] = { ...novo[i], curso: e.target.value };
-                      setFormacao(novo);
-                    }}
-                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                <div className="flex gap-1.5 items-center">
+                  <input type="text" placeholder="Tipo" value={f.tipo}
+                    onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], tipo: e.target.value }; setFormacao(n); }}
+                    className="w-[110px] flex-none border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
-                  <input
-                    type="text"
-                    placeholder={phLocal}
-                    value={f.instituicao_ano}
-                    onChange={(e) => {
-                      const novo = [...formacao];
-                      novo[i] = { ...novo[i], instituicao_ano: e.target.value };
-                      setFormacao(novo);
-                    }}
-                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                  <input type="text" placeholder="Área" value={f.area}
+                    onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], area: e.target.value }; setFormacao(n); }}
+                    className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                  />
+                  <input type="text" placeholder="Instituição" value={f.instituicao}
+                    onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], instituicao: e.target.value }; setFormacao(n); }}
+                    className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                  />
+                  <input type="text" placeholder="Ano" value={f.ano}
+                    onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], ano: e.target.value }; setFormacao(n); }}
+                    className="w-[70px] flex-none border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
                   {formacao.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={() => setFormacao(formacao.filter((_, j) => j !== i))}
-                      className="text-[18px] text-muted cursor-pointer leading-none flex-none"
-                    >
-                      ×
-                    </button>
+                    <button type="button" onClick={() => setFormacao(formacao.filter((_, j) => j !== i))}
+                      className="text-[18px] text-muted cursor-pointer leading-none flex-none">×</button>
                   )}
                 </div>
                 <VerificacaoRow
@@ -572,11 +570,10 @@ export default function EditarProfissionalPage() {
                   onObs={(v) => { const n = [...formacao]; n[i] = { ...n[i], obs: v }; setFormacao(n); }}
                 />
               </div>
-              );
-            })}
+            ))}
             <button
               type="button"
-              onClick={() => setFormacao([...formacao, { curso: "", instituicao_ano: "" }])}
+              onClick={() => setFormacao([...formacao, { tipo: "", area: "", instituicao: "", ano: "" }])}
               className="text-[13px] text-ardosia font-semibold text-left cursor-pointer"
             >
               + Adicionar linha
