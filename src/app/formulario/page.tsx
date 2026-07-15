@@ -34,7 +34,8 @@ function FormularioContent() {
   const [demandaPrincipal, setDemandaPrincipal] = useState("");
   const [idadeCrianca, setIdadeCrianca] = useState("");
   const [pagamento, setPagamento] = useState("");
-  const [nomeConvenio, setNomeConvenio] = useState("");
+  const [convenioSelecionado, setConvenioSelecionado] = useState("");
+  const [convenioOutro, setConvenioOutro] = useState("");
   const [aceitaParticular, setAceitaParticular] = useState(false);
   const [opcoesBusca, setOpcoesBusca] = useState<string[]>([]);
   const [detalhesBusca, setDetalhesBusca] = useState("");
@@ -63,7 +64,7 @@ function FormularioContent() {
         observacoes: [
           demandaPrincipal ? `Demanda: ${demandaPrincipal}` : "",
           idadeCrianca ? `Faixa etária: ${idadeCrianca}` : "",
-          pagamento === "Convênio" && nomeConvenio.trim() ? `Convênio: ${nomeConvenio.trim()}${aceitaParticular ? " (aceita particular se não houver)" : ""}` : pagamento ? `Pagamento: ${pagamento}` : "",
+          pagamento === "Convênio" ? `Convênio: ${convenioSelecionado === "Outro" ? convenioOutro.trim() : convenioSelecionado}${aceitaParticular ? " (aceita particular se não houver)" : ""}` : pagamento ? `Pagamento: ${pagamento}` : "",
           opcoesBusca.join(", "),
           detalhesBusca.trim() ? detalhesBusca.trim() : "",
         ].filter(Boolean).join(" — ") || null,
@@ -260,14 +261,32 @@ function FormularioContent() {
               ))}
             </div>
             {pagamento === "Convênio" && (
-              <div className="flex flex-col gap-2 mt-1">
-                <input
-                  type="text"
-                  value={nomeConvenio}
-                  onChange={(e) => setNomeConvenio(e.target.value)}
-                  placeholder="Qual convênio?"
-                  className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
-                />
+              <div className="flex flex-col gap-3 mt-1">
+                <div className="flex flex-wrap gap-2">
+                  {["Unimed", "Bradesco Saúde", "SulAmérica", "Amil", "Porto Seguro Saúde", "Hapvida", "Notre Dame Intermédica", "Prevent Senior", "Golden Cross", "Care Plus", "Omint", "Assim Saúde", "Outro"].map((conv) => (
+                    <button
+                      key={conv}
+                      type="button"
+                      onClick={() => { setConvenioSelecionado(convenioSelecionado === conv ? "" : conv); setConvenioOutro(""); }}
+                      className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                        convenioSelecionado === conv
+                          ? "bg-ardosia-escura text-white border-ardosia-escura"
+                          : "bg-white text-carvao border-linha"
+                      }`}
+                    >
+                      {conv}
+                    </button>
+                  ))}
+                </div>
+                {convenioSelecionado === "Outro" && (
+                  <input
+                    type="text"
+                    value={convenioOutro}
+                    onChange={(e) => setConvenioOutro(e.target.value)}
+                    placeholder="Qual convênio?"
+                    className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                  />
+                )}
                 <label className="flex items-start gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
