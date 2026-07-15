@@ -476,7 +476,7 @@ export default function EditarProfissionalPage() {
                 links.push({ label: "CFM (outros estados)", url: "https://portal.cfm.org.br/busca-medicos/" });
               }
               if (profissao === "Nutricionista")
-                links.push({ label: "CFN", url: "https://www.cfn.org.br/index.php/busca-de-nutricionistas/" });
+                links.push({ label: "CFN", url: "https://cfn.org.br/consulta-nacional-de-nutricionistas/" });
               if (links.length === 0) return null;
               return (
                 <div className="flex flex-col gap-1.5 mt-1">
