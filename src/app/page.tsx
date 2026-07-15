@@ -67,6 +67,8 @@ export default function Home() {
   const [activePagamento, setActivePagamento] = useState<string | null>(null);
   const [showCidadeOptions, setShowCidadeOptions] = useState(false);
   const [activeCidade, setActiveCidade] = useState<string | null>(null);
+  const [showFaixaOptions, setShowFaixaOptions] = useState(false);
+  const [activeFaixa, setActiveFaixa] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
@@ -134,6 +136,7 @@ export default function Home() {
           if (!normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
         }
       }
+      if (activeFaixa && !p.faixa_etaria.includes(activeFaixa)) return false;
       if (activePagamento) {
         const conv = p.convenio_info.toLowerCase();
         if (activePagamento === "Particular" && conv.includes("não aceita")) return false;
@@ -154,7 +157,7 @@ export default function Home() {
       }
       return true;
     });
-  }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activePagamento, valorMin, valorMax]);
+  }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activeFaixa, activePagamento, valorMin, valorMax]);
 
   const sections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
@@ -162,7 +165,7 @@ export default function Home() {
   })).filter((s) => s.pros.length > 0);
 
   const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activePagamento || valorAtivo || search.trim());
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeFaixa || activePagamento || valorAtivo || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
@@ -400,7 +403,7 @@ export default function Home() {
         </div>
 
         {/* Filtros adicionais */}
-        <div className="pt-4 md:pt-5 overflow-x-auto scrollbar-hide flex gap-2 md:grid md:grid-cols-5 md:overflow-visible">
+        <div className="pt-4 md:pt-5 overflow-x-auto scrollbar-hide flex gap-2 md:grid md:grid-cols-6 md:overflow-visible">
           {/* Tipo de profissional */}
           <button
             onClick={() => { setShowProfissaoOptions((v) => !v); setShowModalidadeOptions(false); }}
@@ -437,7 +440,7 @@ export default function Home() {
 
           {/* Cidade */}
           <button
-            onClick={() => { setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); }}
+            onClick={() => { setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); setShowFaixaOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -452,9 +455,26 @@ export default function Home() {
             )}
           </button>
 
+          {/* Faixa etária */}
+          <button
+            onClick={() => { setShowFaixaOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowCidadeOptions(false); setShowValorOptions(false); setShowPagamentoOptions(false); }}
+            className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+              activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+            }`}
+          >
+            <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+              {activeFaixa ? activeFaixa.split(" ")[0] : "Faixa etária"}
+            </span>
+            {activeFaixa ? (
+              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveFaixa(null); }}>×</span>
+            ) : (
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            )}
+          </button>
+
           {/* Faixa de valor */}
           <button
-            onClick={() => { setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); }}
+            onClick={() => { setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowFaixaOptions(false); setShowPagamentoOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -533,6 +553,23 @@ export default function Home() {
                 }`}
               >
                 {m}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Opções inline de faixa etária */}
+        {showFaixaOptions && (
+          <div className="pt-2 flex flex-wrap gap-2">
+            {["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"].map((f) => (
+              <button
+                key={f}
+                onClick={() => { setActiveFaixa(activeFaixa === f ? null : f); setShowFaixaOptions(false); }}
+                className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
+                  activeFaixa === f ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                }`}
+              >
+                {f}
               </button>
             ))}
           </div>
