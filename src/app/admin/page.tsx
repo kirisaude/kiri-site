@@ -42,6 +42,44 @@ interface Reporte {
 
 type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais";
 
+function parseObs(obs: string | null): { demanda?: string; faixa?: string; pagamento?: string; convenio?: string; objetivo?: string } {
+  if (!obs) return {};
+  const demanda = obs.match(/Demanda: ([^—]+)/)?.[1].trim();
+  const faixa = obs.match(/Faixa etária: ([^—]+)/)?.[1].trim();
+  const convenio = obs.match(/Convênio: ([^—(]+)/)?.[1].trim();
+  const pagamento = !convenio ? obs.match(/Pagamento: ([^—]+)/)?.[1].trim() : undefined;
+  const objetivo = obs
+    .replace(/Demanda: [^—]+(?:—\s*)?/g, "")
+    .replace(/Faixa etária: [^—]+(?:—\s*)?/g, "")
+    .replace(/Convênio: [^—]+(?:—\s*)?/g, "")
+    .replace(/Pagamento: [^—]+(?:—\s*)?/g, "")
+    .replace(/\(aceita particular[^)]*\)/g, "")
+    .replace(/—/g, "").trim() || undefined;
+  return { demanda, faixa, pagamento, convenio, objetivo };
+}
+
+function ObsTopicos({ obs }: { obs: string | null }) {
+  const { demanda, faixa, pagamento, convenio, objetivo } = parseObs(obs);
+  const itens = [
+    demanda && { label: "Queixa central", valor: demanda },
+    faixa && { label: "Faixa etária", valor: faixa },
+    objetivo && { label: "O que procura", valor: objetivo },
+    convenio && { label: "Convênio", valor: convenio },
+    pagamento && { label: "Pagamento", valor: pagamento },
+  ].filter(Boolean) as { label: string; valor: string }[];
+  if (itens.length === 0) return null;
+  return (
+    <div className="flex flex-col gap-1">
+      {itens.map((item) => (
+        <div key={item.label}>
+          <span className="font-medium text-carvao">{item.label}:</span>{" "}
+          <span className="text-cinza-texto">{item.valor}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function pareceWhatsApp(contato: string): boolean {
   const digits = contato.replace(/\D/g, "");
   return digits.length >= 10 && digits.length <= 13;
@@ -105,12 +143,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
           <div className="flex flex-col gap-1.5 mt-3 text-[13px] text-cinza-texto">
             {e.cidade && <div><span className="font-medium text-carvao">Cidade:</span> {e.cidade}</div>}
             {e.modalidade && <div><span className="font-medium text-carvao">Modalidade:</span> {e.modalidade}</div>}
-            {e.observacoes && (
-              <div>
-                <span className="font-medium text-carvao">O que procura:</span>{" "}
-                <span className="italic">"{e.observacoes}"</span>
-              </div>
-            )}
+            <ObsTopicos obs={e.observacoes} />
           </div>
 
           {/* Botão de resposta */}
@@ -289,7 +322,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
           </div>
           {e.observacoes && !respondido && (
             <div className="text-[12.5px] text-muted mt-0.5 truncate max-w-[320px]">
-              {e.observacoes}
+              {parseObs(e.observacoes).demanda ?? e.observacoes}
             </div>
           )}
         </div>
@@ -301,12 +334,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
           <div className="flex flex-col gap-1.5 mt-3 text-[13px] text-cinza-texto">
             {e.cidade && <div><span className="font-medium text-carvao">Cidade:</span> {e.cidade}</div>}
             {e.modalidade && <div><span className="font-medium text-carvao">Modalidade:</span> {e.modalidade}</div>}
-            {e.observacoes && (
-              <div>
-                <span className="font-medium text-carvao">O que procura:</span>{" "}
-                <span className="italic">"{e.observacoes}"</span>
-              </div>
-            )}
+            <ObsTopicos obs={e.observacoes} />
           </div>
           <div className="flex justify-end mb-2 mt-3">
             <button
