@@ -445,16 +445,26 @@ export default function EditarProfissionalPage() {
             </div>
           </div>
 
-          {[
-            { label: "Nome completo", value: nome, set: setNome, required: true },
-            { label: "Título de exibição (ex: Psiquiatra da infância e adolescência)", value: tituloExibicao, set: setTituloExibicao, required: true },
-          ].map(({ label, value, set, required }) => (
-            <div key={label} className="flex flex-col gap-1">
-              <label className="text-[12.5px] font-medium text-cinza-texto">{label}</label>
-              <input type="text" value={value} onChange={(e) => set(e.target.value)} required={required}
-                className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
-            </div>
-          ))}
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Nome completo</label>
+            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+            {["Psicólogo", "Neuropsicólogo"].includes(profissao) && (
+              <div className="flex flex-col gap-1.5 mt-1">
+                <span className="text-[11px] text-cinza-texto2 font-medium uppercase tracking-wide">Verificar no conselho — busque pelo nome acima:</span>
+                <a href="https://cadastro.cfp.org.br/" target="_blank" rel="noreferrer"
+                  className="inline-flex items-center gap-1 self-start px-2.5 py-1 rounded-full border border-ardosia text-[12px] text-ardosia hover:bg-ardosia hover:text-white transition-colors">
+                  CFP ↗
+                </a>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Título de exibição (ex: Psiquiatra da infância e adolescência)</label>
+            <input type="text" value={tituloExibicao} onChange={(e) => setTituloExibicao(e.target.value)} required
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+          </div>
 
           {/* Registro no conselho — com checkbox de verificação */}
           <div className="flex flex-col gap-1">
@@ -463,8 +473,6 @@ export default function EditarProfissionalPage() {
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
             {(() => {
               const links: { label: string; url: string }[] = [];
-              if (["Psicólogo", "Neuropsicólogo"].includes(profissao))
-                links.push({ label: "CFP", url: "https://cadastro.cfp.org.br/" });
               if (profissao === "Fonoaudiólogo") {
                 links.push({ label: "CRFa-SP", url: "https://crfa-sp.implanta.net.br/servicosonline/Publico/ConsultaInscritos/" });
                 links.push({ label: "CRFa-4 (Bahia)", url: "https://crefono4.conselho24horas.com.br/pesquisaprofissional" });
