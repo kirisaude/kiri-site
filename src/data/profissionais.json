@@ -102,15 +102,18 @@
       "formacao": [
         {
           "curso": "Graduação em",
-          "instituicao_ano": "Psicologia — Universidade Paulista — 2015"
+          "instituicao_ano": "Psicologia — Universidade Paulista — 2015",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada para Autismo e Deficiência Intelectual — CBI OF Miami — 2020"
+          "instituicao_ano": "Análise do Comportamento Aplicada para Autismo e Deficiência Intelectual — CBI OF Miami — 2020",
+          "verificado": false
         },
         {
           "curso": "Mestranda em",
-          "instituicao_ano": "Educação Especial —  Universidade Federal de São Carlos — atual"
+          "instituicao_ano": "Educação Especial —  Universidade Federal de São Carlos — atual",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -127,7 +130,8 @@
       "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "F"
     },
     {
       "id": "kiri-024",
