@@ -646,7 +646,7 @@
       "tempo_atuacao": null,
       "foto_posicao": "75% top",
       "oculto": false,
-      "registro_verificado": false,
+      "registro_verificado": true,
       "sobre_verificado": false,
       "genero": "F"
     }
