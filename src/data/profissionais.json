@@ -198,12 +198,16 @@
       "sobre": "Olá! Sou psicóloga, Analista do Comportamento (ABA) e especialista em Neuropsicologia. Desde 2020, dedico minha atuação ao acompanhamento de crianças e adolescentes com Transtorno do Espectro Autista (TEA) e outros transtornos do neurodesenvolvimento.\n\nAcredito que cada criança aprende de uma forma única. Por isso, meu trabalho é construir intervenções individualizadas, baseadas em evidências científicas e nas necessidades de cada paciente, sempre buscando desenvolver habilidades que promovam mais autonomia, qualidade de vida e participação nos diferentes ambientes em que ela está inserida.\n\nMinha atuação envolve o manejo de comportamentos desafiadores, o desenvolvimento de habilidades acadêmicas, sociais, comunicativas e de autonomia, além da elaboração de adaptações de materiais, orientação à família, alinhamento com a escola e observações em ambiente escolar quando necessário.\n\nMais do que trabalhar apenas durante a sessão, acredito na importância de integrar família, escola e demais profissionais para que o desenvolvimento aconteça de forma consistente e significativa. Meu objetivo é oferecer um atendimento acolhedor, ético e individualizado, respeitando o ritmo e as potencialidades de cada criança.",
       "formacao": [
         {
-          "curso": "Graduação em Psicologia",
-          "instituicao_ano": "Centro Universitário FMU, 2018"
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Centro Universitário FMU — 2018"
         },
         {
-          "curso": "Especialização em Análise do Comportamento Aplicada ao TEA",
-          "instituicao_ano": "Instituto Par, 2023"
+          "curso": "Especialização",
+          "instituicao_ano": "Análise do Comportamento Aplicada ao TEA — Instituto Par — 2023"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia — Faculdade Israelita de Ciências da Saúde Albert Einstein — 2025"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -216,7 +220,11 @@
       "foto_url": "/fotos/kiri-025.jpg",
       "verificacao_data": "julho de 2026",
       "card_token": "c589125763964e01",
-      "tempo_atuacao": null
+      "tempo_atuacao": null,
+      "foto_posicao": "center top",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-026",
