@@ -525,7 +525,7 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada ao Transtorno do Espectro Autista e Desenvolvimento Atípico — Instituto Par, 2024"
+          "instituicao_ano": "Análise do Comportamento Anao plicada ao Transtorno do Espectro Autista e Desenvolvimento Atípico — Instituto Par — 2024"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -539,7 +539,7 @@
       "verificacao_data": "Julho de 2026",
       "card_token": "4d9d638fa7c448ed",
       "tempo_atuacao": null,
-      "foto_posicao": "center top",
+      "foto_posicao": "25% top",
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false
