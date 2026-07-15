@@ -109,7 +109,7 @@ export default function ProPage() {
   const filtrado = useMemo(() => {
     const q = sem(busca.trim());
     return profissionais.filter((p) => {
-      if (q && !sem(p.nome).includes(q) && !sem(p.cidade).includes(q)) return false;
+      if (q && !sem(p.nome).includes(q) && !sem(p.cidade).includes(q) && !sem(p.profissao).includes(q)) return false;
       if (profFiltro.length && !profFiltro.includes(p.profissao)) return false;
       if (modalidadeFiltro === "presencial" && !p.modalidade.toLowerCase().includes("presencial")) return false;
       if (modalidadeFiltro === "online" && !p.modalidade.toLowerCase().includes("online")) return false;
@@ -186,7 +186,7 @@ export default function ProPage() {
                 <path d="M13 13 L17 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
               </svg>
               <input type="text" value={busca} onChange={(e) => setBusca(e.target.value)}
-                placeholder="Buscar por nome ou cidade…"
+                placeholder="Buscar por nome, cidade ou profissão…"
                 className="w-full pl-9 pr-3 py-[9px] border border-linha rounded-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted" />
             </div>
             <button type="button" onClick={() => setFiltrosVisiveis((v) => !v)}
