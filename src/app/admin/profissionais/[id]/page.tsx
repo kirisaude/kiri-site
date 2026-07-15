@@ -316,14 +316,14 @@ export default function EditarProfissionalPage() {
                 style={{ width: 72, height: 72, borderRadius: 16, overflow: "hidden", flexShrink: 0, background: "#EBE2D2", display: "flex", alignItems: "flex-end", justifyContent: "center" }}
               >
                 {fotoPreview ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  {(() => {
+                  (() => {
                     const pp = fotoPosicao.split(" ");
                     const px2 = pp[0]; const py2 = pp.slice(1).join(" ") || "top";
                     const xs = px2 === "25%" ? "12%" : px2 === "75%" ? "-12%" : "0%";
                     const hh = px2 !== "center" && px2 !== "50%";
+                    // eslint-disable-next-line @next/next/no-img-element
                     return <img src={fotoPreview} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: `center ${py2}`, ...(hh ? { transform: `scale(1.3) translateX(${xs})` } : {}) }} />;
-                  })()}
+                  })()
                 ) : (
                   <svg width={72} height={72} viewBox="0 0 48 48">
                     <circle cx="24" cy="19" r="8.5" fill="#CDBFA8" />
