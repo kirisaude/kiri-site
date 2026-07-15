@@ -175,7 +175,7 @@ export default async function PerfilPage({ params }: PageProps) {
             <div>
               <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Formação acadêmica</div>
               <div className="flex flex-col gap-3.5">
-                {p.formacao.map((f, i) => {
+                {p.formacao.filter(f => !f.oculto).map((f, i) => {
                   const partes = f.instituicao_ano.split(" — ");
                   const cursoTemArea = / em /i.test(f.curso);
                   let titulo: string;

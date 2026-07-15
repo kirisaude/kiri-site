@@ -3,6 +3,7 @@ export interface Formacao {
   instituicao_ano: string;
   verificado?: boolean;
   pendente?: boolean;
+  oculto?: boolean;
   obs?: string;
 }
 
