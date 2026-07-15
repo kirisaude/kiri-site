@@ -31,6 +31,7 @@ function FormularioContent() {
   const [contato, setContato] = useState("");
   const [cidade, setCidade] = useState("");
   const [modalidade, setModalidade] = useState("");
+  const [demandaPrincipal, setDemandaPrincipal] = useState("");
   const [opcoesBusca, setOpcoesBusca] = useState<string[]>([]);
   const [detalhesBusca, setDetalhesBusca] = useState("");
   const [consentimento, setConsentimento] = useState(false);
@@ -56,6 +57,7 @@ function FormularioContent() {
         cidade: cidade.trim() || null,
         modalidade: modalidade || null,
         observacoes: [
+          demandaPrincipal ? `Demanda: ${demandaPrincipal}` : "",
           opcoesBusca.join(", "),
           detalhesBusca.trim() ? detalhesBusca.trim() : "",
         ].filter(Boolean).join(" — ") || null,
@@ -244,6 +246,35 @@ function FormularioContent() {
 
           <div className="flex flex-col gap-2">
             <label className="text-[13px] font-semibold text-carvao">
+              Qual é a principal dificuldade? <span className="text-ferrugem">*</span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Problemas de fala ou linguagem",
+                "Precisa de diagnóstico",
+                "Dificuldades de aprendizagem",
+                "Comportamento desafiador",
+                "Ansiedade ou saúde mental",
+                "Outro",
+              ].map((op) => (
+                <button
+                  key={op}
+                  type="button"
+                  onClick={() => setDemandaPrincipal(demandaPrincipal === op ? "" : op)}
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                    demandaPrincipal === op
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-carvao border-linha"
+                  }`}
+                >
+                  {op}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-[13px] font-semibold text-carvao">
               O que você procura? <span className="text-ferrugem">*</span>
             </label>
             <div className="flex flex-wrap gap-2">
@@ -312,7 +343,7 @@ function FormularioContent() {
 
           <button
             type="submit"
-            disabled={enviando || !consentimento || !nome || !contato || !modalidade || opcoesBusca.length === 0}
+            disabled={enviando || !consentimento || !nome || !contato || !modalidade || !demandaPrincipal || opcoesBusca.length === 0}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
