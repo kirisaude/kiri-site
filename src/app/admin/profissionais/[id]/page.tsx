@@ -25,6 +25,21 @@ function buildBairro(regioes: string[], texto: string): string {
 
 const profissionais = data.profissionais as Profissional[];
 
+function VerificacaoRow({ checked, onToggle, obs, onObs }: { checked: boolean; onToggle: () => void; obs: string; onObs: (v: string) => void }) {
+  return (
+    <div className="flex items-start gap-2 mt-1">
+      <button type="button" onClick={onToggle}
+        className={`flex-none mt-0.5 w-[16px] h-[16px] rounded-[4px] border-2 flex items-center justify-center cursor-pointer transition-colors ${checked ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-linha"}`}>
+        {checked && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+      </button>
+      <span className={`text-[11.5px] font-medium flex-none mt-0.5 ${checked ? "text-ardosia-escura" : "text-muted"}`}>Documento verificado</span>
+      <input type="text" value={obs} onChange={(e) => onObs(e.target.value)}
+        placeholder="Obs (ex: pendente certificado)"
+        className="flex-1 text-[11.5px] border-b border-linha bg-transparent outline-none text-carvao placeholder:text-muted py-0.5" />
+    </div>
+  );
+}
+
 export default function EditarProfissionalPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
@@ -68,6 +83,10 @@ export default function EditarProfissionalPage() {
   const [fotoPreview, setFotoPreview] = useState<string | null>(profOriginal?.foto_url ?? null);
   const [uploadandoFoto, setUploadandoFoto] = useState(false);
   const [erroFoto, setErroFoto] = useState("");
+
+  const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
+  const [registroVerificado, setRegistroVerificado] = useState(profOriginal?.registro_verificado ?? false);
+  const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
 
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
@@ -205,6 +224,9 @@ export default function EditarProfissionalPage() {
       verificacao_data: verificacaoData.trim(),
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
+      oculto,
+      registro_verificado: registroVerificado,
+      registro_obs: registroObs.trim() || undefined,
     };
 
     const res = await fetch("/api/admin/profissionais", {
@@ -247,6 +269,23 @@ export default function EditarProfissionalPage() {
           >
             Ver perfil ↗
           </Link>
+        </div>
+
+        {/* Toggle ocultar perfil */}
+        <div className={`flex items-center justify-between rounded-[12px] px-4 py-3 mb-4 border ${oculto ? "bg-ferrugem/10 border-ferrugem/30" : "bg-white border-linha"}`}>
+          <div>
+            <div className={`text-[14px] font-semibold ${oculto ? "text-ferrugem" : "text-carvao"}`}>
+              {oculto ? "Perfil oculto" : "Perfil visível"}
+            </div>
+            <div className="text-[12px] text-muted">{oculto ? "Não aparece na plataforma nem na busca" : "Aparece normalmente na plataforma"}</div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setOculto((v) => !v)}
+            className={`text-[13px] font-semibold px-4 py-2 rounded-[9px] cursor-pointer transition-colors ${oculto ? "bg-ferrugem text-white" : "bg-wash border border-linha text-carvao hover:border-ardosia"}`}
+          >
+            {oculto ? "Tornar visível" : "Ocultar perfil"}
+          </button>
         </div>
 
         <form onSubmit={salvar} className="flex flex-col gap-4">
@@ -330,7 +369,23 @@ export default function EditarProfissionalPage() {
           {[
             { label: "Nome completo", value: nome, set: setNome, required: true },
             { label: "Título de exibição (ex: Psiquiatra da infância e adolescência)", value: tituloExibicao, set: setTituloExibicao, required: true },
-            { label: "Registro no conselho", value: registro, set: setRegistro, required: true },
+          ].map(({ label, value, set, required }) => (
+            <div key={label} className="flex flex-col gap-1">
+              <label className="text-[12.5px] font-medium text-cinza-texto">{label}</label>
+              <input type="text" value={value} onChange={(e) => set(e.target.value)} required={required}
+                className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+            </div>
+          ))}
+
+          {/* Registro no conselho — com checkbox de verificação */}
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Registro no conselho</label>
+            <input type="text" value={registro} onChange={(e) => setRegistro(e.target.value)} required
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+            <VerificacaoRow checked={registroVerificado} onToggle={() => setRegistroVerificado(v => !v)} obs={registroObs} onObs={setRegistroObs} />
+          </div>
+
+          {[
             { label: "RQE (só médicos — deixe vazio se não se aplica)", value: rqe, set: setRqe },
             { label: "Áreas de atuação (separadas por vírgula)", value: areas, set: setAreas, required: true },
             { label: "Modalidade", value: modalidade, set: setModalidade, required: true },
@@ -471,38 +526,46 @@ export default function EditarProfissionalPage() {
               const phCurso = exemplosCurso[i] ?? "ex: Especialização · área";
               const phLocal = exemplosLocal[i] ?? "ex: Instituição, Ano";
               return (
-              <div key={i} className="flex gap-2 items-center">
-                <input
-                  type="text"
-                  placeholder={phCurso}
-                  value={f.curso}
-                  onChange={(e) => {
-                    const novo = [...formacao];
-                    novo[i] = { ...novo[i], curso: e.target.value };
-                    setFormacao(novo);
-                  }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+              <div key={i} className="flex flex-col gap-0.5">
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    placeholder={phCurso}
+                    value={f.curso}
+                    onChange={(e) => {
+                      const novo = [...formacao];
+                      novo[i] = { ...novo[i], curso: e.target.value };
+                      setFormacao(novo);
+                    }}
+                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                  />
+                  <input
+                    type="text"
+                    placeholder={phLocal}
+                    value={f.instituicao_ano}
+                    onChange={(e) => {
+                      const novo = [...formacao];
+                      novo[i] = { ...novo[i], instituicao_ano: e.target.value };
+                      setFormacao(novo);
+                    }}
+                    className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                  />
+                  {formacao.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setFormacao(formacao.filter((_, j) => j !== i))}
+                      className="text-[18px] text-muted cursor-pointer leading-none flex-none"
+                    >
+                      ×
+                    </button>
+                  )}
+                </div>
+                <VerificacaoRow
+                  checked={f.verificado ?? false}
+                  onToggle={() => { const n = [...formacao]; n[i] = { ...n[i], verificado: !f.verificado }; setFormacao(n); }}
+                  obs={f.obs ?? ""}
+                  onObs={(v) => { const n = [...formacao]; n[i] = { ...n[i], obs: v }; setFormacao(n); }}
                 />
-                <input
-                  type="text"
-                  placeholder={phLocal}
-                  value={f.instituicao_ano}
-                  onChange={(e) => {
-                    const novo = [...formacao];
-                    novo[i] = { ...novo[i], instituicao_ano: e.target.value };
-                    setFormacao(novo);
-                  }}
-                  className="flex-1 border border-linha rounded-[10px] px-3 py-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
-                />
-                {formacao.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => setFormacao(formacao.filter((_, j) => j !== i))}
-                    className="text-[18px] text-muted cursor-pointer leading-none flex-none"
-                  >
-                    ×
-                  </button>
-                )}
               </div>
               );
             })}

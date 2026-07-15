@@ -81,7 +81,17 @@ export default function RevisarPage() {
 
         const formacoesIniciais = [];
         if (s.graduacao) formacoesIniciais.push({ curso: "Graduação", instituicao_ano: s.graduacao });
-        if (s.pos_graduacao) formacoesIniciais.push({ curso: "Especialização", instituicao_ano: s.pos_graduacao });
+        if (s.pos_graduacao) {
+          s.pos_graduacao.split("\n").forEach((linha: string) => {
+            const t = linha.trim();
+            if (!t) return;
+            const isMestrado = t.startsWith("Mestrado/Doutorado:");
+            formacoesIniciais.push({
+              curso: isMestrado ? t.replace("Mestrado/Doutorado:", "").trim() : t.split(" — ")[0] ?? t,
+              instituicao_ano: isMestrado ? t.replace(/^Mestrado\/Doutorado:[^—]*/, "").replace(/^ — /, "").trim() : t.split(" — ").slice(1).join(" — "),
+            });
+          });
+        }
         if (formacoesIniciais.length > 0) setFormacao(formacoesIniciais);
       });
   }, [id]);

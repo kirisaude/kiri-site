@@ -23,7 +23,7 @@ interface PageProps {
 export default async function PerfilPage({ params }: PageProps) {
   const { id } = await params;
   const p = profissionais.find((pro) => pro.id === id);
-  if (!p) notFound();
+  if (!p || p.oculto) notFound();
 
   const registroLinha = p.rqe ? `${p.registro_conselho} · ${p.rqe}` : p.registro_conselho;
 

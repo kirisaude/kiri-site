@@ -121,6 +121,7 @@ export default function Home() {
 
   const filtered = useMemo(() => {
     return profissionais.filter((p) => {
+      if (p.oculto) return false;
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;

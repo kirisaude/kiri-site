@@ -132,8 +132,8 @@ export default function InscricaoProfissionalPage() {
           })(),
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           pos_graduacao: [
-            ...posGraduacoes.map((p) => [p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
-            ...mestrados.map((m) => ["Mestrado/Doutorado: " + m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
+            ...posGraduacoes.filter((p) => p.titulo.trim() || p.instituicao.trim()).map((p) => [p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
+            ...mestrados.filter((m) => m.titulo.trim()).map((m) => ["Mestrado/Doutorado: " + m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
           ].filter(Boolean).join("\n") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
