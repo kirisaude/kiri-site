@@ -509,11 +509,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Terapia Ocupacional"
+          "instituicao_ano": "Terapia Ocupacional",
+          "verificado": false
         },
         {
           "curso": "Certificação Internacional",
-          "instituicao_ano": "Integração Sensorial de Ayres"
+          "instituicao_ano": "Integração Sensorial de Ayres",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -530,7 +532,8 @@
       "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "F"
     },
     {
       "id": "kiri-032",
