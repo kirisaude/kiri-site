@@ -69,10 +69,8 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Audiologia — CFFa",
-          "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "instituicao_ano": "Audiologia — CFFa — 2022",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
@@ -83,15 +81,13 @@
           "curso": "Especialização",
           "instituicao_ano": "Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "ABA para Autismo e Deficiência Intelectual",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
