@@ -278,16 +278,16 @@
       "sobre": "Sou Terapeuta Ocupacional formada pela Universidade de São Paulo (USP), mestre pela Faculdade de Medicina da USP e apaixonada pelo cuidado às pessoas em suas diferentes fases da vida. Ao longo da minha trajetória, atuei por 15 anos no Sistema Único de Saúde (SUS), em assistência, gestão e supervisão, experiência que ampliou meu olhar para o desenvolvimento humano, a saúde mental e a importância do trabalho em rede.\n\nHoje sou fundadora da TatOca, um espaço especializado em Terapia Ocupacional no Tatuapé (SP). Minha atuação clínica é voltada principalmente para crianças com desafios no processamento sensorial, desenvolvimento e participação no cotidiano, utilizando a abordagem da Integração Sensorial de Ayres® (ASI®), sempre associada a uma análise cuidadosa das ocupações e da funcionalidade da criança em seus diferentes contextos.\n\nTambém atuo na área de saúde mental, acompanhando adolescentes e adultos em processos de sofrimento psíquico, construção de autonomia, organização do cotidiano e participação social. Minha formação e os 15 anos de experiência no SUS, especialmente em serviços de saúde mental, me permitem integrar diferentes perspectivas da Terapia Ocupacional conforme as necessidades de cada pessoa.\n\nAcredito que o tratamento vai muito além da sessão. Gosto de construir projetos terapêuticos compartilhados com famílias, escolas e demais profissionais, buscando intervenções baseadas em evidências científicas e que façam sentido para a vida real de cada paciente. Meu objetivo é favorecer autonomia, participação, qualidade de vida e o engajamento nas ocupações que são significativas para cada indivíduo.\n\nValorizo muito as trocas entre profissionais e acredito que o cuidado interdisciplinar é um dos caminhos mais potentes para oferecer um atendimento ético, consistente e centrado na pessoa. Fico muito feliz em integrar a rede Kiri e espero construir boas parcerias por aqui.",
       "formacao": [
         {
-          "curso": "Graduação em Terapia Ocupacional",
+          "curso": "Graduação",
           "instituicao_ano": "Terapia Ocupacional — Universidade de São Paulo — 2009"
         },
         {
-          "curso": "Aprimoramento profissional",
-          "instituicao_ano": "Saúde Mental Multiprofissional — FUNDAP/CAPS Itapeva — 2010"
+          "curso": "Especialização",
+          "instituicao_ano": "Aprimoramento Profissional em Saúde Mental Multiprofissional — FUNDAP/CAPS Itapeva — 2010"
         },
         {
-          "curso": "Especialização",
-          "instituicao_ano": "ntegração Sensorial de Ayres — CLASI — 2023"
+          "curso": "Certificação Internacional",
+          "instituicao_ano": "Integração Sensorial de Ayres — CLASI — 2023"
         },
         {
           "curso": "Mestrado Profissional ",
@@ -305,7 +305,7 @@
       "verificacao_data": "Julho de 2026",
       "card_token": "06189d024bdf4af2",
       "tempo_atuacao": null,
-      "foto_posicao": "center center",
+      "foto_posicao": "25% center",
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false
