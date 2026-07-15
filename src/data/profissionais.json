@@ -406,6 +406,52 @@
       "foto_url": null,
       "verificacao_data": "Julho de 2026",
       "card_token": "cae40d636cad421c"
+    },
+    {
+      "id": "kiri-030",
+      "nome": "Aline Dunham",
+      "profissao": "Psicopedagogo",
+      "titulo_exibicao": "Psicopedagogo",
+      "registro_conselho": "CBO 2394-25",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "Dificuldades de aprendizagem",
+        "Atraso de desenvolvimento",
+        "TDAH"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Salvador",
+      "faixa_etaria": "Crianças (6–12 anos), Pré-escola (3–5 anos)",
+      "sobre": "Há mais de 15 anos acompanho crianças e adolescentes que apresentam dificuldades de aprendizagem, atraso no processo de alfabetização, transtornos do neurodesenvolvimento e outras condições que interferem no desempenho escolar. Meu trabalho é pautado em práticas fundamentadas na ciência, buscando compreender as necessidades de cada criança para elaborar um plano de intervenção individualizado.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Letras — UCSAL — 2007"
+        },
+        {
+          "curso": "Autismo",
+          "instituicao_ano": "IEPSIS — 2018"
+        },
+        {
+          "curso": "Análise do Comportamento Aplicada ao Autismo",
+          "instituicao_ano": "IEPSIS — 2019"
+        },
+        {
+          "curso": "Neuroalfabetização",
+          "instituicao_ano": "Faculdade Metropolitana — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 200,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "7199217-0795",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "Julho de 2026",
+      "card_token": "a6cc82ccb7da4e02"
     }
   ]
 }
