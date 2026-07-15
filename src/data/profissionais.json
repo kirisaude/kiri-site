@@ -39,6 +39,7 @@
       "convenio_info": "Particular · emite recibo para reembolso",
       "whatsapp_agendamento": "11999999999",
       "verificado": true,
+      "oculto": true,
       "foto_url": null,
       "verificacao_data": "junho de 2026",
       "card_token": "99cc91af2afb4414"
@@ -387,7 +388,7 @@
       "nome": "Saulo Leal Merelles",
       "profissao": "Psiquiatra da infância e adolescência",
       "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "21093",
+      "registro_conselho": "CRM-BA 21093",
       "rqe": "13917",
       "areas_atuacao": [
         "TDAH",
@@ -433,7 +434,7 @@
     },
     {
       "id": "kiri-029",
-      "nome": "CAIO LEONIDAS OLIVEIRA DE ANDRADE",
+      "nome": "Caio Leonidas Oliveira de Andrade",
       "profissao": "Fonoaudiólogo",
       "titulo_exibicao": "Fonoaudiólogo",
       "registro_conselho": "4-11028",
