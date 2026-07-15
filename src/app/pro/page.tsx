@@ -63,6 +63,7 @@ export default function ProPage() {
 
   // Seções abertas
   const [abertas, setAbertas] = useState<Set<string>>(new Set());
+  const [filtrosVisiveis, setFiltrosVisiveis] = useState(true);
   function toggleSecao(s: string) {
     setAbertas((prev) => { const n = new Set(prev); n.has(s) ? n.delete(s) : n.add(s); return n; });
   }
@@ -177,9 +178,9 @@ export default function ProPage() {
         {/* Painel de filtros */}
         <div className="bg-white border border-linha rounded-[16px] overflow-hidden">
 
-          {/* Busca */}
-          <div className="px-4 py-3 border-b border-linha">
-            <div className="relative">
+          {/* Busca + toggle filtros */}
+          <div className="px-4 py-3 border-b border-linha flex items-center gap-2">
+            <div className="relative flex-1">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" width="14" height="14" viewBox="0 0 20 20" fill="none">
                 <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6"/>
                 <path d="M13 13 L17 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
@@ -188,8 +189,17 @@ export default function ProPage() {
                 placeholder="Buscar por nome ou cidade…"
                 className="w-full pl-9 pr-3 py-[9px] border border-linha rounded-[9px] text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted" />
             </div>
+            <button type="button" onClick={() => setFiltrosVisiveis((v) => !v)}
+              title={filtrosVisiveis ? "Ocultar filtros" : "Mostrar filtros"}
+              className="flex-none flex items-center justify-center w-[34px] h-[34px] rounded-[9px] border border-linha bg-white text-muted hover:border-ardosia transition-colors cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                className={`transition-transform ${filtrosVisiveis ? "" : "rotate-180"}`}>
+                <path d="M3 9L7 5L11 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
 
+          {filtrosVisiveis && <>
           {/* Profissão */}
           <FilterRow label="Profissão" count={profFiltro.length} open={abertas.has("prof")} onToggle={() => toggleSecao("prof")}>
             {PROFISSOES_ORDENADAS.filter((p) => profissionais.some((x) => x.profissao === p)).map((p) => (
@@ -219,6 +229,7 @@ export default function ProPage() {
             </FilterRow>
           )}
 
+          </>}
           {/* Convênio + limpar */}
           <div className="px-4 py-3 flex items-center justify-between">
             <button type="button" onClick={() => setConvenioFiltro((v) => !v)}
