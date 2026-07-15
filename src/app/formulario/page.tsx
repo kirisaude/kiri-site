@@ -306,7 +306,7 @@ function FormularioContent() {
             </label>
             <div className="flex flex-wrap gap-2">
               {[
-                "Avaliação diagnóstica (TEA, TDAH…)",
+                "Avaliação diagnóstica",
                 "Acompanhamento terapêutico",
                 "Orientação para pais",
                 "Laudo ou relatório",
