@@ -461,6 +461,30 @@ export default function EditarProfissionalPage() {
             <label className="text-[12.5px] font-medium text-cinza-texto">Registro no conselho</label>
             <input type="text" value={registro} onChange={(e) => setRegistro(e.target.value)} required
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+            {(() => {
+              const links: { label: string; url: string }[] = [];
+              if (["Psicólogo", "Neuropsicólogo"].includes(profissao))
+                links.push({ label: "Consultar no CFP", url: "https://cadastro.cfp.org.br/" });
+              if (profissao === "Fonoaudiólogo") {
+                links.push({ label: "CRFa-SP", url: "https://crfa-sp.implanta.net.br/servicosonline/Publico/ConsultaInscritos/" });
+                links.push({ label: "CRFa-4 (Bahia/outros)", url: "https://crefono4.conselho24horas.com.br/pesquisaprofissional" });
+              }
+              if (profissao === "Terapeuta ocupacional")
+                links.push({ label: "Consultar no CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/detalhes.asp?tb=ni" });
+              if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra"].includes(profissao))
+                links.push({ label: "Consultar no CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
+              if (links.length === 0) return null;
+              return (
+                <div className="flex gap-3 flex-wrap mt-0.5">
+                  {links.map(l => (
+                    <a key={l.url} href={l.url} target="_blank" rel="noreferrer"
+                      className="text-[12px] text-ardosia underline hover:text-carvao transition-colors">
+                      {l.label} ↗
+                    </a>
+                  ))}
+                </div>
+              );
+            })()}
             <VerificacaoRow status={registroStatus} onStatus={setRegistroStatus} obs={registroObs} onObs={setRegistroObs} />
           </div>
 
