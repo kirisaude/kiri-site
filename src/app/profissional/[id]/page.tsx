@@ -174,15 +174,21 @@ export default async function PerfilPage({ params }: PageProps) {
             <div>
               <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Formação acadêmica</div>
               <div className="flex flex-col gap-3.5">
-                {p.formacao.map((f, i) => (
-                  <div key={i} className="flex gap-3">
-                    <div className="w-[9px] h-[9px] rounded-full border-2 border-ferrugem flex-none mt-1" />
-                    <div>
-                      <div className="text-[14.5px] font-semibold text-carvao leading-[1.3]">{titleCasePT(f.curso)}</div>
-                      <div className="text-[13px] text-cinza-texto2 mt-0.5">{titleCasePT(f.instituicao_ano)}</div>
+                {p.formacao.map((f, i) => {
+                  const partes = f.instituicao_ano.split(" — ");
+                  const area = partes[0]?.trim() ?? "";
+                  const local = partes.slice(1).filter(Boolean).join(" · ");
+                  const titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
+                  return (
+                    <div key={i} className="flex gap-3">
+                      <div className="w-[9px] h-[9px] rounded-full border-2 border-ferrugem flex-none mt-1" />
+                      <div>
+                        <div className="text-[14.5px] font-semibold text-carvao leading-[1.3]">{titulo}</div>
+                        {local && <div className="text-[13px] text-cinza-texto2 mt-0.5">{titleCasePT(local)}</div>}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
