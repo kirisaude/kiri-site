@@ -426,7 +426,7 @@
       "card_token": "fddb7f8748844e26",
       "tempo_atuacao": null,
       "foto_posicao": "center top",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
       "genero": "M"
