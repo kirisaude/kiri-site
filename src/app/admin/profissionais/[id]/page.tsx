@@ -365,7 +365,7 @@ export default function EditarProfissionalPage() {
                           { label: "Rosto acima", y: "20%" },
                         ].map((op) => (
                           <button key={op.y} type="button"
-                            onClick={() => setFotoPosicao(`${posX} ${op.y}`)}
+                            onClick={() => setFotoPosicao(`${posX} ${posY === op.y ? "center" : op.y}`)}
                             className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${posY === op.y ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
                             {op.label}
                           </button>
@@ -377,7 +377,7 @@ export default function EditarProfissionalPage() {
                           { label: "Direita →", x: "75%" },
                         ].map((op) => (
                           <button key={op.x} type="button"
-                            onClick={() => setFotoPosicao(`${op.x} ${posY}`)}
+                            onClick={() => setFotoPosicao(`${posX === op.x ? "center" : op.x} ${posY}`)}
                             className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${posX === op.x ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
                             {op.label}
                           </button>
