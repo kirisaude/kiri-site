@@ -49,10 +49,8 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional",
-          "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "instituicao_ano": "Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional — Faculdade Mozarteum de São Paulo — 2023",
+          "verificado": true
         },
         {
           "curso": "Especialização",
