@@ -349,11 +349,13 @@
       "formacao": [
         {
           "curso": "Graduação em Medicina",
-          "instituicao_ano": "Escola Bahiana de Medicina e Saúde Pública (EBMSP) — 2009"
+          "instituicao_ano": "Escola Bahiana de Medicina e Saúde Pública (EBMSP) — 2009",
+          "verificado": false
         },
         {
           "curso": "Especialização em Psiquiatria da infância e adolescência",
-          "instituicao_ano": "Hospital Juliano Moreira — 2014"
+          "instituicao_ano": "Hospital Juliano Moreira — 2014",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -368,9 +370,10 @@
       "card_token": "fddb7f8748844e26",
       "tempo_atuacao": null,
       "foto_posicao": "center top",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "M"
     },
     {
       "id": "kiri-029",
