@@ -497,7 +497,7 @@
       "foto_posicao": "center top",
       "genero": "M",
       "oculto": false,
-      "registro_verificado": false,
+      "registro_verificado": true,
       "sobre_verificado": false
     },
     {
