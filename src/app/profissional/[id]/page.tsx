@@ -175,7 +175,20 @@ export default async function PerfilPage({ params }: PageProps) {
             <div>
               <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Formação acadêmica</div>
               <div className="flex flex-col gap-3.5">
-                {p.formacao.filter(f => !f.oculto).map((f, i) => {
+                {(() => {
+                  const visible = p.formacao.filter(f => !f.oculto);
+                  const isGrad = (f: typeof visible[0]) => /^graduaç/i.test(f.curso);
+                  const getAno = (f: typeof visible[0]) => {
+                    const partes = f.instituicao_ano.split(" — ");
+                    const ultimo = partes[partes.length - 1]?.trim().toLowerCase() ?? "";
+                    if (ultimo === "atual") return 10000;
+                    const m = f.instituicao_ano.match(/\b\d{4}\b/g);
+                    return m ? parseInt(m[m.length - 1]) : 9999;
+                  };
+                  const grad = visible.filter(isGrad);
+                  const outros = visible.filter(f => !isGrad(f)).sort((a, b) => getAno(a) - getAno(b));
+                  return [...grad, ...outros];
+                })().map((f, i) => {
                   const partes = f.instituicao_ano.split(" — ");
                   const cursoTemArea = / em /i.test(f.curso);
                   let titulo: string;
