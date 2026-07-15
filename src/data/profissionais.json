@@ -64,11 +64,13 @@
       "formacao": [
         {
           "curso": "Graduação em Fonoaudiologia",
-          "instituicao_ano": "UNEB"
+          "instituicao_ano": "UNEB",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Doutora em Processos Interativos dos Órgãos e Sistemas, Especialista em Audiologia pelo CFFa, Especialização em Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional, Especialização em ABA para Autismo e Deficiência Intelectual."
+          "instituicao_ano": "Doutora em Processos Interativos dos Órgãos e Sistemas, Especialista em Audiologia pelo CFFa, Especialização em Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional, Especialização em ABA para Autismo e Deficiência Intelectual.",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -81,7 +83,12 @@
       "verificacao_data": "julho de 2026",
       "card_token": "ac7d5ad5908c4ecf",
       "convenios": null,
-      "tempo_atuacao": null
+      "tempo_atuacao": null,
+      "foto_posicao": "center top",
+      "genero": "F",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-023",
