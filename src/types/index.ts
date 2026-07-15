@@ -2,6 +2,7 @@ export interface Formacao {
   curso: string;
   instituicao_ano: string;
   verificado?: boolean;
+  pendente?: boolean;
   obs?: string;
 }
 
@@ -30,8 +31,10 @@ export interface Profissional {
   foto_posicao?: string | null;
   oculto?: boolean;
   registro_verificado?: boolean;
+  registro_pendente?: boolean;
   registro_obs?: string;
   sobre_verificado?: boolean;
+  sobre_pendente?: boolean;
   sobre_obs?: string;
   whatsapp_agendamento: string | null;
   card_token: string;

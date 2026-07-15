@@ -25,17 +25,32 @@ function buildBairro(regioes: string[], texto: string): string {
 
 const profissionais = data.profissionais as Profissional[];
 
-function VerificacaoRow({ checked, onToggle, obs, onObs }: { checked: boolean; onToggle: () => void; obs: string; onObs: (v: string) => void }) {
+type VerificacaoStatus = "verificado" | "pendente" | null;
+
+function Checkbox({ active, color, onClick }: { active: boolean; color: "ardosia" | "ferrugem"; onClick: () => void }) {
+  const bg = active ? (color === "ardosia" ? "bg-ardosia-escura border-ardosia-escura" : "bg-ferrugem border-ferrugem") : "bg-white border-linha";
   return (
-    <div className="flex items-start gap-2 mt-1">
-      <button type="button" onClick={onToggle}
-        className={`flex-none mt-0.5 w-[16px] h-[16px] rounded-[4px] border-2 flex items-center justify-center cursor-pointer transition-colors ${checked ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-linha"}`}>
-        {checked && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-      </button>
-      <span className={`text-[11.5px] font-medium flex-none mt-0.5 ${checked ? "text-ardosia-escura" : "text-muted"}`}>Documento verificado</span>
+    <button type="button" onClick={onClick}
+      className={`flex-none w-[16px] h-[16px] rounded-[4px] border-2 flex items-center justify-center cursor-pointer transition-colors ${bg}`}>
+      {active && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+    </button>
+  );
+}
+
+function VerificacaoRow({ status, onStatus, obs, onObs }: { status: VerificacaoStatus; onStatus: (v: VerificacaoStatus) => void; obs: string; onObs: (v: string) => void }) {
+  return (
+    <div className="flex items-center gap-3 mt-1 flex-wrap">
+      <div className="flex items-center gap-1.5">
+        <Checkbox active={status === "verificado"} color="ardosia" onClick={() => onStatus(status === "verificado" ? null : "verificado")} />
+        <span className={`text-[11.5px] font-medium ${status === "verificado" ? "text-ardosia-escura" : "text-muted"}`}>Verificado</span>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <Checkbox active={status === "pendente"} color="ferrugem" onClick={() => onStatus(status === "pendente" ? null : "pendente")} />
+        <span className={`text-[11.5px] font-medium ${status === "pendente" ? "text-ferrugem" : "text-muted"}`}>Pendente verificação</span>
+      </div>
       <input type="text" value={obs} onChange={(e) => onObs(e.target.value)}
-        placeholder="Obs (ex: pendente certificado)"
-        className="flex-1 text-[11.5px] border-b border-linha bg-transparent outline-none text-carvao placeholder:text-muted py-0.5" />
+        placeholder="Observações"
+        className="flex-1 min-w-[120px] text-[11.5px] border-b border-linha bg-transparent outline-none text-carvao placeholder:text-muted py-0.5" />
     </div>
   );
 }
@@ -73,10 +88,10 @@ export default function EditarProfissionalPage() {
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
-  type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; verificado?: boolean; obs?: string };
-  const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; obs?: string }): FormacaoEdit => {
+  type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; status?: VerificacaoStatus; obs?: string };
+  const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; pendente?: boolean; obs?: string }): FormacaoEdit => {
     const partes = f.instituicao_ano.split(" — ");
-    return { tipo: f.curso, area: partes[0] ?? "", instituicao: partes[1] ?? "", ano: partes[2] ?? "", verificado: f.verificado, obs: f.obs };
+    return { tipo: f.curso, area: partes[0] ?? "", instituicao: partes[1] ?? "", ano: partes[2] ?? "", status: toStatus(f.verificado, f.pendente), obs: f.obs };
   };
   const [formacao, setFormacao] = useState<FormacaoEdit[]>(
     profOriginal?.formacao.length
@@ -92,9 +107,10 @@ export default function EditarProfissionalPage() {
   const [erroFoto, setErroFoto] = useState("");
 
   const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
-  const [registroVerificado, setRegistroVerificado] = useState(profOriginal?.registro_verificado ?? false);
+  const toStatus = (v?: boolean, p?: boolean): VerificacaoStatus => v ? "verificado" : p ? "pendente" : null;
+  const [registroStatus, setRegistroStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.registro_verificado, profOriginal?.registro_pendente));
   const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
-  const [sobreVerificado, setSobreVerificado] = useState(profOriginal?.sobre_verificado ?? false);
+  const [sobreStatus, setSobreStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.sobre_verificado, profOriginal?.sobre_pendente));
   const [sobreObs, setSobreObs] = useState(profOriginal?.sobre_obs ?? "");
 
   const [salvando, setSalvando] = useState(false);
@@ -228,7 +244,8 @@ export default function EditarProfissionalPage() {
         .map((f) => ({
           curso: f.tipo,
           instituicao_ano: [f.area, f.instituicao, f.ano].filter(Boolean).join(" — "),
-          verificado: f.verificado,
+          verificado: f.status === "verificado",
+          pendente: f.status === "pendente" || undefined,
           obs: f.obs,
         })),
       valor_formato: valorFormato,
@@ -241,9 +258,11 @@ export default function EditarProfissionalPage() {
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
       oculto,
-      registro_verificado: registroVerificado,
+      registro_verificado: registroStatus === "verificado",
+      registro_pendente: registroStatus === "pendente" || undefined,
       registro_obs: registroObs.trim() || undefined,
-      sobre_verificado: sobreVerificado,
+      sobre_verificado: sobreStatus === "verificado",
+      sobre_pendente: sobreStatus === "pendente" || undefined,
       sobre_obs: sobreObs.trim() || undefined,
     };
 
@@ -423,7 +442,7 @@ export default function EditarProfissionalPage() {
             <label className="text-[12.5px] font-medium text-cinza-texto">Registro no conselho</label>
             <input type="text" value={registro} onChange={(e) => setRegistro(e.target.value)} required
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
-            <VerificacaoRow checked={registroVerificado} onToggle={() => setRegistroVerificado(v => !v)} obs={registroObs} onObs={setRegistroObs} />
+            <VerificacaoRow status={registroStatus} onStatus={setRegistroStatus} obs={registroObs} onObs={setRegistroObs} />
           </div>
 
           {[
@@ -556,7 +575,7 @@ export default function EditarProfissionalPage() {
               required
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none"
             />
-            <VerificacaoRow checked={sobreVerificado} onToggle={() => setSobreVerificado(v => !v)} obs={sobreObs} onObs={setSobreObs} />
+            <VerificacaoRow status={sobreStatus} onStatus={setSobreStatus} obs={sobreObs} onObs={setSobreObs} />
           </div>
 
           {/* Formação */}
@@ -599,8 +618,8 @@ export default function EditarProfissionalPage() {
                   )}
                 </div>
                 <VerificacaoRow
-                  checked={f.verificado ?? false}
-                  onToggle={() => { const n = [...formacao]; n[i] = { ...n[i], verificado: !f.verificado }; setFormacao(n); }}
+                  status={f.status ?? null}
+                  onStatus={(v) => { const n = [...formacao]; n[i] = { ...n[i], status: v }; setFormacao(n); }}
                   obs={f.obs ?? ""}
                   onObs={(v) => { const n = [...formacao]; n[i] = { ...n[i], obs: v }; setFormacao(n); }}
                 />
