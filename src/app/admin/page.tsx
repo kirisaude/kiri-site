@@ -185,6 +185,31 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   const respondido = e.status === "respondido";
   const [profSelecionados, setProfSelecionados] = useState<string[]>([]);
   const [copiado, setCopiado] = useState<string | null>(null);
+  const [filtroProf, setFiltroProf] = useState<string | null>(null);
+  const [filtroConvenio, setFiltroConvenio] = useState<"todos" | "convenio" | "particular">("todos");
+
+  // Extrair dados estruturados do observacoes
+  const faixaEtaria = e.observacoes?.match(/Faixa etária: ([^—]+)/)?.[1].trim() ?? null;
+
+  // Pré-triagem automática
+  const profPreFiltrados = profissionais.filter((p) => {
+    if (p.oculto) return false;
+    if (e.modalidade === "Presencial" && p.modalidade === "Somente online") return false;
+    if (e.modalidade === "Online" && p.modalidade === "Somente presencial") return false;
+    if (faixaEtaria && !p.faixa_etaria.includes(faixaEtaria)) return false;
+    return true;
+  });
+
+  // Filtros manuais do admin
+  const profFiltrados = profPreFiltrados
+    .filter((p) => !filtroProf || p.profissao === filtroProf)
+    .filter((p) => {
+      if (filtroConvenio === "convenio") return p.convenios && p.convenios.length > 0;
+      if (filtroConvenio === "particular") return !p.convenios || p.convenios.length === 0;
+      return true;
+    });
+
+  const profissoesDisponiveis = [...new Set(profPreFiltrados.map((p) => p.profissao))];
 
   function toggleProf(id: string) {
     setProfSelecionados((prev) =>
@@ -281,13 +306,56 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
 
           {!respondido && (
             <div className="pt-3.5 border-t border-linha-sutil flex flex-col gap-4">
-              {/* Seletor de profissionais */}
+              {/* Seletor de profissionais com pré-triagem e filtros */}
               <div>
-                <div className="text-[11.5px] font-semibold text-carvao uppercase tracking-wide mb-2">
-                  Selecionar profissionais para indicar (até 3)
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-[11.5px] font-semibold text-carvao uppercase tracking-wide">
+                    Selecionar profissionais para indicar (até 3)
+                  </div>
+                  <span className="text-[11.5px] text-muted">{profFiltrados.length} encontrados</span>
                 </div>
+
+                {/* Info de pré-triagem */}
+                {(e.modalidade && e.modalidade !== "Sem preferência" || faixaEtaria) && (
+                  <div className="flex gap-1.5 flex-wrap mb-2">
+                    {e.modalidade && e.modalidade !== "Sem preferência" && (
+                      <span className="text-[11px] bg-ardosia/10 text-ardosia px-2 py-0.5 rounded-full">✓ {e.modalidade}</span>
+                    )}
+                    {faixaEtaria && (
+                      <span className="text-[11px] bg-ardosia/10 text-ardosia px-2 py-0.5 rounded-full">✓ {faixaEtaria}</span>
+                    )}
+                  </div>
+                )}
+
+                {/* Filtro por profissão */}
+                <div className="flex gap-1.5 flex-wrap mb-2">
+                  <button type="button" onClick={() => setFiltroProf(null)}
+                    className={`text-[12px] px-2.5 py-1 rounded-full border cursor-pointer transition-colors ${!filtroProf ? "bg-carvao text-white border-carvao" : "bg-white text-cinza-texto border-linha"}`}>
+                    Todas
+                  </button>
+                  {profissoesDisponiveis.map((prof) => (
+                    <button key={prof} type="button" onClick={() => setFiltroProf(filtroProf === prof ? null : prof)}
+                      className={`text-[12px] px-2.5 py-1 rounded-full border cursor-pointer transition-colors ${filtroProf === prof ? "bg-carvao text-white border-carvao" : "bg-white text-cinza-texto border-linha"}`}>
+                      {prof}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Filtro convênio/particular */}
+                <div className="flex gap-1.5 mb-3">
+                  {(["todos", "convenio", "particular"] as const).map((op) => (
+                    <button key={op} type="button" onClick={() => setFiltroConvenio(op)}
+                      className={`text-[12px] px-2.5 py-1 rounded-full border cursor-pointer transition-colors ${filtroConvenio === op ? "bg-carvao text-white border-carvao" : "bg-white text-cinza-texto border-linha"}`}>
+                      {op === "todos" ? "Todos" : op === "convenio" ? "Com convênio" : "Particular"}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Lista filtrada */}
                 <div className="flex flex-col gap-1.5">
-                  {profissionais.filter((p) => !p.oculto).map((p) => {
+                  {profFiltrados.length === 0 ? (
+                    <p className="text-[12.5px] text-muted">Nenhum profissional encontrado com esses filtros.</p>
+                  ) : profFiltrados.map((p) => {
                     const sel = profSelecionados.includes(p.id);
                     const disabled = !sel && profSelecionados.length >= 3;
                     return (
@@ -301,7 +369,10 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
                         }`}
                       >
                         <span className="font-semibold">{p.nome}</span>
-                        <span className="ml-1.5 opacity-70">{p.titulo_exibicao} · {p.cidade}</span>
+                        <span className={`ml-1.5 ${sel ? "opacity-70" : "text-muted"}`}>
+                          {p.titulo_exibicao} · {p.cidade} · {p.modalidade}
+                          {p.convenios && p.convenios.length > 0 ? " · convênio" : ""}
+                        </span>
                       </button>
                     );
                   })}
