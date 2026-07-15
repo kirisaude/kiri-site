@@ -48,8 +48,8 @@ export default function InscricaoProfissionalPage() {
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
   const [graduacaoAno, setGraduacaoAno] = useState("");
-  const [posGraduacoes, setPosGraduacoes] = useState([{ titulo: "", instituicao: "", ano: "" }]);
-  const [mestrados, setMestrados] = useState([{ titulo: "", instituicao: "", ano: "" }]);
+  const [posGraduacoes, setPosGraduacoes] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "" }]);
+  const [mestrados, setMestrados] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "" }]);
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [lattes, setLattes] = useState("");
@@ -132,8 +132,8 @@ export default function InscricaoProfissionalPage() {
           })(),
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           pos_graduacao: [
-            ...posGraduacoes.filter((p) => p.titulo.trim() || p.instituicao.trim()).map((p) => [p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
-            ...mestrados.filter((m) => m.titulo.trim()).map((m) => ["Mestrado/Doutorado: " + m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
+            ...posGraduacoes.filter((p) => p.titulo.trim() || p.instituicao.trim()).map((p) => [p.tipo.trim(), p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
+            ...mestrados.filter((m) => m.titulo.trim() || m.tipo.trim()).map((m) => [m.tipo.trim(), m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
           ].filter(Boolean).join("\n") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
@@ -448,14 +448,29 @@ export default function InscricaoProfissionalPage() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className={labelClass}>Pós-graduação, residência ou especialização</label>
+            <label className={labelClass}>Pós-graduação, residência, especialização ou certificação</label>
             {posGraduacoes.map((p, i) => (
-              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-[160px_1fr_1fr_90px] gap-2">
                 <div className="flex flex-col gap-1">
-                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Área de especialização</span>}
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Categoria</span>}
+                  <select value={p.tipo}
+                    onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], tipo: e.target.value }; setPosGraduacoes(n); }}
+                    className="border border-linha rounded-[12px] px-3 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors w-full cursor-pointer">
+                    <option value="">Selecionar…</option>
+                    <option value="Especialização">Especialização</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                    <option value="Certificação">Certificação</option>
+                    <option value="Certificação Internacional">Certificação Internacional</option>
+                    <option value="Residência Médica">Residência Médica</option>
+                    <option value="Formação">Formação</option>
+                    <option value="Aperfeiçoamento">Aperfeiçoamento</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Área / título</span>}
                   <input type="text" value={p.titulo}
                     onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], titulo: e.target.value }; setPosGraduacoes(n); }}
-                    placeholder="Ex: Pós-graduação em integração sensorial" className={inputClass} />
+                    placeholder="Ex: Integração sensorial" className={inputClass} />
                 </div>
                 <div className="flex flex-col gap-1">
                   {i === 0 && <span className="text-[11.5px] font-medium text-muted">Instituição</span>}
@@ -464,14 +479,14 @@ export default function InscricaoProfissionalPage() {
                     placeholder="Ex: UNIFESP" className={inputClass} />
                 </div>
                 <div className="flex flex-col gap-1">
-                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>}
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano</span>}
                   <input type="text" value={p.ano}
                     onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], ano: e.target.value }; setPosGraduacoes(n); }}
                     placeholder="Ex: 2022" className={inputClass} />
                 </div>
               </div>
             ))}
-            <button type="button" onClick={() => setPosGraduacoes([...posGraduacoes, { titulo: "", instituicao: "", ano: "" }])}
+            <button type="button" onClick={() => setPosGraduacoes([...posGraduacoes, { tipo: "", titulo: "", instituicao: "", ano: "" }])}
               className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
               + Adicionar outra
             </button>
@@ -480,12 +495,25 @@ export default function InscricaoProfissionalPage() {
           <div className="flex flex-col gap-2">
             <label className={labelClass}>Mestrado, doutorado ou pós-doutorado <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
             {mestrados.map((m, i) => (
-              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-[160px_1fr_1fr_90px] gap-2">
                 <div className="flex flex-col gap-1">
-                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Título / área</span>}
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Categoria</span>}
+                  <select value={m.tipo}
+                    onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], tipo: e.target.value }; setMestrados(n); }}
+                    className="border border-linha rounded-[12px] px-3 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors w-full cursor-pointer">
+                    <option value="">Selecionar…</option>
+                    <option value="Mestrado">Mestrado</option>
+                    <option value="Doutorado">Doutorado</option>
+                    <option value="Mestrando">Mestrando</option>
+                    <option value="Doutorando">Doutorando</option>
+                    <option value="Pós-doutorado">Pós-doutorado</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-1">
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Área</span>}
                   <input type="text" value={m.titulo}
                     onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], titulo: e.target.value }; setMestrados(n); }}
-                    placeholder="Ex: Mestrado em neurociências" className={inputClass} />
+                    placeholder="Ex: Neurociências" className={inputClass} />
                 </div>
                 <div className="flex flex-col gap-1">
                   {i === 0 && <span className="text-[11.5px] font-medium text-muted">Instituição</span>}
@@ -494,14 +522,14 @@ export default function InscricaoProfissionalPage() {
                     placeholder="Ex: UNIFESP" className={inputClass} />
                 </div>
                 <div className="flex flex-col gap-1">
-                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano de conclusão</span>}
+                  {i === 0 && <span className="text-[11.5px] font-medium text-muted">Ano</span>}
                   <input type="text" value={m.ano}
                     onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], ano: e.target.value }; setMestrados(n); }}
                     placeholder="Ex: 2018" className={inputClass} />
                 </div>
               </div>
             ))}
-            <button type="button" onClick={() => setMestrados([...mestrados, { titulo: "", instituicao: "", ano: "" }])}
+            <button type="button" onClick={() => setMestrados([...mestrados, { tipo: "", titulo: "", instituicao: "", ano: "" }])}
               className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
               + Adicionar outro
             </button>
