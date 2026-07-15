@@ -98,6 +98,7 @@ export default function EditarProfissionalPage() {
       ? profOriginal.formacao.map(parseFormacaoEdit)
       : [{ tipo: "", area: "", instituicao: "", ano: "" }, { tipo: "", area: "", instituicao: "", ano: "" }]
   );
+  const [genero, setGenero] = useState<"F" | "M" | undefined>(profOriginal?.genero);
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
   const [convenioCustom, setConvenioCustom] = useState("");
   const [fotoUrl, setFotoUrl] = useState(profOriginal?.foto_url ?? "");
@@ -257,6 +258,7 @@ export default function EditarProfissionalPage() {
       verificacao_data: verificacaoData.trim().toLowerCase(),
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
+      genero: genero ?? undefined,
       oculto,
       registro_verificado: registroStatus === "verificado",
       registro_pendente: registroStatus === "pendente" || undefined,
@@ -424,6 +426,20 @@ export default function EditarProfissionalPage() {
                 <option key={p} value={p}>{p}</option>
               ))}
             </select>
+          </div>
+
+          {/* Gênero */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Gênero <span className="text-[11px] text-muted">(ajusta substantivo da profissão no perfil)</span></label>
+            <div className="flex gap-2">
+              {(["M", "F"] as const).map((g) => (
+                <button key={g} type="button"
+                  onClick={() => setGenero(genero === g ? undefined : g)}
+                  className={`text-[13px] font-medium px-4 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${genero === g ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                  {g === "M" ? "Masculino" : "Feminino"}
+                </button>
+              ))}
+            </div>
           </div>
 
           {[

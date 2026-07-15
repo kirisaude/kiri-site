@@ -7,7 +7,7 @@ import { SaveButton } from "@/components/SaveButton";
 import { PlaceholderPhoto } from "@/components/PlaceholderPhoto";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
-import { valorDisplay } from "@/types";
+import { valorDisplay, feminizarTitulo } from "@/types";
 import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
@@ -26,15 +26,16 @@ export default async function PerfilPage({ params }: PageProps) {
   if (!p || p.oculto) notFound();
 
   const registroLinha = p.rqe ? `${p.registro_conselho} · ${p.rqe}` : p.registro_conselho;
+  const tituloExibicao = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
 
   const credenciais = [
     { rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" },
     ...(p.rqe
       ? [
           { rotulo: "Especialista", valor: p.rqe, detalhe: "" },
-          { rotulo: "Área (RQE)", valor: p.titulo_exibicao, detalhe: "" },
+          { rotulo: "Área (RQE)", valor: tituloExibicao, detalhe: "" },
         ]
-      : [{ rotulo: "Área", valor: p.titulo_exibicao, detalhe: "" }]),
+      : [{ rotulo: "Área", valor: tituloExibicao, detalhe: "" }]),
   ];
 
   return (
@@ -73,7 +74,7 @@ export default async function PerfilPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="text-[15px] text-cinza-texto mt-1.5 leading-[1.3]">{p.titulo_exibicao}</div>
+              <div className="text-[15px] text-cinza-texto mt-1.5 leading-[1.3]">{tituloExibicao}</div>
               <div className="text-[12.5px] tracking-[0.02em] text-muted mt-[7px]">{registroLinha}</div>
 
               <div className="flex flex-wrap gap-[7px] justify-center mt-[14px]">

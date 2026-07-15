@@ -29,6 +29,7 @@ export interface Profissional {
   verificacao_data: string;
   foto_url: string | null;
   foto_posicao?: string | null;
+  genero?: "F" | "M";
   oculto?: boolean;
   registro_verificado?: boolean;
   registro_pendente?: boolean;
@@ -41,6 +42,7 @@ export interface Profissional {
 }
 
 export const PROFISSOES_ORDENADAS = [
+  "Psiquiatra",
   "Psiquiatra da infância e adolescência",
   "Neuropediatra",
   "Neuropsicólogo",
@@ -53,6 +55,7 @@ export const PROFISSOES_ORDENADAS = [
 ] as const;
 
 export const PROFISSAO_PLURAL: Record<string, string> = {
+  "Psiquiatra": "Psiquiatras",
   "Psiquiatra da infância e adolescência": "Psiquiatras da infância e adolescência",
   "Neuropediatra": "Neuropediatras",
   "Neuropsicólogo": "Neuropsicólogos",
@@ -71,6 +74,12 @@ export function valorDisplay(p: Pick<Profissional, "valor_formato" | "valor_min"
   }
   if (p.valor_max == null) return `a partir de R$ ${p.valor_min}`;
   return `R$ ${p.valor_min}–${p.valor_max}`;
+}
+
+export function feminizarTitulo(titulo: string): string {
+  return titulo
+    .replace(/ólogo\b/g, "óloga")
+    .replace(/ogo\b/g, "oga");
 }
 
 export function cidadeCurta(cidade: string): string {
