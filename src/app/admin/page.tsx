@@ -183,6 +183,47 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   onResolver: (id: string, novoStatus: string) => void;
 }) {
   const respondido = e.status === "respondido";
+  const [profSelecionados, setProfSelecionados] = useState<string[]>([]);
+  const [copiado, setCopiado] = useState<string | null>(null);
+
+  function toggleProf(id: string) {
+    setProfSelecionados((prev) =>
+      prev.includes(id) ? prev.filter((p) => p !== id) : prev.length < 3 ? [...prev, id] : prev
+    );
+  }
+
+  function gerarMsgFamilia(): string {
+    const primeiro = e.nome_responsavel.split(" ")[0];
+    const profs = profSelecionados.map((id) => profissionais.find((p) => p.id === id)).filter(Boolean) as typeof profissionais;
+    const lista = profs.map((p, i) => {
+      const wa = p.whatsapp_agendamento
+        ? `\nWhatsApp: wa.me/${p.whatsapp_agendamento.replace(/\D/g, "").replace(/^(?!55)/, "55")}`
+        : "";
+      return `${i + 1}. ${p.nome} — ${p.titulo_exibicao} · ${p.cidade}${wa}`;
+    }).join("\n\n");
+    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido e selecionamos ${profs.length} profissional${profs.length > 1 ? "is" : ""} que ${profs.length > 1 ? "podem" : "pode"} ajudar:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
+  }
+
+  function gerarMsgProfissional(profId: string): string {
+    const prof = profissionais.find((p) => p.id === profId);
+    if (!prof) return "";
+    const primeiroProfNome = prof.nome.split(" ")[0];
+    const partes = [
+      `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.`,
+      `\nA família ${e.nome_responsavel} entrou em contato conosco.`,
+    ];
+    if (e.observacoes) partes.push(`Demanda: ${e.observacoes}.`);
+    if (e.cidade) partes.push(`Cidade: ${e.cidade}.`);
+    if (e.modalidade) partes.push(`Modalidade preferida: ${e.modalidade}.`);
+    partes.push(`\nEnviamos o seu contato a eles para agendamento direto.`);
+    return partes.join(" ");
+  }
+
+  async function copiar(texto: string, chave: string) {
+    await navigator.clipboard.writeText(texto);
+    setCopiado(chave);
+    setTimeout(() => setCopiado(null), 2000);
+  }
 
   return (
     <div className={`border rounded-[14px] overflow-hidden ${respondido ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-linha"}`}>
@@ -238,29 +279,89 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
             </button>
           </div>
 
-          {!respondido && <div className="pt-3.5 border-t border-linha-sutil">
-            {pareceWhatsApp(e.contato) ? (
-              <a
-                href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(`Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[12px] no-underline"
-              >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="white">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                  <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
-                </svg>
-                Responder via WhatsApp
-              </a>
-            ) : (
-              <a
-                href={`mailto:${e.contato}?subject=Kiri — Retorno sobre sua busca&body=Olá, ${e.nome_responsavel.split(" ")[0]}! Aqui é a equipe Kiri. Recebemos sua mensagem e estamos analisando para indicar o profissional mais alinhado ao que você descreveu.`}
-                className="flex items-center justify-center gap-2 w-full bg-ardosia-escura text-white font-semibold text-[14px] rounded-[11px] py-[12px] no-underline"
-              >
-                Responder por e-mail
-              </a>
-            )}
-          </div>}
+          {!respondido && (
+            <div className="pt-3.5 border-t border-linha-sutil flex flex-col gap-4">
+              {/* Seletor de profissionais */}
+              <div>
+                <div className="text-[11.5px] font-semibold text-carvao uppercase tracking-wide mb-2">
+                  Selecionar profissionais para indicar (até 3)
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  {profissionais.filter((p) => !p.oculto).map((p) => {
+                    const sel = profSelecionados.includes(p.id);
+                    const disabled = !sel && profSelecionados.length >= 3;
+                    return (
+                      <button
+                        key={p.id}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() => toggleProf(p.id)}
+                        className={`text-left px-3 py-2 rounded-[9px] border text-[12.5px] transition-colors cursor-pointer disabled:opacity-30 ${
+                          sel ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha hover:border-ardosia"
+                        }`}
+                      >
+                        <span className="font-semibold">{p.nome}</span>
+                        <span className="ml-1.5 opacity-70">{p.titulo_exibicao} · {p.cidade}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Mensagens geradas */}
+              {profSelecionados.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  {/* Mensagem para a família */}
+                  <div className="bg-[#F0F7F0] border border-[#B8D8C0] rounded-[10px] p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[11px] font-semibold text-[#2E7D4F] uppercase tracking-wide">Mensagem para a família</span>
+                      <div className="flex items-center gap-2">
+                        <button type="button" onClick={() => copiar(gerarMsgFamilia(), "familia")}
+                          className="text-[12px] font-semibold text-ardosia cursor-pointer">
+                          {copiado === "familia" ? "✓ Copiado" : "Copiar"}
+                        </button>
+                        {pareceWhatsApp(e.contato) && (
+                          <a href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(gerarMsgFamilia())}`}
+                            target="_blank" rel="noopener noreferrer"
+                            className="text-[12px] font-semibold text-[#22A85A] no-underline">
+                            Abrir WA ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <pre className="text-[12px] text-carvao whitespace-pre-wrap font-sans leading-[1.5]">{gerarMsgFamilia()}</pre>
+                  </div>
+
+                  {/* Mensagem por profissional */}
+                  {profSelecionados.map((id) => {
+                    const prof = profissionais.find((p) => p.id === id);
+                    if (!prof) return null;
+                    return (
+                      <div key={id} className="bg-white border border-linha rounded-[10px] p-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[11px] font-semibold text-cinza-texto uppercase tracking-wide">Para {prof.nome.split(" ")[0]}</span>
+                          <div className="flex items-center gap-2">
+                            <button type="button" onClick={() => copiar(gerarMsgProfissional(id), id)}
+                              className="text-[12px] font-semibold text-ardosia cursor-pointer">
+                              {copiado === id ? "✓ Copiado" : "Copiar"}
+                            </button>
+                            {prof.whatsapp_agendamento && (
+                              <a href={`https://wa.me/${prof.whatsapp_agendamento.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(gerarMsgProfissional(id))}`}
+                                target="_blank" rel="noopener noreferrer"
+                                className="text-[12px] font-semibold text-[#22A85A] no-underline">
+                                Abrir WA ↗
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <pre className="text-[12px] text-carvao whitespace-pre-wrap font-sans leading-[1.5]">{gerarMsgProfissional(id)}</pre>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Checkbox respondido */}
           <label className="flex items-center gap-2.5 cursor-pointer mt-3 pt-3.5 border-t border-linha-sutil">
@@ -802,11 +903,14 @@ export default function AdminPage() {
                   </div>
                   <div className="flex flex-col gap-2">
                     {grupo.map((p) => (
-                      <div key={p.id} className="bg-white border border-linha rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
+                      <div key={p.id} className={`border rounded-[13px] px-4 py-3 flex items-center justify-between gap-3 ${p.oculto ? "bg-[#FFF8F0] border-[#E8C88A]" : "bg-white border-linha"}`}>
                         <div className="min-w-0">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
                             <span className="text-[11px] text-muted font-mono">{p.id}</span>
+                            {p.oculto && (
+                              <span className="text-[11px] font-semibold text-[#BE8A3E] bg-[#FFF0D0] border border-[#E8C88A] px-2 py-0.5 rounded-[6px]">oculto</span>
+                            )}
                           </div>
                           <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
                             <span>{p.cidade}</span>

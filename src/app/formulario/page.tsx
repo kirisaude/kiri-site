@@ -32,6 +32,7 @@ function FormularioContent() {
   const [cidade, setCidade] = useState("");
   const [modalidade, setModalidade] = useState("");
   const [demandaPrincipal, setDemandaPrincipal] = useState("");
+  const [idadeCrianca, setIdadeCrianca] = useState("");
   const [opcoesBusca, setOpcoesBusca] = useState<string[]>([]);
   const [detalhesBusca, setDetalhesBusca] = useState("");
   const [consentimento, setConsentimento] = useState(false);
@@ -58,6 +59,7 @@ function FormularioContent() {
         modalidade: modalidade || null,
         observacoes: [
           demandaPrincipal ? `Demanda: ${demandaPrincipal}` : "",
+          idadeCrianca ? `Faixa etária: ${idadeCrianca}` : "",
           opcoesBusca.join(", "),
           detalhesBusca.trim() ? detalhesBusca.trim() : "",
         ].filter(Boolean).join(" — ") || null,
@@ -263,6 +265,31 @@ function FormularioContent() {
                   onClick={() => setDemandaPrincipal(demandaPrincipal === op ? "" : op)}
                   className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
                     demandaPrincipal === op
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-carvao border-linha"
+                  }`}
+                >
+                  {op}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-[13px] font-semibold text-carvao">Faixa etária da criança</label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "Bebês (0–2 anos)",
+                "Pré-escola (3–5 anos)",
+                "Crianças (6–12 anos)",
+                "Adolescentes (13–18 anos)",
+              ].map((op) => (
+                <button
+                  key={op}
+                  type="button"
+                  onClick={() => setIdadeCrianca(idadeCrianca === op ? "" : op)}
+                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                    idadeCrianca === op
                       ? "bg-ardosia-escura text-white border-ardosia-escura"
                       : "bg-white text-carvao border-linha"
                   }`}
