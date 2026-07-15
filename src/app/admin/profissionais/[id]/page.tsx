@@ -345,28 +345,41 @@ export default function EditarProfissionalPage() {
             {fotoPreview && (
               <div className="flex flex-col gap-1.5 mt-2">
                 <span className="text-[11.5px] font-medium text-muted">Posição da foto</span>
-                <div className="flex gap-2 flex-wrap">
-                  {[
-                    { label: "Topo", value: "center top" },
-                    { label: "Centro", value: "center center" },
-                    { label: "Baixo", value: "center bottom" },
-                    { label: "Rosto acima", value: "center 20%" },
-                    { label: "Rosto abaixo", value: "center 70%" },
-                    { label: "← Esquerda", value: "left center" },
-                    { label: "Direita →", value: "right center" },
-                    { label: "← Esq. acima", value: "left top" },
-                    { label: "Dir. acima →", value: "right top" },
-                  ].map((op) => (
-                    <button
-                      key={op.value}
-                      type="button"
-                      onClick={() => setFotoPosicao(op.value)}
-                      className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${fotoPosicao === op.value ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
-                    >
-                      {op.label}
-                    </button>
-                  ))}
-                </div>
+                {(() => {
+                  const partsPos = fotoPosicao.split(" ");
+                  const posX = partsPos[0] ?? "center";
+                  const posY = partsPos.slice(1).join(" ") || "top";
+                  return (
+                    <>
+                      <div className="flex gap-2 flex-wrap">
+                        {[
+                          { label: "Topo", y: "top" },
+                          { label: "Centro", y: "center" },
+                          { label: "Baixo", y: "bottom" },
+                          { label: "Rosto acima", y: "20%" },
+                        ].map((op) => (
+                          <button key={op.y} type="button"
+                            onClick={() => setFotoPosicao(`${posX} ${op.y}`)}
+                            className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${posY === op.y ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                            {op.label}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex gap-2">
+                        {[
+                          { label: "← Esquerda", x: "25%" },
+                          { label: "Direita →", x: "75%" },
+                        ].map((op) => (
+                          <button key={op.x} type="button"
+                            onClick={() => setFotoPosicao(`${op.x} ${posY}`)}
+                            className={`text-[12px] font-medium px-3 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${posX === op.x ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                            {op.label}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             )}
           </div>
