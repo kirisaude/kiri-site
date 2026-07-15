@@ -152,15 +152,18 @@
       "formacao": [
         {
           "curso": "Graduação em Medicina",
-          "instituicao_ano": "Medicina — EBMSP"
+          "instituicao_ano": "Medicina — EBMSP",
+          "verificado": false
         },
         {
           "curso": "Residência Médica em",
-          "instituicao_ano": "Psiquiatria — Hupes/UFBA — 2023"
+          "instituicao_ano": "Psiquiatria — Hupes/UFBA — 2023",
+          "verificado": false
         },
         {
           "curso": "Especialização em Psiquiatria da Infância e Adolescência",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — Hospital Juliano Moreira — 2024"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — Hospital Juliano Moreira — 2024",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -177,7 +180,8 @@
       "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "genero": "F"
     },
     {
       "id": "kiri-025",
