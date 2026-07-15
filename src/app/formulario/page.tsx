@@ -165,20 +165,13 @@ function FormularioContent() {
         )}
 
         {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[13px] flex gap-[11px]">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 1 }}>
-            <circle cx="10" cy="10" r="8.2" stroke="#BE8A3E" strokeWidth="1.5" />
-            <line x1="10" y1="9" x2="10" y2="14" stroke="#BE8A3E" strokeWidth="1.6" strokeLinecap="round" />
-            <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
-          </svg>
-          <div className="flex flex-col gap-2.5">
-            <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
-              Este formulário é para direcionamento e encaminhamento — não é avaliação clínica nem diagnóstico.
-            </p>
-            <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold m-0">
-              Em caso de urgência ou risco, procure um pronto-socorro.
-            </p>
-          </div>
+        <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[13px] flex flex-col items-center gap-2.5 text-center">
+          <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
+            Este formulário é para direcionamento e encaminhamento — não é avaliação clínica nem diagnóstico.
+          </p>
+          <p className="text-[14.5px] leading-[1.5] text-ambar-texto font-semibold m-0">
+            Em caso de urgência ou risco, procure um pronto-socorro.
+          </p>
         </div>
 
         {/* Formulário nativo */}
