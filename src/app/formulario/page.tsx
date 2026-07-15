@@ -254,7 +254,7 @@ function FormularioContent() {
                 <button
                   key={op}
                   type="button"
-                  onClick={() => { setPagamento(pagamento === op ? "" : op); setNomeConvenio(""); setAceitaParticular(false); }}
+                  onClick={() => { setPagamento(pagamento === op ? "" : op); setConvenioSelecionado(""); setConvenioOutro(""); setAceitaParticular(false); }}
                   className={`px-4 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     pagamento === op ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"
                   }`}
