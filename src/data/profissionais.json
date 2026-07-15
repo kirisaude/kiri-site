@@ -64,28 +64,31 @@
       "formacao": [
         {
           "curso": "Graduação em",
-          "instituicao_ano": "Fonoaudiologia — UNEB",
-          "verificado": false
+          "instituicao_ano": "Fonoaudiologia — UNEB — 2015",
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Audiologia — CFFa",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         },
         {
-          "curso": "Doutorado",
-          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas,",
-          "verificado": false
+          "curso": "Mestrado",
+          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas, — UFBA — 2018",
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Linguagem com ênfase nos Distúrbios de Aprendizagem e na Atuação Educacional",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "ABA para Autismo e Deficiência Intelectual",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -94,16 +97,16 @@
       "convenio_info": "Particular · emite recibo para reembolso",
       "whatsapp_agendamento": "11911097447",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-022.jpg",
       "verificacao_data": "julho de 2026",
       "card_token": "ac7d5ad5908c4ecf",
       "convenios": null,
       "tempo_atuacao": null,
-      "foto_posicao": "center top",
+      "foto_posicao": "center 20%",
       "genero": "F",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": true
     },
     {
       "id": "kiri-023",
