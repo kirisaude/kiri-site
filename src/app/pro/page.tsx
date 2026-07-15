@@ -1,10 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
 import { titleCasePT } from "@/lib/titleCase";
+
+const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
+
+function ChipButton({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick}
+      className={`px-3 py-1.5 rounded-[8px] text-[12.5px] font-medium border transition-colors cursor-pointer whitespace-nowrap ${
+        active ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"
+      }`}>
+      {label}
+    </button>
+  );
+}
 
 export default function ProPage() {
   const [authed, setAuthed] = useState(false);
@@ -12,6 +25,14 @@ export default function ProPage() {
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
   const [profissionais, setProfissionais] = useState<Profissional[]>([]);
+
+  // Filtros
+  const [busca, setBusca] = useState("");
+  const [profFiltro, setProfFiltro] = useState<string[]>([]);
+  const [modalidadeFiltro, setModalidadeFiltro] = useState<"" | "presencial" | "online">("");
+  const [faixaFiltro, setFaixaFiltro] = useState<string[]>([]);
+  const [areaFiltro, setAreaFiltro] = useState<string[]>([]);
+  const [convenioFiltro, setConvenioFiltro] = useState(false);
 
   useEffect(() => {
     fetch("/api/pro/directory").then((r) => {
@@ -42,6 +63,41 @@ export default function ProPage() {
       setErro("Senha incorreta.");
     }
     setCarregando(false);
+  }
+
+  const todasAreas = useMemo(() => {
+    const set = new Set<string>();
+    profissionais.forEach((p) => p.areas_atuacao.forEach((a) => set.add(a)));
+    return Array.from(set).sort();
+  }, [profissionais]);
+
+  function toggleArr<T>(arr: T[], item: T): T[] {
+    return arr.includes(item) ? arr.filter((x) => x !== item) : [...arr, item];
+  }
+
+  const filtrado = useMemo(() => {
+    const q = busca.trim().toLowerCase();
+    return profissionais.filter((p) => {
+      if (q && !p.nome.toLowerCase().includes(q) && !p.cidade.toLowerCase().includes(q)) return false;
+      if (profFiltro.length && !profFiltro.includes(p.profissao)) return false;
+      if (modalidadeFiltro === "presencial" && !p.modalidade.toLowerCase().includes("presencial")) return false;
+      if (modalidadeFiltro === "online" && !p.modalidade.toLowerCase().includes("online")) return false;
+      if (faixaFiltro.length && !faixaFiltro.some((f) => p.faixa_etaria.includes(f))) return false;
+      if (areaFiltro.length && !areaFiltro.some((a) => p.areas_atuacao.includes(a))) return false;
+      if (convenioFiltro && !p.convenio_info.toLowerCase().includes("convênio") && !p.convenio_info.toLowerCase().includes("convenio")) return false;
+      return true;
+    });
+  }, [profissionais, busca, profFiltro, modalidadeFiltro, faixaFiltro, areaFiltro, convenioFiltro]);
+
+  const agrupados = PROFISSOES_ORDENADAS.map((prof) => ({
+    categoria: prof,
+    membros: filtrado.filter((p) => p.profissao === prof),
+  })).filter((g) => g.membros.length > 0);
+
+  const temFiltro = busca.trim() || profFiltro.length || modalidadeFiltro || faixaFiltro.length || areaFiltro.length || convenioFiltro;
+
+  function limparFiltros() {
+    setBusca(""); setProfFiltro([]); setModalidadeFiltro(""); setFaixaFiltro([]); setAreaFiltro([]); setConvenioFiltro(false);
   }
 
   if (!authed) {
@@ -77,27 +133,107 @@ export default function ProPage() {
     );
   }
 
-  const agrupados = PROFISSOES_ORDENADAS.map((prof) => ({
-    categoria: prof,
-    membros: profissionais.filter((p) => p.profissao === prof),
-  })).filter((g) => g.membros.length > 0);
-
   return (
     <div className="min-h-screen bg-creme">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center gap-3">
         <div className="flex items-center gap-2">
           <KiriLogoCompact height={28} />
         </div>
-        <span className="text-[12px] text-muted ml-auto">{profissionais.length} profissionais</span>
+        <span className="text-[12px] text-muted ml-auto">
+          {filtrado.length} {temFiltro ? `de ${profissionais.length}` : ""} profissionais
+        </span>
       </header>
 
-      <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col gap-10">
+      <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
 
+        {/* Aviso */}
         <div className="bg-[#F6E6CC] border border-ambar-borda rounded-[14px] px-4 py-3">
           <p className="text-[13px] text-ambar-texto leading-[1.6]">
             Esta área é exclusiva para profissionais verificados da rede Kiri. Os contatos aqui exibidos são para conexão direta entre colegas — troca de experiências, dúvidas e colaboração multiprofissional. Não compartilhe dados de pacientes por nenhum canal desta plataforma.
           </p>
         </div>
+
+        {/* Filtros */}
+        <div className="bg-white border border-linha rounded-[16px] px-4 py-4 flex flex-col gap-4">
+
+          {/* Busca */}
+          <div className="relative">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6"/>
+              <path d="M13 13 L17 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+            <input
+              type="text"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Buscar por nome ou cidade…"
+              className="w-full pl-9 pr-3 py-[10px] border border-linha rounded-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+            />
+          </div>
+
+          {/* Profissão */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted">Profissão</span>
+            <div className="flex flex-wrap gap-1.5">
+              {PROFISSOES_ORDENADAS.filter((prof) => profissionais.some((p) => p.profissao === prof)).map((prof) => (
+                <ChipButton key={prof} label={prof} active={profFiltro.includes(prof)} onClick={() => setProfFiltro(toggleArr(profFiltro, prof))} />
+              ))}
+            </div>
+          </div>
+
+          {/* Modalidade */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted">Modalidade</span>
+            <div className="flex gap-1.5">
+              <ChipButton label="Presencial" active={modalidadeFiltro === "presencial"} onClick={() => setModalidadeFiltro(modalidadeFiltro === "presencial" ? "" : "presencial")} />
+              <ChipButton label="Online" active={modalidadeFiltro === "online"} onClick={() => setModalidadeFiltro(modalidadeFiltro === "online" ? "" : "online")} />
+            </div>
+          </div>
+
+          {/* Faixa etária */}
+          <div className="flex flex-col gap-2">
+            <span className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted">Faixa etária atendida</span>
+            <div className="flex flex-wrap gap-1.5">
+              {FAIXAS.map((f) => (
+                <ChipButton key={f} label={f} active={faixaFiltro.includes(f)} onClick={() => setFaixaFiltro(toggleArr(faixaFiltro, f))} />
+              ))}
+            </div>
+          </div>
+
+          {/* Área de atuação */}
+          {todasAreas.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <span className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted">Área de atuação</span>
+              <div className="flex flex-wrap gap-1.5">
+                {todasAreas.map((a) => (
+                  <ChipButton key={a} label={a} active={areaFiltro.includes(a)} onClick={() => setAreaFiltro(toggleArr(areaFiltro, a))} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Convênio + limpar */}
+          <div className="flex items-center justify-between">
+            <button type="button" onClick={() => setConvenioFiltro((v) => !v)}
+              className={`flex items-center gap-2 text-[13px] font-medium cursor-pointer transition-colors ${convenioFiltro ? "text-ardosia-escura" : "text-muted"}`}>
+              <div className={`w-[16px] h-[16px] rounded-[4px] border-2 flex items-center justify-center flex-none transition-colors ${convenioFiltro ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-linha"}`}>
+                {convenioFiltro && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+              </div>
+              Aceita convênio
+            </button>
+            {temFiltro && (
+              <button type="button" onClick={limparFiltros}
+                className="text-[12.5px] text-ferrugem font-medium cursor-pointer hover:underline">
+                Limpar filtros
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Resultados */}
+        {agrupados.length === 0 && (
+          <p className="text-[14px] text-muted text-center py-8">Nenhum profissional encontrado com esses filtros.</p>
+        )}
 
         {agrupados.map(({ categoria, membros }) => (
           <div key={categoria}>
@@ -162,10 +298,6 @@ export default function ProPage() {
             </div>
           </div>
         ))}
-
-        {profissionais.length === 0 && (
-          <p className="text-[14px] text-muted text-center py-12">Nenhum profissional publicado ainda.</p>
-        )}
       </div>
     </div>
   );
