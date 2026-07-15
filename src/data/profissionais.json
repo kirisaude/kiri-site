@@ -90,6 +90,12 @@
           "verificado": false,
           "pendente": true,
           "oculto": true
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas — UFBA — 2021",
+          "verificado": true,
+          "obs": "defesa da tese aprovada, sem diploma final por nao ter buscado ainda "
         }
       ],
       "valor_formato": "a_partir_de",
