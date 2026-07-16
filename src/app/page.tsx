@@ -16,7 +16,8 @@ const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
 
 function normCidade(s: string) {
-  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim()
+    .replace(/[,/]\s+/g, ", ");
 }
 
 const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
