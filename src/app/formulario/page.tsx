@@ -54,6 +54,10 @@ function FormularioContent() {
       setErro("É necessário aceitar o uso dos seus dados para continuar.");
       return;
     }
+    if (canalContato === "whatsapp") {
+      if (!/^\d{2}$/.test(ddd.trim())) { setErro("DDD inválido."); return; }
+      if (!/^\d{8,9}$/.test(telefone.trim())) { setErro("Número de WhatsApp inválido. Use apenas dígitos (8 ou 9 números)."); return; }
+    }
     setEnviando(true);
     setErro("");
 
@@ -243,6 +247,8 @@ function FormularioContent() {
                   onChange={(e) => setTelefone(e.target.value.replace(/\D/g, "").slice(0, 9))}
                   placeholder="999999999"
                   maxLength={9}
+                  inputMode="numeric"
+                  pattern="\d{8,9}"
                   className="flex-1 border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
                 />
               </div>
