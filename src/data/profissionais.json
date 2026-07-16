@@ -737,11 +737,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — UFBA — 2011"
+          "instituicao_ano": "Medicina — UFBA — 2011",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — REDE DE SÃO BERNARDO/FMABC — 2020"
+          "instituicao_ano": "Psiquiatria — REDE DE SÃO BERNARDO/FMABC — 2020",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -751,9 +753,14 @@
       "convenios": null,
       "whatsapp_agendamento": "11996398992",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-036.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "3e9e43074d794df7"
+      "card_token": "3e9e43074d794df7",
+      "tempo_atuacao": null,
+      "foto_posicao": "center center",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     }
   ]
 }
