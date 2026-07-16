@@ -197,36 +197,50 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
             <ObsTopicos obs={e.observacoes} />
           </div>
 
-          {/* Botão de resposta */}
-          {!encaminhado && (
-            <div className="mt-4">
-              {temWa && e.profissional_solicitado && prof ? (
-                <a
-                  href={buildWaFamilia(e.contato, e.nome_responsavel, prof.card_token)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5 w-full bg-[#22A85A] text-white font-semibold text-[14px] rounded-[11px] py-[13px] no-underline"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                    <path d="M12 2.003C6.486 2.003 2 6.486 2 12c0 1.762.46 3.441 1.34 4.921L2 22l5.233-1.312A9.953 9.953 0 0012 22c5.514 0 10-4.483 10-9.997 0-2.669-1.037-5.178-2.921-7.064A9.944 9.944 0 0012 2.003z" />
-                  </svg>
-                  Enviar card via WhatsApp
-                </a>
-              ) : (
-                <p className="text-[12.5px] text-muted text-center">
-                  Contato por e-mail — responda em{" "}
-                  <a href={`mailto:${e.contato}`} className="underline text-cinza-texto">{e.contato}</a>
-                  {e.profissional_solicitado && prof && (
-                    <>
-                      {" "}· Link do card:{" "}
-                      <Link href={`/card/${prof.card_token}`} className="underline text-ardosia" target="_blank">
-                        /card/{prof.card_token.slice(0, 8)}…
-                      </Link>
-                    </>
-                  )}
-                </p>
-              )}
+          {/* Mensagens */}
+          {!encaminhado && prof && (
+            <div className="pt-3.5 mt-3 border-t border-linha-sutil flex flex-col gap-3">
+              {/* Mensagem para o profissional */}
+              <div className="bg-white border border-linha rounded-[10px] p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-semibold text-cinza-texto uppercase tracking-wide">Para {prof.nome.split(" ")[0]}</span>
+                  <div className="flex items-center gap-2">
+                    <button type="button" onClick={() => copiar(gerarMsgProfissional(), "prof")}
+                      className="text-[12px] font-semibold text-ardosia cursor-pointer">
+                      {copiado === "prof" ? "✓ Copiado" : "Copiar"}
+                    </button>
+                    {prof.whatsapp_agendamento && (
+                      <a href={`https://wa.me/${prof.whatsapp_agendamento.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(gerarMsgProfissional())}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="text-[12px] font-semibold text-[#22A85A] no-underline">
+                        Abrir WA ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <pre className="text-[12px] text-carvao whitespace-pre-wrap font-sans leading-[1.5]">{gerarMsgProfissional()}</pre>
+              </div>
+
+              {/* Mensagem para a família */}
+              <div className="bg-[#F0F7F0] border border-[#B8D8C0] rounded-[10px] p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-semibold text-[#2E7D4F] uppercase tracking-wide">Mensagem para a família</span>
+                  <div className="flex items-center gap-2">
+                    <button type="button" onClick={() => copiar(gerarMsgFamilia(), "familia")}
+                      className="text-[12px] font-semibold text-ardosia cursor-pointer">
+                      {copiado === "familia" ? "✓ Copiado" : "Copiar"}
+                    </button>
+                    {temWa && (
+                      <a href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(gerarMsgFamilia())}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="text-[12px] font-semibold text-[#22A85A] no-underline">
+                        Abrir WA ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <pre className="text-[12px] text-carvao whitespace-pre-wrap font-sans leading-[1.5]">{gerarMsgFamilia()}</pre>
+              </div>
             </div>
           )}
 
