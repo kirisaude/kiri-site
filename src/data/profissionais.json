@@ -750,17 +750,17 @@
       "modalidade": "Presencial e online",
       "cidade": "Salvador BA",
       "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos), Bebês (0–2 anos)",
-      "sobre": "Procuro entender o sofrimento da criança/adolescente e o grau de disfuncionalidade acadêmica,inter pessoal, familiar do caso clínico para decidir, de forma horizontal, juntamente com os familiares, sobre a intervenção terapêutica medicamentosa ou não.",
+      "sobre": "Procuro entender o sofrimento da criança/adolescente e o grau de disfuncionalidade acadêmica,inter pessoal, familiar do caso clínico para decidir, de forma horizontal, juntamente com os familiares, sobre a intervenção terapêutica medicamentosa ou não",
       "formacao": [
         {
           "curso": "Graduação",
           "instituicao_ano": "Medicina — UFBA — 2011",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
           "instituicao_ano": "Psiquiatria — REDE DE SÃO BERNARDO/FMABC — 2020",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -776,8 +776,8 @@
       "tempo_atuacao": null,
       "foto_posicao": "75% top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true
     },
     {
       "id": "kiri-037",
