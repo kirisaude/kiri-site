@@ -798,15 +798,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Umesp — 2005"
+          "instituicao_ano": "Psicologia — Umesp — 2005",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuropsicologia. — 2024"
+          "instituicao_ano": "Neuropsicologia. — 2024",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "TDAH, Tea e Inclusão — Puc — 2025"
+          "instituicao_ano": "TDAH, Tea e Inclusão — Puc — 2025",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -816,9 +819,14 @@
       "convenios": null,
       "whatsapp_agendamento": "11994571730",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-037.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "bf832a9ba1b5435c"
+      "card_token": "bf832a9ba1b5435c",
+      "tempo_atuacao": null,
+      "foto_posicao": "center center",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     }
   ]
 }
