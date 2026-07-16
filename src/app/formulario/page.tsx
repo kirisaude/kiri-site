@@ -240,8 +240,9 @@ function FormularioContent() {
                 <input
                   type="tel"
                   value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
-                  placeholder="99999-9999"
+                  onChange={(e) => setTelefone(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                  placeholder="999999999"
+                  maxLength={9}
                   className="flex-1 border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
                 />
               </div>
@@ -482,7 +483,7 @@ function FormularioContent() {
             disabled={
               enviando || !consentimento || !nome || !modalidade || !demandaPrincipal || opcoesBusca.length === 0 ||
               !canalContato ||
-              (canalContato === "whatsapp" ? (!ddd.trim() || !telefone.trim()) : !emailContato.trim())
+              (canalContato === "whatsapp" ? (ddd.trim().length !== 2 || telefone.trim().length < 8) : !emailContato.trim())
             }
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
