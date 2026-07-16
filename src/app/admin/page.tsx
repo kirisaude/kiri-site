@@ -573,6 +573,9 @@ export default function AdminPage() {
 
   async function atualizarEncaminhamento(id: string, status: string) {
     setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status } : e));
+    if (status === "respondido") {
+      setExpandidos((prev) => { const next = new Set(prev); next.delete(id); return next; });
+    }
     await fetch("/api/admin/encaminhamentos", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

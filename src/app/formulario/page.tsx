@@ -170,7 +170,7 @@ function FormularioContent() {
         )}
 
         {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[13px] flex flex-col items-center gap-2.5 text-center">
+        <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-1 text-center">
           <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
             Este formulário é para direcionamento e encaminhamento.
           </p>
