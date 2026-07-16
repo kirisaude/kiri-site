@@ -110,6 +110,43 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
   const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
   const temWa = pareceWhatsApp(e.contato);
   const encaminhado = e.status === "encaminhado";
+  const [copiado, setCopiado] = useState<string | null>(null);
+
+  async function copiar(texto: string, chave: string) {
+    await navigator.clipboard.writeText(texto);
+    setCopiado(chave);
+    setTimeout(() => setCopiado(null), 2000);
+  }
+
+  function gerarMsgProfissional(): string {
+    if (!prof) return "";
+    const primeiroProfNome = prof.nome.split(" ")[0];
+    const obs = e.observacoes ?? "";
+    const demanda = obs.match(/Demanda: ([^—]+)/)?.[1].trim() ?? null;
+    const faixa = obs.match(/Faixa etária: ([^—]+)/)?.[1].trim() ?? null;
+    const convenio = obs.match(/Convênio: ([^—(]+)/)?.[1].trim() ?? null;
+    const resto = obs
+      .replace(/Demanda: [^—]+(?:—\s*)?/g, "")
+      .replace(/Faixa etária: [^—]+(?:—\s*)?/g, "")
+      .replace(/Convênio: [^—]+(?:—\s*)?/g, "")
+      .replace(/Pagamento: [^—]+(?:—\s*)?/g, "")
+      .replace(/\(aceita particular[^)]*\)/g, "")
+      .replace(/—/g, "").trim();
+    const topicos: string[] = [];
+    if (demanda) topicos.push(`• Queixa central: ${demanda}`);
+    if (faixa) topicos.push(`• Faixa etária: ${faixa}`);
+    if (resto) topicos.push(`• Principal objetivo: ${resto}`);
+    if (e.modalidade) topicos.push(`• Modalidade: ${e.modalidade}`);
+    if (e.cidade) topicos.push(`• Cidade: ${e.cidade}`);
+    if (convenio) topicos.push(`• Convênio: ${convenio}`);
+    return `Olá, ${primeiroProfNome}! Aqui é a equipe Kiri.\n\nO familiar ${e.nome_responsavel} entrou em contato e pediu especificamente o seu contato. Segue o perfil:\n\n${topicos.join("\n")}\n\nEnviamos o seu contato a eles para agendamento direto. Obrigada pela parceria!`;
+  }
+
+  function gerarMsgFamilia(): string {
+    const primeiro = e.nome_responsavel.split(" ")[0];
+    const cardUrl = prof ? `${window.location.origin}/card/${prof.card_token}` : "";
+    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nPreparamos o card com as informações e o contato para agendamento direto com ${prof?.nome ?? "o profissional"}. Segue o link:\n${cardUrl}`;
+  }
 
   return (
     <div className={`border rounded-[14px] overflow-hidden ${encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
@@ -783,8 +820,12 @@ export default function AdminPage() {
                           <div className="text-[12.5px] text-cinza-texto">{i.profissao}</div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
-                          {profMatch && (
+                          {profMatch ? (
+                            <span className="text-[12px] text-ardosia font-semibold">✓ publicado</span>
+                          ) : (
+                            <span className="text-[12px] text-ambar-texto font-semibold">⚠ perfil não criado</span>
+                          )}
+                          {profMatch ? (
                             <>
                               <Link href={`/profissional/${profMatch.id}`} target="_blank"
                                 className="text-[12px] text-muted font-medium no-underline cursor-pointer hover:underline">
@@ -795,6 +836,11 @@ export default function AdminPage() {
                                 Editar
                               </Link>
                             </>
+                          ) : (
+                            <Link href={`/admin/revisar/${i.id}`}
+                              className="text-[12px] text-ferrugem font-semibold no-underline cursor-pointer hover:underline">
+                              Publicar perfil →
+                            </Link>
                           )}
                           <button onClick={() => excluirInscricao(i.id)}
                             className="text-[12px] text-ferrugem font-medium cursor-pointer hover:underline">
