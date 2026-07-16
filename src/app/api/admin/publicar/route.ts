@@ -57,28 +57,36 @@ export async function POST(request: Request) {
 
   const novoProfissional = (await request.json()) as Profissional;
 
-  // Busca arquivo atual
-  const arquivo = await getArquivoAtual(token);
-  const conteudoAtual = JSON.parse(
-    Buffer.from(arquivo.content, "base64").toString("utf-8")
-  ) as { profissionais: Profissional[] };
-
-  // Gera próximo ID
-  const ids = conteudoAtual.profissionais
-    .map((p) => parseInt(p.id.replace("kiri-", "")))
-    .filter((n) => !isNaN(n));
-  const proximoNum = ids.length > 0 ? Math.max(...ids) + 1 : 1;
-  novoProfissional.id = `kiri-${String(proximoNum).padStart(3, "0")}`;
   novoProfissional.verificado = true;
   if (!novoProfissional.card_token) {
     novoProfissional.card_token = crypto.randomUUID().replace(/-/g, "").slice(0, 16);
   }
 
-  // Adiciona e serializa
-  conteudoAtual.profissionais.push(novoProfissional);
-  const novoConteudo = JSON.stringify(conteudoAtual, null, 2);
+  // Tenta até 3 vezes para lidar com conflitos de SHA concorrentes
+  let lastError = "";
+  for (let tentativa = 0; tentativa < 3; tentativa++) {
+    const arquivo = await getArquivoAtual(token);
+    const conteudoAtual = JSON.parse(
+      Buffer.from(arquivo.content, "base64").toString("utf-8")
+    ) as { profissionais: Profissional[] };
 
-  await commitProfissional(token, novoConteudo, arquivo.sha);
+    const ids = conteudoAtual.profissionais
+      .map((p) => parseInt(p.id.replace("kiri-", "")))
+      .filter((n) => !isNaN(n));
+    const proximoNum = ids.length > 0 ? Math.max(...ids) + 1 : 1;
+    novoProfissional.id = `kiri-${String(proximoNum).padStart(3, "0")}`;
 
-  return NextResponse.json({ ok: true, id: novoProfissional.id });
+    conteudoAtual.profissionais.push(novoProfissional);
+    const novoConteudo = JSON.stringify(conteudoAtual, null, 2);
+
+    try {
+      await commitProfissional(token, novoConteudo, arquivo.sha);
+      return NextResponse.json({ ok: true, id: novoProfissional.id });
+    } catch (err) {
+      lastError = String(err);
+      // SHA conflito — busca SHA atualizado e tenta novamente
+    }
+  }
+
+  throw new Error(`Falha após 3 tentativas: ${lastError}`);
 }
