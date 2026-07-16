@@ -312,7 +312,7 @@ function FormularioContent() {
                       key={conv}
                       type="button"
                       onClick={() => { setConvenioSelecionado(convenioSelecionado === conv ? "" : conv); setConvenioOutro(""); }}
-                      className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                      className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                         convenioSelecionado === conv
                           ? "bg-ardosia-escura text-white border-ardosia-escura"
                           : "bg-white text-carvao border-linha"
@@ -363,7 +363,7 @@ function FormularioContent() {
                   key={op}
                   type="button"
                   onClick={() => { setDemandaPrincipal(demandaPrincipal === op ? "" : op); if (op !== "Outro") setDemandaOutro(""); }}
-                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     demandaPrincipal === op
                       ? "bg-[#7D9590] text-white border-[#7D9590]"
                       : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
@@ -397,7 +397,7 @@ function FormularioContent() {
                   key={op}
                   type="button"
                   onClick={() => setIdadeCrianca(idadeCrianca === op ? "" : op)}
-                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     idadeCrianca === op
                       ? "bg-[#7D9590] text-white border-[#7D9590]"
                       : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
@@ -429,7 +429,7 @@ function FormularioContent() {
                       prev.includes(op) ? prev.filter((o) => o !== op) : [...prev, op]
                     )
                   }
-                  className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     opcoesBusca.includes(op)
                       ? "bg-[#7D9590] text-white border-[#7D9590]"
                       : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
