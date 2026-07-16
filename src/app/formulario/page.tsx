@@ -365,8 +365,8 @@ function FormularioContent() {
                   onClick={() => { setDemandaPrincipal(demandaPrincipal === op ? "" : op); if (op !== "Outro") setDemandaOutro(""); }}
                   className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     demandaPrincipal === op
-                      ? "bg-[#7D9590] text-white border-[#7D9590]"
-                      : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
+                      ? "bg-[#A07855] text-white border-[#A07855]"
+                      : "bg-white text-carvao border-[#C0B5A5]"
                   }`}
                 >
                   {op}
@@ -399,8 +399,8 @@ function FormularioContent() {
                   onClick={() => setIdadeCrianca(idadeCrianca === op ? "" : op)}
                   className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     idadeCrianca === op
-                      ? "bg-[#7D9590] text-white border-[#7D9590]"
-                      : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
+                      ? "bg-[#A07855] text-white border-[#A07855]"
+                      : "bg-white text-carvao border-[#C0B5A5]"
                   }`}
                 >
                   {op}
@@ -431,8 +431,8 @@ function FormularioContent() {
                   }
                   className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
                     opcoesBusca.includes(op)
-                      ? "bg-[#7D9590] text-white border-[#7D9590]"
-                      : "bg-[#F0E9DF] text-carvao border-[#D9CFC0]"
+                      ? "bg-[#A07855] text-white border-[#A07855]"
+                      : "bg-white text-carvao border-[#C0B5A5]"
                   }`}
                 >
                   {op}
