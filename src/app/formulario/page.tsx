@@ -194,7 +194,7 @@ function FormularioContent() {
         <form onSubmit={enviar} className="mx-[18px] mt-5 flex flex-col gap-4">
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               Seu nome <span className="text-ferrugem">*</span>
             </label>
             <input
@@ -208,7 +208,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               Como prefere receber o retorno? <span className="text-ferrugem">*</span>
             </label>
             <div className="flex gap-2">
@@ -258,7 +258,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-carvao">Cidade</label>
+            <label className="text-[15px] font-semibold text-carvao">Cidade</label>
             <input
               type="text"
               value={cidade}
@@ -269,7 +269,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-carvao">Modalidade de atendimento <span className="text-ferrugem">*</span></label>
+            <label className="text-[15px] font-semibold text-carvao">Modalidade de atendimento <span className="text-ferrugem">*</span></label>
             <div className="flex gap-2 flex-wrap">
               {["Presencial", "Online", "Sem preferência"].map((op) => (
                 <button
@@ -289,7 +289,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">Forma de pagamento</label>
+            <label className="text-[15px] font-semibold text-carvao">Forma de pagamento</label>
             <div className="flex gap-2">
               {["Particular", "Convênio"].map((op) => (
                 <button
@@ -347,7 +347,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               Qual é a principal dificuldade? <span className="text-ferrugem">*</span>
             </label>
             <div className="flex flex-wrap gap-2">
@@ -385,7 +385,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">Faixa etária da criança</label>
+            <label className="text-[15px] font-semibold text-carvao">Faixa etária da criança</label>
             <div className="flex flex-wrap gap-2">
               {[
                 "Bebês (0–2 anos)",
@@ -410,7 +410,7 @@ function FormularioContent() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               O que você procura? <span className="text-ferrugem">*</span>
             </label>
             <div className="flex flex-wrap gap-2">
