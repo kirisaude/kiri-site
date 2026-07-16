@@ -665,6 +665,53 @@
       "foto_url": null,
       "verificacao_data": "julho de 2026",
       "card_token": "a3e229eee5724297"
+    },
+    {
+      "id": "kiri-034",
+      "nome": "Rafael Silberfeld",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "217183",
+      "rqe": "1268401",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Comportamento",
+        "Seletividade Alimentar",
+        "Transtorno Alimentar Restritivo Evitativo (TARE)",
+        "TOD",
+        "TOC"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Olá! Meu nome é Rafael e eu sou Psiquiatra da Infância e da Adolescência.\nAo longo dos atendimentos busco conhecer a criança e sua família para compreender as demandas atuais e elaborar intervenções que auxiliem nas principais dificuldades levantadas.\nAcredito na importância de um trabalho multidisciplinar com articulação e comunicação entre os membros da equipe responsáveis pelo cuidado da criança ou adolescente.\nTenho experiência na área de Neurodesenvolvimento, realizo diagnóstico de condições como TDAH e Autismo e atuo no processo terapêutico em conjunto com a equipe multidisciplinar.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Faculdade de Ciências Médicas da Santa Casa de São Paulo — 2020"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria Geral — Irmandade da Santa Casa de Misericórdia de São Paulo — 2021-2024"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da Infância e da Adolescência — Instituto de Psiquiatria do Hospital das Clínicas da Universidade de São Paulo — 2024-2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 750,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "1199111-0018",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "7b73224095af4646"
     }
   ]
 }
