@@ -691,15 +691,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Faculdade de Ciências Médicas da Santa Casa de São Paulo — 2020"
+          "instituicao_ano": "Medicina — Faculdade de Ciências Médicas da Santa Casa de São Paulo — 2020",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria Geral — Irmandade da Santa Casa de Misericórdia de São Paulo — 2021-2024"
+          "instituicao_ano": "Psiquiatria Geral — Irmandade da Santa Casa de Misericórdia de São Paulo — 2021-2024",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e da Adolescência — Instituto de Psiquiatria do Hospital das Clínicas da Universidade de São Paulo — 2024-2025"
+          "instituicao_ano": "Psiquiatria da Infância e da Adolescência — Instituto de Psiquiatria do Hospital das Clínicas da Universidade de São Paulo — 2024-2025",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -709,9 +712,14 @@
       "convenios": null,
       "whatsapp_agendamento": "1199111-0018",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-034.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "7b73224095af4646"
+      "card_token": "7b73224095af4646",
+      "tempo_atuacao": null,
+      "foto_posicao": "center center",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-036",
