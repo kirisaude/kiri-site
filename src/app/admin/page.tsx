@@ -42,6 +42,12 @@ interface Reporte {
 
 type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais";
 
+function linkContato(contato: string | null): string | null {
+  if (!contato) return null;
+  if (contato.includes("@")) return `mailto:${contato}?subject=Kiri%20Sa%C3%BAde%20%E2%80%94%20Encaminhamento`;
+  return `https://wa.me/55${contato.replace(/\D/g, "")}`;
+}
+
 function parseObs(obs: string | null): { demanda?: string; faixa?: string; pagamento?: string; convenio?: string; objetivo?: string } {
   if (!obs) return {};
   const demanda = obs.match(/Demanda: ([^—]+)/)?.[1].trim();
@@ -126,7 +132,12 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
             <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-[5px] border shrink-0 ${e.contato?.includes("@") ? "text-ardosia border-ardosia/40 bg-ardosia/5" : "text-[#2E7D4F] border-[#B8D8C0] bg-[#F0F8F2]"}`}>
               {e.contato?.includes("@") ? "E-mail" : "WhatsApp"}
             </span>
-            {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
+            {linkContato(e.contato) ? (
+              <a href={linkContato(e.contato)!} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-ardosia transition-colors">
+                {e.contato}
+              </a>
+            ) : e.contato}
+            {" · "}{new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
           {prof && (
             <div className="text-[13px] text-ardosia font-medium mt-0.5">
@@ -324,7 +335,12 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
             <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-[5px] border shrink-0 ${e.contato?.includes("@") ? "text-ardosia border-ardosia/40 bg-ardosia/5" : "text-[#2E7D4F] border-[#B8D8C0] bg-[#F0F8F2]"}`}>
               {e.contato?.includes("@") ? "E-mail" : "WhatsApp"}
             </span>
-            {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
+            {linkContato(e.contato) ? (
+              <a href={linkContato(e.contato)!} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-ardosia transition-colors">
+                {e.contato}
+              </a>
+            ) : e.contato}
+            {" · "}{new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
           {e.observacoes && !respondido && (
             <div className="text-[12.5px] text-muted mt-0.5 truncate max-w-[320px]">
