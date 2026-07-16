@@ -640,19 +640,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Unian — 2021"
+          "instituicao_ano": "Psicologia — Unian — 2021",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuropsicologia — Unifesp — 2025"
+          "instituicao_ano": "Neuropsicologia — Unifesp — 2025",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia Cognitivo Comportamental — Grupo PBE — 2023"
+          "instituicao_ano": "Terapia Cognitivo Comportamental — Grupo PBE — 2023",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — HCX FMUSP — 2026"
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — HCX FMUSP — 2026",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -662,9 +666,14 @@
       "convenios": null,
       "whatsapp_agendamento": "11994621322",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-033.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "a3e229eee5724297"
+      "card_token": "a3e229eee5724297",
+      "tempo_atuacao": null,
+      "foto_posicao": "center center",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-034",
