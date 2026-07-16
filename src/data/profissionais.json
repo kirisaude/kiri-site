@@ -778,6 +778,47 @@
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false
+    },
+    {
+      "id": "kiri-037",
+      "nome": "Denise Gonçalves Kurowski",
+      "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicólogo",
+      "registro_conselho": "06/83326",
+      "rqe": null,
+      "areas_atuacao": [
+        "TDAH",
+        "Comportamento",
+        "TEA"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Adolescentes (13–18 anos), Crianças (6–12 anos)",
+      "sobre": "Quem sou eu\nDenise Gonçalves Kurowski, Psicóloga (CRP 06.83.326) e Neuropsicóloga. Não \napenas uma profissional, mas uma parceira dedicada à sua jornada.\nMinha história\nMais de 20 anos de vida dedicados à saúde mental e cognitiva, construindo \num legado de cuidado e transformação.\nMeu propósito\nComo Fundadora e Responsável Técnica da Clínica Ciência do \nComportamento desde 2011, minha missão é oferecer a você um suporte de \nexcelência. Transformar seus desafios em oportunidades reais de crescimento, \ncom base na ciência e, acima de tudo, com um olhar profundamente humano",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Umesp — 2005"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia. — 2024"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "TDAH, Tea e Inclusão — Puc — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 350,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "11994571730",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "bf832a9ba1b5435c"
     }
   ]
 }
