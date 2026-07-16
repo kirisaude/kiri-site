@@ -28,7 +28,10 @@ function FormularioContent() {
     : null;
 
   const [nome, setNome] = useState("");
-  const [contato, setContato] = useState("");
+  const [canalContato, setCanalContato] = useState<"whatsapp" | "email" | "">("");
+  const [ddd, setDdd] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [emailContato, setEmailContato] = useState("");
   const [cidade, setCidade] = useState("");
   const [modalidade, setModalidade] = useState("");
   const [demandaPrincipal, setDemandaPrincipal] = useState("");
@@ -53,12 +56,16 @@ function FormularioContent() {
     setEnviando(true);
     setErro("");
 
+    const contatoFinal = canalContato === "whatsapp"
+      ? `(${ddd.trim()}) ${telefone.trim()}`
+      : emailContato.trim();
+
     const res = await fetch("/api/encaminhamento", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         nome_responsavel: nome.trim(),
-        contato: contato.trim(),
+        contato: contatoFinal,
         cidade: cidade.trim() || null,
         modalidade: modalidade || null,
         observacoes: [
@@ -199,21 +206,54 @@ function FormularioContent() {
             />
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <label className="text-[13px] font-semibold text-carvao">
-              WhatsApp ou e-mail <span className="text-ferrugem">*</span>
+              Como prefere receber o retorno? <span className="text-ferrugem">*</span>
             </label>
-            <input
-              type="text"
-              value={contato}
-              onChange={(e) => setContato(e.target.value)}
-              required
-              placeholder="(11) 99999-9999 ou seu@email.com"
-              className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
-            />
-            <p className="text-[12px] text-muted leading-[1.5]">
-              Canal pelo qual entraremos em contato com o retorno.
-            </p>
+            <div className="flex gap-2">
+              {(["whatsapp", "email"] as const).map((canal) => (
+                <button
+                  key={canal}
+                  type="button"
+                  onClick={() => { setCanalContato(canal); setDdd(""); setTelefone(""); setEmailContato(""); }}
+                  className={`px-4 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
+                    canalContato === canal
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-carvao border-linha"
+                  }`}
+                >
+                  {canal === "whatsapp" ? "WhatsApp" : "E-mail"}
+                </button>
+              ))}
+            </div>
+            {canalContato === "whatsapp" && (
+              <div className="flex gap-2">
+                <input
+                  type="tel"
+                  value={ddd}
+                  onChange={(e) => setDdd(e.target.value.replace(/\D/g, "").slice(0, 2))}
+                  placeholder="DDD"
+                  maxLength={2}
+                  className="w-[68px] border border-linha rounded-[12px] px-3 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted text-center"
+                />
+                <input
+                  type="tel"
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
+                  placeholder="99999-9999"
+                  className="flex-1 border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                />
+              </div>
+            )}
+            {canalContato === "email" && (
+              <input
+                type="email"
+                value={emailContato}
+                onChange={(e) => setEmailContato(e.target.value)}
+                placeholder="seu@email.com"
+                className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+              />
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -429,7 +469,11 @@ function FormularioContent() {
 
           <button
             type="submit"
-            disabled={enviando || !consentimento || !nome || !contato || !modalidade || !demandaPrincipal || opcoesBusca.length === 0}
+            disabled={
+              enviando || !consentimento || !nome || !modalidade || !demandaPrincipal || opcoesBusca.length === 0 ||
+              !canalContato ||
+              (canalContato === "whatsapp" ? (!ddd.trim() || !telefone.trim()) : !emailContato.trim())
+            }
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}

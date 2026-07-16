@@ -122,7 +122,10 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
               </span>
             )}
           </div>
-          <div className="text-[13px] text-cinza-texto mt-0.5">
+          <div className="text-[13px] text-cinza-texto mt-0.5 flex items-center gap-1.5">
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-[5px] border shrink-0 ${e.contato?.includes("@") ? "text-ardosia border-ardosia/40 bg-ardosia/5" : "text-[#2E7D4F] border-[#B8D8C0] bg-[#F0F8F2]"}`}>
+              {e.contato?.includes("@") ? "E-mail" : "WhatsApp"}
+            </span>
             {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
           {prof && (
@@ -317,7 +320,10 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
               </span>
             )}
           </div>
-          <div className="text-[13px] text-cinza-texto mt-0.5">
+          <div className="text-[13px] text-cinza-texto mt-0.5 flex items-center gap-1.5">
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-[5px] border shrink-0 ${e.contato?.includes("@") ? "text-ardosia border-ardosia/40 bg-ardosia/5" : "text-[#2E7D4F] border-[#B8D8C0] bg-[#F0F8F2]"}`}>
+              {e.contato?.includes("@") ? "E-mail" : "WhatsApp"}
+            </span>
             {e.contato} · {new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
           {e.observacoes && !respondido && (
