@@ -35,6 +35,7 @@ function FormularioContent() {
   const [cidade, setCidade] = useState("");
   const [modalidade, setModalidade] = useState("");
   const [demandaPrincipal, setDemandaPrincipal] = useState("");
+  const [demandaOutro, setDemandaOutro] = useState("");
   const [idadeCrianca, setIdadeCrianca] = useState("");
   const [pagamento, setPagamento] = useState("");
   const [convenioSelecionado, setConvenioSelecionado] = useState("");
@@ -69,7 +70,7 @@ function FormularioContent() {
         cidade: cidade.trim() || null,
         modalidade: modalidade || null,
         observacoes: [
-          demandaPrincipal ? `Demanda: ${demandaPrincipal}` : "",
+          demandaPrincipal ? `Demanda: ${demandaPrincipal === "Outro" && demandaOutro.trim() ? demandaOutro.trim() : demandaPrincipal}` : "",
           idadeCrianca ? `Faixa etária: ${idadeCrianca}` : "",
           pagamento === "Convênio" ? `Convênio: ${convenioSelecionado === "Outro" ? convenioOutro.trim() : convenioSelecionado}${aceitaParticular ? " (aceita particular se não houver)" : ""}` : pagamento ? `Pagamento: ${pagamento}` : "",
           opcoesBusca.join(", "),
@@ -361,7 +362,7 @@ function FormularioContent() {
                 <button
                   key={op}
                   type="button"
-                  onClick={() => setDemandaPrincipal(demandaPrincipal === op ? "" : op)}
+                  onClick={() => { setDemandaPrincipal(demandaPrincipal === op ? "" : op); if (op !== "Outro") setDemandaOutro(""); }}
                   className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
                     demandaPrincipal === op
                       ? "bg-[#7D9590] text-white border-[#7D9590]"
@@ -372,6 +373,15 @@ function FormularioContent() {
                 </button>
               ))}
             </div>
+            {demandaPrincipal === "Outro" && (
+              <input
+                type="text"
+                value={demandaOutro}
+                onChange={(e) => setDemandaOutro(e.target.value)}
+                placeholder="Descreva brevemente…"
+                className="border border-linha rounded-[12px] px-4 py-[11px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+              />
+            )}
           </div>
 
           <div className="flex flex-col gap-2">
