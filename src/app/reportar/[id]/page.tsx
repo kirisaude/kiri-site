@@ -104,7 +104,7 @@ export default function ReportarPage() {
 
         <form onSubmit={enviar} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               Qual o problema? <span className="text-ferrugem">*</span>
             </label>
             <div className="flex flex-col gap-2">
@@ -118,7 +118,7 @@ export default function ReportarPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-carvao">
+            <label className="text-[15px] font-semibold text-carvao">
               Detalhes <span className="text-[12px] font-normal text-muted">(opcional)</span>
             </label>
             <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} rows={3}

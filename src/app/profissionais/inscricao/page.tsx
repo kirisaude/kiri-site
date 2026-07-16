@@ -185,7 +185,7 @@ export default function InscricaoProfissionalPage() {
   }
 
   const inputClass = "border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted w-full";
-  const labelClass = "text-[13px] font-semibold text-carvao";
+  const labelClass = "text-[15px] font-semibold text-carvao";
 
   return (
     <div className="min-h-screen bg-creme flex flex-col">
