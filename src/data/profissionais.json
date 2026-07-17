@@ -751,7 +751,7 @@
       "modalidade": "Presencial e online",
       "cidade": "Salvador BA",
       "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos), Bebês (0–2 anos)",
-      "sobre": "Procuro entender o sofrimento da criança/adolescente e o grau de disfuncionalidade acadêmica,inter pessoal, familiar do caso clínico para decidir, de forma horizontal, juntamente com os familiares, sobre a intervenção terapêutica medicamentosa ou não",
+      "sobre": "Procuro entender o sofrimento da criança/adolescente e o grau de disfuncionalidade acadêmica,inter pessoal, familiar do caso clínico para decidir, de forma horizontal, juntamente com os familiares, sobre a intervenção terapêutica medicamentosa ou não.",
       "formacao": [
         {
           "curso": "Graduação",
@@ -765,7 +765,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": 699,
+      "valor_min": 600,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
