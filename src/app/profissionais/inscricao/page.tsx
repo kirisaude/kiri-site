@@ -17,6 +17,7 @@ export default function InscricaoProfissionalPage() {
   const [nome, setNome] = useState("");
   const [genero, setGenero] = useState<"M" | "F" | "">("");
   const [profissao, setProfissao] = useState("");
+  const [profissaoSecundaria, setProfissaoSecundaria] = useState("");
   const [registroConselho, setRegistroConselho] = useState("");
   const [rqe, setRqe] = useState("");
   const [areasAtuacao, setAreasAtuacao] = useState<string[]>([]);
@@ -106,6 +107,7 @@ export default function InscricaoProfissionalPage() {
           genero: genero || null,
           email: email.trim() || null,
           profissao: profissao.trim(),
+          profissao_secundaria: profissaoSecundaria.trim() || null,
           registro_conselho: registroConselho.trim(),
           rqe: rqe.trim() || null,
           tempo_atuacao: tempoAtuacao || null,
@@ -266,6 +268,27 @@ export default function InscricaoProfissionalPage() {
                 </button>
               ))}
             </div>
+            {profissao && (
+              <div className="mt-2">
+                <p className="text-[13px] text-muted mb-1.5">Segunda profissão <span className="font-normal">(opcional)</span></p>
+                <div className="flex flex-wrap gap-2">
+                  {PROFISSOES.filter((op) => op !== profissao).map((op) => (
+                    <button
+                      key={op}
+                      type="button"
+                      onClick={() => setProfissaoSecundaria(profissaoSecundaria === op ? "" : op)}
+                      className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                        profissaoSecundaria === op
+                          ? "bg-ardosia text-white border-ardosia"
+                          : "bg-white text-cinza-texto border-linha"
+                      }`}
+                    >
+                      {op}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5">

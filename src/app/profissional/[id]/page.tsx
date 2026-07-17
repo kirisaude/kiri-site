@@ -74,7 +74,12 @@ export default async function PerfilPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="text-[15px] text-cinza-texto mt-1.5 leading-[1.3]">{tituloExibicao}</div>
+              <div className="text-[15px] text-cinza-texto mt-1.5 leading-[1.3]">
+                {tituloExibicao}
+                {p.profissao_secundaria && (
+                  <span className="text-muted"> · {p.genero === "F" ? feminizarTitulo(p.profissao_secundaria) : p.profissao_secundaria}</span>
+                )}
+              </div>
               <div className="text-[12.5px] tracking-[0.02em] text-muted mt-[7px]">{registroLinha}</div>
 
               <div className="flex flex-wrap gap-[7px] justify-center mt-[14px]">

@@ -126,7 +126,7 @@ export default function Home() {
     return profissionais.filter((p) => {
       if (p.oculto) return false;
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
-      if (activeProfissao && p.profissao !== activeProfissao) return false;
+      if (activeProfissao && p.profissao !== activeProfissao && p.profissao_secundaria !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
       if (activeCidade) {
         const spRegiao = activeCidade.match(/^São Paulo — (.+)$/);

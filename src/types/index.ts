@@ -11,6 +11,7 @@ export interface Profissional {
   id: string;
   nome: string;
   profissao: string;
+  profissao_secundaria?: string | null;
   titulo_exibicao: string;
   registro_conselho: string;
   rqe: string | null;
