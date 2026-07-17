@@ -24,6 +24,9 @@ export interface Profissional {
   valor_formato: "a_partir_de" | "faixa";
   valor_min: number | null;
   valor_max: number | null;
+  valor_formato_secundario?: "a_partir_de" | "faixa" | null;
+  valor_min_secundario?: number | null;
+  valor_max_secundario?: number | null;
   convenio_info: string;
   convenios?: string[] | null;
   tempo_atuacao?: string | null;

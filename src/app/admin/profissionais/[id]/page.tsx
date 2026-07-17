@@ -86,6 +86,9 @@ export default function EditarProfissionalPage() {
   const [valorFormato, setValorFormato] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato ?? "a_partir_de");
   const [valorMin, setValorMin] = useState(profOriginal?.valor_min ? String(profOriginal.valor_min) : "");
   const [valorMax, setValorMax] = useState(profOriginal?.valor_max ? String(profOriginal.valor_max) : "");
+  const [valorFormatoSec, setValorFormatoSec] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato_secundario ?? "a_partir_de");
+  const [valorMinSec, setValorMinSec] = useState(profOriginal?.valor_min_secundario ? String(profOriginal.valor_min_secundario) : "");
+  const [valorMaxSec, setValorMaxSec] = useState(profOriginal?.valor_max_secundario ? String(profOriginal.valor_max_secundario) : "");
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
@@ -257,6 +260,9 @@ export default function EditarProfissionalPage() {
       valor_formato: valorFormato,
       valor_min: isNaN(valorMinNum) ? 0 : valorMinNum,
       valor_max: valorMaxNum && !isNaN(valorMaxNum) ? valorMaxNum : null,
+      valor_formato_secundario: profissaoSecundaria ? valorFormatoSec : null,
+      valor_min_secundario: (() => { const n = parseInt(valorMinSec.replace(/\D/g, ""), 10); return profissaoSecundaria && !isNaN(n) ? n : null; })(),
+      valor_max_secundario: (() => { const n = parseInt(valorMaxSec.replace(/\D/g, ""), 10); return profissaoSecundaria && valorFormatoSec === "faixa" && !isNaN(n) ? n : null; })(),
       convenio_info: convenio.trim(),
       convenios: convenios.length ? convenios : null,
       whatsapp_agendamento: whatsapp.trim() || null,
@@ -447,6 +453,37 @@ export default function EditarProfissionalPage() {
               ))}
             </select>
           </div>
+
+          {/* Valor — segunda profissão */}
+          {profissaoSecundaria && (
+            <div className="flex flex-col gap-2 pl-4 border-l-2 border-linha">
+              <label className="text-[12.5px] font-medium text-cinza-texto">Valor como {profissaoSecundaria} <span className="font-normal text-muted">(opcional)</span></label>
+              <div className="flex gap-3">
+                {(["a_partir_de", "faixa"] as const).map((fmt) => (
+                  <label key={fmt} className="flex items-center gap-2 cursor-pointer">
+                    <input type="radio" checked={valorFormatoSec === fmt} onChange={() => setValorFormatoSec(fmt)} className="accent-ardosia-escura" />
+                    <span className="text-[13.5px] text-carvao">{fmt === "a_partir_de" ? "A partir de" : "Faixa"}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <div className="flex flex-col gap-1 flex-1">
+                  <label className="text-[12px] text-cinza-texto">{valorFormatoSec === "faixa" ? "Valor mínimo" : "Valor (R$)"}</label>
+                  <input type="text" value={valorMinSec} onChange={(e) => setValorMinSec(e.target.value)}
+                    placeholder="ex: 250"
+                    className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+                </div>
+                {valorFormatoSec === "faixa" && (
+                  <div className="flex flex-col gap-1 flex-1">
+                    <label className="text-[12px] text-cinza-texto">Valor máximo</label>
+                    <input type="text" value={valorMaxSec} onChange={(e) => setValorMaxSec(e.target.value)}
+                      placeholder="ex: 400"
+                      className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Gênero */}
           <div className="flex flex-col gap-1.5">
