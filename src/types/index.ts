@@ -43,9 +43,10 @@ export interface Profissional {
 }
 
 export const PROFISSOES_ORDENADAS = [
-  "Psiquiatra",
   "Psiquiatra da infância e adolescência",
+  "Psiquiatra",
   "Neuropediatra",
+  "Neurologista",
   "Neuropsicólogo",
   "Psicólogo",
   "Fonoaudiólogo",
@@ -56,9 +57,10 @@ export const PROFISSOES_ORDENADAS = [
 ] as const;
 
 export const PROFISSAO_PLURAL: Record<string, string> = {
-  "Psiquiatra": "Psiquiatras",
   "Psiquiatra da infância e adolescência": "Psiquiatras da infância e adolescência",
+  "Psiquiatra": "Psiquiatras",
   "Neuropediatra": "Neuropediatras",
+  "Neurologista": "Neurologistas",
   "Neuropsicólogo": "Neuropsicólogos",
   "Psicólogo": "Psicólogos",
   "Fonoaudiólogo": "Fonoaudiólogos",

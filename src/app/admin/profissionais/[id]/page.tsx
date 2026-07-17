@@ -479,7 +479,7 @@ export default function EditarProfissionalPage() {
               }
               if (["Terapeuta ocupacional", "Fisioterapeuta"].includes(profissao))
                 links.push({ label: "CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/buscas.html" });
-              if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra"].includes(profissao)) {
+              if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra", "Neurologista"].includes(profissao)) {
                 links.push({ label: "CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
                 links.push({ label: "CFM (outros estados)", url: "https://portal.cfm.org.br/busca-medicos/" });
               }
