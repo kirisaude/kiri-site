@@ -63,6 +63,7 @@ export default function EditarProfissionalPage() {
 
   const [nome, setNome] = useState(profOriginal?.nome ?? "");
   const [profissao, setProfissao] = useState(profOriginal?.profissao ?? "");
+  const [profissaoSecundaria, setProfissaoSecundaria] = useState(profOriginal?.profissao_secundaria ?? "");
   const [tituloExibicao, setTituloExibicao] = useState(profOriginal?.titulo_exibicao ?? "");
   const [registro, setRegistro] = useState(profOriginal?.registro_conselho ?? "");
   const [rqe, setRqe] = useState(profOriginal?.rqe ?? "");
@@ -233,6 +234,7 @@ export default function EditarProfissionalPage() {
       id,
       nome: nome.trim(),
       profissao: profissao.trim(),
+      profissao_secundaria: profissaoSecundaria.trim() || null,
       titulo_exibicao: tituloExibicao.trim(),
       registro_conselho: registro.trim(),
       rqe: rqe.trim() || null,
@@ -426,6 +428,21 @@ export default function EditarProfissionalPage() {
               className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
             >
               {PROFISSOES_ORDENADAS.map((p) => (
+                <option key={p} value={p}>{p}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Segunda profissão */}
+          <div className="flex flex-col gap-1">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Segunda profissão <span className="font-normal text-muted">(opcional)</span></label>
+            <select
+              value={profissaoSecundaria ?? ""}
+              onChange={(e) => setProfissaoSecundaria(e.target.value)}
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+            >
+              <option value="">— nenhuma —</option>
+              {PROFISSOES_ORDENADAS.filter((p) => p !== profissao).map((p) => (
                 <option key={p} value={p}>{p}</option>
               ))}
             </select>
