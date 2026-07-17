@@ -799,8 +799,8 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Umesp — 2005",
-          "verificado": false
+          "instituicao_ano": "Psicologia — Universidade Metodista de São Paulo — 2005",
+          "verificado": true
         },
         {
           "curso": "Especialização",
@@ -809,7 +809,7 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "TDAH, Tea e Inclusão — Puc — 2025",
+          "instituicao_ano": "TDAH, Tea e Inclusão — PUC Paraná — 2025",
           "verificado": false
         }
       ],
