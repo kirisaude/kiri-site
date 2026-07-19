@@ -145,7 +145,7 @@ function FormularioContent() {
           </div>
         </div>
 
-        <div className="px-[18px] pt-6">
+        <div className="px-[18px] pt-10 text-center">
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você precisa
           </h1>
