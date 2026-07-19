@@ -726,9 +726,9 @@ export default function Home() {
               </p>
               <div className="mt-5 flex flex-col gap-2">
                 {[
-                  "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO, CRN ou CBO)",
+                  "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
-                  "Registro ativo e regular perante o conselho de classe",
+                  "Verificação dos títulos e formações na área",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
@@ -832,9 +832,9 @@ export default function Home() {
                   <p className="text-[14px] leading-[1.6] text-cinza-texto m-0 mt-1">Uma rede pequena, para você decidir com segurança.</p>
                   <div className="mt-5 flex flex-col gap-2">
                     {[
-                      "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO, CRN ou CBO)",
+                      "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                       "Formação na área e atuação em neurodesenvolvimento infantil",
-                      "Registro ativo e regular perante o conselho de classe",
+                      "Verificação dos títulos e formações na área",
                     ].map((item) => (
                       <div key={item} className="flex items-start gap-2">
                         <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
