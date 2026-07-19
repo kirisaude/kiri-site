@@ -182,16 +182,20 @@ function FormularioContent() {
         )}
 
         {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-4 bg-[#F6E6CC] border border-ambar-borda rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-1 text-center">
-          <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
-            Este formulário é para direcionamento e encaminhamento.
-          </p>
-          <p className="text-[14.5px] leading-[1.5] text-ambar-texto m-0">
-            Não é avaliação clínica nem diagnóstico.
-          </p>
-          <p className="text-[16px] leading-[1.5] text-ambar-texto font-semibold m-0">
-            Em caso de urgência ou risco, procure um pronto-socorro.
-          </p>
+        <div className="mx-[18px] mt-4 flex flex-col gap-2">
+          <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-0.5 text-center">
+            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
+              Este formulário é para direcionamento e encaminhamento.
+            </p>
+            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
+              Não é avaliação clínica nem diagnóstico.
+            </p>
+          </div>
+          <div className="bg-[#FDF0F0] border border-[#E8C0C0] rounded-[13px] px-[14px] py-[10px] text-center">
+            <p className="text-[15px] leading-[1.5] text-[#B03030] font-semibold m-0">
+              Em caso de urgência ou risco, procure um pronto-socorro.
+            </p>
+          </div>
         </div>
 
         {/* Formulário nativo */}
