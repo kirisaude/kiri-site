@@ -14,7 +14,7 @@ export default function AvaliacaoPage() {
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
           {/* Emblema */}
-          <div className="self-center w-[76px] h-[76px] rounded-full bg-[#FAF0E4] border border-[#E8DDD0] overflow-hidden mt-1.5">
+          <div className="self-center w-[76px] h-[76px] rounded-full bg-[#FAF0E4] border border-white overflow-hidden mt-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/mascote.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: "100% center" }} />
           </div>
