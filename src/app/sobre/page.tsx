@@ -33,10 +33,12 @@ export default function SobrePage() {
             Não somos uma lista de nomes. Somos uma rede criteriosamente reunida — cada profissional verificado quanto à formação e à atuação real na área. O objetivo é que a família chegue até o cuidador certo sem ter que percorrer um labirinto para isso.
           </p>
 
-          <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0 text-justify">
+        </div>
+
+        <div className="mx-[30px] mt-5 border-l-[3px] border-ferrugem/40 bg-[#F5EDE4] rounded-r-[12px] px-5 py-4">
+          <p className="font-serif italic text-[18px] md:text-[20px] leading-[1.65] text-carvao m-0">
             O nome vem do kiri-kiri, o menor dos falcões — de visão aguçada e voo preciso. A ideia é essa: clareza onde costuma haver ruído.
           </p>
-
         </div>
 
         <Footer className="mx-[30px] mt-7" />

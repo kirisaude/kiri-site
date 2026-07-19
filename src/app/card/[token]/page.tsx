@@ -87,7 +87,7 @@ export default async function CardPage({ params }: { params: Promise<{ token: st
 
             {/* Áreas */}
             <div className="flex flex-wrap gap-[6px] mt-1">
-              {p.areas_atuacao.map((area) => (
+              {p.areas_atuacao.filter((a) => a !== "Outro").map((area) => (
                 <span key={area} className="text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-[10px] py-[4px] rounded-[7px]">
                   {area}
                 </span>

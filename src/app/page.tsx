@@ -208,6 +208,9 @@ export default function Home() {
           {/* Right side */}
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
 
+            <Link href="/profissoes" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+              As profissões
+            </Link>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
             </Link>
@@ -255,6 +258,13 @@ export default function Home() {
         {/* Menu mobile dropdown */}
         {showMenu && (
           <div className="md:hidden border-t border-linha bg-creme/98 px-4 py-2 flex flex-col">
+            <Link
+              href="/profissoes"
+              onClick={() => setShowMenu(false)}
+              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
+            >
+              As profissões
+            </Link>
             <Link
               href="/como-selecionamos"
               onClick={() => setShowMenu(false)}
@@ -353,24 +363,24 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer transition-all ${
+                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-2.5 md:py-4 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
                 }`}
               >
-                <span className={`text-[17px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[16px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[11.5px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`text-[11px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
             ))}
           </div>
 
-          {/* Condições secundárias */}
-          <div className="flex flex-wrap gap-2 mt-2.5">
+          {/* Condições secundárias — scroll horizontal no mobile, wrap no desktop */}
+          <div className="flex gap-2 mt-2.5 overflow-x-auto scrollbar-hide md:flex-wrap pb-0.5 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
             {([
               "Depressão", "Ansiedade", "TOC",
               "Atraso de desenvolvimento", "Dificuldades de aprendizagem",
@@ -379,13 +389,13 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`inline-flex items-center rounded-full px-4 py-2 cursor-pointer transition-all border ${
+                className={`inline-flex items-center flex-none rounded-full px-4 py-2 cursor-pointer transition-all border ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura text-white"
                     : "bg-transparent border-areia text-cinza-texto2 hover:border-ardosia hover:text-ardosia-escura"
                 }`}
               >
-                <span className="text-[13px] font-medium">{cond}</span>
+                <span className="text-[13px] font-medium whitespace-nowrap">{cond}</span>
               </button>
             ))}
           </div>
