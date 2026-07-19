@@ -16,7 +16,7 @@ export default function AvaliacaoPage() {
           {/* Emblema */}
           <div className="self-center w-[76px] h-[76px] rounded-full bg-[#FAF0E4] border border-[#E8DDD0] overflow-hidden mt-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: "0% center" }} />
+            <img src="/mascote.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: "100% center" }} />
           </div>
 
           <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao text-center mt-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
