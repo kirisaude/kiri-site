@@ -98,7 +98,7 @@ export default function ProfissoesPage() {
           {/* Médicos — card manual com sub-box de especialidades */}
           <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
             <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
-              <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
+              <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
               <div className="text-[13px] text-white/80 mt-[2px]">
                 Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
               </div>
@@ -143,7 +143,7 @@ export default function ProfissoesPage() {
           {PROFISSOES.map((item) => (
             <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
               <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
-                <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
+                <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
                 <div className="text-[13px] text-white/80 mt-[2px]">
                   {item.profissoes.join(" · ")}
                 </div>
@@ -174,7 +174,7 @@ export default function ProfissoesPage() {
         {/* Sites de verificação */}
         <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
           <div className="bg-ardosia px-4 py-[12px] border-b border-[#344D57]">
-            <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">Sites de verificação pública</div>
+            <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Sites de verificação pública</div>
             <div className="text-[13px] text-white/80 mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
           </div>
           <div className="divide-y divide-linha-sutil">
