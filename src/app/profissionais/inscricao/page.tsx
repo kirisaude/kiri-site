@@ -200,20 +200,20 @@ export default function InscricaoProfissionalPage() {
         </div>
 
         {/* Critérios */}
-        <div className="mt-5 bg-wash-azulado border border-borda-azulada rounded-[14px] px-4 py-4">
-          <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ardosia-texto mb-3">O que verificamos</div>
+        <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[14px] px-4 py-4">
+          <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#8A6A40] mb-3">O que verificamos</div>
           <div className="flex flex-col gap-2.5">
             {[
               "Registro ativo e regular no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
               "Formação na área e atuação em neurodesenvolvimento infantil",
-              "Registro ativo e regular perante o conselho de classe",
+              "Verificação dos títulos e formações de cada profissional",
             ].map((item) => (
               <div key={item} className="flex items-start gap-2">
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-                  <circle cx="10" cy="10" r="8.4" stroke="#44606C" strokeWidth="1.3" />
-                  <path d="M6.3 10.2 L8.8 12.7 L13.8 7" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="10" cy="10" r="8.4" stroke="#BE6E4E" strokeWidth="1.3" />
+                  <path d="M6.3 10.2 L8.8 12.7 L13.8 7" stroke="#BE6E4E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span className="text-[13.5px] leading-[1.5] text-ardosia-escura">{item}</span>
+                <span className="text-[13.5px] leading-[1.5] text-carvao">{item}</span>
               </div>
             ))}
           </div>
