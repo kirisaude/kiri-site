@@ -83,7 +83,7 @@ export default function EditarProfissionalPage() {
   function toggleRegiao(r: string) { setRegioesSP((prev) => prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]); }
   const [faixaEtaria, setFaixaEtaria] = useState(profOriginal?.faixa_etaria ?? "");
   const [sobre, setSobre] = useState(profOriginal?.sobre ?? "");
-  const [valorFormato, setValorFormato] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato ?? "a_partir_de");
+  const [valorFormato, setValorFormato] = useState<"a_partir_de" | "faixa" | null>(profOriginal?.valor_min ? (profOriginal?.valor_formato ?? "a_partir_de") : null);
   const [valorMin, setValorMin] = useState(profOriginal?.valor_min ? String(profOriginal.valor_min) : "");
   const [valorMax, setValorMax] = useState(profOriginal?.valor_max ? String(profOriginal.valor_max) : "");
   const [valorFormatoSec, setValorFormatoSec] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato_secundario ?? "a_partir_de");
@@ -259,9 +259,9 @@ export default function EditarProfissionalPage() {
           oculto: (publicarSemPendentes && f.status === "pendente") || undefined,
           obs: f.obs,
         })),
-      valor_formato: valorFormato,
-      valor_min: isNaN(valorMinNum) ? 0 : valorMinNum,
-      valor_max: valorMaxNum && !isNaN(valorMaxNum) ? valorMaxNum : null,
+      valor_formato: valorFormato ?? "a_partir_de",
+      valor_min: valorFormato && !isNaN(valorMinNum) ? valorMinNum : null,
+      valor_max: valorFormato === "faixa" && valorMaxNum && !isNaN(valorMaxNum) ? valorMaxNum : null,
       valor_formato_secundario: profissaoSecundaria ? valorFormatoSec : null,
       valor_min_secundario: (() => { const n = parseInt(valorMinSec.replace(/\D/g, ""), 10); return profissaoSecundaria && !isNaN(n) ? n : null; })(),
       valor_max_secundario: (() => { const n = parseInt(valorMaxSec.replace(/\D/g, ""), 10); return profissaoSecundaria && valorFormatoSec === "faixa" && !isNaN(n) ? n : null; })(),
@@ -641,7 +641,7 @@ export default function EditarProfissionalPage() {
 
           {/* Valor */}
           <div className="flex flex-col gap-2">
-            <label className="text-[12.5px] font-medium text-cinza-texto">Formato do valor</label>
+            <label className="text-[12.5px] font-medium text-cinza-texto">Formato do valor <span className="font-normal text-muted">(clique novamente para remover)</span></label>
             <div className="flex gap-3">
               {(["a_partir_de", "faixa"] as const).map((fmt) => (
                 <label key={fmt} className="flex items-center gap-2 cursor-pointer">
@@ -649,36 +649,39 @@ export default function EditarProfissionalPage() {
                     type="radio"
                     checked={valorFormato === fmt}
                     onChange={() => setValorFormato(fmt)}
+                    onClick={() => { if (valorFormato === fmt) setValorFormato(null); }}
                     className="accent-ardosia-escura"
                   />
                   <span className="text-[13.5px] text-carvao">{fmt === "a_partir_de" ? "A partir de" : "Faixa"}</span>
                 </label>
               ))}
             </div>
-            <div className="flex gap-2">
-              <div className="flex flex-col gap-1 flex-1">
-                <label className="text-[12px] text-cinza-texto">{valorFormato === "faixa" ? "Valor mínimo" : "Valor (R$)"}</label>
-                <input
-                  type="text"
-                  value={valorMin}
-                  onChange={(e) => setValorMin(e.target.value)}
-                  placeholder="ex: 250"
-                  className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
-                />
-              </div>
-              {valorFormato === "faixa" && (
+            {valorFormato && (
+              <div className="flex gap-2">
                 <div className="flex flex-col gap-1 flex-1">
-                  <label className="text-[12px] text-cinza-texto">Valor máximo</label>
+                  <label className="text-[12px] text-cinza-texto">{valorFormato === "faixa" ? "Valor mínimo" : "Valor (R$)"}</label>
                   <input
                     type="text"
-                    value={valorMax}
-                    onChange={(e) => setValorMax(e.target.value)}
-                    placeholder="ex: 400"
+                    value={valorMin}
+                    onChange={(e) => setValorMin(e.target.value)}
+                    placeholder="ex: 250"
                     className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
                   />
                 </div>
-              )}
-            </div>
+                {valorFormato === "faixa" && (
+                  <div className="flex flex-col gap-1 flex-1">
+                    <label className="text-[12px] text-cinza-texto">Valor máximo</label>
+                    <input
+                      type="text"
+                      value={valorMax}
+                      onChange={(e) => setValorMax(e.target.value)}
+                      placeholder="ex: 400"
+                      className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Valor por pacote */}
