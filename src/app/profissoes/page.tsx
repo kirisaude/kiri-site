@@ -54,7 +54,7 @@ const ESPECIALIDADES_MEDICAS = [
   },
   {
     nome: "Neurologista",
-    descricao: ["Residência médica em neurologia (3 anos) após a graduação.", "O RQE de neurologia comprova a especialização perante o CRM."],
+    descricao: ["Residência médica em neurologia (3 anos) após a graduação em medicina.", "O RQE de neurologia comprova a especialização perante o CRM."],
   },
   {
     nome: "Psiquiatra da infância e adolescência",
