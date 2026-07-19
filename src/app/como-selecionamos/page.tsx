@@ -82,7 +82,7 @@ export default function ComoSelecionamosPage() {
         </div>
 
         {/* Responsabilidade */}
-        <div className="mx-[18px] mt-[26px] bg-[#EFE6D6] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
+        <div className="mx-[18px] mt-[26px] bg-[#FAF0E4] border border-[#E8DDD0] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
             <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
