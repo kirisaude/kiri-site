@@ -2,6 +2,7 @@ import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 const ITENS = [
   {
@@ -27,8 +28,9 @@ export default function ComoSelecionamosPage() {
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         {/* Título */}
-        <div className="px-[22px] pt-8">
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+        <div className="px-[22px] pt-8 flex flex-col items-center text-center">
+          <KiriSymbol height={40} />
+          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao mt-7 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Como selecionamos os profissionais
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
