@@ -2,6 +2,7 @@ import Link from "next/link";
 import { KiriLogo } from "@/components/KiriLogo";
 import { NavBack } from "@/components/NavBack";
 import { Footer } from "@/components/Footer";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 export default function AvaliacaoPage() {
   return (
@@ -13,11 +14,10 @@ export default function AvaliacaoPage() {
       <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 px-2">
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
-          {/* Título com mascote lateral */}
-          <div className="flex items-start gap-4 mt-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-[58px] h-[58px] object-contain flex-none mt-1" />
-            <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          {/* Símbolo + título */}
+          <div className="mt-4">
+            <KiriSymbol height={32} />
+            <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao mt-3 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
               Você não precisa ter um diagnóstico para começar.
             </h1>
           </div>
