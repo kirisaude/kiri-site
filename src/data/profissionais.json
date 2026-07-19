@@ -670,7 +670,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": 4000,
+      "valor_min": null,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
