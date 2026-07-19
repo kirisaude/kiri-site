@@ -189,7 +189,7 @@ export default function InscricaoProfissionalPage() {
 
       <div className="max-w-2xl mx-auto w-full flex-1 px-[18px]">
         <div className="pt-8 pb-2 flex flex-col items-center text-center">
-          <div className="w-[76px] h-[76px] rounded-full bg-white/70 border border-areia overflow-hidden mb-4">
+          <div className="w-[76px] h-[76px] rounded-full bg-[#FAF0E4] border border-[#E8DDD0] overflow-hidden mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/mascote.png" alt="" className="w-full h-full object-cover" style={{ objectPosition: "0% center" }} />
           </div>
