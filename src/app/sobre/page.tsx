@@ -39,7 +39,7 @@ export default function SobrePage() {
 
         </div>
 
-        <div className="mx-[30px] mt-10 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-8 text-center">
+        <div className="mx-[30px] mt-10 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5 text-center">
           <p className="font-serif italic text-[18px] md:text-[20px] leading-[1.65] text-carvao m-0">
             A ideia é essa: clareza onde costuma haver ruído.
           </p>
