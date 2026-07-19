@@ -39,12 +39,12 @@ export default function SobrePage() {
 
         </div>
 
-        <div className="mx-[30px] mt-10 relative pt-[68px]">
+        <div className="mx-[30px] mt-10 relative pt-[96px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/mascote.png"
             alt="Kiri-kiri"
-            className="absolute top-0 right-8 w-20 h-20 object-contain z-10"
+            className="absolute top-0 right-6 w-28 h-28 object-contain z-10"
           />
           <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5 text-center">
             <p className="font-serif italic text-[18px] md:text-[20px] leading-[1.65] text-carvao m-0">
