@@ -173,7 +173,7 @@ export default function ProfissoesPage() {
 
         {/* Sites de verificação */}
         <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-          <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
+          <div className="bg-ardosia px-4 py-[12px] border-b border-[#344D57]">
             <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">Sites de verificação pública</div>
             <div className="text-[13px] text-white/80 mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
           </div>
