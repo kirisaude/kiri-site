@@ -50,19 +50,19 @@ const PROFISSOES = [
 const ESPECIALIDADES_MEDICAS = [
   {
     nome: "Psiquiatra",
-    descricao: "Residência médica em psiquiatria (3 anos) após a graduação em medicina. O RQE de psiquiatria é emitido pelo CRM como comprovante da especialidade.",
+    descricao: ["Residência médica em psiquiatria (3 anos) após a graduação em medicina.", "O RQE de psiquiatria é emitido pelo CRM como comprovante da especialidade."],
   },
   {
     nome: "Neurologista",
-    descricao: "Residência médica em neurologia (3 anos) após a graduação. O RQE de neurologia comprova a especialização perante o CRM.",
+    descricao: ["Residência médica em neurologia (3 anos) após a graduação.", "O RQE de neurologia comprova a especialização perante o CRM."],
   },
   {
     nome: "Psiquiatra da infância e adolescência",
-    descricao: "Exige residência em psiquiatria completa + 1 ano adicional de residência em psiquiatria da infância e adolescência. Possui RQE específico para essa subespecialidade.",
+    descricao: ["Exige residência em psiquiatria completa + 1 ano adicional de residência em psiquiatria da infância e adolescência.", "Possui RQE específico para essa subespecialidade."],
   },
   {
     nome: "Neuropediatra",
-    descricao: "Exige residência em pediatria ou neurologia (3 anos cada) seguida de residência em neuropediatria (2 anos). O RQE de neuropediatria é emitido pelo CRM.",
+    descricao: ["Exige residência em pediatria ou neurologia (3 anos cada) seguida de residência em neuropediatria (2 anos).", "O RQE de neuropediatria é emitido pelo CRM."],
   },
 ];
 
@@ -122,7 +122,9 @@ export default function ProfissoesPage() {
                   {ESPECIALIDADES_MEDICAS.map((esp) => (
                     <div key={esp.nome} className="px-3.5 py-3 flex flex-col gap-[3px]">
                       <span className="text-[13.5px] font-semibold text-carvao">{esp.nome}</span>
-                      <span className="text-[13px] text-cinza-texto leading-[1.5]">{esp.descricao}</span>
+                      {esp.descricao.map((linha, i) => (
+                        <span key={i} className="text-[13px] text-cinza-texto leading-[1.5]">{linha}</span>
+                      ))}
                     </div>
                   ))}
                 </div>
