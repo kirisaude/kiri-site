@@ -159,7 +159,73 @@ export default function ProfissoesPage() {
           ))}
         </div>
 
-        <div className="mx-[18px] mt-[26px] bg-[#EFE6D6] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
+        {/* Sites de verificação */}
+        <div className="mx-[18px] mt-[28px] bg-white border border-linha rounded-[16px] overflow-hidden">
+          <div className="bg-wash-azulado px-4 py-[12px] border-b border-borda-azulada">
+            <div className="text-[13px] font-bold tracking-[0.04em] uppercase text-ardosia-escura">Sites de verificação pública</div>
+            <div className="text-[13px] text-cinza-texto2 mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
+          </div>
+          <div className="divide-y divide-linha-sutil">
+            {[
+              {
+                label: "e-MEC",
+                desc: "Verifica se uma instituição de ensino ou curso é reconhecido pelo MEC",
+                url: "https://emec.mec.gov.br/emec/nova",
+                profissao: "Todas as profissões",
+              },
+              {
+                label: "CFM — Conselho Federal de Medicina",
+                desc: "Consulta de médicos: CRM, situação do registro e especialidades (RQE)",
+                url: "https://portal.cfm.org.br/busca-medicos",
+                profissao: "Médicos",
+              },
+              {
+                label: "CFP — Conselho Federal de Psicologia",
+                desc: "Consulta de psicólogos: CRP, situação e especialidades reconhecidas",
+                url: "https://cadastro.cfp.org.br",
+                profissao: "Psicólogos · Neuropsicólogos",
+              },
+              {
+                label: "CFFa — Conselho Federal de Fonoaudiologia",
+                desc: "Consulta de fonoaudiólogos: situação do registro e regional",
+                url: "https://www.fonoaudiologia.org.br/cffa/consulta-de-profissional",
+                profissao: "Fonoaudiólogos",
+              },
+              {
+                label: "COFFITO — Conselho Federal de Fisioterapia e Terapia Ocupacional",
+                desc: "Consulta de fisioterapeutas e terapeutas ocupacionais: CREFITO e situação",
+                url: "https://www.coffito.gov.br/nsite/?page_id=2340",
+                profissao: "Terapeutas ocupacionais · Fisioterapeutas",
+              },
+              {
+                label: "CFN — Conselho Federal de Nutricionistas",
+                desc: "Consulta de nutricionistas: CRN e situação do registro",
+                url: "https://www.cfn.org.br/index.php/consulta-de-profissionais",
+                profissao: "Nutricionistas",
+              },
+            ].map((site) => (
+              <a
+                key={site.label}
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 px-4 py-3.5 no-underline hover:bg-wash-azulado/50 transition-colors group"
+              >
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 3 }}>
+                  <circle cx="10" cy="10" r="8.5" stroke="#6E8893" strokeWidth="1.4" />
+                  <path d="M7 10h6M10 7l3 3-3 3" stroke="#6E8893" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div className="flex flex-col gap-[2px]">
+                  <span className="text-[14px] font-semibold text-ardosia-escura group-hover:text-ardosia leading-[1.3]">{site.label}</span>
+                  <span className="text-[13px] text-cinza-texto leading-[1.4]">{site.desc}</span>
+                  <span className="text-[11.5px] font-medium text-ardosia/70 mt-[2px]">{site.profissao}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-[18px] mt-[18px] bg-[#EFE6D6] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
             <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
