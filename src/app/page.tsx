@@ -728,7 +728,7 @@ export default function Home() {
                 {[
                   "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                   "Formação na área e atuação em neurodesenvolvimento infantil",
-                  "Verificação dos títulos e formações na área",
+                  "Verificação dos títulos e formações de cada profissional",
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-2">
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
@@ -834,7 +834,7 @@ export default function Home() {
                     {[
                       "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO ou CRN)",
                       "Formação na área e atuação em neurodesenvolvimento infantil",
-                      "Verificação dos títulos e formações na área",
+                      "Verificação dos títulos e formações de cada profissional",
                     ].map((item) => (
                       <div key={item} className="flex items-start gap-2">
                         <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
