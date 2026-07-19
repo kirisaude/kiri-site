@@ -252,6 +252,22 @@ export default async function PerfilPage({ params }: PageProps) {
                     </div>
                   );
                 })()}
+                {p.valor_pacote && p.valor_pacote > 0 && (
+                  <div className="mt-[11px] bg-[#F5F2ED] border border-linha rounded-[11px] px-[14px] py-[11px]">
+                    <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted mb-[5px]">Pacote</div>
+                    <div className="flex items-center gap-2.5">
+                      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                        <rect x="2.5" y="5" width="15" height="10.5" rx="2" stroke="#9A8C78" strokeWidth="1.3" />
+                        <path d="M2.8 8.2 L17.2 8.2" stroke="#9A8C78" strokeWidth="1.3" />
+                        <circle cx="13.8" cy="11.6" r="1.1" fill="#9A8C78" />
+                      </svg>
+                      <span className="text-[15px] text-carvao-sutil">
+                        R$ {p.valor_pacote.toLocaleString("pt-BR")}
+                        {p.valor_pacote_obs && <span className="text-[13px] text-cinza-texto"> · {p.valor_pacote_obs}</span>}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center gap-2.5 mt-[11px]">
                   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
                     <path d="M5 3 L13 3 L15.5 5.5 L15.5 17 L5 17 Z" stroke="#9A8C78" strokeWidth="1.3" strokeLinejoin="round" />

@@ -89,6 +89,8 @@ export default function EditarProfissionalPage() {
   const [valorFormatoSec, setValorFormatoSec] = useState<"a_partir_de" | "faixa">(profOriginal?.valor_formato_secundario ?? "a_partir_de");
   const [valorMinSec, setValorMinSec] = useState(profOriginal?.valor_min_secundario ? String(profOriginal.valor_min_secundario) : "");
   const [valorMaxSec, setValorMaxSec] = useState(profOriginal?.valor_max_secundario ? String(profOriginal.valor_max_secundario) : "");
+  const [valorPacote, setValorPacote] = useState(profOriginal?.valor_pacote ? String(profOriginal.valor_pacote) : "");
+  const [valorPacoteObs, setValorPacoteObs] = useState(profOriginal?.valor_pacote_obs ?? "");
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
@@ -263,6 +265,8 @@ export default function EditarProfissionalPage() {
       valor_formato_secundario: profissaoSecundaria ? valorFormatoSec : null,
       valor_min_secundario: (() => { const n = parseInt(valorMinSec.replace(/\D/g, ""), 10); return profissaoSecundaria && !isNaN(n) ? n : null; })(),
       valor_max_secundario: (() => { const n = parseInt(valorMaxSec.replace(/\D/g, ""), 10); return profissaoSecundaria && valorFormatoSec === "faixa" && !isNaN(n) ? n : null; })(),
+      valor_pacote: (() => { const n = parseInt(valorPacote.replace(/\D/g, ""), 10); return !isNaN(n) && n > 0 ? n : null; })(),
+      valor_pacote_obs: valorPacoteObs.trim() || null,
       convenio_info: convenio.trim(),
       convenios: convenios.length ? convenios : null,
       whatsapp_agendamento: whatsapp.trim() || null,
@@ -674,6 +678,33 @@ export default function EditarProfissionalPage() {
                   />
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Valor por pacote */}
+          <div className="flex flex-col gap-2 bg-wash border border-linha rounded-[12px] px-4 py-3">
+            <label className="text-[12.5px] font-medium text-cinza-texto">Valor por pacote <span className="font-normal text-muted">(opcional — ex: avaliação neuropsicológica)</span></label>
+            <div className="flex gap-2">
+              <div className="flex flex-col gap-1 flex-1">
+                <label className="text-[12px] text-cinza-texto">Valor total (R$)</label>
+                <input
+                  type="text"
+                  value={valorPacote}
+                  onChange={(e) => setValorPacote(e.target.value)}
+                  placeholder="ex: 1200"
+                  className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-[12px] text-cinza-texto">Descrição do pacote</label>
+              <input
+                type="text"
+                value={valorPacoteObs}
+                onChange={(e) => setValorPacoteObs(e.target.value)}
+                placeholder="ex: valor total da avaliação neuropsicológica"
+                className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+              />
             </div>
           </div>
 
