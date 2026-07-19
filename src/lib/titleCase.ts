@@ -9,8 +9,8 @@ export function titleCasePT(str: string) {
     const lower = word.toLowerCase().replace(/[^a-zà-ú]/g, "");
     // Siglas fixas sempre em maiúsculas
     if (SIGLAS_FIXAS.has(lower)) return word.toUpperCase();
-    // Preserva siglas já escritas em maiúsculas quando o texto não é todo caps
-    if (!todoMaiusculo && word.length > 1 && word === word.toUpperCase() && /^[A-ZÀ-Ú]+$/.test(word)) return word;
+    // Preserva siglas já escritas em maiúsculas quando o texto não é todo caps (inclui hífens e dígitos: DSM-V, CID-10)
+    if (!todoMaiusculo && word.length > 1 && word === word.toUpperCase() && /^[A-ZÀ-Ú0-9][A-ZÀ-Ú0-9\-]*$/.test(word)) return word;
     const clean = word.toLowerCase();
     if (offset === 0 || !CONECTORES.has(clean)) return clean.charAt(0).toUpperCase() + clean.slice(1);
     return clean;
