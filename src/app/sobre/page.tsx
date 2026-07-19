@@ -44,7 +44,7 @@ export default function SobrePage() {
           <img
             src="/mascote.png"
             alt="Kiri-kiri"
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-20 object-contain z-10"
+            className="absolute top-0 right-8 w-20 h-20 object-contain z-10"
           />
           <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5 text-center">
             <p className="font-serif italic text-[18px] md:text-[20px] leading-[1.65] text-carvao m-0">
