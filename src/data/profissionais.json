@@ -145,7 +145,7 @@
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
         "Ansiedade",
-        "Comportamento",
+        "Depressão",
         "TOC"
       ],
       "modalidade": "Presencial e online",
@@ -196,8 +196,7 @@
       "areas_atuacao": [
         "TEA",
         "Atraso de desenvolvimento",
-        "Dificuldades de aprendizagem",
-        "Comportamento"
+        "Dificuldades de aprendizagem"
       ],
       "modalidade": "Presencial e online",
       "cidade": "São Paulo, SP",
@@ -250,7 +249,7 @@
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
         "Ansiedade",
-        "Comportamento",
+        "Depressão",
         "Outro",
         "Altas Habilidades e Superdotação"
       ],
@@ -300,7 +299,7 @@
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
         "Ansiedade",
-        "Comportamento",
+        "Depressão",
         "Outro",
         "Integração Sensorial de Ayres",
         "Saúde mental",
@@ -361,7 +360,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Ansiedade",
-        "Comportamento",
+        "Depressão",
         "TEA",
         "Dificuldades de aprendizagem",
         "Comunicação aumentativa"
@@ -545,6 +544,7 @@
       "areas_atuacao": [
         "TDAH",
         "Ansiedade",
+        "Depressão",
         "TEA",
         "Outro"
       ],
@@ -594,7 +594,7 @@
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
         "Ansiedade",
-        "Comportamento"
+        "Depressão"
       ],
       "modalidade": "Presencial",
       "cidade": "São Paulo, SP",
@@ -641,7 +641,6 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Comportamento",
         "Demências"
       ],
       "modalidade": "Presencial e online",
@@ -699,7 +698,6 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Comportamento",
         "Seletividade Alimentar",
         "Transtorno Alimentar Restritivo Evitativo (TARE)",
         "TOD",
@@ -754,7 +752,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Ansiedade",
-        "Comportamento",
+        "Depressão",
         "Outro",
         "Comunicação aumentativa",
         "Dificuldades de aprendizagem"
@@ -800,7 +798,6 @@
       "rqe": null,
       "areas_atuacao": [
         "TDAH",
-        "Comportamento",
         "TEA"
       ],
       "modalidade": "Presencial e online",
