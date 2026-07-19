@@ -191,8 +191,8 @@ function FormularioContent() {
               Não é avaliação clínica nem diagnóstico.
             </p>
           </div>
-          <div className="bg-[#FDF0F0] border border-[#E8C0C0] rounded-[13px] px-[14px] py-[10px] text-center">
-            <p className="text-[15px] leading-[1.5] text-[#B03030] font-semibold m-0">
+          <div className="bg-[#F9EDE6] border border-[#DDB89A] rounded-[13px] px-[14px] py-[10px] text-center">
+            <p className="text-[15px] leading-[1.5] text-ferrugem font-semibold m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.
             </p>
           </div>
