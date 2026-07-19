@@ -209,7 +209,7 @@ export default function Home() {
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
 
             <Link href="/profissoes" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
-              As profissões
+              Especialidades
             </Link>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
@@ -263,7 +263,7 @@ export default function Home() {
               onClick={() => setShowMenu(false)}
               className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >
-              As profissões
+              Especialidades
             </Link>
             <Link
               href="/como-selecionamos"

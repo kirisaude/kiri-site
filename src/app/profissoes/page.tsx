@@ -70,13 +70,13 @@ export default function ProfissoesPage() {
   return (
     <div className="min-h-screen bg-creme">
       <div className="w-full px-4 pt-4 pb-2">
-        <NavBack label="As profissões" />
+        <NavBack label="Especialidades" />
       </div>
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         <div className="px-[22px] pt-8">
           <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            As profissões da rede
+            Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Cada profissão de saúde no Brasil é regulamentada por um conselho de classe, responsável por emitir e manter os registros profissionais. É esse registro que garante que o profissional tem a formação exigida e está autorizado a exercer a profissão.

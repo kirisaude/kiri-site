@@ -200,7 +200,7 @@ function FormularioContent() {
         )}
 
         {/* Formulário nativo */}
-        <form onSubmit={enviar} className="mx-[18px] mt-5 flex flex-col gap-4">
+        <form onSubmit={enviar} className="mx-[18px] mt-9 flex flex-col gap-4">
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[15px] font-semibold text-carvao">
