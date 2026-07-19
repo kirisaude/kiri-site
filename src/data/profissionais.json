@@ -826,8 +826,13 @@
       "tempo_atuacao": null,
       "foto_posicao": "75% center",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "genero": "F"
     }
   ]
 }
