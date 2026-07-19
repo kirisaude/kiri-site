@@ -38,9 +38,12 @@ const PROFISSOES = [
     grupo: "Psicopedagogos",
     profissoes: ["Psicopedagogo"],
     conselho: "Sem conselho próprio (ainda)",
-    registro: "Não há registro obrigatório em conselho de classe para psicopedagogos. A formação mínima exigida é graduação em Pedagogia, Psicologia, Fonoaudiologia ou licenciatura, acrescida de especialização em psicopedagogia (mínimo 600 horas).",
+    registro: "Não há registro obrigatório em conselho de classe para psicopedagogos. Como a profissão ainda não é regulamentada em lei, não existem pré-requisitos legalmente definidos no momento.",
     como: "É possível consultar o conselho da profissão de base do profissional (ex: CRP se for psicólogo, CFFa se for fonoaudiólogo) e verificar se tem pós-graduação em psicopedagogia. A ABPp (Associação Brasileira de Psicopedagogia) é a principal entidade de referência da área, mas não tem poder fiscalizador como um conselho.",
-    obs: "Regulamentação em curso: a CCJ da Câmara aprovou em 2026 o projeto que regulamenta a profissão e prevê a criação de um conselho próprio (PL 1675/2023 + PL 116/2024). O texto ainda precisa passar pelo Senado e ter sanção presidencial para entrar em vigor.",
+    obs: [
+      "O CFP trata a psicopedagogia como uma das 13 especialidades reconhecidas da Psicologia (Resolução CFP nº 3/2022) — ou seja, para psicólogos, ela é regulamentada dentro do sistema de conselhos de Psicologia, não como profissão à parte.",
+      "Regulamentação em curso: a CCJ da Câmara aprovou em 2026 o projeto que prevê criar um conselho próprio para a profissão (PL 1675/2023 + PL 116/2024). O texto ainda precisa passar pelo Senado e ter sanção presidencial para entrar em vigor.",
+    ],
   },
 ];
 
@@ -149,11 +152,11 @@ export default function ProfissoesPage() {
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Verificar</span>
                   <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.como}</span>
                 </div>
-                {item.obs && (
-                  <div className="mt-1 bg-[#F5EDE4] rounded-[10px] px-3 py-2.5 text-[13.5px] text-[#6E5326] leading-[1.55]">
-                    {item.obs}
+                {item.obs && (Array.isArray(item.obs) ? item.obs : [item.obs]).map((o, i) => (
+                  <div key={i} className="mt-1 bg-[#F5EDE4] rounded-[10px] px-3 py-2.5 text-[13.5px] text-[#6E5326] leading-[1.55]">
+                    {o}
                   </div>
-                )}
+                ))}
               </div>
             </div>
           ))}
