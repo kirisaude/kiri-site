@@ -13,17 +13,16 @@ export default function AvaliacaoPage() {
       <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 px-2">
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
-          {/* Emblema */}
-          <div className="self-center w-[92px] h-[92px] rounded-full bg-[#FAF0E4] border border-white overflow-hidden mt-1.5">
+          {/* Título com mascote lateral */}
+          <div className="flex items-start gap-4 mt-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-full h-full object-contain" />
+            <img src="/mascote.png" alt="" className="w-[58px] h-[58px] object-contain flex-none mt-1" />
+            <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Você não precisa ter um diagnóstico para começar.
+            </h1>
           </div>
 
-          <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao text-center mt-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Você não precisa ter um diagnóstico para começar.
-          </h1>
-
-          <p className="mt-8 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="mt-6 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Muitas famílias chegam aqui só com a sensação de que algo está diferente — no jeito de se comunicar, de se relacionar, de aprender ou de se desenvolver. Está tudo bem não ter um nome ainda. A gente ajuda você a encontrar o profissional certo para entender melhor.
           </p>
 
