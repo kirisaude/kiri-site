@@ -47,11 +47,11 @@ const PROFISSOES = [
 const ESPECIALIDADES_MEDICAS = [
   {
     nome: "Psiquiatra",
-    descricao: "Residência médica em psiquiatria (2 anos) após a graduação em medicina. O RQE de psiquiatria é emitido pelo CRM como comprovante da especialidade.",
+    descricao: "Residência médica em psiquiatria (3 anos) após a graduação em medicina. O RQE de psiquiatria é emitido pelo CRM como comprovante da especialidade.",
   },
   {
     nome: "Neurologista",
-    descricao: "Residência médica em neurologia (2 anos) após a graduação. O RQE de neurologia comprova a especialização perante o CRM.",
+    descricao: "Residência médica em neurologia (3 anos) após a graduação. O RQE de neurologia comprova a especialização perante o CRM.",
   },
   {
     nome: "Psiquiatra da infância e adolescência",
