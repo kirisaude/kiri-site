@@ -188,7 +188,7 @@ export default function InscricaoProfissionalPage() {
       </div>
 
       <div className="max-w-2xl mx-auto w-full flex-1 px-[18px]">
-        <div className="pt-8 pb-2">
+        <div className="pt-8 pb-2 flex flex-col items-center text-center">
           <div className="w-[76px] h-[76px] rounded-full bg-white/70 border border-areia flex items-center justify-center mb-4 p-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/mascote.png" alt="" className="w-full h-full object-contain" style={{ objectPosition: "22% center" }} />
