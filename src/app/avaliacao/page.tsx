@@ -14,9 +14,9 @@ export default function AvaliacaoPage() {
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
           {/* Emblema */}
-          <div className="self-center w-[76px] h-[76px] rounded-full bg-wash-quente border border-borda-quente overflow-hidden mt-1.5">
+          <div className="self-center w-[76px] h-[76px] rounded-full bg-wash-quente border border-borda-quente flex items-center justify-center mt-1.5 p-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-full h-full object-cover object-center" />
+            <img src="/mascote.png" alt="" className="w-full h-full object-contain" />
           </div>
 
           <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao text-center mt-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
