@@ -34,17 +34,17 @@
       "formacao": [
         {
           "curso": "Graduação em",
-          "instituicao_ano": "Fonoaudiologia — UNEB — 2015",
+          "instituicao_ano": "Fonoaudiologia — Universidade do Estado da Bahia (UNEB) — 2015",
           "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Audiologia — CFFa — 2022",
+          "instituicao_ano": "Audiologia — Conselho Federal de Fonoaudiologia (CFFa) — 2022",
           "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas — UFBA — 2018",
+          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas — Universidade Federal da Bahia (UFBA) — 2018",
           "verificado": true
         },
         {
@@ -60,7 +60,7 @@
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas — UFBA — 2021",
+          "instituicao_ano": "Processos Interativos dos Órgãos e Sistemas — Universidade Federal da Bahia (UFBA) — 2021",
           "verificado": true,
           "obs": "defesa da tese aprovada, sem diploma final por nao ter buscado ainda "
         }
@@ -144,7 +144,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento",
         "TOC"
       ],
@@ -155,12 +155,12 @@
       "formacao": [
         {
           "curso": "Graduação em Medicina",
-          "instituicao_ano": "Medicina — EBMSP",
+          "instituicao_ano": "Medicina — Escola Bahiana de Medicina e Saúde Pública (EBMSP)",
           "verificado": false
         },
         {
           "curso": "Residência Médica em",
-          "instituicao_ano": "Psiquiatria — Hupes/UFBA — 2023",
+          "instituicao_ano": "Psiquiatria — Hospital Universitário Professor Edgard Santos (HUPES)/Universidade Federal da Bahia (UFBA) — 2023",
           "verificado": false
         },
         {
@@ -249,7 +249,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento",
         "Outro",
         "Altas Habilidades e Superdotação"
@@ -266,7 +266,7 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — USP",
+          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
           "verificado": false
         }
       ],
@@ -299,7 +299,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento",
         "Outro",
         "Integração Sensorial de Ayres",
@@ -319,12 +319,12 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Aprimoramento Profissional em Saúde Mental Multiprofissional — FUNDAP/CAPS Itapeva — 2010",
+          "instituicao_ano": "Aprimoramento Profissional em Saúde Mental Multiprofissional — Fundação do Desenvolvimento Administrativo (FUNDAP)/CAPS Itapeva — 2010",
           "verificado": false
         },
         {
           "curso": "Certificação Internacional",
-          "instituicao_ano": "Integração Sensorial de Ayres — CLASI — 2023",
+          "instituicao_ano": "Integração Sensorial de Ayres — Collaborative for Leadership in Ayres Sensory Integration (CLASI) — 2023",
           "verificado": false
         },
         {
@@ -360,7 +360,7 @@
       "areas_atuacao": [
         "TDAH",
         "Atraso de desenvolvimento",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento",
         "TEA",
         "Dificuldades de aprendizagem",
@@ -442,7 +442,7 @@
         },
         {
           "curso": "Especialista em Otoneurologia, Audiologia e Neurofuncional",
-          "instituicao_ano": "CFFa",
+          "instituicao_ano": "Conselho Federal de Fonoaudiologia (CFFa)",
           "verificado": false
         },
         {
@@ -488,7 +488,7 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Letras — UCSAL — 2009",
+          "instituicao_ano": "Letras — Universidade Católica do Salvador (UCSAL) — 2009",
           "verificado": true
         },
         {
@@ -508,7 +508,7 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Psicopedagogia Assistencial e Institucional — UNEB — 2010",
+          "instituicao_ano": "Psicopedagogia Assistencial e Institucional — Universidade do Estado da Bahia (UNEB) — 2010",
           "verificado": true
         }
       ],
@@ -544,7 +544,7 @@
       "rqe": null,
       "areas_atuacao": [
         "TDAH",
-        "Ansiedade infantil",
+        "Ansiedade",
         "TEA",
         "Outro"
       ],
@@ -593,7 +593,7 @@
         "TDAH",
         "Atraso de desenvolvimento",
         "Dificuldades de aprendizagem",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento"
       ],
       "modalidade": "Presencial",
@@ -656,7 +656,7 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuropsicologia — Unifesp — 2025",
+          "instituicao_ano": "Neuropsicologia — Universidade Federal de São Paulo (Unifesp) — 2025",
           "verificado": false
         },
         {
@@ -666,7 +666,7 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — HCX FMUSP — 2026",
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — Hospital das Clínicas da Faculdade de Medicina da Universidade de São Paulo (HCFMUSP) — 2026",
           "verificado": false
         }
       ],
@@ -753,7 +753,7 @@
         "TEA",
         "TDAH",
         "Atraso de desenvolvimento",
-        "Ansiedade infantil",
+        "Ansiedade",
         "Comportamento",
         "Outro",
         "Comunicação aumentativa",
@@ -766,12 +766,12 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — UFBA — 2011",
+          "instituicao_ano": "Medicina — Universidade Federal da Bahia (UFBA) — 2011",
           "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — REDE DE SÃO BERNARDO/FMABC — 2020",
+          "instituicao_ano": "Psiquiatria — REDE DE SÃO BERNARDO/Faculdade de Medicina do ABC (FMABC) — 2020",
           "verificado": true
         }
       ],
