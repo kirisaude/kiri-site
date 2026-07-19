@@ -493,12 +493,12 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Transtorno do Espectro do Autismo — IEPSIS — 2018",
+          "instituicao_ano": "Transtorno do Espectro do Autismo — Instituto Nacional de Ensino Superior e Pesquisa (INESP) — 2018",
           "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada ao Autismo — IEPSIS — 2019",
+          "instituicao_ano": "Análise do Comportamento Aplicada ao Autismo — Instituto Nacional de Ensino Superior e Pesquisa (INESP) — 2019",
           "verificado": true
         },
         {
@@ -531,7 +531,9 @@
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
-      "valor_max_secundario": null
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-031",
