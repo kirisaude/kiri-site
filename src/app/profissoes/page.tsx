@@ -58,13 +58,13 @@ const ESPECIALIDADES_MEDICAS = [
   },
   {
     nome: "Psiquiatra da infância e adolescência",
-    descricao: ["Exige residência em psiquiatria completa + 1 ano adicional de residência em psiquiatria da infância e adolescência.", "Possui RQE específico para essa subespecialidade."],
+    descricao: ["Exige residência em psiquiatria + 1 ano adicional de residência em psiquiatria da infância e adolescência.", "Possui RQE específico para essa subespecialidade."],
   },
   {
     nome: "Neuropediatra",
     descricao: ["Exige residência em pediatria ou neurologia (3 anos cada) seguida de residência em neuropediatria (2 anos).", "O RQE de neuropediatria é emitido pelo CRM."],
   },
-];
+]; // ordem: generalistas (psiquiatra, neurologista) → subespecialistas (psiq. infantil, neuropediatra)
 
 export default function ProfissoesPage() {
   return (
@@ -93,7 +93,7 @@ export default function ProfissoesPage() {
             <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
               <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Médicos</div>
               <div className="text-[13px] text-cinza-texto mt-[2px]">
-                Psiquiatra · Psiquiatra da infância e adolescência · Neuropediatra · Neurologista
+                Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
               </div>
             </div>
             <div className="px-4 py-4 flex flex-col gap-3">
