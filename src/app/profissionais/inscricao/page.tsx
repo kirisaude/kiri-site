@@ -189,9 +189,9 @@ export default function InscricaoProfissionalPage() {
 
       <div className="max-w-2xl mx-auto w-full flex-1 px-[18px]">
         <div className="pt-8 pb-2">
-          <div className="w-[76px] h-[76px] rounded-full bg-white border border-white flex items-center justify-center mb-4 p-1">
+          <div className="w-[76px] h-[76px] rounded-full bg-white/70 border border-areia flex items-center justify-center mb-4 p-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-full h-full object-contain" style={{ objectPosition: "38% center" }} />
+            <img src="/mascote.png" alt="" className="w-full h-full object-contain" style={{ objectPosition: "22% center" }} />
           </div>
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">Faça parte da rede Kiri</h1>
           <p className="text-[15.5px] leading-[1.55] text-cinza-texto2 mt-3 mb-0">
