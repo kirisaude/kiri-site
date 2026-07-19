@@ -371,11 +371,19 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Pills secundárias — só mobile */}
-          <div className="flex flex-wrap gap-2 mt-2.5 md:hidden">
-            {["Atraso de fala / linguagem", "Dificuldades de aprendizagem"].map((label) => (
-              <button key={label} className="inline-flex items-center bg-transparent border border-areia rounded-full px-3.5 py-2 cursor-pointer">
-                <span className="text-[13px] font-medium text-cinza-texto2">{label}</span>
+          {/* Condições secundárias */}
+          <div className="flex flex-wrap gap-2 mt-2.5">
+            {(["Depressão", "Ansiedade", "TOC"] as const).map((cond) => (
+              <button
+                key={cond}
+                onClick={() => toggleCond(cond)}
+                className={`inline-flex items-center rounded-full px-4 py-2 cursor-pointer transition-all border ${
+                  activeCond === cond
+                    ? "bg-ardosia-escura border-ardosia-escura text-white"
+                    : "bg-transparent border-areia text-cinza-texto2 hover:border-ardosia hover:text-ardosia-escura"
+                }`}
+              >
+                <span className="text-[13px] font-medium">{cond}</span>
               </button>
             ))}
           </div>

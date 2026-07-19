@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { PROFISSOES_ORDENADAS } from "@/types";
 
 const PROFISSOES = [...PROFISSOES_ORDENADAS];
-const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aumentativa", "Dificuldades de aprendizagem", "Ansiedade infantil", "Comportamento", "Outro"];
+const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aumentativa", "Dificuldades de aprendizagem", "Ansiedade", "Ansiedade infantil", "Depressão", "TOC", "Comportamento", "Outro"];
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
 const CONVENIOS_LISTA = ["Unimed", "Bradesco Saúde", "SulAmérica", "Amil", "Porto Seguro Saúde", "Hapvida", "Notre Dame Intermédica", "Prevent Senior", "Golden Cross", "Care Plus", "Omint", "Assim Saúde"];
 
