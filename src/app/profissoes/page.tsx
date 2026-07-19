@@ -78,13 +78,15 @@ export default function ProfissoesPage() {
           <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Especialidades da rede
           </h1>
-          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
             No acompanhamento de crianças e jovens com alterações do neurodesenvolvimento — como TEA, TDAH, atrasos de linguagem ou dificuldades de aprendizagem — raramente um único profissional detém todas as respostas. Esses casos pedem olhares complementares: o médico que investiga e, quando indicado, prescreve; o psicólogo que avalia o funcionamento cognitivo e emocional; o fonoaudiólogo que atua na comunicação e linguagem; o terapeuta ocupacional que trabalha integração sensorial e autonomia. Quando essas especialidades atuam de forma articulada, o resultado para a criança é consistentemente melhor — e a família ganha clareza sobre onde está e para onde vai.
           </p>
-          <p className="mt-3 text-[16px] md:text-[17px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Cada profissão de saúde no Brasil é regulamentada por um conselho de classe, responsável por emitir e manter os registros profissionais. É esse registro que garante que o profissional tem a formação exigida e está autorizado a exercer a profissão.
-          </p>
-          <p className="mt-3 text-[16px] md:text-[17px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5">
+            <p className="font-serif italic text-[18px] md:text-[19px] leading-[1.65] text-carvao m-0">
+              Cada profissão de saúde no Brasil é regulamentada por um conselho de classe, responsável por emitir e manter os registros profissionais. É esse registro que garante que o profissional tem a formação exigida e está autorizado a exercer a profissão.
+            </p>
+          </div>
+          <p className="mt-5 text-[16px] md:text-[17px] leading-[1.65] text-cinza-texto text-justify">
             Abaixo, um guia rápido por profissão — o conselho responsável e como qualquer pessoa pode verificar o registro.
           </p>
         </div>
