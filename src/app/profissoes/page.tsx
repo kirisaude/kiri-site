@@ -97,7 +97,7 @@ export default function ProfissoesPage() {
 
           {/* Médicos — card manual com sub-box de especialidades */}
           <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-            <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
+            <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
               <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
               <div className="text-[13px] text-white/80 mt-[2px]">
                 Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
@@ -142,7 +142,7 @@ export default function ProfissoesPage() {
           {/* Demais profissões */}
           {PROFISSOES.map((item) => (
             <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-              <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
+              <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
                 <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
                 <div className="text-[13px] text-white/80 mt-[2px]">
                   {item.profissoes.join(" · ")}
@@ -173,7 +173,7 @@ export default function ProfissoesPage() {
 
         {/* Sites de verificação */}
         <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-          <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
+          <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
             <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Sites de verificação pública</div>
             <div className="text-[13px] text-cinza-texto mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
           </div>
