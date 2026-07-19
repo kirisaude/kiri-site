@@ -1,6 +1,9 @@
 // Compact logo matching kiri-logo-compacta.svg — for headers and footers
-export function KiriLogoCompact({ height = 38 }: { height?: number }) {
+export function KiriLogoCompact({ height = 38, onDark = false }: { height?: number; onDark?: boolean }) {
   const width = Math.round(height * 250 / 96);
+  const bird1Color = onDark ? "#FFFFFF" : "#BE6E4E";
+  const bird2Color = onDark ? "#E0A55E" : "#44606C";
+  const textColor = onDark ? "#FFFFFF" : "#BE6E4E";
   return (
     <svg
       viewBox="0 0 250 96"
@@ -14,7 +17,7 @@ export function KiriLogoCompact({ height = 38 }: { height?: number }) {
         <path
           d="M19 52 C31 37 43 37 52 50 C61 37 73 37 84 52"
           fill="none"
-          stroke="#BE6E4E"
+          stroke={bird1Color}
           strokeWidth="10"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -22,7 +25,7 @@ export function KiriLogoCompact({ height = 38 }: { height?: number }) {
         <path
           d="M38 88 C50 73 62 73 71 86 C80 73 92 73 104 88"
           fill="none"
-          stroke="#44606C"
+          stroke={bird2Color}
           strokeWidth="10"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -35,7 +38,7 @@ export function KiriLogoCompact({ height = 38 }: { height?: number }) {
         fontSize="58"
         fontWeight="500"
         letterSpacing="-1"
-        fill="#BE6E4E"
+        fill={textColor}
       >
         Kiri
       </text>

@@ -890,8 +890,8 @@ export default function Home() {
           >
             {/* Card de divulgação */}
             <div className="bg-ardosia-escura px-6 pt-7 pb-6">
-              <div className="mb-4" style={{ filter: "brightness(0) invert(1)" }}>
-                <KiriLogoCompact height={28} />
+              <div className="mb-4">
+                <KiriLogoCompact height={28} onDark />
               </div>
               <p className="font-serif text-[22px] font-medium leading-[1.25] text-white">
                 Uma rede de profissionais verificados que atuam com neurodesenvolvimento infantil.
