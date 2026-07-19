@@ -89,39 +89,39 @@ export default function ProfissoesPage() {
         <div className="mx-[18px] mt-[28px] flex flex-col gap-4">
 
           {/* Médicos — card manual com sub-box de especialidades */}
-          <div className="bg-white border border-linha rounded-[16px] overflow-hidden">
-            <div className="bg-wash-azulado px-4 py-[12px] border-b border-borda-azulada">
-              <div className="text-[13px] font-bold tracking-[0.04em] uppercase text-ardosia-escura">Médicos</div>
-              <div className="text-[13px] text-cinza-texto2 mt-[2px]">
+          <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+            <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+              <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Médicos</div>
+              <div className="text-[13px] text-cinza-texto mt-[2px]">
                 Psiquiatra · Psiquiatra da infância e adolescência · Neuropediatra · Neurologista
               </div>
             </div>
             <div className="px-4 py-4 flex flex-col gap-3">
               <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Conselho</span>
+                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                 <span className="text-[15px] text-carvao-sutil leading-[1.5]">Conselho Regional de Medicina (CRM)</span>
               </div>
               <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Registro</span>
+                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Registro</span>
                 <span className="text-[14.5px] text-cinza-texto leading-[1.5]">CRM seguido de número e sigla do estado — ex: CRM/BA 12345</span>
               </div>
               <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Verificar</span>
+                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
                 <span className="text-[14.5px] text-cinza-texto leading-[1.5]">O CFM (Conselho Federal de Medicina) disponibiliza uma busca pública onde é possível confirmar se o registro está ativo e sem restrições.</span>
               </div>
 
               {/* Sub-box especialidades */}
-              <div className="mt-1 bg-[#F2F5F7] border border-borda-azulada rounded-[12px] overflow-hidden">
-                <div className="px-3.5 py-2.5 border-b border-borda-azulada">
-                  <span className="text-[11.5px] font-bold tracking-[0.04em] uppercase text-ardosia-escura">Especialidades e RQE</span>
-                  <p className="text-[13px] text-cinza-texto2 leading-[1.5] mt-1 mb-0">
+              <div className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[12px] overflow-hidden">
+                <div className="px-3.5 py-2.5 border-b border-[#E0D8CC]">
+                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase text-ferrugem/80">Especialidades e RQE</span>
+                  <p className="text-[13px] text-cinza-texto leading-[1.5] mt-1 mb-0">
                     Além do CRM, cada especialidade médica exige residência na área. O RQE (Registro de Qualificação de Especialidade) é emitido pelo próprio CRM como comprovante formal da especialidade concluída.
                   </p>
                 </div>
-                <div className="divide-y divide-borda-azulada/60">
+                <div className="divide-y divide-[#E8DFD5]">
                   {ESPECIALIDADES_MEDICAS.map((esp) => (
                     <div key={esp.nome} className="px-3.5 py-3 flex flex-col gap-[3px]">
-                      <span className="text-[13.5px] font-semibold text-ardosia-escura">{esp.nome}</span>
+                      <span className="text-[13.5px] font-semibold text-carvao">{esp.nome}</span>
                       <span className="text-[13px] text-cinza-texto leading-[1.5]">{esp.descricao}</span>
                     </div>
                   ))}
@@ -132,28 +132,28 @@ export default function ProfissoesPage() {
 
           {/* Demais profissões */}
           {PROFISSOES.map((item) => (
-            <div key={item.grupo} className="bg-white border border-linha rounded-[16px] overflow-hidden">
-              <div className="bg-wash-azulado px-4 py-[12px] border-b border-borda-azulada">
-                <div className="text-[13px] font-bold tracking-[0.04em] uppercase text-ardosia-escura">{item.grupo}</div>
-                <div className="text-[13px] text-cinza-texto2 mt-[2px]">
+            <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+              <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+                <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">{item.grupo}</div>
+                <div className="text-[13px] text-cinza-texto mt-[2px]">
                   {item.profissoes.join(" · ")}
                 </div>
               </div>
               <div className="px-4 py-4 flex flex-col gap-3">
                 <div className="flex gap-2.5">
-                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Conselho</span>
+                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                   <span className="text-[15px] text-carvao-sutil leading-[1.5]">{item.conselho}</span>
                 </div>
                 <div className="flex gap-2.5">
-                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Registro</span>
+                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Registro</span>
                   <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.registro}</span>
                 </div>
                 <div className="flex gap-2.5">
-                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ardosia min-w-[80px] pt-[1px]">Verificar</span>
+                  <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
                   <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.como}</span>
                 </div>
                 {item.obs && (Array.isArray(item.obs) ? item.obs : [item.obs]).map((o, i) => (
-                  <div key={i} className="mt-1 bg-[#F5EDE4] rounded-[10px] px-3 py-2.5 text-[13.5px] text-[#6E5326] leading-[1.55]">
+                  <div key={i} className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[10px] px-3 py-2.5 text-[13.5px] text-cinza-texto leading-[1.55]">
                     {o}
                   </div>
                 ))}
@@ -163,10 +163,10 @@ export default function ProfissoesPage() {
         </div>
 
         {/* Sites de verificação */}
-        <div className="mx-[18px] mt-[28px] bg-white border border-linha rounded-[16px] overflow-hidden">
-          <div className="bg-wash-azulado px-4 py-[12px] border-b border-borda-azulada">
-            <div className="text-[13px] font-bold tracking-[0.04em] uppercase text-ardosia-escura">Sites de verificação pública</div>
-            <div className="text-[13px] text-cinza-texto2 mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
+        <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+          <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+            <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Sites de verificação pública</div>
+            <div className="text-[13px] text-cinza-texto mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
           </div>
           <div className="divide-y divide-linha-sutil">
             {[
