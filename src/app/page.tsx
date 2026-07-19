@@ -772,7 +772,7 @@ export default function Home() {
         {sections.length === 0 ? (
           <div className="mt-16 text-center pb-20">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/mascote.png" alt="" className="w-20 h-20 object-contain mx-auto mb-4 opacity-70" />
+            <img src="/mascote.png" alt="" className="w-28 h-28 object-contain mx-auto mb-4" />
             <p className="text-[15px] text-cinza-texto2">Nenhum profissional encontrado para esse filtro.</p>
             <button
               className="mt-4 text-[13px] font-semibold text-ferrugem underline cursor-pointer"
