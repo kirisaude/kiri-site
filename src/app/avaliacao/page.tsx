@@ -16,8 +16,8 @@ export default function AvaliacaoPage() {
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
           {/* Símbolo + título centralizados */}
           <div className="mt-4 flex flex-col items-center text-center">
-            <KiriSymbol height={32} />
-            <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao mt-3 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+            <KiriSymbol height={40} />
+            <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao mt-5 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
               Você não precisa ter um diagnóstico para começar.
             </h1>
           </div>
