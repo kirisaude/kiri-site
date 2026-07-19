@@ -77,11 +77,11 @@ export default function ProfissoesPage() {
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         <div className="px-[22px] pt-8 flex flex-col items-center text-center">
           <KiriSymbol height={40} />
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao mt-5 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao mt-7 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
-            No acompanhamento de crianças e jovens com alterações do neurodesenvolvimento — como TEA, TDAH, atrasos de linguagem ou dificuldades de aprendizagem — raramente um único profissional detém todas as respostas. Esses casos pedem olhares complementares: o médico que investiga e, quando indicado, prescreve; o psicólogo que avalia o funcionamento cognitivo e emocional; o fonoaudiólogo que atua na comunicação e linguagem; o terapeuta ocupacional que trabalha integração sensorial e autonomia. Quando essas especialidades atuam de forma articulada, o resultado para a criança é consistentemente melhor — e a família ganha clareza sobre onde está e para onde vai.
+            No acompanhamento de crianças e jovens com alterações do neurodesenvolvimento, como TEA, TDAH, atrasos de linguagem ou dificuldades de aprendizagem, raramente um único profissional detém todas as respostas. Esses casos pedem olhares complementares: o médico que investiga e, quando indicado, prescreve; o psicólogo que avalia o funcionamento cognitivo e emocional; o fonoaudiólogo que atua na comunicação e linguagem; o terapeuta ocupacional que trabalha integração sensorial e autonomia. Quando essas especialidades atuam de forma articulada, o resultado para a criança é consistentemente melhor — e a família ganha clareza sobre onde está e para onde vai.
           </p>
           <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5">
             <p className="font-serif italic text-[18px] md:text-[19px] leading-[1.65] text-carvao m-0">
