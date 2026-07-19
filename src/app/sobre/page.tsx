@@ -35,9 +35,12 @@ export default function SobrePage() {
 
         </div>
 
-        <div className="mx-[30px] mt-5 border-l-[3px] border-ferrugem/40 bg-[#F5EDE4] rounded-r-[12px] px-5 py-4">
+        <div className="mx-[30px] mt-5 bg-[#F0E8DF] border border-[#D9C9B8] rounded-[16px] px-6 py-6 text-center">
           <p className="font-serif italic text-[18px] md:text-[20px] leading-[1.65] text-carvao m-0">
-            O nome vem do kiri-kiri, o menor dos falcões — de visão aguçada e voo preciso. A ideia é essa: clareza onde costuma haver ruído.
+            O nome vem do kiri-kiri, o menor dos falcões —<br />
+            de visão aguçada e voo preciso.<br />
+            <br />
+            A ideia é essa: clareza onde costuma haver ruído.
           </p>
         </div>
 
