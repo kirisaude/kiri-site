@@ -8,7 +8,7 @@ const PROFISSOES = [
     conselho: "Conselho Regional de Psicologia (CRP)",
     registro: "CRP seguido de número da regional e número de inscrição — ex: CRP 03/12345",
     como: "O CFP (Conselho Federal de Psicologia) oferece uma consulta pública de registros, onde é possível verificar situação, especialidade reconhecida e eventuais sanções.",
-    obs: "A Neuropsicologia é uma especialidade reconhecida pelo CFP. O profissional que a exerce é sempre psicólogo com formação adicional na área.",
+    obs: "A Neuropsicologia é uma especialidade reconhecida pelo CFP. O profissional que a exerce é sempre psicólogo com formação adicional em neuropsicologia.",
   },
   {
     grupo: "Fonoaudiólogos",
