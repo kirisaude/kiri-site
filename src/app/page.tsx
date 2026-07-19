@@ -45,12 +45,6 @@ const CIDADES_DISPONIVEIS = (() => {
   return [...mapa.values()].sort();
 })();
 
-// Para São Paulo, expande com sub-opções por região
-const CIDADES_FILTRO: string[] = CIDADES_DISPONIVEIS.flatMap((c) =>
-  normCidade(c) === normCidade("São Paulo")
-    ? [c, ...REGIOES_SP.map((r) => `São Paulo — ${r}`)]
-    : [c]
-);
 
 function EmBreve() {
   return (
@@ -78,6 +72,7 @@ export default function Home() {
   const [activePagamento, setActivePagamento] = useState<string | null>(null);
   const [showCidadeOptions, setShowCidadeOptions] = useState(false);
   const [activeCidade, setActiveCidade] = useState<string | null>(null);
+  const [activeSPRegiao, setActiveSPRegiao] = useState<string | null>(null);
   const [showFaixaOptions, setShowFaixaOptions] = useState(false);
   const [activeFaixa, setActiveFaixa] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
@@ -139,12 +134,11 @@ export default function Home() {
       if (activeProfissao && p.profissao !== activeProfissao && p.profissao_secundaria !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
       if (activeCidade) {
-        const spRegiao = activeCidade.match(/^São Paulo — (.+)$/);
-        if (spRegiao) {
-          if (!normCidade(p.cidade).includes("sao paulo")) return false;
-          if (!p.cidade.includes(spRegiao[1])) return false;
-        } else {
-          if (!normCidade(p.cidade).includes(normCidade(activeCidade))) return false;
+        const cidadeNorm = normCidade(activeCidade);
+        const match = p.cidade.split(/\s+e\s+/).some(c => normCidade(cidadeCurta(c.trim())) === cidadeNorm);
+        if (!match) return false;
+        if (activeSPRegiao && cidadeNorm === "sao paulo") {
+          if (!p.cidade.includes(activeSPRegiao)) return false;
         }
       }
       if (activeFaixa && !p.faixa_etaria.includes(activeFaixa)) return false;
@@ -168,7 +162,7 @@ export default function Home() {
       }
       return true;
     });
-  }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activeFaixa, activePagamento, valorMin, valorMax]);
+  }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activeSPRegiao, activeFaixa, activePagamento, valorMin, valorMax]);
 
   const sections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
@@ -176,7 +170,7 @@ export default function Home() {
   })).filter((s) => s.pros.length > 0);
 
   const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeFaixa || activePagamento || valorAtivo || search.trim());
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeSPRegiao || activeFaixa || activePagamento || valorAtivo || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
@@ -469,10 +463,10 @@ export default function Home() {
             }`}
           >
             <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-              {activeCidade ?? "Cidade"}
+              {activeSPRegiao ? `São Paulo — ${activeSPRegiao}` : (activeCidade ?? "Cidade")}
             </span>
             {activeCidade ? (
-              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveCidade(null); }}>×</span>
+              <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveCidade(null); setActiveSPRegiao(null); }}>×</span>
             ) : (
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             )}
@@ -533,15 +527,38 @@ export default function Home() {
         {/* Opções inline de cidade */}
         {showCidadeOptions && (
           <div className="pt-2 flex flex-wrap gap-2">
-            {CIDADES_FILTRO.map((c) => (
+            {CIDADES_DISPONIVEIS.map((c) => (
               <button
                 key={c}
-                onClick={() => { setActiveCidade(activeCidade === c ? null : c); setShowCidadeOptions(false); }}
-                className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all ${
+                onClick={() => {
+                  const same = activeCidade === c;
+                  setActiveCidade(same ? null : c);
+                  if (same || normCidade(c) !== "sao paulo") setActiveSPRegiao(null);
+                  setShowCidadeOptions(false);
+                }}
+                className={`text-[12.5px] font-semibold px-3 py-1.5 rounded-full border transition-all cursor-pointer ${
                   activeCidade === c ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                } ${c.startsWith("São Paulo — ") ? "ml-1" : ""}`}
+                }`}
               >
                 {c}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Sub-regiões de São Paulo — aparecem quando SP está selecionada */}
+        {activeCidade && normCidade(activeCidade) === "sao paulo" && (
+          <div className="pt-1.5 flex items-center gap-1.5 flex-wrap">
+            <span className="text-[11px] font-semibold tracking-wide text-muted">Região:</span>
+            {REGIOES_SP.map((r) => (
+              <button
+                key={r}
+                onClick={() => setActiveSPRegiao((prev) => (prev === r ? null : r))}
+                className={`text-[12px] font-semibold px-3 py-1 rounded-full border transition-all cursor-pointer ${
+                  activeSPRegiao === r ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                }`}
+              >
+                {r}
               </button>
             ))}
           </div>
@@ -747,7 +764,7 @@ export default function Home() {
             <p className="text-[15px] text-cinza-texto2">Nenhum profissional encontrado para esse filtro.</p>
             <button
               className="mt-4 text-[13px] font-semibold text-ferrugem underline cursor-pointer"
-              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActiveCidade(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
+              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActiveCidade(null); setActiveSPRegiao(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
             >
               Limpar filtros
             </button>
