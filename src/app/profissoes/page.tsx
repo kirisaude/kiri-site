@@ -37,10 +37,10 @@ const PROFISSOES = [
   {
     grupo: "Psicopedagogos",
     profissoes: ["Psicopedagogo"],
-    conselho: "Associação Brasileira de Psicopedagogia (ABPp)",
-    registro: "A psicopedagogia não tem conselho de classe próprio. O profissional tem graduação em outra área (psicologia, pedagogia, etc.) e especialização em psicopedagogia.",
-    como: "Para verificar, é possível consultar o conselho da profissão de base (ex: CRP para psicólogos) e checar se o profissional tem pós-graduação ou certificação reconhecida pela ABPp.",
-    obs: null,
+    conselho: "Sem conselho próprio (ainda)",
+    registro: "Não há registro obrigatório em conselho de classe para psicopedagogos. A formação mínima exigida é graduação em Pedagogia, Psicologia, Fonoaudiologia ou licenciatura, acrescida de especialização em psicopedagogia (mínimo 600 horas).",
+    como: "É possível consultar o conselho da profissão de base do profissional (ex: CRP se for psicólogo, CFFa se for fonoaudiólogo) e verificar se tem pós-graduação em psicopedagogia. A ABPp (Associação Brasileira de Psicopedagogia) é a principal entidade de referência da área, mas não tem poder fiscalizador como um conselho.",
+    obs: "Regulamentação em curso: a CCJ da Câmara aprovou em 2026 o projeto que regulamenta a profissão e prevê a criação de um conselho próprio (PL 1675/2023 + PL 116/2024). O texto ainda precisa passar pelo Senado e ter sanção presidencial para entrar em vigor.",
   },
 ];
 
