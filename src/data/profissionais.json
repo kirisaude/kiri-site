@@ -816,11 +816,16 @@
         {
           "curso": "Especialização",
           "instituicao_ano": "Neuropsicologia — Faculdade Metropolitana — 2024",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "TDAH, Tea e Inclusão — PUC Paraná — 2025",
+          "instituicao_ano": "TEA, TDAH E INCLUSÃO: SAÚDE, FAMÍLIA E SOCIEDADE — PUC Paraná — 2025",
+          "verificado": true
+        },
+        {
+          "curso": "Certificação",
+          "instituicao_ano": "Certificação Internacional em DSM-V — Artmed Academy — 2025",
           "verificado": false
         }
       ],
@@ -843,7 +848,9 @@
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
       "valor_max_secundario": null,
-      "genero": "F"
+      "genero": "F",
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     }
   ]
 }
