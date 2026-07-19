@@ -75,7 +75,7 @@ export default function ProfissoesPage() {
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         <div className="px-[22px] pt-8">
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0 text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
@@ -95,7 +95,7 @@ export default function ProfissoesPage() {
 
           {/* Médicos — card manual com sub-box de especialidades */}
           <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-            <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+            <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
               <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Médicos</div>
               <div className="text-[13px] text-cinza-texto mt-[2px]">
                 Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
@@ -140,7 +140,7 @@ export default function ProfissoesPage() {
           {/* Demais profissões */}
           {PROFISSOES.map((item) => (
             <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-              <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+              <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
                 <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">{item.grupo}</div>
                 <div className="text-[13px] text-cinza-texto mt-[2px]">
                   {item.profissoes.join(" · ")}
@@ -171,7 +171,7 @@ export default function ProfissoesPage() {
 
         {/* Sites de verificação */}
         <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-          <div className="bg-[#F5EFE6] px-4 py-[12px] border-b border-[#E0D8CC]">
+          <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
             <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Sites de verificação pública</div>
             <div className="text-[13px] text-cinza-texto mt-[2px]">Acesso gratuito — qualquer pessoa pode consultar</div>
           </div>
