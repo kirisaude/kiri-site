@@ -37,6 +37,11 @@ export default function SobrePage() {
             O nome vem do kiri-kiri, o menor dos falcões — de visão aguçada e voo preciso.
           </p>
 
+          <div className="flex justify-center mt-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/mascote.png" alt="Kiri-kiri" className="w-28 h-28 object-contain" />
+          </div>
+
         </div>
 
         <div className="mx-[30px] mt-10 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5 text-center">

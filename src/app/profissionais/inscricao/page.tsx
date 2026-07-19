@@ -189,6 +189,8 @@ export default function InscricaoProfissionalPage() {
 
       <div className="max-w-2xl mx-auto w-full flex-1 px-[18px]">
         <div className="pt-8 pb-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/mascote.png" alt="" className="w-14 h-14 object-contain mb-3" />
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">Faça parte da rede Kiri</h1>
           <p className="text-[15.5px] leading-[1.55] text-cinza-texto2 mt-3 mb-0">
             Analisamos cada inscrição individualmente. Se o seu perfil atender aos nossos critérios, entraremos em contato em breve.
