@@ -701,9 +701,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Trust banner + Como funciona — visível quando sem filtros */}
+        {/* Trust banner + Como funciona — desktop: antes dos cards; mobile: oculto aqui (aparece depois) */}
         {!hasFilters && (
-          <div className="pt-8 md:pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          <div className="hidden md:grid md:pt-10 md:grid-cols-2 gap-4 md:gap-5">
             {/* Por que selecionada */}
             <Link
               href="/como-selecionamos"
@@ -813,6 +813,62 @@ export default function Home() {
                 </div>
               </div>
             ))}
+
+            {/* Trust banner + Como funciona — mobile only, depois dos cards */}
+            {!hasFilters && (
+              <div className="md:hidden flex flex-col gap-4 mt-10">
+                <Link
+                  href="/como-selecionamos"
+                  className="flex flex-col justify-center bg-white border border-borda-azulada rounded-[15px] px-5 pt-4 pb-3 cursor-pointer no-underline"
+                >
+                  <div className="flex items-center gap-2.5 mb-3">
+                    <svg width="16" height="16" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
+                      <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
+                      <path d="M6.6 11.2 L9.6 14.2 L15.4 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="font-serif text-[17px] font-semibold text-carvao">Por que é uma rede selecionada</span>
+                  </div>
+                  <p className="text-[14px] leading-[1.6] text-cinza-texto m-0">Registro no conselho e formação conferidos, um a um.</p>
+                  <p className="text-[14px] leading-[1.6] text-cinza-texto m-0 mt-1">Uma rede pequena, para você decidir com segurança.</p>
+                  <div className="mt-5 flex flex-col gap-2">
+                    {[
+                      "Registro ativo no conselho (CRM, CRP, CFFa, COFFITO, CRN ou CBO)",
+                      "Formação na área e atuação em neurodesenvolvimento infantil",
+                      "Registro ativo e regular perante o conselho de classe",
+                    ].map((item) => (
+                      <div key={item} className="flex items-start gap-2">
+                        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                          <circle cx="10" cy="10" r="8.4" stroke="#6E8893" strokeWidth="1.3" />
+                          <path d="M6.3 10.2 L8.8 12.7 L13.8 7" stroke="#6E8893" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span className="text-[13px] leading-[1.5] text-cinza-texto2">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Link>
+                <div className="bg-wash-quente border border-borda-quente rounded-[15px] px-6 pt-4 pb-2 flex flex-col">
+                  <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 pl-9">Como funciona</div>
+                  <div className="flex flex-col gap-0 w-full">
+                    {[
+                      { n: "1", titulo: "Você responde a algumas perguntas", desc: "Nos conte, em poucos passos, o que tem observado no comportamento da criança.", linha: true },
+                      { n: "2", titulo: "Nós direcionamos o seu caso", desc: "Apresentamos os profissionais especializados da nossa rede mais alinhados às suas necessidades.", linha: true },
+                      { n: "3", titulo: "Você escolhe com quem começar", desc: "Avalie os perfis verificados e agende a consulta diretamente com o especialista escolhido.", linha: false },
+                    ].map((passo) => (
+                      <div key={passo.n} className="flex gap-3">
+                        <div className="flex flex-col items-center flex-none self-stretch">
+                          <div className="w-6 h-6 rounded-full bg-white border border-borda-quente flex items-center justify-center font-serif text-[13px] font-semibold text-ferrugem flex-none">{passo.n}</div>
+                          {passo.linha && <div className="flex-1 w-[1.5px] bg-borda-quente mt-1" />}
+                        </div>
+                        <div className="pt-0.5 pb-3">
+                          <div className="text-[13.5px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>
+                          <div className="text-[12.5px] leading-[1.5] text-cinza-texto mt-0.5">{passo.desc}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Rodapé */}
             <Footer className="mt-12 md:mt-16 mb-12" />
