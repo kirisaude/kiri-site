@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 const PROFISSOES = [
   {
@@ -74,8 +75,9 @@ export default function ProfissoesPage() {
       </div>
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
-        <div className="px-[22px] pt-8">
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0 text-center" style={{ textWrap: "pretty" } as React.CSSProperties}>
+        <div className="px-[22px] pt-8 flex flex-col items-center text-center">
+          <KiriSymbol height={40} />
+          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao mt-5 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
@@ -96,8 +98,8 @@ export default function ProfissoesPage() {
           {/* Médicos — card manual com sub-box de especialidades */}
           <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
             <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
-              <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">Médicos</div>
-              <div className="text-[13px] text-cinza-texto mt-[2px]">
+              <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
+              <div className="text-[13px] text-white/80 mt-[2px]">
                 Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
               </div>
             </div>
@@ -141,8 +143,8 @@ export default function ProfissoesPage() {
           {PROFISSOES.map((item) => (
             <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
               <div className="bg-[#E8C07A] px-4 py-[12px] border-b border-[#CDA050]">
-                <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-ferrugem">{item.grupo}</div>
-                <div className="text-[13px] text-cinza-texto mt-[2px]">
+                <div className="text-[12px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
+                <div className="text-[13px] text-white/80 mt-[2px]">
                   {item.profissoes.join(" · ")}
                 </div>
               </div>
