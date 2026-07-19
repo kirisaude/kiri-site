@@ -493,10 +493,8 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Autismo — IEPSIS — 2018",
-          "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "instituicao_ano": "Transtorno do Espectro do Autismo — IEPSIS — 2018",
+          "verificado": true
         },
         {
           "curso": "Especialização",
@@ -505,10 +503,8 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuroalfabetização — Faculdade Metropolitana — 2025",
-          "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "instituicao_ano": "Neuroalfabetização — Faculdade Metropolitana do Estado de São Paulo (FAMEESP) — 2025",
+          "verificado": true
         },
         {
           "curso": "Especialização",
