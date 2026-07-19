@@ -127,9 +127,27 @@ function FormularioContent() {
       </div>
 
       <div className="max-w-2xl mx-auto pb-12 w-full">
-        <div className="px-[18px] pt-8">
+
+        {/* Aviso de triagem */}
+        <div className="mx-[18px] mt-5 flex flex-col gap-2">
+          <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-0.5 text-center">
+            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
+              Este formulário é para direcionamento e encaminhamento.
+            </p>
+            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
+              Não é avaliação clínica nem diagnóstico.
+            </p>
+          </div>
+          <div className="bg-[#F9EDE6] border border-[#DDB89A] rounded-[13px] px-[14px] py-[10px] text-center">
+            <p className="text-[15px] leading-[1.5] text-ferrugem font-semibold m-0">
+              Em caso de urgência ou risco, procure um pronto-socorro.
+            </p>
+          </div>
+        </div>
+
+        <div className="px-[18px] pt-6">
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
-            Conte o que você procura
+            Conte o que você precisa
           </h1>
           <p className="text-[15.5px] leading-[1.55] text-cinza-texto2 mt-2 mb-0">
             O preenchimento é rápido. Suas respostas nos ajudam a encontrar o especialista ideal para a sua necessidade.
@@ -180,23 +198,6 @@ function FormularioContent() {
             </div>
           </div>
         )}
-
-        {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-4 flex flex-col gap-2">
-          <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-0.5 text-center">
-            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
-              Este formulário é para direcionamento e encaminhamento.
-            </p>
-            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
-              Não é avaliação clínica nem diagnóstico.
-            </p>
-          </div>
-          <div className="bg-[#F9EDE6] border border-[#DDB89A] rounded-[13px] px-[14px] py-[10px] text-center">
-            <p className="text-[15px] leading-[1.5] text-ferrugem font-semibold m-0">
-              Em caso de urgência ou risco, procure um pronto-socorro.
-            </p>
-          </div>
-        </div>
 
         {/* Formulário nativo */}
         <form onSubmit={enviar} className="mx-[18px] mt-5 flex flex-col gap-4">
