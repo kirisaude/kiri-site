@@ -16,13 +16,19 @@ const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
 
 function normCidade(s: string) {
-  return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim()
-    .replace(/[,/]\s+/g, ", ");
+  return s
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[,/]\s*[a-z]{2}$/, "")   // "city, sp" ou "city/sp"
+    .replace(/\s+-\s+\w[\w\s]*$/, "")  // "city - bahia" ou "city - estado"
+    .replace(/\s+[a-z]{2}$/, "")       // "city ba"
+    .trim();
 }
 
 const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
 
-// Deduplica por nome normalizado; para cada grupo, mantém a versão mais completa (mais longa)
+// Deduplica por nome normalizado; mantém a versão mais curta (mais limpa) de cada grupo
 const CIDADES_DISPONIVEIS = (() => {
   const mapa = new Map<string, string>();
   for (const p of profissionais) {
@@ -30,7 +36,7 @@ const CIDADES_DISPONIVEIS = (() => {
     if (!curta) continue;
     const chave = normCidade(curta);
     const atual = mapa.get(chave);
-    if (!atual || curta.length > atual.length) mapa.set(chave, curta);
+    if (!atual || curta.length < atual.length) mapa.set(chave, curta);
   }
   return [...mapa.values()].sort();
 })();
