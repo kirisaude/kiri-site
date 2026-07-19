@@ -62,7 +62,7 @@ const ESPECIALIDADES_MEDICAS = [
   },
   {
     nome: "Neuropediatra",
-    descricao: ["Exige residência em pediatria ou neurologia (3 anos cada) seguida de residência em neuropediatria (2 anos).", "O RQE de neuropediatria é emitido pelo CRM."],
+    descricao: ["Exige residência em pediatria ou neurologia seguida de residência em neuropediatria (2 anos).", "O RQE de neuropediatria é emitido pelo CRM."],
   },
 ]; // ordem: generalistas (psiquiatra, neurologista) → subespecialistas (psiq. infantil, neuropediatra)
 
