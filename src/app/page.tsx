@@ -28,15 +28,19 @@ function normCidade(s: string) {
 
 const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
 
-// Deduplica por nome normalizado; mantém a versão mais curta (mais limpa) de cada grupo
+// Deduplica por nome normalizado; separa cidades múltiplas unidas por " e "
 const CIDADES_DISPONIVEIS = (() => {
   const mapa = new Map<string, string>();
   for (const p of profissionais) {
-    const curta = cidadeCurta(p.cidade);
-    if (!curta) continue;
-    const chave = normCidade(curta);
-    const atual = mapa.get(chave);
-    if (!atual || curta.length < atual.length) mapa.set(chave, curta);
+    const campo = cidadeCurta(p.cidade);
+    if (!campo) continue;
+    for (const parte of campo.split(/\s+e\s+/)) {
+      const curta = parte.trim();
+      if (!curta) continue;
+      const chave = normCidade(curta);
+      const atual = mapa.get(chave);
+      if (!atual || curta.length < atual.length) mapa.set(chave, curta);
+    }
   }
   return [...mapa.values()].sort();
 })();
@@ -375,9 +379,8 @@ export default function Home() {
           <div className="flex flex-wrap gap-2 mt-2.5">
             {([
               "Depressão", "Ansiedade", "TOC",
-              "Atraso de desenvolvimento", "Dificuldades de aprendizagem", "Comportamento",
-              "Comunicação aumentativa", "Altas Habilidades e Superdotação",
-              "TOD", "Seletividade Alimentar", "Integração Sensorial de Ayres",
+              "Atraso de desenvolvimento", "Dificuldades de aprendizagem",
+              "Altas Habilidades e Superdotação", "TOD", "Seletividade Alimentar",
             ] as const).map((cond) => (
               <button
                 key={cond}
