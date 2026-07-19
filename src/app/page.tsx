@@ -373,7 +373,12 @@ export default function Home() {
 
           {/* Condições secundárias */}
           <div className="flex flex-wrap gap-2 mt-2.5">
-            {(["Depressão", "Ansiedade", "TOC"] as const).map((cond) => (
+            {([
+              "Depressão", "Ansiedade", "TOC",
+              "Atraso de desenvolvimento", "Dificuldades de aprendizagem", "Comportamento",
+              "Comunicação aumentativa", "Altas Habilidades e Superdotação",
+              "TOD", "Seletividade Alimentar", "Integração Sensorial de Ayres",
+            ] as const).map((cond) => (
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
