@@ -684,7 +684,13 @@
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "genero": "F"
+      "genero": "F",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": 4000,
+      "valor_pacote_obs": "Inclui todo o processo da Avaliação Neuropsicológica"
     },
     {
       "id": "kiri-034",
