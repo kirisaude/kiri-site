@@ -77,6 +77,7 @@ export default function Home() {
   const [activeFaixa, setActiveFaixa] = useState<string | null>(null);
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [activeSheet, setActiveSheet] = useState<string | null>(null);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
   const [shareReady, setShareReady] = useState(false);
@@ -317,7 +318,7 @@ export default function Home() {
               Encontre o profissional certo para o desenvolvimento do seu filho.
             </h1>
             <p
-              className="mt-2 md:mt-5 text-[15px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
+              className="mt-2 md:mt-5 hidden md:block text-[15px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
               style={{ textWrap: "pretty" } as React.CSSProperties}
             >
               Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
@@ -433,7 +434,7 @@ export default function Home() {
         <div className="pt-4 md:pt-5 overflow-x-auto scrollbar-hide flex gap-2 md:grid md:grid-cols-6 md:overflow-visible">
           {/* Tipo de profissional */}
           <button
-            onClick={() => { setShowProfissaoOptions((v) => !v); setShowModalidadeOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("profissao"); return; } setShowProfissaoOptions((v) => !v); setShowModalidadeOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -450,7 +451,7 @@ export default function Home() {
 
           {/* Modalidade */}
           <button
-            onClick={() => { setShowModalidadeOptions((v) => !v); setShowProfissaoOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("modalidade"); return; } setShowModalidadeOptions((v) => !v); setShowProfissaoOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -467,7 +468,7 @@ export default function Home() {
 
           {/* Cidade */}
           <button
-            onClick={() => { setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); setShowFaixaOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("cidade"); return; } setShowCidadeOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowPagamentoOptions(false); setShowValorOptions(false); setShowFaixaOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -484,7 +485,7 @@ export default function Home() {
 
           {/* Faixa etária */}
           <button
-            onClick={() => { setShowFaixaOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowCidadeOptions(false); setShowValorOptions(false); setShowPagamentoOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("faixa"); return; } setShowFaixaOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowCidadeOptions(false); setShowValorOptions(false); setShowPagamentoOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -501,7 +502,7 @@ export default function Home() {
 
           {/* Faixa de valor */}
           <button
-            onClick={() => { setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowFaixaOptions(false); setShowPagamentoOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("valor"); return; } setShowValorOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); setShowFaixaOptions(false); setShowPagamentoOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -518,7 +519,7 @@ export default function Home() {
 
           {/* Particular / convênio */}
           <button
-            onClick={() => { setShowPagamentoOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); }}
+            onClick={() => { if (window.innerWidth < 768) { setActiveSheet("pagamento"); return; } setShowPagamentoOptions((v) => !v); setShowProfissaoOptions(false); setShowModalidadeOptions(false); }}
             className={`flex-none md:flex-auto inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
               activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
             }`}
@@ -536,7 +537,7 @@ export default function Home() {
 
         {/* Opções inline de cidade */}
         {showCidadeOptions && (
-          <div className="pt-2 flex flex-wrap gap-2">
+          <div className="pt-2 hidden md:flex flex-wrap gap-2">
             {CIDADES_DISPONIVEIS.map((c) => (
               <button
                 key={c}
@@ -576,7 +577,7 @@ export default function Home() {
 
         {/* Opções inline de profissão */}
         {showProfissaoOptions && (
-          <div className="pt-2 flex flex-wrap gap-2">
+          <div className="pt-2 hidden md:flex flex-wrap gap-2">
             {PROFISSOES_ORDENADAS.map((p) => (
               <button
                 key={p}
@@ -593,7 +594,7 @@ export default function Home() {
 
         {/* Opções inline de modalidade */}
         {showModalidadeOptions && (
-          <div className="pt-2 flex flex-wrap gap-2">
+          <div className="pt-2 hidden md:flex flex-wrap gap-2">
             {FILTROS_MODALIDADE.map((m) => (
               <button
                 key={m}
@@ -610,7 +611,7 @@ export default function Home() {
 
         {/* Opções inline de faixa etária */}
         {showFaixaOptions && (
-          <div className="pt-2 flex flex-wrap gap-2">
+          <div className="pt-2 hidden md:flex flex-wrap gap-2">
             {["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"].map((f) => (
               <button
                 key={f}
@@ -627,7 +628,7 @@ export default function Home() {
 
         {/* Opções inline de pagamento */}
         {showPagamentoOptions && (
-          <div className="pt-2 flex flex-wrap gap-2">
+          <div className="pt-2 hidden md:flex flex-wrap gap-2">
             {["Particular", "Convênio"].map((opt) => (
               <button
                 key={opt}
@@ -644,7 +645,7 @@ export default function Home() {
 
         {/* Range slider de valor */}
         {showValorOptions && (
-          <div className="pt-3 px-1">
+          <div className="pt-3 px-1 hidden md:block">
             <div className="bg-white border border-linha rounded-[16px] p-4 md:p-5 max-w-sm">
               <div className="flex justify-between items-baseline mb-3">
                 <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
@@ -698,6 +699,13 @@ export default function Home() {
                 <span className="text-[11.5px] text-muted">R$600+</span>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Contador de resultados */}
+        {hasFilters && (
+          <div className="pt-3 text-[13px] text-muted">
+            {filtered.length} profissional{filtered.length !== 1 ? 'is' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
           </div>
         )}
 
@@ -877,6 +885,179 @@ export default function Home() {
           </>
         )}
       </div>
+
+      {/* ═══ BOTTOM SHEET: FILTROS MOBILE ═══ */}
+      {activeSheet && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/40"
+          onClick={() => setActiveSheet(null)}
+        >
+          <div
+            className="absolute bottom-0 left-0 right-0 bg-creme rounded-t-[20px] px-4 pt-4 pb-10 max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Handle */}
+            <div className="w-10 h-1 bg-areia rounded-full mx-auto mb-4" />
+
+            {/* Header */}
+            <div className="flex items-center justify-between mb-5">
+              <span className="font-semibold text-[17px] text-carvao">
+                {activeSheet === 'profissao' ? 'Tipo de profissional'
+                  : activeSheet === 'modalidade' ? 'Modalidade'
+                  : activeSheet === 'cidade' ? 'Cidade'
+                  : activeSheet === 'faixa' ? 'Faixa etária'
+                  : activeSheet === 'pagamento' ? 'Pagamento'
+                  : 'Faixa de valor'}
+              </span>
+              <button onClick={() => setActiveSheet(null)} className="text-muted text-2xl leading-none cursor-pointer">×</button>
+            </div>
+
+            {/* Profissão */}
+            {activeSheet === 'profissao' && (
+              <div className="flex flex-wrap gap-2">
+                {PROFISSOES_ORDENADAS.map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => { setActiveProfissao(activeProfissao === p ? null : p); setActiveSheet(null); }}
+                    className={`text-[13.5px] font-semibold px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                      activeProfissao === p ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
+                    }`}
+                  >
+                    {PROFISSAO_PLURAL[p] ?? p}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Modalidade */}
+            {activeSheet === 'modalidade' && (
+              <div className="flex flex-col gap-2">
+                {FILTROS_MODALIDADE.map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => { setActiveModalidade(activeModalidade === m ? null : m); setActiveSheet(null); }}
+                    className={`text-[15px] font-semibold px-4 py-3.5 rounded-[13px] border text-left transition-all cursor-pointer ${
+                      activeModalidade === m ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
+                    }`}
+                  >
+                    {m}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Cidade */}
+            {activeSheet === 'cidade' && (
+              <div className="flex flex-wrap gap-2">
+                {CIDADES_DISPONIVEIS.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => {
+                      const same = activeCidade === c;
+                      setActiveCidade(same ? null : c);
+                      if (same || normCidade(c) !== 'sao paulo') setActiveSPRegiao(null);
+                      setActiveSheet(null);
+                    }}
+                    className={`text-[13.5px] font-semibold px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                      activeCidade === c ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Faixa etária */}
+            {activeSheet === 'faixa' && (
+              <div className="flex flex-col gap-2">
+                {['Bebês (0–2 anos)', 'Pré-escola (3–5 anos)', 'Crianças (6–12 anos)', 'Adolescentes (13–18 anos)'].map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => { setActiveFaixa(activeFaixa === f ? null : f); setActiveSheet(null); }}
+                    className={`text-[15px] font-semibold px-4 py-3.5 rounded-[13px] border text-left transition-all cursor-pointer ${
+                      activeFaixa === f ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
+                    }`}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Pagamento */}
+            {activeSheet === 'pagamento' && (
+              <div className="flex flex-col gap-2">
+                {['Particular', 'Convênio'].map((opt) => (
+                  <button
+                    key={opt}
+                    onClick={() => { setActivePagamento(activePagamento === opt ? null : opt); setActiveSheet(null); }}
+                    className={`text-[15px] font-semibold px-4 py-3.5 rounded-[13px] border text-left transition-all cursor-pointer ${
+                      activePagamento === opt ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Valor */}
+            {activeSheet === 'valor' && (
+              <div className="px-1">
+                <div className="flex justify-between items-baseline mb-4">
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
+                  <span className="text-[14px] font-semibold text-ardosia-escura">
+                    R${valorMin} — {valorMax >= VALOR_TOTAL_MAX ? 'R$600+' : `R$${valorMax}`}
+                  </span>
+                </div>
+                <div className="relative h-8 flex items-center">
+                  <div className="absolute left-0 right-0 h-[5px] bg-areia rounded-full" />
+                  <div
+                    className="absolute h-[5px] bg-ardosia rounded-full pointer-events-none"
+                    style={{
+                      left: `${(valorMin / VALOR_TOTAL_MAX) * 100}%`,
+                      right: `${100 - (valorMax / VALOR_TOTAL_MAX) * 100}%`,
+                    }}
+                  />
+                  <input
+                    type="range" min={0} max={VALOR_TOTAL_MAX} step={50}
+                    value={valorMin}
+                    onChange={(e) => { const v = Number(e.target.value); if (v <= valorMax - 50) setValorMin(v); }}
+                    className="absolute w-full h-full opacity-0 cursor-pointer"
+                    style={{ zIndex: valorMin > VALOR_TOTAL_MAX - 100 ? 5 : 3 }}
+                  />
+                  <input
+                    type="range" min={0} max={VALOR_TOTAL_MAX} step={50}
+                    value={valorMax}
+                    onChange={(e) => { const v = Number(e.target.value); if (v >= valorMin + 50) setValorMax(v); }}
+                    className="absolute w-full h-full opacity-0 cursor-pointer"
+                    style={{ zIndex: 4 }}
+                  />
+                  <div
+                    className="absolute w-6 h-6 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                    style={{ left: `calc(${(valorMin / VALOR_TOTAL_MAX) * 100}% - 12px)`, zIndex: 6 }}
+                  />
+                  <div
+                    className="absolute w-6 h-6 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                    style={{ left: `calc(${(valorMax / VALOR_TOTAL_MAX) * 100}% - 12px)`, zIndex: 6 }}
+                  />
+                </div>
+                <div className="flex justify-between mt-2">
+                  <span className="text-[12px] text-muted">R$0</span>
+                  <span className="text-[12px] text-muted">R$600+</span>
+                </div>
+                <button
+                  onClick={() => setActiveSheet(null)}
+                  className="mt-6 w-full bg-ardosia-escura text-white font-semibold text-[15px] rounded-[13px] py-3.5 cursor-pointer"
+                >
+                  Aplicar
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ═══ MODAL: DIVULGUE A KIRI ═══ */}
       {showCompartilhar && (

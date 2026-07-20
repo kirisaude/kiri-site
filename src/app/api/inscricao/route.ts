@@ -10,9 +10,11 @@ export async function POST(request: Request) {
 
   const body = await request.json();
   const {
-    nome, email, profissao, registro_conselho, rqe, tempo_atuacao,
+    nome, email, genero, profissao, profissao_secundaria,
+    registro_conselho, rqe, tempo_atuacao,
     areas_atuacao, faixa_etaria, modalidade, cidade, bairro,
-    valor_medio, aceita_convenio, graduacao, pos_graduacao,
+    valor_medio, aceita_convenio, convenios_nomes,
+    graduacao, pos_graduacao, lattes,
     apresentacao, site_perfil, como_conheceu, whatsapp_agendamento,
     grupo_whatsapp, consentimento,
   } = body;
@@ -30,7 +32,12 @@ export async function POST(request: Request) {
       "Prefer": "return=minimal",
     },
     body: JSON.stringify({
-      nome, email: email || null, profissao, registro_conselho,
+      nome,
+      email: email || null,
+      genero: genero || null,
+      profissao,
+      profissao_secundaria: profissao_secundaria || null,
+      registro_conselho,
       rqe: rqe || null,
       tempo_atuacao: tempo_atuacao || null,
       areas_atuacao: areas_atuacao || null,
@@ -40,8 +47,10 @@ export async function POST(request: Request) {
       bairro: bairro || null,
       valor_medio: valor_medio || null,
       aceita_convenio: aceita_convenio ?? null,
+      convenios_nomes: convenios_nomes || null,
       graduacao: graduacao || null,
       pos_graduacao: pos_graduacao || null,
+      lattes: lattes || null,
       apresentacao: apresentacao || null,
       site_perfil: site_perfil || null,
       como_conheceu: como_conheceu || null,
@@ -55,7 +64,7 @@ export async function POST(request: Request) {
   if (!res.ok) {
     const erro = await res.text();
     console.error("Erro Supabase inscricao:", res.status, erro);
-    return NextResponse.json({ erro: "Falha ao registrar inscrição" }, { status: 500 });
+    return NextResponse.json({ erro: `Falha ao registrar inscrição (${res.status}): ${erro}` }, { status: 500 });
   }
 
   const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
