@@ -12,8 +12,8 @@ const ITENS = [
     detalhe: "Título ou RQE quando aplicável, e atuação em neurodesenvolvimento infantil.",
   },
   {
-    titulo: "Registro ativo e regular perante o conselho",
-    detalhe: "Verificado junto ao conselho de classe competente na data da checagem periódica.",
+    titulo: "Verificação dos títulos e formações de cada profissional",
+    detalhe: "Diploma, pós-graduação ou especialização conferidos em relação à área de atuação declarada.",
   },
 ];
 
