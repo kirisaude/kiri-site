@@ -47,17 +47,27 @@ function FormularioContent() {
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
   const [enviado, setEnviado] = useState(false);
+  const [tentou, setTentou] = useState(false);
+
+  const camposFaltando: string[] = [];
+  if (!nome.trim()) camposFaltando.push("Seu nome");
+  if (!canalContato) {
+    camposFaltando.push("Forma de contato (WhatsApp ou e-mail)");
+  } else if (canalContato === "whatsapp") {
+    if (ddd.trim().length !== 2) camposFaltando.push("DDD (2 dígitos)");
+    if (!/^\d{8,9}$/.test(telefone.trim())) camposFaltando.push("Número de WhatsApp (8 ou 9 dígitos)");
+  } else if (canalContato === "email") {
+    if (!emailContato.trim()) camposFaltando.push("E-mail de contato");
+  }
+  if (!modalidade) camposFaltando.push("Modalidade de atendimento");
+  if (!demandaPrincipal) camposFaltando.push("Principal dificuldade");
+  if (opcoesBusca.length === 0) camposFaltando.push("O que você procura");
+  if (!consentimento) camposFaltando.push("Aceitar os termos de uso");
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
-    if (!consentimento) {
-      setErro("É necessário aceitar o uso dos seus dados para continuar.");
-      return;
-    }
-    if (canalContato === "whatsapp") {
-      if (!/^\d{2}$/.test(ddd.trim())) { setErro("DDD inválido."); return; }
-      if (!/^\d{8,9}$/.test(telefone.trim())) { setErro("Número de WhatsApp inválido. Use apenas dígitos (8 ou 9 números)."); return; }
-    }
+    setTentou(true);
+    if (camposFaltando.length > 0) return;
     setEnviando(true);
     setErro("");
 
@@ -514,17 +524,27 @@ function FormularioContent() {
             </label>
           </div>
 
+          {tentou && camposFaltando.length > 0 && (
+            <div className="rounded-[12px] border border-ferrugem/25 bg-[#FDF2EF] px-4 py-3 flex flex-col gap-2">
+              <p className="text-[13px] font-semibold text-ferrugem m-0">Para enviar, preencha os campos obrigatórios:</p>
+              <ul className="flex flex-col gap-1 m-0 pl-0 list-none">
+                {camposFaltando.map((campo, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[12.5px] text-ferrugem">
+                    <span style={{ flexShrink: 0 }}>·</span>
+                    <span>{campo}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {erro && (
-            <p className="text-[13.5px] text-ferrugem">{erro}</p>
+            <p className="text-[13.5px] text-ferrugem m-0">{erro}</p>
           )}
 
           <button
             type="submit"
-            disabled={
-              enviando || !consentimento || !nome || !modalidade || !demandaPrincipal || opcoesBusca.length === 0 ||
-              !canalContato ||
-              (canalContato === "whatsapp" ? (ddd.trim().length !== 2 || telefone.trim().length < 8) : !emailContato.trim())
-            }
+            disabled={enviando}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity mt-1"
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
