@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
 import { KiriSymbol } from "@/components/KiriSymbol";
@@ -65,9 +68,27 @@ const ESPECIALIDADES_MEDICAS = [
     nome: "Neuropediatra",
     descricao: ["Exige residência em pediatria ou neurologia seguida de residência em neuropediatria (2 anos).", "O RQE de neuropediatria é emitido pelo CRM."],
   },
-]; // ordem: generalistas (psiquiatra, neurologista) → subespecialistas (psiq. infantil, neuropediatra)
+];
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="16" height="16" viewBox="0 0 20 20" fill="none"
+      style={{ flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+    >
+      <path d="M5 7.5 L10 12.5 L15 7.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export default function ProfissoesPage() {
+  const [openMedicos, setOpenMedicos] = useState(false);
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
+
+  function toggleProfissao(grupo: string) {
+    setOpenMap((prev) => ({ ...prev, [grupo]: !prev[grupo] }));
+  }
+
   return (
     <div className="min-h-screen bg-creme">
       <div className="w-full px-4 pt-4 pb-2">
@@ -81,7 +102,7 @@ export default function ProfissoesPage() {
             Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
-            No acompanhamento de crianças e jovens com alterações do neurodesenvolvimento, como TEA, TDAH, atrasos de linguagem ou dificuldades de aprendizagem, raramente um único profissional detém todas as respostas. Esses casos pedem olhares complementares: o médico que investiga e, quando indicado, prescreve; o psicólogo que avalia o funcionamento cognitivo e emocional; o fonoaudiólogo que atua na comunicação e linguagem; o terapeuta ocupacional que trabalha integração sensorial e autonomia. Quando essas especialidades atuam de forma articulada, o resultado para a criança é consistentemente melhor — e a família ganha clareza sobre onde está e para onde vai.
+            O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade. Médico, psicólogo, fonoaudiólogo e terapeuta ocupacional costumam atuar juntos — cada um com um olhar distinto, todos necessários.
           </p>
           <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5">
             <p className="font-serif italic text-[18px] md:text-[19px] leading-[1.65] text-carvao m-0">
@@ -93,82 +114,99 @@ export default function ProfissoesPage() {
           </p>
         </div>
 
-        <div className="mx-[18px] mt-[28px] flex flex-col gap-4">
+        <div className="mx-[18px] mt-[28px] flex flex-col gap-3">
 
-          {/* Médicos — card manual com sub-box de especialidades */}
+          {/* Médicos */}
           <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-            <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
-              <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
-              <div className="text-[13px] text-white/80 mt-[2px]">
-                Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
-              </div>
-            </div>
-            <div className="px-4 py-4 flex flex-col gap-3">
-              <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
-                <span className="text-[15px] text-carvao-sutil leading-[1.5]">Conselho Regional de Medicina (CRM)</span>
-              </div>
-              <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Registro</span>
-                <span className="text-[14.5px] text-cinza-texto leading-[1.5]">CRM seguido de número e sigla do estado — ex: CRM/BA 12345</span>
-              </div>
-              <div className="flex gap-2.5">
-                <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
-                <span className="text-[14.5px] text-cinza-texto leading-[1.5]">O CFM (Conselho Federal de Medicina) disponibiliza uma busca pública onde é possível confirmar se o registro está ativo e sem restrições.</span>
-              </div>
-
-              {/* Sub-box especialidades */}
-              <div className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[12px] overflow-hidden">
-                <div className="px-3.5 py-2.5 border-b border-[#E0D8CC]">
-                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase text-ferrugem/80">Especialidades e RQE</span>
-                  <p className="text-[13px] text-cinza-texto leading-[1.5] mt-1 mb-0">
-                    Além do CRM, cada especialidade médica exige residência na área. O RQE (Registro de Qualificação de Especialidade) é emitido pelo próprio CRM como comprovante formal da especialidade concluída.
-                  </p>
-                </div>
-                <div className="divide-y divide-[#E8DFD5]">
-                  {ESPECIALIDADES_MEDICAS.map((esp) => (
-                    <div key={esp.nome} className="px-3.5 py-3 flex flex-col gap-[3px]">
-                      <span className="text-[13.5px] font-semibold text-carvao">{esp.nome}</span>
-                      {esp.descricao.map((linha, i) => (
-                        <span key={i} className="text-[13px] text-cinza-texto leading-[1.5]">{linha}</span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Demais profissões */}
-          {PROFISSOES.map((item) => (
-            <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
-              <div className="bg-ferrugem px-4 py-[12px] border-b border-[#A85C3C]">
-                <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
+            <button
+              onClick={() => setOpenMedicos((v) => !v)}
+              className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
+            >
+              <div>
+                <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
                 <div className="text-[13px] text-white/80 mt-[2px]">
-                  {item.profissoes.join(" · ")}
+                  Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
                 </div>
               </div>
+              <Chevron open={openMedicos} />
+            </button>
+
+            {openMedicos && (
               <div className="px-4 py-4 flex flex-col gap-3">
                 <div className="flex gap-2.5">
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
-                  <span className="text-[15px] text-carvao-sutil leading-[1.5]">{item.conselho}</span>
+                  <span className="text-[15px] text-carvao-sutil leading-[1.5]">Conselho Regional de Medicina (CRM)</span>
                 </div>
                 <div className="flex gap-2.5">
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Registro</span>
-                  <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.registro}</span>
+                  <span className="text-[14.5px] text-cinza-texto leading-[1.5]">CRM seguido de número e sigla do estado — ex: CRM/BA 12345</span>
                 </div>
                 <div className="flex gap-2.5">
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
-                  <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.como}</span>
+                  <span className="text-[14.5px] text-cinza-texto leading-[1.5]">O CFM (Conselho Federal de Medicina) disponibiliza uma busca pública onde é possível confirmar se o registro está ativo e sem restrições.</span>
                 </div>
-                {item.obs && (Array.isArray(item.obs) ? item.obs : [item.obs]).map((o, i) => (
-                  <div key={i} className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[10px] px-3 py-2.5 text-[13.5px] text-cinza-texto leading-[1.55]">
-                    {o}
+                <div className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[12px] overflow-hidden">
+                  <div className="px-3.5 py-2.5 border-b border-[#E0D8CC]">
+                    <span className="text-[11px] font-bold tracking-[0.06em] uppercase text-ferrugem/80">Especialidades e RQE</span>
+                    <p className="text-[13px] text-cinza-texto leading-[1.5] mt-1 mb-0">
+                      Além do CRM, cada especialidade médica exige residência na área. O RQE (Registro de Qualificação de Especialidade) é emitido pelo próprio CRM como comprovante formal da especialidade concluída.
+                    </p>
                   </div>
-                ))}
+                  <div className="divide-y divide-[#E8DFD5]">
+                    {ESPECIALIDADES_MEDICAS.map((esp) => (
+                      <div key={esp.nome} className="px-3.5 py-3 flex flex-col gap-[3px]">
+                        <span className="text-[13.5px] font-semibold text-carvao">{esp.nome}</span>
+                        {esp.descricao.map((linha, i) => (
+                          <span key={i} className="text-[13px] text-cinza-texto leading-[1.5]">{linha}</span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
+
+          {/* Demais profissões */}
+          {PROFISSOES.map((item) => {
+            const open = !!openMap[item.grupo];
+            return (
+              <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+                <button
+                  onClick={() => toggleProfissao(item.grupo)}
+                  className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
+                >
+                  <div>
+                    <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
+                    <div className="text-[13px] text-white/80 mt-[2px]">{item.profissoes.join(" · ")}</div>
+                  </div>
+                  <Chevron open={open} />
+                </button>
+
+                {open && (
+                  <div className="px-4 py-4 flex flex-col gap-3">
+                    <div className="flex gap-2.5">
+                      <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
+                      <span className="text-[15px] text-carvao-sutil leading-[1.5]">{item.conselho}</span>
+                    </div>
+                    <div className="flex gap-2.5">
+                      <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Registro</span>
+                      <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.registro}</span>
+                    </div>
+                    <div className="flex gap-2.5">
+                      <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
+                      <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.como}</span>
+                    </div>
+                    {item.obs && (Array.isArray(item.obs) ? item.obs : [item.obs]).map((o, i) => (
+                      <div key={i} className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[10px] px-3 py-2.5 text-[13.5px] text-cinza-texto leading-[1.55]">
+                        {o}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Sites de verificação */}

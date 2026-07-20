@@ -209,7 +209,7 @@ export default function Home() {
           {/* Right side */}
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
 
-            <Link href="/profissoes" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+            <Link href="/especialidades" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Especialidades
             </Link>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
@@ -256,11 +256,71 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Filtros ativos — chips removíveis */}
+        {hasFilters && (
+          <div className="border-t border-linha px-4 md:px-8 py-2 flex gap-2 overflow-x-auto scrollbar-hide">
+            {activeCond && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {activeCond}
+                <button onClick={() => setActiveCond(null)} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {activeProfissao && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {activeProfissao.split(" ")[0]}
+                <button onClick={() => setActiveProfissao(null)} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {activeCidade && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {activeSPRegiao ? `${activeCidade} · ${activeSPRegiao}` : activeCidade}
+                <button onClick={() => { setActiveCidade(null); setActiveSPRegiao(null); }} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {activeModalidade && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {modalidadeCurta(activeModalidade)}
+                <button onClick={() => setActiveModalidade(null)} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {activeFaixa && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {activeFaixa.split(" ")[0]}
+                <button onClick={() => setActiveFaixa(null)} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {activePagamento && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                {activePagamento}
+                <button onClick={() => setActivePagamento(null)} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {valorAtivo && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                R${valorMin}–{valorMax >= VALOR_TOTAL_MAX ? "600+" : valorMax}
+                <button onClick={() => { setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            {search.trim() && (
+              <span className="inline-flex items-center gap-1 flex-none bg-ardosia-escura text-white text-[12px] font-semibold px-3 py-1 rounded-full">
+                "{search.trim()}"
+                <button onClick={() => setSearch("")} className="text-white/70 hover:text-white leading-none cursor-pointer ml-0.5">×</button>
+              </span>
+            )}
+            <button
+              onClick={() => { setSearch(""); setActiveCond(null); setActiveProfissao(null); setActiveModalidade(null); setActiveCidade(null); setActiveSPRegiao(null); setActiveFaixa(null); setActivePagamento(null); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}
+              className="inline-flex items-center flex-none text-[12px] font-semibold text-muted hover:text-ferrugem cursor-pointer whitespace-nowrap ml-1"
+            >
+              Limpar todos
+            </button>
+          </div>
+        )}
+
         {/* Menu mobile dropdown */}
         {showMenu && (
           <div className="md:hidden border-t border-linha bg-creme/98 px-4 py-2 flex flex-col">
             <Link
-              href="/profissoes"
+              href="/especialidades"
               onClick={() => setShowMenu(false)}
               className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >

@@ -311,15 +311,20 @@ export default function EditarProfissionalPage() {
       </header>
 
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="mb-5 flex items-center gap-3">
-          <div>
-            <div className="font-serif text-[20px] font-semibold text-carvao">{profOriginal.nome}</div>
-            <div className="text-[13px] text-muted">{profOriginal.id}</div>
+        <div className="mb-5 flex items-start gap-3">
+          <div className="flex-1">
+            <input
+              type="text"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              className="font-serif text-[20px] font-semibold text-carvao bg-transparent border-b border-linha outline-none focus:border-ardosia w-full pb-0.5"
+            />
+            <div className="text-[13px] text-muted mt-1">{profOriginal.id}</div>
           </div>
           <Link
             href={`/profissional/${profOriginal.id}`}
             target="_blank"
-            className="ml-auto text-[13px] font-medium text-ardosia no-underline"
+            className="ml-auto flex-none text-[13px] font-medium text-ardosia no-underline"
           >
             Ver perfil ↗
           </Link>
@@ -501,21 +506,6 @@ export default function EditarProfissionalPage() {
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label className="text-[12.5px] font-medium text-cinza-texto">Nome completo</label>
-            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required
-              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
-            {["Psicólogo", "Neuropsicólogo"].includes(profissao) && (
-              <div className="flex flex-col gap-1.5 mt-1">
-                <span className="text-[11px] text-cinza-texto2 font-medium uppercase tracking-wide">Verificar no conselho — busque pelo nome acima:</span>
-                <a href="https://cadastro.cfp.org.br/" target="_blank" rel="noreferrer"
-                  className="inline-flex items-center gap-1 self-start px-2.5 py-1 rounded-full border border-ardosia text-[12px] text-ardosia hover:bg-ardosia hover:text-white transition-colors">
-                  CFP ↗
-                </a>
-              </div>
-            )}
           </div>
 
           <div className="flex flex-col gap-1">
