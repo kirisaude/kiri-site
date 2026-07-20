@@ -875,11 +875,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — FTC — 2008"
+          "instituicao_ano": "Psicologia — FTC — 2008",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicóloga — Visconde de Cairú — 2020"
+          "instituicao_ano": "Neuropsicóloga — Fundação Visconde de Cairú — 2020",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -889,9 +891,21 @@
       "convenios": null,
       "whatsapp_agendamento": "71987545911",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-038.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "7088b4215baf4b87"
+      "card_token": "7088b4215baf4b87",
+      "profissao_secundaria": null,
+      "tempo_atuacao": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center center",
+      "genero": "F",
+      "oculto": false,
+      "registro_verificado": true,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-039",
