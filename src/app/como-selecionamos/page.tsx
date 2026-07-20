@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 const ITENS = [
   {
@@ -28,9 +29,12 @@ export default function ComoSelecionamosPage() {
 
         {/* Cabeçalho — alinhado à esquerda */}
         <div className="px-[22px] pt-8 flex flex-col items-start text-left">
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Como selecionamos os profissionais
-          </h1>
+          <div className="flex items-center gap-3">
+            <KiriSymbol height={46} />
+            <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Como selecionamos os profissionais
+            </h1>
+          </div>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Em vez de uma lista infinita, reunimos uma rede pequena e selecionada — e somos transparentes sobre o critério. Em neurodesenvolvimento, a avaliação cuidadosa costuma ser multidisciplinar, por isso reunimos diferentes especialidades numa só rede.
           </p>
