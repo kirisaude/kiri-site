@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 export default function SobrePage() {
   return (
@@ -13,10 +14,7 @@ export default function SobrePage() {
         {/* Cabeçalho — alinhado à esquerda */}
         <div className="px-[26px] pt-8">
           <div className="flex items-center gap-3">
-            <svg width="34" height="34" viewBox="0 0 120 120" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-              <path d="M19 52 C31 37 43 37 52 50 C61 37 73 37 84 52" stroke="#BE6E4E" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M38 88 C50 73 62 73 71 86 C80 73 92 73 104 88" stroke="#44606C" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <KiriSymbol height={46} />
             <h1 className="font-serif text-[40px] md:text-[44px] font-medium leading-[1.15] tracking-[-0.02em] text-carvao m-0">
               Sobre a Kiri
             </h1>
