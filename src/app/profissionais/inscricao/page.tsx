@@ -193,19 +193,46 @@ export default function InscricaoProfissionalPage() {
 
   if (enviado) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 text-center">
-        <div className="w-12 h-12 rounded-full bg-ardosia/10 flex items-center justify-center mb-5">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M5 12.5 L9.5 17 L19 7" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+      <div className="min-h-screen bg-creme flex flex-col">
+        <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
+          <NavBack />
+          <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">Inscrição de profissional</span>
+          <div className="w-9 h-9" />
         </div>
-        <h1 className="font-serif text-[26px] font-medium text-carvao mb-3">Recebemos sua inscrição.</h1>
-        <p className="text-[15px] leading-[1.6] text-cinza-texto2 max-w-[320px]">
-          Obrigada pelo interesse em fazer parte da Kiri. Analisamos cada perfil individualmente e retornamos em breve.
-        </p>
-        <button onClick={() => router.push("/")} className="mt-8 text-[14px] font-semibold text-ardosia cursor-pointer">
-          ← Voltar ao início
-        </button>
+
+        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-8">
+
+          {/* Grupo 1: emblema + título + reforço */}
+          <div className="flex flex-col items-center text-center gap-4">
+            <div className="w-[60px] h-[60px] rounded-full bg-[#E6F0F5] flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 22 22" fill="none">
+                <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.5" />
+                <path d="M6.5 11.2 L9.5 14.2 L15.5 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div className="flex flex-col" style={{ gap: 12 }}>
+              <h1 className="font-serif text-[26px] font-medium text-carvao m-0">Recebemos sua inscrição.</h1>
+              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
+                Obrigada pelo interesse em fazer parte da rede Kiri.
+              </p>
+              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
+                Toda inscrição é revisada com cuidado pela nossa equipe. Retornamos em breve.
+              </p>
+            </div>
+          </div>
+
+          {/* Grupo 2: botão */}
+          <div className="flex flex-col items-center">
+            <button
+              onClick={() => router.push("/")}
+              className="w-full border border-ardosia text-ardosia-escura font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer hover:bg-[#44606C]/5 transition-colors"
+            >
+              Voltar ao início
+            </button>
+          </div>
+        </div>
+
+        <Footer className="mx-[18px] mt-auto mb-8" />
       </div>
     );
   }
