@@ -168,6 +168,9 @@ export default function Home() {
     });
   }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activeSPRegiao, activeFaixa, activePagamento, valorMin, valorMax]);
 
+  const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
+  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeSPRegiao || activeFaixa || activePagamento || valorAtivo || search.trim());
+
   const allSections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
     pros: filtered.filter((p) => p.profissao === prof),
@@ -179,9 +182,6 @@ export default function Home() {
   const sections = hasFilters
     ? allSections
     : allSections.filter((s) => s.pros.length >= 2).slice(0, 4);
-
-  const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
-  const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeSPRegiao || activeFaixa || activePagamento || valorAtivo || search.trim());
 
   function toggleCond(cond: string) {
     setActiveCond((prev) => (prev === cond ? null : cond));
