@@ -825,7 +825,8 @@ export default function AdminPage() {
                 <div className="flex flex-col gap-2">
                   {aprovados.map((i) => {
                     const profMatch = profPublicados.find(
-                      (p) => p.nome.toLowerCase().trim() === i.nome.toLowerCase().trim()
+                      (p) => (p.inscricao_id && p.inscricao_id === i.id) ||
+                        p.nome.toLowerCase().trim() === i.nome.toLowerCase().trim()
                     );
                     return (
                       <div key={i.id} className="bg-white border border-linha rounded-[12px] px-4 py-3 flex items-center justify-between gap-3 opacity-70">
