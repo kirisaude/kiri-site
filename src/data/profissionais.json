@@ -895,7 +895,7 @@
     },
     {
       "id": "kiri-039",
-      "nome": "Shara Catherine Marcos Ataude",
+      "nome": "Shara Catherine Marcos Atayde",
       "profissao": "Psicólogo",
       "titulo_exibicao": "Psicólogo",
       "registro_conselho": "03/24667",
@@ -914,23 +914,39 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Escola Bahiana de medicina e saúde pública — 2021"
+          "instituicao_ano": "Psicologia — Escola Bahiana de medicina e saúde pública — 2021",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "clínica psicanalítica lacaniana — UniFil — 2024"
+          "instituicao_ano": "clínica psicanalítica lacaniana — Centro Universitário Filadélfia (Unifil) — 2024",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
       "valor_min": 185,
       "valor_max": null,
       "convenio_info": "Particular e convênio",
-      "convenios": null,
+      "convenios": [
+        "Bradesco Saúde"
+      ],
       "whatsapp_agendamento": "75992434779",
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "a1699b9b6b3946af"
+      "card_token": "a1699b9b6b3946af",
+      "profissao_secundaria": null,
+      "tempo_atuacao": "1 a 3 anos",
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "genero": "F",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-040",
