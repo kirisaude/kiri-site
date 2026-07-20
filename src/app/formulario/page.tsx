@@ -96,22 +96,57 @@ function FormularioContent() {
 
   if (enviado) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 text-center">
-        <div className="w-12 h-12 rounded-full bg-ardosia/10 flex items-center justify-center mb-5">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M5 12.5 L9.5 17 L19 7" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+      <div className="min-h-screen bg-creme flex flex-col">
+        <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
+          <NavBack />
+          <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">Direcionamento</span>
+          <div className="w-9 h-9" />
         </div>
-        <h1 className="font-serif text-[26px] font-medium text-carvao mb-3">Recebemos seu pedido</h1>
-        <p className="text-[15px] leading-[1.6] text-cinza-texto2 max-w-[320px]">
-          Nossa equipe vai entrar em contato em breve pelo canal que você informou.
-        </p>
-        <button
-          onClick={() => router.push("/")}
-          className="mt-8 text-[14px] font-semibold text-ardosia cursor-pointer"
-        >
-          ← Voltar ao início
-        </button>
+
+        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-6">
+
+          {/* Emblema + título */}
+          <div className="flex flex-col items-center text-center gap-4">
+            <div className="w-[60px] h-[60px] rounded-full bg-[#E6F0F5] flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 22 22" fill="none">
+                <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.5" />
+                <path d="M6.5 11.2 L9.5 14.2 L15.5 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="font-serif text-[26px] font-medium text-carvao m-0">Recebemos seu pedido</h1>
+              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 mt-2 m-0">
+                Nossa equipe vai entrar em contato em breve pelo canal que você informou.
+              </p>
+            </div>
+          </div>
+
+          {/* Bloco de reforço */}
+          <div className="bg-white border border-linha rounded-[14px] px-4 py-4 flex gap-3 items-start">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+              <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#44606C" strokeWidth="1.4" strokeLinejoin="round" />
+              <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <p className="text-[14px] leading-[1.6] text-cinza-texto m-0">
+              Cada caso é avaliado individualmente, com cuidado e sigilo.
+            </p>
+          </div>
+
+          {/* Aviso de urgência */}
+          <p className="text-[13px] leading-[1.55] text-muted text-center m-0">
+            Se for uma situação urgente ou de risco, procure um serviço de atendimento presencial imediato.
+          </p>
+
+          {/* Botão outline */}
+          <button
+            onClick={() => router.push("/")}
+            className="w-full border border-ardosia text-ardosia-escura font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer hover:bg-[#44606C]/5 transition-colors"
+          >
+            Voltar ao início
+          </button>
+        </div>
+
+        <Footer className="mx-[18px] mt-auto mb-8" />
       </div>
     );
   }
