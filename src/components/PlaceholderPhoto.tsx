@@ -50,16 +50,17 @@ export function PlaceholderPhoto({ size = 46, radius = 11, url, posicao }: Place
         height: size,
         borderRadius: radius,
         flexShrink: 0,
-        background: "#EBE2D2",
+        background: "#EAE6DE",
         overflow: "hidden",
+        display: "flex",
+        alignItems: "flex-end",
+        justifyContent: "center",
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/mascote.png"
-        alt=""
-        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
-      />
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="18" r="9" fill="#CDBFA8" />
+        <path d="M8 46 C8 32 40 32 40 46 Z" fill="#CDBFA8" />
+      </svg>
     </div>
   );
 }
