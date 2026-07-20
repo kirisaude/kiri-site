@@ -160,18 +160,18 @@ function FormularioContent() {
       <div className="max-w-2xl mx-auto pb-12 w-full">
 
         {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-5 bg-[#F6E6CC] border border-[#E6CDA8] rounded-[13px] px-4 py-3 flex gap-3 items-start">
-          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+        <div className="mx-[18px] mt-5 flex gap-2 items-start">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <circle cx="10" cy="10" r="8.5" stroke="#9A6B30" strokeWidth="1.4" />
             <line x1="10" y1="9" x2="10" y2="14" stroke="#9A6B30" strokeWidth="1.5" strokeLinecap="round" />
             <circle cx="10" cy="6.3" r="1.05" fill="#9A6B30" />
           </svg>
-          <p className="text-[13.5px] leading-[1.55] text-[#7A5020] m-0">
+          <p className="text-[13px] leading-[1.5] text-[#7A5020] m-0">
             Este formulário é para direcionamento e encaminhamento, não avaliação clínica nem diagnóstico. Em caso de urgência ou risco, procure um pronto-socorro.
           </p>
         </div>
 
-        <div className="px-[18px] pt-10">
+        <div className="px-[18px] pt-[52px]">
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você precisa
           </h1>

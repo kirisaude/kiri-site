@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { KiriSymbol } from "@/components/KiriSymbol";
 
 const PROFISSOES = [
   {
@@ -96,11 +97,14 @@ export default function ProfissoesPage() {
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         <div className="px-[22px] pt-8 flex flex-col items-start text-left">
-          <div className="flex items-baseline gap-3 flex-wrap">
-            <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
-              Especialidades da rede
-            </h1>
-            <span className="text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem whitespace-nowrap">8 especialidades</span>
+          <div className="flex items-center gap-3">
+            <KiriSymbol height={46} />
+            <div className="flex items-baseline gap-3 flex-wrap">
+              <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                Especialidades da rede
+              </h1>
+              <span className="text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem whitespace-nowrap">8 especialidades</span>
+            </div>
           </div>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
             O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade — cada um com um olhar distinto, todos necessários.
