@@ -282,7 +282,7 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "F",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false
     },
@@ -463,7 +463,7 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "M",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": true,
       "sobre_verificado": false
     },
@@ -576,7 +576,7 @@
       "card_token": "7b240576cf0c4514",
       "tempo_atuacao": null,
       "foto_posicao": "center center",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
       "genero": "F"
