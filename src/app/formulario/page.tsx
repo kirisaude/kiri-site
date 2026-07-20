@@ -161,19 +161,12 @@ function FormularioContent() {
 
       <div className="max-w-2xl mx-auto pb-12 w-full">
 
-        {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-5 flex gap-2 items-start">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-            <circle cx="10" cy="10" r="8.5" stroke="#9A6B30" strokeWidth="1.4" />
-            <line x1="10" y1="9" x2="10" y2="14" stroke="#9A6B30" strokeWidth="1.5" strokeLinecap="round" />
-            <circle cx="10" cy="6.3" r="1.05" fill="#9A6B30" />
-          </svg>
-          <p className="text-[13px] leading-[1.5] text-[#7A5020] m-0">
-            Este formulário é para direcionamento e encaminhamento, não avaliação clínica nem diagnóstico. Em caso de urgência ou risco, procure um pronto-socorro.
-          </p>
-        </div>
+        {/* Aviso de urgência — compacto, sem caixa */}
+        <p className="mx-[18px] mt-4 text-[12px] leading-[1.45] text-[#7A5020] m-0">
+          Em caso de urgência ou risco, procure um pronto-socorro.
+        </p>
 
-        <div className="px-[18px] pt-[52px]">
+        <div className="px-[18px] pt-8">
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você precisa
           </h1>
@@ -536,6 +529,9 @@ function FormularioContent() {
           >
             {enviando ? "Enviando…" : "Enviar pedido de encaminhamento"}
           </button>
+          <p className="text-[12px] leading-[1.5] text-[#9A8C78] mt-3 m-0">
+            Este formulário é para direcionamento e encaminhamento, não avaliação clínica nem diagnóstico.
+          </p>
         </form>
 
         <Footer className="mx-[18px] mt-8 mb-8" />
