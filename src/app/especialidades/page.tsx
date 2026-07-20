@@ -97,14 +97,14 @@ export default function ProfissoesPage() {
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
         <div className="px-[22px] pt-8 flex flex-col items-start text-left">
+          <span className="mb-2 text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem">8 especialidades</span>
           <div className="flex items-center gap-3">
             <KiriSymbol height={46} />
             <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
               Especialidades da rede
             </h1>
           </div>
-          <span className="mt-3 text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem">8 especialidades</span>
-          <p className="mt-3 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
+          <p className="mt-6 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
             O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade — cada um com um olhar distinto, todos necessários.
           </p>
           <div className="mt-5 w-full bg-white border-l-[3px] border-[#44606C] pl-5 pr-4 py-4 rounded-r-[8px]">
