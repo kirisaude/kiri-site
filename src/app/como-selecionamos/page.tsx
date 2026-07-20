@@ -39,7 +39,7 @@ export default function ComoSelecionamosPage() {
         {/* O que verificamos — contador "03", check só no título, itens com número */}
         <div className="mx-[18px] mt-[32px] bg-white border border-borda-azulada rounded-[16px] overflow-hidden">
           <div className="flex items-center gap-3 bg-wash-azulado px-4 py-[13px]">
-            <span className="font-serif text-[30px] font-medium text-ferrugem/50 leading-none select-none">03</span>
+            <span className="font-serif text-[30px] font-medium text-ferrugem-escura leading-none select-none">03</span>
             <div className="flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
                 <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.4" />
@@ -51,7 +51,7 @@ export default function ComoSelecionamosPage() {
           <div className="px-4 pb-1.5">
             {ITENS.map((item, i) => (
               <div key={i} className="flex gap-3 py-4 border-t border-linha-sutil">
-                <span className="font-serif text-[15px] font-medium text-ferrugem leading-none pt-[3px] min-w-[22px] select-none">
+                <span className="font-serif text-[15px] font-medium text-ferrugem-escura leading-none pt-[3px] min-w-[22px] select-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
