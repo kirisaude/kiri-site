@@ -571,7 +571,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": 0,
+      "valor_min": null,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -582,10 +582,16 @@
       "card_token": "7b240576cf0c4514",
       "tempo_atuacao": null,
       "foto_posicao": "center center",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "genero": "F"
+      "genero": "F",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-032",
