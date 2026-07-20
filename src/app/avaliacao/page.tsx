@@ -22,9 +22,14 @@ export default function AvaliacaoPage() {
             </h1>
           </div>
 
-          <p className="mt-6 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Muitas famílias chegam aqui só com a sensação de que algo está diferente — no jeito de se comunicar, de se relacionar, de aprender ou de se desenvolver. Está tudo bem não ter um nome ainda. A gente ajuda você a encontrar o profissional certo para entender melhor.
-          </p>
+          <div className="mt-6 flex flex-col gap-4">
+            <p className="text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Muitas famílias chegam aqui só com a sensação de que algo está diferente — no jeito de se comunicar, de se relacionar, de aprender ou de se desenvolver.
+            </p>
+            <p className="text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Está tudo bem não ter um nome ainda: a gente ajuda você a encontrar o profissional certo para entender melhor.
+            </p>
+          </div>
 
           {/* Como funciona */}
           <div className="mt-6 bg-white border border-linha rounded-[16px] px-4 py-[18px]">
