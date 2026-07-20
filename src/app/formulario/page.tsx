@@ -263,25 +263,33 @@ function FormularioContent() {
               ))}
             </div>
             {canalContato === "whatsapp" && (
-              <div className="flex gap-2">
-                <input
-                  type="tel"
-                  value={ddd}
-                  onChange={(e) => setDdd(e.target.value.replace(/\D/g, "").slice(0, 2))}
-                  placeholder="DDD"
-                  maxLength={2}
-                  className="w-[68px] border border-linha rounded-[12px] px-3 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted text-center"
-                />
-                <input
-                  type="tel"
-                  value={telefone}
-                  onChange={(e) => setTelefone(e.target.value.replace(/\D/g, "").slice(0, 9))}
-                  placeholder="999999999"
-                  maxLength={9}
-                  inputMode="numeric"
-                  pattern="\d{8,9}"
-                  className="flex-1 border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
-                />
+              <div className="flex flex-col gap-1.5">
+                <div className="flex gap-2">
+                  <input
+                    type="tel"
+                    value={ddd}
+                    onChange={(e) => setDdd(e.target.value.replace(/\D/g, "").slice(0, 2))}
+                    placeholder="DDD"
+                    maxLength={2}
+                    className={`w-[68px] border rounded-[12px] px-3 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted text-center ${ddd.length === 1 ? "border-ferrugem" : "border-linha"}`}
+                  />
+                  <input
+                    type="tel"
+                    value={telefone}
+                    onChange={(e) => setTelefone(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                    placeholder="999999999"
+                    maxLength={9}
+                    inputMode="numeric"
+                    pattern="\d{8,9}"
+                    className={`flex-1 border rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted ${telefone.length > 0 && telefone.length < 8 ? "border-ferrugem" : "border-linha"}`}
+                  />
+                </div>
+                {ddd.length === 1 && (
+                  <p className="text-[12.5px] text-ferrugem m-0">DDD precisa ter 2 dígitos.</p>
+                )}
+                {telefone.length > 0 && telefone.length < 8 && (
+                  <p className="text-[12.5px] text-ferrugem m-0">Número precisa ter 8 ou 9 dígitos.</p>
+                )}
               </div>
             )}
             {canalContato === "email" && (
