@@ -956,7 +956,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "foto_posicao": "center top",
+      "foto_posicao": "25% top",
       "genero": "F",
       "oculto": false,
       "registro_verificado": false,
