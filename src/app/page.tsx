@@ -133,6 +133,7 @@ export default function Home() {
   const filtered = useMemo(() => {
     return profissionais.filter((p) => {
       if (p.oculto) return false;
+      if (!p.foto_url) return false;
       if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
       if (activeProfissao && p.profissao !== activeProfissao && p.profissao_secundaria !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
@@ -774,6 +775,9 @@ export default function Home() {
           </div>
         )}
 
+        {/* Divisor filtros / conteúdo — desktop only */}
+        <div className="hidden md:block mt-6 border-b border-[#E2D6C0]" />
+
         {/* Trust banner + Como funciona — desktop: antes dos cards; mobile: oculto aqui (aparece depois) */}
         {!hasFilters && (
           <div className="hidden md:grid md:pt-10 md:grid-cols-2 gap-4 md:gap-5">
@@ -882,10 +886,12 @@ export default function Home() {
                     ))}
                   </div>
 
-                  {/* Desktop: grid */}
-                  <div className="hidden md:grid grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                  {/* Desktop: flex com colunas fixas (4 col), alinha à esquerda */}
+                  <div className="hidden md:flex flex-wrap gap-5">
                     {sec.pros.map((p) => (
-                      <MiniCard key={p.id} profissional={p} />
+                      <div key={p.id} className="w-[calc(25%-15px)]">
+                        <MiniCard profissional={p} />
+                      </div>
                     ))}
                   </div>
                 </div>
