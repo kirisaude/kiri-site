@@ -947,45 +947,6 @@
       "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false
-    },
-    {
-      "id": "kiri-040",
-      "nome": "Shara Catherine Marcos Atayde",
-      "profissao": "Psicólogo",
-      "titulo_exibicao": "Psicólogo",
-      "registro_conselho": "03/24667",
-      "rqe": null,
-      "areas_atuacao": [
-        "TEA",
-        "TDAH",
-        "Atraso de desenvolvimento",
-        "Ansiedade",
-        "Depressão"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Salvador",
-      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
-      "sobre": "Psicóloga formada pela Escola Bahiana de Medicina e Saúde Pública (EBMSP), pós-graduada em Clínica Psicanalítica Lacaniana pela Instituição de Ensino Superior (ESPE) dedicada ao Ensino e à Pesquisa da Psicanálise no Brasil. Atualmente é integrante do Seminário Interdisciplinar de Psicanálise (SIPSI).\n\nAtravessada pelas questões sociais, raciais, de gênero e culturais, busco me dedicar aos estudos dessas temáticas. Entretanto, tenho tido como foco temas que envolvem o neoliberalismo e as transformações do conceito de corpo ao decorrer da história. O meu público alvo é composto por crianças, adolescentes e adultos. Atendo a partir dos 3 anos de idade.\n\nNo que diz respeito ao atendimento psicológico com crianças, o processo acontece por etapas. Inicialmente, é necessário uma conversa com os pais, escutá-los, saber qual a demanda que trazem sobre a criança. Posteriormente, escuta-se a criança, através de brincadeiras, pois é através delas que as crianças se comunicam. Brincar é coisa séria. \nAo decorrer do tratamento, haverá momentos de conversas com os pais/responsáveis. \n\n\"Eu que me aguente comigo e com os comigos de mim\"; como diria Fernando Pessoa e como ouso dizer através dessa fala o que faz, também, uma análise. Dessa forma, proponho nesse espaço uma escuta que possa ressoar um defronte consigo mesmo, assim também como recuperar o fôlego pelos não ditos, ou em outras palavras, os não vistos, pois, para poder ver é preciso se escutar.",
-      "formacao": [
-        {
-          "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Escola Bahiana de medicina e saúde pública — 2021"
-        },
-        {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "clínica psicanalítica lacaniana — UniFil — 2024"
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 185,
-      "valor_max": null,
-      "convenio_info": "Particular e convênio",
-      "convenios": null,
-      "whatsapp_agendamento": "75992434779",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "julho de 2026",
-      "card_token": "ef3d99bff0b349b4"
     }
   ]
 }
