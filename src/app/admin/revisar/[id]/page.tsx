@@ -129,6 +129,7 @@ export default function RevisarPage() {
 
     const profissional = {
       id: "",
+      inscricao_id: id,
       nome: nome.trim(),
       profissao: profissao.trim(),
       titulo_exibicao: profissao.trim(),
