@@ -102,7 +102,7 @@ export default function ProfissoesPage() {
             Especialidades da rede
           </h1>
           <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
-            O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade. Médico, psicólogo, fonoaudiólogo e terapeuta ocupacional costumam atuar juntos — cada um com um olhar distinto, todos necessários.
+            O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade — cada um com um olhar distinto, todos necessários.
           </p>
           <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5">
             <p className="font-serif italic text-[18px] md:text-[19px] leading-[1.65] text-carvao m-0">

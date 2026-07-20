@@ -78,6 +78,7 @@ export default function Home() {
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
+  const [mostrarTodasMobile, setMostrarTodasMobile] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
   const [shareReady, setShareReady] = useState(false);
@@ -424,16 +425,16 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-1 items-start rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-2.5 md:py-4 cursor-pointer transition-all ${
+                className={`flex flex-col gap-0.5 items-start rounded-[13px] md:rounded-[14px] px-3 md:px-5 py-2 md:py-4 cursor-pointer transition-all ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-2 border-ardosia"
                     : "bg-wash-azulado border-[1.5px] border-borda-azulada"
                 }`}
               >
-                <span className={`text-[16px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[15px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[11px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`text-[10px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
@@ -453,7 +454,7 @@ export default function Home() {
                 className={`inline-flex items-center flex-none rounded-full px-4 py-2 cursor-pointer transition-all border ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura text-white"
-                    : "bg-transparent border-areia text-cinza-texto2 hover:border-ardosia hover:text-ardosia-escura"
+                    : "bg-[#F0E8DC] border-[#D8C8B4] text-carvao hover:border-ardosia hover:text-ardosia-escura"
                 }`}
               >
                 <span className="text-[13px] font-medium whitespace-nowrap">{cond}</span>
@@ -464,7 +465,7 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-4 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer no-underline transition-all hover:opacity-90"
+            className="flex items-center gap-4 mt-3 md:mt-4 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-4 md:py-5 cursor-pointer no-underline transition-all hover:opacity-90"
           >
             <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
@@ -477,10 +478,10 @@ export default function Home() {
               </svg>
             </div>
             <div className="flex-1">
-              <div className="text-[14.5px] md:text-[19px] font-bold text-white leading-[1.2]">
+              <div className="text-[17px] md:text-[19px] font-bold text-white leading-[1.2]">
                 Não sei por onde começar
               </div>
-              <div className="text-[12.5px] md:text-[17px] text-white/80 mt-0.5 md:mt-1">
+              <div className="text-[13.5px] md:text-[17px] text-white/80 mt-0.5 md:mt-1">
                 Quero uma avaliação do neurodesenvolvimento
               </div>
             </div>
@@ -851,38 +852,54 @@ export default function Home() {
           </div>
         ) : (
           <>
-            {sections.map((sec) => (
-              <div key={sec.nome} className="mt-10 md:mt-14">
-                {/* Header da seção */}
-                <div className="flex items-baseline justify-between gap-3.5 mb-4 md:mb-5">
-                  <span className="font-serif text-[19px] md:text-[22px] font-semibold text-carvao leading-[1.2]">
-                    {PROFISSAO_PLURAL[sec.nome] ?? sec.nome}
-                  </span>
-                  <button
-                    className="flex-none text-[13px] font-semibold text-ferrugem whitespace-nowrap cursor-pointer hover:underline"
-                    onClick={() => setActiveProfissao(sec.nome)}
-                  >
-                    Ver todos
-                  </button>
-                </div>
+            {sections.map((sec, idx) => {
+              const ocultaMobile = !mostrarTodasMobile && !hasFilters && idx >= 3;
+              return (
+                <div key={sec.nome} className={`mt-10 md:mt-14 ${ocultaMobile ? "hidden md:block" : ""}`}>
+                  {/* Header da seção */}
+                  <div className="flex items-baseline justify-between gap-3.5 mb-4 md:mb-5">
+                    <span className="font-serif text-[19px] md:text-[22px] font-semibold text-carvao leading-[1.2]">
+                      {PROFISSAO_PLURAL[sec.nome] ?? sec.nome}
+                    </span>
+                    <button
+                      className="flex-none text-[13px] font-semibold text-ferrugem whitespace-nowrap cursor-pointer hover:underline"
+                      onClick={() => setActiveProfissao(sec.nome)}
+                    >
+                      Ver todos
+                    </button>
+                  </div>
 
-                {/* Mobile: scroll horizontal */}
-                <div className="-mx-4 md:hidden overflow-x-auto scrollbar-hide flex gap-3 px-4 pb-1.5">
-                  {sec.pros.map((p) => (
-                    <div key={p.id} className="flex-none w-[220px]">
-                      <MiniCard profissional={p} />
-                    </div>
-                  ))}
-                </div>
+                  {/* Mobile: scroll horizontal */}
+                  <div className="-mx-4 md:hidden overflow-x-auto scrollbar-hide flex gap-3 px-4 pb-1.5">
+                    {sec.pros.map((p) => (
+                      <div key={p.id} className="flex-none w-[220px]">
+                        <MiniCard profissional={p} />
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Desktop: grid */}
-                <div className="hidden md:grid grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-                  {sec.pros.map((p) => (
-                    <MiniCard key={p.id} profissional={p} />
-                  ))}
+                  {/* Desktop: grid */}
+                  <div className="hidden md:grid grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+                    {sec.pros.map((p) => (
+                      <MiniCard key={p.id} profissional={p} />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+
+            {/* Botão expandir — mobile, sem filtros ativos, mais de 3 seções */}
+            {!mostrarTodasMobile && !hasFilters && sections.length > 3 && (
+              <button
+                onClick={() => setMostrarTodasMobile(true)}
+                className="md:hidden mt-6 w-full flex items-center justify-center gap-2 bg-white border border-linha rounded-[13px] py-3.5 text-[14px] font-semibold text-cinza-texto cursor-pointer"
+              >
+                Ver todas as especialidades
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 7.5 L10 12.5 L15 7.5" stroke="#9A8C78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            )}
 
             {/* Trust banner + Como funciona — mobile only, depois dos cards */}
             {!hasFilters && (
