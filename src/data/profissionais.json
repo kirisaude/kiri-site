@@ -282,15 +282,9 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "F",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false,
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "sobre_verificado": false
     },
     {
       "id": "kiri-027",
@@ -372,7 +366,7 @@
         "Comunicação aumentativa"
       ],
       "modalidade": "Presencial e online",
-      "cidade": "Salvador, BA",
+      "cidade": "Salvador",
       "faixa_etaria": "Bebês (0–2 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos), Crianças (6–12 anos)",
       "sobre": "Apresentação: Graduação em Medicina pela Escola Bahiana de Medicina e Saúde Pública (EBMSP) (2009). Especialização em Psiquiatria e sub-especialização em Psiquiatria da Infância e Adolescência pelo programa de residência da SESAB/SUS (2011 a 2015). Médico assistente do Centro Especializado em Reabilitação (CER4) das Obras Sociais Irmã Dulce (OSID). Preceptor da Residência em Psiquiatria da Clínica Apice (Salvador/BA).",
       "formacao": [
@@ -457,7 +451,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": null,
+      "valor_min": 0,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -469,15 +463,9 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "M",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": true,
-      "sobre_verificado": false,
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "sobre_verificado": false
     },
     {
       "id": "kiri-030",
@@ -577,7 +565,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": null,
+      "valor_min": 0,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -588,16 +576,10 @@
       "card_token": "7b240576cf0c4514",
       "tempo_atuacao": null,
       "foto_posicao": "center center",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "genero": "F",
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "genero": "F"
     },
     {
       "id": "kiri-032",
@@ -782,7 +764,7 @@
         "Dificuldades de aprendizagem"
       ],
       "modalidade": "Presencial e online",
-      "cidade": "Salvador, BA",
+      "cidade": "Salvador",
       "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos), Bebês (0–2 anos)",
       "sobre": "Procuro entender o sofrimento da criança/adolescente e o grau de disfuncionalidade acadêmica,inter pessoal, familiar do caso clínico para decidir, de forma horizontal, juntamente com os familiares, sobre a intervenção terapêutica medicamentosa ou não.",
       "formacao": [
@@ -887,19 +869,17 @@
         "Dificuldades de aprendizagem"
       ],
       "modalidade": "Presencial",
-      "cidade": "Salvador -BA",
+      "cidade": "Salvador",
       "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
       "sobre": "Atendo crianças, adultos e idosos. Faço Avaliação Neuropsicológica. Presencial.",
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — FTC — 2008",
-          "verificado": true
+          "instituicao_ano": "Psicologia — FTC — 2008"
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicóloga — Fundação Visconde de Cairú — 2020",
-          "verificado": true
+          "instituicao_ano": "Neuropsicóloga — Visconde de Cairú — 2020"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -909,21 +889,9 @@
       "convenios": null,
       "whatsapp_agendamento": "71987545911",
       "verificado": true,
-      "foto_url": "/fotos/kiri-038.jpg",
+      "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "7088b4215baf4b87",
-      "profissao_secundaria": null,
-      "tempo_atuacao": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null,
-      "foto_posicao": "center 20%",
-      "genero": "F",
-      "oculto": false,
-      "registro_verificado": true,
-      "sobre_verificado": false
+      "card_token": "7088b4215baf4b87"
     },
     {
       "id": "kiri-039",
@@ -964,21 +932,21 @@
       ],
       "whatsapp_agendamento": "75992434779",
       "verificado": true,
-      "foto_url": "/fotos/kiri-039.jpg",
+      "foto_url": null,
       "verificacao_data": "julho de 2026",
       "card_token": "a1699b9b6b3946af",
       "profissao_secundaria": null,
-      "tempo_atuacao": "3 a 5 anos",
+      "tempo_atuacao": "1 a 3 anos",
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "foto_posicao": "25% top",
+      "foto_posicao": "center top",
       "genero": "F",
       "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": true
+      "sobre_verificado": false
     }
   ]
 }
