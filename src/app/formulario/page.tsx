@@ -123,7 +123,7 @@ function FormularioContent() {
                 <path d="M6.5 11.2 L9.5 14.2 L15.5 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <div className="flex flex-col" style={{ gap: 12 }}>
+            <div className="flex flex-col w-full" style={{ gap: 12 }}>
               <h1 className="font-serif text-[26px] font-medium text-carvao m-0">Recebemos seu pedido</h1>
               <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
                 Nossa equipe vai entrar em contato em breve pelo canal que você informou.
