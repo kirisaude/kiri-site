@@ -299,7 +299,7 @@ export default async function PerfilPage({ params }: PageProps) {
               <div className="md:hidden mt-3.5">
                 <Link
                   href={`/reportar/${p.id}`}
-                  className="flex items-center justify-center gap-1.5 text-[13.5px] text-[#9A8C78] no-underline hover:text-[#6E5326] transition-colors py-1.5"
+                  className="flex items-center justify-center gap-1.5 text-[13.5px] text-[#9A8C78] no-underline hover:text-[#6E5326] transition-colors py-2 px-4 rounded-[10px] border border-[#DDD0BC]"
                 >
                   <svg width="11" height="12" viewBox="0 0 14 16" fill="none" style={{ flexShrink: 0 }}>
                     <line x1="2" y1="1" x2="2" y2="15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
