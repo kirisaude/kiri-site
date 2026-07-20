@@ -106,7 +106,7 @@ function FormularioContent() {
 
   if (enviado) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col">
+      <div className="min-h-screen bg-creme flex flex-col overflow-x-hidden">
         <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
           <NavBack />
           <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">Direcionamento</span>
@@ -142,12 +142,12 @@ function FormularioContent() {
             >
               Voltar ao início
             </button>
-            <div className="flex justify-center">
-              <p className="text-[11.5px] leading-[1.55] text-[#9A8C78] m-0 inline-flex items-start gap-1.5">
-                <svg width="11" height="11" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-                  <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
-                  <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+            <div className="flex gap-1.5 items-start px-2">
+              <svg width="11" height="11" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+                <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
+                <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <p className="text-[11.5px] leading-[1.55] text-[#9A8C78] m-0 min-w-0">
                 Se for uma situação urgente ou de risco, procure um serviço de atendimento presencial imediato.
               </p>
             </div>
@@ -160,7 +160,7 @@ function FormularioContent() {
   }
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
       <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
         <NavBack />
         <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">
@@ -229,7 +229,7 @@ function FormularioContent() {
                 <line x1="10" y1="9" x2="10" y2="14" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" />
                 <circle cx="10" cy="6.3" r="1.05" fill="#9A8C78" />
               </svg>
-              <p className="text-[12px] leading-[1.55] text-muted m-0">
+              <p className="text-[12px] leading-[1.55] text-muted m-0 min-w-0">
                 Nossa equipe valida a disponibilidade do profissional e direciona o caso para que o seu atendimento comece o quanto antes.
               </p>
             </div>
