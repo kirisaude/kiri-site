@@ -578,7 +578,7 @@ export default function AdminPage() {
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [reportes, setReportes] = useState<Reporte[]>([]);
   const [profPublicados, setProfPublicados] = useState<Profissional[]>(
-    (data.profissionais as Profissional[]).filter((p) => p.verificado)
+    data.profissionais as Profissional[]
   );
   const [excluindo, setExcluindo] = useState<string | null>(null);
   const [buscando, setBuscando] = useState(false);
@@ -739,6 +739,11 @@ export default function AdminPage() {
   const comProfissional = encaminhamentos.filter((e) => !!e.profissional_solicitado);
   const semProfissional = encaminhamentos.filter((e) => !e.profissional_solicitado);
 
+  const naoVisiveis = profPublicados.filter((p) =>
+    p.oculto || !p.foto_url || p.registro_verificado === false || p.sobre_verificado === false
+  );
+  const visiveis = profPublicados.filter((p) => !p.oculto && !!p.foto_url);
+
   return (
     <div className="min-h-screen bg-creme">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center justify-between">
@@ -766,7 +771,7 @@ export default function AdminPage() {
         </button>
         <button onClick={() => setAba("profissionais")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Plataforma ({profPublicados.length})
+          Plataforma ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
         </button>
       </div>
 
@@ -1079,83 +1084,119 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* ABA PROFISSIONAIS PUBLICADOS */}
+        {/* ABA PROFISSIONAIS */}
         {aba === "profissionais" && (
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="font-serif text-[18px] font-semibold text-carvao mb-1">
-                Profissionais na plataforma
-              </h2>
-              <p className="text-[13px] text-muted mb-1">
-                {profPublicados.length} profissional{profPublicados.length !== 1 ? "is" : ""} publicado{profPublicados.length !== 1 ? "s" : ""}. Exclusões entram em vigor após ~1 min (rebuild automático).
-              </p>
-            </div>
+          <div className="flex flex-col gap-10">
 
-            {PROFISSOES_ORDENADAS.map((prof) => {
-              const grupo = profPublicados.filter((p) => p.profissao === prof);
-              if (grupo.length === 0) return null;
-              return (
-                <div key={prof}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h3 className="text-[14px] font-bold tracking-[0.04em] uppercase text-muted">{prof}</h3>
-                    <span className="text-[13px] text-muted">({grupo.length})</span>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {grupo.map((p) => (
-                      <div key={p.id} className={`border rounded-[13px] px-4 py-3 flex items-center justify-between gap-3 ${p.oculto ? "bg-[#FFF8F0] border-[#E8C88A]" : "bg-white border-linha"}`}>
+            {/* PENDÊNCIAS */}
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">Pendências</h2>
+                {naoVisiveis.length === 0
+                  ? <span className="text-[13px] text-[#2E7D4F] font-semibold">✓ tudo ok</span>
+                  : <span className="bg-ferrugem text-white text-[11px] font-bold px-2 py-0.5 rounded-full">{naoVisiveis.length}</span>
+                }
+              </div>
+              <p className="text-[13px] text-muted mb-4">
+                Profissionais inscritos que não aparecem na home ou têm dados incompletos.
+              </p>
+
+              {naoVisiveis.length === 0 ? (
+                <p className="text-[13px] text-muted">Nenhuma pendência encontrada.</p>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  {naoVisiveis.map((p) => {
+                    const tags: { label: string; cls: string }[] = [];
+                    if (!p.foto_url) tags.push({ label: "sem foto", cls: "text-ferrugem bg-[#FFF0EE] border-ferrugem/25" });
+                    if (p.oculto) tags.push({ label: "oculto", cls: "text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]" });
+                    if (p.registro_verificado === false) tags.push({ label: "registro não verificado", cls: "text-ardosia bg-wash-azulado border-borda-azulada" });
+                    if (p.sobre_verificado === false) tags.push({ label: "sobre não verificado", cls: "text-ardosia bg-wash-azulado border-borda-azulada" });
+                    return (
+                      <div key={p.id} className="bg-white border border-ferrugem/20 rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
                             <span className="text-[11px] text-muted font-mono">{p.id}</span>
-                            {p.oculto && (
-                              <span className="text-[11px] font-semibold text-[#BE8A3E] bg-[#FFF0D0] border border-[#E8C88A] px-2 py-0.5 rounded-[6px]">oculto</span>
-                            )}
+                            {tags.map((t) => (
+                              <span key={t.label} className={`text-[11px] font-semibold border px-2 py-0.5 rounded-[6px] ${t.cls}`}>{t.label}</span>
+                            ))}
                           </div>
-                          <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
-                            <span>{p.cidade}</span>
-                            <span>·</span>
-                            <span>{p.modalidade}</span>
-                            {p.verificacao_data && (
-                              <>
-                                <span>·</span>
-                                <span>verificado em {p.verificacao_data}</span>
-                              </>
-                            )}
-                          </div>
+                          <div className="text-[12.5px] text-cinza-texto mt-0.5">{p.profissao} · {p.cidade}</div>
                         </div>
-                        <div className="flex items-center gap-2 flex-none">
-                          <Link
-                            href={`/profissional/${p.id}`}
-                            target="_blank"
-                            className="text-[12.5px] font-medium text-ardosia no-underline"
-                          >
-                            Ver ↗
-                          </Link>
-                          <Link
-                            href={`/admin/profissionais/${p.id}`}
-                            className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline"
-                          >
-                            Editar
-                          </Link>
-                          <button
-                            type="button"
-                            disabled={excluindo === p.id}
-                            onClick={() => excluirProfissional(p.id, p.nome)}
-                            className="text-[12.5px] font-semibold text-white bg-ferrugem rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50"
-                          >
-                            {excluindo === p.id ? "Removendo…" : "Excluir"}
-                          </button>
-                        </div>
+                        <Link
+                          href={`/admin/profissionais/${p.id}`}
+                          className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline flex-none"
+                        >
+                          Editar
+                        </Link>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              )}
+            </div>
 
-            {profPublicados.length === 0 && (
-              <p className="text-[14px] text-muted">Nenhum profissional publicado ainda.</p>
-            )}
+            {/* TODOS OS PROFISSIONAIS */}
+            <div>
+              <h2 className="font-serif text-[18px] font-semibold text-carvao mb-1">
+                Todos na plataforma
+              </h2>
+              <p className="text-[13px] text-muted mb-5">
+                {visiveis.length} visíveis na home · {profPublicados.length} no total. Exclusões entram em vigor após ~1 min (rebuild automático).
+              </p>
+
+              {PROFISSOES_ORDENADAS.map((prof) => {
+                const grupo = profPublicados.filter((p) => p.profissao === prof);
+                if (grupo.length === 0) return null;
+                return (
+                  <div key={prof} className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <h3 className="text-[14px] font-bold tracking-[0.04em] uppercase text-muted">{prof}</h3>
+                      <span className="text-[13px] text-muted">({grupo.length})</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {grupo.map((p) => {
+                        const temPendencia = p.oculto || !p.foto_url || p.registro_verificado === false || p.sobre_verificado === false;
+                        return (
+                          <div key={p.id} className={`border rounded-[13px] px-4 py-3 flex items-center justify-between gap-3 ${temPendencia ? "bg-[#FFF8F0] border-[#E8C88A]" : "bg-white border-linha"}`}>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
+                                <span className="text-[11px] text-muted font-mono">{p.id}</span>
+                                {p.oculto && <span className="text-[11px] font-semibold text-[#BE8A3E] bg-[#FFF0D0] border border-[#E8C88A] px-2 py-0.5 rounded-[6px]">oculto</span>}
+                                {!p.foto_url && <span className="text-[11px] font-semibold text-ferrugem bg-[#FFF0EE] border border-ferrugem/25 px-2 py-0.5 rounded-[6px]">sem foto</span>}
+                              </div>
+                              <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
+                                <span>{p.cidade}</span>
+                                <span>·</span>
+                                <span>{p.modalidade}</span>
+                                {p.verificacao_data && <><span>·</span><span>verificado em {p.verificacao_data}</span></>}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 flex-none">
+                              <Link href={`/profissional/${p.id}`} target="_blank" className="text-[12.5px] font-medium text-ardosia no-underline">Ver ↗</Link>
+                              <Link href={`/admin/profissionais/${p.id}`} className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline">Editar</Link>
+                              <button
+                                type="button"
+                                disabled={excluindo === p.id}
+                                onClick={() => excluirProfissional(p.id, p.nome)}
+                                className="text-[12.5px] font-semibold text-white bg-ferrugem rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50"
+                              >
+                                {excluindo === p.id ? "Removendo…" : "Excluir"}
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+
+              {profPublicados.length === 0 && (
+                <p className="text-[14px] text-muted">Nenhum profissional na plataforma ainda.</p>
+              )}
+            </div>
           </div>
         )}
 
