@@ -91,8 +91,8 @@ export default function ComoSelecionamosPage() {
         </div>
 
         {/* CTA para profissionais */}
-        <div className="mx-[18px] mt-[36px] flex flex-col items-center text-center gap-3 py-6 border-t border-linha">
-          <p className="text-[14.5px] leading-[1.6] text-cinza-texto m-0">
+        <div className="mx-[18px] mt-[52px] flex flex-col items-center text-center gap-4 py-6 border-t border-linha">
+          <p className="font-serif text-[20px] md:text-[22px] leading-[1.45] text-carvao m-0">
             É profissional de saúde e quer fazer parte da rede?
           </p>
           <Link

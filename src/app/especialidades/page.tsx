@@ -121,7 +121,7 @@ export default function ProfissoesPage() {
           <div>
             <button
               onClick={() => setOpenMedicos((v) => !v)}
-              className={`w-full px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${openMedicos ? "bg-[#EFE6D6]" : "bg-white"}`}
+              className={`w-full px-4 py-[17px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${openMedicos ? "bg-[#EFE6D6]" : "bg-white"}`}
             >
               <div>
                 <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-[#BE6E4E]">Médicos</div>
@@ -175,7 +175,7 @@ export default function ProfissoesPage() {
               <div key={item.grupo}>
                 <button
                   onClick={() => toggleProfissao(item.grupo)}
-                  className={`w-full px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${open ? "bg-[#EFE6D6]" : "bg-white"}`}
+                  className={`w-full px-4 py-[17px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${open ? "bg-[#EFE6D6]" : "bg-white"}`}
                 >
                   <div>
                     <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-[#BE6E4E]">{item.grupo}</div>
