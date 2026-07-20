@@ -19,17 +19,22 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
   );
 }
 
-function FilterRow({ label, count, open, onToggle, children }: {
-  label: string; count: number; open: boolean; onToggle: () => void; children: React.ReactNode;
+function FilterRow({ label, count, open, onToggle, summary, children }: {
+  label: string; count: number; open: boolean; onToggle: () => void; summary?: string; children: React.ReactNode;
 }) {
   return (
     <div className="border-b border-linha last:border-b-0">
       <button type="button" onClick={onToggle}
         className="w-full flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-wash/60 transition-colors">
-        <div className="flex items-center gap-2">
-          <span className="text-[13.5px] font-medium text-carvao">{label}</span>
-          {count > 0 && (
-            <span className="text-[11px] font-semibold bg-ardosia-escura text-white rounded-full px-1.5 py-0.5 leading-none">{count}</span>
+        <div className="flex flex-col items-start gap-0.5">
+          <div className="flex items-center gap-2">
+            <span className="text-[13.5px] font-medium text-carvao">{label}</span>
+            {count > 0 && (
+              <span className="text-[11px] font-semibold bg-ardosia-escura text-white rounded-full px-1.5 py-0.5 leading-none">{count}</span>
+            )}
+          </div>
+          {!open && summary && (
+            <span className="text-[11.5px] text-ardosia leading-none">{summary}</span>
           )}
         </div>
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
@@ -62,10 +67,10 @@ export default function ProPage() {
   const [convenioFiltro, setConvenioFiltro] = useState(false);
 
   // Seções abertas
-  const [abertas, setAbertas] = useState<Set<string>>(new Set());
+  const [aberta, setAberta] = useState<string | null>(null);
   const [filtrosVisiveis, setFiltrosVisiveis] = useState(true);
   function toggleSecao(s: string) {
-    setAbertas((prev) => { const n = new Set(prev); n.has(s) ? n.delete(s) : n.add(s); return n; });
+    setAberta((prev) => (prev === s ? null : s));
   }
 
   useEffect(() => {
@@ -201,20 +206,23 @@ export default function ProPage() {
 
           {filtrosVisiveis && <>
           {/* Profissão */}
-          <FilterRow label="Profissão" count={profFiltro.length} open={abertas.has("prof")} onToggle={() => toggleSecao("prof")}>
+          <FilterRow label="Profissão" count={profFiltro.length} open={aberta === "prof"} onToggle={() => toggleSecao("prof")}
+            summary={profFiltro.length ? profFiltro.slice(0, 3).join(", ") + (profFiltro.length > 3 ? ` +${profFiltro.length - 3}` : "") : undefined}>
             {PROFISSOES_ORDENADAS.filter((p) => profissionais.some((x) => x.profissao === p)).map((p) => (
               <Chip key={p} label={p} active={profFiltro.includes(p)} onClick={() => setProfFiltro(toggleArr(profFiltro, p))} />
             ))}
           </FilterRow>
 
           {/* Modalidade */}
-          <FilterRow label="Modalidade" count={modalidadeFiltro ? 1 : 0} open={abertas.has("mod")} onToggle={() => toggleSecao("mod")}>
+          <FilterRow label="Modalidade" count={modalidadeFiltro ? 1 : 0} open={aberta === "mod"} onToggle={() => toggleSecao("mod")}
+            summary={modalidadeFiltro ? (modalidadeFiltro === "presencial" ? "Presencial" : "Online") : undefined}>
             <Chip label="Presencial" active={modalidadeFiltro === "presencial"} onClick={() => setModalidadeFiltro(modalidadeFiltro === "presencial" ? "" : "presencial")} />
             <Chip label="Online" active={modalidadeFiltro === "online"} onClick={() => setModalidadeFiltro(modalidadeFiltro === "online" ? "" : "online")} />
           </FilterRow>
 
           {/* Faixa etária */}
-          <FilterRow label="Faixa etária atendida" count={faixaFiltro.length} open={abertas.has("faixa")} onToggle={() => toggleSecao("faixa")}>
+          <FilterRow label="Faixa etária atendida" count={faixaFiltro.length} open={aberta === "faixa"} onToggle={() => toggleSecao("faixa")}
+            summary={faixaFiltro.length ? faixaFiltro.slice(0, 2).map((f) => f.split(" ")[0]).join(", ") + (faixaFiltro.length > 2 ? ` +${faixaFiltro.length - 2}` : "") : undefined}>
             {FAIXAS.map((f) => (
               <Chip key={f} label={f} active={faixaFiltro.includes(f)} onClick={() => setFaixaFiltro(toggleArr(faixaFiltro, f))} />
             ))}
@@ -222,7 +230,8 @@ export default function ProPage() {
 
           {/* Área de atuação */}
           {todasAreas.length > 0 && (
-            <FilterRow label="Área de atuação" count={areaFiltro.length} open={abertas.has("area")} onToggle={() => toggleSecao("area")}>
+            <FilterRow label="Área de atuação" count={areaFiltro.length} open={aberta === "area"} onToggle={() => toggleSecao("area")}
+              summary={areaFiltro.length ? areaFiltro.slice(0, 3).join(", ") + (areaFiltro.length > 3 ? ` +${areaFiltro.length - 3}` : "") : undefined}>
               {todasAreas.map((a) => (
                 <Chip key={a} label={a} active={areaFiltro.includes(a)} onClick={() => setAreaFiltro(toggleArr(areaFiltro, a))} />
               ))}

@@ -531,7 +531,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "profissao" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] min-w-[200px] py-1.5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
                   {PROFISSOES_ORDENADAS.map((p) => (
                     <button key={p} onClick={() => { setActiveProfissao(activeProfissao === p ? null : p); setActiveDropdown(null); }}
                       className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeProfissao === p ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
@@ -560,7 +560,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "modalidade" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] min-w-[200px] py-1.5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
                   {FILTROS_MODALIDADE.map((m) => (
                     <button key={m} onClick={() => { setActiveModalidade(activeModalidade === m ? null : m); setActiveDropdown(null); }}
                       className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeModalidade === m ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
@@ -589,7 +589,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "cidade" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] min-w-[220px] max-h-[320px] overflow-y-auto py-1.5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] max-h-[320px] overflow-y-auto py-1.5">
                   {CIDADES_DISPONIVEIS.map((c) => (
                     <button key={c} onClick={() => {
                       const same = activeCidade === c;
@@ -635,7 +635,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "faixa" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] min-w-[220px] py-1.5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
                   {["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"].map((f) => (
                     <button key={f} onClick={() => { setActiveFaixa(activeFaixa === f ? null : f); setActiveDropdown(null); }}
                       className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeFaixa === f ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
@@ -664,7 +664,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "valor" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] w-[280px] p-5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] w-[280px] p-5">
                   <div className="flex justify-between items-baseline mb-3">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
                     <span className="text-[13px] font-semibold text-ardosia-escura">
@@ -713,7 +713,7 @@ export default function Home() {
                 )}
               </button>
               {activeDropdown === "pagamento" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] right-0 z-50 bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_8px_32px_-8px_rgba(44,39,34,0.2)] min-w-[180px] py-1.5">
+                <div className="hidden md:block absolute top-[calc(100%+6px)] right-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[220px] py-1.5">
                   {["Particular", "Convênio"].map((opt) => (
                     <button key={opt} onClick={() => { setActivePagamento(activePagamento === opt ? null : opt); setActiveDropdown(null); }}
                       className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activePagamento === opt ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>

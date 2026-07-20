@@ -26,12 +26,12 @@ export default function SobrePage() {
         <div className="px-[26px] pt-[28px] flex flex-col gap-8">
 
           <p className="font-serif text-[19px] md:text-[21px] leading-[1.55] font-normal text-carvao m-0">
-            Para famílias com crianças em suspeita de TEA, TDAH ou atraso de desenvolvimento, encontrar o profissional certo costuma ser uma segunda jornada — tão desgastante quanto o diagnóstico em si.
+            Para famílias com crianças em suspeita de TEA, TDAH ou atraso de desenvolvimento, encontrar o profissional certo costuma ser uma segunda jornada, tão desgastante quanto o diagnóstico em si.
           </p>
 
           <div className="flex flex-col gap-4">
             <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
-              O que se vê com frequência são famílias já exaustas chegando ao consultório — não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele:
+              O que se vê com frequência são famílias já exaustas chegando ao consultório. Não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele:
             </p>
             <ul className="flex flex-col gap-2.5 pl-1">
               {[
@@ -53,11 +53,11 @@ export default function SobrePage() {
           </p>
 
           <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
-            Não somos uma lista de nomes. Somos uma rede criteriosamente reunida — cada profissional verificado quanto à formação e à atuação real na área. O objetivo é que a família chegue até o cuidador certo sem ter que percorrer um labirinto para isso.
+            Não somos uma lista de nomes. Somos uma rede criteriosamente reunida: cada profissional é verificado quanto à formação e à atuação real na área. O objetivo é que a família chegue até o cuidador certo sem ter que percorrer um labirinto para isso.
           </p>
 
           <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
-            O nome vem do kiri-kiri, o menor dos falcões — de visão aguçada e voo preciso.
+            O nome vem do kiri-kiri, o menor dos falcões, de visão aguçada e voo preciso.
           </p>
 
         </div>
