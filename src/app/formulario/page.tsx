@@ -201,8 +201,8 @@ function FormularioContent() {
               <div className="flex items-start gap-3">
                 <PlaceholderPhoto size={54} radius={12} url={profissionalSolicitado.foto_url} posicao={profissionalSolicitado.foto_posicao} />
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-serif text-[16px] font-semibold text-carvao leading-[1.15]">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className="font-serif text-[16px] font-semibold text-carvao leading-[1.15] truncate">
                       {profissionalSolicitado.nome}
                     </span>
                     <svg width="15" height="15" viewBox="0 0 22 22" fill="none" style={{ flexShrink: 0 }}>
