@@ -728,7 +728,7 @@ export default function Home() {
           {/* Contador de resultados */}
           {hasFilters && (
             <div className="pt-3 text-[13px] text-muted">
-              {filtered.length} profissional{filtered.length !== 1 ? 'is' : ''} encontrado{filtered.length !== 1 ? 's' : ''}
+              {filtered.length} {filtered.length !== 1 ? 'profissionais' : 'profissional'} encontrado{filtered.length !== 1 ? 's' : ''}
             </div>
           )}
         </div>
