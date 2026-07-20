@@ -324,7 +324,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
         : "";
       return `${i + 1}. ${p.nome} — ${p.titulo_exibicao} · ${p.cidade}${wa}`;
     }).join("\n\n");
-    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido e selecionamos ${profs.length} profissional${profs.length > 1 ? "is" : ""} que ${profs.length > 1 ? "podem" : "pode"} ajudar:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
+    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido e selecionamos ${profs.length} ${profs.length > 1 ? "profissionais" : "profissional"} que ${profs.length > 1 ? "podem" : "pode"} ajudar:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
   }
 
   function gerarMsgProfissional(profId: string): string {
