@@ -282,9 +282,15 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "F",
-      "oculto": false,
+      "oculto": true,
       "registro_verificado": false,
-      "sobre_verificado": false
+      "sobre_verificado": false,
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-027",
