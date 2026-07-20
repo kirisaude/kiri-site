@@ -25,7 +25,7 @@ export function SaveButton({ profissionalId: _ }: { profissionalId: string }) {
       onClick={copiar}
       className={`mt-[18px] w-full font-semibold text-[14px] border rounded-[11px] py-3 cursor-pointer inline-flex items-center justify-center gap-[7px] transition-colors ${
         copiado
-          ? "text-white bg-ardosia-escura border-ardosia-escura"
+          ? "text-white bg-ferrugem border-ferrugem"
           : "text-cinza-texto bg-white border-linha hover:bg-areia"
       }`}
     >
