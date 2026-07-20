@@ -79,6 +79,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
   const [mostrarTodasMobile, setMostrarTodasMobile] = useState(false);
+  const [mostrarCondicoes, setMostrarCondicoes] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
   const [shareReady, setShareReady] = useState(false);
@@ -344,23 +345,10 @@ export default function Home() {
             <Link
               href="/profissionais/inscricao"
               onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-ferrugem border-b border-linha-sutil no-underline"
+              className="py-3.5 text-[16px] font-semibold text-ferrugem no-underline"
             >
               Faça parte da Kiri
             </Link>
-            <button
-              onClick={() => { setShowMenu(false); setShowCompartilhar(true); }}
-              className="py-3.5 text-[16px] font-semibold text-ardosia-escura text-left cursor-pointer flex items-center gap-2"
-            >
-              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                <circle cx="4" cy="10" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                <circle cx="16" cy="16" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                <line x1="6.2" y1="8.8" x2="13.8" y2="5.2" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
-                <line x1="6.2" y1="11.2" x2="13.8" y2="14.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-              Divulgue a Kiri
-            </button>
           </div>
         )}
       </header>
@@ -419,30 +407,34 @@ export default function Home() {
             Buscar por condição
           </div>
 
-          {/* TEA + TDAH — 2 col mobile, continua 2 col desktop (mais largo) */}
-          <div className="grid grid-cols-2 gap-2.5 md:gap-4">
+          {/* TEA + TDAH */}
+          <div className="flex gap-2 md:grid md:grid-cols-2 md:gap-4">
             {(["TEA", "TDAH"] as const).map((cond) => (
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`flex flex-col gap-0.5 items-start rounded-[13px] md:rounded-[14px] px-3 md:px-5 py-2 md:py-4 cursor-pointer transition-all ${
-                  activeCond === cond
-                    ? "bg-ardosia-escura border-2 border-ardosia"
-                    : "bg-wash-azulado border-[1.5px] border-borda-azulada"
-                }`}
+                className={`cursor-pointer transition-all border
+                  /* mobile: pill compacto */
+                  inline-flex items-center rounded-full px-4 py-1.5
+                  /* desktop: box com descrição */
+                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-4
+                  ${activeCond === cond
+                    ? "bg-ardosia-escura border-ardosia"
+                    : "bg-wash-azulado border-borda-azulada"
+                  }`}
               >
-                <span className={`text-[15px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[13px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`text-[10px] md:text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`hidden md:block text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
             ))}
           </div>
 
-          {/* Condições secundárias — scroll horizontal no mobile, wrap no desktop */}
-          <div className="flex gap-2 mt-2.5 overflow-x-auto scrollbar-hide md:flex-wrap pb-0.5 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
+          {/* Condições secundárias — colapsadas no mobile, sempre visíveis no desktop */}
+          <div className={`mt-2.5 md:flex md:flex-wrap md:gap-2 ${mostrarCondicoes || activeCond ? "flex flex-wrap gap-2" : "hidden md:flex"}`}>
             {([
               "Depressão", "Ansiedade", "TOC",
               "Atraso de desenvolvimento", "Dificuldades de aprendizagem",
@@ -461,6 +453,18 @@ export default function Home() {
               </button>
             ))}
           </div>
+          {/* Botão "ver mais condições" — mobile only, sem filtro ativo */}
+          {!mostrarCondicoes && !activeCond && (
+            <button
+              onClick={() => setMostrarCondicoes(true)}
+              className="md:hidden mt-2 text-[12.5px] font-semibold text-muted flex items-center gap-1 cursor-pointer"
+            >
+              Ver mais condições
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5 L10 12.5 L15 7.5" stroke="#9A8C78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          )}
 
           {/* Não sei por onde começar */}
           <Link
@@ -956,6 +960,31 @@ export default function Home() {
                 </div>
               </div>
             )}
+
+            {/* Bloco de compartilhamento */}
+            <div className="mt-10 md:mt-14 rounded-[16px] bg-ardosia-escura px-5 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+              <div className="flex-1">
+                <p className="font-serif text-[18px] md:text-[20px] font-semibold text-white leading-[1.3]">
+                  Conhece alguém que pode precisar?
+                </p>
+                <p className="text-[13.5px] md:text-[15px] text-white/70 mt-1 leading-[1.5]">
+                  Compartilhe a Kiri e ajude mais famílias a encontrar o profissional certo.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowCompartilhar(true)}
+                className="flex-none flex items-center justify-center gap-2 bg-white text-ardosia-escura font-semibold text-[14px] md:text-[15px] rounded-[12px] px-5 py-3 cursor-pointer hover:bg-creme transition-colors whitespace-nowrap"
+              >
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                  <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                  <circle cx="4" cy="10" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                  <circle cx="16" cy="16" r="2.4" stroke="#44606C" strokeWidth="1.4" />
+                  <line x1="6.2" y1="8.8" x2="13.8" y2="5.2" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                  <line x1="6.2" y1="11.2" x2="13.8" y2="14.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                Divulgue a Kiri
+              </button>
+            </div>
 
             {/* Rodapé */}
             <Footer className="mt-12 md:mt-16 mb-12" />
