@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
-import { KiriSymbol } from "@/components/KiriSymbol";
 
 const PROFISSOES = [
   {
@@ -96,20 +95,22 @@ export default function ProfissoesPage() {
       </div>
 
       <div className="max-w-3xl mx-auto pb-10 w-full px-2">
-        <div className="px-[22px] pt-8 flex flex-col items-center text-center">
-          <KiriSymbol height={40} />
-          <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao mt-7 m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
-            Especialidades da rede
-          </h1>
-          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto text-justify">
+        <div className="px-[22px] pt-8 flex flex-col items-start text-left">
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
+              Especialidades da rede
+            </h1>
+            <span className="text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem whitespace-nowrap">8 especialidades</span>
+          </div>
+          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
             O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade — cada um com um olhar distinto, todos necessários.
           </p>
-          <div className="mt-5 bg-[#FAF0E4] border border-[#E8DDD0] rounded-[16px] px-6 py-5">
-            <p className="font-serif italic text-[18px] md:text-[19px] leading-[1.65] text-carvao m-0">
+          <div className="mt-5 w-full bg-white border-l-[3px] border-[#44606C] pl-5 pr-4 py-4 rounded-r-[8px]">
+            <p className="text-[15.5px] md:text-[16.5px] leading-[1.65] text-carvao m-0">
               Cada profissão de saúde no Brasil é regulamentada por um conselho de classe, responsável por emitir e manter os registros profissionais. É esse registro que garante que o profissional tem a formação exigida e está autorizado a exercer a profissão.
             </p>
           </div>
-          <p className="mt-5 text-[16px] md:text-[17px] leading-[1.65] text-cinza-texto text-justify">
+          <p className="mt-5 text-[16px] md:text-[17px] leading-[1.65] text-cinza-texto">
             Abaixo, um guia rápido por profissão — o conselho responsável e como qualquer pessoa pode verificar o registro.
           </p>
         </div>
@@ -117,7 +118,7 @@ export default function ProfissoesPage() {
         <div className="mx-[18px] mt-[28px] flex flex-col gap-3">
 
           {/* Médicos */}
-          <div className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+          <div className={`bg-white border rounded-[16px] overflow-hidden transition-shadow ${openMedicos ? "border-[#BE6E4E] shadow-[0_2px_8px_rgba(0,0,0,0.07)]" : "border-[#E0D8CC]"}`}>
             <button
               onClick={() => setOpenMedicos((v) => !v)}
               className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
@@ -132,7 +133,7 @@ export default function ProfissoesPage() {
             </button>
 
             {openMedicos && (
-              <div className="px-4 py-4 flex flex-col gap-3">
+              <div className="px-4 py-4 flex flex-col gap-2">
                 <div className="flex gap-2.5">
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                   <span className="text-[15px] text-carvao-sutil leading-[1.5]">Conselho Regional de Medicina (CRM)</span>
@@ -145,8 +146,8 @@ export default function ProfissoesPage() {
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Verificar</span>
                   <span className="text-[14.5px] text-cinza-texto leading-[1.5]">O CFM (Conselho Federal de Medicina) disponibiliza uma busca pública onde é possível confirmar se o registro está ativo e sem restrições.</span>
                 </div>
-                <div className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[12px] overflow-hidden">
-                  <div className="px-3.5 py-2.5 border-b border-[#E0D8CC]">
+                <div className="mt-1 bg-white border border-[#E2D6C0] rounded-[12px] overflow-hidden">
+                  <div className="px-3.5 py-2.5 border-b border-[#E2D6C0]">
                     <span className="text-[11px] font-bold tracking-[0.06em] uppercase text-ferrugem/80">Especialidades e RQE</span>
                     <p className="text-[13px] text-cinza-texto leading-[1.5] mt-1 mb-0">
                       Além do CRM, cada especialidade médica exige residência na área. O RQE (Registro de Qualificação de Especialidade) é emitido pelo próprio CRM como comprovante formal da especialidade concluída.
@@ -171,7 +172,7 @@ export default function ProfissoesPage() {
           {PROFISSOES.map((item) => {
             const open = !!openMap[item.grupo];
             return (
-              <div key={item.grupo} className="bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
+              <div key={item.grupo} className={`bg-white border rounded-[16px] overflow-hidden transition-shadow ${open ? "border-[#BE6E4E] shadow-[0_2px_8px_rgba(0,0,0,0.07)]" : "border-[#E0D8CC]"}`}>
                 <button
                   onClick={() => toggleProfissao(item.grupo)}
                   className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
@@ -184,7 +185,7 @@ export default function ProfissoesPage() {
                 </button>
 
                 {open && (
-                  <div className="px-4 py-4 flex flex-col gap-3">
+                  <div className="px-4 py-4 flex flex-col gap-2">
                     <div className="flex gap-2.5">
                       <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                       <span className="text-[15px] text-carvao-sutil leading-[1.5]">{item.conselho}</span>
@@ -198,7 +199,7 @@ export default function ProfissoesPage() {
                       <span className="text-[14.5px] text-cinza-texto leading-[1.5]">{item.como}</span>
                     </div>
                     {item.obs && (Array.isArray(item.obs) ? item.obs : [item.obs]).map((o, i) => (
-                      <div key={i} className="mt-1 bg-[#FAF6F0] border border-[#E0D8CC] rounded-[10px] px-3 py-2.5 text-[13.5px] text-cinza-texto leading-[1.55]">
+                      <div key={i} className="mt-1 bg-white border border-[#E2D6C0] rounded-[10px] px-3 py-2.5 text-[13.5px] text-cinza-texto leading-[1.55]">
                         {o}
                       </div>
                     ))}
@@ -209,7 +210,7 @@ export default function ProfissoesPage() {
           })}
         </div>
 
-        {/* Sites de verificação */}
+        {/* Sites de verificação pública — rendered once */}
         <div className="mx-[18px] mt-[28px] bg-white border border-[#E0D8CC] rounded-[16px] overflow-hidden">
           <div className="bg-ardosia px-4 py-[12px] border-b border-[#344D57]">
             <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Sites de verificação pública</div>
@@ -275,7 +276,7 @@ export default function ProfissoesPage() {
           </div>
         </div>
 
-        <div className="mx-[18px] mt-[18px] bg-[#EFE6D6] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
+        <div className="mx-[18px] mt-[18px] bg-white border border-[#E2D6C0] rounded-[14px] px-4 py-[15px] flex gap-[11px]">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
             <circle cx="10" cy="10" r="8.2" stroke="#8A7E6A" strokeWidth="1.4" />
             <line x1="10" y1="9" x2="10" y2="14" stroke="#8A7E6A" strokeWidth="1.5" strokeLinecap="round" />
