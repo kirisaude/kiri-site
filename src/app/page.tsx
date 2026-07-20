@@ -467,14 +467,17 @@ export default function Home() {
               </button>
             ))}
           </div>
-          {/* Botão "ver mais condições" — mobile only, sem filtro ativo */}
-          {!mostrarCondicoes && !activeCond && (
+          {/* Botão toggle condições — mobile only, sem filtro ativo */}
+          {!activeCond && (
             <button
-              onClick={() => setMostrarCondicoes(true)}
+              onClick={() => setMostrarCondicoes((v) => !v)}
               className="md:hidden mt-2 text-[12.5px] font-semibold text-muted flex items-center gap-1 cursor-pointer"
             >
-              Ver mais condições
-              <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+              {mostrarCondicoes ? "Ver menos condições" : "Ver mais condições"}
+              <svg
+                width="12" height="12" viewBox="0 0 20 20" fill="none"
+                style={{ transform: mostrarCondicoes ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+              >
                 <path d="M5 7.5 L10 12.5 L15 7.5" stroke="#9A8C78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>

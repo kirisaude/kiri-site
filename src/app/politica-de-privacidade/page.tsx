@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { NavBack } from "@/components/NavBack";
+import { IndiceAccordion } from "@/components/IndiceAccordion";
 
 type Bloco =
   | { tipo: "p"; texto: string }
@@ -193,7 +194,12 @@ export default function PoliticaPrivacidadePage() {
             <p className="mt-3 text-[14px] text-muted leading-[1.6]">
               Última atualização: junho de 2026
             </p>
-            <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
+          </div>
+
+          <IndiceAccordion secoes={SECOES.map((s) => s.titulo)} />
+
+          <div className="px-[22px] pt-4 pb-2">
+            <p className="text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
               Esta Política de Privacidade descreve como a Kiri coleta, usa, armazena e protege
               os dados pessoais de quem utiliza nossa plataforma, em estrita conformidade com a
               Lei Geral de Proteção de Dados Pessoais (LGPD — Lei n.º 13.709/2018).
