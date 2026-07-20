@@ -129,23 +129,23 @@ function FormularioContent() {
       <div className="max-w-2xl mx-auto pb-12 w-full">
 
         {/* Aviso de triagem */}
-        <div className="mx-[18px] mt-5 flex flex-col gap-2">
-          <div className="bg-[#FAF0E4] border border-[#E8DDD0] rounded-[13px] px-[14px] py-[10px] flex flex-col items-center gap-0.5 text-center">
-            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
-              Este formulário é para direcionamento e encaminhamento.
+        <div className="mx-[18px] mt-5 bg-[#F6E6CC] border border-[#E6CDA8] rounded-[13px] px-4 py-3 flex gap-3 items-start">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+            <circle cx="10" cy="10" r="8.5" stroke="#9A6B30" strokeWidth="1.4" />
+            <line x1="10" y1="9" x2="10" y2="14" stroke="#9A6B30" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="10" cy="6.3" r="1.05" fill="#9A6B30" />
+          </svg>
+          <div className="flex flex-col gap-1">
+            <p className="text-[13.5px] leading-[1.55] text-[#7A5020] m-0">
+              Este formulário é para direcionamento e encaminhamento, não avaliação clínica nem diagnóstico.
             </p>
-            <p className="text-[14px] leading-[1.5] text-[#7A6040] m-0">
-              Não é avaliação clínica nem diagnóstico.
-            </p>
-          </div>
-          <div className="bg-[#F9EDE6] border border-[#DDB89A] rounded-[13px] px-[14px] py-[10px] text-center">
-            <p className="text-[15px] leading-[1.5] text-ferrugem font-semibold m-0">
+            <p className="text-[13.5px] leading-[1.55] text-[#7A5020] font-semibold m-0">
               Em caso de urgência ou risco, procure um pronto-socorro.
             </p>
           </div>
         </div>
 
-        <div className="px-[18px] pt-10 text-center">
+        <div className="px-[18px] pt-10">
           <h1 className="font-serif text-[28px] font-medium leading-[1.25] text-carvao m-0">
             Conte o que você precisa
           </h1>
