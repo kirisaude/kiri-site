@@ -51,7 +51,7 @@ export default function ComoSelecionamosPage() {
           <div className="px-4 pb-1.5">
             {ITENS.map((item, i) => (
               <div key={i} className="flex gap-3 py-4 border-t border-linha-sutil">
-                <span className="font-serif text-[15px] font-medium text-ferrugem/40 leading-none pt-[3px] min-w-[22px] select-none">
+                <span className="font-serif text-[15px] font-medium text-ferrugem leading-none pt-[3px] min-w-[22px] select-none">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>

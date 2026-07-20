@@ -121,16 +121,14 @@ function FormularioContent() {
             </div>
           </div>
 
-          {/* Bloco de reforço */}
-          <div className="bg-white border border-linha rounded-[14px] px-4 py-4 flex gap-3 items-start">
-            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-              <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#44606C" strokeWidth="1.4" strokeLinejoin="round" />
-              <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Reforço inline — sem caixa */}
+          <p className="text-[13px] leading-[1.55] text-muted text-center m-0 flex items-center justify-center gap-1.5">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+              <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
+              <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <p className="text-[14px] leading-[1.6] text-cinza-texto m-0">
-              Cada caso é avaliado individualmente, com cuidado e sigilo.
-            </p>
-          </div>
+            Cada caso é avaliado individualmente, com cuidado e sigilo.
+          </p>
 
           {/* Aviso de urgência */}
           <p className="text-[13px] leading-[1.55] text-muted text-center m-0">
