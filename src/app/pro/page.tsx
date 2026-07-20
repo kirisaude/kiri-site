@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import type { Profissional } from "@/types";
-import { PROFISSOES_ORDENADAS } from "@/types";
+import { PROFISSOES_ORDENADAS, PROFISSAO_PLURAL } from "@/types";
 import { titleCasePT } from "@/lib/titleCase";
 
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
@@ -255,7 +255,7 @@ export default function ProPage() {
 
         {agrupados.map(({ categoria, membros }) => (
           <div key={categoria}>
-            <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">{categoria}</h2>
+            <h2 className="font-serif text-[18px] font-semibold text-carvao mb-3">{PROFISSAO_PLURAL[categoria] ?? categoria}</h2>
             <div className="flex flex-col gap-3">
               {membros.map((p) => {
                 const digits = (p.whatsapp_agendamento ?? "").replace(/\D/g, "");
