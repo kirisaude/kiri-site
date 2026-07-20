@@ -11,6 +11,13 @@ const AREAS = ["TEA", "TDAH", "Atraso de desenvolvimento", "Comunicação aument
 const FAIXAS = ["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"];
 const CONVENIOS_LISTA = ["Unimed", "Bradesco Saúde", "SulAmérica", "Amil", "Porto Seguro Saúde", "Hapvida", "Notre Dame Intermédica", "Prevent Senior", "Golden Cross", "Care Plus", "Omint", "Assim Saúde"];
 
+function formatarWhatsapp(valor: string) {
+  const d = valor.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d.length ? `(${d}` : "";
+  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 function BlockTitle({ num, title }: { num: number; title: string }) {
   return (
     <div className="flex items-center gap-3 pb-3 mb-1 border-b border-[#E2D6C0]">
@@ -308,7 +315,7 @@ export default function InscricaoProfissionalPage() {
               <input
                 type="tel"
                 value={whatsappAgendamento}
-                onChange={(e) => setWhatsappAgendamento(e.target.value)}
+                onChange={(e) => setWhatsappAgendamento(formatarWhatsapp(e.target.value))}
                 required
                 placeholder="(11) 99999-9999"
                 className={inputClass}

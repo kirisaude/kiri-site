@@ -75,7 +75,7 @@ function Chevron({ open }: { open: boolean }) {
       width="16" height="16" viewBox="0 0 20 20" fill="none"
       style={{ flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
     >
-      <path d="M5 7.5 L10 12.5 L15 7.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5 7.5 L10 12.5 L15 7.5" stroke="#BE6E4E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -115,17 +115,17 @@ export default function ProfissoesPage() {
           </p>
         </div>
 
-        <div className="mx-[18px] mt-[28px] flex flex-col gap-3">
+        <div className="mx-[18px] mt-[28px] bg-white border border-[#E2D6C0] border-l-[3px] border-l-[#BE6E4E] rounded-[16px] overflow-hidden divide-y divide-[#E2D6C0]">
 
           {/* Médicos */}
-          <div className={`bg-white border rounded-[16px] overflow-hidden transition-shadow ${openMedicos ? "border-[#BE6E4E] shadow-[0_2px_8px_rgba(0,0,0,0.07)]" : "border-[#E0D8CC]"}`}>
+          <div>
             <button
               onClick={() => setOpenMedicos((v) => !v)}
-              className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
+              className={`w-full px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${openMedicos ? "bg-[#EFE6D6]" : "bg-white"}`}
             >
               <div>
-                <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">Médicos</div>
-                <div className="text-[13px] text-white/80 mt-[2px]">
+                <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-[#BE6E4E]">Médicos</div>
+                <div className="text-[13px] text-[#6E6457] mt-[2px]">
                   Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function ProfissoesPage() {
             </button>
 
             {openMedicos && (
-              <div className="px-4 py-4 flex flex-col gap-2">
+              <div className="px-4 py-4 flex flex-col gap-2 border-t border-[#E2D6C0]">
                 <div className="flex gap-2.5">
                   <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                   <span className="text-[15px] text-carvao-sutil leading-[1.5]">Conselho Regional de Medicina (CRM)</span>
@@ -172,20 +172,27 @@ export default function ProfissoesPage() {
           {PROFISSOES.map((item) => {
             const open = !!openMap[item.grupo];
             return (
-              <div key={item.grupo} className={`bg-white border rounded-[16px] overflow-hidden transition-shadow ${open ? "border-[#BE6E4E] shadow-[0_2px_8px_rgba(0,0,0,0.07)]" : "border-[#E0D8CC]"}`}>
+              <div key={item.grupo}>
                 <button
                   onClick={() => toggleProfissao(item.grupo)}
-                  className="w-full bg-ferrugem px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left"
+                  className={`w-full px-4 py-[14px] flex items-center justify-between gap-3 cursor-pointer text-left transition-colors ${open ? "bg-[#EFE6D6]" : "bg-white"}`}
                 >
                   <div>
-                    <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-white">{item.grupo}</div>
-                    <div className="text-[13px] text-white/80 mt-[2px]">{item.profissoes.join(" · ")}</div>
+                    <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-[#BE6E4E]">{item.grupo}</div>
+                    <div className="flex items-center gap-2 flex-wrap mt-[2px]">
+                      <span className="text-[13px] text-[#6E6457]">{item.profissoes.join(" · ")}</span>
+                      {item.conselho.startsWith("Sem conselho") && (
+                        <span className="text-[9.5px] font-semibold tracking-[0.05em] uppercase text-ferrugem/60 border border-ferrugem/25 rounded-full px-1.5 py-[2px] leading-none">
+                          sem conselho próprio
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <Chevron open={open} />
                 </button>
 
                 {open && (
-                  <div className="px-4 py-4 flex flex-col gap-2">
+                  <div className="px-4 py-4 flex flex-col gap-2 border-t border-[#E2D6C0]">
                     <div className="flex gap-2.5">
                       <span className="text-[11px] font-bold tracking-[0.05em] uppercase text-ferrugem/70 min-w-[80px] pt-[1px]">Conselho</span>
                       <span className="text-[15px] text-carvao-sutil leading-[1.5]">{item.conselho}</span>

@@ -147,56 +147,78 @@ export default function TermosPage() {
         <NavBack label="Termos de Uso" />
       </div>
 
-      <div className="max-w-3xl mx-auto pb-16 w-full px-2">
+      <div className="max-w-3xl lg:max-w-[1060px] mx-auto w-full pb-16 px-2 lg:px-6 lg:flex lg:gap-10 lg:items-start">
 
-        <div className="px-[22px] pt-4 pb-2">
-          <h1 className="font-serif text-[32px] md:text-[38px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0">
-            Termos de Uso
-          </h1>
-          <p className="mt-3 text-[14px] text-muted leading-[1.6]">
-            Última atualização: junho de 2026
-          </p>
-          <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
-            Seja bem-vindo à Kiri. Ao acessar, navegar ou utilizar nossa plataforma, você concorda integralmente com estes Termos de Uso. Caso não concorde com qualquer das condições aqui estabelecidas, orientamos que interrompa imediatamente o uso dos nossos serviços.
-          </p>
-        </div>
+        {/* Sumário lateral — lg+ */}
+        <aside className="hidden lg:block w-[196px] flex-shrink-0">
+          <div className="sticky top-8 pt-4">
+            <p className="text-[10.5px] font-semibold tracking-[0.1em] uppercase text-muted mb-2 pl-3">Sumário</p>
+            <nav className="flex flex-col">
+              {SECOES.map((s, i) => (
+                <a
+                  key={i}
+                  href={`#secao-${i + 1}`}
+                  className="text-[12px] leading-[1.45] text-muted no-underline hover:text-carvao transition-colors py-[5px] border-l border-[#E2D6C0] pl-3 hover:border-[#BE6E4E] block"
+                >
+                  {s.titulo}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
 
-        {/* Aviso em destaque */}
-        <div className="mx-[18px] mt-6 bg-[#F6E6CC] border border-ambar-borda rounded-[14px] px-5 py-4 flex gap-3">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
-            <circle cx="10" cy="10" r="8.2" stroke="#BE8A3E" strokeWidth="1.5" />
-            <line x1="10" y1="9" x2="10" y2="14" stroke="#BE8A3E" strokeWidth="1.6" strokeLinecap="round" />
-            <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
-          </svg>
-          <div className="flex flex-col gap-2">
-            <p className="text-[12px] font-bold tracking-[0.06em] uppercase text-ambar-texto m-0">
-              Aviso de Limitação de Responsabilidade (Art. 54, §4º do CDC)
+        {/* Conteúdo principal */}
+        <div className="flex-1 min-w-0">
+
+          <div className="px-[22px] pt-4 pb-2">
+            <h1 className="font-serif text-[32px] md:text-[38px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0">
+              Termos de Uso
+            </h1>
+            <p className="mt-3 text-[14px] text-muted leading-[1.6]">
+              Última atualização: junho de 2026
             </p>
-            <p className="text-[14px] leading-[1.6] text-ambar-texto m-0">
-              <strong>A Kiri é exclusivamente uma ferramenta tecnológica de classificados e facilitação de busca de contatos.</strong> Não somos uma clínica, não prestamos serviços de saúde de qualquer natureza, não realizamos triagens clínicas e não elaboramos diagnósticos. Toda responsabilidade técnica, ética, administrativa e civil pelo atendimento, condutas e acompanhamento clínico é exclusiva do profissional de saúde selecionado de forma independente pelo usuário.
-            </p>
-            <p className="text-[14px] leading-[1.6] text-ambar-texto font-semibold m-0">
-              Em caso de urgência, emergência, crise de saúde mental ou risco imediato à integridade física, procure o pronto-socorro mais próximo ou acione os serviços públicos de emergência (192 / 193).
+            <p className="mt-4 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
+              Seja bem-vindo à Kiri. Ao acessar, navegar ou utilizar nossa plataforma, você concorda integralmente com estes Termos de Uso. Caso não concorde com qualquer das condições aqui estabelecidas, orientamos que interrompa imediatamente o uso dos nossos serviços.
             </p>
           </div>
-        </div>
 
-        <div className="px-[22px] mt-8 flex flex-col gap-8">
-          {SECOES.map((s) => (
-            <div key={s.titulo}>
-              <h2 className="font-serif text-[20px] md:text-[22px] font-semibold text-carvao leading-[1.25] mb-3">
-                {s.titulo}
-              </h2>
-              <div className="flex flex-col gap-2.5">
-                {s.blocos.map((b, i) => (
-                  <Bloco key={i} bloco={b} />
-                ))}
-              </div>
+          {/* Aviso em destaque */}
+          <div className="mx-[18px] mt-6 bg-[#F6E6CC] border border-ambar-borda rounded-[14px] px-5 py-4 flex gap-3">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0, marginTop: 2 }}>
+              <circle cx="10" cy="10" r="8.2" stroke="#BE8A3E" strokeWidth="1.5" />
+              <line x1="10" y1="9" x2="10" y2="14" stroke="#BE8A3E" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="10" cy="6.3" r="1.05" fill="#BE8A3E" />
+            </svg>
+            <div className="flex flex-col gap-2">
+              <p className="text-[12px] font-bold tracking-[0.06em] uppercase text-ambar-texto m-0">
+                Aviso de Limitação de Responsabilidade (Art. 54, §4º do CDC)
+              </p>
+              <p className="text-[14px] leading-[1.6] text-ambar-texto m-0">
+                <strong>A Kiri é exclusivamente uma ferramenta tecnológica de classificados e facilitação de busca de contatos.</strong> Não somos uma clínica, não prestamos serviços de saúde de qualquer natureza, não realizamos triagens clínicas e não elaboramos diagnósticos. Toda responsabilidade técnica, ética, administrativa e civil pelo atendimento, condutas e acompanhamento clínico é exclusiva do profissional de saúde selecionado de forma independente pelo usuário.
+              </p>
+              <p className="text-[14px] leading-[1.6] text-ambar-texto font-semibold m-0">
+                Em caso de urgência, emergência, crise de saúde mental ou risco imediato à integridade física, procure o pronto-socorro mais próximo ou acione os serviços públicos de emergência (192 / 193).
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <Footer className="mx-[22px] mt-12" />
+          <div className="px-[22px] mt-8 flex flex-col gap-8">
+            {SECOES.map((s, idx) => (
+              <div key={s.titulo}>
+                <h2 id={`secao-${idx + 1}`} className="font-serif text-[20px] md:text-[22px] font-semibold text-carvao leading-[1.25] mb-3">
+                  {s.titulo}
+                </h2>
+                <div className="flex flex-col gap-2.5">
+                  {s.blocos.map((b, i) => (
+                    <Bloco key={i} bloco={b} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Footer className="mx-[22px] mt-12" />
+        </div>
       </div>
     </div>
   );

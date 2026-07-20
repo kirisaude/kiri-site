@@ -298,7 +298,7 @@ export default async function PerfilPage({ params }: PageProps) {
               <div className="md:hidden mt-3.5">
                 <Link
                   href={`/reportar/${p.id}`}
-                  className="block w-full text-center text-[13px] font-medium text-cinza-texto bg-wash-quente border border-borda-quente rounded-[11px] py-2.5 no-underline hover:bg-[#EFE6D6] transition-colors"
+                  className="block w-full text-center text-[13px] text-[#9A8C78] no-underline hover:text-[#6E5326] transition-colors py-1.5"
                 >
                   Reportar perfil
                 </Link>

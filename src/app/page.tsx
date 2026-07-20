@@ -78,7 +78,7 @@ export default function Home() {
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
-  const [mostrarTodasMobile, setMostrarTodasMobile] = useState(false);
+  const [mostrarTodasMobile] = useState(false);
   const [mostrarCondicoes, setMostrarCondicoes] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
@@ -168,10 +168,17 @@ export default function Home() {
     });
   }, [search, activeCond, activeProfissao, activeModalidade, activeCidade, activeSPRegiao, activeFaixa, activePagamento, valorMin, valorMax]);
 
-  const sections = PROFISSOES_ORDENADAS.map((prof) => ({
+  const allSections = PROFISSOES_ORDENADAS.map((prof) => ({
     nome: prof,
     pros: filtered.filter((p) => p.profissao === prof),
-  })).filter((s) => s.pros.length > 0);
+  }))
+    .filter((s) => s.pros.length > 0)
+    .sort((a, b) => b.pros.length - a.pros.length);
+
+  // Sem filtros: só as 4 maiores seções com >= 2 profissionais
+  const sections = hasFilters
+    ? allSections
+    : allSections.filter((s) => s.pros.length >= 2).slice(0, 4);
 
   const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
   const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeSPRegiao || activeFaixa || activePagamento || valorAtivo || search.trim());
@@ -418,7 +425,7 @@ export default function Home() {
                   /* mobile: pill compacto */
                   inline-flex items-center rounded-full px-4 py-1.5
                   /* desktop: box com descrição */
-                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-4
+                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-[10px]
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia"
                     : "bg-wash-azulado border-borda-azulada"
@@ -435,7 +442,7 @@ export default function Home() {
           </div>
 
           {/* Condições secundárias — colapsadas no mobile, sempre visíveis no desktop */}
-          <div className={`mt-2.5 md:flex md:flex-wrap md:gap-2 ${mostrarCondicoes || activeCond ? "flex flex-wrap gap-2" : "hidden md:flex"}`}>
+          <div className={`mt-1.5 md:flex md:flex-wrap md:gap-2 ${mostrarCondicoes || activeCond ? "flex flex-wrap gap-2" : "hidden md:flex"}`}>
             {([
               "Depressão", "Ansiedade", "TOC",
               "Atraso de desenvolvimento", "Dificuldades de aprendizagem",
@@ -444,13 +451,13 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`inline-flex items-center flex-none rounded-full px-4 py-2 cursor-pointer transition-all border ${
+                className={`inline-flex items-center flex-none rounded-full px-3.5 py-1.5 cursor-pointer transition-all border ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura text-white"
-                    : "bg-[#F0E8DC] border-[#D8C8B4] text-carvao hover:border-ardosia hover:text-ardosia-escura"
+                    : "bg-white border-[#E2D6C0] text-[#9A8C78] hover:border-ardosia hover:text-ardosia-escura"
                 }`}
               >
-                <span className="text-[13px] font-medium whitespace-nowrap">{cond}</span>
+                <span className="text-[12px] font-medium whitespace-nowrap">{cond}</span>
               </button>
             ))}
           </div>
@@ -860,10 +867,9 @@ export default function Home() {
           </div>
         ) : (
           <>
-            {sections.map((sec, idx) => {
-              const ocultaMobile = !mostrarTodasMobile && !hasFilters && idx >= 3;
+            {sections.map((sec) => {
               return (
-                <div key={sec.nome} className={`mt-10 md:mt-14 ${ocultaMobile ? "hidden md:block" : ""}`}>
+                <div key={sec.nome} className="mt-10 md:mt-14">
                   {/* Header da seção */}
                   <div className="flex items-baseline justify-between gap-3.5 mb-4 md:mb-5">
                     <span className="font-serif text-[19px] md:text-[22px] font-semibold text-carvao leading-[1.2]">
@@ -898,17 +904,19 @@ export default function Home() {
               );
             })}
 
-            {/* Botão expandir — mobile, sem filtros ativos, mais de 3 seções */}
-            {!mostrarTodasMobile && !hasFilters && sections.length > 3 && (
-              <button
-                onClick={() => setMostrarTodasMobile(true)}
-                className="md:hidden mt-6 w-full flex items-center justify-center gap-2 bg-white border border-linha rounded-[13px] py-3.5 text-[14px] font-semibold text-cinza-texto cursor-pointer"
-              >
-                Ver todas as especialidades
-                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-                  <path d="M5 7.5 L10 12.5 L15 7.5" stroke="#9A8C78" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+            {/* Link para /especialidades — sempre visível após as seções principais */}
+            {!hasFilters && (
+              <div className="mt-8 flex justify-center">
+                <Link
+                  href="/especialidades"
+                  className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#9A8C78] no-underline hover:text-carvao transition-colors"
+                >
+                  Ver todas as especialidades
+                  <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                    <path d="M7 4 L13 10 L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
             )}
 
             {/* Trust banner + Como funciona — mobile only, depois dos cards */}
