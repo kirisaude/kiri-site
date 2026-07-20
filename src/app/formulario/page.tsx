@@ -121,19 +121,19 @@ function FormularioContent() {
             </div>
           </div>
 
-          {/* Reforço inline — sem caixa */}
-          <p className="text-[13px] leading-[1.55] text-muted text-center m-0 flex items-center justify-center gap-1.5">
-            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-              <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
-              <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Cada caso é avaliado individualmente, com cuidado e sigilo.
-          </p>
-
-          {/* Aviso de urgência */}
-          <p className="text-[13px] leading-[1.55] text-muted text-center m-0">
-            Se for uma situação urgente ou de risco, procure um serviço de atendimento presencial imediato.
-          </p>
+          {/* Reforço + urgência — bloco coeso */}
+          <div className="flex flex-col gap-2 text-center">
+            <p className="text-[13px] leading-[1.55] text-muted m-0 flex items-center justify-center gap-1.5">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
+                <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Cada caso é avaliado individualmente, com cuidado e sigilo.
+            </p>
+            <p className="text-[13px] leading-[1.55] text-muted m-0">
+              Se for uma situação urgente ou de risco, procure um serviço de atendimento presencial imediato.
+            </p>
+          </div>
 
           {/* Botão outline */}
           <button
@@ -190,7 +190,7 @@ function FormularioContent() {
                 Encaminhamento para
               </div>
               <div className="flex items-start gap-3">
-                <PlaceholderPhoto size={54} radius={12} />
+                <PlaceholderPhoto size={54} radius={12} url={profissionalSolicitado.foto_url} posicao={profissionalSolicitado.foto_posicao} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="font-serif text-[16px] font-semibold text-carvao leading-[1.15]">

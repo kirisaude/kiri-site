@@ -29,7 +29,7 @@ export default function SobrePage() {
             Para famílias com crianças em suspeita de TEA, TDAH ou atraso de desenvolvimento, encontrar o profissional certo costuma ser uma segunda jornada, tão desgastante quanto o diagnóstico em si.
           </p>
 
-          <div className="flex flex-col gap-4">
+          <div className="bg-white border-l-[3px] border-[#44606C] pl-5 pr-4 py-4 rounded-r-[8px] flex flex-col gap-4">
             <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
               O que se vê com frequência são famílias já exaustas chegando ao consultório. Não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele:
             </p>
