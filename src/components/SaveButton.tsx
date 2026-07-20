@@ -1,45 +1,48 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const STORAGE_KEY = "kiri_salvos";
+export function SaveButton({ profissionalId: _ }: { profissionalId: string }) {
+  const [copiado, setCopiado] = useState(false);
 
-export function SaveButton({ profissionalId }: { profissionalId: string }) {
-  const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]") as string[];
-    setSaved(list.includes(profissionalId));
-  }, [profissionalId]);
-
-  const toggle = () => {
-    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]") as string[];
-    const updated = list.includes(profissionalId)
-      ? list.filter((id) => id !== profissionalId)
-      : [...list, profissionalId];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    setSaved(updated.includes(profissionalId));
+  const copiar = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch {
+      const input = document.createElement("input");
+      input.value = window.location.href;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      document.body.removeChild(input);
+    }
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 2500);
   };
 
   return (
     <button
-      onClick={toggle}
+      onClick={copiar}
       className={`mt-[18px] w-full font-semibold text-[14px] border rounded-[11px] py-3 cursor-pointer inline-flex items-center justify-center gap-[7px] transition-colors ${
-        saved
-          ? "text-white bg-ferrugem border-ferrugem"
+        copiado
+          ? "text-white bg-ardosia-escura border-ardosia-escura"
           : "text-cinza-texto bg-white border-linha hover:bg-areia"
       }`}
     >
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-        <path
-          d="M5 3 L15 3 C15.6 3 16 3.4 16 4 L16 17 L10 13 L4 17 L4 4 C4 3.4 4.4 3 5 3 Z"
-          stroke={saved ? "white" : "#9A8C78"}
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-          fill={saved ? "white" : "none"}
-        />
-      </svg>
-      {saved ? "Salvo" : "Salvar para depois"}
+      {copiado ? (
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+          <path d="M4 10.5 L8 14.5 L16 6" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ) : (
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+          <circle cx="14.5" cy="5.5" r="2" stroke="#9A8C78" strokeWidth="1.4" />
+          <circle cx="14.5" cy="14.5" r="2" stroke="#9A8C78" strokeWidth="1.4" />
+          <circle cx="5.5" cy="10" r="2" stroke="#9A8C78" strokeWidth="1.4" />
+          <line x1="7.4" y1="9" x2="12.6" y2="6.5" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="7.4" y1="11" x2="12.6" y2="13.5" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" />
+        </svg>
+      )}
+      {copiado ? "Link copiado!" : "Compartilhar perfil"}
     </button>
   );
 }
