@@ -25,14 +25,15 @@ export default async function PerfilPage({ params }: PageProps) {
   const p = profissionais.find((pro) => pro.id === id);
   if (!p || p.oculto) notFound();
 
-  const registroLinha = p.rqe ? `${p.registro_conselho} · ${p.rqe}` : p.registro_conselho;
+  const rqeLabel = p.rqe ? `RQE ${p.rqe}` : null;
+  const registroLinha = rqeLabel ? `${p.registro_conselho} · ${rqeLabel}` : p.registro_conselho;
   const tituloExibicao = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
 
   const credenciais = [
     { rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" },
-    ...(p.rqe
+    ...(rqeLabel
       ? [
-          { rotulo: "Especialista", valor: p.rqe, detalhe: "" },
+          { rotulo: "Especialista", valor: rqeLabel, detalhe: "" },
           { rotulo: "Área (RQE)", valor: tituloExibicao, detalhe: "" },
         ]
       : [{ rotulo: "Área", valor: tituloExibicao, detalhe: "" }]),

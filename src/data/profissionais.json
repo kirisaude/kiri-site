@@ -87,7 +87,7 @@
       "nome": "Sheila Silva Siqueira",
       "profissao": "Psicólogo",
       "titulo_exibicao": "Psicólogo",
-      "registro_conselho": "06/151196",
+      "registro_conselho": "CRP 06/151196",
       "rqe": null,
       "areas_atuacao": [
         "TEA",
@@ -137,7 +137,7 @@
       "nome": "Aline Azevedo Lira",
       "profissao": "Psiquiatra da infância e adolescência",
       "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "33099BA",
+      "registro_conselho": "CRM 33099BA",
       "rqe": "23246/26288",
       "areas_atuacao": [
         "TEA",
@@ -241,7 +241,7 @@
       "nome": "Juliana Reis Faria",
       "profissao": "Psicólogo",
       "titulo_exibicao": "Psicólogo",
-      "registro_conselho": "06/116043",
+      "registro_conselho": "CRP 06/116043",
       "rqe": null,
       "areas_atuacao": [
         "TEA",
@@ -282,15 +282,9 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "F",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false,
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "sobre_verificado": false
     },
     {
       "id": "kiri-027",
@@ -409,7 +403,7 @@
       "nome": "Caio Leonidas Oliveira de Andrade",
       "profissao": "Fonoaudiólogo",
       "titulo_exibicao": "Fonoaudiólogo",
-      "registro_conselho": "4-11028",
+      "registro_conselho": "CRFa 4-11028",
       "rqe": null,
       "areas_atuacao": [
         "TDAH",
@@ -457,7 +451,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": null,
+      "valor_min": 0,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -469,15 +463,9 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "M",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": true,
-      "sobre_verificado": false,
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "sobre_verificado": false
     },
     {
       "id": "kiri-030",
@@ -577,7 +565,7 @@
         }
       ],
       "valor_formato": "a_partir_de",
-      "valor_min": null,
+      "valor_min": 0,
       "valor_max": null,
       "convenio_info": "Particular · emite recibo para reembolso",
       "convenios": null,
@@ -588,16 +576,10 @@
       "card_token": "7b240576cf0c4514",
       "tempo_atuacao": null,
       "foto_posicao": "center center",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "genero": "F",
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null
+      "genero": "F"
     },
     {
       "id": "kiri-032",
@@ -715,7 +697,7 @@
       "nome": "Rafael Silberfeld",
       "profissao": "Psiquiatra da infância e adolescência",
       "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "217183",
+      "registro_conselho": "CRM 217183",
       "rqe": "1268401",
       "areas_atuacao": [
         "TEA",
@@ -818,7 +800,7 @@
       "nome": "Denise Gonçalves Kurowski",
       "profissao": "Neuropsicólogo",
       "titulo_exibicao": "Neuropsicólogo",
-      "registro_conselho": "06/83326",
+      "registro_conselho": "CRP 06/83326",
       "rqe": null,
       "areas_atuacao": [
         "TDAH",
@@ -916,7 +898,7 @@
       "nome": "Shara Catherine Marcos Atayde",
       "profissao": "Psicólogo",
       "titulo_exibicao": "Psicólogo",
-      "registro_conselho": "03/24667",
+      "registro_conselho": "CRP 03/24667",
       "rqe": null,
       "areas_atuacao": [
         "TEA",

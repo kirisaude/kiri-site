@@ -90,7 +90,7 @@ export default function ReportarPage() {
 
         {profissional && (
           <div className="mb-6 bg-white border border-linha rounded-[14px] px-4 py-3.5 flex items-center gap-3">
-            <PlaceholderPhoto size={44} radius={10} />
+            <PlaceholderPhoto size={44} radius={10} url={profissional.foto_url} posicao={profissional.foto_posicao} />
             <div className="min-w-0">
               <div className="font-serif text-[15.5px] font-semibold text-carvao leading-[1.15] truncate">
                 {profissional.nome}
