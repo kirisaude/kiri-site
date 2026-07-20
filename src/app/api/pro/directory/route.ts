@@ -16,6 +16,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
 
-  const profissionais = (data.profissionais as Profissional[]).filter((p) => p.verificado && !p.oculto);
+  const profissionais = (data.profissionais as Profissional[]).filter((p) => p.verificado && !p.oculto && !!p.foto_url);
   return NextResponse.json(profissionais);
 }
