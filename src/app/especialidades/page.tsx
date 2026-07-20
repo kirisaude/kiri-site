@@ -104,7 +104,7 @@ export default function ProfissoesPage() {
               Especialidades da rede
             </h1>
           </div>
-          <p className="mt-6 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto">
+          <p className="mt-6 mb-0 font-serif text-[19px] md:text-[21px] leading-[1.55] font-normal text-carvao">
             O acompanhamento em neurodesenvolvimento raramente cabe em uma única especialidade — cada um com um olhar distinto, todos necessários.
           </p>
           <div className="mt-5 w-full bg-white border-l-[3px] border-[#44606C] pl-5 pr-4 py-4 rounded-r-[8px]">
