@@ -23,18 +23,32 @@ export default function SobrePage() {
           </div>
         </div>
 
-        <div className="px-[26px] pt-[28px] flex flex-col gap-6">
+        <div className="px-[26px] pt-[28px] flex flex-col gap-8">
 
           <p className="font-serif text-[19px] md:text-[21px] leading-[1.55] font-normal text-carvao m-0">
-            Encontrar o profissional certo para uma criança com suspeita de TEA, TDAH ou atraso de desenvolvimento costuma ser, para as famílias, uma segunda jornada tão difícil quanto o próprio diagnóstico.
+            Para famílias com crianças em suspeita de TEA, TDAH ou atraso de desenvolvimento, encontrar o profissional certo costuma ser uma segunda jornada — tão desgastante quanto o diagnóstico em si.
           </p>
 
-          <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
-            Esse padrão se repete. Na prática clínica, o que se vê com frequência são famílias que chegam ao consultório já exaustas — não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele. Listas desatualizadas, nomes sem contexto, profissionais indicados sem que se saiba ao certo qual é a formação real ou se a atuação com neurodesenvolvimento infantil vai além do autodeclarado. O sistema não organiza esse fluxo — e as famílias acabam tomando decisões importantes com informação insuficiente.
-          </p>
+          <div className="flex flex-col gap-4">
+            <p className="text-[16px] md:text-[17px] leading-[1.75] text-cinza-texto m-0">
+              O que se vê com frequência são famílias já exaustas chegando ao consultório — não pela falta de diagnóstico, mas pela ausência de um caminho claro depois dele:
+            </p>
+            <ul className="flex flex-col gap-2.5 pl-1">
+              {[
+                "Listas desatualizadas, sem contexto sobre formação ou especialidade.",
+                "Indicações informais sem nenhuma verificação de qualificação real.",
+                "Impossibilidade de saber se o profissional realmente atua com neurodesenvolvimento infantil.",
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3 text-[15.5px] md:text-[16.5px] leading-[1.6] text-cinza-texto">
+                  <span className="text-ferrugem/50 mt-[4px] flex-shrink-0 text-[9px]">●</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Pull-quote editorial — item 14/15 */}
-          <p className="font-serif text-[28px] md:text-[31px] font-medium leading-[1.2] tracking-[-0.01em] text-ardosia m-0">
+          {/* Pull-quote editorial */}
+          <p className="font-serif text-[28px] md:text-[31px] font-medium leading-[1.2] tracking-[-0.01em] text-ardosia mt-2 m-0">
             A Kiri nasceu para mudar isso.
           </p>
 
