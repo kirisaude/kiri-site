@@ -35,7 +35,7 @@ export default function ComoSelecionamosPage() {
               Como selecionamos os profissionais
             </h1>
           </div>
-          <p className="mt-6 text-[16.5px] md:text-[17.5px] leading-[1.65] text-cinza-texto" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="mt-6 mb-0 font-serif text-[19px] md:text-[21px] leading-[1.55] font-normal text-carvao" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Em vez de uma lista infinita, reunimos uma rede pequena e selecionada — e somos transparentes sobre o critério. Em neurodesenvolvimento, a avaliação cuidadosa costuma ser multidisciplinar, por isso reunimos diferentes especialidades numa só rede.
           </p>
         </div>
