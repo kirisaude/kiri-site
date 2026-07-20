@@ -15,8 +15,8 @@ export default function AvaliacaoPage() {
         {/* Conteúdo */}
         <div className="flex-1 px-[22px] pt-2 flex flex-col">
           {/* Símbolo + título alinhados à esquerda */}
-          <div className="mt-6 flex items-start gap-3">
-            <div style={{ flexShrink: 0, marginTop: 4 }}><KiriSymbol height={32} /></div>
+          <div className="mt-6 flex items-center gap-3">
+            <div style={{ flexShrink: 0 }}><KiriSymbol height={46} /></div>
             <h1 className="font-serif text-[30px] md:text-[34px] font-medium leading-[1.22] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
               Você não precisa ter um diagnóstico para começar.
             </h1>
