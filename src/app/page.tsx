@@ -78,7 +78,7 @@ export default function Home() {
   const [showValorOptions, setShowValorOptions] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
-  const [mostrarTodasMobile] = useState(false);
+  const [mostrarTodasSections, setMostrarTodasSections] = useState(false);
   const [mostrarCondicoes, setMostrarCondicoes] = useState(false);
   const [showCompartilhar, setShowCompartilhar] = useState(false);
   const [copiado, setCopiado] = useState(false);
@@ -178,8 +178,8 @@ export default function Home() {
     .filter((s) => s.pros.length > 0)
     .sort((a, b) => b.pros.length - a.pros.length);
 
-  // Sem filtros: só as 4 maiores seções com >= 2 profissionais
-  const sections = hasFilters
+  // Sem filtros e não expandido: só as 4 maiores seções com >= 2 profissionais
+  const sections = hasFilters || mostrarTodasSections
     ? allSections
     : allSections.filter((s) => s.pros.length >= 2).slice(0, 4);
 
@@ -904,18 +904,18 @@ export default function Home() {
               );
             })}
 
-            {/* Link para /especialidades — sempre visível após as seções principais */}
-            {!hasFilters && (
+            {/* Expandir seções restantes */}
+            {!hasFilters && !mostrarTodasSections && allSections.length > sections.length && (
               <div className="mt-8 flex justify-center">
-                <Link
-                  href="/especialidades"
-                  className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#9A8C78] no-underline hover:text-carvao transition-colors"
+                <button
+                  onClick={() => setMostrarTodasSections(true)}
+                  className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#9A8C78] hover:text-carvao transition-colors cursor-pointer"
                 >
                   Ver todas as especialidades
                   <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
-                    <path d="M7 4 L13 10 L7 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M5 7.5 L10 12.5 L15 7.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </Link>
+                </button>
               </div>
             )}
 
