@@ -103,9 +103,9 @@ function FormularioContent() {
           <div className="w-9 h-9" />
         </div>
 
-        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-6">
+        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-8">
 
-          {/* Emblema + título */}
+          {/* Grupo 1: emblema + título + reforço */}
           <div className="flex flex-col items-center text-center gap-4">
             <div className="w-[60px] h-[60px] rounded-full bg-[#E6F0F5] flex items-center justify-center">
               <svg width="26" height="26" viewBox="0 0 22 22" fill="none">
@@ -113,35 +113,33 @@ function FormularioContent() {
                 <path d="M6.5 11.2 L9.5 14.2 L15.5 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <div>
+            <div className="flex flex-col" style={{ gap: 12 }}>
               <h1 className="font-serif text-[26px] font-medium text-carvao m-0">Recebemos seu pedido</h1>
-              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 mt-2 m-0">
+              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
                 Nossa equipe vai entrar em contato em breve pelo canal que você informou.
+              </p>
+              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
+                Cada caso é avaliado individualmente, com cuidado e sigilo.
               </p>
             </div>
           </div>
 
-          {/* Reforço + urgência — bloco coeso */}
-          <div className="flex flex-col gap-2 text-center">
-            <p className="text-[13px] leading-[1.55] text-muted m-0 flex items-center justify-center gap-1.5">
-              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+          {/* Grupo 2: botão + aviso de urgência */}
+          <div className="flex flex-col items-center gap-3">
+            <button
+              onClick={() => router.push("/")}
+              className="w-full border border-ardosia text-ardosia-escura font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer hover:bg-[#44606C]/5 transition-colors"
+            >
+              Voltar ao início
+            </button>
+            <p className="text-[11.5px] leading-[1.55] text-[#9A8C78] text-center m-0 flex items-center gap-1.5">
+              <svg width="11" height="11" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
                 <path d="M10 2.5 L16.5 5.2 L16.5 10 C16.5 14 13.7 16.5 10 17.8 C6.3 16.5 3.5 14 3.5 10 L3.5 5.2 Z" stroke="#9A8C78" strokeWidth="1.4" strokeLinejoin="round" />
                 <path d="M7.4 10 L9.2 11.8 L12.8 7.8" stroke="#9A8C78" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Cada caso é avaliado individualmente, com cuidado e sigilo.
-            </p>
-            <p className="text-[13px] leading-[1.55] text-muted m-0">
               Se for uma situação urgente ou de risco, procure um serviço de atendimento presencial imediato.
             </p>
           </div>
-
-          {/* Botão outline */}
-          <button
-            onClick={() => router.push("/")}
-            className="w-full border border-ardosia text-ardosia-escura font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer hover:bg-[#44606C]/5 transition-colors"
-          >
-            Voltar ao início
-          </button>
         </div>
 
         <Footer className="mx-[18px] mt-auto mb-8" />
