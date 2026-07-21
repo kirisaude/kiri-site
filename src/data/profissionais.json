@@ -928,12 +928,12 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — Escola Bahiana de Medicina e Saúde Pública — 2021",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
           "instituicao_ano": "clínica psicanalítica lacaniana — Instituto ESPE / Centro Universitário Filadélfia (Unifil) — 2024",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -958,8 +958,8 @@
       "foto_posicao": "25% top",
       "genero": "F",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true
     }
   ]
 }
