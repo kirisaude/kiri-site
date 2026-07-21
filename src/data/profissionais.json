@@ -986,7 +986,7 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Medicina — UPE — 2021",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
@@ -1007,7 +1007,7 @@
       "convenios": null,
       "whatsapp_agendamento": "(11) 91600-0914",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-040.jpg",
       "verificacao_data": "julho de 2026",
       "card_token": "d95add6415774ee3",
       "profissao_secundaria": null,
@@ -1017,10 +1017,11 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "foto_posicao": "center top",
+      "foto_posicao": "center center",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "genero": "M"
     }
   ]
 }
