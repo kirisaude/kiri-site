@@ -40,7 +40,7 @@ export default async function PerfilPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
       {/* Nav */}
       <div className="w-full px-4 md:px-8 pt-4 pb-0">
         <div className="flex items-center pb-3">
@@ -113,7 +113,7 @@ export default async function PerfilPage({ params }: PageProps) {
                     <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-muted w-[94px] flex-none pt-[1px]">
                       {c.rotulo}
                     </div>
-                    <div className="text-[14px] text-carvao leading-[1.45]">
+                    <div className="text-[14px] text-carvao leading-[1.45] min-w-0">
                       {c.valor}
                       <span className="text-cinza-texto2">{c.detalhe}</span>
                     </div>

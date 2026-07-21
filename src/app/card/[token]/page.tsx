@@ -28,7 +28,7 @@ export default async function CardPage({ params }: { params: Promise<{ token: st
   const waUrl = p.whatsapp_agendamento ? buildWaUrl(p.whatsapp_agendamento, p.nome) : null;
 
   return (
-    <div className="min-h-screen bg-creme flex flex-col items-center justify-start py-10 px-4">
+    <div className="min-h-screen bg-creme flex flex-col items-center justify-start py-10 px-4 overflow-x-hidden">
       <div className="w-full max-w-sm">
 
         {/* Header Kiri */}
@@ -74,7 +74,7 @@ export default async function CardPage({ params }: { params: Promise<{ token: st
                 <circle cx="10" cy="6" r="3" stroke="#6E8893" strokeWidth="1.4" />
                 <path d="M4.5 16 C4.5 12 15.5 12 15.5 16" stroke="#6E8893" strokeWidth="1.4" strokeLinecap="round" />
               </svg>
-              <span className="text-[14px] text-carvao-sutil">{p.faixa_etaria}</span>
+              <span className="text-[14px] text-carvao-sutil min-w-0">{p.faixa_etaria}</span>
             </div>
             <div className="flex items-center gap-2.5">
               <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>

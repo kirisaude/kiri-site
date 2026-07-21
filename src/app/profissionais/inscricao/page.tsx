@@ -193,7 +193,7 @@ export default function InscricaoProfissionalPage() {
 
   if (enviado) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col">
+      <div className="min-h-screen bg-creme flex flex-col overflow-x-hidden">
         <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
           <NavBack />
           <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">Inscrição de profissional</span>
@@ -241,7 +241,7 @@ export default function InscricaoProfissionalPage() {
   const labelClass = "text-[15px] font-semibold text-carvao";
 
   return (
-    <div className="min-h-screen bg-creme flex flex-col">
+    <div className="min-h-screen bg-creme flex flex-col overflow-x-hidden">
       <div className="w-full px-4 pt-4 pb-2 flex items-center justify-between">
         <NavBack />
         <span className="text-[12.5px] font-semibold tracking-[0.04em] text-muted">Inscrição de profissional</span>

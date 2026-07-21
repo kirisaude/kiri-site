@@ -6,7 +6,7 @@ import { KiriSymbol } from "@/components/KiriSymbol";
 
 export default function AvaliacaoPage() {
   return (
-    <div className="min-h-screen bg-creme flex flex-col">
+    <div className="min-h-screen bg-creme flex flex-col overflow-x-hidden">
       <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Avaliação do neurodesenvolvimento" />
       </div>

@@ -90,7 +90,7 @@ export default function ProfissoesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
       <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Especialidades" />
       </div>

@@ -139,7 +139,7 @@ export default function ProPage() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
+      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 overflow-x-hidden">
         <div className="flex flex-col items-center gap-6 w-full max-w-[320px]">
           <div className="flex flex-col items-center gap-2">
             <KiriLogoCompact height={36} />
@@ -163,7 +163,7 @@ export default function ProPage() {
   }
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center gap-3">
         <KiriLogoCompact height={28} />
         <span className="text-[12px] text-muted ml-auto">

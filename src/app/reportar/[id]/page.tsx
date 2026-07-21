@@ -55,7 +55,7 @@ export default function ReportarPage() {
 
   if (enviado) {
     return (
-      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 text-center">
+      <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 text-center overflow-x-hidden">
         <div className="w-12 h-12 rounded-full bg-ardosia/10 flex items-center justify-center mb-5">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M5 12.5 L9.5 17 L19 7" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -73,7 +73,7 @@ export default function ReportarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
       <div className="w-full px-4 pt-4 pb-2">
         <NavBack label="Reportar perfil" />
       </div>

@@ -48,7 +48,7 @@ const CIDADES_DISPONIVEIS = (() => {
 
 function EmBreve() {
   return (
-    <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6">
+    <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 overflow-x-hidden">
       <KiriLogo size={72} />
       <div className="font-serif text-[38px] md:text-[48px] font-medium text-ferrugem tracking-[-0.01em] mt-4">
         Kiri
@@ -194,7 +194,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-creme">
+    <div className="min-h-screen bg-creme overflow-x-hidden">
 
       {/* ═══ STICKY HEADER ═══ */}
       <header className="sticky top-0 z-30 bg-creme/95 backdrop-blur-sm border-b border-linha">

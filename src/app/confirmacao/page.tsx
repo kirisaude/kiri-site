@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ConfirmacaoPage() {
   return (
-    <div className="min-h-screen bg-creme flex flex-col">
+    <div className="min-h-screen bg-creme flex flex-col overflow-x-hidden">
       <div className="max-w-2xl mx-auto w-full flex flex-col flex-1 px-2">
         {/* Nav */}
         <div className="flex items-center justify-end px-4 pt-5">
