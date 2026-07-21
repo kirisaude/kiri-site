@@ -1165,6 +1165,8 @@ export default function AdminPage() {
                                 <span className="text-[11px] text-muted font-mono">{p.id}</span>
                                 {p.oculto && <span className="text-[11px] font-semibold text-[#BE8A3E] bg-[#FFF0D0] border border-[#E8C88A] px-2 py-0.5 rounded-[6px]">oculto</span>}
                                 {!p.foto_url && <span className="text-[11px] font-semibold text-ferrugem bg-[#FFF0EE] border border-ferrugem/25 px-2 py-0.5 rounded-[6px]">sem foto</span>}
+                                {p.registro_verificado === false && <span className="text-[11px] font-semibold text-ardosia bg-wash-azulado border border-borda-azulada px-2 py-0.5 rounded-[6px]">registro não verificado</span>}
+                                {p.sobre_verificado === false && <span className="text-[11px] font-semibold text-ardosia bg-wash-azulado border border-borda-azulada px-2 py-0.5 rounded-[6px]">sobre não verificado</span>}
                               </div>
                               <div className="text-[12.5px] text-cinza-texto mt-0.5 flex gap-2 flex-wrap">
                                 <span>{p.cidade}</span>
