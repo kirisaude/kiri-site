@@ -965,8 +965,8 @@
       "id": "kiri-040",
       "inscricao_id": "1f035f54-6ff5-4c5d-91c8-ac580fb1c3d2",
       "nome": "Gabriel Teixeira Basto Feitosa",
-      "profissao": "Psiquiatra da infância e adolescência",
-      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "profissao": "Psiquiatra",
+      "titulo_exibicao": "Psiquiatra",
       "registro_conselho": "241988",
       "rqe": "149945",
       "areas_atuacao": [
@@ -985,15 +985,19 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — UPE — 2021"
+          "instituicao_ano": "Medicina — UPE — 2021",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — UNIFESP — 2026"
+          "instituicao_ano": "Psiquiatria — UNIFESP — 2026",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESO — Em andamento (conclusão 2027)"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESP — Em andamento (conclusão 2027)",
+          "verificado": true,
+          "obs": "Atual"
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1005,7 +1009,18 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "julho de 2026",
-      "card_token": "d95add6415774ee3"
+      "card_token": "d95add6415774ee3",
+      "profissao_secundaria": null,
+      "tempo_atuacao": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": false
     }
   ]
 }
