@@ -73,6 +73,8 @@ export default function Home() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [showMenu, setShowMenu] = useState(false);
   const filtrosRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(60);
   const [activeSheet, setActiveSheet] = useState<string | null>(null);
   const [mostrarTodasSections, setMostrarTodasSections] = useState(false);
   const [mostrarCondicoes, setMostrarCondicoes] = useState(false);
@@ -101,6 +103,15 @@ export default function Home() {
     }
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  useEffect(() => {
+    if (!headerRef.current) return;
+    const el = headerRef.current;
+    setHeaderHeight(el.getBoundingClientRect().height);
+    const obs = new ResizeObserver(() => setHeaderHeight(el.getBoundingClientRect().height));
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   function copiarLink() {
@@ -197,7 +208,7 @@ export default function Home() {
     <div className="min-h-screen bg-creme overflow-x-hidden">
 
       {/* ═══ STICKY HEADER ═══ */}
-      <header className="sticky top-0 z-30 bg-creme/95 backdrop-blur-sm border-b border-linha">
+      <header ref={headerRef} className="sticky top-0 z-30 bg-creme/95 backdrop-blur-sm border-b border-linha">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-3.5 flex items-center gap-3 md:gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-none no-underline">
@@ -513,7 +524,11 @@ export default function Home() {
         </div>
 
         {/* Filtros adicionais */}
-        <div ref={filtrosRef} className="pt-4 md:pt-5 relative">
+        <div
+          ref={filtrosRef}
+          className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 pt-3 pb-2 md:pt-5 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-linha md:border-b-0 relative"
+          style={{ top: headerHeight }}
+        >
           <div className="overflow-x-auto scrollbar-hide flex gap-2 md:overflow-visible">
 
             {/* 1. Tipo de profissional */}
