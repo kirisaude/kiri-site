@@ -67,7 +67,9 @@ export async function PATCH(request: Request) {
   );
 
   if (!res.ok) {
-    return NextResponse.json({ error: "Erro ao atualizar status" }, { status: 502 });
+    const errBody = await res.text();
+    console.error("Supabase PATCH encaminhamento erro:", res.status, errBody);
+    return NextResponse.json({ error: errBody || "Erro ao atualizar status" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

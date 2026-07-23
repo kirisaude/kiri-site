@@ -645,15 +645,28 @@ export default function AdminPage() {
   }
 
   async function atualizarEncaminhamento(id: string, status: string) {
+    const statusAnterior = encaminhamentos.find((e) => e.id === id)?.status ?? null;
+
     setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status } : e));
     if (status === "respondido") {
       setExpandidos((prev) => { const next = new Set(prev); next.delete(id); return next; });
     }
-    await fetch("/api/admin/encaminhamentos", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, status }),
-    });
+
+    try {
+      const res = await fetch("/api/admin/encaminhamentos", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, status }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status: statusAnterior } : e));
+        alert(`Erro ao salvar status: ${body.error ?? res.status}`);
+      }
+    } catch {
+      setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status: statusAnterior } : e));
+      alert("Erro de rede. Tente novamente.");
+    }
   }
 
   async function excluirEncaminhamento(id: string) {
