@@ -201,10 +201,10 @@ export default async function PerfilPage({ params }: PageProps) {
                   let local: string;
                   if (cursoTemArea) {
                     titulo = titleCasePT(f.curso);
-                    local = partes.filter(Boolean).join(" · ");
+                    local = partes.filter(Boolean).map(p => titleCasePT(p.trim())).join(" · ");
                   } else {
                     const area = partes[0]?.trim() ?? "";
-                    local = partes.slice(1).filter(Boolean).join(" · ");
+                    local = partes.slice(1).filter(Boolean).map(p => titleCasePT(p.trim())).join(" · ");
                     titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
                   }
                   return (

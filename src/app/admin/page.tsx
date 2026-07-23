@@ -581,6 +581,7 @@ export default function AdminPage() {
     data.profissionais as Profissional[]
   );
   const [excluindo, setExcluindo] = useState<string | null>(null);
+  const [buscaPlataforma, setBuscaPlataforma] = useState("");
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
   const [exportando, setExportando] = useState(false);
@@ -1154,12 +1155,20 @@ export default function AdminPage() {
               <h2 className="font-serif text-[18px] font-semibold text-carvao mb-1">
                 Todos na plataforma
               </h2>
-              <p className="text-[13px] text-muted mb-5">
+              <p className="text-[13px] text-muted mb-4">
                 {visiveis.length} visíveis na home · {profPublicados.length} no total. Exclusões entram em vigor após ~1 min (rebuild automático).
               </p>
 
+              <input
+                type="text"
+                value={buscaPlataforma}
+                onChange={(e) => setBuscaPlataforma(e.target.value)}
+                placeholder="Buscar por nome…"
+                className="w-full max-w-sm mb-5 px-3 py-2 text-[14px] border border-linha rounded-[10px] bg-white placeholder:text-muted focus:outline-none focus:border-ardosia"
+              />
+
               {PROFISSOES_ORDENADAS.map((prof) => {
-                const grupo = profPublicados.filter((p) => p.profissao === prof);
+                const grupo = profPublicados.filter((p) => p.profissao === prof && (!buscaPlataforma || p.nome.toLowerCase().includes(buscaPlataforma.toLowerCase())));
                 if (grupo.length === 0) return null;
                 return (
                   <div key={prof} className="mb-6">
