@@ -103,12 +103,12 @@
       "modalidade": "Presencial e online",
       "cidade": "Cotia, SP",
       "faixa_etaria": "Crianças (6–12 anos), Pré-escola (3–5 anos)",
-      "sobre": "Sou mãe de uma criança autista nível 3 de suporte e Psicóloga especializada em Terapia Aba para Autismo e TDAH. \nAtuo na área e venho me especializando com cursos e supervisões de profissionais referência no campo da Análise do Comportamento Aplicada desde 2018.\nDesde então, dedico-me a contribuir com o\ndesenvolvimento pleno de crianças de até os 13 anos de idade com mais variados perfis e a apoiar os cuidadores nos desafios diários de uma vida atípica.\nO meu propósito é garantir que as crianças alcancem o máximo de seu potencial e minimizem comportamentosdesafiadores que impedem seu\nprogresso. Criar oportunidades de aprendizado para que os cuidadores tenham ferramentas\npara aumentar a frequencia dos comportamentos desejados e diminuir os indesejados.\nRealizo atendimento a crianças com Transtorno do Espectro Autista (TEA), deficiência intelectual ou TDAH de até 13 anos de idade.\nUtilizo os protocolos VB-Mapp, ABLLS, Social Skills Solutions, Socially Savvy, Essential For Living nos processos avaliativos de acordo com a especificidade de cada caso.\nAtuo com intervenção ABA em consultório e online; treinamento parental para os cuidadores, assim como orientação para escolas e acompanhantes terapêuticos (ATs).",
+      "sobre": "Sou mãe de uma criança autista nível 3 de suporte e Psicóloga especializada em Terapia Aba para Autismo e TDAH. \nAtuo na área e venho me especializando com cursos e supervisões de profissionais referência no campo da Análise do Comportamento Aplicada desde 2018.\nDesde então, dedico-me a contribuir com o\ndesenvolvimento pleno de crianças de até os 13 anos de idade com mais variados perfis e a apoiar os cuidadores nos desafios diários de uma vida atípica.\nO meu propósito é garantir que as crianças alcancem o máximo de seu potencial e minimizem comportamentosdesafiadores que impedem seu\nprogresso. Criar oportunidades de aprendizado para que os cuidadores tenham ferramentas\npara aumentar a frequencia dos comportamentos desejados e diminuir os indesejados.\nRealizo atendimento a crianças com Transtorno do Espectro Autista (TEA), deficiência intelectual ou TDAH até 13 anos de idade.\nUtilizo os protocolos VB-Mapp, ABLLS, Social Skills Solutions, Socially Savvy, Essential For Living nos processos avaliativos de acordo com a especificidade de cada caso.\nAtuo com intervenção ABA em consultório e online; treinamento parental para os cuidadores, assim como orientação para escolas e acompanhantes terapêuticos (ATs).",
       "formacao": [
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — Universidade Paulista (UNIP) — 2015",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Especialização",
@@ -118,7 +118,7 @@
         {
           "curso": "Mestranda",
           "instituicao_ano": "Educação Especial —  Universidade Federal de São Carlos (UFSCar) — atual",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -134,9 +134,15 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false,
-      "genero": "F"
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "genero": "F",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-024",
