@@ -338,22 +338,22 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Terapia Ocupacional — Universidade de São Paulo — 2009",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Aprimoramento Profissional em Saúde Mental Multiprofissional — Fundação do Desenvolvimento Administrativo (FUNDAP)/CAPS Itapeva — 2010",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Certificação Internacional",
           "instituicao_ano": "Integração Sensorial de Ayres — Collaborative for Leadership in Ayres Sensory Integration (CLASI) — 2023",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Mestrado Profissional ",
           "instituicao_ano": " Terapia Ocupacional e Processos de Inclusão Social — Faculdade de Medicina da Universidade de São Paulo (FMUSP) — 2019-2024",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -369,9 +369,15 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false,
-      "genero": "F"
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "genero": "F",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-028",
