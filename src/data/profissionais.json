@@ -156,17 +156,17 @@
         {
           "curso": "Graduação em Medicina",
           "instituicao_ano": "Medicina — Escola Bahiana de Medicina e Saúde Pública (EBMSP)",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
           "instituicao_ano": "Psiquiatria — Hospital Universitário Professor Edgard Santos (HUPES)/Universidade Federal da Bahia (UFBA) — 2023",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Especialização em Psiquiatria da Infância e Adolescência",
           "instituicao_ano": "Psiquiatria da Infância e Adolescência — Hospital Juliano Moreira — 2024",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -182,9 +182,15 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false,
-      "genero": "F"
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "genero": "F",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-025",
