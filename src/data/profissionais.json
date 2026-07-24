@@ -1033,6 +1033,43 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "genero": "M"
+    },
+    {
+      "id": "kiri-041",
+      "inscricao_id": "ce52b780-d656-4a44-a7ef-6d5aec9bc8e7",
+      "nome": "RANY SOFIA SAGICA REIS",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 20/14225",
+      "rqe": null,
+      "areas_atuacao": [
+        "Ansiedade",
+        "Depressão"
+      ],
+      "modalidade": "Online",
+      "cidade": "BOA VISTA",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Olá, sou Sofia Reis, psicóloga, e realizo acompanhamento psicológico de adolescentes, oferecendo um espaço seguro de escuta, acolhimento e desenvolvimento emocional.\nMeu trabalho é baseado na Terapia Cognitivo-Comportamental (TCC), auxiliando adolescentes a compreenderem seus pensamentos, emoções e comportamentos, desenvolvendo estratégias para lidar com desafios, inseguranças e mudanças dessa fase.\nAcredito na importância da parceria com a família, construindo um processo terapêutico que respeite o adolescente e favoreça seu bem-estar e crescimento.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Faculdade Cathedral — 2026"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Neuropsicologia — EDUCAMINAS — 2027"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(95) 99139-4947",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "e2e821e164fe4b24"
     }
   ]
 }
