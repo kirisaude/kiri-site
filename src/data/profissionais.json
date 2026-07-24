@@ -1070,6 +1070,48 @@
       "foto_url": null,
       "verificacao_data": "julho de 2026",
       "card_token": "e2e821e164fe4b24"
+    },
+    {
+      "id": "kiri-042",
+      "inscricao_id": "261a2410-04d5-4e81-9311-1351292e5948",
+      "nome": "Giuliana Blenda Lima Dantas Cruz",
+      "profissao": "Psiquiatra",
+      "titulo_exibicao": "Psiquiatra",
+      "registro_conselho": "36408",
+      "rqe": "29008",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "TOC"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Salvador",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos)",
+      "sobre": "Médica Psiquiatra (HUPES/UFBA) | CRM-BA 36408 | RQE 29008\n\nAtendimentos para crianças, adolescentes e adultos presencial em Salvador ou online para o Brasil (on-line apenas para maiores de 15 anos).\n\nEscuta empática, atendimento holístico e humanizado, aplicando a medicina baseada em evidências.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — UESB — 2020"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — UFBA — 2026"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(71) 98121-8781",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "4d36cd4f30224e31"
     }
   ]
 }
