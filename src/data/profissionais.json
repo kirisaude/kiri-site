@@ -1053,11 +1053,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Faculdade Cathedral — 2026"
+          "instituicao_ano": "Psicologia — Faculdade Cathedral — 2026",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicologia — EDUCAMINAS — 2027"
+          "instituicao_ano": "Neuropsicologia — EDUCAMINAS — 2027",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1067,9 +1069,20 @@
       "convenios": null,
       "whatsapp_agendamento": "(95) 99139-4947",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-041.jpg",
       "verificacao_data": "julho de 2026",
-      "card_token": "e2e821e164fe4b24"
+      "card_token": "e2e821e164fe4b24",
+      "profissao_secundaria": null,
+      "tempo_atuacao": "Menos de 1 ano",
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": false,
+      "registro_verificado": false,
+      "sobre_verificado": true
     },
     {
       "id": "kiri-042",
