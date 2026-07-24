@@ -79,8 +79,14 @@
       "foto_posicao": "center 20%",
       "genero": "F",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": true
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null
     },
     {
       "id": "kiri-023",
