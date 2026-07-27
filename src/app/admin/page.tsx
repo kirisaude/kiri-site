@@ -1538,6 +1538,12 @@ export default function AdminPage() {
 
             {/* Lista de todas as instituições citadas */}
             {(() => {
+              // Mapa de siglas já cadastradas pelo admin
+              const siglasMap: Record<string, string> = {};
+              for (const inst of instituicoes) {
+                if (inst.nome_extenso) siglasMap[inst.sigla.toUpperCase()] = inst.nome_extenso;
+              }
+
               // Formato do campo: "ÁREA — INSTITUIÇÃO — ANO" (3 partes) ou "ÁREA — INSTITUIÇÃO" (2) ou só nome da inst (1)
               function extrairInstituicao(campo: string): string | null {
                 const partes = campo.split(" — ").map(p => p.trim()).filter(Boolean);
@@ -1545,24 +1551,35 @@ export default function AdminPage() {
                   /^\d{4}(-\d{4})?$/.test(s) || /^(atual|em andamento)/i.test(s);
 
                 if (partes.length >= 3) {
-                  // ÁREA — INSTITUIÇÃO — ANO → pega a penúltima parte (instituição)
                   const inst = partes[partes.length - 2];
                   return inst && inst.length >= 3 ? inst : null;
                 }
                 if (partes.length === 2) {
-                  // Se a segunda parte é ano/status → só ÁREA — ANO, sem instituição
                   if (isAnoOuStatus(partes[1])) return null;
-                  // ÁREA — INSTITUIÇÃO (sem ano)
                   return partes[1].length >= 3 ? partes[1] : null;
                 }
                 if (partes.length === 1) {
                   const p = partes[0];
-                  // Considera instituição se tem sigla entre parênteses ou começa com palavra-chave
                   if (/\([A-Za-z]{2,12}\)/.test(p)) return p;
                   if (/^(universidade|faculdade|instituto|centro|escola|hospital|pontifícia|fundação|conselho)/i.test(p)) return p;
                   return null;
                 }
                 return null;
+              }
+
+              // Resolve sigla pura para nome completo usando o mapa do admin
+              function resolverSigla(inst: string): string {
+                // Sigla pura maiúscula: "UESB", "UFBA"
+                if (/^[A-Z]{2,12}$/.test(inst)) {
+                  const nome = siglasMap[inst];
+                  return nome ? `${nome} (${inst})` : inst;
+                }
+                // Sigla com capitalização mista sem espaço: "Unian", "FMU"
+                if (/^[A-Za-z]{2,12}$/.test(inst) && !inst.includes(" ")) {
+                  const nome = siglasMap[inst.toUpperCase()];
+                  return nome ? `${nome} (${inst.toUpperCase()})` : inst;
+                }
+                return inst;
               }
 
               function chaveSemSigla(s: string) {
@@ -1574,8 +1591,9 @@ export default function AdminPage() {
                 if (!p.formacao) continue;
                 for (const f of p.formacao) {
                   if (!f.instituicao_ano) continue;
-                  const inst = extrairInstituicao(f.instituicao_ano);
-                  if (!inst) continue;
+                  const instRaw = extrairInstituicao(f.instituicao_ano);
+                  if (!instRaw) continue;
+                  const inst = resolverSigla(instRaw);
                   const chave = chaveSemSigla(inst);
                   const existe = entradasComNome.find(e => chaveSemSigla(e.nome) === chave);
                   if (existe) {
