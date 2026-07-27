@@ -34,11 +34,20 @@ export async function PATCH(request: Request) {
       "Content-Type": "application/json",
       "apikey": SUPABASE_KEY(),
       "Authorization": `Bearer ${SUPABASE_KEY()}`,
-      "Prefer": "return=minimal",
+      "Prefer": "return=representation",
     },
     body: JSON.stringify({ nome_extenso: nome_extenso?.trim() || null }),
   });
 
-  if (!res.ok) return NextResponse.json({ error: "Erro ao atualizar" }, { status: 502 });
+  if (!res.ok) {
+    const body = await res.text();
+    return NextResponse.json({ error: `Supabase ${res.status}: ${body}` }, { status: 502 });
+  }
+
+  const updated = await res.json() as unknown[];
+  if (!Array.isArray(updated) || updated.length === 0) {
+    return NextResponse.json({ error: "Nenhuma linha atualizada — execute o GRANT no Supabase" }, { status: 409 });
+  }
+
   return NextResponse.json({ ok: true });
 }

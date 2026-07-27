@@ -267,6 +267,9 @@ export default async function PerfilPage({ params }: PageProps) {
                     if (emAndamento && /^\d{4}$/.test(parte.trim()) && parseInt(parte.trim()) > anoAtual) {
                       return `em andamento · previsão de conclusão em ${parte.trim()}`;
                     }
+                    if (/^em andamento/i.test(parte.trim())) {
+                      return parte.trim().toLowerCase();
+                    }
                     return resolveInstituicao(parte, instituicoesMap);
                   };
 

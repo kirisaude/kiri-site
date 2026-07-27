@@ -712,6 +712,7 @@ export default function AdminPage() {
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
   const [instituicoes, setInstituicoes] = useState<{ sigla: string; nome_extenso: string | null }[]>([]);
   const [instEdits, setInstEdits] = useState<Record<string, string>>({});
+  const [instBusca, setInstBusca] = useState("");
   const [profPublicados, setProfPublicados] = useState<Profissional[]>(
     data.profissionais as Profissional[]
   );
@@ -1682,20 +1683,44 @@ export default function AdminPage() {
               }
               entradasComNome.sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
 
+              function formatarInst(nome: string) {
+                return titleCasePT(nome)
+                  .replace(/\(([^)]+)\)/g, (_, s) => `(${s.toUpperCase()})`)
+                  .replace(/\/([a-záéíóúâêîôûãõàü])/gi, (_, c) => `/${c.toUpperCase()}`);
+              }
+
+              const busca = instBusca.trim().toLowerCase();
+              const visiveis = busca
+                ? entradasComNome.filter(e =>
+                    e.nome.toLowerCase().includes(busca) ||
+                    e.nomes.some(n => n.toLowerCase().includes(busca))
+                  )
+                : entradasComNome;
+
               return (
                 <div className="mt-8 flex flex-col gap-3">
                   <div>
                     <div className="text-[13px] font-semibold text-carvao mb-0.5">Todas as instituições citadas na rede</div>
                     <p className="text-[12px] text-muted">Referência para classificação futura por qualificação institucional. {entradasComNome.length} entradas encontradas.</p>
                   </div>
+                  <input
+                    type="text"
+                    value={instBusca}
+                    onChange={e => setInstBusca(e.target.value)}
+                    placeholder="Buscar instituição ou profissional…"
+                    className="border border-linha rounded-[10px] px-3 py-2 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                  />
                   <div className="flex flex-col gap-1.5">
                     <div className="grid grid-cols-[2fr_1fr] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
                       <span>Instituição</span>
                       <span>Profissionais</span>
                     </div>
-                    {entradasComNome.map((e) => (
+                    {visiveis.length === 0 && (
+                      <p className="text-[13px] text-muted px-3 py-2">Nenhuma instituição encontrada.</p>
+                    )}
+                    {visiveis.map((e) => (
                       <div key={e.nome} className="grid grid-cols-[2fr_1fr] gap-x-3 items-start px-3 py-2 rounded-[10px] bg-white border border-linha">
-                        <span className="text-[13px] text-carvao">{titleCasePT(e.nome).replace(/\(([^)]+)\)/g, (_, s) => `(${s.toUpperCase()})`)}</span>
+                        <span className="text-[13px] text-carvao">{formatarInst(e.nome)}</span>
                         <span className="text-[12px] text-muted leading-[1.5]">{e.nomes.join(", ")}</span>
                       </div>
                     ))}
