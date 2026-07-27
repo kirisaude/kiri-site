@@ -130,6 +130,10 @@ export default function InscricaoProfissionalPage() {
       setErro("Preencha a instituição e o ano de conclusão da graduação.");
       return;
     }
+    if (!experienciasInfantil.some((e) => e.descricao.trim())) {
+      setErro("Descreva ao menos uma experiência com atendimento infantil.");
+      return;
+    }
     setEnviando(true);
     setErro("");
 
@@ -611,7 +615,7 @@ export default function InscricaoProfissionalPage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className={labelClass}>Experiência com atendimento infantil <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+              <label className={labelClass}>Experiência com atendimento infantil <span className="text-ferrugem">*</span></label>
               <p className="text-[12.5px] text-muted -mt-1 leading-[1.55]">Descreva experiências relevantes com crianças — contexto, duração e faixa etária.</p>
               {experienciasInfantil.map((exp, i) => (
                 <div key={i} className="flex gap-2 items-start">
