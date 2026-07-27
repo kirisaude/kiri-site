@@ -1117,8 +1117,9 @@
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": true
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null
     }
   ]
 }
