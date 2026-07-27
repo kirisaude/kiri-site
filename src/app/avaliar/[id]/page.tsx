@@ -202,9 +202,12 @@ export default function AvaliarPage() {
             />
           </div>
 
-          <p className="text-[12px] text-muted leading-[1.5]">
-            As avaliações são revisadas pela equipe Kiri antes de serem publicadas no perfil.
-          </p>
+          <div className="bg-[#F5EFE6] rounded-[10px] px-4 py-3 flex flex-col gap-1">
+            <p className="text-[12.5px] font-semibold text-carvao">Política de moderação</p>
+            <p className="text-[12px] text-cinza-texto leading-[1.6]">
+              Todas as avaliações passam por revisão antes de serem publicadas. Não são aceitas avaliações com conteúdo ofensivo, inadequado ou referentes a atendimentos não intermediados pela plataforma Kiri.
+            </p>
+          </div>
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
