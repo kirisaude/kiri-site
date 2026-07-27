@@ -502,19 +502,23 @@ export default function EditarProfissionalPage() {
             </div>
           )}
 
-          {/* Gênero */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[12.5px] font-medium text-cinza-texto">Gênero <span className="text-[11px] text-muted">(ajusta substantivo da profissão no perfil)</span></label>
-            <div className="flex gap-2">
-              {(["M", "F"] as const).map((g) => (
-                <button key={g} type="button"
-                  onClick={() => setGenero(genero === g ? undefined : g)}
-                  className={`text-[13px] font-medium px-4 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${genero === g ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
-                  {g === "M" ? "Masculino" : "Feminino"}
-                </button>
-              ))}
+          {/* Sufixo profissional — só para profissões com conjugação M/F distinta */}
+          {["Neuropsicólogo", "Psicólogo", "Fonoaudiólogo", "Psicopedagogo"].includes(profissao) && (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12.5px] font-medium text-cinza-texto">
+                Sufixo profissional <span className="text-[11px] text-muted">(ex: Psicóloga vs Psicólogo)</span>
+              </label>
+              <div className="flex gap-2">
+                {(["M", "F"] as const).map((g) => (
+                  <button key={g} type="button"
+                    onClick={() => setGenero(genero === g ? undefined : g)}
+                    className={`text-[13px] font-medium px-4 py-1.5 rounded-[8px] border cursor-pointer transition-colors ${genero === g ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}>
+                    {g === "M" ? "Masculino" : "Feminino"}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="flex flex-col gap-1">
             <label className="text-[12.5px] font-medium text-cinza-texto">Título de exibição (ex: Psiquiatra da infância e adolescência)</label>
