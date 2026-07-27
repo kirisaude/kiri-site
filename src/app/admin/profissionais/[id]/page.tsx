@@ -246,7 +246,7 @@ export default function EditarProfissionalPage() {
       profissao: profissao.trim(),
       profissao_secundaria: profissaoSecundaria.trim() || null,
       titulo_exibicao: tituloExibicao.trim(),
-      registro_conselho: registro.trim(),
+      registro_conselho: registro.trim() || null,
       rqe: rqe.trim() || null,
       areas_atuacao: areasLista,
       modalidade: modalidade.trim(),
@@ -528,9 +528,19 @@ export default function EditarProfissionalPage() {
 
           {/* Registro no conselho — com checkbox de verificação */}
           <div className="flex flex-col gap-1">
-            <label className="text-[12.5px] font-medium text-cinza-texto">Registro no conselho</label>
-            <input type="text" value={registro} onChange={(e) => setRegistro(e.target.value)} required
-              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors" />
+            <label className="text-[12.5px] font-medium text-cinza-texto">
+              Registro no conselho
+              {profissao === "Psicopedagogo" && <span className="ml-1 text-[11px] font-normal text-muted">(opcional — não há conselho de psicopedagogia)</span>}
+            </label>
+            {profissao === "Psicopedagogo" && (
+              <p className="text-[11.5px] text-ambar-texto bg-[#FFF8ED] border border-[#E0A55E]/30 rounded-[8px] px-3 py-2 mb-1 leading-[1.5]">
+                Psicopedagogia não tem conselho regulamentador. O CBO (Classificação Brasileira de Ocupações) não é um registro de conselho — pode deixar em branco ou registrar outro vínculo profissional, se houver.
+              </p>
+            )}
+            <input type="text" value={registro} onChange={(e) => setRegistro(e.target.value)}
+              required={profissao !== "Psicopedagogo"}
+              placeholder={profissao === "Psicopedagogo" ? "Deixe em branco ou informe outro vínculo" : ""}
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted" />
             {(() => {
               const links: { label: string; url: string }[] = [];
               if (profissao === "Fonoaudiólogo") {

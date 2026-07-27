@@ -58,7 +58,7 @@ export function AvaliacoesSection({ profissionalId }: { profissionalId: string }
     <div>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
-          <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted">Avaliações</div>
+          <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ferrugem">Avaliações</div>
           {avaliacoes.length > 0 && (
             <div className="flex items-center gap-1.5">
               <Estrelas nota={Math.round(media)} size={12} />

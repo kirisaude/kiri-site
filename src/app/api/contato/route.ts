@@ -13,10 +13,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ erro: "Configuração incompleta" }, { status: 500 });
   }
 
-  const { nome, email, mensagem } = await request.json();
+  const { nome, email, topico, mensagem } = await request.json();
 
-  if (!nome?.trim() || !mensagem?.trim()) {
-    return NextResponse.json({ erro: "Nome e mensagem são obrigatórios" }, { status: 400 });
+  if (!nome?.trim() || !email?.trim() || !mensagem?.trim()) {
+    return NextResponse.json({ erro: "Nome, e-mail e mensagem são obrigatórios" }, { status: 400 });
   }
 
   const res = await fetch(`${supabaseUrl}/rest/v1/contatos`, {
@@ -29,7 +29,8 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       nome: nome.trim(),
-      email: email?.trim() || null,
+      email: email.trim(),
+      topico: topico?.trim() || null,
       mensagem: mensagem.trim(),
     }),
   });

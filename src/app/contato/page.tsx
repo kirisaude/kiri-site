@@ -4,9 +4,13 @@ import { useState } from "react";
 import { NavBack } from "@/components/NavBack";
 import { Footer } from "@/components/Footer";
 
+const TOPICOS = ["Dúvidas", "Sugestões", "Críticas", "Outros"] as const;
+type Topico = typeof TOPICOS[number];
+
 export default function ContatoPage() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [topico, setTopico] = useState<Topico | "">("");
   const [mensagem, setMensagem] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
@@ -21,7 +25,7 @@ export default function ContatoPage() {
       const res = await fetch("/api/contato", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, email, mensagem }),
+        body: JSON.stringify({ nome, email, topico, mensagem }),
       });
 
       if (res.ok) {
@@ -92,15 +96,32 @@ export default function ContatoPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="text-[14px] font-semibold text-carvao">
-              E-mail <span className="text-[13px] font-normal text-muted">(opcional)</span>
+              E-mail <span className="text-ferrugem">*</span>
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Para recebermos retorno"
+              required
+              placeholder="Para enviarmos a resposta"
               className={inputClass}
             />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[14px] font-semibold text-carvao">Assunto <span className="text-ferrugem">*</span></label>
+            <div className="flex flex-wrap gap-2">
+              {TOPICOS.map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setTopico(topico === t ? "" : t)}
+                  className={`px-4 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${topico === t ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -121,7 +142,7 @@ export default function ContatoPage() {
 
           <button
             type="submit"
-            disabled={enviando}
+            disabled={enviando || !topico}
             className="bg-ardosia-escura text-white text-[15px] font-semibold rounded-[13px] py-[14px] cursor-pointer disabled:opacity-50 transition-opacity"
           >
             {enviando ? "Enviando…" : "Enviar mensagem"}

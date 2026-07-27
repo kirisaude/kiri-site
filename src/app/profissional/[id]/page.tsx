@@ -27,11 +27,13 @@ export default async function PerfilPage({ params }: PageProps) {
   if (!p || p.oculto) notFound();
 
   const rqeLabel = p.rqe ? `RQE ${p.rqe}` : null;
-  const registroLinha = rqeLabel ? `${p.registro_conselho} · ${rqeLabel}` : p.registro_conselho;
+  const registroLinha = p.registro_conselho
+    ? rqeLabel ? `${p.registro_conselho} · ${rqeLabel}` : p.registro_conselho
+    : rqeLabel ?? null;
   const tituloExibicao = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
 
   const credenciais = [
-    { rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" },
+    ...(p.registro_conselho ? [{ rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" }] : []),
     ...(rqeLabel
       ? [
           { rotulo: "Especialista", valor: rqeLabel, detalhe: "" },
@@ -82,7 +84,7 @@ export default async function PerfilPage({ params }: PageProps) {
                   <span className="text-muted"> · {p.genero === "F" ? feminizarTitulo(p.profissao_secundaria) : p.profissao_secundaria}</span>
                 )}
               </div>
-              <div className="text-[12.5px] tracking-[0.02em] text-muted mt-[7px]">{registroLinha}</div>
+              {registroLinha && <div className="text-[12.5px] tracking-[0.02em] text-muted mt-[7px]">{registroLinha}</div>}
 
               <div className="flex flex-wrap gap-[7px] justify-center mt-[14px]">
                 {p.areas_atuacao.filter((a) => a !== "Outro").map((area) => (

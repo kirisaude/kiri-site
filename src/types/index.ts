@@ -19,7 +19,7 @@ export interface Profissional {
   profissao: string;
   profissao_secundaria?: string | null;
   titulo_exibicao: string;
-  registro_conselho: string;
+  registro_conselho: string | null;
   rqe: string | null;
   areas_atuacao: string[];
   formacao: Formacao[];

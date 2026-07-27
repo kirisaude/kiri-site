@@ -374,7 +374,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
           const lista = profsSemConvenio.map(linhaProf).join("\n\n");
           msg += `\n\nComo você indicou que aceita profissionais particulares, selecionamos algumas opções:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
         } else {
-          msg += `\n\nVamos continuar buscando e entraremos em contato assim que tivermos uma indicação adequada para o seu caso. Qualquer dúvida, estamos aqui!`;
+          msg += `\n\nCaso deseje profissionais particulares, nos comunique e enviamos algumas opções que possam te ajudar. Qualquer dúvida, estamos aqui!`;
         }
         return msg;
       }
@@ -530,9 +530,32 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
                   ))}
                 </div>
                 {convenioSolicitado && filtroConvenio === "especifico" && profFiltrados.length === 0 && (
-                  <p className="text-[12px] text-ferrugem mb-2 font-medium">
-                    Nenhum profissional atende {convenioSolicitado} na rede.{aceitaParticular ? " Selecione particulares — a mensagem explicará isso automaticamente." : ""}
-                  </p>
+                  <div className="mb-2">
+                    <p className="text-[12px] text-ferrugem font-medium mb-2">
+                      Nenhum profissional atende {convenioSolicitado} na rede.{aceitaParticular ? " Selecione particulares — a mensagem explicará isso automaticamente." : ""}
+                    </p>
+                    {!aceitaParticular && (
+                      <div className="bg-[#FFF8ED] border border-[#E0A55E]/40 rounded-[10px] p-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[11px] font-semibold text-[#A0621A] uppercase tracking-wide">Mensagem para a família</span>
+                          <div className="flex items-center gap-2">
+                            <button type="button" onClick={() => copiar(gerarMsgFamilia(), "familia")}
+                              className="text-[12px] font-semibold text-ardosia cursor-pointer">
+                              {copiado === "familia" ? "✓ Copiado" : "Copiar"}
+                            </button>
+                            {pareceWhatsApp(e.contato) && (
+                              <a href={`https://wa.me/${e.contato.replace(/\D/g, "").replace(/^(?!55)/, "55")}?text=${encodeURIComponent(gerarMsgFamilia())}`}
+                                target="_blank" rel="noopener noreferrer"
+                                className="text-[12px] font-semibold text-[#22A85A] no-underline">
+                                Abrir WA ↗
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <pre className="text-[12px] text-carvao whitespace-pre-wrap font-sans leading-[1.5]">{gerarMsgFamilia()}</pre>
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 {/* Lista filtrada */}
@@ -850,25 +873,25 @@ export default function AdminPage() {
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "inscricoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Profissionais ({pendentes.length})
         </button>
+        <button onClick={() => setAba("profissionais")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Plataforma ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
+        </button>
         <button onClick={() => setAba("encaminhamentos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Encaminhamentos ({encaminhamentos.length})
         </button>
-        <button onClick={() => setAba("reportes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
-        </button>
-        <button onClick={() => setAba("profissionais")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Plataforma ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
+        <button onClick={() => setAba("avaliacoes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Avaliações {avaliacoes.filter(a => !a.aprovado).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{avaliacoes.filter(a => !a.aprovado).length}</span>}
         </button>
         <button onClick={() => setAba("contatos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "contatos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Contatos {contatos.filter(c => !c.lido).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{contatos.filter(c => !c.lido).length}</span>}
         </button>
-        <button onClick={() => setAba("avaliacoes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Avaliações {avaliacoes.filter(a => !a.aprovado).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{avaliacoes.filter(a => !a.aprovado).length}</span>}
+        <button onClick={() => setAba("reportes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
         </button>
       </div>
 
