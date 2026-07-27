@@ -304,10 +304,12 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   const [profSelecionados, setProfSelecionados] = useState<string[]>([]);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [filtroProf, setFiltroProf] = useState<string | null>(null);
-  const [filtroConvenio, setFiltroConvenio] = useState<"todos" | "convenio" | "particular">("todos");
+  const [filtroConvenio, setFiltroConvenio] = useState<"todos" | "convenio" | "particular" | "especifico">("especifico");
 
   // Extrair dados estruturados do observacoes
   const faixaEtaria = e.observacoes?.match(/Faixa etária: ([^—]+)/)?.[1].trim() ?? null;
+  const convenioSolicitado = e.observacoes?.match(/Convênio: ([^—(]+)/)?.[1].trim() ?? null;
+  const aceitaParticular = !!(e.observacoes?.includes("aceita particular"));
 
   // Pré-triagem automática
   const profPreFiltrados = profissionais.filter((p) => {
@@ -322,6 +324,9 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   const profFiltrados = profPreFiltrados
     .filter((p) => !filtroProf || p.profissao === filtroProf)
     .filter((p) => {
+      if (filtroConvenio === "especifico" && convenioSolicitado) {
+        return p.convenios?.some((c) => c.toLowerCase().includes(convenioSolicitado.toLowerCase())) ?? false;
+      }
       if (filtroConvenio === "convenio") return p.convenios && p.convenios.length > 0;
       if (filtroConvenio === "particular") return !p.convenios || p.convenios.length === 0;
       return true;
@@ -338,12 +343,44 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   function gerarMsgFamilia(): string {
     const primeiro = e.nome_responsavel.split(" ")[0];
     const profs = profSelecionados.map((id) => profissionais.find((p) => p.id === id)).filter(Boolean) as typeof profissionais;
-    const lista = profs.map((p, i) => {
+
+    function linhaProf(p: typeof profissionais[0], i: number) {
       const wa = p.whatsapp_agendamento
         ? `\nWhatsApp: wa.me/${p.whatsapp_agendamento.replace(/\D/g, "").replace(/^(?!55)/, "55")}`
         : "";
       return `${i + 1}. ${p.nome} — ${p.titulo_exibicao} · ${p.cidade}${wa}`;
-    }).join("\n\n");
+    }
+
+    if (convenioSolicitado) {
+      const profsComConvenio = profs.filter((p) =>
+        p.convenios?.some((c) => c.toLowerCase().includes(convenioSolicitado.toLowerCase()))
+      );
+      const profsSemConvenio = profs.filter((p) =>
+        !p.convenios?.some((c) => c.toLowerCase().includes(convenioSolicitado.toLowerCase()))
+      );
+
+      if (profsComConvenio.length > 0) {
+        const lista = profsComConvenio.map(linhaProf).join("\n\n");
+        let msg = `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido e selecionamos ${profsComConvenio.length} ${profsComConvenio.length > 1 ? "profissionais" : "profissional"} que atende${profsComConvenio.length > 1 ? "m" : ""} pelo ${convenioSolicitado}:\n\n${lista}`;
+        if (aceitaParticular && profsSemConvenio.length > 0) {
+          const listaP = profsSemConvenio.map((p, i) => linhaProf(p, i));
+          msg += `\n\nTambém incluímos profissionais particulares que podem complementar a busca:\n\n${listaP.join("\n\n")}`;
+        }
+        msg += `\n\nFique à vontade para entrar em contato para agendar. Qualquer dúvida, estamos aqui!`;
+        return msg;
+      } else {
+        let msg = `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido, mas infelizmente não encontramos profissionais da nossa rede que atendam pelo ${convenioSolicitado} no momento.`;
+        if (aceitaParticular && profsSemConvenio.length > 0) {
+          const lista = profsSemConvenio.map(linhaProf).join("\n\n");
+          msg += `\n\nComo você indicou que aceita profissionais particulares, selecionamos algumas opções:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
+        } else {
+          msg += `\n\nVamos continuar buscando e entraremos em contato assim que tivermos uma indicação adequada para o seu caso. Qualquer dúvida, estamos aqui!`;
+        }
+        return msg;
+      }
+    }
+
+    const lista = profs.map(linhaProf).join("\n\n");
     return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nAnalisamos seu pedido e selecionamos ${profs.length} ${profs.length > 1 ? "profissionais" : "profissional"} que ${profs.length > 1 ? "podem" : "pode"} ajudar:\n\n${lista}\n\nFique à vontade para entrar em contato com qualquer um deles para agendar. Qualquer dúvida, estamos aqui!`;
   }
 
@@ -477,7 +514,14 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
                 </div>
 
                 {/* Filtro convênio/particular */}
-                <div className="flex gap-1.5 mb-3">
+                <div className="flex gap-1.5 flex-wrap mb-3">
+                  {convenioSolicitado && (
+                    <button type="button" onClick={() => setFiltroConvenio("especifico")}
+                      className={`text-[12px] px-2.5 py-1 rounded-full border cursor-pointer transition-colors font-semibold ${filtroConvenio === "especifico" ? "bg-ambar-texto text-white border-ambar-texto" : "bg-[#FFF8ED] text-ambar-texto border-[#E0A55E]/50"}`}>
+                      Atende {convenioSolicitado}
+                      {profFiltrados.length === 0 && filtroConvenio !== "especifico" ? "" : filtroConvenio === "especifico" && profFiltrados.length === 0 ? " (0)" : ""}
+                    </button>
+                  )}
                   {(["todos", "convenio", "particular"] as const).map((op) => (
                     <button key={op} type="button" onClick={() => setFiltroConvenio(op)}
                       className={`text-[12px] px-2.5 py-1 rounded-full border cursor-pointer transition-colors ${filtroConvenio === op ? "bg-carvao text-white border-carvao" : "bg-white text-cinza-texto border-linha"}`}>
@@ -485,6 +529,11 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
                     </button>
                   ))}
                 </div>
+                {convenioSolicitado && filtroConvenio === "especifico" && profFiltrados.length === 0 && (
+                  <p className="text-[12px] text-ferrugem mb-2 font-medium">
+                    Nenhum profissional atende {convenioSolicitado} na rede.{aceitaParticular ? " Selecione particulares — a mensagem explicará isso automaticamente." : ""}
+                  </p>
+                )}
 
                 {/* Lista filtrada */}
                 <div className="flex flex-col gap-1.5">
