@@ -1535,6 +1535,78 @@ export default function AdminPage() {
                 ))}
               </div>
             )}
+
+            {/* Lista de todas as instituições citadas */}
+            {(() => {
+              // Extrai todas as entradas de instituição dos perfis
+              const mapa = new Map<string, string[]>(); // instituição → [nomes dos profissionais]
+              for (const p of profissionais) {
+                if (!p.formacao) continue;
+                for (const f of p.formacao) {
+                  if (!f.instituicao_ano) continue;
+                  const partes = f.instituicao_ano.split(" — ");
+                  for (const parte of partes) {
+                    const t = parte.trim();
+                    // ignora anos (4 dígitos ou ranges), strings muito curtas, e strings muito longas que são áreas
+                    if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
+                    if (/^(atual|em andamento)$/i.test(t)) continue;
+                    // ignora strings que parecem claramente ser áreas de estudo (sem siglas ou nomes de instituições)
+                    if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
+                    const chave = t.toLowerCase();
+                    if (!mapa.has(chave)) mapa.set(chave, []);
+                    const lista = mapa.get(chave)!;
+                    if (!lista.includes(p.nome)) lista.push(p.nome);
+                  }
+                }
+              }
+              const entradas = [...mapa.entries()]
+                .map(([, nomes]) => ({ nome: nomes[0] ? [...mapa.entries()].find(([, n]) => n === nomes)?.[0] ?? "" : "", nomes }))
+                .sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
+
+              // Rebuild with original case
+              const entradasComNome: { nome: string; nomes: string[] }[] = [];
+              for (const p of profissionais) {
+                if (!p.formacao) continue;
+                for (const f of p.formacao) {
+                  if (!f.instituicao_ano) continue;
+                  const partes = f.instituicao_ano.split(" — ");
+                  for (const parte of partes) {
+                    const t = parte.trim();
+                    if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
+                    if (/^(atual|em andamento)$/i.test(t)) continue;
+                    if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
+                    const existe = entradasComNome.find(e => e.nome.toLowerCase() === t.toLowerCase());
+                    if (existe) {
+                      if (!existe.nomes.includes(p.nome)) existe.nomes.push(p.nome);
+                    } else {
+                      entradasComNome.push({ nome: t, nomes: [p.nome] });
+                    }
+                  }
+                }
+              }
+              entradasComNome.sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
+
+              return (
+                <div className="mt-8 flex flex-col gap-3">
+                  <div>
+                    <div className="text-[13px] font-semibold text-carvao mb-0.5">Todas as instituições citadas na rede</div>
+                    <p className="text-[12px] text-muted">Referência para classificação futura por qualificação institucional. {entradasComNome.length} entradas encontradas.</p>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="grid grid-cols-[2fr_1fr] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
+                      <span>Instituição</span>
+                      <span>Profissionais</span>
+                    </div>
+                    {entradasComNome.map((e) => (
+                      <div key={e.nome} className="grid grid-cols-[2fr_1fr] gap-x-3 items-start px-3 py-2 rounded-[10px] bg-white border border-linha">
+                        <span className="text-[13px] text-carvao">{e.nome}</span>
+                        <span className="text-[12px] text-muted leading-[1.5]">{e.nomes.join(", ")}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         )}
 

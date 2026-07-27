@@ -15,6 +15,52 @@ import { titleCasePT } from "@/lib/titleCase";
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
 
+const CIDADE_ESTADO: Record<string, string> = {
+  "salvador": "BA",
+  "boa vista": "RR",
+  "sao paulo": "SP",
+  "sao bernardo do campo": "SP",
+  "cotia": "SP",
+  "recife": "PE",
+  "fortaleza": "CE",
+  "belo horizonte": "MG",
+  "curitiba": "PR",
+  "porto alegre": "RS",
+  "manaus": "AM",
+  "belem": "PA",
+  "goiania": "GO",
+  "brasilia": "DF",
+  "maceio": "AL",
+  "natal": "RN",
+  "joao pessoa": "PB",
+  "teresina": "PI",
+  "campo grande": "MS",
+  "cuiaba": "MT",
+  "macapa": "AP",
+  "porto velho": "RO",
+  "palmas": "TO",
+  "rio branco": "AC",
+  "florianopolis": "SC",
+  "vitoria": "ES",
+  "aracaju": "SE",
+  "sao luis": "MA",
+  "rio de janeiro": "RJ",
+  "campinas": "SP",
+  "santos": "SP",
+  "ribeirao preto": "SP",
+  "sorocaba": "SP",
+  "osasco": "SP",
+  "guarulhos": "SP",
+  "Santo Andre": "SP",
+  "santo andre": "SP",
+  "sao caetano do sul": "SP",
+  "diadema": "SP",
+  "mogi das cruzes": "SP",
+  "bauru": "SP",
+  "marilia": "SP",
+  "piracicaba": "SP",
+};
+
 function normCidade(s: string) {
   return s
     .normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -26,6 +72,20 @@ function normCidade(s: string) {
     .trim();
 }
 
+function comEstado(cidade: string): string {
+  if (/,\s*[A-Z]{2}$/.test(cidade)) return cidade;
+  const norm = cidade.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  const uf = CIDADE_ESTADO[norm];
+  return uf ? `${cidade}, ${uf}` : cidade;
+}
+
+function exibirCidade(cidade: string): string {
+  return titleCasePT(cidadeCurta(cidade))
+    .split(/\s+e\s+/)
+    .map(c => comEstado(c.trim()))
+    .join(" e ");
+}
+
 const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
 
 // Deduplica por nome normalizado; separa cidades múltiplas unidas por " e "
@@ -35,7 +95,7 @@ const CIDADES_DISPONIVEIS = (() => {
     const campo = cidadeCurta(p.cidade);
     if (!campo) continue;
     for (const parte of campo.split(/\s+e\s+/)) {
-      const curta = titleCasePT(parte.trim());
+      const curta = comEstado(titleCasePT(parte.trim()));
       if (!curta) continue;
       const chave = normCidade(curta);
       const atual = mapa.get(chave);
@@ -1306,7 +1366,7 @@ function MiniCard({ profissional: p, rating }: { profissional: Profissional; rat
           <circle cx="10" cy="7.6" r="2" stroke="#9A8C78" strokeWidth="1.5" />
         </svg>
         <span className="truncate">
-          {modalidadeCurta(p.modalidade)} · {titleCasePT(cidadeCurta(p.cidade))}
+          {modalidadeCurta(p.modalidade)} · {exibirCidade(p.cidade)}
         </span>
       </div>
     </Link>
