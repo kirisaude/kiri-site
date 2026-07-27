@@ -35,7 +35,7 @@ const CIDADES_DISPONIVEIS = (() => {
     const campo = cidadeCurta(p.cidade);
     if (!campo) continue;
     for (const parte of campo.split(/\s+e\s+/)) {
-      const curta = parte.trim();
+      const curta = titleCasePT(parte.trim());
       if (!curta) continue;
       const chave = normCidade(curta);
       const atual = mapa.get(chave);
@@ -1306,7 +1306,7 @@ function MiniCard({ profissional: p, rating }: { profissional: Profissional; rat
           <circle cx="10" cy="7.6" r="2" stroke="#9A8C78" strokeWidth="1.5" />
         </svg>
         <span className="truncate">
-          {modalidadeCurta(p.modalidade)} · {cidadeCurta(p.cidade)}
+          {modalidadeCurta(p.modalidade)} · {titleCasePT(cidadeCurta(p.cidade))}
         </span>
       </div>
     </Link>
