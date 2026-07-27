@@ -1538,56 +1538,51 @@ export default function AdminPage() {
 
             {/* Lista de todas as instituições citadas */}
             {(() => {
-              // Extrai todas as entradas de instituição dos perfis
-              const mapa = new Map<string, string[]>(); // instituição → [nomes dos profissionais]
-              for (const p of profissionais) {
-                if (!p.formacao) continue;
-                for (const f of p.formacao) {
-                  if (!f.instituicao_ano) continue;
-                  const partes = f.instituicao_ano.split(" — ");
-                  for (const parte of partes) {
-                    const t = parte.trim();
-                    // ignora anos (4 dígitos ou ranges), strings muito curtas, e strings muito longas que são áreas
-                    if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
-                    if (/^(atual|em andamento)/i.test(t)) continue;
-                    // ignora strings que parecem claramente ser áreas de estudo (sem siglas ou nomes de instituições)
-                    if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
-                    const chave = t.toLowerCase();
-                    if (!mapa.has(chave)) mapa.set(chave, []);
-                    const lista = mapa.get(chave)!;
-                    if (!lista.includes(p.nome)) lista.push(p.nome);
-                  }
-                }
-              }
-              const entradas = [...mapa.entries()]
-                .map(([, nomes]) => ({ nome: nomes[0] ? [...mapa.entries()].find(([, n]) => n === nomes)?.[0] ?? "" : "", nomes }))
-                .sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
+              // Formato do campo: "ÁREA — INSTITUIÇÃO — ANO" (3 partes) ou "ÁREA — INSTITUIÇÃO" (2) ou só nome da inst (1)
+              function extrairInstituicao(campo: string): string | null {
+                const partes = campo.split(" — ").map(p => p.trim()).filter(Boolean);
+                const isAnoOuStatus = (s: string) =>
+                  /^\d{4}(-\d{4})?$/.test(s) || /^(atual|em andamento)/i.test(s);
 
-              // Rebuild with original case — normaliza deduplicação ignorando sigla entre parênteses
-              // chave = nome sem "(SIGLA)" final, lowercased; prefere a versão mais longa (com sigla) como display
-              const entradasComNome: { nome: string; nomes: string[] }[] = [];
+                if (partes.length >= 3) {
+                  // ÁREA — INSTITUIÇÃO — ANO → pega a penúltima parte (instituição)
+                  const inst = partes[partes.length - 2];
+                  return inst && inst.length >= 3 ? inst : null;
+                }
+                if (partes.length === 2) {
+                  // Se a segunda parte é ano/status → só ÁREA — ANO, sem instituição
+                  if (isAnoOuStatus(partes[1])) return null;
+                  // ÁREA — INSTITUIÇÃO (sem ano)
+                  return partes[1].length >= 3 ? partes[1] : null;
+                }
+                if (partes.length === 1) {
+                  const p = partes[0];
+                  // Considera instituição se tem sigla entre parênteses ou começa com palavra-chave
+                  if (/\([A-Za-z]{2,12}\)/.test(p)) return p;
+                  if (/^(universidade|faculdade|instituto|centro|escola|hospital|pontifícia|fundação|conselho)/i.test(p)) return p;
+                  return null;
+                }
+                return null;
+              }
+
               function chaveSemSigla(s: string) {
                 return s.replace(/\s*\([A-Za-z]{2,12}\)\s*$/, "").toLowerCase().trim();
               }
+
+              const entradasComNome: { nome: string; nomes: string[] }[] = [];
               for (const p of profissionais) {
                 if (!p.formacao) continue;
                 for (const f of p.formacao) {
                   if (!f.instituicao_ano) continue;
-                  const partes = f.instituicao_ano.split(" — ");
-                  for (const parte of partes) {
-                    const t = parte.trim();
-                    if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
-                    if (/^(atual|em andamento)/i.test(t)) continue;
-                    if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
-                    const chave = chaveSemSigla(t);
-                    const existe = entradasComNome.find(e => chaveSemSigla(e.nome) === chave);
-                    if (existe) {
-                      // prefere o nome mais longo (com sigla entre parênteses)
-                      if (t.length > existe.nome.length) existe.nome = t;
-                      if (!existe.nomes.includes(p.nome)) existe.nomes.push(p.nome);
-                    } else {
-                      entradasComNome.push({ nome: t, nomes: [p.nome] });
-                    }
+                  const inst = extrairInstituicao(f.instituicao_ano);
+                  if (!inst) continue;
+                  const chave = chaveSemSigla(inst);
+                  const existe = entradasComNome.find(e => chaveSemSigla(e.nome) === chave);
+                  if (existe) {
+                    if (inst.length > existe.nome.length) existe.nome = inst;
+                    if (!existe.nomes.includes(p.nome)) existe.nomes.push(p.nome);
+                  } else {
+                    entradasComNome.push({ nome: inst, nomes: [p.nome] });
                   }
                 }
               }
