@@ -9,6 +9,7 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { valorDisplay, feminizarTitulo } from "@/types";
 import { titleCasePT } from "@/lib/titleCase";
+import { AvaliacoesSection } from "@/components/AvaliacoesSection";
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -333,6 +334,9 @@ export default async function PerfilPage({ params }: PageProps) {
             </div>
 
           </div>
+        </div>
+        <div className="mt-8 pt-8 border-t border-linha">
+          <AvaliacoesSection profissionalId={p.id} />
         </div>
         <Footer className="mt-8" />
       </div>

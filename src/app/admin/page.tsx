@@ -41,6 +41,16 @@ interface Reporte {
   descricao: string | null;
 }
 
+interface Avaliacao {
+  id: string;
+  criado_em: string;
+  profissional_id: string;
+  nota: number;
+  data_atendimento: string;
+  texto: string | null;
+  aprovado: boolean;
+}
+
 interface Contato {
   id: string;
   criado_em: string;
@@ -50,7 +60,7 @@ interface Contato {
   lido: boolean;
 }
 
-type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos";
+type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos" | "avaliacoes";
 
 function linkContato(contato: string | null): string | null {
   if (!contato) return null;
@@ -588,6 +598,7 @@ export default function AdminPage() {
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [reportes, setReportes] = useState<Reporte[]>([]);
   const [contatos, setContatos] = useState<Contato[]>([]);
+  const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
   const [profPublicados, setProfPublicados] = useState<Profissional[]>(
     data.profissionais as Profissional[]
   );
@@ -599,16 +610,18 @@ export default function AdminPage() {
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
-    const [resI, resE, resR, resC] = await Promise.all([
+    const [resI, resE, resR, resC, resA] = await Promise.all([
       fetch("/api/admin/inscricoes"),
       fetch("/api/admin/encaminhamentos"),
       fetch("/api/admin/reportes"),
       fetch("/api/contato"),
+      fetch("/api/admin/avaliacoes"),
     ]);
     if (resI.ok) setInscricoes(await resI.json());
     if (resE.ok) setEncaminhamentos(await resE.json());
     if (resR.ok) setReportes(await resR.json());
     if (resC.ok) setContatos(await resC.json());
+    if (resA.ok) setAvaliacoes(await resA.json());
     setBuscando(false);
   }, []);
 
@@ -803,6 +816,10 @@ export default function AdminPage() {
         <button onClick={() => setAba("contatos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "contatos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Contatos {contatos.filter(c => !c.lido).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{contatos.filter(c => !c.lido).length}</span>}
+        </button>
+        <button onClick={() => setAba("avaliacoes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Avaliações {avaliacoes.filter(a => !a.aprovado).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{avaliacoes.filter(a => !a.aprovado).length}</span>}
         </button>
       </div>
 
@@ -1243,6 +1260,96 @@ export default function AdminPage() {
                 <p className="text-[14px] text-muted">Nenhum profissional na plataforma ainda.</p>
               )}
             </div>
+          </div>
+        )}
+
+        {/* ABA AVALIAÇÕES */}
+        {aba === "avaliacoes" && (
+          <div className="flex flex-col gap-6">
+            <h2 className="font-serif text-[18px] font-semibold text-carvao">
+              Avaliações <span className="text-[14px] font-sans font-normal text-muted">({avaliacoes.length})</span>
+            </h2>
+
+            {avaliacoes.length === 0 ? (
+              <p className="text-[14px] text-muted">Nenhuma avaliação recebida ainda.</p>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {avaliacoes.map((a) => {
+                  const prof = profPublicados.find((p) => p.id === a.profissional_id);
+                  return (
+                    <div key={a.id} className={`rounded-[14px] px-4 py-4 border ${a.aprovado ? "bg-white border-linha opacity-70" : "bg-white border-ardosia/25"}`}>
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-serif text-[14.5px] font-semibold text-carvao">
+                              {prof ? prof.nome : a.profissional_id}
+                            </span>
+                            <span className="flex gap-0.5">
+                              {[1,2,3,4,5].map((n) => (
+                                <svg key={n} width="13" height="13" viewBox="0 0 24 24" fill="none">
+                                  <path d="M12 2L14.9 8.6L22 9.3L16.8 14.1L18.4 21L12 17.4L5.6 21L7.2 14.1L2 9.3L9.1 8.6Z" fill={a.nota >= n ? "#E0A55E" : "none"} stroke={a.nota >= n ? "#E0A55E" : "#D8C7B0"} strokeWidth="1.5" strokeLinejoin="round"/>
+                                </svg>
+                              ))}
+                            </span>
+                            <span className="text-[12px] text-muted">Atend. {a.data_atendimento}</span>
+                          </div>
+                          {a.texto && <p className="text-[13.5px] text-cinza-texto leading-[1.55] mt-1.5 mb-0">{a.texto}</p>}
+                          <div className="text-[11.5px] text-muted mt-1">{new Date(a.criado_em).toLocaleDateString("pt-BR")}</div>
+                        </div>
+                        <div className="flex items-center gap-2 flex-none">
+                          {!a.aprovado ? (
+                            <button
+                              type="button"
+                              onClick={async () => {
+                                setAvaliacoes((prev) => prev.map((x) => x.id === a.id ? { ...x, aprovado: true } : x));
+                                await fetch("/api/admin/avaliacoes", {
+                                  method: "PATCH",
+                                  headers: { "Content-Type": "application/json" },
+                                  body: JSON.stringify({ id: a.id, aprovado: true }),
+                                });
+                              }}
+                              className="text-[12.5px] font-semibold text-[#1A7A4A] bg-[#E6F4EE] border border-[#A8D9BC] rounded-[8px] px-3 py-1.5 cursor-pointer"
+                            >
+                              Aprovar
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={async () => {
+                                setAvaliacoes((prev) => prev.map((x) => x.id === a.id ? { ...x, aprovado: false } : x));
+                                await fetch("/api/admin/avaliacoes", {
+                                  method: "PATCH",
+                                  headers: { "Content-Type": "application/json" },
+                                  body: JSON.stringify({ id: a.id, aprovado: false }),
+                                });
+                              }}
+                              className="text-[12.5px] font-semibold text-muted cursor-pointer hover:underline"
+                            >
+                              Desaprovar
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              if (!confirm("Excluir esta avaliação?")) return;
+                              setAvaliacoes((prev) => prev.filter((x) => x.id !== a.id));
+                              await fetch("/api/admin/avaliacoes", {
+                                method: "DELETE",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ id: a.id }),
+                              });
+                            }}
+                            className="text-[12.5px] font-semibold text-ferrugem cursor-pointer hover:underline"
+                          >
+                            Excluir
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
 
