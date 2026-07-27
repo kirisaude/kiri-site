@@ -55,7 +55,7 @@ export async function POST(request: Request) {
   if (!res.ok) {
     const err = await res.text();
     console.error("Supabase avaliacao erro:", res.status, err);
-    return NextResponse.json({ erro: `Erro ${res.status}: ${err}` }, { status: 500 });
+    return NextResponse.json({ erro: "Erro ao salvar avaliação" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });
