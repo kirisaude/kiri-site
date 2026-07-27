@@ -13,12 +13,12 @@ export async function GET() {
     `${SUPABASE_URL()}/rest/v1/instituicoes?select=sigla,nome_extenso&order=sigla.asc`,
     {
       headers: { "apikey": SUPABASE_KEY(), "Authorization": `Bearer ${SUPABASE_KEY()}` },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     }
   );
   if (!res.ok) return NextResponse.json([], { status: 200 });
   return NextResponse.json(await res.json(), {
-    headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200" },
+    headers: { "Cache-Control": "no-store" },
   });
 }
 

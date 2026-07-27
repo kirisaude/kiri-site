@@ -660,6 +660,45 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
   );
 }
 
+function SalvarInstBtn({ sigla, valor, onSalvo }: { sigla: string; valor: string; onSalvo: (sigla: string, nome: string) => void }) {
+  const [estado, setEstado] = useState<"idle" | "salvando" | "ok" | "erro">("idle");
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        setEstado("salvando");
+        try {
+          const res = await fetch("/api/instituicoes", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ sigla, nome_extenso: valor || null }),
+          });
+          if (res.ok) {
+            onSalvo(sigla, valor);
+            setEstado("ok");
+            setTimeout(() => setEstado("idle"), 2000);
+          } else {
+            const err = await res.json().catch(() => ({}));
+            console.error("Erro ao salvar instituição:", err);
+            setEstado("erro");
+            setTimeout(() => setEstado("idle"), 3000);
+          }
+        } catch (e) {
+          console.error(e);
+          setEstado("erro");
+          setTimeout(() => setEstado("idle"), 3000);
+        }
+      }}
+      className={`text-[12px] font-semibold cursor-pointer whitespace-nowrap transition-colors ${
+        estado === "ok" ? "text-green-600" : estado === "erro" ? "text-red-500" : "text-ardosia hover:text-ardosia-escura"
+      }`}
+    >
+      {estado === "salvando" ? "…" : estado === "ok" ? "✓ Salvo" : estado === "erro" ? "Erro" : "Salvar"}
+    </button>
+  );
+}
+
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
   const [senha, setSenha] = useState("");
@@ -1517,20 +1556,13 @@ export default function AdminPage() {
                       placeholder="Nome por extenso (deixe em branco se não souber)"
                       className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
                     />
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        await fetch("/api/instituicoes", {
-                          method: "PATCH",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ sigla: inst.sigla, nome_extenso: instEdits[inst.sigla] || null }),
-                        });
-                        setInstituicoes((prev) => prev.map((x) => x.sigla === inst.sigla ? { ...x, nome_extenso: instEdits[inst.sigla] || null } : x));
-                      }}
-                      className="text-[12px] font-semibold text-ardosia cursor-pointer whitespace-nowrap hover:text-ardosia-escura"
-                    >
-                      Salvar
-                    </button>
+                    <SalvarInstBtn
+                      sigla={inst.sigla}
+                      valor={instEdits[inst.sigla] ?? ""}
+                      onSalvo={(sigla, nome) =>
+                        setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
+                      }
+                    />
                   </div>
                 ))}
               </div>
