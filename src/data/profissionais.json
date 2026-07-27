@@ -453,7 +453,7 @@
       "nome": "Aline Dunham",
       "profissao": "Psicopedagogo",
       "titulo_exibicao": "Psicopedagogo",
-      "registro_conselho": "CBO 2394-25",
+      "registro_conselho": "não se aplica",
       "rqe": null,
       "areas_atuacao": [
         "TEA",
@@ -505,7 +505,7 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
+      "registro_verificado": true,
       "sobre_verificado": true,
       "genero": "F",
       "profissao_secundaria": null,
@@ -513,7 +513,9 @@
       "valor_min_secundario": null,
       "valor_max_secundario": null,
       "valor_pacote": null,
-      "valor_pacote_obs": null
+      "valor_pacote_obs": null,
+      "registro_obs": "nao tem conselho de psicopedagogia",
+      "experiencias_infantil": null
     },
     {
       "id": "kiri-031",
