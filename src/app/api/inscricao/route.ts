@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const {
     nome, email, genero, profissao, profissao_secundaria,
-    registro_conselho, rqe, tempo_atuacao,
+    registro_conselho, registro_conselho_secundario, rqe, tempo_atuacao,
     areas_atuacao, faixa_etaria, modalidade, cidade, bairro,
     valor_medio, aceita_convenio, convenios_nomes,
     graduacao, pos_graduacao, lattes,
@@ -38,6 +38,7 @@ export async function POST(request: Request) {
       profissao,
       profissao_secundaria: profissao_secundaria || null,
       registro_conselho,
+      registro_conselho_secundario: registro_conselho_secundario || null,
       rqe: rqe || null,
       tempo_atuacao: tempo_atuacao || null,
       areas_atuacao: areas_atuacao || null,

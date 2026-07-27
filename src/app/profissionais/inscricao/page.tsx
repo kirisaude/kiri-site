@@ -35,6 +35,7 @@ export default function InscricaoProfissionalPage() {
   const [profissao, setProfissao] = useState("");
   const [profissaoSecundaria, setProfissaoSecundaria] = useState("");
   const [registroConselho, setRegistroConselho] = useState("");
+  const [registroConselhoSecundario, setRegistroConselhoSecundario] = useState("");
   const [rqe, setRqe] = useState("");
   const [areasAtuacao, setAreasAtuacao] = useState<string[]>([]);
   const [faixaEtaria, setFaixaEtaria] = useState<string[]>([]);
@@ -148,6 +149,7 @@ export default function InscricaoProfissionalPage() {
           profissao: profissao.trim(),
           profissao_secundaria: profissaoSecundaria.trim() || null,
           registro_conselho: registroConselho.trim(),
+          registro_conselho_secundario: registroConselhoSecundario.trim() || null,
           rqe: rqe.trim() || null,
           tempo_atuacao: tempoAtuacao || null,
           areas_atuacao: areasAtuacao.join(", ") || null,
@@ -382,23 +384,37 @@ export default function InscricaoProfissionalPage() {
                 ))}
               </div>
               {profissao && (
-                <div className="mt-2">
-                  <p className="text-[13px] text-muted mb-1.5">Segunda profissão <span className="font-normal">(opcional)</span></p>
-                  <div className="flex flex-wrap gap-2">
-                    {PROFISSOES.filter((op) => op !== profissao).map((op) => (
-                      <button
-                        key={op}
-                        type="button"
-                        onClick={() => setProfissaoSecundaria(profissaoSecundaria === op ? "" : op)}
-                        className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
-                          profissaoSecundaria === op
-                            ? "bg-ardosia text-white border-ardosia"
-                            : "bg-white text-cinza-texto border-linha"
-                        }`}
-                      >
-                        {op}
-                      </button>
-                    ))}
+                <div className="mt-3 flex flex-col gap-3">
+                  <div className="flex flex-col gap-1.5">
+                    <label className={labelClass}>Número de registro no conselho <span className="text-ferrugem">*</span></label>
+                    <input type="text" value={registroConselho} onChange={(e) => setRegistroConselho(e.target.value)} required placeholder="Ex: CRP 06/12345 ou CRM 123456-SP" className={inputClass} />
+                  </div>
+
+                  <div>
+                    <p className="text-[13px] text-muted mb-1.5">Segunda profissão <span className="font-normal">(opcional)</span></p>
+                    <div className="flex flex-wrap gap-2">
+                      {PROFISSOES.filter((op) => op !== profissao).map((op) => (
+                        <button
+                          key={op}
+                          type="button"
+                          onClick={() => { setProfissaoSecundaria(profissaoSecundaria === op ? "" : op); setRegistroConselhoSecundario(""); }}
+                          className={`px-3.5 py-2 rounded-[10px] text-[13.5px] font-medium border transition-colors cursor-pointer ${
+                            profissaoSecundaria === op
+                              ? "bg-ardosia text-white border-ardosia"
+                              : "bg-white text-cinza-texto border-linha"
+                          }`}
+                        >
+                          {op}
+                        </button>
+                      ))}
+                    </div>
+
+                    {profissaoSecundaria && (
+                      <div className="flex flex-col gap-1.5 mt-3">
+                        <label className={labelClass}>Registro no conselho — {profissaoSecundaria} <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+                        <input type="text" value={registroConselhoSecundario} onChange={(e) => setRegistroConselhoSecundario(e.target.value)} placeholder="Ex: CRM 123456-SP" className={inputClass} />
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -418,11 +434,6 @@ export default function InscricaoProfissionalPage() {
                 </div>
               </div>
             )}
-
-            <div className="flex flex-col gap-1.5">
-              <label className={labelClass}>Número de registro no conselho <span className="text-ferrugem">*</span></label>
-              <input type="text" value={registroConselho} onChange={(e) => setRegistroConselho(e.target.value)} required placeholder="Ex: CRP 06/12345 ou CRM 123456-SP" className={inputClass} />
-            </div>
 
             <div className="flex flex-col gap-1.5">
               <label className={labelClass}>RQE <span className="text-[12px] font-normal text-muted">(somente médicos com especialidade)</span></label>
