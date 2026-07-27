@@ -9,6 +9,7 @@ export function Footer({ className = "" }: { className?: string }) {
         <span className="hidden sm:inline text-[13px] text-muted">· Rede de cuidado ao neurodesenvolvimento infantil</span>
       </Link>
       <div className="flex items-center gap-3">
+        <a href="/contato" className="text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline">Fale conosco</a>
         <a href="/termos" className="text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline">Termos de Uso</a>
         <a href="/politica-de-privacidade" className="text-[12.5px] text-muted hover:text-cinza-texto transition-colors no-underline">Privacidade</a>
       </div>

@@ -41,7 +41,16 @@ interface Reporte {
   descricao: string | null;
 }
 
-type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais";
+interface Contato {
+  id: string;
+  criado_em: string;
+  nome: string;
+  email: string | null;
+  mensagem: string;
+  lido: boolean;
+}
+
+type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos";
 
 function linkContato(contato: string | null): string | null {
   if (!contato) return null;
@@ -578,6 +587,7 @@ export default function AdminPage() {
   const [inscricoes, setInscricoes] = useState<Inscricao[]>([]);
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [reportes, setReportes] = useState<Reporte[]>([]);
+  const [contatos, setContatos] = useState<Contato[]>([]);
   const [profPublicados, setProfPublicados] = useState<Profissional[]>(
     data.profissionais as Profissional[]
   );
@@ -589,14 +599,16 @@ export default function AdminPage() {
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
-    const [resI, resE, resR] = await Promise.all([
+    const [resI, resE, resR, resC] = await Promise.all([
       fetch("/api/admin/inscricoes"),
       fetch("/api/admin/encaminhamentos"),
       fetch("/api/admin/reportes"),
+      fetch("/api/contato"),
     ]);
     if (resI.ok) setInscricoes(await resI.json());
     if (resE.ok) setEncaminhamentos(await resE.json());
     if (resR.ok) setReportes(await resR.json());
+    if (resC.ok) setContatos(await resC.json());
     setBuscando(false);
   }, []);
 
@@ -787,6 +799,10 @@ export default function AdminPage() {
         <button onClick={() => setAba("profissionais")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Plataforma ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
+        </button>
+        <button onClick={() => setAba("contatos")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "contatos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Contatos {contatos.filter(c => !c.lido).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{contatos.filter(c => !c.lido).length}</span>}
         </button>
       </div>
 
@@ -1227,6 +1243,51 @@ export default function AdminPage() {
                 <p className="text-[14px] text-muted">Nenhum profissional na plataforma ainda.</p>
               )}
             </div>
+          </div>
+        )}
+
+        {/* ABA CONTATOS */}
+        {aba === "contatos" && (
+          <div className="flex flex-col gap-6">
+            <h2 className="font-serif text-[18px] font-semibold text-carvao">
+              Mensagens de contato <span className="text-[14px] font-sans font-normal text-muted">({contatos.length})</span>
+            </h2>
+
+            {contatos.length === 0 ? (
+              <p className="text-[14px] text-muted">Nenhuma mensagem recebida ainda.</p>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {contatos.map((c) => (
+                  <div key={c.id} className={`rounded-[14px] px-4 py-4 border ${c.lido ? "bg-white border-linha opacity-60" : "bg-white border-ardosia/25"}`}>
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <div>
+                        <span className="font-serif text-[15px] font-semibold text-carvao">{c.nome}</span>
+                        {c.email && (
+                          <a href={`mailto:${c.email}`} className="ml-2 text-[13px] text-ardosia no-underline hover:underline">{c.email}</a>
+                        )}
+                        <span className="ml-2 text-[12px] text-muted">{new Date(c.criado_em).toLocaleDateString("pt-BR")}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const novoLido = !c.lido;
+                          setContatos((prev) => prev.map((x) => x.id === c.id ? { ...x, lido: novoLido } : x));
+                          await fetch("/api/contato", {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ id: c.id, lido: novoLido }),
+                          });
+                        }}
+                        className={`text-[12px] font-semibold flex-none cursor-pointer ${c.lido ? "text-muted" : "text-ardosia"}`}
+                      >
+                        {c.lido ? "Marcar como não lido" : "Marcar como lido"}
+                      </button>
+                    </div>
+                    <p className="text-[14px] text-carvao-sutil leading-[1.6] whitespace-pre-wrap">{c.mensagem}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
