@@ -235,16 +235,32 @@ export default async function PerfilPage({ params }: PageProps) {
                   const outros = visible.filter(f => !isGrad(f)).sort((a, b) => getAno(a) - getAno(b));
                   return [...grad, ...outros];
                 })().map((f, i) => {
+                  const anoAtual = new Date().getFullYear();
                   const partes = f.instituicao_ano.split(" — ");
+                  // Detecta ano futuro para indicar "em andamento"
+                  const ultimoAno = (() => {
+                    const m = f.instituicao_ano.match(/\b(\d{4})\b/g);
+                    return m ? parseInt(m[m.length - 1]) : null;
+                  })();
+                  const emAndamento = ultimoAno !== null && ultimoAno > anoAtual;
+
+                  // Substitui o ano futuro por indicação de andamento no local
+                  const resolverParte = (parte: string) => {
+                    if (emAndamento && /^\d{4}$/.test(parte.trim()) && parseInt(parte.trim()) > anoAtual) {
+                      return `em andamento · previsão de conclusão em ${parte.trim()}`;
+                    }
+                    return resolveInstituicao(parte, instituicoesMap);
+                  };
+
                   const cursoTemArea = / em /i.test(f.curso);
                   let titulo: string;
                   let local: string;
                   if (cursoTemArea) {
                     titulo = titleCasePT(f.curso);
-                    local = partes.filter(Boolean).map(parte => resolveInstituicao(parte, instituicoesMap)).join(" · ");
+                    local = partes.filter(Boolean).map(resolverParte).join(" · ");
                   } else {
                     const area = partes[0]?.trim() ?? "";
-                    local = partes.slice(1).filter(Boolean).map(parte => resolveInstituicao(parte, instituicoesMap)).join(" · ");
+                    local = partes.slice(1).filter(Boolean).map(resolverParte).join(" · ");
                     titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
                   }
                   return (
