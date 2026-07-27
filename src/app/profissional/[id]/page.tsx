@@ -21,10 +21,47 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+async function getInstituicoesMap(): Promise<Record<string, string>> {
+  try {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!url || !key) return {};
+    const res = await fetch(`${url}/rest/v1/instituicoes?select=sigla,nome_extenso`, {
+      headers: { "apikey": key, "Authorization": `Bearer ${key}` },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return {};
+    const rows: { sigla: string; nome_extenso: string | null }[] = await res.json();
+    return Object.fromEntries(rows.filter(r => r.nome_extenso).map(r => [r.sigla.toUpperCase(), r.nome_extenso!]));
+  } catch { return {}; }
+}
+
+function resolveInstituicao(parte: string, map: Record<string, string>): string {
+  const t = parte.trim();
+  // Sigla pura (ex: UFBA, UESB, UPE): busca no mapa
+  if (/^[A-Za-z]{2,12}$/.test(t) && t === t.toUpperCase()) {
+    const nome = map[t];
+    return nome ? `${nome} (${t})` : t;
+  }
+  // Mixed-case curto que parece sigla (ex: Unian)
+  if (/^[A-Z][a-z]?[A-Z]/.test(t) && t.length <= 10 && !t.includes(" ")) {
+    const nome = map[t.toUpperCase()];
+    return nome ? `${nome} (${t.toUpperCase()})` : t.toUpperCase();
+  }
+  // Já tem "(SIGLA)" no final: normaliza titleCase + sigla uppercase
+  const abbrevMatch = t.match(/^(.+?)\s*\(([A-Za-z]{2,12})\)$/);
+  if (abbrevMatch) {
+    return `${titleCasePT(abbrevMatch[1].trim())} (${abbrevMatch[2].toUpperCase()})`;
+  }
+  return titleCasePT(t);
+}
+
 export default async function PerfilPage({ params }: PageProps) {
   const { id } = await params;
   const p = profissionais.find((pro) => pro.id === id);
   if (!p || p.oculto) notFound();
+
+  const instituicoesMap = await getInstituicoesMap();
 
   const rqeLabel = p.rqe ? `RQE ${p.rqe}` : null;
   const registroLinha = p.registro_conselho
@@ -204,10 +241,10 @@ export default async function PerfilPage({ params }: PageProps) {
                   let local: string;
                   if (cursoTemArea) {
                     titulo = titleCasePT(f.curso);
-                    local = partes.filter(Boolean).map(p => titleCasePT(p.trim())).join(" · ");
+                    local = partes.filter(Boolean).map(parte => resolveInstituicao(parte, instituicoesMap)).join(" · ");
                   } else {
                     const area = partes[0]?.trim() ?? "";
-                    local = partes.slice(1).filter(Boolean).map(p => titleCasePT(p.trim())).join(" · ");
+                    local = partes.slice(1).filter(Boolean).map(parte => resolveInstituicao(parte, instituicoesMap)).join(" · ");
                     titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
                   }
                   return (

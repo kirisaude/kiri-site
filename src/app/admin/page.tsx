@@ -56,11 +56,12 @@ interface Contato {
   criado_em: string;
   nome: string;
   email: string | null;
+  topico: string | null;
   mensagem: string;
   lido: boolean;
 }
 
-type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos" | "avaliacoes";
+type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos" | "avaliacoes" | "instituicoes";
 
 function linkContato(contato: string | null): string | null {
   if (!contato) return null;
@@ -671,6 +672,8 @@ export default function AdminPage() {
   const [reportes, setReportes] = useState<Reporte[]>([]);
   const [contatos, setContatos] = useState<Contato[]>([]);
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
+  const [instituicoes, setInstituicoes] = useState<{ sigla: string; nome_extenso: string | null }[]>([]);
+  const [instEdits, setInstEdits] = useState<Record<string, string>>({});
   const [profPublicados, setProfPublicados] = useState<Profissional[]>(
     data.profissionais as Profissional[]
   );
@@ -682,18 +685,26 @@ export default function AdminPage() {
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
-    const [resI, resE, resR, resC, resA] = await Promise.all([
+    const [resI, resE, resR, resC, resA, resInst] = await Promise.all([
       fetch("/api/admin/inscricoes"),
       fetch("/api/admin/encaminhamentos"),
       fetch("/api/admin/reportes"),
       fetch("/api/contato"),
       fetch("/api/admin/avaliacoes"),
+      fetch("/api/instituicoes"),
     ]);
     if (resI.ok) setInscricoes(await resI.json());
     if (resE.ok) setEncaminhamentos(await resE.json());
     if (resR.ok) setReportes(await resR.json());
     if (resC.ok) setContatos(await resC.json());
     if (resA.ok) setAvaliacoes(await resA.json());
+    if (resInst.ok) {
+      const rows = await resInst.json();
+      setInstituicoes(rows);
+      const edits: Record<string, string> = {};
+      for (const r of rows) edits[r.sigla] = r.nome_extenso ?? "";
+      setInstEdits(edits);
+    }
     setBuscando(false);
   }, []);
 
@@ -892,6 +903,10 @@ export default function AdminPage() {
         <button onClick={() => setAba("reportes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
           Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
+        </button>
+        <button onClick={() => setAba("instituicoes")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "instituicoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Instituições
         </button>
       </div>
 
@@ -1466,6 +1481,56 @@ export default function AdminPage() {
                       <span className="inline-block mb-1.5 text-[11px] font-semibold text-ambar-texto bg-[#FFF8ED] border border-[#E0A55E]/30 px-2 py-0.5 rounded-full">{c.topico}</span>
                     )}
                     <p className="text-[14px] text-carvao-sutil leading-[1.6] whitespace-pre-wrap">{c.mensagem}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ABA INSTITUIÇÕES */}
+        {aba === "instituicoes" && (
+          <div className="flex flex-col gap-4">
+            <div>
+              <h2 className="font-serif text-[19px] font-semibold text-carvao mb-1">Locais de formação</h2>
+              <p className="text-[13px] text-muted leading-[1.5]">
+                Siglas detectadas nos perfis. Preencha o nome por extenso para que apareça automaticamente nos perfis (ex: UFBA → Universidade Federal da Bahia).
+              </p>
+            </div>
+
+            {instituicoes.length === 0 ? (
+              <p className="text-[13.5px] text-muted">Nenhuma instituição cadastrada. Execute o SQL de criação da tabela no Supabase.</p>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <div className="grid grid-cols-[1fr_2fr_auto] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
+                  <span>Sigla / entrada</span>
+                  <span>Nome por extenso</span>
+                  <span></span>
+                </div>
+                {instituicoes.map((inst) => (
+                  <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-white border border-linha">
+                    <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
+                    <input
+                      type="text"
+                      value={instEdits[inst.sigla] ?? ""}
+                      onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
+                      placeholder="Nome por extenso (deixe em branco se não souber)"
+                      className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await fetch("/api/instituicoes", {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ sigla: inst.sigla, nome_extenso: instEdits[inst.sigla] || null }),
+                        });
+                        setInstituicoes((prev) => prev.map((x) => x.sigla === inst.sigla ? { ...x, nome_extenso: instEdits[inst.sigla] || null } : x));
+                      }}
+                      className="text-[12px] font-semibold text-ardosia cursor-pointer whitespace-nowrap hover:text-ardosia-escura"
+                    >
+                      Salvar
+                    </button>
                   </div>
                 ))}
               </div>
