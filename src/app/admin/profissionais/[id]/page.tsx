@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
-import type { Profissional } from "@/types";
+import type { Profissional, ExperienciaInfantil } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
 
 const CONVENIOS_COMUNS = ["Unimed", "Bradesco Saúde", "Amil", "SulAmérica", "Notre Dame Intermédica", "Hapvida", "Porto Seguro Saúde", "Prevent Senior", "Golden Cross"];
@@ -104,6 +104,11 @@ export default function EditarProfissionalPage() {
     profOriginal?.formacao.length
       ? profOriginal.formacao.map(parseFormacaoEdit)
       : [{ tipo: "", area: "", instituicao: "", ano: "" }, { tipo: "", area: "", instituicao: "", ano: "" }]
+  );
+  const [experienciasInfantil, setExperienciasInfantil] = useState<ExperienciaInfantil[]>(
+    profOriginal?.experiencias_infantil?.length
+      ? profOriginal.experiencias_infantil
+      : []
   );
   const [genero, setGenero] = useState<"F" | "M" | undefined>(profOriginal?.genero);
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
@@ -281,6 +286,9 @@ export default function EditarProfissionalPage() {
       sobre_verificado: sobreStatus === "verificado",
       sobre_pendente: sobreStatus === "pendente" || undefined,
       sobre_obs: sobreObs.trim() || undefined,
+      experiencias_infantil: experienciasInfantil.filter(e => e.descricao.trim()).length
+        ? experienciasInfantil.filter(e => e.descricao.trim()).map(e => ({ descricao: e.descricao.trim(), tempo: e.tempo?.trim() || undefined, faixa_etaria: e.faixa_etaria?.trim() || undefined }))
+        : null,
     };
 
     const res = await fetch("/api/admin/profissionais", {
@@ -767,6 +775,54 @@ export default function EditarProfissionalPage() {
               className="text-[13px] text-ardosia font-semibold text-left cursor-pointer"
             >
               + Adicionar linha
+            </button>
+          </div>
+
+          {/* Experiências de atendimento infantil */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[12.5px] font-medium text-cinza-texto">
+              Experiências de atendimento infantil <span className="text-[11px] text-muted">(opcional)</span>
+            </label>
+            {experienciasInfantil.map((exp, i) => (
+              <div key={i} className="flex gap-1.5 items-start">
+                <div className="flex-1 flex flex-col gap-1">
+                  <input
+                    type="text"
+                    placeholder="Descrição (ex: Atendimento domiciliar de crianças com TEA)"
+                    value={exp.descricao}
+                    onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], descricao: e.target.value }; setExperienciasInfantil(n); }}
+                    className="border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted w-full"
+                  />
+                  <div className="flex gap-1.5">
+                    <input
+                      type="text"
+                      placeholder="Tempo (ex: 3 anos)"
+                      value={exp.tempo ?? ""}
+                      onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], tempo: e.target.value }; setExperienciasInfantil(n); }}
+                      className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Faixa etária (ex: 2–10 anos)"
+                      value={exp.faixa_etaria ?? ""}
+                      onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], faixa_etaria: e.target.value }; setExperienciasInfantil(n); }}
+                      className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setExperienciasInfantil(experienciasInfantil.filter((_, j) => j !== i))}
+                  className="text-[18px] text-muted cursor-pointer leading-none flex-none mt-2"
+                >×</button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => setExperienciasInfantil([...experienciasInfantil, { descricao: "", tempo: "", faixa_etaria: "" }])}
+              className="text-[13px] text-ardosia font-semibold text-left cursor-pointer"
+            >
+              + Adicionar experiência
             </button>
           </div>
 

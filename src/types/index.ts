@@ -1,3 +1,9 @@
+export interface ExperienciaInfantil {
+  descricao: string;
+  tempo?: string;
+  faixa_etaria?: string;
+}
+
 export interface Formacao {
   curso: string;
   instituicao_ano: string;
@@ -44,6 +50,7 @@ export interface Profissional {
   sobre_verificado?: boolean;
   sobre_pendente?: boolean;
   sobre_obs?: string;
+  experiencias_infantil?: ExperienciaInfantil[] | null;
   whatsapp_agendamento: string | null;
   card_token: string;
   inscricao_id?: string | null;
