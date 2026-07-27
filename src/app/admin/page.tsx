@@ -1616,6 +1616,9 @@ export default function AdminPage() {
                 if (inst.nome_extenso) siglasMap[inst.sigla.toUpperCase()] = inst.nome_extenso;
               }
 
+              const naoEhInstEnsino = (s: string) =>
+                /^(conselho|crf|cfm|crm|cfp|crp|cff|crefito|coffito|coren|cfn|crbm|cro|cfo)/i.test(s);
+
               // Formato do campo: "ÁREA — INSTITUIÇÃO — ANO" (3 partes) ou "ÁREA — INSTITUIÇÃO" (2) ou só nome da inst (1)
               function extrairInstituicao(campo: string): string | null {
                 const partes = campo.split(" — ").map(p => p.trim()).filter(Boolean);
@@ -1624,7 +1627,8 @@ export default function AdminPage() {
 
                 if (partes.length >= 3) {
                   const inst = partes[partes.length - 2];
-                  return inst && inst.length >= 3 ? inst : null;
+                  if (!inst || inst.length < 3 || naoEhInstEnsino(inst)) return null;
+                  return inst;
                 }
                 if (partes.length === 2) {
                   if (isAnoOuStatus(partes[1])) return null;
