@@ -1563,8 +1563,12 @@ export default function AdminPage() {
                 .map(([, nomes]) => ({ nome: nomes[0] ? [...mapa.entries()].find(([, n]) => n === nomes)?.[0] ?? "" : "", nomes }))
                 .sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
 
-              // Rebuild with original case
+              // Rebuild with original case — normaliza deduplicação ignorando sigla entre parênteses
+              // chave = nome sem "(SIGLA)" final, lowercased; prefere a versão mais longa (com sigla) como display
               const entradasComNome: { nome: string; nomes: string[] }[] = [];
+              function chaveSemSigla(s: string) {
+                return s.replace(/\s*\([A-Za-z]{2,12}\)\s*$/, "").toLowerCase().trim();
+              }
               for (const p of profissionais) {
                 if (!p.formacao) continue;
                 for (const f of p.formacao) {
@@ -1575,8 +1579,11 @@ export default function AdminPage() {
                     if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
                     if (/^(atual|em andamento)/i.test(t)) continue;
                     if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
-                    const existe = entradasComNome.find(e => e.nome.toLowerCase() === t.toLowerCase());
+                    const chave = chaveSemSigla(t);
+                    const existe = entradasComNome.find(e => chaveSemSigla(e.nome) === chave);
                     if (existe) {
+                      // prefere o nome mais longo (com sigla entre parênteses)
+                      if (t.length > existe.nome.length) existe.nome = t;
                       if (!existe.nomes.includes(p.nome)) existe.nomes.push(p.nome);
                     } else {
                       entradasComNome.push({ nome: t, nomes: [p.nome] });
