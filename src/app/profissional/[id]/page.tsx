@@ -13,6 +13,22 @@ import { AvaliacoesSection } from "@/components/AvaliacoesSection";
 
 const profissionais = data.profissionais as Profissional[];
 
+const PROFISSAO_AREA: Record<string, string> = {
+  "psicólogo": "Psicologia",
+  "neuropsicólogo": "Neuropsicologia",
+  "psicopedagogo": "Psicopedagogia",
+  "fonoaudiólogo": "Fonoaudiologia",
+  "terapeuta ocupacional": "Terapia Ocupacional",
+  "psiquiatra": "Psiquiatria",
+  "psiquiatra da infância e adolescência": "Psiquiatria da Infância e Adolescência",
+  "nutricionista": "Nutrição",
+  "fisioterapeuta": "Fisioterapia",
+};
+
+function areaSubstantiva(profissao: string): string | null {
+  return PROFISSAO_AREA[profissao.toLowerCase().trim()] ?? null;
+}
+
 export function generateStaticParams() {
   return profissionais.map((p) => ({ id: p.id }));
 }
@@ -69,14 +85,16 @@ export default async function PerfilPage({ params }: PageProps) {
     : rqeLabel ?? null;
   const tituloExibicao = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
 
+  const areaValor = areaSubstantiva(p.profissao) ?? tituloExibicao;
+
   const credenciais = [
     ...(p.registro_conselho ? [{ rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" }] : []),
     ...(rqeLabel
       ? [
           { rotulo: "Especialista", valor: rqeLabel, detalhe: "" },
-          { rotulo: "Área (RQE)", valor: tituloExibicao, detalhe: "" },
+          { rotulo: "Área (RQE)", valor: areaValor, detalhe: "" },
         ]
-      : [{ rotulo: "Área", valor: tituloExibicao, detalhe: "" }]),
+      : [{ rotulo: "Área", valor: areaValor, detalhe: "" }]),
   ];
 
   return (
