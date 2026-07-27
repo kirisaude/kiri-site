@@ -1651,7 +1651,7 @@ export default function AdminPage() {
                     </div>
                     {entradasComNome.map((e) => (
                       <div key={e.nome} className="grid grid-cols-[2fr_1fr] gap-x-3 items-start px-3 py-2 rounded-[10px] bg-white border border-linha">
-                        <span className="text-[13px] text-carvao">{e.nome}</span>
+                        <span className="text-[13px] text-carvao">{titleCasePT(e.nome)}</span>
                         <span className="text-[12px] text-muted leading-[1.5]">{e.nomes.join(", ")}</span>
                       </div>
                     ))}
