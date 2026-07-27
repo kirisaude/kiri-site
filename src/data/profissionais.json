@@ -453,7 +453,7 @@
       "nome": "Aline Dunham",
       "profissao": "Psicopedagogo",
       "titulo_exibicao": "Psicopedagogo",
-      "registro_conselho": "não se aplica",
+      "registro_conselho": null,
       "rqe": null,
       "areas_atuacao": [
         "TEA",
