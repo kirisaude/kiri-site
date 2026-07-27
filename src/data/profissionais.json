@@ -380,55 +380,6 @@
       "valor_pacote_obs": null
     },
     {
-      "id": "kiri-028",
-      "nome": "Saulo Leal Merelles",
-      "profissao": "Psiquiatra da infância e adolescência",
-      "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "CRM-BA 21093",
-      "rqe": "13917",
-      "areas_atuacao": [
-        "TDAH",
-        "Atraso de desenvolvimento",
-        "Ansiedade",
-        "Depressão",
-        "TEA",
-        "Dificuldades de aprendizagem",
-        "Comunicação aumentativa"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Salvador",
-      "faixa_etaria": "Bebês (0–2 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos), Crianças (6–12 anos)",
-      "sobre": "Apresentação: Graduação em Medicina pela Escola Bahiana de Medicina e Saúde Pública (EBMSP) (2009). Especialização em Psiquiatria e sub-especialização em Psiquiatria da Infância e Adolescência pelo programa de residência da SESAB/SUS (2011 a 2015). Médico assistente do Centro Especializado em Reabilitação (CER4) das Obras Sociais Irmã Dulce (OSID). Preceptor da Residência em Psiquiatria da Clínica Apice (Salvador/BA).",
-      "formacao": [
-        {
-          "curso": "Graduação em Medicina",
-          "instituicao_ano": "Escola Bahiana de Medicina e Saúde Pública (EBMSP) — 2009",
-          "verificado": false
-        },
-        {
-          "curso": "Especialização em Psiquiatria da infância e adolescência",
-          "instituicao_ano": "Hospital Juliano Moreira — 2014",
-          "verificado": false
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 1000,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "convenios": null,
-      "whatsapp_agendamento": "71997081568",
-      "verificado": true,
-      "foto_url": null,
-      "verificacao_data": "julho de 2026",
-      "card_token": "fddb7f8748844e26",
-      "tempo_atuacao": null,
-      "foto_posicao": "center top",
-      "oculto": true,
-      "registro_verificado": false,
-      "sobre_verificado": false,
-      "genero": "M"
-    },
-    {
       "id": "kiri-029",
       "nome": "Caio Leonidas Oliveira de Andrade",
       "profissao": "Fonoaudiólogo",
