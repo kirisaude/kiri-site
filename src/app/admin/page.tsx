@@ -1549,7 +1549,7 @@ export default function AdminPage() {
                     const t = parte.trim();
                     // ignora anos (4 dígitos ou ranges), strings muito curtas, e strings muito longas que são áreas
                     if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
-                    if (/^(atual|em andamento)$/i.test(t)) continue;
+                    if (/^(atual|em andamento)/i.test(t)) continue;
                     // ignora strings que parecem claramente ser áreas de estudo (sem siglas ou nomes de instituições)
                     if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
                     const chave = t.toLowerCase();
@@ -1573,7 +1573,7 @@ export default function AdminPage() {
                   for (const parte of partes) {
                     const t = parte.trim();
                     if (!t || /^\d{4}(-\d{4})?$/.test(t) || t.length < 3) continue;
-                    if (/^(atual|em andamento)$/i.test(t)) continue;
+                    if (/^(atual|em andamento)/i.test(t)) continue;
                     if (/^(psicologia|medicina|fonoaudiologia|terapia|neuropsicologia|psicopedagogia|nutrição|fisioterapia|psiquiatria|audiologia|letras|educação)$/i.test(t)) continue;
                     const existe = entradasComNome.find(e => e.nome.toLowerCase() === t.toLowerCase());
                     if (existe) {
