@@ -27,6 +27,7 @@ interface Inscricao {
   como_conheceu: string | null;
   whatsapp_agendamento: string | null;
   grupo_whatsapp?: boolean | null;
+  experiencia_infantil?: string | null;
 }
 
 export default function RevisarPage() {
@@ -227,6 +228,7 @@ export default function RevisarPage() {
               ["Site/perfil", inscricao.site_perfil],
               ["Como conheceu", inscricao.como_conheceu],
               ["WhatsApp agendamento", inscricao.whatsapp_agendamento],
+              ["Experiência infantil", inscricao.experiencia_infantil],
               ["Grupo WhatsApp Kiri", inscricao.grupo_whatsapp != null ? (inscricao.grupo_whatsapp ? "Sim, quer participar" : "Não tem interesse") : null],
             ].filter(([, v]) => v).map(([label, valor]) => (
               <div key={label as string} className="flex gap-2 text-[13px]">

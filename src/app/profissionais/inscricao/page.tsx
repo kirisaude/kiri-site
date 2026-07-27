@@ -66,6 +66,7 @@ export default function InscricaoProfissionalPage() {
   const [comoConheceu, setComoConheceu] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [aceitaTermos, setAceitaTermos] = useState(false);
+  const [experienciasInfantil, setExperienciasInfantil] = useState([{ descricao: "", tempo: "", faixa_etaria: "" }]);
   const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
@@ -169,6 +170,10 @@ export default function InscricaoProfissionalPage() {
           lattes: lattes.trim() || null,
           como_conheceu: comoConheceu.trim() || null,
           whatsapp_agendamento: whatsappAgendamento.trim() || null,
+          experiencia_infantil: experienciasInfantil
+            .filter((e) => e.descricao.trim())
+            .map((e) => [e.descricao.trim(), e.tempo.trim(), e.faixa_etaria.trim()].filter(Boolean).join(" — "))
+            .join("\n") || null,
           grupo_whatsapp: grupoWhatsapp,
           consentimento: true,
         }),
@@ -603,6 +608,49 @@ export default function InscricaoProfissionalPage() {
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className={labelClass}>Experiência com atendimento infantil <span className="text-[12px] font-normal text-muted">(opcional)</span></label>
+              <p className="text-[12.5px] text-muted -mt-1 leading-[1.55]">Descreva experiências relevantes com crianças — contexto, duração e faixa etária.</p>
+              {experienciasInfantil.map((exp, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    <input
+                      type="text"
+                      placeholder="Descrição (ex: Atendimento em clínica de crianças com TEA)"
+                      value={exp.descricao}
+                      onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], descricao: e.target.value }; setExperienciasInfantil(n); }}
+                      className={inputClass + " w-full"}
+                    />
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Tempo (ex: 4 anos)"
+                        value={exp.tempo}
+                        onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], tempo: e.target.value }; setExperienciasInfantil(n); }}
+                        className={inputClass + " flex-1"}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Faixa etária (ex: 3–10 anos)"
+                        value={exp.faixa_etaria}
+                        onChange={(e) => { const n = [...experienciasInfantil]; n[i] = { ...n[i], faixa_etaria: e.target.value }; setExperienciasInfantil(n); }}
+                        className={inputClass + " flex-1"}
+                      />
+                    </div>
+                  </div>
+                  {experienciasInfantil.length > 1 && (
+                    <button type="button" onClick={() => setExperienciasInfantil(experienciasInfantil.filter((_, j) => j !== i))}
+                      className="text-[20px] text-muted cursor-pointer leading-none mt-3 flex-none">×</button>
+                  )}
+                </div>
+              ))}
+              <button type="button"
+                onClick={() => setExperienciasInfantil([...experienciasInfantil, { descricao: "", tempo: "", faixa_etaria: "" }])}
+                className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
+                + Adicionar outra experiência
+              </button>
             </div>
 
             <div className="flex flex-col gap-2">
