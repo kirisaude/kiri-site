@@ -18,6 +18,7 @@ interface Inscricao {
   registro_conselho: string;
   cidade: string;
   status: string;
+  grupo_whatsapp?: boolean;
 }
 
 interface Encaminhamento {
@@ -814,7 +815,12 @@ export default function AdminPage() {
                   {pendentes.map((i) => (
                     <div key={i.id} className="bg-white border border-linha rounded-[14px] px-4 py-3.5 flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="font-serif text-[15.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="font-serif text-[15.5px] font-semibold text-carvao">{titleCasePT(i.nome)}</span>
+                          {i.grupo_whatsapp && (
+                            <span className="text-[11px] font-semibold text-[#1A7A4A] bg-[#E6F4EE] border border-[#A8D9BC] px-2 py-0.5 rounded-[6px]">Quer grupo WhatsApp</span>
+                          )}
+                        </div>
                         <div className="text-[13px] text-cinza-texto mt-0.5">{i.profissao} · {i.cidade || "—"} · {new Date(i.criado_em).toLocaleDateString("pt-BR")}</div>
                       </div>
                       <div className="flex items-center gap-2 flex-none">
