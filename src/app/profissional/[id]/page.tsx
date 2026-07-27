@@ -205,7 +205,7 @@ export default async function PerfilPage({ params }: PageProps) {
                     <path d="M10 18 C10 18 16 12 16 7.5 A6 6 0 1 0 4 7.5 C4 12 10 18 10 18 Z" stroke="#6E8893" strokeWidth="1.4" strokeLinejoin="round" />
                     <circle cx="10" cy="7.6" r="2.1" stroke="#6E8893" strokeWidth="1.4" />
                   </svg>
-                  {p.cidade}
+                  {titleCasePT(p.cidade)}
                 </div>
                 <div className="flex items-center gap-2.5 text-[14px] md:text-[14.5px] text-carvao-sutil">
                   <svg width="17" height="17" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>

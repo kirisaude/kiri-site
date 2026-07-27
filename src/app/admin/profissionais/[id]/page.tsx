@@ -555,11 +555,18 @@ export default function EditarProfissionalPage() {
               }
               if (profissao === "Nutricionista")
                 links.push({ label: "CFN", url: "https://cfn.org.br/consulta-nacional-de-nutricionistas/" });
+
+              const isCRP = ["Psicólogo", "Neuropsicólogo"].includes(profissao);
+              if (isCRP)
+                links.push({ label: "CFP (busca por nome)", url: "https://cadastro.cfp.org.br/" });
+
               if (links.length === 0) return null;
               return (
                 <div className="flex flex-col gap-1.5 mt-1">
-                  <span className="text-[11px] text-cinza-texto2 font-medium uppercase tracking-wide">Verificar no conselho — copie o número acima e busque:</span>
-                  <div className="flex gap-2 flex-wrap">
+                  <span className="text-[11px] text-cinza-texto2 font-medium uppercase tracking-wide">
+                    {isCRP ? "Verificar no CRP — busca feita pelo nome do profissional:" : "Verificar no conselho — copie o número acima e busque:"}
+                  </span>
+                  <div className="flex gap-2 flex-wrap items-center">
                     {links.map(l => (
                       <a key={l.url} href={l.url} target="_blank" rel="noreferrer"
                         className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-ardosia text-[12px] text-ardosia hover:bg-ardosia hover:text-white transition-colors">
@@ -567,6 +574,18 @@ export default function EditarProfissionalPage() {
                       </a>
                     ))}
                   </div>
+                  {isCRP && (
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[11.5px] text-muted whitespace-nowrap">Nome para busca:</span>
+                      <input
+                        type="text"
+                        readOnly
+                        value={nome}
+                        className="border border-linha rounded-[8px] px-2.5 py-1 text-[13px] text-carvao bg-[#F9F6F1] outline-none flex-1 cursor-text select-all"
+                        onClick={(e) => (e.target as HTMLInputElement).select()}
+                      />
+                    </div>
+                  )}
                 </div>
               );
             })()}
