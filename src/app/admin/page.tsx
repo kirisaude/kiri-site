@@ -677,7 +677,6 @@ function SalvarInstBtn({ sigla, valor, onSalvo }: { sigla: string; valor: string
           if (res.ok) {
             onSalvo(sigla, valor);
             setEstado("ok");
-            setTimeout(() => setEstado("idle"), 2000);
           } else {
             const err = await res.json().catch(() => ({}));
             console.error("Erro ao salvar instituição:", err);
@@ -1539,34 +1538,75 @@ export default function AdminPage() {
 
             {instituicoes.length === 0 ? (
               <p className="text-[13.5px] text-muted">Nenhuma instituição cadastrada. Execute o SQL de criação da tabela no Supabase.</p>
-            ) : (
-              <div className="flex flex-col gap-2">
-                <div className="grid grid-cols-[1fr_2fr_auto] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
-                  <span>Sigla / entrada</span>
-                  <span>Nome por extenso</span>
-                  <span></span>
+            ) : (() => {
+              const pendentes = instituicoes.filter(i => !i.nome_extenso);
+              const mapeadas = instituicoes.filter(i => !!i.nome_extenso);
+              return (
+                <div className="flex flex-col gap-4">
+                  {/* Pendentes: siglas sem nome */}
+                  {pendentes.length > 0 ? (
+                    <div className="flex flex-col gap-2">
+                      <p className="text-[12.5px] text-muted">Siglas ainda sem nome por extenso ({pendentes.length}):</p>
+                      <div className="grid grid-cols-[1fr_2fr_auto] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
+                        <span>Sigla</span><span>Nome por extenso</span><span></span>
+                      </div>
+                      {pendentes.map((inst) => (
+                        <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-white border border-linha">
+                          <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
+                          <input
+                            type="text"
+                            value={instEdits[inst.sigla] ?? ""}
+                            onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
+                            placeholder="Nome por extenso (deixe em branco se não souber)"
+                            className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                          />
+                          <SalvarInstBtn
+                            sigla={inst.sigla}
+                            valor={instEdits[inst.sigla] ?? ""}
+                            onSalvo={(sigla, nome) =>
+                              setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
+                            }
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-[13px] text-[#2E7D4F] font-semibold">✓ Todas as siglas mapeadas</p>
+                  )}
+
+                  {/* Mapeadas: compacto, editável */}
+                  {mapeadas.length > 0 && (
+                    <details className="group">
+                      <summary className="text-[12.5px] text-muted cursor-pointer select-none list-none flex items-center gap-1">
+                        <span className="group-open:hidden">▸</span>
+                        <span className="hidden group-open:inline">▾</span>
+                        {mapeadas.length} sigla{mapeadas.length !== 1 ? "s" : ""} já mapeada{mapeadas.length !== 1 ? "s" : ""} (clique para ver/editar)
+                      </summary>
+                      <div className="flex flex-col gap-1.5 mt-2">
+                        {mapeadas.map((inst) => (
+                          <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-[#F7FAF7] border border-[#B8D8C0]">
+                            <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
+                            <input
+                              type="text"
+                              value={instEdits[inst.sigla] ?? inst.nome_extenso ?? ""}
+                              onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
+                              className="border border-[#B8D8C0] rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+                            />
+                            <SalvarInstBtn
+                              sigla={inst.sigla}
+                              valor={instEdits[inst.sigla] ?? inst.nome_extenso ?? ""}
+                              onSalvo={(sigla, nome) =>
+                                setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
+                              }
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )}
                 </div>
-                {instituicoes.map((inst) => (
-                  <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-white border border-linha">
-                    <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
-                    <input
-                      type="text"
-                      value={instEdits[inst.sigla] ?? ""}
-                      onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
-                      placeholder="Nome por extenso (deixe em branco se não souber)"
-                      className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
-                    />
-                    <SalvarInstBtn
-                      sigla={inst.sigla}
-                      valor={instEdits[inst.sigla] ?? ""}
-                      onSalvo={(sigla, nome) =>
-                        setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
-                      }
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+              );
+            })()}
 
             {/* Lista de todas as instituições citadas */}
             {(() => {
