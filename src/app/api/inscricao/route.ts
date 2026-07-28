@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     valor_medio, aceita_convenio, convenios_nomes,
     graduacao, pos_graduacao, lattes,
     apresentacao, site_perfil, como_conheceu, whatsapp_agendamento,
-    grupo_whatsapp, experiencia_infantil, consentimento,
+    grupo_whatsapp, experiencia_infantil, cpf_consentimento, consentimento,
   } = body;
 
   if (!nome || !profissao || !registro_conselho || consentimento !== true) {
@@ -58,6 +58,7 @@ export async function POST(request: Request) {
       whatsapp_agendamento: whatsapp_agendamento || null,
       experiencia_infantil: experiencia_infantil || null,
       grupo_whatsapp: grupo_whatsapp ?? false,
+      cpf_consentimento: cpf_consentimento || null,
       consentimento: true,
       status: "pendente",
     }),

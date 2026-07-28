@@ -67,6 +67,8 @@ export default function InscricaoProfissionalPage() {
   const [comoConheceu, setComoConheceu] = useState("");
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [aceitaTermos, setAceitaTermos] = useState(false);
+  const [aceitaTermo, setAceitaTermo] = useState(false);
+  const [cpfConsentimento, setCpfConsentimento] = useState("");
   const [experienciasInfantil, setExperienciasInfantil] = useState([{ descricao: "", tempo: "", faixa_etaria: "" }]);
   const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
@@ -181,6 +183,7 @@ export default function InscricaoProfissionalPage() {
             .map((e) => [e.descricao.trim(), e.tempo.trim(), e.faixa_etaria.trim()].filter(Boolean).join(" — "))
             .join("\n") || null,
           grupo_whatsapp: grupoWhatsapp,
+          cpf_consentimento: cpfConsentimento.trim() || null,
           consentimento: true,
         }),
       });
@@ -802,6 +805,62 @@ export default function InscricaoProfissionalPage() {
               </label>
             </div>
 
+            {/* Termo de Adesão */}
+            <div className="border border-linha rounded-[13px] overflow-hidden">
+              <details>
+                <summary className="flex items-center justify-between px-4 py-3.5 cursor-pointer select-none bg-white list-none">
+                  <div className="flex items-center gap-2.5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/>
+                    </svg>
+                    <span className="text-[13.5px] font-semibold text-carvao">Termo de Adesão e Consentimento — Rede Kiri</span>
+                  </div>
+                  <span className="text-[11px] text-muted font-medium">ver ▾</span>
+                </summary>
+                <div className="px-4 pb-4 pt-2 bg-[#FAFAF8] border-t border-linha flex flex-col gap-3 text-[12.5px] text-cinza-texto2 leading-[1.65]">
+                  <p>Ao integrar a fase piloto da <strong>Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil</strong>, você concorda com as premissas abaixo:</p>
+                  <div className="flex flex-col gap-1.5">
+                    <p className="font-semibold text-carvao text-[12px]">1. Objeto e Propósito</p>
+                    <p>Você está ingressando voluntariamente em um grupo restrito de especialistas para validação e aprimoramento da plataforma Kiri. O objetivo é avaliar a sustentabilidade do ecossistema e o fluxo de usuários.</p>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <p className="font-semibold text-carvao text-[12px]">2. Uso e Exposição de Dados — LGPD</p>
+                    <p>Você autoriza a Kiri a exibir publicamente os dados profissionais fornecidos (nome, registro, especialidade, áreas de atuação, descrição clínica e foto). Você pode solicitar alteração ou exclusão a qualquer momento pelo e-mail <span className="text-ardosia">contato@kirisaude.com.br</span>.</p>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <p className="font-semibold text-carvao text-[12px]">3. Integração e Networking</p>
+                    <p>Você autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) exclusivamente com os demais membros do grupo piloto, para encaminhamentos internos.</p>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <p className="font-semibold text-carvao text-[12px]">4. Condições e Período de Validação</p>
+                    <p>A participação na Kiri é gratuita durante essa fase. Qualquer alteração será comunicada com antecedência. Você poderá sair a qualquer momento.</p>
+                  </div>
+                  <a href="/termo-de-adesao-kiri.pdf" target="_blank" className="text-ardosia text-[12px] underline self-start">Baixar termo completo em PDF ↗</a>
+                </div>
+              </details>
+              <div className="px-4 py-4 bg-white border-t border-linha flex flex-col gap-3">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[11.5px] font-medium text-muted">CPF <span className="text-ferrugem">*</span></label>
+                  <input
+                    type="text"
+                    value={cpfConsentimento}
+                    onChange={(e) => {
+                      const v = e.target.value.replace(/\D/g, "").slice(0, 11);
+                      setCpfConsentimento(v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4").replace(/(\d{3})(\d{3})(\d{3})$/, "$1.$2.$3").replace(/(\d{3})(\d{3})$/, "$1.$2").replace(/(\d{3})$/, "$1"));
+                    }}
+                    placeholder="000.000.000-00"
+                    className="border border-linha rounded-[10px] px-3 py-2.5 text-[13.5px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                  />
+                </div>
+                <label className="flex gap-3 cursor-pointer items-start">
+                  <input type="checkbox" checked={aceitaTermo} onChange={(e) => setAceitaTermo(e.target.checked)} className="mt-0.5 w-4 h-4 flex-none accent-ardosia" />
+                  <span className="text-[13px] leading-[1.6] text-cinza-texto2">
+                    Li e concordo com o <strong>Termo de Adesão e Consentimento da Rede Kiri</strong>, dando meu consentimento para o uso dos dados conforme descrito.
+                  </span>
+                </label>
+              </div>
+            </div>
+
             {/* Declaração de consentimento — cor da marca */}
             <div className="bg-[#E5EAEC] border border-[#B8CDD3] rounded-[13px] px-4 py-4 flex flex-col gap-3">
               <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ardosia-texto m-0">Declaração de consentimento</p>
@@ -827,7 +886,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !email || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
+          <button type="submit" disabled={enviando || !aceitaTermos || !aceitaTermo || !cpfConsentimento || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !email || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
           </button>
