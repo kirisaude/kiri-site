@@ -41,14 +41,13 @@ interface Reporte {
   descricao: string | null;
 }
 
-interface Avaliacao {
+interface Experiencia {
   id: string;
   criado_em: string;
   profissional_id: string;
-  nota: number;
-  data_atendimento: string;
-  texto: string | null;
-  aprovado: boolean;
+  data_atendimento: string | null;
+  comentario: string | null;
+  consentimento: boolean;
 }
 
 interface Contato {
@@ -709,7 +708,7 @@ export default function AdminPage() {
   const [encaminhamentos, setEncaminhamentos] = useState<Encaminhamento[]>([]);
   const [reportes, setReportes] = useState<Reporte[]>([]);
   const [contatos, setContatos] = useState<Contato[]>([]);
-  const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
+  const [experiencias, setExperiencias] = useState<Experiencia[]>([]);
   const [instituicoes, setInstituicoes] = useState<{ sigla: string; nome_extenso: string | null }[]>([]);
   const [instEdits, setInstEdits] = useState<Record<string, string>>({});
   const [instBusca, setInstBusca] = useState("");
@@ -724,19 +723,19 @@ export default function AdminPage() {
 
   const buscarDados = useCallback(async () => {
     setBuscando(true);
-    const [resI, resE, resR, resC, resA, resInst] = await Promise.all([
+    const [resI, resE, resR, resC, resExp, resInst] = await Promise.all([
       fetch("/api/admin/inscricoes"),
       fetch("/api/admin/encaminhamentos"),
       fetch("/api/admin/reportes"),
       fetch("/api/contato"),
-      fetch("/api/admin/avaliacoes"),
+      fetch("/api/admin/experiencias"),
       fetch("/api/instituicoes"),
     ]);
     if (resI.ok) setInscricoes(await resI.json());
     if (resE.ok) setEncaminhamentos(await resE.json());
     if (resR.ok) setReportes(await resR.json());
     if (resC.ok) setContatos(await resC.json());
-    if (resA.ok) setAvaliacoes(await resA.json());
+    if (resExp.ok) setExperiencias(await resExp.json());
     if (resInst.ok) {
       const rows = await resInst.json();
       setInstituicoes(rows);
@@ -933,7 +932,7 @@ export default function AdminPage() {
         </button>
         <button onClick={() => setAba("avaliacoes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Avaliações {avaliacoes.filter(a => !a.aprovado).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{avaliacoes.filter(a => !a.aprovado).length}</span>}
+          Experiências {experiencias.length > 0 && <span className="ml-1 bg-ardosia text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{experiencias.length}</span>}
         </button>
         <button onClick={() => setAba("contatos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "contatos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
@@ -1389,87 +1388,59 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* ABA AVALIAÇÕES */}
+        {/* ABA EXPERIÊNCIAS */}
         {aba === "avaliacoes" && (
           <div className="flex flex-col gap-6">
-            <h2 className="font-serif text-[18px] font-semibold text-carvao">
-              Avaliações <span className="text-[14px] font-sans font-normal text-muted">({avaliacoes.length})</span>
-            </h2>
+            <div>
+              <h2 className="font-serif text-[18px] font-semibold text-carvao">
+                Relatos de experiência <span className="text-[14px] font-sans font-normal text-muted">({experiencias.length})</span>
+              </h2>
+              <p className="text-[13px] text-muted mt-0.5">Privados — apenas a equipe Kiri tem acesso. Não são publicados nos perfis.</p>
+            </div>
 
-            {avaliacoes.length === 0 ? (
-              <p className="text-[14px] text-muted">Nenhuma avaliação recebida ainda.</p>
+            {experiencias.length === 0 ? (
+              <p className="text-[14px] text-muted">Nenhum relato recebido ainda.</p>
             ) : (
               <div className="flex flex-col gap-3">
-                {avaliacoes.map((a) => {
-                  const prof = profPublicados.find((p) => p.id === a.profissional_id);
+                {experiencias.map((exp) => {
+                  const prof = profPublicados.find((p) => p.id === exp.profissional_id);
                   return (
-                    <div key={a.id} className={`rounded-[14px] px-4 py-4 border ${a.aprovado ? "bg-white border-linha opacity-70" : "bg-white border-ardosia/25"}`}>
+                    <div key={exp.id} className="bg-white border border-linha rounded-[14px] px-4 py-4">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-serif text-[14.5px] font-semibold text-carvao">
-                              {prof ? prof.nome : a.profissional_id}
+                              {prof ? prof.nome : exp.profissional_id}
                             </span>
-                            <span className="flex gap-0.5">
-                              {[1,2,3,4,5].map((n) => (
-                                <svg key={n} width="13" height="13" viewBox="0 0 24 24" fill="none">
-                                  <path d="M12 2L14.9 8.6L22 9.3L16.8 14.1L18.4 21L12 17.4L5.6 21L7.2 14.1L2 9.3L9.1 8.6Z" fill={a.nota >= n ? "#E0A55E" : "none"} stroke={a.nota >= n ? "#E0A55E" : "#D8C7B0"} strokeWidth="1.5" strokeLinejoin="round"/>
-                                </svg>
-                              ))}
-                            </span>
-                            <span className="text-[12px] text-muted">Atend. {a.data_atendimento}</span>
+                            {prof && <span className="text-[12px] text-muted">{prof.titulo_exibicao}</span>}
                           </div>
-                          {a.texto && <p className="text-[13.5px] text-cinza-texto leading-[1.55] mt-1.5 mb-0">{a.texto}</p>}
-                          <div className="text-[11.5px] text-muted mt-1">{new Date(a.criado_em).toLocaleDateString("pt-BR")}</div>
-                        </div>
-                        <div className="flex items-center gap-2 flex-none">
-                          {!a.aprovado ? (
-                            <button
-                              type="button"
-                              onClick={async () => {
-                                setAvaliacoes((prev) => prev.map((x) => x.id === a.id ? { ...x, aprovado: true } : x));
-                                await fetch("/api/admin/avaliacoes", {
-                                  method: "PATCH",
-                                  headers: { "Content-Type": "application/json" },
-                                  body: JSON.stringify({ id: a.id, aprovado: true }),
-                                });
-                              }}
-                              className="text-[12.5px] font-semibold text-[#1A7A4A] bg-[#E6F4EE] border border-[#A8D9BC] rounded-[8px] px-3 py-1.5 cursor-pointer"
-                            >
-                              Aprovar
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={async () => {
-                                setAvaliacoes((prev) => prev.map((x) => x.id === a.id ? { ...x, aprovado: false } : x));
-                                await fetch("/api/admin/avaliacoes", {
-                                  method: "PATCH",
-                                  headers: { "Content-Type": "application/json" },
-                                  body: JSON.stringify({ id: a.id, aprovado: false }),
-                                });
-                              }}
-                              className="text-[12.5px] font-semibold text-muted cursor-pointer hover:underline"
-                            >
-                              Desaprovar
-                            </button>
+                          {exp.data_atendimento && (
+                            <div className="text-[12px] text-muted mt-0.5">
+                              Atendimento: {exp.data_atendimento}
+                            </div>
                           )}
-                          <button
-                            type="button"
-                            onClick={async () => {
-                              if (!confirm("Excluir esta avaliação?")) return;
-                              setAvaliacoes((prev) => prev.filter((x) => x.id !== a.id));
-                              await fetch("/api/admin/avaliacoes", {
-                                method: "DELETE",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ id: a.id }),
-                              });
-                            }}
-                            className="text-[12.5px] font-semibold text-ferrugem cursor-pointer hover:underline"
-                          >
-                            Excluir
-                          </button>
+                          {exp.comentario && (
+                            <p className="text-[13.5px] text-cinza-texto leading-[1.6] mt-2 whitespace-pre-wrap">{exp.comentario}</p>
+                          )}
+                          <div className="text-[11.5px] text-muted mt-2">
+                            Recebido em {new Date(exp.criado_em).toLocaleDateString("pt-BR")}
+                          </div>
                         </div>
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            if (!confirm("Excluir este relato permanentemente?")) return;
+                            setExperiencias((prev) => prev.filter((x) => x.id !== exp.id));
+                            await fetch("/api/admin/experiencias", {
+                              method: "DELETE",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ id: exp.id }),
+                            });
+                          }}
+                          className="text-[12.5px] font-semibold text-ferrugem cursor-pointer hover:underline flex-none"
+                        >
+                          Excluir
+                        </button>
                       </div>
                     </div>
                   );

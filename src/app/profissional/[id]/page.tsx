@@ -9,7 +9,6 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { valorDisplay, feminizarTitulo } from "@/types";
 import { titleCasePT } from "@/lib/titleCase";
-import { AvaliacoesSection } from "@/components/AvaliacoesSection";
 
 const profissionais = data.profissionais as Profissional[];
 
@@ -411,10 +410,15 @@ export default async function PerfilPage({ params }: PageProps) {
 
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-linha">
-          <AvaliacoesSection profissionalId={p.id} />
+        <div className="mt-8 pt-6 border-t border-linha flex justify-center">
+          <Link
+            href={`/avaliar/${p.id}`}
+            className="text-[13px] text-muted no-underline hover:text-ardosia transition-colors"
+          >
+            Atendeu com este profissional? Conte sua experiência →
+          </Link>
         </div>
-        <Footer className="mt-8" />
+        <Footer className="mt-6" />
       </div>
 
       {/* Barra CTA fixa — mobile only */}

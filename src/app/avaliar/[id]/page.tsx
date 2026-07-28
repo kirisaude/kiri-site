@@ -10,49 +10,13 @@ import { feminizarTitulo } from "@/types";
 
 const profissionais = data.profissionais as Profissional[];
 
-function Estrelas({ nota, onNota }: { nota: number; onNota: (n: number) => void }) {
-  const [hover, setHover] = useState(0);
-  return (
-    <div className="flex gap-1.5">
-      {[1, 2, 3, 4, 5].map((n) => (
-        <button
-          key={n}
-          type="button"
-          onClick={() => onNota(n)}
-          onMouseEnter={() => setHover(n)}
-          onMouseLeave={() => setHover(0)}
-          className="cursor-pointer p-0.5 transition-transform hover:scale-110"
-        >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 2L14.9 8.6L22 9.3L16.8 14.1L18.4 21L12 17.4L5.6 21L7.2 14.1L2 9.3L9.1 8.6Z"
-              fill={(hover || nota) >= n ? "#E0A55E" : "none"}
-              stroke={(hover || nota) >= n ? "#E0A55E" : "#D8C7B0"}
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      ))}
-    </div>
-  );
-}
-
-const NOTAS_LABEL: Record<number, string> = {
-  1: "Ruim",
-  2: "Regular",
-  3: "Bom",
-  4: "Muito bom",
-  5: "Excelente",
-};
-
-export default function AvaliarPage() {
+export default function ExperienciaPage() {
   const { id } = useParams<{ id: string }>();
   const profissional = profissionais.find((p) => p.id === id && !p.oculto);
 
-  const [nota, setNota] = useState(0);
   const [dataAtendimento, setDataAtendimento] = useState("");
   const [texto, setTexto] = useState("");
+  const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [erro, setErro] = useState("");
@@ -71,22 +35,22 @@ export default function AvaliarPage() {
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
-    if (nota === 0) {
-      setErro("Selecione uma nota de 1 a 5 estrelas.");
+    if (!consentimento) {
+      setErro("É necessário autorizar o uso do relato para continuar.");
       return;
     }
     setEnviando(true);
     setErro("");
 
     try {
-      const res = await fetch("/api/avaliacoes", {
+      const res = await fetch("/api/experiencia", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           profissional_id: id,
-          nota,
-          data_atendimento: dataAtendimento,
-          texto,
+          data_atendimento: dataAtendimento || null,
+          comentario: texto.trim() || null,
+          consentimento: true,
         }),
       });
 
@@ -110,14 +74,14 @@ export default function AvaliarPage() {
           <NavBack />
         </div>
         <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-          <div className="w-12 h-12 rounded-full bg-[#FFF4E0] flex items-center justify-center mb-5">
+          <div className="w-12 h-12 rounded-full bg-[#F5EFE6] flex items-center justify-center mb-5">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L14.9 8.6L22 9.3L16.8 14.1L18.4 21L12 17.4L5.6 21L7.2 14.1L2 9.3L9.1 8.6Z" fill="#E0A55E" stroke="#E0A55E" strokeWidth="1.5" strokeLinejoin="round"/>
+              <path d="M20 6L9 17L4 12" stroke="#BE6E4E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <h1 className="font-serif text-[22px] font-semibold text-carvao mb-2">Avaliação enviada</h1>
+          <h1 className="font-serif text-[22px] font-semibold text-carvao mb-2">Relato enviado</h1>
           <p className="text-[15px] text-cinza-texto leading-[1.65] max-w-sm">
-            Obrigada pelo seu retorno. Sua avaliação será revisada pela equipe Kiri antes de ser publicada.
+            Obrigada por compartilhar sua experiência. Seu relato é confidencial e ajuda a Kiri a cuidar da qualidade da rede.
           </p>
         </div>
         <div className="px-[18px] mb-8">
@@ -154,35 +118,23 @@ export default function AvaliarPage() {
         </div>
 
         <div>
-          <h1 className="font-serif text-[22px] font-semibold text-carvao mb-1">Avaliar atendimento</h1>
+          <h1 className="font-serif text-[22px] font-semibold text-carvao mb-1">Conte como foi sua experiência</h1>
           <p className="text-[14px] text-cinza-texto leading-[1.6]">
-            Sua avaliação ajuda outras famílias a escolher com mais segurança.
+            Seu relato é privado e ajuda a Kiri a cuidar da qualidade da rede. Não é publicado no perfil do profissional.
           </p>
         </div>
 
         <form onSubmit={enviar} className="flex flex-col gap-5">
-          {/* Nota */}
-          <div className="flex flex-col gap-2">
-            <label className="text-[14px] font-semibold text-carvao">
-              Nota <span className="text-ferrugem">*</span>
-            </label>
-            <Estrelas nota={nota} onNota={setNota} />
-            {nota > 0 && (
-              <span className="text-[13px] text-ambar-texto font-medium">{NOTAS_LABEL[nota]}</span>
-            )}
-          </div>
-
           {/* Data do atendimento */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[14px] font-semibold text-carvao">
-              Data do atendimento <span className="text-ferrugem">*</span>
+              Data do atendimento
             </label>
             <p className="text-[12.5px] text-muted -mt-0.5">Mês e ano em que ocorreu a consulta ou sessão.</p>
             <input
               type="month"
               value={dataAtendimento}
               onChange={(e) => setDataAtendimento(e.target.value)}
-              required
               max={new Date().toISOString().slice(0, 7)}
               className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors w-full"
             />
@@ -191,32 +143,47 @@ export default function AvaliarPage() {
           {/* Comentário */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[14px] font-semibold text-carvao">
-              Comentário <span className="text-[13px] font-normal text-muted">(opcional)</span>
+              Como foi sua experiência com este profissional? <span className="text-ferrugem">*</span>
             </label>
             <textarea
               value={texto}
               onChange={(e) => setTexto(e.target.value)}
-              rows={4}
-              placeholder="Como foi sua experiência? O que gostaria de compartilhar com outras famílias?"
+              required
+              rows={5}
+              placeholder="Descreva como foi o atendimento, o que marcou positiva ou negativamente, como a família se sentiu…"
               className="border border-linha rounded-[12px] px-4 py-[13px] text-[15px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted resize-none w-full"
             />
           </div>
 
+          {/* Aviso de privacidade */}
           <div className="bg-[#F5EFE6] rounded-[10px] px-4 py-3 flex flex-col gap-1">
-            <p className="text-[12.5px] font-semibold text-carvao">Política de moderação</p>
+            <p className="text-[12.5px] font-semibold text-carvao">Privacidade</p>
             <p className="text-[12px] text-cinza-texto leading-[1.6]">
-              Todas as avaliações passam por revisão antes de serem publicadas. Não são aceitas avaliações com conteúdo ofensivo, inadequado ou referentes a atendimentos não intermediados pela plataforma Kiri.
+              Este relato é confidencial, usado apenas pela equipe Kiri para curadoria. Não é publicado nem compartilhado com o profissional de forma identificável.
             </p>
           </div>
+
+          {/* Consentimento */}
+          <label className="flex gap-3 cursor-pointer items-start bg-white border border-linha rounded-[12px] px-4 py-3.5">
+            <input
+              type="checkbox"
+              checked={consentimento}
+              onChange={(e) => setConsentimento(e.target.checked)}
+              className="mt-0.5 w-4 h-4 flex-none accent-ardosia"
+            />
+            <span className="text-[13px] leading-[1.6] text-cinza-texto2">
+              Autorizo a Kiri a usar este relato internamente para acompanhamento da qualidade da rede. <span className="text-ferrugem">*</span>
+            </span>
+          </label>
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
           <button
             type="submit"
-            disabled={enviando}
+            disabled={enviando || !consentimento || !texto.trim()}
             className="bg-ardosia-escura text-white text-[15px] font-semibold rounded-[13px] py-[14px] cursor-pointer disabled:opacity-50 transition-opacity"
           >
-            {enviando ? "Enviando…" : "Enviar avaliação"}
+            {enviando ? "Enviando…" : "Enviar relato"}
           </button>
         </form>
       </div>

@@ -142,17 +142,8 @@ export default function Home() {
   const [copiado, setCopiado] = useState(false);
   const [shareReady, setShareReady] = useState(false);
   const shareBlobRef = useRef<Blob | null>(null);
-  const [ratings, setRatings] = useState<Record<string, { media: number; count: number }>>({});
-
   const SITE_URL = "https://kirisaude.com.br";
   const SHARE_URL = "https://www.kirisaude.com.br/compartilhar";
-
-  useEffect(() => {
-    fetch("/api/avaliacoes/medias")
-      .then((r) => r.json())
-      .then((data) => { if (data && typeof data === "object") setRatings(data); })
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     if (!showCompartilhar) { shareBlobRef.current = null; setShareReady(false); return; }
@@ -924,7 +915,7 @@ export default function Home() {
                   <div className="-mx-4 md:hidden overflow-x-auto scrollbar-hide flex gap-3 px-4 pb-1.5">
                     {sec.pros.map((p) => (
                       <div key={p.id} className="flex-none w-[220px]">
-                        <MiniCard profissional={p} rating={ratings[p.id]} />
+                        <MiniCard profissional={p} />
                       </div>
                     ))}
                   </div>
@@ -933,7 +924,7 @@ export default function Home() {
                   <div className="hidden md:flex flex-wrap gap-5">
                     {sec.pros.map((p) => (
                       <div key={p.id} className="w-[calc(25%-15px)]">
-                        <MiniCard profissional={p} rating={ratings[p.id]} />
+                        <MiniCard profissional={p} />
                       </div>
                     ))}
                   </div>
@@ -1300,7 +1291,7 @@ export default function Home() {
   );
 }
 
-function MiniCard({ profissional: p, rating }: { profissional: Profissional; rating?: { media: number; count: number } }) {
+function MiniCard({ profissional: p }: { profissional: Profissional }) {
   const [expandido, setExpandido] = useState(false);
   const LIMITE = 3;
   const temMais = p.areas_atuacao.length > LIMITE;
@@ -1327,15 +1318,6 @@ function MiniCard({ profissional: p, rating }: { profissional: Profissional; rat
                 Verificado
               </span>
             </div>
-            {rating && rating.count > 0 && (
-              <div className="inline-flex items-center gap-[3px]">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="#E0A55E">
-                  <path d="M12 2L14.9 8.6L22 9.3L16.8 14.1L18.4 21L12 17.4L5.6 21L7.2 14.1L2 9.3L9.1 8.6Z" strokeLinejoin="round"/>
-                </svg>
-                <span className="text-[10.5px] md:text-[12px] font-semibold text-carvao">{rating.media.toFixed(1)}</span>
-                <span className="text-[10px] md:text-[11px] text-muted">({rating.count})</span>
-              </div>
-            )}
           </div>
         </div>
       </div>
