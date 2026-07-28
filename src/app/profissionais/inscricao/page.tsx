@@ -214,36 +214,83 @@ export default function InscricaoProfissionalPage() {
           <div className="w-9 h-9" />
         </div>
 
-        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-8">
+        <div className="max-w-2xl mx-auto w-full px-[18px] pt-8 pb-12 flex flex-col gap-7">
 
-          {/* Grupo 1: emblema + título + reforço */}
-          <div className="flex flex-col items-center text-center gap-4">
-            <div className="w-[60px] h-[60px] rounded-full bg-[#E6F0F5] flex items-center justify-center">
-              <svg width="26" height="26" viewBox="0 0 22 22" fill="none">
-                <circle cx="11" cy="11" r="10" stroke="#44606C" strokeWidth="1.5" />
-                <path d="M6.5 11.2 L9.5 14.2 L15.5 7.6" stroke="#44606C" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          {/* Indicador de progresso */}
+          <div className="flex items-center gap-2 justify-center">
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-ardosia flex items-center justify-center flex-none">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <span className="text-[13px] font-semibold text-ardosia">Dados enviados</span>
+            </div>
+            <div className="w-8 h-px bg-linha" />
+            <div className="flex items-center gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-ferrugem flex items-center justify-center flex-none">
+                <span className="text-[11px] font-bold text-white">2</span>
+              </div>
+              <span className="text-[13px] font-semibold text-ferrugem">Documentação</span>
+            </div>
+          </div>
+
+          {/* Título */}
+          <div className="flex flex-col items-center text-center gap-3">
+            <div className="w-[60px] h-[60px] rounded-full bg-[#FDF3EC] flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#BE6E4E" strokeWidth="1.6" strokeLinejoin="round"/>
+                <path d="M14 2v6h6" stroke="#BE6E4E" strokeWidth="1.6" strokeLinejoin="round"/>
+                <line x1="8" y1="13" x2="16" y2="13" stroke="#BE6E4E" strokeWidth="1.6" strokeLinecap="round"/>
+                <line x1="8" y1="17" x2="13" y2="17" stroke="#BE6E4E" strokeWidth="1.6" strokeLinecap="round"/>
               </svg>
             </div>
-            <div className="flex flex-col" style={{ gap: 12 }}>
-              <h1 className="font-serif text-[26px] font-medium text-carvao m-0">Recebemos sua inscrição.</h1>
-              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
-                Obrigada pelo interesse em fazer parte da rede Kiri.
-              </p>
-              <p className="text-[15.5px] leading-[1.6] text-cinza-texto2 m-0">
-                Toda inscrição é revisada com cuidado pela nossa equipe. Retornamos em breve.
+            <div className="flex flex-col gap-2">
+              <h1 className="font-serif text-[24px] font-medium text-carvao m-0">Quase lá! Envie sua documentação.</h1>
+              <p className="text-[15px] leading-[1.65] text-cinza-texto2 m-0">
+                Para concluir sua inscrição, precisamos dos documentos que comprovam sua formação. O envio é feito pelo link abaixo — leva menos de 5 minutos.
               </p>
             </div>
           </div>
 
-          {/* Grupo 2: botão */}
-          <div className="flex flex-col items-center">
-            <button
-              onClick={() => router.push("/")}
-              className="w-full border border-ardosia text-ardosia-escura font-semibold text-[15px] rounded-[13px] py-[13px] cursor-pointer hover:bg-[#44606C]/5 transition-colors"
-            >
-              Voltar ao início
-            </button>
+          {/* Box de documentos necessários */}
+          <div className="bg-white border border-linha rounded-[16px] px-5 py-5 flex flex-col gap-3">
+            <div className="text-[12px] font-semibold tracking-[0.08em] uppercase text-muted">O que enviar</div>
+            <div className="flex flex-col gap-2.5">
+              {[
+                "Foto profissional (fundo neutro, rosto nítido, preferencialmente quadrada 1:1)",
+                "Certidão de regularidade no conselho da sua profissão (atualizada)",
+                "Diploma de graduação",
+                "Certificados de especialização, residência, mestrado, doutorado ou outros (se houver)",
+              ].map((doc) => (
+                <div key={doc} className="flex items-start gap-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-ferrugem flex-none mt-[7px]" />
+                  <span className="text-[14px] text-carvao-sutil leading-[1.5]">{doc}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* CTA principal */}
+          <a
+            href="https://forms.gle/p4dptue63CP5Gt5Y8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] no-underline shadow-[0_8px_20px_-10px_rgba(190,110,78,0.45)]"
+          >
+            Enviar documentação →
+          </a>
+
+          <p className="text-[12.5px] text-muted text-center leading-[1.6]">
+            O link também será enviado para o e-mail cadastrado caso precise acessar depois.
+          </p>
+
+          <button
+            onClick={() => router.push("/")}
+            className="w-full border border-linha text-cinza-texto font-medium text-[14px] rounded-[13px] py-[12px] cursor-pointer hover:bg-[#F0EBE3] transition-colors"
+          >
+            Enviar depois e voltar ao início
+          </button>
         </div>
 
         <Footer className="mx-[18px] mt-auto mb-8" />
@@ -364,7 +411,7 @@ export default function InscricaoProfissionalPage() {
             <div className="bg-wash-azulado border border-borda-azulada rounded-[14px] px-4 py-4">
               <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-ardosia-texto mb-2">Comprovação de formação</div>
               <p className="text-[13.5px] leading-[1.6] text-ardosia-escura">
-                Os documentos que comprovem as formações e especializações listadas abaixo serão solicitados pela equipe Kiri após o contato inicial. O envio ocorre em etapa posterior ao preenchimento deste formulário.
+                Os documentos que comprovem as formações e especializações listadas abaixo serão solicitados na próxima etapa, logo após o envio desta ficha.
               </p>
             </div>
 
