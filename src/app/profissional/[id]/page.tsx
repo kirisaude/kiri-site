@@ -413,7 +413,7 @@ export default async function PerfilPage({ params }: PageProps) {
         <div className="mt-8 pt-6 border-t border-linha flex justify-center">
           <Link
             href={`/avaliar/${p.id}`}
-            className="text-[13px] text-muted no-underline hover:text-ardosia transition-colors"
+            className="inline-flex items-center gap-2 text-[14px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada rounded-[11px] px-5 py-3 no-underline hover:bg-[#D8E8EE] transition-colors"
           >
             Atendeu com este profissional? Conte sua experiência →
           </Link>
