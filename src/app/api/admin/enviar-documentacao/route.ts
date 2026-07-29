@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       html: `
         <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; color: #2C2722; background: #F5EFE6;">
           <div style="margin-bottom: 28px;">
-            <img src="https://www.kirisaude.com.br/logo-kiri-principal.png" alt="Kiri" height="36" style="display:block;" />
+            <span style="font-family: Georgia, serif; font-size: 22px; font-weight: 600; color: #BE6E4E; letter-spacing: 0.01em;">Kiri</span>
           </div>
           <h1 style="font-size: 22px; font-weight: 600; margin: 0 0 12px 0; color: #2C2722;">Olá, ${primeiroNome}!</h1>
           <p style="font-size: 15px; line-height: 1.65; margin: 0 0 16px 0; color: #4A4038;">
