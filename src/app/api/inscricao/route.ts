@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     const resend = new Resend(resendKey);
     const primeiroNome = nome.split(" ")[0];
     resend.emails.send({
-      from: "Kiri <equipe@kirisaude.com.br>",
+      from: "Kiri <nao-responda@kirisaude.com.br>",
       to: email,
       subject: "Kiri — Envie sua documentação para concluir o cadastro",
       html: `
@@ -124,8 +124,7 @@ export async function POST(request: Request) {
             <li>Certificados de especialização, residência, mestrado ou doutorado (se houver)</li>
           </ul>
           <p style="font-size: 13px; color: #9A8C78; margin: 0;">
-            Qualquer dúvida, responda a este e-mail ou entre em contato pelo WhatsApp da Kiri.<br/>
-            Obrigada!
+            Este é um e-mail automático. Para dúvidas, entre em contato pelo WhatsApp da Kiri.
           </p>
         </div>
       `,
