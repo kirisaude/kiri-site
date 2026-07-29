@@ -928,7 +928,7 @@ export default function AdminPage() {
         </button>
         <button onClick={() => setAba("encaminhamentos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Encaminhamentos ({encaminhamentos.length})
+          Encaminhamentos ({encaminhamentos.length}){(() => { const p = encaminhamentos.filter(e => e.status !== "encaminhado" && e.status !== "respondido").length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
         </button>
         <button onClick={() => setAba("avaliacoes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
