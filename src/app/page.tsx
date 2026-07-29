@@ -17,6 +17,7 @@ const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Soment
 
 const CIDADE_ESTADO: Record<string, string> = {
   "salvador": "BA",
+  "luis eduardo magalhaes": "BA",
   "boa vista": "RR",
   "sao paulo": "SP",
   "sao bernardo do campo": "SP",
