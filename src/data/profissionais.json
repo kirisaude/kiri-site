@@ -1130,6 +1130,50 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null
+    },
+    {
+      "id": "kiri-043",
+      "inscricao_id": "6a4c9d6a-3ead-45c7-9ebe-26cd0fb3513c",
+      "nome": "Gabriela Andrade Martins",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "03/32016",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Luís Eduardo Magalhães",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Olá! Sou uma profissional dedicada ao desenvolvimento infantil e acredito que cada criança é única. Meu atendimento é individualizado, baseado em evidências científicas e realizado com muito respeito, acolhimento e parceria com a família. Durante as sessões, busco compreender as necessidades de cada criança, estimular suas habilidades e promover autonomia de forma lúdica e significativa. Os pais podem esperar um espaço seguro para diálogo, orientações práticas e um acompanhamento próximo, sempre com foco no bem-estar e na evolução da criança.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Faculdade Irecê- Fai — 2024"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Análise do comportamento aplicada (Aba) — Instituto Líbano — 2025"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Psicologia jurídica e avaliação psicológica — Instituto Líbano — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular e convênio",
+      "convenios": null,
+      "whatsapp_agendamento": "(77) 99828-5230",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "3fba3ba043bf4a65"
     }
   ]
 }
