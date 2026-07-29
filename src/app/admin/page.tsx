@@ -14,6 +14,7 @@ interface Inscricao {
   id: string;
   criado_em: string;
   nome: string;
+  email: string | null;
   profissao: string;
   registro_conselho: string;
   cidade: string;
@@ -957,13 +958,41 @@ export default function AdminPage() {
               <h2 className="font-serif text-[18px] font-semibold text-carvao">
                 Pendentes <span className="text-[14px] font-sans font-normal text-muted">({pendentes.length})</span>
               </h2>
-              <button
-                onClick={exportarPlanilha}
-                disabled={exportando || inscricoes.length === 0}
-                className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40"
-              >
-                {exportando ? "Exportando…" : "↗ Exportar para planilha"}
-              </button>
+              <div className="flex items-center gap-2">
+                {pendentes.length > 0 && (() => {
+                  const [enviandoEmail, setEnviandoEmail] = useState(false);
+                  const [emailStatus, setEmailStatus] = useState<"idle"|"ok"|"erro">("idle");
+                  return (
+                    <button
+                      onClick={async () => {
+                        if (!confirm(`Enviar e-mail de documentação para ${pendentes.length} profissional(is) pendente(s)?`)) return;
+                        setEnviandoEmail(true);
+                        const res = await fetch("/api/admin/enviar-documentacao", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ ids: pendentes.map(i => i.id) }),
+                        });
+                        const data = await res.json();
+                        setEnviandoEmail(false);
+                        if (res.ok) { setEmailStatus("ok"); setTimeout(() => setEmailStatus("idle"), 4000); }
+                        else setEmailStatus("erro");
+                        if (res.ok) alert(`E-mail enviado para ${data.enviados} profissional(is).${data.semEmail > 0 ? ` ${data.semEmail} sem e-mail cadastrado.` : ""}`);
+                      }}
+                      disabled={enviandoEmail}
+                      className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40 transition-colors ${emailStatus === "ok" ? "text-[#1A7A4A] border-[#A8D9BC]" : emailStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ferrugem border-ferrugem/30"}`}
+                    >
+                      {enviandoEmail ? "Enviando…" : emailStatus === "ok" ? "✓ Enviado" : "✉ Enviar e-mail de documentação"}
+                    </button>
+                  );
+                })()}
+                <button
+                  onClick={exportarPlanilha}
+                  disabled={exportando || inscricoes.length === 0}
+                  className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40"
+                >
+                  {exportando ? "Exportando…" : "↗ Exportar para planilha"}
+                </button>
+              </div>
             </div>
             <div>
               {pendentes.length === 0 ? (
