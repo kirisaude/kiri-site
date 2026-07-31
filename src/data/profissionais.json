@@ -1189,6 +1189,47 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null
+    },
+    {
+      "id": "kiri-044",
+      "inscricao_id": "aac69b43-dbc4-4b05-b490-16f2f17c5322",
+      "nome": "Hercules Hideki Makio",
+      "profissao": "Psiquiatra",
+      "titulo_exibicao": "Psiquiatra",
+      "registro_conselho": "44523",
+      "rqe": "25294",
+      "areas_atuacao": [
+        "Depressão",
+        "Ansiedade",
+        "TOC",
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Luís Eduardo Magalhães",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Priorizo um atendimento humano, cuidadoso e de qualidade. Valorizo o vínculo, a escuta e a empatia como princípios fundamentais em meu atendimento. Tenho como objetivo melhorar a saúde mental, auxiliar no desenvolvimento, promovendo bem-estar, realização pessoal e profissional, autonomia, equilíbrio e qualidade de vida.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — UFMS — 2017"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — SMS-MS — 2024"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 520,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(77) 99961-3873",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "julho de 2026",
+      "card_token": "54f2a0e37dcd4d0e"
     }
   ]
 }
