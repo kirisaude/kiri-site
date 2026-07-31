@@ -289,7 +289,12 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
+          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP) — 2018",
+          "verificado": true
+        },
+        {
+          "curso": "Formação",
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — USP — 2022",
           "verificado": true
         }
       ],
