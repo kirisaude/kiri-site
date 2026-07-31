@@ -285,22 +285,12 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013",
-          "verificado": true
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP) — 2018",
-          "verificado": true
-        },
-        {
-          "curso": "Formação",
-          "instituicao_ano": "Curso Introdutório do Modelo Precoce de Denver  — UC Davis Mind Institute — 2016",
-          "verificado": true
-        },
-        {
-          "curso": "Formação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — USP — 2022",
-          "verificado": true
+          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -317,8 +307,8 @@
       "foto_posicao": "center 20%",
       "genero": "F",
       "oculto": true,
-      "registro_verificado": true,
-      "sobre_verificado": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
