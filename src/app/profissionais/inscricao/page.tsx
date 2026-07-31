@@ -890,7 +890,6 @@ export default function InscricaoProfissionalPage() {
                     <p className="font-semibold text-carvao text-[12px]">4. Condições de Participação</p>
                     <p>A participação na Rede Kiri é gratuita. Qualquer alteração nas condições será comunicada com antecedência. Você poderá solicitar o encerramento da sua participação a qualquer momento.</p>
                   </div>
-                  <a href="/termo-de-adesao-kiri.pdf" target="_blank" className="text-ardosia text-[12px] underline self-start">Baixar termo completo em PDF ↗</a>
                 </div>
               </details>
               <div className="px-4 py-4 bg-white border-t border-linha flex flex-col gap-3">
