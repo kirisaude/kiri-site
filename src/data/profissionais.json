@@ -285,12 +285,12 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -307,8 +307,8 @@
       "foto_posicao": "center 20%",
       "genero": "F",
       "oculto": true,
-      "registro_verificado": false,
-      "sobre_verificado": false,
+      "registro_verificado": true,
+      "sobre_verificado": true,
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
