@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     if (!insc.email) { semEmail++; continue; }
     const primeiroNome = insc.nome.split(" ")[0];
     await resend.emails.send({
-      from: "Kiri <nao-responda@kirisaude.com.br>",
+      from: "Kiri <contato@kirisaude.com.br>",
       to: insc.email,
       subject: "Kiri — Envie sua documentação para concluir o cadastro",
       html: `

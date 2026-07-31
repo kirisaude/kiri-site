@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     const resend = new Resend(resendKey);
     const primeiroNome = nome.split(" ")[0];
     resend.emails.send({
-      from: "Kiri <nao-responda@kirisaude.com.br>",
+      from: "Kiri <contato@kirisaude.com.br>",
       to: email,
       subject: "Kiri — Envie sua documentação para concluir o cadastro",
       html: `
