@@ -107,14 +107,10 @@ async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Arra
 
 async function criarDocumentoAutentique(token: string, pdfBytes: Uint8Array, nome: string, email: string) {
   const query = `
-    mutation CreateDocument($document: DocumentInput!, $signatories: [SignatoryInput!]!, $file: Upload!) {
-      createDocument(document: $document, signatories: $signatories, file: $file) {
+    mutation CreateDocument($document: DocumentInput!, $signers: [SignerInput!]!, $file: Upload!) {
+      createDocument(document: $document, signers: $signers, file: $file) {
         id
         name
-        signatories {
-          email
-          link
-        }
       }
     }
   `;
@@ -123,7 +119,7 @@ async function criarDocumentoAutentique(token: string, pdfBytes: Uint8Array, nom
     query,
     variables: {
       document: { name: `Termo de Adesão — ${nome}` },
-      signatories: [{ email, action: "SIGN" }],
+      signers: [{ email, action: "SIGN" }],
       file: null,
     },
   });
