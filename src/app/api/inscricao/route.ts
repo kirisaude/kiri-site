@@ -1,5 +1,148 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+
+async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Array> {
+  const doc = await PDFDocument.create();
+  const fontReg = await doc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await doc.embedFont(StandardFonts.HelveticaBold);
+
+  const pageWidth = 595.28;
+  const pageHeight = 841.89;
+  const margin = 60;
+  const contentWidth = pageWidth - 2 * margin;
+  const cinza = rgb(0.17, 0.15, 0.13);
+  const ferrugem = rgb(0.745, 0.431, 0.306);
+  const muted = rgb(0.6, 0.57, 0.53);
+
+  let page = doc.addPage([pageWidth, pageHeight]);
+  let y = pageHeight - margin;
+
+  function addPage() {
+    page = doc.addPage([pageWidth, pageHeight]);
+    y = pageHeight - margin;
+  }
+
+  function drawWrapped(text: string, font: typeof fontReg, size: number, color = cinza, indent = 0) {
+    const lineH = size * 1.55;
+    const words = text.split(" ");
+    let line = "";
+    for (const word of words) {
+      const test = line ? `${line} ${word}` : word;
+      if (font.widthOfTextAtSize(test, size) > contentWidth - indent && line) {
+        if (y < margin + lineH * 2) addPage();
+        page.drawText(line, { x: margin + indent, y, size, font, color });
+        y -= lineH;
+        line = word;
+      } else {
+        line = test;
+      }
+    }
+    if (line) {
+      if (y < margin + lineH * 2) addPage();
+      page.drawText(line, { x: margin + indent, y, size, font, color });
+      y -= lineH;
+    }
+  }
+
+  function gap(pts = 8) { y -= pts; }
+
+  // Cabeçalho
+  page.drawText("Kiri", { x: margin, y, size: 20, font: fontBold, color: ferrugem });
+  y -= 28;
+  drawWrapped("Termo de Adesão e Consentimento — Rede Kiri", fontBold, 14);
+  gap(4);
+  const hoje = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  drawWrapped(`Data: ${hoje}`, fontReg, 10, muted);
+  drawWrapped(`Profissional: ${nome}`, fontReg, 10, muted);
+  drawWrapped(`Área: ${profissao}`, fontReg, 10, muted);
+  gap(12);
+  page.drawLine({ start: { x: margin, y }, end: { x: pageWidth - margin, y }, thickness: 0.5, color: rgb(0.85, 0.82, 0.78) });
+  gap(14);
+
+  // Corpo
+  drawWrapped(
+    "Ao integrar a fase piloto da Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil, o profissional identificado acima concorda com as premissas abaixo:",
+    fontReg, 11
+  );
+  gap(10);
+
+  const secoes = [
+    {
+      titulo: "1. Objeto e Propósito",
+      texto: "O profissional está ingressando voluntariamente em um grupo restrito de especialistas para validação e aprimoramento da plataforma Kiri. O objetivo é avaliar a sustentabilidade do ecossistema e o fluxo de usuários.",
+    },
+    {
+      titulo: "2. Uso e Exposição de Dados — LGPD",
+      texto: "O profissional autoriza a Kiri a exibir publicamente os dados profissionais fornecidos (nome, registro, especialidade, áreas de atuação, descrição clínica e foto). O profissional pode solicitar alteração ou exclusão a qualquer momento pelo e-mail contato@kirisaude.com.br.",
+    },
+    {
+      titulo: "3. Integração e Networking",
+      texto: "O profissional autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) exclusivamente com os demais membros do grupo piloto, para encaminhamentos internos.",
+    },
+    {
+      titulo: "4. Condições e Período de Validação",
+      texto: "A participação na Kiri é gratuita durante essa fase. Qualquer alteração nos termos ou nas condições de participação será comunicada com antecedência mínima de 30 dias. O profissional poderá sair a qualquer momento, mediante comunicação por escrito.",
+    },
+    {
+      titulo: "5. Declaração de Consentimento",
+      texto: "Ao assinar este documento digitalmente, o profissional declara ter lido, compreendido e concordado integralmente com os Termos de Uso e a Política de Privacidade da plataforma Kiri, dando seu consentimento livre, informado e inequívoco para o tratamento dos dados fornecidos, nos termos da Lei Geral de Proteção de Dados (Lei n.o 13.709/2018 — LGPD).",
+    },
+  ];
+
+  for (const s of secoes) {
+    drawWrapped(s.titulo, fontBold, 11);
+    gap(2);
+    drawWrapped(s.texto, fontReg, 11);
+    gap(12);
+  }
+
+  gap(8);
+  page.drawLine({ start: { x: margin, y }, end: { x: pageWidth - margin, y }, thickness: 0.5, color: rgb(0.85, 0.82, 0.78) });
+  gap(8);
+  drawWrapped("Este documento foi gerado automaticamente pela plataforma Kiri — kirisaude.com.br", fontReg, 9, muted);
+
+  return doc.save();
+}
+
+async function criarDocumentoAutentique(token: string, pdfBytes: Uint8Array, nome: string, email: string) {
+  const query = `
+    mutation CreateDocument($document: DocumentInput!, $signatories: [SignatoryInput!]!, $file: Upload!) {
+      createDocument(document: $document, signatories: $signatories, file: $file) {
+        id
+        name
+        signatories {
+          email
+          link
+        }
+      }
+    }
+  `;
+
+  const operations = JSON.stringify({
+    query,
+    variables: {
+      document: { name: `Termo de Adesão — ${nome}` },
+      signatories: [{ email, action: "SIGN" }],
+      file: null,
+    },
+  });
+
+  const formData = new FormData();
+  formData.append("operations", operations);
+  formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
+  formData.append("0", new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" }), "termo.pdf");
+
+  const res = await fetch("https://api.autentique.com.br/v2/graphql", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData,
+  });
+
+  const result = await res.json();
+  if (result.errors) throw new Error(result.errors[0]?.message ?? "Erro Autentique");
+  return result.data?.createDocument;
+}
 
 export async function POST(request: Request) {
   const supabaseUrl = process.env.SUPABASE_URL;
@@ -17,7 +160,7 @@ export async function POST(request: Request) {
     valor_medio, aceita_convenio, convenios_nomes,
     graduacao, pos_graduacao, lattes,
     apresentacao, site_perfil, como_conheceu, whatsapp_agendamento,
-    grupo_whatsapp, experiencia_infantil, cpf_consentimento, consentimento,
+    grupo_whatsapp, experiencia_infantil, consentimento,
   } = body;
 
   if (!nome || !profissao || !registro_conselho || consentimento !== true) {
@@ -59,7 +202,6 @@ export async function POST(request: Request) {
       whatsapp_agendamento: whatsapp_agendamento || null,
       experiencia_infantil: experiencia_infantil || null,
       grupo_whatsapp: grupo_whatsapp ?? false,
-      cpf_consentimento: cpf_consentimento || null,
       consentimento: true,
       status: "pendente",
     }),
@@ -71,6 +213,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ erro: `Falha ao registrar inscrição (${res.status}): ${erro}` }, { status: 500 });
   }
 
+  // Google Sheets
   const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheetsUrl) {
     const agoraDate = new Date();
@@ -79,17 +222,16 @@ export async function POST(request: Request) {
     fetch(sheetsUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        data,
-        horario,
-        nome,
-        email: email || "",
-        profissao,
-        cidade: cidade || "",
-        modalidade: modalidade || "",
-        whatsapp: whatsapp_agendamento || "",
-      }),
+      body: JSON.stringify({ data, horario, nome, email: email || "", profissao, cidade: cidade || "", modalidade: modalidade || "", whatsapp: whatsapp_agendamento || "" }),
     }).catch(() => {});
+  }
+
+  // Autentique — gera PDF do termo e envia para assinatura digital ICP-Brasil
+  const autentiqueToken = process.env.AUTENTIQUE_API_TOKEN;
+  if (autentiqueToken && email) {
+    gerarTermoPDF(nome, profissao)
+      .then((pdfBytes) => criarDocumentoAutentique(autentiqueToken, pdfBytes, nome, email))
+      .catch((err) => console.error("Erro Autentique:", err));
   }
 
   // E-mail automático com link de documentação

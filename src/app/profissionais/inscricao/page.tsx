@@ -68,7 +68,6 @@ export default function InscricaoProfissionalPage() {
   const [whatsappAgendamento, setWhatsappAgendamento] = useState("");
   const [aceitaTermos, setAceitaTermos] = useState(false);
   const [aceitaTermo, setAceitaTermo] = useState(false);
-  const [cpfConsentimento, setCpfConsentimento] = useState("");
   const [experienciasInfantil, setExperienciasInfantil] = useState([{ descricao: "", tempo: "", faixa_etaria: "" }]);
   const [grupoWhatsapp, setGrupoWhatsapp] = useState(false);
   const [consentimento, setConsentimento] = useState(false);
@@ -145,7 +144,6 @@ export default function InscricaoProfissionalPage() {
     if (!apresentacao.trim()) { setErro("Preencha a apresentação."); return; }
     if (!aceitaTermos) { setErro("Aceite os Termos de Uso e a Política de Privacidade."); return; }
     if (!aceitaTermo) { setErro("Leia e aceite o Termo de Adesão e Consentimento."); return; }
-    if (!cpfConsentimento) { setErro("Preencha o CPF no Termo de Adesão."); return; }
     if (!consentimento) { setErro("Aceite a Declaração de Consentimento."); return; }
 
     setEnviando(true);
@@ -194,7 +192,6 @@ export default function InscricaoProfissionalPage() {
             .map((e) => [e.descricao.trim(), e.tempo.trim(), e.faixa_etaria.trim()].filter(Boolean).join(" — "))
             .join("\n") || null,
           grupo_whatsapp: grupoWhatsapp,
-          cpf_consentimento: cpfConsentimento.trim() || null,
           consentimento: true,
         }),
       });
@@ -897,18 +894,14 @@ export default function InscricaoProfissionalPage() {
                 </div>
               </details>
               <div className="px-4 py-4 bg-white border-t border-linha flex flex-col gap-3">
-                <div className="flex flex-col gap-1">
-                  <label className="text-[11.5px] font-medium text-muted">CPF <span className="text-ferrugem">*</span></label>
-                  <input
-                    type="text"
-                    value={cpfConsentimento}
-                    onChange={(e) => {
-                      const v = e.target.value.replace(/\D/g, "").slice(0, 11);
-                      setCpfConsentimento(v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4").replace(/(\d{3})(\d{3})(\d{3})$/, "$1.$2.$3").replace(/(\d{3})(\d{3})$/, "$1.$2").replace(/(\d{3})$/, "$1"));
-                    }}
-                    placeholder="000.000.000-00"
-                    className="border border-linha rounded-[10px] px-3 py-2.5 text-[13.5px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
-                  />
+                <div className="bg-[#EFF4F6] border border-[#C5D8DF] rounded-[10px] px-3.5 py-3 flex items-start gap-2.5">
+                  <svg width="15" height="15" viewBox="0 0 20 20" fill="none" className="flex-none mt-[1px]">
+                    <circle cx="10" cy="10" r="8.4" stroke="#44606C" strokeWidth="1.4"/>
+                    <path d="M10 6v4M10 13.5v.5" stroke="#44606C" strokeWidth="1.6" strokeLinecap="round"/>
+                  </svg>
+                  <p className="text-[12.5px] leading-[1.6] text-ardosia-escura m-0">
+                    Após o envio, você receberá um e-mail separado do <strong>Autentique</strong> para assinar este termo digitalmente com seu <strong>certificado ICP-Brasil</strong>.
+                  </p>
                 </div>
                 <label className="flex gap-3 cursor-pointer items-start">
                   <input type="checkbox" checked={aceitaTermo} onChange={(e) => setAceitaTermo(e.target.checked)} className="mt-0.5 w-4 h-4 flex-none accent-ardosia" />
