@@ -311,7 +311,7 @@
       "tempo_atuacao": null,
       "foto_posicao": "center 20%",
       "genero": "F",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
       "profissao_secundaria": null,
