@@ -125,18 +125,29 @@ export default function InscricaoProfissionalPage() {
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
-    if (!consentimento) {
-      setErro("É necessário aceitar o uso dos seus dados para continuar.");
-      return;
-    }
-    if (!graduacaoInstituicao.trim() || !graduacaoAno.trim()) {
-      setErro("Preencha a instituição e o ano de conclusão da graduação.");
-      return;
-    }
-    if (!experienciasInfantil.some((e) => e.descricao.trim())) {
-      setErro("Descreva ao menos uma experiência com atendimento infantil.");
-      return;
-    }
+
+    if (!nome.trim()) { setErro("Preencha o nome completo."); return; }
+    if (!email.trim()) { setErro("Preencha o e-mail."); return; }
+    if (!whatsappAgendamento.trim()) { setErro("Preencha o WhatsApp para agendamento."); return; }
+    if (!profissao) { setErro("Selecione a profissão."); return; }
+    if (!registroConselho.trim()) { setErro("Preencha o número de registro no conselho."); return; }
+    if (!graduacaoCurso.trim()) { setErro("Preencha a área de graduação."); return; }
+    if (!graduacaoInstituicao.trim()) { setErro("Preencha a instituição de graduação."); return; }
+    if (!graduacaoAno.trim()) { setErro("Preencha o ano de conclusão da graduação."); return; }
+    if (!tempoAtuacao) { setErro("Selecione o tempo de atuação na área."); return; }
+    if (areasAtuacao.length === 0) { setErro("Selecione ao menos uma área de atuação."); return; }
+    if (faixaEtaria.length === 0) { setErro("Selecione ao menos uma faixa etária atendida."); return; }
+    if (!experienciasInfantil.some((exp) => exp.descricao.trim())) { setErro("Descreva ao menos uma experiência com atendimento infantil."); return; }
+    if (!modalidade) { setErro("Selecione a modalidade de atendimento (Presencial, Online ou ambos)."); return; }
+    if (!cidade.trim()) { setErro("Preencha a cidade de atendimento."); return; }
+    if (isSaoPaulo && regioesSP.length === 0) { setErro("Selecione ao menos uma região de atendimento em São Paulo."); return; }
+    if (!aceitaConvenio) { setErro("Selecione se aceita convênio."); return; }
+    if (!apresentacao.trim()) { setErro("Preencha a apresentação."); return; }
+    if (!aceitaTermos) { setErro("Aceite os Termos de Uso e a Política de Privacidade."); return; }
+    if (!aceitaTermo) { setErro("Leia e aceite o Termo de Adesão e Consentimento."); return; }
+    if (!cpfConsentimento) { setErro("Preencha o CPF no Termo de Adesão."); return; }
+    if (!consentimento) { setErro("Aceite a Declaração de Consentimento."); return; }
+
     setEnviando(true);
     setErro("");
 
@@ -933,7 +944,7 @@ export default function InscricaoProfissionalPage() {
 
           {erro && <p className="text-[13.5px] text-ferrugem">{erro}</p>}
 
-          <button type="submit" disabled={enviando || !aceitaTermos || !aceitaTermo || !cpfConsentimento || !consentimento || !nome || !profissao || !registroConselho || !tempoAtuacao || !graduacaoCurso || !graduacaoInstituicao || !graduacaoAno || !aceitaConvenio || !apresentacao || !email || !whatsappAgendamento || !cidade || !modalidade || areasAtuacao.length === 0 || faixaEtaria.length === 0 || (isSaoPaulo && regioesSP.length === 0)}
+          <button type="submit" disabled={enviando}
             className="w-full bg-ardosia-escura text-white font-semibold text-[16px] rounded-[13px] py-[15px] cursor-pointer disabled:opacity-50 transition-opacity">
             {enviando ? "Enviando…" : "Enviar inscrição"}
           </button>

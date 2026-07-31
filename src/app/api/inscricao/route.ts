@@ -124,7 +124,7 @@ export async function POST(request: Request) {
             <li>Certificados de especialização, residência, mestrado ou doutorado (se houver)</li>
           </ul>
           <p style="font-size: 13px; color: #9A8C78; margin: 0;">
-            Este é um e-mail automático. Para dúvidas, entre em contato pelo WhatsApp da Kiri.
+            Este é um e-mail automático. Para dúvidas, fale pelo <a href="https://wa.me/5511993197202" style="color: #44606C;">WhatsApp da Kiri</a>.
           </p>
         </div>
       `,
