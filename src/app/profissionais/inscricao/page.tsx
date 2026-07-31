@@ -873,22 +873,22 @@ export default function InscricaoProfissionalPage() {
                   <span className="text-[11px] text-muted font-medium">ver ▾</span>
                 </summary>
                 <div className="px-4 pb-4 pt-2 bg-[#FAFAF8] border-t border-linha flex flex-col gap-3 text-[12.5px] text-cinza-texto2 leading-[1.65]">
-                  <p>Ao integrar a fase piloto da <strong>Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil</strong>, você concorda com as premissas abaixo:</p>
+                  <p>Ao integrar a <strong>Rede Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil</strong>, você concorda com as premissas abaixo:</p>
                   <div className="flex flex-col gap-1.5">
                     <p className="font-semibold text-carvao text-[12px]">1. Objeto e Propósito</p>
-                    <p>Você está ingressando voluntariamente em um grupo restrito de especialistas para validação e aprimoramento da plataforma Kiri. O objetivo é avaliar a sustentabilidade do ecossistema e o fluxo de usuários.</p>
+                    <p>Ao integrar a Rede Kiri, o profissional passa a compor uma rede de indicação de especialistas em neurodesenvolvimento infantil, cujos dados serão exibidos publicamente na plataforma para facilitar o acesso das famílias a atendimento especializado. A Kiri reserva-se o direito de desligar da rede profissionais cujas condutas sejam incompatíveis com a ética profissional ou que comprometam a confiança das famílias.</p>
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <p className="font-semibold text-carvao text-[12px]">2. Uso e Exposição de Dados — LGPD</p>
                     <p>Você autoriza a Kiri a exibir publicamente os dados profissionais fornecidos (nome, registro, especialidade, áreas de atuação, descrição clínica e foto). Você pode solicitar alteração ou exclusão a qualquer momento pelo e-mail <span className="text-ardosia">contato@kirisaude.com.br</span>.</p>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <p className="font-semibold text-carvao text-[12px]">3. Integração e Networking</p>
-                    <p>Você autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) exclusivamente com os demais membros do grupo piloto, para encaminhamentos internos.</p>
+                    <p className="font-semibold text-carvao text-[12px]">3. Integração e Encaminhamentos</p>
+                    <p>Você autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) com os demais membros da rede, exclusivamente para fins de encaminhamentos internos entre profissionais.</p>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <p className="font-semibold text-carvao text-[12px]">4. Condições e Período de Validação</p>
-                    <p>A participação na Kiri é gratuita durante essa fase. Qualquer alteração será comunicada com antecedência. Você poderá sair a qualquer momento.</p>
+                    <p className="font-semibold text-carvao text-[12px]">4. Condições de Participação</p>
+                    <p>A participação na Rede Kiri é gratuita. Qualquer alteração nas condições será comunicada com antecedência. Você poderá solicitar o encerramento da sua participação a qualquer momento.</p>
                   </div>
                   <a href="/termo-de-adesao-kiri.pdf" target="_blank" className="text-ardosia text-[12px] underline self-start">Baixar termo completo em PDF ↗</a>
                 </div>

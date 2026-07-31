@@ -62,7 +62,7 @@ async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Arra
 
   // Corpo
   drawWrapped(
-    "Ao integrar a fase piloto da Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil, o profissional identificado acima concorda com as premissas abaixo:",
+    "Ao integrar a Rede Kiri — Rede de Cuidado ao Neurodesenvolvimento Infantil, o profissional identificado acima concorda com as premissas abaixo:",
     fontReg, 11
   );
   gap(10);
@@ -70,19 +70,19 @@ async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Arra
   const secoes = [
     {
       titulo: "1. Objeto e Propósito",
-      texto: "O profissional está ingressando voluntariamente em um grupo restrito de especialistas para validação e aprimoramento da plataforma Kiri. O objetivo é avaliar a sustentabilidade do ecossistema e o fluxo de usuários.",
+      texto: "Ao integrar a Rede Kiri, o profissional passa a compor uma rede de indicação de especialistas em neurodesenvolvimento infantil, cujos dados serão exibidos publicamente na plataforma para facilitar o acesso das famílias a atendimento especializado. A Kiri reserva-se o direito de desligar da rede profissionais cujas condutas sejam incompatíveis com a ética profissional ou que comprometam a confiança das famílias.",
     },
     {
       titulo: "2. Uso e Exposição de Dados — LGPD",
       texto: "O profissional autoriza a Kiri a exibir publicamente os dados profissionais fornecidos (nome, registro, especialidade, áreas de atuação, descrição clínica e foto). O profissional pode solicitar alteração ou exclusão a qualquer momento pelo e-mail contato@kirisaude.com.br.",
     },
     {
-      titulo: "3. Integração e Networking",
-      texto: "O profissional autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) exclusivamente com os demais membros do grupo piloto, para encaminhamentos internos.",
+      titulo: "3. Integração e Encaminhamentos",
+      texto: "O profissional autoriza o compartilhamento do seu contato direto (e-mail ou WhatsApp profissional) com os demais membros da rede, exclusivamente para fins de encaminhamentos internos entre profissionais.",
     },
     {
-      titulo: "4. Condições e Período de Validação",
-      texto: "A participação na Kiri é gratuita durante essa fase. Qualquer alteração nos termos ou nas condições de participação será comunicada com antecedência mínima de 30 dias. O profissional poderá sair a qualquer momento, mediante comunicação por escrito.",
+      titulo: "4. Condições de Participação",
+      texto: "A participação na Rede Kiri é gratuita. Qualquer alteração nas condições de participação será comunicada com antecedência mínima de 30 dias. O profissional poderá solicitar o encerramento da sua participação a qualquer momento, mediante comunicação por escrito.",
     },
     {
       titulo: "5. Declaração de Consentimento",
