@@ -146,7 +146,7 @@ export default function ParaProfissionaisPage() {
         <section className="bg-ardosia/8 border border-ardosia/15 rounded-[16px] px-6 py-7 text-center">
           <p className="text-[16px] font-semibold text-carvao mb-2">Pronto para fazer parte?</p>
           <p className="text-[14px] text-cinza-texto mb-5">
-            A inscrição leva cerca de 10 minutos e é totalmente gratuita.
+            A inscrição leva alguns minutos e é totalmente gratuita.
           </p>
           <Link
             href="/profissionais/inscricao"
