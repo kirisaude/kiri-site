@@ -54,6 +54,7 @@ export interface Profissional {
   whatsapp_agendamento: string | null;
   card_token: string;
   inscricao_id?: string | null;
+  pasta_drive?: string | null;
 }
 
 export const PROFISSOES_ORDENADAS = [
