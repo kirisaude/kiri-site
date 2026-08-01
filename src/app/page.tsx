@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-14 md:pt-[72px] md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
+        <div className="pt-10 md:pt-[72px] md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -560,7 +560,7 @@ export default function Home() {
           {/* Filtros — zona de busca, imediatamente após as condições */}
           <div
             ref={filtrosRef}
-            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-[14px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-t border-b border-[#D8C7B0] md:border-b-0 relative"
+            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-[14px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
             style={{ top: headerHeight }}
           >
             <div className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-2.5 md:mb-3" style={{ color: "#9A8C78" }}>
@@ -810,17 +810,17 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
               onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
             >
-              <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #B8C8CD" }}>
-                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #C4D0D5" }}>
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="10" cy="7" r="3.2" stroke="#44606C" strokeWidth="1.5" />
                   <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-[14px] md:text-[15px] font-semibold leading-[1.2]" style={{ color: "#44606C" }}>
+                <div className="text-[17px] md:text-[19px] leading-[1.2]" style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500, color: "#44606C" }}>
                   Você é profissional de saúde?
                 </div>
-                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "rgba(68,96,108,0.65)" }}>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#6E6457" }}>
                   Faça parte da rede Kiri, é gratuito
                 </div>
               </div>
@@ -837,8 +837,8 @@ export default function Home() {
               onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
               onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
             >
-              <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #B8C8CD" }}>
-                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #C4D0D5" }}>
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="15.5" cy="4" r="2" stroke="#44606C" strokeWidth="1.4" />
                   <circle cx="4.5" cy="10" r="2" stroke="#44606C" strokeWidth="1.4" />
                   <circle cx="15.5" cy="16" r="2" stroke="#44606C" strokeWidth="1.4" />
@@ -847,10 +847,10 @@ export default function Home() {
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-[14px] md:text-[15px] font-semibold leading-[1.2]" style={{ color: "#44606C" }}>
+                <div className="text-[17px] md:text-[19px] leading-[1.2]" style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500, color: "#44606C" }}>
                   Conhece alguém que pode precisar?
                 </div>
-                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "rgba(68,96,108,0.65)" }}>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#6E6457" }}>
                   Compartilhe a Kiri com outra família
                 </div>
               </div>
