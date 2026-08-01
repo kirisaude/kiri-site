@@ -119,6 +119,7 @@ export default function EditarProfissionalPage() {
   const [uploadandoFoto, setUploadandoFoto] = useState(false);
   const [erroFoto, setErroFoto] = useState("");
 
+  const [pastaDrive, setPastaDrive] = useState(profOriginal?.pasta_drive ?? "");
   const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
   const [registroStatus, setRegistroStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.registro_verificado, profOriginal?.registro_pendente));
   const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
@@ -289,6 +290,7 @@ export default function EditarProfissionalPage() {
       experiencias_infantil: experienciasInfantil.filter(e => e.descricao.trim()).length
         ? experienciasInfantil.filter(e => e.descricao.trim()).map(e => ({ descricao: e.descricao.trim(), tempo: e.tempo?.trim() || undefined, faixa_etaria: e.faixa_etaria?.trim() || undefined }))
         : null,
+      pasta_drive: pastaDrive.trim() || null,
     };
 
     const res = await fetch("/api/admin/profissionais", {
@@ -314,6 +316,20 @@ export default function EditarProfissionalPage() {
         <Link href="/admin" className="text-[13px] font-semibold text-ardosia no-underline">← Admin</Link>
         <span className="text-[13px] text-muted">/ Editar profissional</span>
         <div className="flex items-center gap-2 ml-auto">
+          {pastaDrive ? (
+            <a
+              href={pastaDrive}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-[12.5px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada rounded-[8px] px-3 py-1.5 no-underline hover:opacity-80 transition-opacity"
+            >
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M13 2h5v5M18 2l-8 8" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Pasta no Drive
+            </a>
+          ) : null}
           <KiriLogoCompact height={28} />
         </div>
       </header>
@@ -336,6 +352,19 @@ export default function EditarProfissionalPage() {
           >
             Ver perfil ↗
           </Link>
+        </div>
+        <div className="mt-2 flex items-center gap-2">
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+            <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M13 2h5v5M18 2l-8 8" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <input
+            type="url"
+            value={pastaDrive}
+            onChange={(e) => setPastaDrive(e.target.value)}
+            placeholder="Link da pasta do Drive (cole aqui)"
+            className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
+          />
         </div>
 
         {/* Toggle ocultar perfil */}
