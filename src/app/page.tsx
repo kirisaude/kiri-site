@@ -267,6 +267,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-creme overflow-x-hidden">
+      <WelcomeModal />
 
       {/* ═══ STICKY HEADER ═══ */}
       <header ref={headerRef} className="sticky top-0 z-30 bg-creme/95 backdrop-blur-sm border-b border-linha">
