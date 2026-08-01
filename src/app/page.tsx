@@ -11,6 +11,7 @@ import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS, PROFISSAO_PLURAL, cidadeCurta, modalidadeCurta } from "@/types";
 import { Footer } from "@/components/Footer";
 import { titleCasePT } from "@/lib/titleCase";
+import { WelcomeModal } from "@/components/WelcomeModal";
 
 const profissionais = data.profissionais as Profissional[];
 const FILTROS_MODALIDADE = ["Presencial e online", "Somente presencial", "Somente online"];
@@ -110,6 +111,7 @@ const CIDADES_DISPONIVEIS = (() => {
 function EmBreve() {
   return (
     <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 overflow-x-hidden">
+      <WelcomeModal />
       <KiriLogo size={72} />
       <div className="font-serif text-[38px] md:text-[48px] font-medium text-ferrugem tracking-[-0.01em] mt-4">
         Kiri
@@ -233,12 +235,13 @@ export default function Home() {
         if (vm < valorMin || vm > valorMax) return false;
       }
       if (search.trim()) {
-        const q = search.toLowerCase();
+        const sem = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+        const q = sem(search);
         const match =
-          p.nome.toLowerCase().includes(q) ||
-          p.titulo_exibicao.toLowerCase().includes(q) ||
-          p.areas_atuacao.join(" ").toLowerCase().includes(q) ||
-          p.cidade.toLowerCase().includes(q);
+          sem(p.nome).includes(q) ||
+          sem(p.titulo_exibicao).includes(q) ||
+          sem(p.areas_atuacao.join(" ")).includes(q) ||
+          sem(p.cidade).includes(q);
         if (!match) return false;
       }
       return true;
