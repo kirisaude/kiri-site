@@ -65,6 +65,19 @@ const BENEFICIOS = [
       </svg>
     ),
   },
+  {
+    titulo: "Área exclusiva de networking entre colegas",
+    desc: "Profissionais verificados têm acesso a um espaço privado para contato direto com outros membros da rede — troca de experiências, dúvidas e colaboração multiprofissional.",
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <circle cx="10" cy="6" r="2.8" stroke="#44606C" strokeWidth="1.4" />
+        <circle cx="3.5" cy="14" r="2.2" stroke="#44606C" strokeWidth="1.4" />
+        <circle cx="16.5" cy="14" r="2.2" stroke="#44606C" strokeWidth="1.4" />
+        <path d="M5.5 12.5C6.5 10 8.5 9 10 9s3.5 1 4.5 3.5" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+        <path d="M3.5 11.8V10M16.5 11.8V10" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 ];
 
 function SectionBadge({ num, label }: { num: string; label: string }) {
