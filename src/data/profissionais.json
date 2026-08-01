@@ -107,17 +107,22 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Universidade Paulista (UNIP) — 2015",
+          "instituicao_ano": "Psicologia — Universidade Paulista (UNIP) — 2016",
           "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada para Autismo e Deficiência Intelectual — CBI of Miami — 2020",
-          "verificado": false
+          "instituicao_ano": "Intervenção ABA para Autismo e Deficiência Intelectual — Centro Universitário Celso Lisboa — 2021",
+          "verificado": true
+        },
+        {
+          "curso": "Certificação Internacional",
+          "instituicao_ano": "Applied Behavior Analysis in Autism and Cognitive Impairment — Child Behavior Institute of Miami (CBI of Miami) — 2021",
+          "verificado": true
         },
         {
           "curso": "Mestranda",
-          "instituicao_ano": "Educação Especial —  Universidade Federal de São Carlos (UFSCar) — atual",
+          "instituicao_ano": "Educação Especial — Universidade Federal de São Carlos (UFSCar) — atual",
           "verificado": true
         }
       ],
@@ -223,12 +228,12 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Centro Universitário FMU — 2018",
+          "instituicao_ano": "Psicologia — Centro Universitário das Faculdades Metropolitanas Unidas (FMU) — 2019",
           "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Análise do Comportamento Aplicada ao TEA — Instituto Par — 2023",
+          "instituicao_ano": "Análise do Comportamento Aplicada ao TEA e Desenvolvimento Atípico — FACESF / SAIJ — 2022",
           "verificado": true
         },
         {
@@ -284,13 +289,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013",
+          "instituicao_ano": "Psicologia — Universidade Presbiteriana Mackenzie — 2013",
           "verificado": false
         },
         {
-          "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
-          "verificado": false
+          "curso": "Extensão Universitária",
+          "instituicao_ano": "Terapia Comportamental e Cognitiva: Teoria e Aplicação — Universidade de São Paulo (USP) — 2018",
+          "verificado": true
+        },
+        {
+          "curso": "Formação",
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — EEP — Hospital das Clínicas da Faculdade de Medicina da USP — 2022",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -538,7 +548,7 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Terapia Ocupacional — centro universitario são camilo — 2005",
+          "instituicao_ano": "Terapia Ocupacional — Centro Universitário São Camilo — 2004",
           "verificado": true
         },
         {
@@ -657,17 +667,17 @@
         {
           "curso": "Especialização",
           "instituicao_ano": "Neuropsicologia — Universidade Federal de São Paulo (UNIFESP) — 2025",
-          "verificado": false
+          "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia Cognitivo Comportamental — Grupo PBE — 2023",
-          "verificado": false
+          "curso": "Extensão Universitária",
+          "instituicao_ano": "Formação em Terapia Cognitivo-Comportamental — Faculdade FaCiencia / Grupo PBE — 2024",
+          "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — Hospital das Clínicas da Faculdade de Medicina da Universidade de São Paulo (HCFMUSP) — 2026",
-          "verificado": false
+          "curso": "Formação",
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — HCX Fmusp / Ipq HCFMUSP — 2026",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -932,8 +942,8 @@
           "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "clínica psicanalítica lacaniana — Instituto ESPE / Centro Universitário Filadélfia (Unifil) — 2024",
+          "curso": "Especialização",
+          "instituicao_ano": "Clínica Psicanalítica Lacaniana — Centro Universitário Filadélfia (UniFil) — 2024",
           "verificado": true
         }
       ],
@@ -1157,14 +1167,14 @@
           "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Análise do comportamento aplicada (Aba) — Instituto Líbano — 2026",
+          "curso": "Especialização",
+          "instituicao_ano": "ABA — Análise do Comportamento Aplicada — Faculdade Líbano — 2026",
           "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Psicologia jurídica e avaliação psicológica — Instituto Líbano — 2026",
-          "verificado": false
+          "curso": "Especialização",
+          "instituicao_ano": "Psicologia Jurídica e Avaliação Psicológica — Faculdade Líbano — 2026",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
