@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-6 md:pt-14 md:pb-2 flex items-start md:items-center gap-8 md:gap-12">
+        <div className="pt-6 md:pt-14 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -483,8 +483,8 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-center justify-center pr-4" style={{ minWidth: 126 }}>
-            <KiriLogo size={126} />
+          <div className="hidden md:flex flex-none items-center justify-center pr-4" style={{ minWidth: 180 }}>
+            <KiriLogo size={180} />
           </div>
         </div>
 
