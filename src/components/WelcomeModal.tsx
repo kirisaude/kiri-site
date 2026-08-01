@@ -8,13 +8,13 @@ export function WelcomeModal() {
   const [visivel, setVisivel] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(STORAGE_KEY)) {
+    if (!sessionStorage.getItem(STORAGE_KEY)) {
       setVisivel(true);
     }
   }, []);
 
   function fechar() {
-    localStorage.setItem(STORAGE_KEY, "1");
+    sessionStorage.setItem(STORAGE_KEY, "1");
     setVisivel(false);
   }
 
@@ -49,7 +49,7 @@ export function WelcomeModal() {
         </p>
 
         <p className="text-[14px] text-ardosia leading-[1.6] mb-6">
-          Esperamos que encontre o profissional ideal para a sua família. 💛
+          Esperamos que encontre o profissional ideal para a sua família.
         </p>
 
         <button
