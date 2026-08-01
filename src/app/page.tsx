@@ -584,30 +584,67 @@ export default function Home() {
             </svg>
           </Link>
 
-          {/* CTA para profissionais */}
-          <Link
-            href="/para-profissionais"
-            className="flex items-center gap-3 mt-2 rounded-[14px] px-4 py-[18px] cursor-pointer no-underline transition-all hover:bg-ardosia/5"
-            style={{ background: "transparent", border: "1px solid rgba(68,96,108,0.28)" }}
-          >
-            <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid rgba(68,96,108,0.3)" }}>
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="7" r="3.2" stroke="#44606C" strokeWidth="1.5" />
-                <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" />
+          {/* CTAs secundários — grid 2 colunas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+
+            {/* Box 1: profissionais */}
+            <Link
+              href="/para-profissionais"
+              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer no-underline transition-all group"
+              style={{ background: "#F5EFE6", border: "1px solid #D8C7B0" }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
+            >
+              <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #B8C8CD" }}>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="7" r="3.2" stroke="#44606C" strokeWidth="1.5" />
+                  <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[14px] md:text-[15px] font-semibold leading-[1.2]" style={{ color: "#44606C" }}>
+                  Você é profissional de saúde?
+                </div>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "rgba(68,96,108,0.65)" }}>
+                  Faça parte da rede Kiri, é gratuito
+                </div>
+              </div>
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M7 4 L13 10 L7 16" stroke="#44606C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </div>
-            <div className="flex-1">
-              <div className="text-[15px] md:text-[16px] font-semibold leading-[1.2]" style={{ color: "#44606C" }}>
-                Você é profissional de saúde?
+            </Link>
+
+            {/* Box 2: compartilhar */}
+            <button
+              onClick={() => setShowCompartilhar(true)}
+              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer text-left transition-all w-full"
+              style={{ background: "#F5EFE6", border: "1px solid #D8C7B0" }}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
+              onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
+            >
+              <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #B8C8CD" }}>
+                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+                  <circle cx="15.5" cy="4" r="2" stroke="#44606C" strokeWidth="1.4" />
+                  <circle cx="4.5" cy="10" r="2" stroke="#44606C" strokeWidth="1.4" />
+                  <circle cx="15.5" cy="16" r="2" stroke="#44606C" strokeWidth="1.4" />
+                  <line x1="6.4" y1="9" x2="13.6" y2="5" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                  <line x1="6.4" y1="11" x2="13.6" y2="15" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
               </div>
-              <div className="text-[12.5px] md:text-[14px] mt-0.5" style={{ color: "rgba(68,96,108,0.7)" }}>
-                Faça parte da rede Kiri, é gratuito
+              <div className="flex-1 min-w-0">
+                <div className="text-[14px] md:text-[15px] font-semibold leading-[1.2]" style={{ color: "#44606C" }}>
+                  Conhece alguém que pode precisar?
+                </div>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "rgba(68,96,108,0.65)" }}>
+                  Compartilhe a Kiri com outra família
+                </div>
               </div>
-            </div>
-            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-              <path d="M7 4 L13 10 L7 16" stroke="#44606C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M7 4 L13 10 L7 16" stroke="#44606C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+          </div>
         </div>
 
         {/* Filtros adicionais */}
@@ -1030,31 +1067,6 @@ export default function Home() {
                 </div>
               </div>
             )}
-
-            {/* Bloco de compartilhamento */}
-            <div className="mt-10 md:mt-14 rounded-[16px] bg-ardosia-escura px-5 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-              <div className="flex-1">
-                <p className="font-serif text-[18px] md:text-[20px] font-semibold text-white leading-[1.3]">
-                  Conhece alguém que pode precisar?
-                </p>
-                <p className="text-[13.5px] md:text-[15px] text-white/70 mt-1 leading-[1.5]">
-                  Compartilhe a Kiri e ajude mais famílias a encontrar o profissional certo.
-                </p>
-              </div>
-              <button
-                onClick={() => setShowCompartilhar(true)}
-                className="flex-none flex items-center justify-center gap-2 bg-white text-ardosia-escura font-semibold text-[14px] md:text-[15px] rounded-[12px] px-5 py-3 cursor-pointer hover:bg-creme transition-colors whitespace-nowrap"
-              >
-                <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-                  <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                  <circle cx="4" cy="10" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                  <circle cx="16" cy="16" r="2.4" stroke="#44606C" strokeWidth="1.4" />
-                  <line x1="6.2" y1="8.8" x2="13.8" y2="5.2" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
-                  <line x1="6.2" y1="11.2" x2="13.8" y2="14.8" stroke="#44606C" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-                Divulgue a Kiri
-              </button>
-            </div>
 
             {/* Rodapé */}
             <Footer className="mt-12 md:mt-16 mb-12" />
