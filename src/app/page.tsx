@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-6 md:pt-14 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
+        <div className="pt-14 md:pt-[72px] md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -454,7 +454,7 @@ export default function Home() {
               Encontre o profissional certo para o desenvolvimento do seu filho.
             </h1>
             <p
-              className="mt-2 md:mt-5 hidden md:block text-[15px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
+              className="mt-2 md:mt-7 hidden md:block text-[15px] md:text-[18px] leading-[1.55] md:leading-[1.65] text-cinza-texto"
               style={{ textWrap: "pretty" } as React.CSSProperties}
             >
               Uma rede selecionada para TEA, TDAH e outras questões do neurodesenvolvimento infantil,
@@ -483,8 +483,8 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-center justify-center pr-4" style={{ minWidth: 180 }}>
-            <KiriLogo size={180} />
+          <div className="hidden md:flex flex-none items-center justify-center" style={{ minWidth: 190, marginRight: 40 }}>
+            <KiriLogo size={190} />
           </div>
         </div>
 
@@ -533,8 +533,9 @@ export default function Home() {
                 className={`inline-flex items-center flex-none rounded-full px-3.5 py-1.5 cursor-pointer transition-all border ${
                   activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura text-white"
-                    : "bg-white border-[#E2D6C0] text-[#9A8C78] hover:border-ardosia hover:text-ardosia-escura"
+                    : "border-[#CAD4D8] text-[#44606C] hover:border-ardosia hover:bg-[#D8E1E5]"
                 }`}
+                style={activeCond !== cond ? { background: "#E5EAEC" } : {}}
               >
                 <span className="text-[12px] font-medium whitespace-nowrap">{cond}</span>
               </button>
@@ -562,6 +563,9 @@ export default function Home() {
             className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-[14px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-t border-b border-[#D8C7B0] md:border-b-0 relative"
             style={{ top: headerHeight }}
           >
+            <div className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-2.5 md:mb-3" style={{ color: "#9A8C78" }}>
+              Refinar busca
+            </div>
             <div className="overflow-x-auto scrollbar-hide flex gap-2 md:overflow-visible">
 
               {/* 1. Tipo de profissional */}
