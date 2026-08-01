@@ -663,23 +663,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Unian — 2021",
-          "verificado": false
+          "instituicao_ano": "Psicologia — Universidade Anhanguera — 2021",
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Neuropsicologia — Universidade Federal de São Paulo (UNIFESP) — 2025",
-          "verificado": false
+          "verificado": true
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia Cognitivo Comportamental — Grupo PBE — 2023",
-          "verificado": false
+          "curso": "Formação",
+          "instituicao_ano": "Terapia Cognitivo Comportamental — Faculdade FaCiência e Grupo PBE — 2023",
+          "verificado": true
         },
         {
-          "curso": "Pós-graduação",
+          "curso": "Formação",
           "instituicao_ano": "Terapia de Aceitação e Compromisso — Hospital das Clínicas da Faculdade de Medicina da Universidade de São Paulo (HCFMUSP) — 2026",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -695,15 +695,16 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false,
+      "registro_verificado": true,
+      "sobre_verificado": true,
       "genero": "F",
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
       "valor_max_secundario": null,
       "valor_pacote": 4000,
-      "valor_pacote_obs": "Inclui todo o processo da Avaliação Neuropsicológica"
+      "valor_pacote_obs": "Inclui todo o processo da Avaliação Neuropsicológica",
+      "experiencias_infantil": null
     },
     {
       "id": "kiri-034",
