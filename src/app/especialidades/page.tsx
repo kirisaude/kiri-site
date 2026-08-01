@@ -100,7 +100,7 @@ export default function ProfissoesPage() {
           <div className="flex items-center gap-3">
             <KiriSymbol height={46} />
             <div>
-              <span className="block mb-1.5 text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem">8 especialidades</span>
+              <span className="block mb-1.5 text-[11px] font-bold tracking-[0.08em] uppercase text-ferrugem">11 especialidades</span>
               <h1 className="font-serif text-[32px] md:text-[36px] font-medium leading-[1.2] tracking-[-0.01em] text-carvao m-0" style={{ textWrap: "pretty" } as React.CSSProperties}>
                 Especialidades da rede
               </h1>
