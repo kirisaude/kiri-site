@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-6 md:pt-14 md:pb-2 flex items-start gap-8 md:gap-12">
+        <div className="pt-6 md:pt-14 md:pb-2 flex items-start md:items-center gap-8 md:gap-12">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -483,8 +483,8 @@ export default function Home() {
           </div>
 
           {/* Pássaros — desktop only */}
-          <div className="hidden md:flex flex-none items-start justify-center self-start -mt-6" style={{ minWidth: 180 }}>
-            <KiriLogo size={180} />
+          <div className="hidden md:flex flex-none items-center justify-center pr-4" style={{ minWidth: 126 }}>
+            <KiriLogo size={126} />
           </div>
         </div>
 
@@ -504,7 +504,7 @@ export default function Home() {
                   /* mobile: pill compacto */
                   inline-flex items-center rounded-full px-4 py-1.5
                   /* desktop: box com descrição */
-                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-[10px]
+                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-[7px]
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia"
                     : "bg-wash-azulado border-borda-azulada"
@@ -555,6 +555,217 @@ export default function Home() {
               </svg>
             </button>
           )}
+
+          {/* Filtros — zona de busca, imediatamente após as condições */}
+          <div
+            ref={filtrosRef}
+            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-[14px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-t border-b border-[#D8C7B0] md:border-b-0 relative"
+            style={{ top: headerHeight }}
+          >
+            <div className="overflow-x-auto scrollbar-hide flex gap-2 md:overflow-visible">
+
+              {/* 1. Tipo de profissional */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("profissao"); return; } setActiveDropdown((d) => d === "profissao" ? null : "profissao"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {activeProfissao ? `Tipo: ${activeProfissao}` : "Tipo de profissional"}
+                  </span>
+                  {activeProfissao ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveProfissao(null); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "profissao" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
+                    {PROFISSOES_ORDENADAS.map((p) => (
+                      <button key={p} onClick={() => { setActiveProfissao(activeProfissao === p ? null : p); setActiveDropdown(null); }}
+                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeProfissao === p ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                        {PROFISSAO_PLURAL[p] ?? p}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 2. Modalidade */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("modalidade"); return; } setActiveDropdown((d) => d === "modalidade" ? null : "modalidade"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {activeModalidade ?? "Modalidade"}
+                  </span>
+                  {activeModalidade ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveModalidade(null); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "modalidade" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[200px] py-1.5">
+                    {FILTROS_MODALIDADE.map((m) => (
+                      <button key={m} onClick={() => { setActiveModalidade(activeModalidade === m ? null : m); setActiveDropdown(null); }}
+                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeModalidade === m ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                        {m}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Cidade */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("cidade"); return; } setActiveDropdown((d) => d === "cidade" ? null : "cidade"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {activeCidade ?? "Cidade"}
+                  </span>
+                  {activeCidade ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveCidade(null); setActiveSPRegiao(null); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "cidade" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[200px] py-1.5">
+                    {CIDADES_DISPONIVEIS.map((c) => (
+                      <button key={c} onClick={() => { const same = activeCidade === c; setActiveCidade(same ? null : c); if (same || normCidade(c) !== 'sao paulo') setActiveSPRegiao(null); setActiveDropdown(null); }}
+                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeCidade === c ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                        {c}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 4. Faixa etária */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("faixa"); return; } setActiveDropdown((d) => d === "faixa" ? null : "faixa"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {activeFaixa ? `Faixa: ${activeFaixa.split(" ")[0]}` : "Faixa etária"}
+                  </span>
+                  {activeFaixa ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveFaixa(null); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "faixa" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
+                    {["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"].map((f) => (
+                      <button key={f} onClick={() => { setActiveFaixa(activeFaixa === f ? null : f); setActiveDropdown(null); }}
+                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeFaixa === f ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                        {f}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* 5. Faixa de valor */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("valor"); return; } setActiveDropdown((d) => d === "valor" ? null : "valor"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {valorAtivo ? `R$${valorMin}–${valorMax >= VALOR_TOTAL_MAX ? "600+" : valorMax}` : "Faixa de valor"}
+                  </span>
+                  {valorAtivo ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "valor" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] w-[280px] p-5">
+                    <div className="flex justify-between items-baseline mb-3">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
+                      <span className="text-[13px] font-semibold text-ardosia-escura">
+                        R${valorMin} — {valorMax >= VALOR_TOTAL_MAX ? "R$600+" : `R$${valorMax}`}
+                      </span>
+                    </div>
+                    <div className="relative h-6 flex items-center">
+                      <div className="absolute left-0 right-0 h-[5px] bg-areia rounded-full" />
+                      <div className="absolute h-[5px] bg-ardosia rounded-full pointer-events-none"
+                        style={{ left: `${(valorMin / VALOR_TOTAL_MAX) * 100}%`, right: `${100 - (valorMax / VALOR_TOTAL_MAX) * 100}%` }} />
+                      <input type="range" min={0} max={VALOR_TOTAL_MAX} step={50} value={valorMin}
+                        onChange={(e) => { const v = Number(e.target.value); if (v <= valorMax - 50) setValorMin(v); }}
+                        className="absolute w-full h-full opacity-0 cursor-pointer"
+                        style={{ zIndex: valorMin > VALOR_TOTAL_MAX - 100 ? 5 : 3 }} />
+                      <input type="range" min={0} max={VALOR_TOTAL_MAX} step={50} value={valorMax}
+                        onChange={(e) => { const v = Number(e.target.value); if (v >= valorMin + 50) setValorMax(v); }}
+                        className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 4 }} />
+                      <div className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                        style={{ left: `calc(${(valorMin / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }} />
+                      <div className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
+                        style={{ left: `calc(${(valorMax / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }} />
+                    </div>
+                    <div className="flex justify-between mt-1">
+                      <span className="text-[11.5px] text-muted">R$0</span>
+                      <span className="text-[11.5px] text-muted">R$600+</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 6. Particular / Convênio */}
+              <div className="relative flex-none md:flex-1">
+                <button
+                  onClick={() => { if (window.innerWidth < 768) { setActiveSheet("pagamento"); return; } setActiveDropdown((d) => d === "pagamento" ? null : "pagamento"); }}
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                    activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                  }`}
+                >
+                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                    {activePagamento ?? "Particular / convênio"}
+                  </span>
+                  {activePagamento ? (
+                    <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActivePagamento(null); }}>×</span>
+                  ) : (
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  )}
+                </button>
+                {activeDropdown === "pagamento" && (
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] right-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[220px] py-1.5">
+                    {["Particular", "Convênio"].map((opt) => (
+                      <button key={opt} onClick={() => { setActivePagamento(activePagamento === opt ? null : opt); setActiveDropdown(null); }}
+                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activePagamento === opt ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Contador de resultados */}
+            {hasFilters && (
+              <div className="pt-3 text-[13px] text-muted">
+                {filtered.length} {filtered.length !== 1 ? 'profissionais' : 'profissional'} encontrado{filtered.length !== 1 ? 's' : ''}
+              </div>
+            )}
+          </div>
 
           {/* Não sei por onde começar */}
           <Link
@@ -645,234 +856,6 @@ export default function Home() {
             </button>
 
           </div>
-        </div>
-
-        {/* Filtros adicionais */}
-        <div
-          ref={filtrosRef}
-          className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 pt-3 pb-2 md:pt-5 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-linha md:border-b-0 relative"
-          style={{ top: headerHeight }}
-        >
-          <div className="overflow-x-auto scrollbar-hide flex gap-2 md:overflow-visible">
-
-            {/* 1. Tipo de profissional */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("profissao"); return; } setActiveDropdown((d) => d === "profissao" ? null : "profissao"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {activeProfissao ? `Tipo: ${activeProfissao}` : "Tipo de profissional"}
-                </span>
-                {activeProfissao ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveProfissao(null); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "profissao" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
-                  {PROFISSOES_ORDENADAS.map((p) => (
-                    <button key={p} onClick={() => { setActiveProfissao(activeProfissao === p ? null : p); setActiveDropdown(null); }}
-                      className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeProfissao === p ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                      {PROFISSAO_PLURAL[p] ?? p}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* 2. Modalidade */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("modalidade"); return; } setActiveDropdown((d) => d === "modalidade" ? null : "modalidade"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {activeModalidade ? `Modalidade: ${modalidadeCurta(activeModalidade)}` : "Modalidade"}
-                </span>
-                {activeModalidade ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveModalidade(null); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "modalidade" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
-                  {FILTROS_MODALIDADE.map((m) => (
-                    <button key={m} onClick={() => { setActiveModalidade(activeModalidade === m ? null : m); setActiveDropdown(null); }}
-                      className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeModalidade === m ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                      {m}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* 3. Cidade */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("cidade"); return; } setActiveDropdown((d) => d === "cidade" ? null : "cidade"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {activeCidade ? (activeSPRegiao ? `SP — ${activeSPRegiao}` : `Cidade: ${activeCidade}`) : "Cidade"}
-                </span>
-                {activeCidade ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveCidade(null); setActiveSPRegiao(null); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "cidade" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] max-h-[320px] overflow-y-auto py-1.5">
-                  {CIDADES_DISPONIVEIS.map((c) => (
-                    <button key={c} onClick={() => {
-                      const same = activeCidade === c;
-                      setActiveCidade(same ? null : c);
-                      if (same || normCidade(c) !== "sao paulo") { setActiveSPRegiao(null); setActiveDropdown(null); }
-                    }}
-                      className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeCidade === c ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                      {c}
-                    </button>
-                  ))}
-                  {activeCidade && normCidade(activeCidade) === "sao paulo" && (
-                    <div className="border-t border-[#F0E8DC] mt-1 pt-2 px-3 pb-2">
-                      <div className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-muted mb-2">Região</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {REGIOES_SP.map((r) => (
-                          <button key={r} onClick={() => { setActiveSPRegiao((prev) => (prev === r ? null : r)); setActiveDropdown(null); }}
-                            className={`text-[12px] font-semibold px-2.5 py-1 rounded-full border transition-all cursor-pointer ${activeSPRegiao === r ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto hover:border-ardosia"}`}>
-                            {r}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* 4. Faixa etária */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("faixa"); return; } setActiveDropdown((d) => d === "faixa" ? null : "faixa"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {activeFaixa ? `Faixa: ${activeFaixa.split(" ")[0]}` : "Faixa etária"}
-                </span>
-                {activeFaixa ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActiveFaixa(null); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "faixa" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[240px] py-1.5">
-                  {["Bebês (0–2 anos)", "Pré-escola (3–5 anos)", "Crianças (6–12 anos)", "Adolescentes (13–18 anos)"].map((f) => (
-                    <button key={f} onClick={() => { setActiveFaixa(activeFaixa === f ? null : f); setActiveDropdown(null); }}
-                      className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeFaixa === f ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                      {f}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* 5. Faixa de valor */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("valor"); return; } setActiveDropdown((d) => d === "valor" ? null : "valor"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {valorAtivo ? `R$${valorMin}–${valorMax >= VALOR_TOTAL_MAX ? "600+" : valorMax}` : "Faixa de valor"}
-                </span>
-                {valorAtivo ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setValorMin(0); setValorMax(VALOR_TOTAL_MAX); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "valor" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] w-[280px] p-5">
-                  <div className="flex justify-between items-baseline mb-3">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">Valor por consulta</span>
-                    <span className="text-[13px] font-semibold text-ardosia-escura">
-                      R${valorMin} — {valorMax >= VALOR_TOTAL_MAX ? "R$600+" : `R$${valorMax}`}
-                    </span>
-                  </div>
-                  <div className="relative h-6 flex items-center">
-                    <div className="absolute left-0 right-0 h-[5px] bg-areia rounded-full" />
-                    <div className="absolute h-[5px] bg-ardosia rounded-full pointer-events-none"
-                      style={{ left: `${(valorMin / VALOR_TOTAL_MAX) * 100}%`, right: `${100 - (valorMax / VALOR_TOTAL_MAX) * 100}%` }} />
-                    <input type="range" min={0} max={VALOR_TOTAL_MAX} step={50} value={valorMin}
-                      onChange={(e) => { const v = Number(e.target.value); if (v <= valorMax - 50) setValorMin(v); }}
-                      className="absolute w-full h-full opacity-0 cursor-pointer"
-                      style={{ zIndex: valorMin > VALOR_TOTAL_MAX - 100 ? 5 : 3 }} />
-                    <input type="range" min={0} max={VALOR_TOTAL_MAX} step={50} value={valorMax}
-                      onChange={(e) => { const v = Number(e.target.value); if (v >= valorMin + 50) setValorMax(v); }}
-                      className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 4 }} />
-                    <div className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
-                      style={{ left: `calc(${(valorMin / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }} />
-                    <div className="absolute w-5 h-5 rounded-full bg-ardosia-escura border-2 border-white shadow-[0_1px_5px_rgba(0,0,0,0.22)] pointer-events-none"
-                      style={{ left: `calc(${(valorMax / VALOR_TOTAL_MAX) * 100}% - 10px)`, zIndex: 6 }} />
-                  </div>
-                  <div className="flex justify-between mt-1">
-                    <span className="text-[11.5px] text-muted">R$0</span>
-                    <span className="text-[11.5px] text-muted">R$600+</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 6. Particular / Convênio */}
-            <div className="relative flex-none md:flex-1">
-              <button
-                onClick={() => { if (window.innerWidth < 768) { setActiveSheet("pagamento"); return; } setActiveDropdown((d) => d === "pagamento" ? null : "pagamento"); }}
-                className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                  activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
-                }`}
-              >
-                <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
-                  {activePagamento ?? "Particular / convênio"}
-                </span>
-                {activePagamento ? (
-                  <span className="text-white text-sm ml-0.5" onClick={(e) => { e.stopPropagation(); setActivePagamento(null); }}>×</span>
-                ) : (
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5 L6 8 L9.5 4.5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                )}
-              </button>
-              {activeDropdown === "pagamento" && (
-                <div className="hidden md:block absolute top-[calc(100%+6px)] right-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[220px] py-1.5">
-                  {["Particular", "Convênio"].map((opt) => (
-                    <button key={opt} onClick={() => { setActivePagamento(activePagamento === opt ? null : opt); setActiveDropdown(null); }}
-                      className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activePagamento === opt ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Contador de resultados */}
-          {hasFilters && (
-            <div className="pt-3 text-[13px] text-muted">
-              {filtered.length} {filtered.length !== 1 ? 'profissionais' : 'profissional'} encontrado{filtered.length !== 1 ? 's' : ''}
-            </div>
-          )}
         </div>
 
         {/* Divisor filtros / conteúdo — desktop only */}
