@@ -24,7 +24,7 @@ const FAQ_ITEMS = [
   },
   {
     pergunta: "Quanto tempo leva para meu perfil ir ao ar?",
-    resposta: "Após o envio da inscrição e dos documentos, o prazo é de aproximadamente 7 dias úteis para análise e publicação do perfil.",
+    resposta: "Após o envio da inscrição e dos documentos, o prazo é de aproximadamente 48 horas para análise e publicação do perfil.",
   },
   {
     pergunta: "Posso atualizar meu perfil depois de publicado?",
