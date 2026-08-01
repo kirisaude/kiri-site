@@ -225,10 +225,8 @@ export default function Home() {
         }
       }
       if (activeFaixa && !p.faixa_etaria.includes(activeFaixa)) return false;
-      if (activePagamento) {
-        const conv = p.convenio_info.toLowerCase();
-        if (activePagamento === "Particular" && conv.includes("convênio")) return false;
-        if (activePagamento === "Convênio" && !conv.includes("convênio")) return false;
+      if (activePagamento === "Convênio") {
+        if (!p.convenio_info.toLowerCase().includes("convênio")) return false;
       }
       if (valorMin > 0 || valorMax < VALOR_TOTAL_MAX) {
         const vm = p.valor_min ?? 0;
