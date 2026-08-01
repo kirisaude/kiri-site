@@ -583,6 +583,30 @@ export default function Home() {
               <path d="M7 4 L13 10 L7 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
+
+          {/* CTA para profissionais */}
+          <Link
+            href="/para-profissionais"
+            className="flex items-center gap-4 mt-2 bg-ardosia rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-3.5 md:py-4 cursor-pointer no-underline transition-all hover:opacity-90"
+          >
+            <div className="w-9 h-9 md:w-11 md:h-11 rounded-full flex-shrink-0 bg-white/15 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="3.2" stroke="white" strokeWidth="1.6" />
+                <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <div className="text-[15px] md:text-[17px] font-bold text-white leading-[1.2]">
+                Você é profissional de saúde?
+              </div>
+              <div className="text-[12.5px] md:text-[15px] text-white/80 mt-0.5">
+                Faça parte da rede Kiri — é gratuito
+              </div>
+            </div>
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+              <path d="M7 4 L13 10 L7 16" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
 
         {/* Filtros adicionais */}
