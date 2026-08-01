@@ -794,6 +794,11 @@ export default function EditarProfissionalPage() {
                       className="text-[18px] text-muted cursor-pointer leading-none flex-none">×</button>
                   )}
                 </div>
+                {/^[A-Za-z]{2,8}$/.test(f.instituicao.trim()) && (
+                  <p className="text-[11.5px] text-amber-600 pl-1 mt-0.5">
+                    ⚠ Sigla sem nome completo — especifique a instituição, ex: &quot;Faculdade X ({f.instituicao.trim().toUpperCase()})&quot;
+                  </p>
+                )}
                 <VerificacaoRow
                   status={f.status ?? null}
                   onStatus={(v) => { const n = [...formacao]; n[i] = { ...n[i], status: v }; setFormacao(n); }}
