@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { KiriLogoFull } from "@/components/KiriLogoFull";
 
 const STORAGE_KEY = "kiri_welcome_seen";
 
@@ -25,40 +26,68 @@ export function WelcomeModal() {
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       style={{ backgroundColor: "rgba(44, 39, 34, 0.55)" }}
     >
-      <div className="bg-creme rounded-[20px] max-w-[440px] w-full px-7 py-8 shadow-xl">
-        <div className="mb-5">
-          <span style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 600, color: "#BE6E4E", letterSpacing: "0.01em" }}>
-            Kiri
-          </span>
+      <div className="bg-creme rounded-[20px] max-w-[440px] w-full px-9 py-8 shadow-xl relative">
+
+        {/* X fechar */}
+        <button
+          onClick={fechar}
+          aria-label="Fechar"
+          className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center text-cinza-texto2 hover:text-carvao hover:bg-areia/40 rounded-full transition-colors cursor-pointer"
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </button>
+
+        {/* Logo */}
+        <div className="flex justify-center mb-5">
+          <KiriLogoFull height={40} />
         </div>
 
-        <h2 className="text-[20px] font-semibold text-carvao leading-snug mb-3">
-          Bem-vindo à Kiri ♡
+        {/* Título */}
+        <h2
+          className="text-[27px] text-carvao text-center leading-snug mb-4"
+          style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500 }}
+        >
+          Bem-vindo à Kiri
         </h2>
 
-        <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-3">
+        {/* Parágrafos */}
+        <p className="text-[15px] text-cinza-texto leading-[1.6] text-center mb-2.5">
           A Kiri é uma plataforma de conexão entre famílias e especialistas em neurodesenvolvimento infantil.
         </p>
 
-        <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-4">
+        <p className="text-[15px] text-cinza-texto leading-[1.6] text-center mb-4">
           Aqui você encontra profissionais verificados — fonoaudiólogos, psicólogos, terapeutas ocupacionais, neuropediatras e outros — para orientar o cuidado do seu filho.
         </p>
 
-        <div className="bg-ferrugem/8 border border-ferrugem/20 rounded-[12px] px-4 py-3.5 mb-5">
-          <p className="text-[14px] text-carvao leading-[1.65]">
-            <strong className="font-semibold">A Kiri não realiza atendimentos.</strong> Somos uma rede de indicação: você encontra o profissional certo, entra em contato diretamente e agenda com ele.
+        {/* Caixa de aviso */}
+        <div
+          className="rounded-[10px] px-4 py-3 mb-5"
+          style={{ background: "#F4E7D5", border: "1px solid #D8C7B0" }}
+        >
+          <p className="text-[13.5px] text-carvao leading-[1.65]">
+            <strong className="font-semibold">A Kiri não realiza atendimentos.</strong>{" "}
+            Somos uma rede de indicação: você encontra o profissional certo, entra em contato diretamente e agenda com ele.
           </p>
         </div>
 
+        {/* Frase solta acima do botão */}
+        <p
+          className="text-[14px] text-ardosia text-center mb-3"
+          style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontStyle: "italic" }}
+        >
+          Esperamos que encontre o profissional ideal para a sua família.
+        </p>
+
+        {/* Botão ferrugem */}
         <button
           onClick={fechar}
-          className="w-full bg-ardosia-escura text-white rounded-[12px] pt-3 pb-4 cursor-pointer hover:opacity-90 transition-opacity flex flex-col items-center gap-0.5"
+          className="w-full bg-ferrugem text-creme font-semibold text-[15px] rounded-[12px] py-[15px] cursor-pointer hover:opacity-90 transition-opacity"
         >
-          <span style={{ fontFamily: "Georgia, serif" }} className="text-[12px] font-normal opacity-75 italic">
-            Esperamos que encontre o profissional ideal para a sua família.
-          </span>
-          <span className="font-semibold text-[15px]">Começar a explorar →</span>
+          Começar a explorar →
         </button>
+
       </div>
     </div>
   );
