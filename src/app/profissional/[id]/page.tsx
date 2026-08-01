@@ -65,10 +65,21 @@ function resolveInstituicao(parte: string, map: Record<string, string>): string 
     const nome = map[sigla];
     return nome ? `${nome} (${sigla}) · ${resto}` : t;
   }
+  // "Name- Sigla" ou "Name – Sigla" no final (ex: "Faculdade Irecê- Fai" → "Faculdade Irecê (FAI)")
+  const dashSiglaMatch = t.match(/^(.+?)\s*[-–]\s*([A-Za-z]{2,8})$/);
+  if (dashSiglaMatch) {
+    const [, nomeParte, siglaParte] = dashSiglaMatch;
+    const siglaUpper = siglaParte.toUpperCase();
+    if (siglaParte.length <= 5 || siglaParte === siglaUpper) {
+      const nomeConhecido = map[siglaUpper];
+      return `${nomeConhecido ?? titleCasePT(nomeParte.trim())} (${siglaUpper})`;
+    }
+  }
   // Mixed-case curto que parece sigla (ex: Unian)
   if (/^[A-Z][a-z]?[A-Z]/.test(t) && t.length <= 10 && !t.includes(" ")) {
-    const nome = map[t.toUpperCase()];
-    return nome ? `${nome} (${t.toUpperCase()})` : t.toUpperCase();
+    const siglaUpper = t.toUpperCase();
+    const nome = map[siglaUpper];
+    return nome ? `${nome} (${siglaUpper})` : siglaUpper;
   }
   // Já tem "(SIGLA)" no final: normaliza titleCase + sigla uppercase
   const abbrevMatch = t.match(/^(.+?)\s*\(([A-Za-z]{2,12})\)$/);
