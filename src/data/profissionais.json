@@ -285,17 +285,12 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — Universidade Mackenzie — 2013",
-          "verificado": true
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP) — 2018",
-          "verificado": true
-        },
-        {
-          "curso": "Formação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — USP — 2022",
-          "verificado": true
+          "instituicao_ano": "Terapia Comportamental — Universidade de São Paulo (USP)",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -309,18 +304,11 @@
       "verificacao_data": "julho de 2026",
       "card_token": "19f3779a7e87432d",
       "tempo_atuacao": null,
-      "foto_posicao": "center 20%",
+      "foto_posicao": "center center",
       "genero": "F",
-      "oculto": false,
-      "registro_verificado": true,
-      "sobre_verificado": true,
-      "profissao_secundaria": null,
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null,
-      "experiencias_infantil": null
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-027",
@@ -353,7 +341,7 @@
           "verificado": true
         },
         {
-          "curso": "Especialização",
+          "curso": "Aprimoramento Profissional",
           "instituicao_ano": "Aprimoramento Profissional em Saúde Mental Multiprofissional — Fundação do Desenvolvimento Administrativo (FUNDAP)/CAPS Itapeva — 2010",
           "verificado": true
         },
@@ -663,23 +651,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Universidade Anhanguera — 2021",
-          "verificado": true
+          "instituicao_ano": "Psicologia — Unian — 2021",
+          "verificado": false
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Neuropsicologia — Universidade Federal de São Paulo (UNIFESP) — 2025",
-          "verificado": true
+          "verificado": false
         },
         {
-          "curso": "Formação",
-          "instituicao_ano": "Terapia Cognitivo Comportamental — Faculdade FaCiência e Grupo PBE — 2023",
-          "verificado": true
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Terapia Cognitivo Comportamental — Grupo PBE — 2023",
+          "verificado": false
         },
         {
-          "curso": "Formação",
+          "curso": "Pós-graduação",
           "instituicao_ano": "Terapia de Aceitação e Compromisso — Hospital das Clínicas da Faculdade de Medicina da Universidade de São Paulo (HCFMUSP) — 2026",
-          "verificado": true
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -695,16 +683,15 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": true,
-      "sobre_verificado": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
       "genero": "F",
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
       "valor_max_secundario": null,
       "valor_pacote": 4000,
-      "valor_pacote_obs": "Inclui todo o processo da Avaliação Neuropsicológica",
-      "experiencias_infantil": null
+      "valor_pacote_obs": "Inclui todo o processo da Avaliação Neuropsicológica"
     },
     {
       "id": "kiri-034",
@@ -842,7 +829,7 @@
         },
         {
           "curso": "Certificação",
-          "instituicao_ano": "Certificação Internacional em DSM-V — Artmed Academy — 2025",
+          "instituicao_ano": "Certificação Internacional em DSM-5-TR — Artmed Academy — 2025",
           "verificado": false
         }
       ],
@@ -890,12 +877,12 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — FTC — 2008",
-          "verificado": true
+          "verificado": false
         },
         {
-          "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicóloga — Visconde de Cairú — 2020",
-          "verificado": true
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia — Fundação Visconde de Cairu (FVC) — 2020",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -917,9 +904,8 @@
       "valor_pacote_obs": null,
       "foto_posicao": "center 20%",
       "oculto": false,
-      "registro_verificado": true,
-      "sobre_verificado": true,
-      "experiencias_infantil": null
+      "registro_verificado": false,
+      "sobre_verificado": false
     },
     {
       "id": "kiri-039",
@@ -1062,7 +1048,7 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicologia — EDUCAMINAS — 2027",
+          "instituicao_ano": "Neuropsicologia — Faculdade Iguaçu (FI) — 2027",
           "verificado": true
         }
       ],
@@ -1193,61 +1179,6 @@
       "card_token": "3fba3ba043bf4a65",
       "profissao_secundaria": null,
       "tempo_atuacao": "1 a 3 anos",
-      "valor_formato_secundario": null,
-      "valor_min_secundario": null,
-      "valor_max_secundario": null,
-      "valor_pacote": null,
-      "valor_pacote_obs": null,
-      "foto_posicao": "center center",
-      "oculto": false,
-      "registro_verificado": true,
-      "sobre_verificado": true,
-      "experiencias_infantil": null
-    },
-    {
-      "id": "kiri-044",
-      "inscricao_id": "aac69b43-dbc4-4b05-b490-16f2f17c5322",
-      "nome": "Hercules Hideki Makio",
-      "profissao": "Psiquiatra",
-      "titulo_exibicao": "Psiquiatra",
-      "registro_conselho": "44523",
-      "rqe": "25294",
-      "areas_atuacao": [
-        "Depressão",
-        "Ansiedade",
-        "TOC",
-        "TEA",
-        "TDAH",
-        "Atraso de desenvolvimento"
-      ],
-      "modalidade": "Presencial e online",
-      "cidade": "Luís Eduardo Magalhães",
-      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
-      "sobre": "Priorizo um atendimento humano, cuidadoso e de qualidade. Valorizo o vínculo, a escuta e a empatia como princípios fundamentais em meu atendimento. Tenho como objetivo melhorar a saúde mental, auxiliar no desenvolvimento, promovendo bem-estar, realização pessoal e profissional, autonomia, equilíbrio e qualidade de vida.",
-      "formacao": [
-        {
-          "curso": "Graduação",
-          "instituicao_ano": "Medicina — UFMS — 2017",
-          "verificado": true
-        },
-        {
-          "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — SMS-MS — 2024",
-          "verificado": true
-        }
-      ],
-      "valor_formato": "a_partir_de",
-      "valor_min": 520,
-      "valor_max": null,
-      "convenio_info": "Particular · emite recibo para reembolso",
-      "convenios": null,
-      "whatsapp_agendamento": "(77) 99961-3873",
-      "verificado": true,
-      "foto_url": "/fotos/kiri-044.jpg",
-      "verificacao_data": "julho de 2026",
-      "card_token": "54f2a0e37dcd4d0e",
-      "profissao_secundaria": null,
-      "tempo_atuacao": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
       "valor_max_secundario": null,
