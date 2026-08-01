@@ -33,20 +33,22 @@ export function WelcomeModal() {
         </div>
 
         <h2 className="text-[20px] font-semibold text-carvao leading-snug mb-3">
-          Bem-vindo à Kiri
+          Bem-vindo à Kiri ♡
         </h2>
 
         <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-3">
           A Kiri é uma plataforma de conexão entre famílias e especialistas em neurodesenvolvimento infantil.
         </p>
 
-        <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-3">
+        <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-4">
           Aqui você encontra profissionais verificados — fonoaudiólogos, psicólogos, terapeutas ocupacionais, neuropediatras e outros — para orientar o cuidado do seu filho.
         </p>
 
-        <p className="text-[14.5px] text-cinza-texto leading-[1.65] mb-5">
-          <strong className="text-carvao font-semibold">A Kiri não realiza atendimentos.</strong> Somos uma rede de indicação: você encontra o profissional certo, entra em contato diretamente e agenda com ele.
-        </p>
+        <div className="bg-ferrugem/8 border border-ferrugem/20 rounded-[12px] px-4 py-3.5 mb-5">
+          <p className="text-[14px] text-carvao leading-[1.65]">
+            <strong className="font-semibold">A Kiri não realiza atendimentos.</strong> Somos uma rede de indicação: você encontra o profissional certo, entra em contato diretamente e agenda com ele.
+          </p>
+        </div>
 
         <p className="text-[14px] text-ardosia leading-[1.6] mb-6">
           Esperamos que encontre o profissional ideal para a sua família.
