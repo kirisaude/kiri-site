@@ -317,8 +317,8 @@
       "foto_posicao": "center center",
       "genero": "F",
       "oculto": true,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true
     },
     {
       "id": "kiri-027",
@@ -693,8 +693,8 @@
       "tempo_atuacao": null,
       "foto_posicao": "center top",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false,
+      "registro_verificado": true,
+      "sobre_verificado": true,
       "genero": "F",
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
@@ -914,8 +914,8 @@
       "valor_pacote_obs": null,
       "foto_posicao": "center 20%",
       "oculto": false,
-      "registro_verificado": false,
-      "sobre_verificado": false
+      "registro_verificado": true,
+      "sobre_verificado": true
     },
     {
       "id": "kiri-039",
