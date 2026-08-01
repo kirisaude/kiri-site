@@ -299,7 +299,7 @@
         },
         {
           "curso": "Formação",
-          "instituicao_ano": "Terapia de Aceitação e Compromisso — EEP — Hospital das Clínicas da Faculdade de Medicina da USP — 2022",
+          "instituicao_ano": "Terapia de Aceitação e Compromisso — Universidade de São Paulo (USP) — Hospital das Clínicas da Faculdade de Medicina da USP",
           "verificado": true
         }
       ],
@@ -316,9 +316,17 @@
       "tempo_atuacao": null,
       "foto_posicao": "center center",
       "genero": "F",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": true,
-      "sobre_verificado": true
+      "sobre_verificado": true,
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "experiencias_infantil": null,
+      "pasta_drive": "https://drive.google.com/drive/u/0/folders/1lEkaZWTLnvWPe5vxwA_tE0zgoeFeeCuQ"
     },
     {
       "id": "kiri-027",
