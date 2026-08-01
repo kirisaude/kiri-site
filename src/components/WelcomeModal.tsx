@@ -58,7 +58,7 @@ export function WelcomeModal() {
         </p>
 
         <p className="text-[15px] text-cinza-texto leading-[1.6] text-center mb-4">
-          Aqui você encontra profissionais verificados — fonoaudiólogos, psicólogos, terapeutas ocupacionais, neuropediatras e outros — para orientar o cuidado do seu filho.
+          Aqui você encontra profissionais verificados para orientar o cuidado do seu filho: fonoaudiólogos, psicólogos, terapeutas ocupacionais, neuropediatras e outros.
         </p>
 
         {/* Caixa de aviso */}
