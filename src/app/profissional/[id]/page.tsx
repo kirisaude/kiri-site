@@ -58,6 +58,13 @@ function resolveInstituicao(parte: string, map: Record<string, string>): string 
     const nome = map[t];
     return nome ? `${nome} (${t})` : t;
   }
+  // "SIGLA · ANO" ou "SIGLA · texto" (ex: "USP · 2022"): expande a sigla e mantém o resto
+  const siglaComResto = t.match(/^([A-Z]{2,12})\s*·\s*(.+)$/);
+  if (siglaComResto) {
+    const [, sigla, resto] = siglaComResto;
+    const nome = map[sigla];
+    return nome ? `${nome} (${sigla}) · ${resto}` : t;
+  }
   // Mixed-case curto que parece sigla (ex: Unian)
   if (/^[A-Z][a-z]?[A-Z]/.test(t) && t.length <= 10 && !t.includes(" ")) {
     const nome = map[t.toUpperCase()];
