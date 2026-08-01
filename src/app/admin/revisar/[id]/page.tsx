@@ -149,6 +149,7 @@ export default function RevisarPage() {
       convenio_info: convenio.trim(),
       convenios: null,
       whatsapp_agendamento: whatsappAgendamento.trim() || null,
+      tempo_atuacao: inscricao?.tempo_atuacao || null,
       verificado: true,
       foto_url: null,
       verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }).toLowerCase(),
