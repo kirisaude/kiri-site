@@ -307,7 +307,7 @@ export default function Home() {
             <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
             </Link>
-            <Link href="/profissionais/inscricao" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-3.5 py-2 hover:bg-ferrugem/14 transition-colors no-underline">
+            <Link href="/para-profissionais" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-3.5 py-2 hover:bg-ferrugem/14 transition-colors no-underline">
               Faça parte da Kiri
             </Link>
             <button
@@ -430,7 +430,7 @@ export default function Home() {
               Sobre
             </Link>
             <Link
-              href="/profissionais/inscricao"
+              href="/para-profissionais"
               onClick={() => setShowMenu(false)}
               className="py-3.5 text-[16px] font-semibold text-ferrugem no-underline"
             >
