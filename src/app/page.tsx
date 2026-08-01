@@ -862,12 +862,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Divisor filtros / conteúdo — desktop only */}
-        <div className="hidden md:block mt-6 border-b border-[#E2D6C0]" />
-
         {/* Trust banner + Como funciona — desktop: antes dos cards; mobile: oculto aqui (aparece depois) */}
         {!hasFilters && (
-          <div className="hidden md:grid md:pt-10 md:grid-cols-2 gap-4 md:gap-5">
+          <div className="hidden md:grid md:pt-12 md:grid-cols-2 gap-4 md:gap-5">
             {/* Por que selecionada */}
             <Link
               href="/como-selecionamos"
