@@ -50,15 +50,14 @@ export function WelcomeModal() {
           </p>
         </div>
 
-        <p className="text-[14px] text-ardosia leading-[1.6] mb-6">
-          Esperamos que encontre o profissional ideal para a sua família.
-        </p>
-
         <button
           onClick={fechar}
-          className="w-full bg-ardosia-escura text-white font-semibold text-[15px] rounded-[12px] py-[13px] cursor-pointer hover:opacity-90 transition-opacity"
+          className="w-full bg-ardosia-escura text-white rounded-[12px] pt-3 pb-4 cursor-pointer hover:opacity-90 transition-opacity flex flex-col items-center gap-0.5"
         >
-          Começar a explorar →
+          <span style={{ fontFamily: "Georgia, serif" }} className="text-[12px] font-normal opacity-75 italic">
+            Esperamos que encontre o profissional ideal para a sua família.
+          </span>
+          <span className="font-semibold text-[15px]">Começar a explorar →</span>
         </button>
       </div>
     </div>
