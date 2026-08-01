@@ -153,14 +153,19 @@ export default function ParaProfissionaisPage() {
 
         {/* Hero */}
         <section ref={heroRef} className="pt-12 pb-10">
-          <KiriSymbol height={40} />
-          <h1
-            className="text-[34px] md:text-[40px] text-carvao leading-tight tracking-[-0.01em] mt-4 mb-4"
-            style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500 }}
+          <div className="flex items-center gap-3">
+            <KiriSymbol height={46} />
+            <h1
+              className="text-[32px] md:text-[38px] text-carvao leading-tight tracking-[-0.01em] m-0"
+              style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500 }}
+            >
+              Faça parte da rede Kiri
+            </h1>
+          </div>
+          <p
+            className="mt-6 mb-8 text-[19px] md:text-[21px] text-carvao leading-[1.55] max-w-lg"
+            style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 400 }}
           >
-            Faça parte da rede Kiri
-          </h1>
-          <p className="text-[16px] text-cinza-texto leading-[1.65] mb-8 max-w-lg">
             Uma plataforma que conecta profissionais de neurodesenvolvimento infantil com famílias que buscam cuidado especializado — com verificação de formação em cada perfil.
           </p>
           <Link
