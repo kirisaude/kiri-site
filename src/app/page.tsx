@@ -407,41 +407,61 @@ export default function Home() {
 
         {/* Menu mobile dropdown */}
         {showMenu && (
-          <div className="md:hidden border-t border-linha bg-creme/98 px-4 py-2 flex flex-col">
-            <Link
-              href="/sobre"
-              onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
-            >
-              Sobre
-            </Link>
-            <Link
-              href="/como-selecionamos"
-              onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
-            >
-              Como selecionamos
-            </Link>
-            <Link
-              href="/especialidades"
-              onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
-            >
-              Especialidades
-            </Link>
-            <Link
-              href="/para-profissionais"
-              onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-ferrugem border-b border-linha-sutil no-underline"
-            >
-              Faça parte da Kiri
-            </Link>
-            <button
-              onClick={() => { setShowMenu(false); setShowCompartilhar(true); }}
-              className="py-3.5 text-[16px] font-semibold text-ardosia-escura text-left cursor-pointer no-underline"
-            >
-              Divulgue a Kiri
-            </button>
+          <div className="md:hidden border-t border-linha bg-creme/98 px-5 pt-6 pb-7 flex flex-col">
+
+            {/* Grupo 1 — Navegação */}
+            <nav className="flex flex-col gap-[18px]">
+              {([
+                { href: "/sobre", label: "Sobre" },
+                { href: "/especialidades", label: "Especialidades" },
+                { href: "/como-selecionamos", label: "Como selecionamos" },
+              ] as const).map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setShowMenu(false)}
+                  className="text-[20px] text-carvao no-underline leading-none"
+                  style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 400 }}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Divisória */}
+            <div className="mt-6 mb-6 border-t border-[#D8C7B0]" />
+
+            {/* Grupo 2 — Ações */}
+            <div className="flex flex-col gap-[10px]">
+              <Link
+                href="/avaliacao"
+                onClick={() => setShowMenu(false)}
+                className="w-full flex items-center justify-center rounded-[12px] py-[14px] text-[15px] font-semibold text-creme no-underline bg-ferrugem"
+              >
+                Quero ser encaminhado
+              </Link>
+              <Link
+                href="/para-profissionais"
+                onClick={() => setShowMenu(false)}
+                className="w-full flex items-center justify-center rounded-[12px] py-[14px] text-[15px] font-semibold text-creme no-underline"
+                style={{ background: "#44606C" }}
+              >
+                Sou profissional
+              </Link>
+            </div>
+
+            {/* Rodapé do menu */}
+            <div className="mt-8 flex items-center justify-between">
+              <KiriLogoCompact height={24} />
+              <Link
+                href="/contato"
+                onClick={() => setShowMenu(false)}
+                className="text-[13px] text-muted no-underline"
+              >
+                Fale conosco
+              </Link>
+            </div>
+
           </div>
         )}
       </header>
