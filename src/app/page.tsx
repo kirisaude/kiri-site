@@ -935,9 +935,12 @@ export default function Home() {
                       </div>
                       {passo.linha && <div className="flex-1 w-[1.5px] bg-borda-quente mt-1" />}
                     </div>
-                    <div className="pt-0.5 pb-3">
-                      <div className="text-[13.5px] md:text-[15px] font-semibold text-carvao leading-[1.3]">{passo.titulo}</div>
-                      <div className="text-[12.5px] md:text-[13.5px] leading-[1.5] text-cinza-texto mt-0.5">{passo.desc}</div>
+                    <div className="pt-0.5 pb-3 md:pb-5">
+                      <div
+                        className="text-[13.5px] md:text-[24px] font-semibold md:font-medium text-carvao leading-[1.3] md:leading-[1.2]"
+                        style={{ fontFamily: "var(--font-newsreader), Georgia, serif" }}
+                      >{passo.titulo}</div>
+                      <div className="text-[12.5px] md:text-[16px] leading-[1.5] md:leading-[1.6] text-cinza-texto mt-0.5">{passo.desc}</div>
                     </div>
                   </div>
                 ))}
