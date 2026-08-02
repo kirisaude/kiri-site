@@ -799,17 +799,17 @@ export default function Home() {
           </Link>
 
           {/* CTAs secundários — grid 2 colunas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 md:mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 md:mt-3">
 
             {/* Box 1: profissionais */}
             <Link
               href="/para-profissionais"
-              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer no-underline transition-all group"
-              style={{ background: "#F5EFE6", border: "1px solid #D8C7B0" }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
+              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer no-underline transition-all"
+              style={{ background: "#E5EAEC", border: "1px solid #CAD4D8" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#DCE4E8")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#E5EAEC")}
             >
-              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #C4D0D5" }}>
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #CAD4D8" }}>
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="10" cy="7" r="3.2" stroke="#44606C" strokeWidth="1.5" />
                   <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" />
@@ -819,7 +819,7 @@ export default function Home() {
                 <div className="text-[17px] md:text-[19px] leading-[1.2]" style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500, color: "#44606C" }}>
                   Você é profissional de saúde?
                 </div>
-                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#6E6457" }}>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#5A7079" }}>
                   Faça parte da rede Kiri, é gratuito
                 </div>
               </div>
@@ -832,11 +832,11 @@ export default function Home() {
             <button
               onClick={() => setShowCompartilhar(true)}
               className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer text-left transition-all w-full"
-              style={{ background: "#F5EFE6", border: "1px solid #D8C7B0" }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = "#B0A090")}
-              onMouseLeave={e => (e.currentTarget.style.borderColor = "#D8C7B0")}
+              style={{ background: "#E5EAEC", border: "1px solid #CAD4D8" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#DCE4E8")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#E5EAEC")}
             >
-              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1px solid #C4D0D5" }}>
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #CAD4D8" }}>
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="15.5" cy="4" r="2" stroke="#44606C" strokeWidth="1.4" />
                   <circle cx="4.5" cy="10" r="2" stroke="#44606C" strokeWidth="1.4" />
@@ -849,7 +849,7 @@ export default function Home() {
                 <div className="text-[17px] md:text-[19px] leading-[1.2]" style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500, color: "#44606C" }}>
                   Conhece alguém que pode precisar?
                 </div>
-                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#6E6457" }}>
+                <div className="text-[12px] md:text-[13px] mt-0.5" style={{ color: "#5A7079" }}>
                   Compartilhe a Kiri com outra família
                 </div>
               </div>
