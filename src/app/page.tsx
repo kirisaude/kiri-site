@@ -500,18 +500,15 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-4 py-2 md:px-5 md:py-2
+                title={cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
+                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-4 py-2
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura"
                     : "bg-ardosia border-ardosia"
                   }`}
               >
-                <span className="text-[13px] md:text-[14px] font-bold text-creme">
+                <span className="text-[13px] font-bold text-creme">
                   {cond}
-                </span>
-                <span className="hidden md:inline text-[13px] mx-2 text-creme/50">·</span>
-                <span className="hidden md:inline text-[13px] font-normal text-creme/75">
-                  {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
             ))}
@@ -566,11 +563,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("profissao"); return; } setActiveDropdown((d) => d === "profissao" ? null : "profissao"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {activeProfissao ? `Tipo: ${activeProfissao}` : "Tipo de profissional"}
                   </span>
                   {activeProfissao ? (
@@ -595,11 +592,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("modalidade"); return; } setActiveDropdown((d) => d === "modalidade" ? null : "modalidade"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {activeModalidade ?? "Modalidade"}
                   </span>
                   {activeModalidade ? (
@@ -624,11 +621,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("cidade"); return; } setActiveDropdown((d) => d === "cidade" ? null : "cidade"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {activeCidade ?? "Cidade"}
                   </span>
                   {activeCidade ? (
@@ -653,11 +650,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("faixa"); return; } setActiveDropdown((d) => d === "faixa" ? null : "faixa"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {activeFaixa ? `Faixa: ${activeFaixa.split(" ")[0]}` : "Faixa etária"}
                   </span>
                   {activeFaixa ? (
@@ -682,11 +679,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("valor"); return; } setActiveDropdown((d) => d === "valor" ? null : "valor"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {valorAtivo ? `R$${valorMin}–${valorMax >= VALOR_TOTAL_MAX ? "600+" : valorMax}` : "Faixa de valor"}
                   </span>
                   {valorAtivo ? (
@@ -731,11 +728,11 @@ export default function Home() {
               <div className="relative flex-none md:flex-1">
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("pagamento"); return; } setActiveDropdown((d) => d === "pagamento" ? null : "pagamento"); }}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
+                  className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-2 cursor-pointer border transition-all ${
                     activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
-                  <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
+                  <span className="text-[13px] md:text-[14px] font-semibold whitespace-nowrap">
                     {activePagamento ?? "Particular / convênio"}
                   </span>
                   {activePagamento ? (
@@ -768,9 +765,9 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-4 md:py-5 cursor-pointer no-underline transition-all hover:opacity-90"
+            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-[14px] md:py-[18px] cursor-pointer no-underline transition-all hover:opacity-90"
           >
-            <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
+            <div className="w-9 h-9 md:w-10 md:h-10 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
                 <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
                 <circle cx="10" cy="14.7" r="1.05" fill="white" />
