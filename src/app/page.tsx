@@ -501,13 +501,13 @@ export default function Home() {
                 key={cond}
                 onClick={() => toggleCond(cond)}
                 title={cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
-                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-4 py-2
+                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-[22px] py-2
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura"
                     : "bg-ardosia border-ardosia"
                   }`}
               >
-                <span className="text-[13px] font-bold text-creme">
+                <span className="text-[15px] font-bold text-creme">
                   {cond}
                 </span>
               </button>
@@ -765,9 +765,9 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-[14px] md:py-[18px] cursor-pointer no-underline transition-all hover:opacity-90"
+            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-[12px] md:py-[16px] cursor-pointer no-underline transition-all hover:opacity-90"
           >
-            <div className="w-9 h-9 md:w-10 md:h-10 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
+            <div className="w-9 h-9 md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
                 <path d="M7.3 7.4 C7.3 5.6 8.5 4.5 10 4.5 C11.6 4.5 12.7 5.6 12.7 7 C12.7 9.3 10 9 10 11.3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
                 <circle cx="10" cy="14.7" r="1.05" fill="white" />
@@ -781,7 +781,7 @@ export default function Home() {
               <div className="text-[17px] md:text-[19px] font-bold text-white leading-[1.2]">
                 Não sei por onde começar
               </div>
-              <div className="text-[13.5px] md:text-[17px] text-white/80 mt-0.5 md:mt-1">
+              <div className="text-[13px] md:text-[14px] text-white/75 mt-0.5">
                 Quero uma avaliação do neurodesenvolvimento
               </div>
             </div>
