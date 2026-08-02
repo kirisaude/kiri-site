@@ -296,7 +296,7 @@ export default function Home() {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
+          <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-10">
 
             <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Sobre
@@ -307,12 +307,12 @@ export default function Home() {
             <Link href="/especialidades" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Especialidades
             </Link>
-            <Link href="/para-profissionais" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-3.5 py-2 hover:bg-ferrugem/14 transition-colors no-underline">
+            <Link href="/para-profissionais" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-[10px] py-2 hover:bg-ferrugem/14 transition-colors no-underline">
               Faça parte da Kiri
             </Link>
             <button
               onClick={() => setShowCompartilhar(true)}
-              className="hidden md:flex items-center gap-1.5 text-[14px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada rounded-[9px] px-3.5 py-2 cursor-pointer hover:bg-borda-azulada/40 transition-colors"
+              className="hidden md:flex items-center gap-1.5 text-[14px] font-semibold text-[#44606C] bg-transparent border border-[#D8C7B0] rounded-[9px] px-[10px] py-2 cursor-pointer hover:bg-[#EDE3D3] transition-colors"
             >
               <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                 <circle cx="16" cy="4" r="2.4" stroke="#44606C" strokeWidth="1.4" />
