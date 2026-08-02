@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-[1180px] mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-10 md:pt-12 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
+        <div className="pt-6 md:pt-12 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -489,7 +489,7 @@ export default function Home() {
         </div>
 
         {/* Filtros por condição */}
-        <div className="pt-6 md:pt-8">
+        <div className="pt-4 md:pt-8">
           <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 md:mb-4">
             Buscar por condição
           </div>
@@ -551,7 +551,7 @@ export default function Home() {
           {/* Filtros — zona de busca, imediatamente após as condições */}
           <div
             ref={filtrosRef}
-            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-7 pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
+            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-[14px] md:mt-7 pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
             style={{ top: headerHeight }}
           >
             <div className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-2.5 md:mb-3" style={{ color: "#9A8C78" }}>
