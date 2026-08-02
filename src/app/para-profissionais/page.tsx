@@ -272,19 +272,19 @@ export default function ParaProfissionaisPage() {
           style={{ background: "#F4E7D5", border: "1px solid #E6CDA8" }}
         >
           <p
-            className="text-[26px] text-carvao mb-2 leading-snug"
+            className="text-[30px] text-carvao mb-2 leading-snug"
             style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500 }}
           >
             Pronto para fazer parte?
           </p>
-          <p className="text-[14px] text-cinza-texto mb-6">
+          <p className="text-[16px] mb-6" style={{ color: "#BE6E4E" }}>
             A inscrição leva alguns minutos e é totalmente gratuita.
           </p>
           <Link
             href="/profissionais/inscricao"
             className="inline-flex items-center gap-2 bg-ferrugem text-creme font-semibold text-[15px] rounded-[12px] px-6 py-3.5 hover:opacity-90 transition-opacity no-underline"
           >
-            Preencher inscrição →
+            Se inscrever →
           </Link>
         </section>
 
