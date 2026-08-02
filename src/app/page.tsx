@@ -765,7 +765,7 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-[12px] md:py-[16px] cursor-pointer no-underline transition-all hover:opacity-90"
+            className="flex items-center gap-4 mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-[12px] md:py-[16px] cursor-pointer no-underline transition-all hover:opacity-90"
           >
             <div className="w-9 h-9 md:w-[36px] md:h-[36px] rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
@@ -791,12 +791,12 @@ export default function Home() {
           </Link>
 
           {/* CTAs secundários — grid 2 colunas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 md:mt-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[8px] md:gap-3 mt-[8px] md:mt-3">
 
             {/* Box 1: profissionais */}
             <Link
               href="/para-profissionais"
-              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer no-underline transition-all"
+              className="flex items-center gap-3 rounded-[14px] px-4 py-4 md:py-5 cursor-pointer no-underline transition-all"
               style={{ background: "#EFE6D6", border: "1px solid #D8C7B0" }}
               onMouseEnter={e => (e.currentTarget.style.background = "#E5D9C5")}
               onMouseLeave={e => (e.currentTarget.style.background = "#EFE6D6")}
@@ -823,7 +823,7 @@ export default function Home() {
             {/* Box 2: compartilhar */}
             <button
               onClick={() => setShowCompartilhar(true)}
-              className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer text-left transition-all w-full"
+              className="flex items-center gap-3 rounded-[14px] px-4 py-4 md:py-5 cursor-pointer text-left transition-all w-full"
               style={{ background: "#EFE6D6", border: "1px solid #D8C7B0" }}
               onMouseEnter={e => (e.currentTarget.style.background = "#E5D9C5")}
               onMouseLeave={e => (e.currentTarget.style.background = "#EFE6D6")}
