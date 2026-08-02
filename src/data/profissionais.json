@@ -1207,6 +1207,59 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null
+    },
+    {
+      "id": "kiri-044",
+      "inscricao_id": "11f3c056-0e39-4973-9177-0acce6545116",
+      "nome": "Gabriel Ferriolli Marques",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "06/212392",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "Ansiedade",
+        "TOC",
+        "Depressão",
+        "TDAH"
+      ],
+      "modalidade": "Online",
+      "cidade": "Mogi Guaçu-SP",
+      "faixa_etaria": "Adolescentes (13–18 anos), Crianças (6–12 anos)",
+      "sobre": "Acredito que cada criança e adolescente possui uma forma única de compreender e lidar com suas emoções. Por isso, meu trabalho começa pela construção de um vínculo de confiança, buscando entender não apenas o comportamento apresentado, mas também sua história, o contexto familiar e escolar e os fatores que podem estar contribuindo para as dificuldades.\n\nRealizo atendimentos fundamentados em uma avaliação clínica cuidadosa, envolvendo, quando necessário, os responsáveis no processo terapêutico. O objetivo é promover o desenvolvimento emocional, fortalecer recursos pessoais e auxiliar a criança ou o adolescente a enfrentar desafios de maneira mais saudável.\n\nAtuo em demandas como ansiedade, dificuldades emocionais e comportamentais, autoestima, habilidades sociais, dificuldades escolares, processos de desenvolvimento e avaliação psicológica, sempre respeitando as necessidades individuais de cada paciente.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — UNIFAE — 2024"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Psicologia Clínica — PUC — 2025"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Avaliação Psicológica e Psicodiagnóstico — F. Líbano — 2026"
+        },
+        {
+          "curso": "Aperfeiçoamento",
+          "instituicao_ano": "Psicopatologia e Psicofarmacologia hospitalar — Hospital Israelita Albert Einstein — 2025"
+        },
+        {
+          "curso": "Pós-doutorado",
+          "instituicao_ano": ""
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 350,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(19) 99019-6632",
+      "tempo_atuacao": "1 a 3 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "a0f3291b64b6455a"
     }
   ]
 }
