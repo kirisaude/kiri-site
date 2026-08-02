@@ -298,14 +298,14 @@ export default function Home() {
           {/* Right side */}
           <div className="flex items-center gap-3 md:gap-5 ml-auto md:ml-0">
 
-            <Link href="/especialidades" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
-              Especialidades
+            <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+              Sobre
             </Link>
             <Link href="/como-selecionamos" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Como selecionamos
             </Link>
-            <Link href="/sobre" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
-              Sobre
+            <Link href="/especialidades" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
+              Especialidades
             </Link>
             <Link href="/para-profissionais" className="hidden md:flex items-center text-[14px] font-semibold text-ferrugem bg-ferrugem/8 border border-ferrugem/25 rounded-[9px] px-3.5 py-2 hover:bg-ferrugem/14 transition-colors no-underline">
               Faça parte da Kiri
@@ -409,11 +409,11 @@ export default function Home() {
         {showMenu && (
           <div className="md:hidden border-t border-linha bg-creme/98 px-4 py-2 flex flex-col">
             <Link
-              href="/especialidades"
+              href="/sobre"
               onClick={() => setShowMenu(false)}
               className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >
-              Especialidades
+              Sobre
             </Link>
             <Link
               href="/como-selecionamos"
@@ -423,19 +423,25 @@ export default function Home() {
               Como selecionamos
             </Link>
             <Link
-              href="/sobre"
+              href="/especialidades"
               onClick={() => setShowMenu(false)}
               className="py-3.5 text-[16px] font-semibold text-cinza-texto border-b border-linha-sutil no-underline"
             >
-              Sobre
+              Especialidades
             </Link>
             <Link
               href="/para-profissionais"
               onClick={() => setShowMenu(false)}
-              className="py-3.5 text-[16px] font-semibold text-ferrugem no-underline"
+              className="py-3.5 text-[16px] font-semibold text-ferrugem border-b border-linha-sutil no-underline"
             >
               Faça parte da Kiri
             </Link>
+            <button
+              onClick={() => { setShowMenu(false); setShowCompartilhar(true); }}
+              className="py-3.5 text-[16px] font-semibold text-ardosia-escura text-left cursor-pointer no-underline"
+            >
+              Divulgue a Kiri
+            </button>
           </div>
         )}
       </header>
