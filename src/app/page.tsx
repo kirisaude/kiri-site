@@ -307,9 +307,6 @@ export default function Home() {
             <Link href="/especialidades" className="hidden md:block text-[15px] font-semibold text-cinza-texto hover:text-carvao transition-colors no-underline">
               Especialidades
             </Link>
-            <Link href="/para-profissionais" className="hidden md:flex items-center text-[15px] font-semibold text-creme rounded-[10px] px-[10px] py-2 hover:opacity-90 transition-opacity no-underline" style={{ background: "#44606C" }}>
-              Faça parte da Kiri
-            </Link>
             <button
               onClick={() => setShowCompartilhar(true)}
               className="hidden md:flex items-center gap-1.5 text-[14px] font-medium text-[#44606C] bg-transparent rounded-[9px] px-[10px] py-2 cursor-pointer hover:bg-[#EFE6D6] transition-colors"
@@ -323,6 +320,15 @@ export default function Home() {
               </svg>
               Divulgue a Kiri
             </button>
+            <Link href="/para-profissionais" className="hidden md:flex items-center gap-[8px] text-[15px] font-semibold text-creme rounded-[10px] px-[10px] py-2 hover:opacity-90 transition-opacity no-underline" style={{ background: "#44606C" }}>
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="3.2" stroke="#F5EFE6" strokeWidth="1.5" />
+                <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#F5EFE6" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="15.5" y1="2.5" x2="15.5" y2="6.5" stroke="#F5EFE6" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="13.5" y1="4.5" x2="17.5" y2="4.5" stroke="#F5EFE6" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+              Faça parte da Kiri
+            </Link>
             {/* Hambúrguer — mobile only */}
             <button
               onClick={() => setShowMenu((v) => !v)}
