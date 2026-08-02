@@ -444,7 +444,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Hero */}
-        <div className="pt-10 md:pt-[72px] md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
+        <div className="pt-10 md:pt-12 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
           {/* Texto */}
           <div className="flex-1 min-w-0">
             <h1
@@ -489,7 +489,7 @@ export default function Home() {
         </div>
 
         {/* Filtros por condição */}
-        <div className="pt-6 md:pt-10">
+        <div className="pt-6 md:pt-8">
           <div className="text-[11px] md:text-[12px] font-semibold tracking-[0.1em] uppercase text-muted mb-3 md:mb-4">
             Buscar por condição
           </div>
@@ -501,19 +501,18 @@ export default function Home() {
                 key={cond}
                 onClick={() => toggleCond(cond)}
                 className={`cursor-pointer transition-all border
-                  /* mobile: pill compacto */
                   inline-flex items-center rounded-full px-4 py-1.5
-                  /* desktop: box com descrição */
-                  md:flex md:flex-col md:gap-0.5 md:items-start md:rounded-[14px] md:px-5 md:py-[7px]
+                  md:rounded-[14px] md:px-5 md:py-3
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia"
                     : "bg-wash-azulado border-borda-azulada"
                   }`}
               >
-                <span className={`text-[13px] md:text-[22px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className={`text-[13px] md:text-[17px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
                   {cond}
                 </span>
-                <span className={`hidden md:block text-[14px] ${activeCond === cond ? "text-white/80" : "text-ardosia-texto"}`}>
+                <span className={`hidden md:inline text-[14px] mx-2 ${activeCond === cond ? "text-white/40" : "text-[#A8B8BF]"}`}>·</span>
+                <span className={`hidden md:inline text-[14px] ${activeCond === cond ? "text-white/80" : "text-[#6E6457]"}`}>
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
@@ -560,7 +559,7 @@ export default function Home() {
           {/* Filtros — zona de busca, imediatamente após as condições */}
           <div
             ref={filtrosRef}
-            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-[14px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
+            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-[10px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
             style={{ top: headerHeight }}
           >
             <div className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-2.5 md:mb-3" style={{ color: "#9A8C78" }}>
@@ -774,7 +773,7 @@ export default function Home() {
           {/* Não sei por onde começar */}
           <Link
             href="/avaliacao"
-            className="flex items-center gap-4 mt-3 md:mt-4 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-4 md:py-5 cursor-pointer no-underline transition-all hover:opacity-90"
+            className="flex items-center gap-4 mt-3 md:mt-5 bg-ferrugem border border-ferrugem rounded-[13px] md:rounded-[14px] px-4 md:px-5 py-4 md:py-5 cursor-pointer no-underline transition-all hover:opacity-90"
           >
             <div className="w-9 h-9 md:w-12 md:h-12 rounded-full flex-shrink-0 bg-white/20 flex items-center justify-center">
               <svg width="17" height="17" viewBox="0 0 20 20" fill="none" className="md:hidden">
@@ -800,7 +799,7 @@ export default function Home() {
           </Link>
 
           {/* CTAs secundários — grid 2 colunas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2 md:mt-6">
 
             {/* Box 1: profissionais */}
             <Link
