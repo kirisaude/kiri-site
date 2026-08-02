@@ -823,7 +823,7 @@ export default function Home() {
             {/* Box 2: compartilhar */}
             <button
               onClick={() => setShowCompartilhar(true)}
-              className="flex items-center gap-3 rounded-[14px] px-4 py-4 md:py-5 cursor-pointer text-left transition-all w-full"
+              className="hidden md:flex items-center gap-3 rounded-[14px] px-4 py-4 md:py-5 cursor-pointer text-left transition-all w-full"
               style={{ background: "#EFE6D6", border: "1px solid #D8C7B0" }}
               onMouseEnter={e => (e.currentTarget.style.background = "#E5D9C5")}
               onMouseLeave={e => (e.currentTarget.style.background = "#EFE6D6")}
@@ -1042,6 +1042,34 @@ export default function Home() {
                 </div>
               </div>
             )}
+
+            {/* Compartilhar — mobile only, acima do rodapé */}
+            <button
+              onClick={() => setShowCompartilhar(true)}
+              className="md:hidden w-full flex items-center gap-4 mt-8 rounded-[14px] px-5 py-[20px] cursor-pointer text-left transition-all hover:opacity-90"
+              style={{ background: "#44606C" }}
+            >
+              <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: "1.5px solid rgba(245,239,230,0.45)" }}>
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                  <circle cx="15.5" cy="4" r="2" stroke="#F5EFE6" strokeWidth="1.4" />
+                  <circle cx="4.5" cy="10" r="2" stroke="#F5EFE6" strokeWidth="1.4" />
+                  <circle cx="15.5" cy="16" r="2" stroke="#F5EFE6" strokeWidth="1.4" />
+                  <line x1="6.4" y1="9" x2="13.6" y2="5" stroke="#F5EFE6" strokeWidth="1.4" strokeLinecap="round" />
+                  <line x1="6.4" y1="11" x2="13.6" y2="15" stroke="#F5EFE6" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[19px] leading-[1.2]" style={{ fontFamily: "var(--font-newsreader), Georgia, serif", fontWeight: 500, color: "#F5EFE6" }}>
+                  Conhece alguém que pode precisar?
+                </div>
+                <div className="text-[14px] mt-0.5" style={{ color: "rgba(245,239,230,0.85)" }}>
+                  Compartilhe a Kiri com outra família
+                </div>
+              </div>
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M7 4 L13 10 L7 16" stroke="#F5EFE6" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
 
             {/* Rodapé */}
             <Footer className="mt-12 md:mt-16 mb-12" />
