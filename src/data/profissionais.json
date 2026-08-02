@@ -1230,29 +1230,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — UNIFAE — 2024",
+          "instituicao_ano": "Psicologia — Faculdades Associadas de Ensino (FAE) — 2024",
           "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psicologia Clínica — PUC — 2025",
+          "instituicao_ano": "Psicologia Clínica — PUCRS — 2025",
           "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Avaliação Psicológica e Psicodiagnóstico — F. Líbano — 2026",
+          "instituicao_ano": "Avaliação Psicológica e Psicodiagnóstico — Faculdade Líbano — 2026",
           "verificado": false
         },
         {
           "curso": "Aperfeiçoamento",
           "instituicao_ano": "Psicopatologia e Psicofarmacologia hospitalar — Hospital Israelita Albert Einstein — 2025",
           "verificado": false
-        },
-        {
-          "curso": "Pós-doutorado",
-          "instituicao_ano": "",
-          "verificado": false,
-          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
