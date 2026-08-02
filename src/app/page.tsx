@@ -441,7 +441,7 @@ export default function Home() {
       </header>
 
       {/* ═══ CONTEÚDO PRINCIPAL ═══ */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-[1180px] mx-auto px-4 md:px-8">
 
         {/* Hero */}
         <div className="pt-10 md:pt-12 md:pb-2 flex items-start md:items-center gap-8 md:gap-6">
@@ -494,33 +494,27 @@ export default function Home() {
             Buscar por condição
           </div>
 
-          {/* TEA + TDAH */}
-          <div className="flex gap-2 md:grid md:grid-cols-2 md:gap-4">
+          {/* Todas as condições — nuvem de pílulas unificada */}
+          <div className="flex flex-wrap gap-2">
             {(["TEA", "TDAH"] as const).map((cond) => (
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`cursor-pointer transition-all border
-                  inline-flex items-center rounded-full px-4 py-1.5
-                  md:rounded-full md:px-5 md:py-3
+                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-4 py-2 md:px-5 md:py-2
                   ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura"
                     : "bg-ardosia border-ardosia"
                   }`}
               >
-                <span className="text-[13px] md:text-[17px] font-bold text-creme">
+                <span className="text-[13px] md:text-[14px] font-bold text-creme">
                   {cond}
                 </span>
-                <span className="hidden md:inline text-[14px] mx-2 text-creme/50">·</span>
-                <span className="hidden md:inline text-[14px] font-normal text-creme/75">
+                <span className="hidden md:inline text-[13px] mx-2 text-creme/50">·</span>
+                <span className="hidden md:inline text-[13px] font-normal text-creme/75">
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
             ))}
-          </div>
-
-          {/* Condições secundárias — colapsadas no mobile, sempre visíveis no desktop */}
-          <div className={`mt-1.5 md:flex md:flex-wrap md:gap-2 ${mostrarCondicoes || activeCond ? "flex flex-wrap gap-2" : "hidden md:flex"}`}>
             {([
               "Depressão", "Ansiedade", "TOC",
               "Atraso de desenvolvimento", "Dificuldades de aprendizagem",
@@ -529,11 +523,12 @@ export default function Home() {
               <button
                 key={cond}
                 onClick={() => toggleCond(cond)}
-                className={`inline-flex items-center flex-none rounded-full px-3.5 py-1.5 cursor-pointer transition-all border ${
-                  activeCond === cond
+                className={`flex-none rounded-full px-3.5 py-1.5 cursor-pointer transition-all border
+                  ${(mostrarCondicoes || activeCond) ? "inline-flex items-center" : "hidden md:inline-flex md:items-center"}
+                  ${activeCond === cond
                     ? "bg-ardosia-escura border-ardosia-escura text-white"
                     : "border-[#CAD4D8] text-[#44606C] hover:border-ardosia hover:bg-[#D8E1E5]"
-                }`}
+                  }`}
                 style={activeCond !== cond ? { background: "#E5EAEC" } : {}}
               >
                 <span className="text-[12px] font-medium whitespace-nowrap">{cond}</span>
@@ -559,7 +554,7 @@ export default function Home() {
           {/* Filtros — zona de busca, imediatamente após as condições */}
           <div
             ref={filtrosRef}
-            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-[10px] pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
+            className="sticky md:static z-20 -mx-4 md:mx-0 px-4 md:px-0 mt-7 md:mt-7 pt-[14px] pb-2 md:pb-0 bg-creme/95 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none border-b border-[#D8C7B0] md:border-t md:border-b-0 relative"
             style={{ top: headerHeight }}
           >
             <div className="text-[11px] font-semibold tracking-[0.1em] uppercase mb-2.5 md:mb-3" style={{ color: "#9A8C78" }}>
@@ -572,7 +567,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("profissao"); return; } setActiveDropdown((d) => d === "profissao" ? null : "profissao"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    activeProfissao ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
@@ -601,7 +596,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("modalidade"); return; } setActiveDropdown((d) => d === "modalidade" ? null : "modalidade"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    activeModalidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
@@ -630,7 +625,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("cidade"); return; } setActiveDropdown((d) => d === "cidade" ? null : "cidade"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    activeCidade ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
@@ -659,7 +654,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("faixa"); return; } setActiveDropdown((d) => d === "faixa" ? null : "faixa"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    activeFaixa ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
@@ -688,7 +683,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("valor"); return; } setActiveDropdown((d) => d === "valor" ? null : "valor"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    valorAtivo ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
@@ -737,7 +732,7 @@ export default function Home() {
                 <button
                   onClick={() => { if (window.innerWidth < 768) { setActiveSheet("pagamento"); return; } setActiveDropdown((d) => d === "pagamento" ? null : "pagamento"); }}
                   className={`w-full inline-flex items-center justify-center gap-1.5 rounded-full px-[13px] py-3 cursor-pointer border transition-all ${
-                    activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-white border-linha text-cinza-texto"
+                    activePagamento ? "bg-ardosia-escura border-ardosia text-white" : "bg-transparent border-[#D8C7B0] text-carvao hover:bg-white"
                   }`}
                 >
                   <span className="text-[13px] md:text-[15px] font-semibold whitespace-nowrap">
