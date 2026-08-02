@@ -1230,23 +1230,29 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — UNIFAE — 2024"
+          "instituicao_ano": "Psicologia — UNIFAE — 2024",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psicologia Clínica — PUC — 2025"
+          "instituicao_ano": "Psicologia Clínica — PUC — 2025",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Avaliação Psicológica e Psicodiagnóstico — F. Líbano — 2026"
+          "instituicao_ano": "Avaliação Psicológica e Psicodiagnóstico — F. Líbano — 2026",
+          "verificado": false
         },
         {
           "curso": "Aperfeiçoamento",
-          "instituicao_ano": "Psicopatologia e Psicofarmacologia hospitalar — Hospital Israelita Albert Einstein — 2025"
+          "instituicao_ano": "Psicopatologia e Psicofarmacologia hospitalar — Hospital Israelita Albert Einstein — 2025",
+          "verificado": false
         },
         {
           "curso": "Pós-doutorado",
-          "instituicao_ano": ""
+          "instituicao_ano": "",
+          "verificado": false,
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1257,9 +1263,21 @@
       "whatsapp_agendamento": "(19) 99019-6632",
       "tempo_atuacao": "1 a 3 anos",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-044.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "a0f3291b64b6455a"
+      "card_token": "a0f3291b64b6455a",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center center",
+      "oculto": true,
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
