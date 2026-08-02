@@ -502,17 +502,17 @@ export default function Home() {
                 onClick={() => toggleCond(cond)}
                 className={`cursor-pointer transition-all border
                   inline-flex items-center rounded-full px-4 py-1.5
-                  md:rounded-[14px] md:px-5 md:py-3
+                  md:rounded-full md:px-5 md:py-3
                   ${activeCond === cond
-                    ? "bg-ardosia-escura border-ardosia"
-                    : "bg-wash-azulado border-borda-azulada"
+                    ? "bg-ardosia-escura border-ardosia-escura"
+                    : "bg-ardosia border-ardosia"
                   }`}
               >
-                <span className={`text-[13px] md:text-[17px] font-bold ${activeCond === cond ? "text-white" : "text-ardosia-escura"}`}>
+                <span className="text-[13px] md:text-[17px] font-bold text-creme">
                   {cond}
                 </span>
-                <span className={`hidden md:inline text-[14px] mx-2 ${activeCond === cond ? "text-white/40" : "text-[#A8B8BF]"}`}>·</span>
-                <span className={`hidden md:inline text-[14px] ${activeCond === cond ? "text-white/80" : "text-[#6E6457]"}`}>
+                <span className="hidden md:inline text-[14px] mx-2 text-creme/50">·</span>
+                <span className="hidden md:inline text-[14px] font-normal text-creme/75">
                   {cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
                 </span>
               </button>
@@ -805,11 +805,11 @@ export default function Home() {
             <Link
               href="/para-profissionais"
               className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer no-underline transition-all"
-              style={{ background: "#E5EAEC", border: "1px solid #CAD4D8" }}
-              onMouseEnter={e => (e.currentTarget.style.background = "#DCE4E8")}
-              onMouseLeave={e => (e.currentTarget.style.background = "#E5EAEC")}
+              style={{ background: "#EFE6D6", border: "1px solid #D8C7B0" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#E5D9C5")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#EFE6D6")}
             >
-              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #CAD4D8" }}>
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #D8C7B0" }}>
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="10" cy="7" r="3.2" stroke="#44606C" strokeWidth="1.5" />
                   <path d="M3.5 17c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6" stroke="#44606C" strokeWidth="1.5" strokeLinecap="round" />
@@ -832,11 +832,11 @@ export default function Home() {
             <button
               onClick={() => setShowCompartilhar(true)}
               className="flex items-center gap-3 rounded-[14px] px-4 py-5 cursor-pointer text-left transition-all w-full"
-              style={{ background: "#E5EAEC", border: "1px solid #CAD4D8" }}
-              onMouseEnter={e => (e.currentTarget.style.background = "#DCE4E8")}
-              onMouseLeave={e => (e.currentTarget.style.background = "#E5EAEC")}
+              style={{ background: "#EFE6D6", border: "1px solid #D8C7B0" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#E5D9C5")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#EFE6D6")}
             >
-              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #CAD4D8" }}>
+              <div className="w-[34px] h-[34px] rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#fff", border: "1px solid #D8C7B0" }}>
                 <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <circle cx="15.5" cy="4" r="2" stroke="#44606C" strokeWidth="1.4" />
                   <circle cx="4.5" cy="10" r="2" stroke="#44606C" strokeWidth="1.4" />
