@@ -229,8 +229,6 @@ export default function EditarProfissionalPage() {
     setUploadandoFoto(false);
   }
 
-  const temPendentes = formacao.some(f => f.status === "pendente");
-
   async function salvar(e: React.FormEvent, publicarSemPendentes = false) {
     e.preventDefault();
     setSalvando(true);
@@ -280,7 +278,7 @@ export default function EditarProfissionalPage() {
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
       genero: genero ?? undefined,
-      oculto: publicarSemPendentes ? false : oculto,
+      oculto: publicarSemPendentes ? true : oculto,
       registro_verificado: registroStatus === "verificado",
       registro_pendente: registroStatus === "pendente" || undefined,
       registro_obs: registroObs.trim() || undefined,
@@ -301,7 +299,7 @@ export default function EditarProfissionalPage() {
     });
 
     if (res.ok) {
-      setSucesso(publicarSemPendentes ? "Publicado! Itens pendentes estão ocultos no perfil público. O site atualiza em ~1 min." : "Salvo! O site atualiza em ~1 min.");
+      setSucesso(publicarSemPendentes ? "Publicado com perfil oculto. Verifique os itens e clique em 'Tornar visível' quando pronto." : "Salvo! O site atualiza em ~1 min.");
       setTimeout(() => router.push("/admin?aba=profissionais"), 2500);
     } else {
       const e = await res.json();
@@ -951,16 +949,14 @@ export default function EditarProfissionalPage() {
           >
             {salvando ? "Salvando…" : "Salvar alterações"}
           </button>
-          {temPendentes && (
-            <button
-              type="button"
-              disabled={salvando}
-              onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
-              className="w-full bg-white border border-ferrugem text-ferrugem font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
-            >
-              {salvando ? "Publicando…" : "Publicar no site ocultando itens de verificação pendente"}
-            </button>
-          )}
+          <button
+            type="button"
+            disabled={salvando}
+            onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
+            className="w-full bg-white border border-ardosia text-ardosia font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
+          >
+            {salvando ? "Publicando…" : "Publicar (perfil ficará oculto até você ativar)"}
+          </button>
         </form>
       </div>
     </div>
