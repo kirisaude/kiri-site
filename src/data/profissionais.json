@@ -1353,23 +1353,28 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — EBMSP — 2006"
+          "instituicao_ano": "Medicina — EBMSP — 2006",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — HJM — 2012"
+          "instituicao_ano": "Psiquiatria — HJM — 2012",
+          "verificado": false
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Osiquiatria da infância e adolescência — HJM — 2014"
+          "instituicao_ano": "Osiquiatria da infância e adolescência — HJM — 2014",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Sexualidade — USP — 2019"
+          "instituicao_ano": "Sexualidade — USP — 2019",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psiquiatria Perinatal — USP — 2026 (previsto)"
+          "instituicao_ano": "Psiquiatria Perinatal — USP — 2026 (previsto)",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1382,7 +1387,19 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "c4eea8600d3549ad"
+      "card_token": "c4eea8600d3549ad",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     },
     {
       "id": "kiri-047",
