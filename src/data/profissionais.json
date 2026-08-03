@@ -1383,6 +1383,43 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "c4eea8600d3549ad"
+    },
+    {
+      "id": "kiri-047",
+      "inscricao_id": "1800128f-39e7-431c-876a-50a201e87619",
+      "nome": "marcelle Spina donadio alves silva",
+      "profissao": "Nutricionista",
+      "titulo_exibicao": "Nutricionista",
+      "registro_conselho": "42381",
+      "rqe": null,
+      "areas_atuacao": [
+        "Transtornos Alimentares"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "A consulta acontece em um ambiente acolhedor, seguro e sensível, onde o paciente e sua família são recebidos com escuta, respeito e atenção às suas necessidades. Todas as dúvidas são esclarecidas de forma clara e cuidadosa, por uma profissional com ampla experiência, expertise e profundo conhecimento na área dos transtornos alimentares.\n\nCada atendimento é totalmente personalizado, considerando as particularidades do paciente, sua história, seu momento de vida e o contexto familiar. O plano terapêutico é construído de forma individualizada, com foco nas necessidades específicas de cada família, promovendo um cuidado humanizado, consistente e baseado em evidências.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Nutrição — Unifesp — 2013"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Transtornos alimentares — USP/UNIFESP — 2017"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 550,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 99988-8910",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "4efe637f75ea44fa"
     }
   ]
 }
