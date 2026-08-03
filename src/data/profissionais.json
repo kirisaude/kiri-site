@@ -1298,7 +1298,7 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — UFMS — 2017",
+          "instituicao_ano": "Medicina — Universidade Federal de Mato Grosso do Sul (UFMS) — 2017",
           "verificado": true
         },
         {
@@ -1315,7 +1315,7 @@
       "whatsapp_agendamento": "(77) 99961-3873",
       "tempo_atuacao": "3 a 5 anos",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-045.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "41bbdcbdb8bd464b",
       "profissao_secundaria": null,
@@ -1324,7 +1324,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "foto_posicao": "center top",
+      "foto_posicao": "center center",
       "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
