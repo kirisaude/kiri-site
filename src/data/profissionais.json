@@ -1474,31 +1474,38 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — EBMSP — 2021"
+          "instituicao_ano": "Psicologia — EBMSP — 2021",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psicologia Transpessoal — ALUBRAT — 2022"
+          "instituicao_ano": "Psicologia Transpessoal — ALUBRAT — 2022",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicologia — UNIFACS — 2025"
+          "instituicao_ano": "Neuropsicologia — UNIFACS — 2025",
+          "verificado": false
         },
         {
           "curso": "Formação",
-          "instituicao_ano": "Psicotraumatologia — LIANA NETTO — 2026"
+          "instituicao_ano": "Psicotraumatologia — LIANA NETTO — 2026",
+          "verificado": false
         },
         {
           "curso": "Certificação",
-          "instituicao_ano": "Dinâmica Energética do Psiquismo — ICDEP — 2020"
+          "instituicao_ano": "Dinâmica Energética do Psiquismo — ICDEP — 2020",
+          "verificado": false
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Master of Transpersonal Psychology — ALUBRAT — 2022"
+          "instituicao_ano": "Master of Transpersonal Psychology — ALUBRAT — 2022",
+          "verificado": false
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Reiki - Prática Integrativa — TPVB — 2014"
+          "instituicao_ano": "Reiki - Prática Integrativa — TPVB — 2014",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1511,7 +1518,19 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "a4f1a4d7cf4f4014"
+      "card_token": "a4f1a4d7cf4f4014",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
