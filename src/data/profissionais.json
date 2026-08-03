@@ -1419,11 +1419,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Nutrição — Unifesp — 2013"
+          "instituicao_ano": "Nutrição — Unifesp — 2013",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Transtornos alimentares — USP/UNIFESP — 2017"
+          "instituicao_ano": "Transtornos alimentares — USP/UNIFESP — 2017",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1436,7 +1438,19 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "4efe637f75ea44fa"
+      "card_token": "4efe637f75ea44fa",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     },
     {
       "id": "kiri-048",
