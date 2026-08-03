@@ -1420,6 +1420,67 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "4efe637f75ea44fa"
+    },
+    {
+      "id": "kiri-048",
+      "inscricao_id": "cf921779-acf8-408e-ae84-541749964eef",
+      "nome": "Mariana Prado de Amorim",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 03/24066",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "TOC",
+        "Depressão",
+        "Ansiedade"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Camaçari",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Recebo adolescentes e adultos com suspeita ou diagnóstico de TDAH e Transtorno do Espectro Autista, além de pessoas que buscam compreender melhor seu funcionamento cognitivo, emocional e comportamental.\n\nMeu trabalho parte de um princípio simples: antes de procurar respostas, é preciso compreender a pessoa. Nenhum diagnóstico resume uma história. Por isso, cada avaliação e cada processo terapêutico são conduzidos de forma individualizada, respeitando as características, as potencialidades e os desafios de quem está à minha frente.\n\nMinha atuação une ciência, escuta clínica e um olhar humano. Sou psicóloga clínica, pós-graduada em Neuropsicologia e formação em Psicotraumatologia, mestre em Psicologia Transpessoal e membro da Associação Luso-Brasileira de Transpessoal (ALUBRAT). Essa formação me permite compreender o indivíduo de maneira ampla, integrando aspectos cognitivos, emocionais e relacionais, sempre fundamentada em evidências científicas.\n\nQuando há indicação, realizo a Avaliação Neuropsicológica, um processo cuidadoso que investiga funções como atenção, memória, linguagem, funções executivas, raciocínio e aspectos emocionais. Mais do que confirmar ou descartar um diagnóstico, a avaliação busca responder perguntas importantes: quais são as dificuldades? Quais são as habilidades preservadas? Como essa pessoa aprende, organiza sua rotina, toma decisões e se relaciona com o mundo?\n\nAo final, entrego um laudo completo, uma devolutiva detalhada e orientações práticas para que o paciente e sua família compreendam os resultados e saibam quais caminhos podem favorecer o desenvolvimento e a qualidade de vida.\n\nO que as famílias podem esperar:\n\nEntendo que buscar ajuda para um filho, um familiar ou para si mesmo costuma vir acompanhado de muitas dúvidas, expectativas e, muitas vezes, de um longo caminho até chegar ao consultório.\n\nMeu compromisso é oferecer um espaço seguro, respeitoso e livre de julgamentos, onde cada pessoa seja vista para além de um diagnóstico.\n\nAs famílias podem esperar uma comunicação clara durante todo o processo, acolhimento das suas dúvidas e um trabalho baseado em critérios técnicos e éticos. Acredito que compreender o funcionamento de uma pessoa é o primeiro passo para construir estratégias que façam sentido na vida real, seja na escola, na universidade, no trabalho, nos relacionamentos ou na rotina diária.\n\nMais do que identificar dificuldades, busco evidenciar potencialidades. O objetivo não é rotular, mas promover autonomia, qualidade de vida e uma compreensão mais profunda sobre quem aquela pessoa é e como ela pode desenvolver seu melhor funcionamento.\n\nAté breve!",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — EBMSP — 2021"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Psicologia Transpessoal — ALUBRAT — 2022"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Neuropsicologia — UNIFACS — 2025"
+        },
+        {
+          "curso": "Formação",
+          "instituicao_ano": "Psicotraumatologia — LIANA NETTO — 2026"
+        },
+        {
+          "curso": "Certificação",
+          "instituicao_ano": "Dinâmica Energética do Psiquismo — ICDEP — 2020"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Master of Transpersonal Psychology — ALUBRAT — 2022"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Reiki - Prática Integrativa — TPVB — 2014"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 370,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(71) 99227-8303",
+      "tempo_atuacao": "3 a 5 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "a4f1a4d7cf4f4014"
     }
   ]
 }
