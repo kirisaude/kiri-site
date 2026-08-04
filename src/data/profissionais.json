@@ -1557,23 +1557,28 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Terapia ocupacional — USP — 2007"
+          "instituicao_ano": "Terapia ocupacional — USP — 2007",
+          "verificado": false
         },
         {
           "curso": "Certificação Internacional",
-          "instituicao_ano": "Rede de cuidados da saúde da família — CLASI — 2024"
+          "instituicao_ano": "Rede de cuidados da saúde da família — CLASI — 2024",
+          "verificado": false
         },
         {
           "curso": "Formação",
-          "instituicao_ano": "Bobath — Aconbobath — 2018"
+          "instituicao_ano": "Bobath — Aconbobath — 2018",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Redes de cuidados da estratégia saúde da família — Santa Marcelina — 2018"
+          "instituicao_ano": "Redes de cuidados da estratégia saúde da família — Santa Marcelina — 2018",
+          "verificado": false
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Ciências da Reabilitação — USP — 2018"
+          "instituicao_ano": "Ciências da Reabilitação — USP — 2018",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1586,7 +1591,19 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "1c0ff446714440f9"
+      "card_token": "1c0ff446714440f9",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
