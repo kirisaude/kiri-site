@@ -1604,6 +1604,59 @@
       "sobre_verificado": false,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-050",
+      "inscricao_id": "4aa49d0c-59c4-42e4-8957-9f046e63dca2",
+      "nome": "Marcella Deribani Bonoldi Caetano",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "06/159603",
+      "rqe": null,
+      "areas_atuacao": [
+        "Depressão",
+        "Ansiedade",
+        "TEA",
+        "TDAH",
+        "Comunicação",
+        "Orientação parental",
+        "Terapia familiar",
+        "Terapia de casal",
+        "Psicologia do Desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Santos",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou psicóloga graduada pela PUC-SP, especializada em adolescência para equipe multidisciplinar na UNIFESP e arteterapeuta. Realizo avaliação psicológica em crianças e adolescentes com hipóteses diagnósticas como depressão, ansiedade, TDAH, bipolaridade, entre outras.\n\nAtendo adultos, casal, família, realizo orientação parental; também sou orientadora profissional para jovens e adolescentes.\n\nFerramentas artísticas e outras Práticas Integrativas e Complementares (PICs) podem fazer parte dos atendimentos com objetivo de facilitar e ampliar nossa comunicação, além de apresentar possibilidades além da psicoterapia \"exclusiva pela fala\", isto é, atividades que permitem uma experiência mais confortável e personalizada.\n\nConheça os serviços completos da minha clínica\nMAHE - Psicologia e Psicanálise",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — PUC-SP — 2019"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Adolescência para equipe multidisciplinar — UNIFESP — 2023"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Arteterapia — IJEP — 2023"
+        },
+        {
+          "curso": "Certificação Internacional",
+          "instituicao_ano": "Mestrado Integrado — Universidade do Porto — 2018"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 250,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(13) 99197-3967",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "82241cf3848e4143"
     }
   ]
 }
