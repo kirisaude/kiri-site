@@ -1531,6 +1531,62 @@
       "sobre_verificado": false,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-049",
+      "inscricao_id": "5c09c7c3-7e9b-4e2b-a7b0-7a7e39364ccc",
+      "nome": "Rejane Cristina Petrokas",
+      "profissao": "Terapeuta ocupacional",
+      "titulo_exibicao": "Terapeuta ocupacional",
+      "registro_conselho": "CREFITO 3/9772TO",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "Atraso de desenvolvimento",
+        "TDAH",
+        "Comunicação aumentativa",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "TOC"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Acolhimento, abordagem da saúde da família e desenvolvimento da criança.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Terapia ocupacional — USP — 2007"
+        },
+        {
+          "curso": "Certificação Internacional",
+          "instituicao_ano": "Rede de cuidados da saúde da família — CLASI — 2024"
+        },
+        {
+          "curso": "Formação",
+          "instituicao_ano": "Bobath — Aconbobath — 2018"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Redes de cuidados da estratégia saúde da família — Santa Marcelina — 2018"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Ciências da Reabilitação — USP — 2018"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 420,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 97474-0517",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "1c0ff446714440f9"
     }
   ]
 }
