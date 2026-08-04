@@ -1657,6 +1657,50 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "82241cf3848e4143"
+    },
+    {
+      "id": "kiri-051",
+      "inscricao_id": "1213c4ef-9446-405e-828b-e9a51b3f4681",
+      "nome": "Pâmella Crystina Silva Café",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 06/208481",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Orientação Parental"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou psicóloga, mestre em Psicologia e especialista em Análise do Comportamento Aplicada. Atuo com orientação parental baseada em evidências, auxiliando famílias no desenvolvimento de estratégias práticas para lidar com os desafios do dia a dia e promover o desenvolvimento infantil. Meu trabalho busca fortalecer a relação entre pais e filhos, favorecendo uma rotina mais leve, funcional e alinhada às necessidades de cada família.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — UFMT — 2022"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Intervenção ABA para Autismo e Deficiência Intelectual — CbiofMiami — 2025"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Psicologia — UFMT — 2024"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 96907-1996",
+      "tempo_atuacao": "3 a 5 anos",
+      "verificado": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "95c8b2f88b154f65"
     }
   ]
 }
