@@ -151,6 +151,7 @@ export default function RevisarPage() {
       whatsapp_agendamento: whatsappAgendamento.trim() || null,
       tempo_atuacao: inscricao?.tempo_atuacao || null,
       verificado: true,
+      oculto: true,
       foto_url: null,
       verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }).toLowerCase(),
     };
@@ -169,7 +170,7 @@ export default function RevisarPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, status: "aprovado" }),
       });
-      setSucesso(`Publicado como ${novoId}! O site atualiza em ~1 min.`);
+      setSucesso(`Publicado como ${novoId} (oculto). Acesse o perfil para revisar e tornar visível.`);
       setTimeout(() => router.push("/admin"), 3000);
     } else {
       const e = await res.json();
