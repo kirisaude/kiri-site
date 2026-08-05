@@ -1695,15 +1695,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — UFMT — 2022"
+          "instituicao_ano": "Psicologia — UFMT — 2022",
+          "verificado": false
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Intervenção ABA para Autismo e Deficiência Intelectual — CbiofMiami — 2025"
+          "instituicao_ano": "Intervenção ABA para Autismo e Deficiência Intelectual — CbiofMiami — 2025",
+          "verificado": false
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Psicologia — UFMT — 2024"
+          "instituicao_ano": "Psicologia — UFMT — 2024",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1716,7 +1719,19 @@
       "verificado": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "95c8b2f88b154f65"
+      "card_token": "95c8b2f88b154f65",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "oculto": true,
+      "registro_verificado": false,
+      "sobre_verificado": false,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
