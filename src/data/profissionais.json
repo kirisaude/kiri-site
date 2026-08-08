@@ -1732,6 +1732,46 @@
       "sobre_verificado": false,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-052",
+      "inscricao_id": "3191e445-043e-49b4-a4a3-237f64d8f241",
+      "nome": "Jéssica Barros",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 06/180600",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Meu trabalho é voltado ao desenvolvimento de habilidades acadêmicas, com foco em alfabetização, leitura, escrita, matemática e habilidades de estudo. Realizo atendimentos individualizados e também acompanhamento domiciliar para suporte à rotina de estudos, considerando as necessidades e potencialidades de cada criança.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — UNIP — 2021"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Psicopedagogia — Anhembi Morumbi — 2023"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 93957-9767",
+      "tempo_atuacao": "3 a 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "6f3e5b6e7aea428f"
     }
   ]
 }
