@@ -1772,6 +1772,53 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "6f3e5b6e7aea428f"
+    },
+    {
+      "id": "kiri-053",
+      "inscricao_id": "6cdd9701-12bb-4d34-96cd-4afb6bdf0ca8",
+      "nome": "Luiza Magalhães de Oliveira Meneghel",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "Crm 189778",
+      "rqe": "99135/991351",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "TOC",
+        "Ansiedade",
+        "Depressão",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou fascinada pelo estudo da mente humana e me encanto com cada história de vida compartilhada em atendimento. Minha especialização em Psiquiatria da Infância e Adolescência contribui não só para o acompanhamento da saúde mental de crianças, mas também amplia o olhar da saúde mental dos adultos sob a ótica do desenvolvimento do indivíduo, de sua personalidade e seus sintomas. Assim, considero as trajetórias de cada paciente em minha prática, utilizando métodos comprovados e adaptados às suas necessidades individuais para um tratamento eficaz.​​​\nOfereço um atendimento de qualidade, pautado na atenção, cuidado, ética e profundo conhecimento na área. ​Meu compromisso é contribuir para a melhora da qualidade de vida dos meus pacientes e suas famílias através do cuidado da saúde mental, alcançando assim o equilíbrio que eles merecem.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Universidade Federal de Pelotas — 2017"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — USP — 2022"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — USP — 2023"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 91056-6036",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "90765608f34a48ed"
     }
   ]
 }
