@@ -1978,6 +1978,56 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "6e5167872dd44d57"
+    },
+    {
+      "id": "kiri-057",
+      "inscricao_id": "8ae2cf62-6079-450c-afc4-5abb20940d99",
+      "nome": "Nádia Seiko Nagano",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM 163038 SP",
+      "rqe": "RQE 925781",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Comunicação aumentativa",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Transtorno alimentar"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Psiquiatra da infância e adolescência",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Universidade de Ribeirão Preto — 2013"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — Instituto Bairral de Psiquiatria — 2021"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da infância e adolescência — UNIFESP — 2022"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 98503-4567",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "0fcc41fc811340e8"
     }
   ]
 }
