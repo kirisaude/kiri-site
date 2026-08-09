@@ -96,16 +96,39 @@ export default async function PerfilPage({ params }: PageProps) {
 
   const instituicoesMap = await getInstituicoesMap();
 
-  const rqeLabel = p.rqe ? `RQE ${p.rqe}` : null;
-  const registroLinha = p.registro_conselho
-    ? rqeLabel ? `${p.registro_conselho} · ${rqeLabel}` : p.registro_conselho
+  const PROFISSAO_CONSELHO: Record<string, string> = {
+    "Psiquiatra da infância e adolescência": "CRM", "Psiquiatra": "CRM",
+    "Neuropediatra": "CRM", "Neurologista": "CRM",
+    "Neuropsicólogo": "CRP", "Psicólogo": "CRP",
+    "Fonoaudiólogo": "CRFa",
+    "Terapeuta ocupacional": "CREFITO", "Fisioterapeuta": "CREFITO",
+    "Nutricionista": "CFN",
+  };
+  const PREFIXOS = /^(crm|crp|crfa|crefito|cfn|cfm|cfp|cff|cro|coren|cref|abpp)\b/i;
+
+  function normRegistro(reg: string, profissao: string): string {
+    if (!reg) return reg;
+    if (PREFIXOS.test(reg.trim())) return reg.trim();
+    const prefixo = PROFISSAO_CONSELHO[profissao];
+    return prefixo ? `${prefixo} ${reg.trim()}` : reg.trim();
+  }
+
+  function normRqe(rqe: string): string {
+    return rqe.replace(/^rqe\s*/i, "").trim();
+  }
+
+  const registroNorm = p.registro_conselho ? normRegistro(p.registro_conselho, p.profissao) : null;
+  const rqeNumero = p.rqe ? normRqe(p.rqe) : null;
+  const rqeLabel = rqeNumero ? `RQE ${rqeNumero}` : null;
+  const registroLinha = registroNorm
+    ? rqeLabel ? `${registroNorm} · ${rqeLabel}` : registroNorm
     : rqeLabel ?? null;
   const tituloExibicao = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
 
   const areaValor = areaSubstantiva(p.profissao) ?? tituloExibicao;
 
   const credenciais = [
-    ...(p.registro_conselho ? [{ rotulo: "Registro", valor: p.registro_conselho, detalhe: " — verificado pela Kiri" }] : []),
+    ...(registroNorm ? [{ rotulo: "Registro", valor: registroNorm, detalhe: " — verificado pela Kiri" }] : []),
     ...(rqeLabel
       ? [
           { rotulo: "Especialista", valor: rqeLabel, detalhe: "" },
