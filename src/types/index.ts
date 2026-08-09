@@ -60,14 +60,14 @@ export interface Profissional {
 export const PROFISSOES_ORDENADAS = [
   "Psiquiatra da infância e adolescência",
   "Psiquiatra",
-  "Neuropediatra",
-  "Neurologista",
-  "Neuropsicólogo",
   "Psicólogo",
+  "Neuropsicólogo",
   "Fonoaudiólogo",
   "Terapeuta ocupacional",
-  "Fisioterapeuta",
   "Nutricionista",
+  "Neurologista",
+  "Neuropediatra",
+  "Fisioterapeuta",
   "Psicopedagogo",
 ] as const;
 
