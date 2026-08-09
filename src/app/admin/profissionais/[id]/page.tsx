@@ -131,6 +131,30 @@ export default function EditarProfissionalPage() {
   const [sucesso, setSucesso] = useState("");
   const [authed, setAuthed] = useState<boolean | null>(null);
 
+  const PENDENCIAS_PADRAO = `Foto profissional (fundo neutro, rosto nítido, preferencialmente formato quadrado 1:1)
+Certidão de regularidade no conselho de classe (atualizada)
+Diploma de graduação
+Certificados de especialização / residência / pós-graduação`;
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [pendenciasTexto, setPendenciasTexto] = useState(PENDENCIAS_PADRAO);
+  const [enviandoEmail, setEnviandoEmail] = useState(false);
+  const [emailEnviado, setEmailEnviado] = useState(false);
+  const [erroEmail, setErroEmail] = useState("");
+
+  async function enviarEmailPendencias() {
+    if (!profOriginal?.inscricao_id) { setErroEmail("Sem inscricao_id — não é possível buscar o e-mail."); return; }
+    setEnviandoEmail(true); setErroEmail(""); setEmailEnviado(false);
+    const res = await fetch("/api/admin/pendencias-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ inscricao_id: profOriginal.inscricao_id, pendencias: pendenciasTexto }),
+    });
+    if (res.ok) { setEmailEnviado(true); setTimeout(() => setShowEmailModal(false), 1800); }
+    else { const d = await res.json(); setErroEmail(d.error ?? "Erro ao enviar"); }
+    setEnviandoEmail(false);
+  }
+
   useEffect(() => {
     fetch("/api/admin/inscricoes", { credentials: "include" }).then((r) => {
       if (r.ok) setAuthed(true);
@@ -381,6 +405,49 @@ export default function EditarProfissionalPage() {
             {oculto ? "Tornar visível" : "Ocultar perfil"}
           </button>
         </div>
+
+        {/* Botão email pendências — só aparece quando perfil está oculto */}
+        {oculto && (
+          <button
+            type="button"
+            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setShowEmailModal(true); }}
+            className="w-full mb-4 flex items-center justify-center gap-2 border border-[#D8C7B0] rounded-[12px] py-[11px] text-[13.5px] font-semibold text-ardosia bg-white hover:bg-wash cursor-pointer transition-colors"
+          >
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+            </svg>
+            Solicitar documentos pendentes por e-mail
+          </button>
+        )}
+
+        {/* Modal email pendências */}
+        {showEmailModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(44,39,34,0.5)" }}>
+            <div className="bg-creme rounded-[18px] max-w-[460px] w-full px-7 py-6 shadow-xl relative">
+              <button onClick={() => setShowEmailModal(false)} className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center text-muted hover:text-carvao cursor-pointer">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              </button>
+              <div className="text-[16px] font-semibold text-carvao mb-1">Solicitar documentos pendentes</div>
+              <div className="text-[12.5px] text-muted mb-4">Edite os itens abaixo — cada linha vira um bullet no e-mail enviado ao profissional.</div>
+              <textarea
+                value={pendenciasTexto}
+                onChange={(e) => setPendenciasTexto(e.target.value)}
+                rows={6}
+                className="w-full border border-linha rounded-[10px] px-3.5 py-3 text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none mb-4"
+              />
+              {erroEmail && <p className="text-[12.5px] text-ferrugem mb-3">{erroEmail}</p>}
+              {emailEnviado && <p className="text-[12.5px] text-verde-confirmacao font-semibold mb-3">E-mail enviado!</p>}
+              <button
+                onClick={enviarEmailPendencias}
+                disabled={enviandoEmail || !pendenciasTexto.trim()}
+                className="w-full bg-ardosia text-white font-semibold text-[14px] rounded-[11px] py-[13px] cursor-pointer disabled:opacity-50 transition-opacity"
+              >
+                {enviandoEmail ? "Enviando…" : "Enviar e-mail"}
+              </button>
+            </div>
+          </div>
+        )}
 
         <form onSubmit={salvar} className="flex flex-col gap-4">
 
