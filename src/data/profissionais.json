@@ -2028,6 +2028,64 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "0fcc41fc811340e8"
+    },
+    {
+      "id": "kiri-058",
+      "inscricao_id": "8c949cc9-ff8d-4644-8b7c-4454b2cebcef",
+      "nome": "ANA GABRIELA HOUNIE",
+      "profissao": "Psiquiatra",
+      "titulo_exibicao": "Psiquiatra",
+      "registro_conselho": "CRM 94382 SP",
+      "rqe": "17704",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Tourette",
+        "tratamento com cannabis",
+        "casos refratários"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Atua numa perspectiva de busca de qualidade de vida, dentro de uma abordagem integrativa, em que o bem-estar deve ser biopsicossocial. Tenho experiência com quadros refratários.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "MEDICINA — UFPE — 1994"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "PSIQUIATRIA — UFPE — 1997"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "PSIQUIATRIA — ABP — 1995"
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "CIENCIAS — USP — 2003"
+        },
+        {
+          "curso": "Pós-doutorado",
+          "instituicao_ano": "GENETICA — USP — 2005"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 97847-7171",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "87daf9d4ed134173"
     }
   ]
 }
