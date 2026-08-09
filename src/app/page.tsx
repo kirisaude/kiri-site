@@ -96,8 +96,10 @@ function exibirCidade(cidade: string): string {
 const REGIOES_SP = ["Norte", "Sul", "Leste", "Oeste", "Centro"];
 
 // Deduplica por nome normalizado; separa cidades múltiplas unidas por " e "
+// Ordena por volume de profissionais (mais → menos)
 const CIDADES_DISPONIVEIS = (() => {
-  const mapa = new Map<string, string>();
+  const nomes = new Map<string, string>();
+  const contagem = new Map<string, number>();
   for (const p of profissionais) {
     const campo = cidadeCurta(p.cidade);
     if (!campo) continue;
@@ -106,11 +108,14 @@ const CIDADES_DISPONIVEIS = (() => {
       const curta = /,\s*[A-Z]{2}$/.test(norm) ? norm : comEstado(norm);
       if (!curta) continue;
       const chave = normCidade(curta);
-      const atual = mapa.get(chave);
-      if (!atual || curta.length < atual.length) mapa.set(chave, curta);
+      const atual = nomes.get(chave);
+      if (!atual || curta.length < atual.length) nomes.set(chave, curta);
+      contagem.set(chave, (contagem.get(chave) ?? 0) + 1);
     }
   }
-  return [...mapa.values()].sort();
+  return [...nomes.entries()]
+    .sort((a, b) => (contagem.get(b[0]) ?? 0) - (contagem.get(a[0]) ?? 0))
+    .map(([, nome]) => nome);
 })();
 
 
