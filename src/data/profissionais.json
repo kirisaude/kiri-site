@@ -2102,6 +2102,49 @@
       "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-059",
+      "inscricao_id": "92ffe4e4-86bf-4972-8dd8-3479fe4cd656",
+      "nome": "Vivian Hein Hirsch",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM 58076",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Ansiedade",
+        "Depressão",
+        "TOC"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Cotia, São Paulo",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Minha formação é tanto clínica quanto psicanalítica. Minha escuta inclui diagnóstico clínico e muita empatia",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Faculdade de Medicina de Santo Amaro — 1985"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — GEPPPI — 1987"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 1200,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 99573-3729",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "66732444800d49e1"
     }
   ]
 }
