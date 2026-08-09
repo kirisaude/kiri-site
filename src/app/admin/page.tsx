@@ -720,7 +720,6 @@ export default function AdminPage() {
   const [buscaPlataforma, setBuscaPlataforma] = useState("");
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
-  const [exportando, setExportando] = useState(false);
   const [enviandoEmailDocs, setEnviandoEmailDocs] = useState(false);
   const [emailDocsStatus, setEmailDocsStatus] = useState<"idle"|"ok"|"erro">("idle");
 
@@ -840,17 +839,6 @@ export default function AdminPage() {
     });
   }
 
-  async function exportarPlanilha() {
-    setExportando(true);
-    const res = await fetch("/api/admin/exportar-planilha", { method: "POST" });
-    const data = await res.json();
-    if (res.ok) {
-      alert(`${data.exportados} inscrição(ões) exportada(s) para a planilha.`);
-    } else {
-      alert(`Erro: ${data.error}`);
-    }
-    setExportando(false);
-  }
 
   async function excluirProfissional(id: string, nome: string) {
     if (!confirm(`Remover "${nome}" da plataforma? Esta ação não pode ser desfeita.`)) return;
@@ -983,13 +971,13 @@ export default function AdminPage() {
                     {enviandoEmailDocs ? "Enviando…" : emailDocsStatus === "ok" ? "✓ Enviado" : "✉ Enviar e-mail de documentação"}
                   </button>
                 )}
-                <button
-                  onClick={exportarPlanilha}
-                  disabled={exportando || inscricoes.length === 0}
-                  className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-40"
+                <a
+                  href="/api/admin/exportar-csv"
+                  download
+                  className="text-[12.5px] font-semibold text-ardosia border border-ardosia/30 rounded-[9px] px-3 py-1.5 cursor-pointer no-underline inline-flex items-center gap-1"
                 >
-                  {exportando ? "Exportando…" : "↗ Exportar para planilha"}
-                </button>
+                  ↓ Baixar planilha CSV
+                </a>
               </div>
             </div>
             <div>
