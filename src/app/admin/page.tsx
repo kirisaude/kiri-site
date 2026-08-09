@@ -1486,21 +1486,40 @@ export default function AdminPage() {
                         )}
                         <span className="text-[12px] text-muted">{new Date(c.criado_em).toLocaleDateString("pt-BR")}</span>
                       </div>
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          const novoLido = !c.lido;
-                          setContatos((prev) => prev.map((x) => x.id === c.id ? { ...x, lido: novoLido } : x));
-                          await fetch("/api/contato", {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ id: c.id, lido: novoLido }),
-                          });
-                        }}
-                        className={`text-[12px] font-semibold flex-none cursor-pointer whitespace-nowrap ${c.lido ? "text-[#2E7D4F]" : "text-ardosia"}`}
-                      >
-                        {c.lido ? "✓ Respondido" : "Marcar como respondido"}
-                      </button>
+                      <div className="flex items-center gap-3 flex-none">
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            const novoLido = !c.lido;
+                            setContatos((prev) => prev.map((x) => x.id === c.id ? { ...x, lido: novoLido } : x));
+                            await fetch("/api/contato", {
+                              method: "PATCH",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ id: c.id, lido: novoLido }),
+                            });
+                          }}
+                          className={`text-[12px] font-semibold cursor-pointer whitespace-nowrap ${c.lido ? "text-[#2E7D4F]" : "text-ardosia"}`}
+                        >
+                          {c.lido ? "✓ Respondido" : "Marcar como respondido"}
+                        </button>
+                        {c.lido && (
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              if (!confirm("Excluir esta mensagem?")) return;
+                              setContatos((prev) => prev.filter((x) => x.id !== c.id));
+                              await fetch("/api/contato", {
+                                method: "DELETE",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ id: c.id }),
+                              });
+                            }}
+                            className="text-[12px] font-medium text-muted hover:text-ferrugem cursor-pointer whitespace-nowrap transition-colors"
+                          >
+                            Excluir
+                          </button>
+                        )}
+                      </div>
                     </div>
                     {c.topico && (
                       <span className="inline-block mb-1.5 text-[11px] font-semibold text-ambar-texto bg-[#FFF8ED] border border-[#E0A55E]/30 px-2 py-0.5 rounded-full">{c.topico}</span>
