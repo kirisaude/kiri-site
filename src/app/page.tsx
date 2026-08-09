@@ -10,7 +10,7 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 import { PROFISSOES_ORDENADAS, PROFISSAO_PLURAL, cidadeCurta, modalidadeCurta } from "@/types";
 import { Footer } from "@/components/Footer";
-import { titleCasePT } from "@/lib/titleCase";
+import { titleCasePT, normalizarCidade } from "@/lib/titleCase";
 import { WelcomeModal } from "@/components/WelcomeModal";
 
 const profissionais = data.profissionais as Profissional[];
@@ -82,9 +82,14 @@ function comEstado(cidade: string): string {
 }
 
 function exibirCidade(cidade: string): string {
-  return titleCasePT(cidadeCurta(cidade))
+  return cidadeCurta(cidade)
     .split(/\s+e\s+/)
-    .map(c => comEstado(c.trim()))
+    .map(c => {
+      const norm = normalizarCidade(c.trim());
+      // Se normalizarCidade não encontrou UF, tenta CIDADE_ESTADO como fallback
+      if (!/,\s*[A-Z]{2}$/.test(norm)) return comEstado(norm);
+      return norm;
+    })
     .join(" e ");
 }
 
@@ -97,7 +102,8 @@ const CIDADES_DISPONIVEIS = (() => {
     const campo = cidadeCurta(p.cidade);
     if (!campo) continue;
     for (const parte of campo.split(/\s+e\s+/)) {
-      const curta = comEstado(titleCasePT(parte.trim()));
+      const norm = normalizarCidade(parte.trim());
+      const curta = /,\s*[A-Z]{2}$/.test(norm) ? norm : comEstado(norm);
       if (!curta) continue;
       const chave = normCidade(curta);
       const atual = mapa.get(chave);
