@@ -2055,23 +2055,28 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "MEDICINA — UFPE — 1994"
+          "instituicao_ano": "MEDICINA — UFPE — 1994",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "PSIQUIATRIA — UFPE — 1997"
+          "instituicao_ano": "PSIQUIATRIA — UFPE — 1997",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "PSIQUIATRIA — ABP — 1995"
+          "instituicao_ano": "PSIQUIATRIA — ABP — 1995",
+          "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "CIENCIAS — USP — 2003"
+          "instituicao_ano": "CIENCIAS — USP — 2003",
+          "verificado": true
         },
         {
           "curso": "Pós-doutorado",
-          "instituicao_ano": "GENETICA — USP — 2005"
+          "instituicao_ano": "GENETICA — USP — 2005",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2083,9 +2088,20 @@
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-058.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "87daf9d4ed134173"
+      "card_token": "87daf9d4ed134173",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
