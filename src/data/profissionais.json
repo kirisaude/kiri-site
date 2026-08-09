@@ -2145,6 +2145,56 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "66732444800d49e1"
+    },
+    {
+      "id": "kiri-060",
+      "inscricao_id": "f0b522d7-32b9-462e-b43e-15c2e1a49a40",
+      "nome": "Renzo Roldi Rossoni",
+      "profissao": "Psiquiatra",
+      "titulo_exibicao": "Psiquiatra",
+      "registro_conselho": "ES 10234",
+      "rqe": "8512/8691",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Depressão e transtorno bipolar",
+        "Síndrome de Tourette",
+        "Dificuldades de aprendizagem",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Vitória",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos), Bebês (0–2 anos)",
+      "sobre": ".",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — UFES — 2010"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatra geral — UNIFESP — 2014"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da infância e adolescência — UNIFESP — 2015"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(27) 99775-6600",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "77a94153680e4089"
     }
   ]
 }
