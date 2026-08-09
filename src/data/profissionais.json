@@ -1929,6 +1929,55 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "ca77bc06512e46ff"
+    },
+    {
+      "id": "kiri-056",
+      "inscricao_id": "d9e161ff-a84d-40cf-9b25-b759b73e2a7f",
+      "nome": "Gabriela Hellmann Dircksen",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM SC 26440",
+      "rqe": "RQE 27.612 / RQE 28.190",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Comunicação aumentativa",
+        "TOC",
+        "Depressão",
+        "Ansiedade",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Blumenau, SC",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Medicina pela Fundação Universidade Regional de Blumenau (FURB). Psiquiatria e Psiquiatria da Infância e Adolescência pelo Departamento de Psiquiatria da Escola Paulista de Medicina - Universidade Federal de São Paulo (EPM - UNIFESP). Supervisora do Programa de Pesquisa e Atendimento em Violência e Transtorno de Estresse Pós Traumático (PROVE - KIDS) de 2024-2025. Psiquiatra voluntária no projeto filantrópico SAHA a população refugiada, desenvolvido pela Associação Médica Líbano-Brasileira de 2022-2025. Experiência em atendimentos de adultos, crianças e adolescentes, principalmente em dependência química, transtorno de personalidade, transtorno de estresse pós traumático, transtorno obsessivo compulsivo, transtornos ansiosos e transtornos psicóticos. Atuação atual na Prefeitura de Blumenau, APAE Blumenau e FURB.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — FURB — 2018"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — Unifesp — 2022"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — Unifesp — 2024"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 500,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(47) 99618-3323",
+      "tempo_atuacao": "3 a 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "6e5167872dd44d57"
     }
   ]
 }
