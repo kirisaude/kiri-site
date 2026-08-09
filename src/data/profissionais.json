@@ -1851,9 +1851,8 @@
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — Unisa — 2021",
-          "verificado": false,
-          "pendente": true
+          "instituicao_ano": "Psiquiatria — Universidade Santo Amaro (Unisa) — 2021",
+          "verificado": true
         },
         {
           "curso": "Especialização",
