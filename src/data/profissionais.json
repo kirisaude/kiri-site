@@ -2055,27 +2055,27 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "MEDICINA — UFPE — 1994",
+          "instituicao_ano": "Medicina — Universidade Federal de Pernambuco (UFPE) — 1994",
           "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "PSIQUIATRIA — UFPE — 1997",
+          "instituicao_ano": "Psiquiatria — Universidade Federal de Pernambuco (UFPE) — 1997",
           "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "PSIQUIATRIA — ABP — 1995",
+          "instituicao_ano": "Psiquiatria — Associação Brasileira de Psiquiatria (ABP) — 1995",
           "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "CIENCIAS — USP — 2003",
+          "instituicao_ano": "Ciências — USP — 2003",
           "verificado": true
         },
         {
           "curso": "Pós-doutorado",
-          "instituicao_ano": "GENETICA — USP — 2005",
+          "instituicao_ano": "Genética — USP — 2005",
           "verificado": true
         }
       ],
