@@ -113,8 +113,33 @@ const CIDADES_DISPONIVEIS = (() => {
       contagem.set(chave, (contagem.get(chave) ?? 0) + 1);
     }
   }
+  // Peso por tamanho/importância da cidade (desempate quando volume é igual)
+  const CIDADE_PESO: Record<string, number> = {
+    "sao paulo": 12000000, "rio de janeiro": 6700000, "brasilia": 3100000,
+    "salvador": 2900000, "fortaleza": 2700000, "belo horizonte": 2500000,
+    "manaus": 2200000, "curitiba": 1900000, "recife": 1600000, "goiania": 1500000,
+    "belem": 1500000, "porto alegre": 1400000, "guarulhos": 1400000,
+    "campinas": 1200000, "sao luis": 1100000, "maceio": 1000000,
+    "natal": 900000, "teresina": 870000, "campo grande": 900000,
+    "joao pessoa": 820000, "sao bernardo do campo": 840000, "osasco": 700000,
+    "sorocaba": 680000, "ribeirao preto": 700000, "aracaju": 660000,
+    "cuiaba": 620000, "mogi das cruzes": 440000, "santos": 440000,
+    "boa vista": 420000, "florianopolis": 530000, "vitoria": 370000,
+    "blumenau": 370000, "camasari": 350000, "piracicaba": 410000,
+    "diadema": 420000, "bauru": 390000, "marilia": 240000,
+    "sao caetano do sul": 160000, "santo andre": 710000,
+    "cotia": 280000, "nova odessa": 60000, "mogi guacu": 190000,
+    "luis eduardo magalhaes": 80000, "porto velho": 520000,
+    "rio branco": 420000, "palmas": 310000, "macapa": 500000,
+  };
+  function pesoNorm(chave: string) { return chave.replace(/,\s*[a-z]{2}$/, "").trim(); }
+
   return [...nomes.entries()]
-    .sort((a, b) => (contagem.get(b[0]) ?? 0) - (contagem.get(a[0]) ?? 0))
+    .sort((a, b) => {
+      const diff = (contagem.get(b[0]) ?? 0) - (contagem.get(a[0]) ?? 0);
+      if (diff !== 0) return diff;
+      return (CIDADE_PESO[pesoNorm(b[0])] ?? 0) - (CIDADE_PESO[pesoNorm(a[0])] ?? 0);
+    })
     .map(([, nome]) => nome);
 })();
 
