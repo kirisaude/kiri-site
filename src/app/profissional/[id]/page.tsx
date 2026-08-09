@@ -294,12 +294,12 @@ export default async function PerfilPage({ params }: PageProps) {
                   let titulo: string;
                   let local: string;
                   if (cursoTemArea) {
-                    titulo = titleCasePT(f.curso);
+                    titulo = titleCasePT(f.curso.toLowerCase());
                     local = partes.filter(Boolean).map(resolverParte).join(" · ");
                   } else {
                     const area = partes[0]?.trim() ?? "";
                     local = partes.slice(1).filter(Boolean).map(resolverParte).join(" · ");
-                    titulo = titleCasePT(f.curso + (area ? " em " + area : ""));
+                    titulo = titleCasePT((f.curso + (area ? " em " + area : "")).toLowerCase());
                   }
                   return (
                     <div key={i} className="flex gap-3">
