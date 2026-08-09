@@ -2109,7 +2109,7 @@
       "nome": "Vivian Hein Hirsch",
       "profissao": "Psiquiatra da infância e adolescência",
       "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "CRM 58076",
+      "registro_conselho": "CRM 58075/SP",
       "rqe": null,
       "areas_atuacao": [
         "TEA",
@@ -2126,11 +2126,14 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Faculdade de Medicina de Santo Amaro — 1985"
+          "instituicao_ano": "Medicina — Faculdade de Medicina de Santo Amaro — 1986",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — GEPPPI — 1987"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — GEPPPI — 1987",
+          "verificado": false,
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2142,9 +2145,20 @@
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-059.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "66732444800d49e1"
+      "card_token": "66732444800d49e1",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center bottom",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     },
     {
       "id": "kiri-060",
