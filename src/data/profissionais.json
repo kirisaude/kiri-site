@@ -2126,14 +2126,15 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Faculdade de Medicina de Santo Amaro — 1986",
+          "instituicao_ano": "Medicina — Faculdade de Medicina de Santo Amaro — 1985",
           "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Psiquiatria da Infância e Adolescência — GEPPPI — 1987",
           "verificado": false,
-          "pendente": true
+          "pendente": true,
+          "oculto": true
         }
       ],
       "valor_formato": "a_partir_de",
