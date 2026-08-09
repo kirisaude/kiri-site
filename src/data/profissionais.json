@@ -2195,6 +2195,60 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "77a94153680e4089"
+    },
+    {
+      "id": "kiri-061",
+      "inscricao_id": "d4a4c101-3f45-49da-adae-af95657b3b63",
+      "nome": "Marcelo Calcagno Reinhardt",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "10573",
+      "rqe": "14132 e 14205",
+      "areas_atuacao": [
+        "TDAH",
+        "TEA",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Dificuldades de aprendizagem",
+        "Transtorno Bipolar",
+        "Esquizofrenia",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Florianópolis-SC",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Atendimento de avaliação - diagnóstico e indicação de tratamento, além de consultas clínicas para todas as idades.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psiquiatria — UFPEL — 2000"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — UFPEL — 2002"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UFRGS — 2004"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Psiquiatria — UFRGS — 2007"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 800,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(48) 98842-1174",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "63a3f5d960d941d5"
     }
   ]
 }
