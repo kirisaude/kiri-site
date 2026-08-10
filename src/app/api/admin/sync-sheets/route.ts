@@ -91,7 +91,13 @@ export async function POST(request: Request) {
 
   let sa: { client_email: string; private_key: string };
   try {
-    sa = JSON.parse(saJson);
+    // Extrai só o conteúdo entre o primeiro { e o último } para tolerar
+    // caracteres extras (BOM, newlines) que ambientes de hosting às vezes adicionam
+    const raw = saJson.trim();
+    const start = raw.indexOf("{");
+    const end = raw.lastIndexOf("}");
+    const clean = start >= 0 && end > start ? raw.slice(start, end + 1) : raw;
+    sa = JSON.parse(clean);
   } catch (e) {
     return NextResponse.json({ error: `JSON inválido: ${e}` }, { status: 500 });
   }
