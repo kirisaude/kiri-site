@@ -2486,27 +2486,37 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Universidade Federal de Juiz de Fora - UFJF — 2006"
+          "instituicao_ano": "Medicina — Universidade Federal de Juiz de Fora - UFJF — 2006",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — UFJF — 2006"
+          "instituicao_ano": "Psiquiatria — Universidade Federal de Juiz de Fora (UFJF) — 2006",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da infância e adolescência — FHEMIG — 2008"
+          "instituicao_ano": "Psiquiatria da infância e adolescência — Fundação Hospitalar do Estado de Minas Gerais (FHEMIG) — 2008",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Terapia Cognitivo-Comportamental — PUC RS — 2025"
+          "instituicao_ano": "Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS) — 2025",
+          "verificado": false,
+          "pendente": true,
+          "oculto": true
         },
         {
           "curso": "Certificação",
-          "instituicao_ano": "Psicoterapia — Área de atuação em Psicoterapia ABP/AMB — 2026"
+          "instituicao_ano": "Psicoterapia — Área de atuação em Psicoterapia ABP/AMB — 2026",
+          "verificado": false,
+          "pendente": true,
+          "oculto": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2014"
+          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2014",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2518,9 +2528,20 @@
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-066.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "634fa64af95c4a8b"
+      "card_token": "634fa64af95c4a8b",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center 20%",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     }
   ]
 }
