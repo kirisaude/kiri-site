@@ -58,21 +58,57 @@ const ALIASES_INSTITUICOES: Record<string, string> = {
   "pucpr": "Pontifícia Universidade Católica do Paraná (PUCPR)",
   "puc-sp": "Pontifícia Universidade Católica de São Paulo (PUC-SP)",
   "puc sp": "Pontifícia Universidade Católica de São Paulo (PUC-SP)",
+  "usp": "Universidade de São Paulo (USP)",
+  "unifesp": "Universidade Federal de São Paulo (UNIFESP)",
+  "ufba": "Universidade Federal da Bahia (UFBA)",
+  "ufmg": "Universidade Federal de Minas Gerais (UFMG)",
+  "ufrgs": "Universidade Federal do Rio Grande do Sul (UFRGS)",
+  "ufpe": "Universidade Federal de Pernambuco (UFPE)",
+  "ufjf": "Universidade Federal de Juiz de Fora (UFJF)",
+  "ufmt": "Universidade Federal de Mato Grosso (UFMT)",
+  "ufms": "Universidade Federal de Mato Grosso do Sul (UFMS)",
+  "ufpel": "Universidade Federal de Pelotas (UFPel)",
+  "ufes": "Universidade Federal do Espírito Santo (UFES)",
+  "ufscar": "Universidade Federal de São Carlos (UFSCar)",
+  "unicamp": "Universidade Estadual de Campinas (Unicamp)",
+  "uesb": "Universidade Estadual do Sudoeste da Bahia (UESB)",
+  "upe": "Universidade de Pernambuco (UPE)",
+  "unip": "Universidade Paulista (UNIP)",
+  "uneb": "Universidade do Estado da Bahia (UNEB)",
+  "unifacs": "Universidade Salvador (UNIFACS)",
+  "fmu": "Centro Universitário das Faculdades Metropolitanas Unidas (FMU)",
+  "unifae": "Centro Universitário das Faculdades Associadas de Ensino (UNIFAE)",
+  "fvc": "Fundação Visconde de Cairu (FVC)",
+  "ebmsp": "Escola Bahiana de Medicina e Saúde Pública (EBMSP)",
+  "fmabc": "Faculdade de Medicina do ABC (FMABC)",
+  "famerp": "Faculdade de Medicina de São José do Rio Preto (FAMERP)",
+  "furb": "Universidade Regional de Blumenau (FURB)",
+  "ftc": "Faculdade de Tecnologia e Ciências (FTC)",
   "albert einstein": "Hospital Israelita Albert Einstein",
   "einstein": "Hospital Israelita Albert Einstein",
   "santa casa": "Santa Casa de São Paulo",
   "hc fmusp": "Hospital das Clínicas da Faculdade de Medicina da USP",
+  "hcfmusp": "Hospital das Clínicas da Faculdade de Medicina da USP",
 };
 
 function resolveInstituicao(parte: string, map: Record<string, string>): string {
   const t = parte.trim();
-  // Alias de nomes parciais conhecidos
-  const alias = ALIASES_INSTITUICOES[t.toLowerCase()];
+  // Alias: strip parênteses antes de buscar (suporta "(PUC-SP)", "PUC-SP", "mackenzie")
+  const aliasKey = t.toLowerCase().replace(/^\(|\)$/g, "").trim();
+  const alias = ALIASES_INSTITUICOES[aliasKey];
   if (alias) return alias;
-  // Sigla pura (ex: UFBA, UESB, UPE): busca no mapa
-  if (/^[A-Za-z]{2,12}$/.test(t) && t === t.toUpperCase()) {
+  // Sigla pura com ou sem hífen (ex: UFBA, PUC-SP, UFSCar): busca no mapa Supabase
+  if (/^[A-Za-z][A-Za-z0-9\-]{1,14}$/.test(t) && t.toUpperCase() === t) {
     const nome = map[t];
     return nome ? `${nome} (${t})` : t;
+  }
+  // Apenas "(SIGLA)" sem nome antes (ex: "(USP)", "(PUC-SP)"): já tratado pelo alias acima,
+  // mas cai aqui se não tiver alias — extrai sigla e busca no mapa
+  const soPareMatch = t.match(/^\(([A-Za-z][A-Za-z0-9\-]{1,14})\)$/);
+  if (soPareMatch) {
+    const siglaUpper = soPareMatch[1].toUpperCase();
+    const nome = map[siglaUpper];
+    return nome ? `${nome} (${siglaUpper})` : siglaUpper;
   }
   // "SIGLA · ANO" ou "SIGLA · texto" (ex: "USP · 2022"): expande a sigla e mantém o resto
   const siglaComResto = t.match(/^([A-Z]{2,12})\s*·\s*(.+)$/);
