@@ -1336,12 +1336,22 @@ export default function AdminPage() {
                           </div>
                           <div className="text-[12.5px] text-cinza-texto mt-0.5">{p.profissao} · {p.cidade}</div>
                         </div>
-                        <Link
-                          href={`/admin/profissionais/${p.id}`}
-                          className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline flex-none"
-                        >
-                          Editar
-                        </Link>
+                        <div className="flex items-center gap-2 flex-none">
+                          <Link
+                            href={`/admin/profissionais/${p.id}`}
+                            className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline"
+                          >
+                            Editar
+                          </Link>
+                          <button
+                            type="button"
+                            disabled={excluindo === p.id}
+                            onClick={() => excluirProfissional(p.id, p.nome)}
+                            className="text-[12.5px] font-semibold text-ferrugem bg-white border border-ferrugem/40 rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50 hover:bg-[#FFF0EE] transition-colors"
+                          >
+                            {excluindo === p.id ? "Removendo…" : "Excluir"}
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
