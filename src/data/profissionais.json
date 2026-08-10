@@ -2505,15 +2505,13 @@
           "curso": "Pós-graduação",
           "instituicao_ano": "Terapia Cognitivo-Comportamental — Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS) — 2025",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         },
         {
           "curso": "Certificação",
           "instituicao_ano": "Psicoterapia — Área de atuação em Psicoterapia ABP/AMB — 2026",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         },
         {
           "curso": "Mestrado",
@@ -2529,7 +2527,7 @@
       "whatsapp_agendamento": "(11) 97821-5350",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-066.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "634fa64af95c4a8b",
