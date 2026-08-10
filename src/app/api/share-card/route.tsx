@@ -76,7 +76,7 @@ export async function GET() {
               display: "flex",
             }}
           >
-            Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.
+            Psiquiatras infantis, psicólogos, terapeutas ocupacionais, fonoaudiólogos e mais — com formação conferida, para você decidir com segurança.
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
