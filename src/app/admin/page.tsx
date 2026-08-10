@@ -718,6 +718,7 @@ export default function AdminPage() {
   );
   const [excluindo, setExcluindo] = useState<string | null>(null);
   const [buscaPlataforma, setBuscaPlataforma] = useState("");
+  const [buscaPendentes, setBuscaPendentes] = useState("");
   const [buscando, setBuscando] = useState(false);
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
   const [enviandoEmailDocs, setEnviandoEmailDocs] = useState(false);
@@ -1310,15 +1311,23 @@ export default function AdminPage() {
                   : <span className="bg-ferrugem text-white text-[11px] font-bold px-2 py-0.5 rounded-full">{naoVisiveis.length}</span>
                 }
               </div>
-              <p className="text-[13px] text-muted mb-4">
+              <p className="text-[13px] text-muted mb-3">
                 Profissionais inscritos que não aparecem na home ou têm dados incompletos.
               </p>
+
+              <input
+                type="text"
+                value={buscaPendentes}
+                onChange={(e) => setBuscaPendentes(e.target.value)}
+                placeholder="Buscar por nome…"
+                className="w-full max-w-sm mb-4 px-3 py-2 text-[14px] border border-linha rounded-[10px] bg-white placeholder:text-muted focus:outline-none focus:border-ardosia"
+              />
 
               {naoVisiveis.length === 0 ? (
                 <p className="text-[13px] text-muted">Nenhuma pendência encontrada.</p>
               ) : (
                 <div className="flex flex-col gap-2">
-                  {naoVisiveis.map((p) => {
+                  {naoVisiveis.filter((p) => !buscaPendentes || p.nome.toLowerCase().includes(buscaPendentes.toLowerCase())).map((p) => {
                     const tags: { label: string; cls: string }[] = [];
                     if (!p.foto_url) tags.push({ label: "sem foto", cls: "text-ferrugem bg-[#FFF0EE] border-ferrugem/25" });
                     if (p.oculto) tags.push({ label: "oculto", cls: "text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]" });
