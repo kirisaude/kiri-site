@@ -890,6 +890,10 @@ export default function InscricaoProfissionalPage() {
                     <p className="font-semibold text-carvao text-[12px]">4. Condições de Participação</p>
                     <p>A participação na Rede Kiri é gratuita. Qualquer alteração nas condições será comunicada com antecedência. Você poderá solicitar o encerramento da sua participação a qualquer momento.</p>
                   </div>
+                  <div className="flex flex-col gap-1.5">
+                    <p className="font-semibold text-carvao text-[12px]">5. Veracidade das Informações</p>
+                    <p>O profissional declara que todas as informações fornecidas — incluindo formação acadêmica, registros de conselho, especializações e áreas de atuação — são verdadeiras e atualizadas, sendo de sua exclusiva responsabilidade mantê-las corretas. A Kiri não se responsabiliza por dados inverídicos constados nos diplomas e documentos enviados, cabendo ao profissional responder civil e eticamente por qualquer inexatidão.</p>
+                  </div>
                 </div>
               </details>
               <div className="px-4 py-4 bg-white border-t border-linha flex flex-col gap-3">
