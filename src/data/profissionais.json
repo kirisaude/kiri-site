@@ -2436,7 +2436,9 @@
         {
           "curso": "Mestrado",
           "instituicao_ano": "Ciência/psiquiatria — Universidade de São Paulo (USP) — 2004",
-          "verificado": true
+          "verificado": false,
+          "pendente": true,
+          "oculto": true
         }
       ],
       "valor_formato": "a_partir_de",
