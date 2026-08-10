@@ -2420,23 +2420,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — FAMERP — 1993",
-          "verificado": false
+          "instituicao_ano": "Medicina — Faculdade de Medicina de São José do Rio Preto (FAMERP) — 1993",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — USP — 1997",
-          "verificado": false
+          "instituicao_ano": "Psiquiatria — Universidade de São Paulo (USP) — 1997",
+          "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Ciência/psiquiatria — USP — 2013",
-          "verificado": false
+          "instituicao_ano": "Ciência/psiquiatria — Universidade de São Paulo (USP) — 2013",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Ciência/psiquiatria — USP — 2004",
-          "verificado": false
+          "instituicao_ano": "Ciência/psiquiatria — Universidade de São Paulo (USP) — 2004",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
