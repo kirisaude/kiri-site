@@ -2448,7 +2448,7 @@
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-065.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "878659908e664452",
       "profissao_secundaria": null,
@@ -2458,7 +2458,7 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
-      "registro_verificado": false,
+      "registro_verificado": true,
       "sobre_verificado": false,
       "experiencias_infantil": null,
       "pasta_drive": null
