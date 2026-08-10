@@ -2217,7 +2217,7 @@
       "nome": "Marcelo Calcagno Reinhardt",
       "profissao": "Psiquiatra da infância e adolescência",
       "titulo_exibicao": "Psiquiatra da infância e adolescência",
-      "registro_conselho": "10573",
+      "registro_conselho": "CRM: 10573/SC",
       "rqe": "14132 e 14205",
       "areas_atuacao": [
         "TDAH",
@@ -2237,19 +2237,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psiquiatria — UFPEL — 2000"
+          "instituicao_ano": "Psiquiatria — (UFPEL) — 2000",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — UFPEL — 2002"
+          "instituicao_ano": "Psiquiatria — (UFPEL) — 2002",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UFRGS — 2004"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — (UFRGS) — 2004",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Psiquiatria — UFRGS — 2007"
+          "instituicao_ano": "Psiquiatria — (UFRGS) — 2007",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2261,9 +2265,20 @@
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-061.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "63a3f5d960d941d5"
+      "card_token": "63a3f5d960d941d5",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     },
     {
       "id": "kiri-062",
