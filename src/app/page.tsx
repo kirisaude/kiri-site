@@ -61,6 +61,17 @@ const CIDADE_ESTADO: Record<string, string> = {
   "bauru": "SP",
   "marilia": "SP",
   "piracicaba": "SP",
+  "camacari": "BA",
+  "blumenau": "SC",
+  "nova odessa": "SP",
+  "mogi guacu": "SP",
+  "nova iguacu": "RJ",
+  "duque de caxias": "RJ",
+  "sao jose dos campos": "SP",
+  "jundiai": "SP",
+  "limeira": "SP",
+  "americana": "SP",
+  "franca": "SP",
 };
 
 function normCidade(s: string) {
@@ -703,13 +714,15 @@ export default function Home() {
                   )}
                 </button>
                 {activeDropdown === "cidade" && (
-                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] min-w-[200px] py-1.5">
-                    {CIDADES_DISPONIVEIS.map((c) => (
-                      <button key={c} onClick={() => { const same = activeCidade === c; setActiveCidade(same ? null : c); if (same || normCidade(c) !== 'sao paulo') setActiveSPRegiao(null); setActiveDropdown(null); }}
-                        className={`w-full text-left px-4 py-2.5 text-[14px] transition-colors ${activeCidade === c ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
-                        {c}
-                      </button>
-                    ))}
+                  <div className="hidden md:block absolute top-[calc(100%+6px)] left-0 z-[200] bg-white border border-[#E2D6C0] rounded-[14px] shadow-[0_12px_40px_-6px_rgba(44,39,34,0.35)] w-[360px] p-3">
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {CIDADES_DISPONIVEIS.map((c) => (
+                        <button key={c} onClick={() => { const same = activeCidade === c; setActiveCidade(same ? null : c); if (same || normCidade(c) !== 'sao paulo') setActiveSPRegiao(null); setActiveDropdown(null); }}
+                          className={`text-left px-3 py-2.5 text-[13px] font-medium rounded-[10px] transition-colors cursor-pointer ${activeCidade === c ? "bg-[#EFE6D6] text-carvao font-semibold" : "text-cinza-texto hover:bg-[#F9F5EF]"}`}>
+                          {c}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -1207,7 +1220,7 @@ export default function Home() {
 
             {/* Cidade */}
             {activeSheet === 'cidade' && (
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {CIDADES_DISPONIVEIS.map((c) => (
                   <button
                     key={c}
@@ -1217,7 +1230,7 @@ export default function Home() {
                       if (same || normCidade(c) !== 'sao paulo') setActiveSPRegiao(null);
                       setActiveSheet(null);
                     }}
-                    className={`text-[13.5px] font-semibold px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                    className={`text-[13.5px] font-semibold px-4 py-3 rounded-[13px] border text-center transition-all cursor-pointer ${
                       activeCidade === c ? 'bg-ardosia-escura border-ardosia text-white' : 'bg-white border-linha text-cinza-texto'
                     }`}
                   >
