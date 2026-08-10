@@ -1562,29 +1562,26 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — PUC-SP — 2019",
+          "instituicao_ano": "Psicologia — (PUC-SP) — 2019",
           "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Adolescência para equipe multidisciplinar — UNIFESP — 2023",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Arteterapia — IJEP — 2023",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         },
         {
           "curso": "Certificação Internacional",
           "instituicao_ano": "Mestrado Integrado — Universidade do Porto — 2018",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
