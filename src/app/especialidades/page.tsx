@@ -130,7 +130,7 @@ export default function ProfissoesPage() {
               <div>
                 <div className="text-[14px] font-bold tracking-[0.06em] uppercase text-[#BE6E4E]">Médicos</div>
                 <div className="text-[13px] text-[#6E6457] mt-[2px]">
-                  Psiquiatra · Neurologista · Psiquiatra da infância e adolescência · Neuropediatra
+                  Psiquiatra · Psiquiatra da infância e adolescência · Neurologista · Neuropediatra
                 </div>
               </div>
               <Chevron open={openMedicos} />
