@@ -380,80 +380,6 @@ Certificados de especialização / residência / pós-graduação`;
             Ver perfil ↗
           </Link>
         </div>
-        <div className="mt-2 flex items-center gap-2">
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-            <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M13 2h5v5M18 2l-8 8" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <input
-            type="url"
-            value={pastaDrive}
-            onChange={(e) => setPastaDrive(e.target.value)}
-            placeholder="Link da pasta do Drive (cole aqui)"
-            className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
-          />
-        </div>
-
-        {/* Toggle ocultar perfil */}
-        <div className={`flex items-center justify-between rounded-[12px] px-4 py-3 mb-4 border ${oculto ? "bg-ferrugem/10 border-ferrugem/30" : "bg-white border-linha"}`}>
-          <div>
-            <div className={`text-[14px] font-semibold ${oculto ? "text-ferrugem" : "text-carvao"}`}>
-              {oculto ? "Perfil oculto" : "Perfil visível"}
-            </div>
-            <div className="text-[12px] text-muted">{oculto ? "Não aparece na plataforma nem na busca" : "Aparece normalmente na plataforma"}</div>
-          </div>
-          <button
-            type="button"
-            onClick={() => setOculto((v) => !v)}
-            className={`text-[13px] font-semibold px-4 py-2 rounded-[9px] cursor-pointer transition-colors ${oculto ? "bg-ferrugem text-white" : "bg-wash border border-linha text-carvao hover:border-ardosia"}`}
-          >
-            {oculto ? "Tornar visível" : "Ocultar perfil"}
-          </button>
-        </div>
-
-        {/* Botão email pendências — só aparece quando perfil está oculto */}
-        {oculto && (
-          <button
-            type="button"
-            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setShowEmailModal(true); }}
-            className="w-full mb-4 flex items-center justify-center gap-2 border border-[#D8C7B0] rounded-[12px] py-[11px] text-[13.5px] font-semibold text-ardosia bg-white hover:bg-wash cursor-pointer transition-colors"
-          >
-            <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-              <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-            </svg>
-            Solicitar documentos pendentes por e-mail
-          </button>
-        )}
-
-        {/* Modal email pendências */}
-        {showEmailModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(44,39,34,0.5)" }}>
-            <div className="bg-creme rounded-[18px] max-w-[460px] w-full px-7 py-6 shadow-xl relative">
-              <button onClick={() => setShowEmailModal(false)} className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center text-muted hover:text-carvao cursor-pointer">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              </button>
-              <div className="text-[16px] font-semibold text-carvao mb-1">Solicitar documentos pendentes</div>
-              <div className="text-[12.5px] text-muted mb-4">Edite os itens abaixo — cada linha vira um bullet no e-mail enviado ao profissional.</div>
-              <textarea
-                value={pendenciasTexto}
-                onChange={(e) => setPendenciasTexto(e.target.value)}
-                rows={6}
-                className="w-full border border-linha rounded-[10px] px-3.5 py-3 text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none mb-4"
-              />
-              {erroEmail && <p className="text-[12.5px] text-ferrugem mb-3">{erroEmail}</p>}
-              {emailEnviado && <p className="text-[12.5px] text-verde-confirmacao font-semibold mb-3">E-mail enviado!</p>}
-              <button
-                onClick={enviarEmailPendencias}
-                disabled={enviandoEmail || !pendenciasTexto.trim()}
-                className="w-full bg-ardosia text-white font-semibold text-[14px] rounded-[11px] py-[13px] cursor-pointer disabled:opacity-50 transition-opacity"
-              >
-                {enviandoEmail ? "Enviando…" : "Enviar e-mail"}
-              </button>
-            </div>
-          </div>
-        )}
-
         <form onSubmit={salvar} className="flex flex-col gap-4">
 
           {/* Foto */}
@@ -1027,9 +953,86 @@ Certificados de especialização / residência / pós-graduação`;
             onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
             className="w-full bg-white border border-ardosia text-ardosia font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
           >
-            {salvando ? "Publicando…" : "Publicar (perfil ficará oculto até você ativar)"}
+            {salvando ? "Publicando…" : "Publicar (ocultando itens com verificação pendente)"}
           </button>
+
+          {/* Status do perfil */}
+          <div className="flex items-center gap-3 pt-1">
+            <span className="text-[13px] font-medium text-muted flex-none">Status do perfil:</span>
+            <div className="flex rounded-[10px] border border-linha overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setOculto(true)}
+                className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}
+              >
+                Oculto
+              </button>
+              <button
+                type="button"
+                onClick={() => setOculto(false)}
+                className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}
+              >
+                Visível
+              </button>
+            </div>
+          </div>
         </form>
+
+        {/* Drive + e-mail pendências — parte inferior */}
+        <div className="mt-6 flex flex-col gap-3 border-t border-linha pt-6">
+          <div className="flex items-center gap-2">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+              <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M13 2h5v5M18 2l-8 8" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <input
+              type="url"
+              value={pastaDrive}
+              onChange={(e) => setPastaDrive(e.target.value)}
+              placeholder="Link da pasta do Drive (cole aqui)"
+              className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setShowEmailModal(true); }}
+            className="w-full flex items-center justify-center gap-2 border border-[#D8C7B0] rounded-[12px] py-[11px] text-[13.5px] font-semibold text-ardosia bg-white hover:bg-wash cursor-pointer transition-colors"
+          >
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+            </svg>
+            Solicitar documentos pendentes por e-mail
+          </button>
+        </div>
+
+        {/* Modal email pendências */}
+        {showEmailModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(44,39,34,0.5)" }}>
+            <div className="bg-creme rounded-[18px] max-w-[460px] w-full px-7 py-6 shadow-xl relative">
+              <button onClick={() => setShowEmailModal(false)} className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center text-muted hover:text-carvao cursor-pointer">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              </button>
+              <div className="text-[16px] font-semibold text-carvao mb-1">Solicitar documentos pendentes</div>
+              <div className="text-[12.5px] text-muted mb-4">Edite os itens abaixo — cada linha vira um bullet no e-mail enviado ao profissional.</div>
+              <textarea
+                value={pendenciasTexto}
+                onChange={(e) => setPendenciasTexto(e.target.value)}
+                rows={6}
+                className="w-full border border-linha rounded-[10px] px-3.5 py-3 text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none mb-4"
+              />
+              {erroEmail && <p className="text-[12.5px] text-ferrugem mb-3">{erroEmail}</p>}
+              {emailEnviado && <p className="text-[12.5px] text-verde-confirmacao font-semibold mb-3">E-mail enviado!</p>}
+              <button
+                onClick={enviarEmailPendencias}
+                disabled={enviandoEmail || !pendenciasTexto.trim()}
+                className="w-full bg-ardosia text-white font-semibold text-[14px] rounded-[11px] py-[13px] cursor-pointer disabled:opacity-50 transition-opacity"
+              >
+                {enviandoEmail ? "Enviando…" : "Enviar e-mail"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
