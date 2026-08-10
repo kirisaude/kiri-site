@@ -2433,6 +2433,55 @@
       "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": "https://drive.google.com/drive/u/0/folders/17TrD2xcN_vU4O9M5JtXiOArLTe2ogpmK"
+    },
+    {
+      "id": "kiri-065",
+      "inscricao_id": "94f3417d-7b19-4f51-a422-cd22b912406b",
+      "nome": "Prof Dra Jackeline Giusti",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM 80715",
+      "rqe": "RQE 140776",
+      "areas_atuacao": [
+        "TDAH",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Adolescentes (13–18 anos), Crianças (6–12 anos)",
+      "sobre": "Sabemos que buscar ajuda profissional para um filho é um passo importante e, muitas vezes, cheio de incertezas. Meu objetivo é garantir que esse processo seja claro, acolhedor e seguro desde o primeiro momento.\n\n1. Primeira consulta: conversa inicial com os pais ou responsáveis\nNosso primeiro encontro é dedicado exclusivamente a vocês. Neste momento, temos um espaço calmo e reservado para conversar sobre todo o histórico da criança ou do adolescente, o desenvolvimento até aqui, os desafios do dia a dia e as principais preocupações da família. Essa etapa é essencial para que eu entenda o contexto completo antes de conhecer o paciente.\n\n2. Segunda consulta: avaliação e plano de cuidado\nNo segundo encontro, recebo a criança ou o adolescente em um ambiente preparado para que ele se sinta confortável. A partir dessa avaliação inicial e das informações reunidas:\n\nExames: Solicito exames complementares apenas quando há necessidade médica para investigação;\n\nOrientações: Ofereço direcionamentos práticos para a rotina da família e conduta no lar;\n\nPrescrições e encaminhamentos: Defino o tratamento medicamentoso (se indicado) e faço os encaminhamentos adequados para especialidades complementares.\n\n3. Cuidado integrado: escola e equipe multidisciplinar\nO desenvolvimento do seu filho não acontece de forma isolada. Por isso, quando necessário, estabeleço contato direto com a escola para alinhar estratégias pedagógicas e comportamentais. Da mesma forma, mantenho comunicação ativa com os outros profissionais que já acompanham a criança ou o adolescente (como psicólogos, fonoaudiólogos e terapeutas ocupacionais), garantindo que toda a rede de apoio trabalhe de forma alinhada.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — FAMERP — 1993"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — USP — 1997"
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Ciência/psiquiatria — USP — 2013"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Ciência/psiquiatria — USP — 2004"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 99348-5020",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "878659908e664452"
     }
   ]
 }
