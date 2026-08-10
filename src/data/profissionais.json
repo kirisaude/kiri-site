@@ -1602,7 +1602,7 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null,
