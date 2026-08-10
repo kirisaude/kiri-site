@@ -315,21 +315,26 @@ Certificados de especialização / residência / pós-graduação`;
       pasta_drive: pastaDrive.trim() || null,
     };
 
-    const res = await fetch("/api/admin/profissionais", {
-      method: "PATCH",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch("/api/admin/profissionais", {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    if (res.ok) {
-      setSucesso(publicarSemPendentes ? "Publicado com perfil oculto. Verifique os itens e clique em 'Tornar visível' quando pronto." : "Salvo! O site atualiza em ~1 min.");
-      setTimeout(() => router.push("/admin?aba=profissionais"), 2500);
-    } else {
-      const e = await res.json();
-      setErro(e.error ?? "Erro ao salvar");
+      if (res.ok) {
+        setSucesso(publicarSemPendentes ? "Publicado com perfil oculto. Verifique os itens e clique em 'Tornar visível' quando pronto." : "Salvo! O site atualiza em ~1 min.");
+        setTimeout(() => router.push("/admin?aba=profissionais"), 2500);
+      } else {
+        const err = await res.json().catch(() => ({}));
+        setErro(err.error ?? `Erro ${res.status} ao salvar`);
+      }
+    } catch (err) {
+      setErro(`Erro de rede: ${err instanceof Error ? err.message : "tente novamente"}`);
+    } finally {
+      setSalvando(false);
     }
-    setSalvando(false);
   }
 
   return (
