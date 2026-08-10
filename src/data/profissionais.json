@@ -2462,6 +2462,65 @@
       "sobre_verificado": false,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-066",
+      "inscricao_id": "6222f940-7382-443f-b987-0d3612d6e175",
+      "nome": "Daniel de Sousa Filho",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM-SP 136645",
+      "rqe": "RQE: 32664/32664-1",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Ansiedade",
+        "Depressão",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Crianças (6–12 anos), Pré-escola (3–5 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou médico psiquiatra, especialista em Psiquiatria da Infância e da Adolescência e mestre em Distúrbios do Desenvolvimento. Atendo crianças e adolescentes com autismo, TDAH, dificuldades de aprendizagem, alterações de comportamento e outros desafios emocionais e do neurodesenvolvimento.\n\nMeu atendimento é acolhedor, cuidadoso e individualizado, com escuta atenta da criança, do adolescente e de sua família. Busco compreender não apenas os sintomas, mas também a história, as potencialidades e as necessidades de cada paciente, construindo com os pais e as equipes um plano de cuidado claro e integrado à escola e aos demais profissionais envolvidos.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Universidade Federal de Juiz de Fora - UFJF — 2006"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — UFJF — 2006"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da infância e adolescência — FHEMIG — 2008"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Terapia Cognitivo-Comportamental — PUC RS — 2025"
+        },
+        {
+          "curso": "Certificação",
+          "instituicao_ano": "Psicoterapia — Área de atuação em Psicoterapia ABP/AMB — 2026"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2014"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 820,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 97821-5350",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "634fa64af95c4a8b"
     }
   ]
 }
