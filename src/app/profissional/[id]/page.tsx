@@ -52,8 +52,23 @@ async function getInstituicoesMap(): Promise<Record<string, string>> {
   } catch { return {}; }
 }
 
+const ALIASES_INSTITUICOES: Record<string, string> = {
+  "mackenzie": "Universidade Presbiteriana Mackenzie",
+  "pucrs": "Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)",
+  "pucpr": "Pontifícia Universidade Católica do Paraná (PUCPR)",
+  "puc-sp": "Pontifícia Universidade Católica de São Paulo (PUC-SP)",
+  "puc sp": "Pontifícia Universidade Católica de São Paulo (PUC-SP)",
+  "albert einstein": "Hospital Israelita Albert Einstein",
+  "einstein": "Hospital Israelita Albert Einstein",
+  "santa casa": "Santa Casa de São Paulo",
+  "hc fmusp": "Hospital das Clínicas da Faculdade de Medicina da USP",
+};
+
 function resolveInstituicao(parte: string, map: Record<string, string>): string {
   const t = parte.trim();
+  // Alias de nomes parciais conhecidos
+  const alias = ALIASES_INSTITUICOES[t.toLowerCase()];
+  if (alias) return alias;
   // Sigla pura (ex: UFBA, UESB, UPE): busca no mapa
   if (/^[A-Za-z]{2,12}$/.test(t) && t === t.toUpperCase()) {
     const nome = map[t];
