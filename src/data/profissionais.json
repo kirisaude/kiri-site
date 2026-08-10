@@ -1558,7 +1558,7 @@
       "modalidade": "Presencial e online",
       "cidade": "Santos",
       "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
-      "sobre": "Sou psicóloga graduada pela PUC-SP, especializada em adolescência para equipe multidisciplinar na UNIFESP e arteterapeuta. Realizo avaliação psicológica em crianças e adolescentes com hipóteses diagnósticas como depressão, ansiedade, TDAH, bipolaridade, entre outras.\n\nAtendo adultos, casal, família, realizo orientação parental; também sou orientadora profissional para jovens e adolescentes.\n\nFerramentas artísticas e outras Práticas Integrativas e Complementares (PICs) podem fazer parte dos atendimentos com objetivo de facilitar e ampliar nossa comunicação, além de apresentar possibilidades além da psicoterapia \"exclusiva pela fala\", isto é, atividades que permitem uma experiência mais confortável e personalizada.\n\nConheça os serviços completos da minha clínica\nMAHE - Psicologia e Psicanálise",
+      "sobre": "Sou psicóloga graduada pela PUC-SP. Realizo avaliação psicológica em crianças e adolescentes com hipóteses diagnósticas como depressão, ansiedade, TDAH, bipolaridade, entre outras.\n\nAtendo adultos, casal, família, realizo orientação parental; também sou orientadora profissional para jovens e adolescentes.\n\nFerramentas artísticas e outras Práticas Integrativas e Complementares (PICs) podem fazer parte dos atendimentos com objetivo de facilitar e ampliar nossa comunicação, além de apresentar possibilidades além da psicoterapia \"exclusiva pela fala\", isto é, atividades que permitem uma experiência mais confortável e personalizada.\n\nConheça os serviços completos da minha clínica\nMAHE - Psicologia e Psicanálise.",
       "formacao": [
         {
           "curso": "Graduação",
@@ -1568,17 +1568,20 @@
         {
           "curso": "Especialização",
           "instituicao_ano": "Adolescência para equipe multidisciplinar — UNIFESP — 2023",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Arteterapia — IJEP — 2023",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         },
         {
           "curso": "Certificação Internacional",
           "instituicao_ano": "Mestrado Integrado — Universidade do Porto — 2018",
-          "verificado": false
+          "verificado": false,
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1601,7 +1604,7 @@
       "foto_posicao": "center top",
       "oculto": true,
       "registro_verificado": true,
-      "sobre_verificado": false,
+      "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
     },
