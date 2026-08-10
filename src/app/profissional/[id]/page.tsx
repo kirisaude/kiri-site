@@ -12,6 +12,7 @@ import { titleCasePT, normalizarCidade } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
 
+
 const PROFISSAO_AREA: Record<string, string> = {
   "psicólogo": "Psicologia",
   "neuropsicólogo": "Neuropsicologia",
@@ -187,7 +188,7 @@ export default async function PerfilPage({ params }: PageProps) {
                     key={area}
                     className="text-[12.5px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-[13px] py-[5px] rounded-[8px]"
                   >
-                    {area}
+                    {titleCasePT(area)}
                   </span>
                 ))}
               </div>

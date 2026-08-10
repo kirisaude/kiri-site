@@ -7,6 +7,7 @@ import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
 import type { Profissional, ExperienciaInfantil } from "@/types";
 import { PROFISSOES_ORDENADAS } from "@/types";
+import { titleCasePT } from "@/lib/titleCase";
 
 const CONVENIOS_COMUNS = ["Unimed", "Bradesco Saúde", "Amil", "SulAmérica", "Notre Dame Intermédica", "Hapvida", "Porto Seguro Saúde", "Prevent Senior", "Golden Cross"];
 const TEMPO_ATUACAO_OPCOES = ["Menos de 1 ano", "1 a 3 anos", "3 a 5 anos", "Mais de 5 anos"];
@@ -259,7 +260,7 @@ Certificados de especialização / residência / pós-graduação`;
     setErro("");
     setSucesso("");
 
-    const areasLista = areas.split(",").map((a) => a.trim()).filter(Boolean);
+    const areasLista = areas.split(",").map((a) => titleCasePT(a.trim().toLowerCase())).filter(Boolean);
     const valorMinNum = parseInt(valorMin.replace(/\D/g, ""), 10);
     const valorMaxNum = valorMax ? parseInt(valorMax.replace(/\D/g, ""), 10) : null;
 
@@ -302,7 +303,7 @@ Certificados de especialização / residência / pós-graduação`;
       foto_url: fotoUrl || null,
       foto_posicao: fotoPosicao || null,
       genero: genero ?? undefined,
-      oculto: publicarSemPendentes ? true : oculto,
+      oculto: oculto,
       registro_verificado: registroStatus === "verificado",
       registro_pendente: registroStatus === "pendente" || undefined,
       registro_obs: registroObs.trim() || undefined,
@@ -324,7 +325,7 @@ Certificados de especialização / residência / pós-graduação`;
       });
 
       if (res.ok) {
-        setSucesso(publicarSemPendentes ? "Publicado com perfil oculto. Verifique os itens e clique em 'Tornar visível' quando pronto." : "Salvo! O site atualiza em ~1 min.");
+        setSucesso(publicarSemPendentes ? "Publicado! Itens com verificação pendente foram ocultados. O site atualiza em ~1 min." : "Salvo! O site atualiza em ~1 min.");
         setTimeout(() => router.push("/admin?aba=profissionais"), 2500);
       } else {
         const err = await res.json().catch(() => ({}));
