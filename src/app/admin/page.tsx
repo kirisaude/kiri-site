@@ -724,16 +724,26 @@ export default function AdminPage() {
   const [enviandoEmailDocs, setEnviandoEmailDocs] = useState(false);
   const [emailDocsStatus, setEmailDocsStatus] = useState<"idle"|"ok"|"erro">("idle");
   const [syncStatus, setSyncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
+  const [syncErro, setSyncErro] = useState("");
 
   async function sincronizarSheets() {
     setSyncStatus("syncing");
-    const res = await fetch("/api/admin/sync-sheets", { method: "POST", credentials: "include" });
-    if (res.ok) {
-      setSyncStatus("ok");
-      setTimeout(() => setSyncStatus("idle"), 3000);
-    } else {
+    setSyncErro("");
+    try {
+      const res = await fetch("/api/admin/sync-sheets", { method: "POST", credentials: "include" });
+      if (res.ok) {
+        setSyncStatus("ok");
+        setTimeout(() => setSyncStatus("idle"), 3000);
+      } else {
+        const d = await res.json().catch(() => ({}));
+        setSyncErro(d.error ?? `Erro ${res.status}`);
+        setSyncStatus("erro");
+        setTimeout(() => setSyncStatus("idle"), 8000);
+      }
+    } catch (e) {
+      setSyncErro(e instanceof Error ? e.message : "Erro de rede");
       setSyncStatus("erro");
-      setTimeout(() => setSyncStatus("idle"), 4000);
+      setTimeout(() => setSyncStatus("idle"), 8000);
     }
   }
 
@@ -985,13 +995,16 @@ export default function AdminPage() {
                     {enviandoEmailDocs ? "Enviando…" : emailDocsStatus === "ok" ? "✓ Enviado" : "✉ Enviar e-mail de documentação"}
                   </button>
                 )}
-                <button
-                  onClick={sincronizarSheets}
-                  disabled={syncStatus === "syncing"}
-                  className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-50 transition-colors ${syncStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : syncStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
-                >
-                  {syncStatus === "syncing" ? "Sincronizando…" : syncStatus === "ok" ? "✓ Planilha atualizada" : syncStatus === "erro" ? "Erro — tente novamente" : "↑ Sincronizar Google Sheets"}
-                </button>
+                <div className="flex flex-col items-end gap-1">
+                  <button
+                    onClick={sincronizarSheets}
+                    disabled={syncStatus === "syncing"}
+                    className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-50 transition-colors ${syncStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : syncStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
+                  >
+                    {syncStatus === "syncing" ? "Sincronizando…" : syncStatus === "ok" ? "✓ Planilha atualizada" : syncStatus === "erro" ? "Erro — tente novamente" : "↑ Sincronizar Google Sheets"}
+                  </button>
+                  {syncErro && <p className="text-[11px] text-ferrugem max-w-[280px] text-right">{syncErro}</p>}
+                </div>
                 <a
                   href="/api/admin/exportar-csv"
                   download
