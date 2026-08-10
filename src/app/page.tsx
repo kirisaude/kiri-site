@@ -136,7 +136,7 @@ const CIDADES_DISPONIVEIS = (() => {
     "sorocaba": 680000, "ribeirao preto": 700000, "aracaju": 660000,
     "cuiaba": 620000, "mogi das cruzes": 440000, "santos": 440000,
     "boa vista": 420000, "florianopolis": 530000, "vitoria": 370000,
-    "blumenau": 370000, "camasari": 350000, "piracicaba": 410000,
+    "blumenau": 370000, "camacari": 350000, "piracicaba": 410000,
     "diadema": 420000, "bauru": 390000, "marilia": 240000,
     "sao caetano do sul": 160000, "santo andre": 710000,
     "cotia": 280000, "nova odessa": 60000, "mogi guacu": 190000,
