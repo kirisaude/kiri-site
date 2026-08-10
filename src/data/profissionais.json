@@ -1752,7 +1752,7 @@
       "whatsapp_agendamento": "(11) 91056-6036",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-053.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "90765608f34a48ed",
