@@ -1350,7 +1350,7 @@ export default function Home() {
                 Uma rede de profissionais verificados que atuam com neurodesenvolvimento infantil.
               </p>
               <p className="mt-3 text-[14px] leading-[1.55] text-white/75">
-                Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.
+                Psiquiatras infantis, psicólogos, terapeutas ocupacionais, fonoaudiólogos e mais — com formação conferida, para você decidir com segurança.
               </p>
               <div className="mt-4 flex items-center gap-1.5">
                 <svg width="13" height="13" viewBox="0 0 22 22" fill="none">

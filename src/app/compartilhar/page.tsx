@@ -4,11 +4,11 @@ import { CompartilharRedirect } from "./redirect";
 export const metadata: Metadata = {
   title: "Kiri — rede de cuidado ao neurodesenvolvimento",
   description:
-    "Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.",
+    "Psiquiatras infantis, psicólogos, terapeutas ocupacionais, fonoaudiólogos e mais — com formação conferida, para você decidir com segurança.",
   openGraph: {
     title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
-      "Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.",
+      "Psiquiatras infantis, psicólogos, terapeutas ocupacionais, fonoaudiólogos e mais — com formação conferida, para você decidir com segurança.",
     url: "https://www.kirisaude.com.br/compartilhar",
     siteName: "Kiri",
     locale: "pt_BR",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
-      "Psicólogos, fonoaudiólogos, neuropediatras, terapeutas ocupacionais e mais — com formação conferida, para você decidir com segurança.",
+      "Psiquiatras infantis, psicólogos, terapeutas ocupacionais, fonoaudiólogos e mais — com formação conferida, para você decidir com segurança.",
     images: ["https://www.kirisaude.com.br/api/share-card"],
   },
 };
