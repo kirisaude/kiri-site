@@ -2321,7 +2321,7 @@
       "rqe": "RQE 140776",
       "areas_atuacao": [
         "TDAH",
-        "Dificuldades de aprendizagem",
+        "Dificuldades de Aprendizagem",
         "Ansiedade",
         "Depressão"
       ],
@@ -2361,7 +2361,7 @@
       "whatsapp_agendamento": "(11) 99348-5020",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-065.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "878659908e664452",
