@@ -1,0 +1,26 @@
+import { NextResponse } from "next/server";
+
+function isAdminAuthed(request: Request) {
+  const cookie = request.headers.get("cookie") ?? "";
+  return cookie.includes("kiri_admin=ok");
+}
+
+export async function GET(request: Request) {
+  if (!isAdminAuthed(request)) {
+    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  }
+
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    return NextResponse.json({ error: "Configuração incompleta" }, { status: 500 });
+  }
+
+  const res = await fetch(
+    `${supabaseUrl}/rest/v1/followups?select=*&order=criado_em.desc`,
+    { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` } }
+  );
+
+  if (!res.ok) return NextResponse.json({ error: "Erro ao buscar followups" }, { status: 502 });
+  return NextResponse.json(await res.json());
+}

@@ -389,27 +389,6 @@ export default async function PerfilPage({ params }: PageProps) {
               </div>
             </div>
 
-            {/* Experiências de atendimento infantil */}
-            {p.experiencias_infantil && p.experiencias_infantil.length > 0 && (
-              <div>
-                <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted mb-3">Experiência infantil</div>
-                <div className="flex flex-col gap-3.5">
-                  {p.experiencias_infantil.map((exp, i) => (
-                    <div key={i} className="flex gap-3">
-                      <div className="w-[9px] h-[9px] rounded-full border-2 border-ferrugem flex-none mt-1" />
-                      <div>
-                        <div className="text-[14.5px] font-semibold text-carvao leading-[1.3]">{exp.descricao}</div>
-                        {(exp.tempo || exp.faixa_etaria) && (
-                          <div className="text-[13px] text-cinza-texto2 mt-0.5">
-                            {[exp.tempo, exp.faixa_etaria].filter(Boolean).join(" · ")}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
             {/* Valores */}
             <div>

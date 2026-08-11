@@ -63,6 +63,28 @@ interface Contato {
   lido: boolean;
 }
 
+interface Followup {
+  id: string;
+  encaminhamento_id: string;
+  token: string;
+  profissional_nome: string | null;
+  responsavel_nome: string | null;
+  contato: string | null;
+  contato_tipo: string | null;
+  email_enviado_em: string | null;
+  lembrete_enviado_em: string | null;
+  contatou: boolean | null;
+  motivo_nao_contato: string | null;
+  agendou: boolean | null;
+  motivo_nao_agendamento: string | null;
+  quer_novo_encaminhamento: boolean | null;
+  nps_profissional: number | null;
+  nps_plataforma: number | null;
+  comentario: string | null;
+  concluido_em: string | null;
+  criado_em: string;
+}
+
 type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos" | "avaliacoes" | "instituicoes";
 
 function linkContato(contato: string | null): string | null {
@@ -123,12 +145,127 @@ function buildWaFamilia(contato: string, nome: string, cardToken: string): strin
   return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 }
 
-function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
+function FollowupBadge({ followup, encaminhamento, onCriado }: {
+  followup: Followup | undefined;
+  encaminhamento: Encaminhamento;
+  onCriado: (fup: Followup) => void;
+}) {
+  const [criando, setCriando] = useState(false);
+
+  function buildWaFollowup(fup: Followup): string {
+    const digits = encaminhamento.contato.replace(/\D/g, "");
+    const numero = digits.startsWith("55") ? digits : `55${digits}`;
+    const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
+    const profNome = fup.profissional_nome ?? "o profissional indicado";
+    const url = `https://kirisaude.com.br/followup/${fup.token}`;
+    const msg = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${url}`;
+    return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
+  }
+
+  async function criarEEnviar() {
+    setCriando(true);
+    try {
+      const res = await fetch("/api/admin/criar-followup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
+      });
+      if (res.ok) {
+        const fup = await res.json() as Followup;
+        onCriado(fup);
+        window.open(buildWaFollowup(fup), "_blank");
+      }
+    } finally {
+      setCriando(false);
+    }
+  }
+
+  if (!followup) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#D8C7B0] text-muted bg-[#F5EFE6]">Follow-up pendente</span>
+        <button
+          type="button"
+          onClick={criarEEnviar}
+          disabled={criando}
+          className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full cursor-pointer hover:bg-[#E0F0E5] disabled:opacity-50 transition-colors"
+        >
+          {criando ? "Criando…" : "Enviar follow-up"}
+        </button>
+      </div>
+    );
+  }
+
+  const isWa = followup.contato_tipo === "whatsapp";
+
+  if (followup.concluido_em && followup.nps_profissional) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#B8D8C0] text-[#2E7D4F] bg-[#E8F5EC]">
+          Avaliado ★{followup.nps_profissional}/5 · Kiri ★{followup.nps_plataforma}/5
+        </span>
+        {followup.comentario && (
+          <span className="text-[11px] text-muted italic">"{followup.comentario}"</span>
+        )}
+      </div>
+    );
+  }
+
+  if (followup.agendou === false) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#F5C49A] text-[#8B5C1E] bg-[#FFF5EA]">Não agendou</span>
+        {followup.quer_novo_encaminhamento && <span className="text-[11px] text-ferrugem font-semibold">Quer novo encaminhamento</span>}
+        {followup.motivo_nao_agendamento && <span className="text-[11px] text-muted">"{followup.motivo_nao_agendamento}"</span>}
+      </div>
+    );
+  }
+
+  if (followup.agendou === true && !followup.nps_profissional) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-borda-azulada text-ardosia bg-wash-azulado">Agendou — aguardando avaliação</span>
+      </div>
+    );
+  }
+
+  if (followup.contatou === false) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-ferrugem/30 text-ferrugem bg-[#FFF0EE]">Não entrou em contato</span>
+        {followup.quer_novo_encaminhamento && <span className="text-[11px] text-ferrugem font-semibold">Quer novo encaminhamento</span>}
+        {followup.motivo_nao_contato && <span className="text-[11px] text-muted">"{followup.motivo_nao_contato}"</span>}
+      </div>
+    );
+  }
+
+  // Aguardando resposta
+  return (
+    <div className="flex items-center gap-2 flex-wrap mt-1">
+      <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#E8C88A] text-[#8B6A1E] bg-[#FFF8E8]">
+        {isWa && !followup.email_enviado_em ? "Follow-up criado — envie o WA" : "Aguardando resposta"}
+      </span>
+      {isWa && (
+        <a
+          href={buildWaFollowup(followup)}
+          target="_blank" rel="noopener noreferrer"
+          className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full no-underline hover:bg-[#E0F0E5] transition-colors"
+        >
+          {followup.email_enviado_em ? "Reenviar WA" : "Abrir WA"}
+        </a>
+      )}
+    </div>
+  );
+}
+
+function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, followup, onFollowupCriado }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
   onEncaminhar: (id: string, novoStatus: string) => void;
   onExcluir: (id: string) => void;
+  followup?: Followup;
+  onFollowupCriado: (fup: Followup) => void;
 }) {
   const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
   const temWa = pareceWhatsApp(e.contato);
@@ -207,6 +344,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
           {!prof && e.profissional_solicitado && (
             <div className="text-[13px] text-muted mt-0.5">→ ID: {e.profissional_solicitado}</div>
           )}
+          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} />
         </div>
         <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
       </button>
@@ -296,12 +434,14 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir }: {
   );
 }
 
-function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
+function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, onFollowupCriado }: {
   e: Encaminhamento;
   expandido: boolean;
   onToggle: () => void;
   onExcluir: (id: string) => void;
   onResolver: (id: string, novoStatus: string) => void;
+  followup?: Followup;
+  onFollowupCriado: (fup: Followup) => void;
 }) {
   const respondido = e.status === "respondido";
   const [profSelecionados, setProfSelecionados] = useState<string[]>([]);
@@ -458,6 +598,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver }: {
               {parseObs(e.observacoes).demanda ?? e.observacoes}
             </div>
           )}
+          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} />
         </div>
         <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
       </button>
@@ -723,6 +864,7 @@ export default function AdminPage() {
   const [buscaPlataforma, setBuscaPlataforma] = useState("");
   const [buscaPendentes, setBuscaPendentes] = useState("");
   const [buscando, setBuscando] = useState(false);
+  const [followupsMap, setFollowupsMap] = useState<Map<string, Followup>>(new Map());
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
   const [enviandoEmailDocs, setEnviandoEmailDocs] = useState(false);
   const [emailDocsStatus, setEmailDocsStatus] = useState<"idle"|"ok"|"erro">("idle");
@@ -772,6 +914,9 @@ export default function AdminPage() {
       for (const r of rows) edits[r.sigla] = r.nome_extenso ?? "";
       setInstEdits(edits);
     }
+    fetch("/api/admin/followups").then(r => r.ok ? r.json() : []).then((fups: Followup[]) => {
+      setFollowupsMap(new Map(fups.map(f => [f.encaminhamento_id, f])));
+    });
     setBuscando(false);
   }, []);
 
@@ -1163,6 +1308,8 @@ export default function AdminPage() {
                         onToggle={() => toggleExpandido(e.id)}
                         onEncaminhar={atualizarEncaminhamento}
                         onExcluir={excluirEncaminhamento}
+                        followup={followupsMap.get(e.id)}
+                        onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                       />
                     ))}
                 </div>
@@ -1190,6 +1337,8 @@ export default function AdminPage() {
                           onToggle={() => toggleExpandido(e.id)}
                           onEncaminhar={atualizarEncaminhamento}
                           onExcluir={excluirEncaminhamento}
+                          followup={followupsMap.get(e.id)}
+                          onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                         />
                       ))}
                   </div>
@@ -1222,6 +1371,8 @@ export default function AdminPage() {
                         onToggle={() => toggleExpandido(e.id)}
                         onExcluir={excluirEncaminhamento}
                         onResolver={atualizarEncaminhamento}
+                        followup={followupsMap.get(e.id)}
+                        onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                       />
                     ))}
                 </div>
@@ -1247,6 +1398,8 @@ export default function AdminPage() {
                           onToggle={() => toggleExpandido(e.id)}
                           onExcluir={excluirEncaminhamento}
                           onResolver={atualizarEncaminhamento}
+                          followup={followupsMap.get(e.id)}
+                          onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                         />
                       ))}
                   </div>
