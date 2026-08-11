@@ -719,6 +719,7 @@ export default function AdminPage() {
     data.profissionais as Profissional[]
   );
   const [excluindo, setExcluindo] = useState<string | null>(null);
+  const [buscaGlobal, setBuscaGlobal] = useState("");
   const [buscaPlataforma, setBuscaPlataforma] = useState("");
   const [buscaPendentes, setBuscaPendentes] = useState("");
   const [buscando, setBuscando] = useState(false);
@@ -1316,6 +1317,45 @@ export default function AdminPage() {
         {/* ABA PROFISSIONAIS */}
         {aba === "profissionais" && (
           <div className="flex flex-col gap-10">
+
+            {/* BUSCA GLOBAL */}
+            <div>
+              <input
+                type="text"
+                value={buscaGlobal}
+                onChange={(e) => setBuscaGlobal(e.target.value)}
+                placeholder="Buscar qualquer profissional (pendente, oculto ou visível)…"
+                className="w-full max-w-lg px-3 py-2.5 text-[14px] border border-linha rounded-[10px] bg-white placeholder:text-muted focus:outline-none focus:border-ardosia"
+              />
+              {buscaGlobal.trim() && (() => {
+                const q = semAcento(buscaGlobal.trim());
+                const resultados = profPublicados.filter((p) =>
+                  semAcento(p.nome).includes(q) ||
+                  semAcento(p.profissao).includes(q) ||
+                  semAcento(p.cidade ?? "").includes(q)
+                );
+                return (
+                  <div className="mt-3 flex flex-col gap-2">
+                    {resultados.length === 0 ? (
+                      <p className="text-[13px] text-muted">Nenhum profissional encontrado.</p>
+                    ) : resultados.map((p) => (
+                      <div key={p.id} className="bg-white border border-linha rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-semibold text-[14px] text-carvao">{p.nome}</span>
+                            <span className="text-[12px] text-muted">{p.id}</span>
+                            {p.oculto && <span className="text-[11px] px-1.5 py-0.5 rounded border text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]">oculto</span>}
+                            {!p.foto_url && <span className="text-[11px] px-1.5 py-0.5 rounded border text-ferrugem bg-[#FFF0EE] border-ferrugem/25">sem foto</span>}
+                          </div>
+                          <div className="text-[12px] text-muted mt-0.5">{p.profissao} · {p.cidade}</div>
+                        </div>
+                        <a href={`/admin/profissionais/${p.id}`} className="flex-none text-[13px] font-semibold text-ardosia border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Editar</a>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
 
             {/* PENDÊNCIAS */}
             <div>

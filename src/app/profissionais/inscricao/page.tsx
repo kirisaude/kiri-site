@@ -302,8 +302,8 @@ export default function InscricaoProfissionalPage() {
 
           {/* Convite Instagram */}
           <div className="bg-white border border-linha rounded-[16px] px-5 py-5 flex flex-col gap-3 text-center">
-            <p className="text-[15px] font-serif font-medium text-carvao m-0 leading-snug">
-              Ajude a Kiri a crescer 🌱
+            <p className="text-[18px] font-serif font-medium text-carvao m-0 leading-snug">
+              Ajude a Kiri a crescer <span className="ml-1">🌱</span>
             </p>
             <p className="text-[13.5px] text-cinza-texto2 leading-[1.65] m-0">
               Compartilhe com colegas que atuam com neurodesenvolvimento e com famílias que possam se beneficiar da rede. Cada indicação fortalece o cuidado coletivo.
@@ -319,7 +319,7 @@ export default function InscricaoProfissionalPage() {
                 <circle cx="12" cy="12" r="4"/>
                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
               </svg>
-              Seguir @kiri.saude
+              Siga-nos no Instagram
             </a>
           </div>
         </div>

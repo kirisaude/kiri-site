@@ -150,6 +150,16 @@ export default function RevisarPage() {
       convenios: null,
       whatsapp_agendamento: whatsappAgendamento.trim() || null,
       tempo_atuacao: inscricao?.tempo_atuacao || null,
+      experiencias_infantil: inscricao?.experiencia_infantil
+        ? inscricao.experiencia_infantil.split("\n").filter(Boolean).map((linha) => {
+            const partes = linha.split(" — ");
+            return {
+              descricao: partes[0]?.trim() ?? "",
+              tempo: partes[1]?.trim() ?? "",
+              faixa_etaria: partes[2]?.trim() ?? "",
+            };
+          })
+        : null,
       verificado: true,
       oculto: true,
       foto_url: null,

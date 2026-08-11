@@ -1203,7 +1203,13 @@
       "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atuo com avaliação psicológica, psicodiagnóstico e acompanhamento psicológico de crianças e adolescentes, buscando compreender de forma aprofundada o funcionamento emocional, comportamental, cognitivo e do desenvolvimento. O processo é realizado por meio de entrevistas clínicas, observação, instrumentos psicológicos validados e devolutiva detalhada aos responsáveis, permitindo identificar potencialidades, dificuldades e subsidiar diagnósticos, encaminhamentos e intervenções quando necessários. Também realizo psicoterapia para demandas como ansiedade, TDAH, TOC, depressão e outras dificuldades emocionais, sempre com atuação baseada em evidências e individualizada.",
+          "tempo": "2 anos",
+          "faixa_etaria": "6-18 anos"
+        }
+      ],
       "pasta_drive": "https://drive.google.com/drive/u/0/folders/1-r72UfMjg4UfbRBzJeBHILgo1UdlHU5W"
     },
     {
@@ -1259,7 +1265,13 @@
       "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento no setor público e privado de crianças a partir de 6 anos com diversos transtornos (TEA, TDAH, TOC, TOD, TDDH, TAB, Psicose, depedência química); último ano de residência com rotina intensa em enfermaria de psiquiatria infantil com internação de crianças a partir de 4 anos.",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1329,7 +1341,23 @@
       "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento em crianças com TEA/TDAH",
+          "tempo": "12 anos",
+          "faixa_etaria": "6-17 anos"
+        },
+        {
+          "descricao": "Atendimento em gestante e puerperas (psiquiatria perinatal)",
+          "tempo": "9 anos",
+          "faixa_etaria": "adultos"
+        },
+        {
+          "descricao": "Atendimento em crianças/adolescentes com alteração comportamental e do humor",
+          "tempo": "12 anos",
+          "faixa_etaria": "6-17 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1380,7 +1408,13 @@
       "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento clínico de crianças e adolescentes com transtornos alimentares e comer transtornado",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1460,7 +1494,18 @@
       "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Avaliação Neuropsicológica em clínica para adolescentes com TEA e TDAH",
+          "tempo": "1",
+          "faixa_etaria": "14 a 18"
+        },
+        {
+          "descricao": "Atendimento psicoterápico em clínica para adolescentes com TEA e TDAH",
+          "tempo": "5",
+          "faixa_etaria": "16 a 18"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1533,7 +1578,13 @@
       "oculto": true,
       "registro_verificado": false,
       "sobre_verificado": false,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento em consultório e domiciliar",
+          "tempo": "10 anos",
+          "faixa_etaria": "Bebês, crianças e adolescentes"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1608,7 +1659,23 @@
       "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento de crianças em clínica particular",
+          "tempo": "1 ano",
+          "faixa_etaria": "6-11"
+        },
+        {
+          "descricao": "Atendimento de pre e adolescentes",
+          "tempo": "6 anos",
+          "faixa_etaria": "11-21"
+        },
+        {
+          "descricao": "Atendimento de crianças, pré e adolescentes sob supervisão",
+          "tempo": "10 anos",
+          "faixa_etaria": "7-21"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1667,7 +1734,13 @@
       "oculto": false,
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Serviços de Orientação Parental - Online/ Supervisão de Profissionais - ABA /Atendimento - Crianças e adolescentesIntervenção ABA para pessoas com autismo e outros transtornos do desenvolvimento",
+          "tempo": "4 anos",
+          "faixa_etaria": ""
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1720,7 +1793,13 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento e acompanhamento de crianças com foco no desenvolvimento de habilidades acadêmicas, alfabetização, leitura, escrita, matemática e habilidades necessárias para a rotina escolar. Atuação com planejamento individualizado e estratégias voltadas às necessidades de aprendizagem de cada criança.",
+          "tempo": "4 anos",
+          "faixa_etaria": "4 a 15 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1781,7 +1860,23 @@
       "foto_posicao": "center 20%",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Consultório particular",
+          "tempo": "4 anos",
+          "faixa_etaria": "4-18"
+        },
+        {
+          "descricao": "Psiquiatra do Programa de Pós Graduação em Ciências do Desenvolvimento Humano da Universidade Mackenzie",
+          "tempo": "3 anos",
+          "faixa_etaria": "1-18"
+        },
+        {
+          "descricao": "Psiquiatra colabora do Programa de Diagnóstico e Intervenções Precoces - PRODIP - do Instituto de Psiquiatria do Hospital das Clínicas da USP",
+          "tempo": "3 anos",
+          "faixa_etaria": "4-10"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1845,7 +1940,13 @@
       "foto_posicao": "center 20%",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento em consultório, CAPS infantil, supervisão de residentes e alunos de graduação em ambulatórios do departamento dd Psiquiatroa da Infância e Adolescência da UNIFESP e da PUC-SP e ensino universitário na área, além de assistência em CAPS infantil e outras unidades públicas de saúde da criança e adolescência (São Paulo e São Caetano do Sul)..",
+          "tempo": "4 anos",
+          "faixa_etaria": "Faixa etária (2-18 anos)"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -1895,7 +1996,24 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "6e5167872dd44d57"
+      "card_token": "6e5167872dd44d57",
+      "experiencias_infantil": [
+        {
+          "descricao": "Prefeitura de Blumenau (serviço municipal para diagnósticos de dificuldades escolares/comportamentos)",
+          "tempo": "1 ano",
+          "faixa_etaria": "0 a 18 anos"
+        },
+        {
+          "descricao": "APAE Blumenau",
+          "tempo": "1 ano",
+          "faixa_etaria": "2 anos a idosos"
+        },
+        {
+          "descricao": "Centro de Reabilitação - CER2 Blumenau/FURB",
+          "tempo": "6 meses",
+          "faixa_etaria": "2 anos a 18 anos"
+        }
+      ]
     },
     {
       "id": "kiri-057",
@@ -1945,7 +2063,14 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "0fcc41fc811340e8"
+      "card_token": "0fcc41fc811340e8",
+      "experiencias_infantil": [
+        {
+          "descricao": "Hospital Municipal Menino Jesus",
+          "tempo": "2 anos",
+          "faixa_etaria": "3-18 anos"
+        }
+      ]
     },
     {
       "id": "kiri-058",
@@ -2018,7 +2143,13 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "expertise em Tourette , TDAH e TEA",
+          "tempo": "mais de 30 anos",
+          "faixa_etaria": "a partir de 3 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2076,7 +2207,13 @@
       "foto_posicao": "center bottom",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Comunidade Terapêutica Enfance, 4 anos - Centro de Convivência \"Casinha\" 7 anos, Ambulatório Protea IPQ 5 anos",
+          "tempo": "De 2 a 26 anos",
+          "faixa_etaria": ""
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2127,7 +2264,14 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "77a94153680e4089"
+      "card_token": "77a94153680e4089",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atualmente atendimento somente em consultório particular",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ]
     },
     {
       "id": "kiri-061",
@@ -2195,7 +2339,13 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento em todas as idades",
+          "tempo": "24 anos",
+          "faixa_etaria": "Todas"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2252,7 +2402,14 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "d85a456606e54cd0"
+      "card_token": "d85a456606e54cd0",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento ambulatorial",
+          "tempo": "07 anos",
+          "faixa_etaria": "01-18"
+        }
+      ]
     },
     {
       "id": "kiri-064",
@@ -2308,7 +2465,13 @@
       "foto_posicao": "center 20%",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Consulta psiquiátrica e investigação de marcos de desenvolvimento e atrasos",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ],
       "pasta_drive": "https://drive.google.com/drive/u/0/folders/17TrD2xcN_vU4O9M5JtXiOArLTe2ogpmK"
     },
     {
@@ -2374,7 +2537,13 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": false,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Com mais de 20 anos de experiência dedicada à saúde mental infanto-juvenil, construí minha trajetória acompanhando crianças e adolescentes em diferentes contextos de vida. Atuei no atendimento a jovens em situação de vulnerabilidade, lidando de perto com desafios de aprendizagem, impulsividade e comportamento. Atualmente, integro a equipe do Hospital das Clínicas, com foco no acompanhamento de adolescentes com desregulação emocional, e realizo atendimentos em consultório particular voltados para TDAH, ansiedade, depressão e desregulação emocionais. Além disso, sou sócia da Clínica Livaz, onde disponibilizamos o tratamento com Estimulação Magnética Transcraniana (EMT)",
+          "tempo": "uma abordagem inovadora, segura e não invasiva, que possui indicação como suporte terapêutico para alguns casos de Transtorno do Espectro Autista (TEA). Meu compromisso é unir o acolhimento humano às melhores práticas da ciência para ajudar cada paciente e sua família a encontrarem mais qualidade de vida.",
+          "faixa_etaria": "7 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2452,7 +2621,13 @@
       "foto_posicao": "center 20%",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atuo há 18 anos com crianças, adolescentes e adultos",
+          "tempo": "18 anos",
+          "faixa_etaria": "De 0 a 17 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2514,7 +2689,23 @@
       "foto_posicao": "center 20%",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "experiencias_infantil": null,
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento individual a crianças com quadros psicossomáticos",
+          "tempo": "1 ano",
+          "faixa_etaria": "11-15 anos"
+        },
+        {
+          "descricao": "Experiência CAPS IJ Brasilândia",
+          "tempo": "1 ano",
+          "faixa_etaria": "8-11 anos"
+        },
+        {
+          "descricao": "Atendimento clínico individual a adolescentes",
+          "tempo": "3 anos",
+          "faixa_etaria": "15-18 anos"
+        }
+      ],
       "pasta_drive": null
     },
     {
@@ -2558,7 +2749,14 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "d5c87e6c44424750"
+      "card_token": "d5c87e6c44424750",
+      "experiencias_infantil": [
+        {
+          "descricao": "Consultório",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ]
     }
   ]
 }

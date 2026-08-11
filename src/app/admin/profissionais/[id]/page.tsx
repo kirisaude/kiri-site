@@ -576,8 +576,7 @@ Certificados de especialização / residência / pós-graduação`;
               if (["Terapeuta ocupacional", "Fisioterapeuta"].includes(profissao))
                 links.push({ label: "CREFITO-3", url: "https://www.crefito3.org.br/dsn/consultapf/buscas.html" });
               if (["Psiquiatra", "Psiquiatra da infância e adolescência", "Neuropediatra", "Neurologista"].includes(profissao)) {
-                links.push({ label: "CRM-BA", url: "https://www.cremeb.org.br/index.php/buscar-medicos/" });
-                links.push({ label: "CFM (outros estados)", url: "https://portal.cfm.org.br/busca-medicos/" });
+                links.push({ label: "CFM", url: "https://portal.cfm.org.br/busca-medicos/" });
               }
               if (profissao === "Nutricionista")
                 links.push({ label: "CFN", url: "https://cfn.org.br/consulta-nacional-de-nutricionistas/" });
@@ -942,23 +941,25 @@ Certificados de especialização / residência / pós-graduação`;
           {sucesso && <p className="text-[13px] text-verde-confirmacao font-semibold">{sucesso}</p>}
 
           {/* Status do perfil */}
-          <div className="flex items-center gap-3 pt-1">
-            <span className="text-[13px] font-medium text-muted flex-none">Status do perfil:</span>
-            <div className="flex rounded-[10px] border border-linha overflow-hidden">
-              <button
-                type="button"
-                onClick={() => setOculto(true)}
-                className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}
-              >
-                Oculto
-              </button>
-              <button
-                type="button"
-                onClick={() => setOculto(false)}
-                className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}
-              >
-                Visível
-              </button>
+          <div className="flex flex-col gap-1.5 pt-1">
+            <div className="flex items-center gap-3">
+              <span className="text-[13px] font-medium text-muted flex-none">Status do perfil:</span>
+              <div className="flex rounded-[10px] border border-linha overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setOculto(true)}
+                  className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}
+                >
+                  Oculto
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setOculto(false)}
+                  className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}
+                >
+                  Visível
+                </button>
+              </div>
             </div>
             <span className="text-[11.5px] text-muted leading-tight">Ambos os botões abaixo salvam esse status.</span>
           </div>

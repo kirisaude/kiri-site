@@ -1041,13 +1041,13 @@ export default function Home() {
                     ))}
                   </div>
 
-                  {/* Desktop: flex com colunas fixas (4 col), alinha à esquerda */}
-                  <div className="hidden md:flex flex-wrap gap-5">
-                    {sec.pros.map((p) => (
-                      <div key={p.id} className="w-[calc(25%-15px)]">
-                        <MiniCard profissional={p} />
-                      </div>
-                    ))}
+                  {/* Desktop: grid 2 linhas com scroll horizontal */}
+                  <div className="hidden md:block overflow-x-auto scrollbar-hide pb-1.5">
+                    <div className="grid gap-5" style={{ gridTemplateRows: "repeat(2, auto)", gridAutoFlow: "column", gridAutoColumns: "calc(25% - 15px)" }}>
+                      {sec.pros.map((p) => (
+                        <MiniCard key={p.id} profissional={p} />
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
