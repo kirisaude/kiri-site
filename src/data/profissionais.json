@@ -2503,6 +2503,49 @@
       "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-068",
+      "inscricao_id": "7bc25afc-d921-4bd8-9f6d-fb623208c734",
+      "nome": "Janaína Lima Pires",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM 101708",
+      "rqe": "29134 e 291341",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Ansiedade",
+        "Depressão",
+        "TOC"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "Dracena",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Médica psiquiatra em todas as fases da vida!",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Unoeste — 2000"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — Famema — 2001"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(18) 99636-7690",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "d5c87e6c44424750"
     }
   ]
 }
