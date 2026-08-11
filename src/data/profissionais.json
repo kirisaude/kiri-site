@@ -2487,6 +2487,54 @@
       "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-067",
+      "inscricao_id": "85aa80b3-af79-4820-bf03-fad4fa9004be",
+      "nome": "Flavia Villaboy Fernandes",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP: 06/170654",
+      "rqe": null,
+      "areas_atuacao": [
+        "Depressão",
+        "Ansiedade",
+        "TOC",
+        "TDAH",
+        "Dificuldades de aprendizagem",
+        "Transtornos alimentares",
+        "Saúde Mental"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Buscar apoio psicológico para um filho adolescente é um passo de muito cuidado, especialmente quando as transformações dessa fase são atravessadas por desafios como ansiedade, depressão ou TDAH. Como psicóloga clínica, ofereço ao seu filho um espaço seguro e sigiloso, focado em compreender as raízes de suas angústias e ajudá-lo a desenvolver recursos emocionais próprios. Para que o vínculo terapêutico funcione, a confidencialidade da sessão do adolescente é essencial, mas o trabalho é feito em verdadeira parceria com a família. Mantenho um diálogo aberto com os pais, oferecendo escuta e orientações pontuais para que o ambiente familiar seja um forte ponto de apoio. Os atendimentos ocorrem de forma presencial no consultório ou no formato online. Se vocês sentem que é o momento de buscar esse cuidado para que ele encontre formas mais leves de lidar com os próprios desafios, fiquem à vontade para agendar uma primeira conversa.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Universidade Presbiteriana Mackenzie — 2020"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Saúde Mental e Psicoterapia Psicanalitica — UNIFESP — 2024"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Transtornos Alimentares — UNIFESP — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 98674-2203",
+      "tempo_atuacao": "Mais de 5 anos",
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "c1c43613070d4cde"
     }
   ]
 }
