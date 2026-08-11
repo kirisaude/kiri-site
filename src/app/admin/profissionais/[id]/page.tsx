@@ -141,6 +141,7 @@ Certificados de especialização / residência / pós-graduação`;
   const [enviandoEmail, setEnviandoEmail] = useState(false);
   const [emailEnviado, setEmailEnviado] = useState(false);
   const [erroEmail, setErroEmail] = useState("");
+  const [emailManual, setEmailManual] = useState("");
 
   async function enviarEmailPendencias() {
     if (!profOriginal?.inscricao_id) { setErroEmail("Sem inscricao_id — não é possível buscar o e-mail."); return; }
@@ -149,10 +150,17 @@ Certificados de especialização / residência / pós-graduação`;
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ inscricao_id: profOriginal.inscricao_id, pendencias: pendenciasTexto }),
+      body: JSON.stringify({
+        inscricao_id: profOriginal.inscricao_id,
+        pendencias: pendenciasTexto,
+        ...(emailManual.trim() ? { email_override: emailManual.trim() } : {}),
+      }),
     });
     if (res.ok) { setEmailEnviado(true); setTimeout(() => setShowEmailModal(false), 1800); }
-    else { const d = await res.json(); setErroEmail(d.error ?? "Erro ao enviar"); }
+    else {
+      const d = await res.json();
+      setErroEmail(d.error === "sem_email" ? "sem_email" : (d.error ?? "Erro ao enviar"));
+    }
     setEnviandoEmail(false);
   }
 
@@ -998,7 +1006,7 @@ Certificados de especialização / residência / pós-graduação`;
           </div>
           <button
             type="button"
-            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setShowEmailModal(true); }}
+            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setEmailManual(""); setShowEmailModal(true); }}
             className="w-full flex items-center justify-center gap-2 border border-[#D8C7B0] rounded-[12px] py-[11px] text-[13.5px] font-semibold text-ardosia bg-white hover:bg-wash cursor-pointer transition-colors"
           >
             <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
@@ -1024,11 +1032,25 @@ Certificados de especialização / residência / pós-graduação`;
                 rows={6}
                 className="w-full border border-linha rounded-[10px] px-3.5 py-3 text-[13.5px] text-carvao bg-white outline-none focus:border-ardosia transition-colors resize-none mb-4"
               />
-              {erroEmail && <p className="text-[12.5px] text-ferrugem mb-3">{erroEmail}</p>}
+              {erroEmail === "sem_email" ? (
+                <div className="mb-4">
+                  <p className="text-[12.5px] text-ferrugem mb-2">Profissional sem e-mail cadastrado no formulário. Informe o e-mail manualmente:</p>
+                  <input
+                    type="email"
+                    value={emailManual}
+                    onChange={(e) => setEmailManual(e.target.value)}
+                    placeholder="email@profissional.com.br"
+                    className="w-full border border-ferrugem rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+                    autoFocus
+                  />
+                </div>
+              ) : erroEmail ? (
+                <p className="text-[12.5px] text-ferrugem mb-3">{erroEmail}</p>
+              ) : null}
               {emailEnviado && <p className="text-[12.5px] text-verde-confirmacao font-semibold mb-3">E-mail enviado!</p>}
               <button
                 onClick={enviarEmailPendencias}
-                disabled={enviandoEmail || !pendenciasTexto.trim()}
+                disabled={enviandoEmail || !pendenciasTexto.trim() || (erroEmail === "sem_email" && !emailManual.trim())}
                 className="w-full bg-ardosia text-white font-semibold text-[14px] rounded-[11px] py-[13px] cursor-pointer disabled:opacity-50 transition-opacity"
               >
                 {enviandoEmail ? "Enviando…" : "Enviar e-mail"}
