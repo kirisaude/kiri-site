@@ -299,6 +299,29 @@ export default function InscricaoProfissionalPage() {
           >
             Enviar depois e voltar ao início
           </button>
+
+          {/* Convite Instagram */}
+          <div className="bg-white border border-linha rounded-[16px] px-5 py-5 flex flex-col gap-3 text-center">
+            <p className="text-[15px] font-serif font-medium text-carvao m-0 leading-snug">
+              Ajude a Kiri a crescer 🌱
+            </p>
+            <p className="text-[13.5px] text-cinza-texto2 leading-[1.65] m-0">
+              Compartilhe com colegas que atuam com neurodesenvolvimento e com famílias que possam se beneficiar da rede. Cada indicação fortalece o cuidado coletivo.
+            </p>
+            <a
+              href="https://www.instagram.com/kiri.saude"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 w-full bg-[#F5EFE6] border border-[#D8C7B0] text-ferrugem font-semibold text-[14px] rounded-[11px] py-[12px] no-underline hover:bg-[#EDE4D8] transition-colors"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              </svg>
+              Seguir @kiri.saude
+            </a>
+          </div>
         </div>
 
         <Footer className="mx-[18px] mt-auto mb-8" />
