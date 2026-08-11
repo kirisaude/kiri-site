@@ -91,17 +91,21 @@ export async function POST(request: Request) {
 
   let sa: { client_email: string; private_key: string };
   try {
+    // Extrai o primeiro objeto JSON válido — ignora conteúdo extra antes/depois
     const raw = saJson.trim();
-    const start = raw.indexOf("{");
-    const end = raw.lastIndexOf("}");
-    const clean = start >= 0 && end > start ? raw.slice(start, end + 1) : raw;
+    let depth = 0, inStr = false, esc = false, jsonStart = -1, jsonEnd = -1;
+    for (let i = 0; i < raw.length; i++) {
+      const c = raw[i];
+      if (esc) { esc = false; continue; }
+      if (inStr) { if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; }
+      if (c === '"') { inStr = true; continue; }
+      if (c === "{") { if (depth === 0) jsonStart = i; depth++; }
+      else if (c === "}") { depth--; if (depth === 0 && jsonStart >= 0) { jsonEnd = i; break; } }
+    }
+    const clean = jsonStart >= 0 && jsonEnd > jsonStart ? raw.slice(jsonStart, jsonEnd + 1) : raw;
     sa = JSON.parse(clean);
   } catch (e) {
-    const raw = saJson.trim();
-    const start = raw.indexOf("{");
-    const end = raw.lastIndexOf("}");
-    const diag = `len=${raw.length} start=${start} end=${end} linhas=${(raw.match(/\n/g) ?? []).length} charAfterEnd=${JSON.stringify(raw[end + 1] ?? "none")}`;
-    return NextResponse.json({ error: `JSON inválido [${diag}]: ${e}` }, { status: 500 });
+    return NextResponse.json({ error: `JSON inválido: ${e}` }, { status: 500 });
   }
 
   const profissionais = data.profissionais as (Profissional & {
