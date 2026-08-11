@@ -10,6 +10,8 @@ import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = data.profissionais as Profissional[];
 
+const semAcento = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
 interface Inscricao {
   id: string;
   criado_em: string;
@@ -1340,7 +1342,7 @@ export default function AdminPage() {
                 <p className="text-[13px] text-muted">Nenhuma pendência encontrada.</p>
               ) : (
                 <div className="flex flex-col gap-2">
-                  {naoVisiveis.filter((p) => !buscaPendentes || p.nome.toLowerCase().includes(buscaPendentes.toLowerCase())).map((p) => {
+                  {naoVisiveis.filter((p) => !buscaPendentes || semAcento(p.nome).includes(semAcento(buscaPendentes))).map((p) => {
                     const tags: { label: string; cls: string }[] = [];
                     if (!p.foto_url) tags.push({ label: "sem foto", cls: "text-ferrugem bg-[#FFF0EE] border-ferrugem/25" });
                     if (p.oculto) tags.push({ label: "oculto", cls: "text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]" });
@@ -1399,7 +1401,7 @@ export default function AdminPage() {
               />
 
               {PROFISSOES_ORDENADAS.map((prof) => {
-                const grupo = profPublicados.filter((p) => p.profissao === prof && (!buscaPlataforma || p.nome.toLowerCase().includes(buscaPlataforma.toLowerCase())));
+                const grupo = profPublicados.filter((p) => p.profissao === prof && (!buscaPlataforma || semAcento(p.nome).includes(semAcento(buscaPlataforma))));
                 if (grupo.length === 0) return null;
                 return (
                   <div key={prof} className="mb-6">
