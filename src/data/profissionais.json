@@ -1718,7 +1718,7 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
-      "registro_verificado": false,
+      "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
