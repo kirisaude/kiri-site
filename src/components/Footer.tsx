@@ -61,27 +61,25 @@ export function Footer({ className = "" }: { className?: string }) {
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden py-4 flex flex-col gap-3">
-        <div className="flex items-center justify-between gap-2">
-          <Link href="/" className="flex items-center gap-2 no-underline">
-            <KiriLogoCompact height={24} />
-          </Link>
-          <a
-            href="https://www.instagram.com/kiri.saude"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 no-underline"
-            style={{ color: "#9A8C78" }}
-          >
-            <InstagramIcon size={13} />
-            <span className="text-[12.5px] font-medium">@kiri.saude</span>
-          </a>
+      <div className="md:hidden pt-7 pb-5 flex flex-col items-center gap-5">
+        <Link href="/" className="flex items-center no-underline">
+          <KiriLogoCompact height={24} />
+        </Link>
+        <div className="flex items-center gap-5">
+          <a href="/contato" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
+          <a href="/termos" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
+          <a href="/politica-de-privacidade" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
         </div>
-        <div className="flex items-center gap-3">
-          <a href="/contato" className="text-[12.5px] text-muted no-underline">Fale conosco</a>
-          <a href="/termos" className="text-[12.5px] text-muted no-underline">Termos</a>
-          <a href="/politica-de-privacidade" className="text-[12.5px] text-muted no-underline">Privacidade</a>
-        </div>
+        <a
+          href="https://www.instagram.com/kiri.saude"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 no-underline"
+          style={{ color: "#9A8C78" }}
+        >
+          <InstagramIcon size={14} />
+          <span className="text-[14px] font-medium">@kiri.saude</span>
+        </a>
       </div>
 
     </div>
