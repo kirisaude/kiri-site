@@ -1622,7 +1622,7 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
+        "Atraso de Desenvolvimento",
         "Orientação Parental"
       ],
       "modalidade": "Presencial e online",
@@ -1633,17 +1633,17 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Psicologia — UFMT — 2022",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
           "instituicao_ano": "Intervenção ABA para Autismo e Deficiência Intelectual — CBI of Miami — 2025",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Mestrado",
           "instituicao_ano": "Psicologia — UFMT — 2024",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1654,7 +1654,7 @@
       "whatsapp_agendamento": "(11) 96907-1996",
       "tempo_atuacao": "3 a 5 anos",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-051.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "95c8b2f88b154f65",
       "profissao_secundaria": null,
@@ -1664,9 +1664,9 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
-      "oculto": true,
+      "oculto": false,
       "registro_verificado": false,
-      "sobre_verificado": false,
+      "sobre_verificado": true,
       "experiencias_infantil": null,
       "pasta_drive": null
     },
