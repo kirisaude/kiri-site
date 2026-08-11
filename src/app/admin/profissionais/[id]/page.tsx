@@ -941,22 +941,6 @@ Certificados de especialização / residência / pós-graduação`;
           {erro && <p className="text-[13px] text-ferrugem">{erro}</p>}
           {sucesso && <p className="text-[13px] text-verde-confirmacao font-semibold">{sucesso}</p>}
 
-          <button
-            type="submit"
-            disabled={salvando}
-            className="w-full bg-ardosia-escura text-white font-semibold text-[15px] rounded-[12px] py-[14px] cursor-pointer disabled:opacity-50 mt-2"
-          >
-            {salvando ? "Salvando…" : "Salvar alterações"}
-          </button>
-          <button
-            type="button"
-            disabled={salvando}
-            onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
-            className="w-full bg-white border border-ardosia text-ardosia font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
-          >
-            {salvando ? "Publicando…" : "Publicar (ocultando itens com verificação pendente)"}
-          </button>
-
           {/* Status do perfil */}
           <div className="flex items-center gap-3 pt-1">
             <span className="text-[13px] font-medium text-muted flex-none">Status do perfil:</span>
@@ -976,7 +960,24 @@ Certificados de especialização / residência / pós-graduação`;
                 Visível
               </button>
             </div>
+            <span className="text-[11.5px] text-muted leading-tight">Ambos os botões abaixo salvam esse status.</span>
           </div>
+
+          <button
+            type="submit"
+            disabled={salvando}
+            className="w-full bg-ardosia-escura text-white font-semibold text-[15px] rounded-[12px] py-[14px] cursor-pointer disabled:opacity-50 mt-2"
+          >
+            {salvando ? "Salvando…" : "Salvar alterações"}
+          </button>
+          <button
+            type="button"
+            disabled={salvando}
+            onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
+            className="w-full bg-white border border-ardosia text-ardosia font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
+          >
+            {salvando ? "Publicando…" : "Publicar (ocultando itens com verificação pendente)"}
+          </button>
         </form>
 
         {/* Drive + e-mail pendências — parte inferior */}
