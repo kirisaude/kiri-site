@@ -267,7 +267,7 @@ export default function InscricaoProfissionalPage() {
             <div className="flex flex-col gap-2.5">
               {[
                 "Foto profissional (fundo neutro, rosto nítido, preferencialmente quadrada 1:1)",
-                "Certidão de regularidade no conselho da sua profissão (atualizada)",
+                "Certidão de regularidade no conselho da sua profissão — emitida pelo site do conselho (CRP, CRM, CFFa, COFFITO etc.), confirmando registro ativo e regular",
                 "Diploma de graduação",
                 "Certificados de especialização, residência, mestrado, doutorado ou outros (se houver)",
               ].map((doc) => (
@@ -469,6 +469,9 @@ export default function InscricaoProfissionalPage() {
                   <div className="flex flex-col gap-1.5">
                     <label className={labelClass}>Número de registro no conselho <span className="text-ferrugem">*</span></label>
                     <input type="text" value={registroConselho} onChange={(e) => setRegistroConselho(e.target.value)} required placeholder="Ex: CRP 06/12345 ou CRM 123456-SP" className={inputClass} />
+                    <p className="text-[12px] text-muted leading-[1.55] mt-0.5">
+                      Na próxima etapa, será necessário enviar a <strong className="text-carvao">certidão de regularidade</strong> emitida pelo site do seu conselho (CRP, CRM, CFFa, COFFITO etc.), confirmando que o registro está ativo e regular.
+                    </p>
                   </div>
 
                   <div>
