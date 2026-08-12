@@ -386,7 +386,6 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
             <textarea
               value={desfecho}
               onChange={e => setDesfecho(e.target.value)}
-              disabled={encerrado}
               rows={3}
               placeholder="Ex: família agendou para setembro. / Não quis mais, desistiu. / Marcou com outro profissional."
               className="w-full border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao placeholder:text-muted outline-none resize-none leading-[1.55] disabled:opacity-60"
