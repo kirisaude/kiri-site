@@ -162,8 +162,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [copiado, setCopiado] = useState<string | null>(null);
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
   const [desfecho, setDesfecho] = useState("");
-  const [salvandoDesfecho, setSalvandoDesfecho] = useState(false);
-  const [desfechoSalvo, setDesfechoSalvo] = useState(false);
+  const [encerrando, setEncerrando] = useState(false);
+  const [encerrado, setEncerrado] = useState(false);
   function toggleMarca(chave: string) {
     setMarcadas(prev => { const s = new Set(prev); s.has(chave) ? s.delete(chave) : s.add(chave); return s; });
   }
@@ -194,19 +194,33 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
     setTimeout(() => setCopiado(null), 2000);
   }
 
-  async function criar() {
+  async function criar(): Promise<Followup | null> {
     setCriando(true);
     const res = await fetch("/api/admin/criar-followup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
     });
-    if (res.ok) {
-      const novo = await res.json() as Followup;
-      setFup(novo);
-      onEnviado(novo);
-    }
     setCriando(false);
+    if (!res.ok) return null;
+    const novo = await res.json() as Followup;
+    setFup(novo);
+    onEnviado(novo);
+    return novo;
+  }
+
+  async function salvarEEncerrar() {
+    setEncerrando(true);
+    let fupAtual = fup;
+    if (!fupAtual) fupAtual = await criar();
+    if (!fupAtual) { setEncerrando(false); return; }
+    await fetch("/api/admin/followup-desfecho", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
+    });
+    setEncerrando(false);
+    setEncerrado(true);
   }
 
   function BolhaCopia({ chave, texto, label }: { chave: string; texto: string; label?: string }) {
@@ -339,52 +353,52 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
             <textarea
               value={desfecho}
               onChange={e => setDesfecho(e.target.value)}
+              disabled={encerrado}
               rows={3}
-              placeholder="Ex: família agendou para setembro, aguardando confirmação. / Não quis mais, desistiu."
-              className="w-full border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao placeholder:text-muted outline-none resize-none leading-[1.55]"
+              placeholder="Ex: família agendou para setembro. / Não quis mais, desistiu. / Marcou com outro profissional."
+              className="w-full border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao placeholder:text-muted outline-none resize-none leading-[1.55] disabled:opacity-60"
               style={{ background: "#fff" }}
               onFocus={e => (e.currentTarget.style.borderColor = "#44606C")}
               onBlur={e => (e.currentTarget.style.borderColor = "")}
             />
-            <button
-              type="button"
-              disabled={!fup || !desfecho.trim() || salvandoDesfecho}
-              onClick={async () => {
-                if (!fup) return;
-                setSalvandoDesfecho(true);
-                await fetch("/api/admin/followup-desfecho", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ followup_id: fup.id, desfecho: desfecho.trim() }),
-                });
-                setSalvandoDesfecho(false);
-                setDesfechoSalvo(true);
-                setTimeout(() => setDesfechoSalvo(false), 3000);
-              }}
-              className="self-end text-[12px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-colors"
-              style={{ color: desfechoSalvo ? "#2E7D4F" : "#44606C" }}
-            >
-              {salvandoDesfecho ? "Salvando…" : desfechoSalvo ? "✓ Salvo!" : !fup ? "Crie o follow-up primeiro" : "Salvar anotação"}
-            </button>
           </div>
         </div>
 
         {/* Base */}
         <div className="px-5 pt-3 pb-5 flex-none border-t border-linha flex flex-col gap-2">
-          {!fup ? (
-            <button
-              type="button"
-              onClick={criar}
-              disabled={criando}
-              className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity"
-              style={{ background: "#44606C", color: "#fff" }}
-            >
-              {criando ? "Criando…" : "Criar follow-up (gera link de avaliação)"}
-            </button>
+          {encerrado ? (
+            <div className="flex flex-col items-center gap-3">
+              <div className="text-[13px] font-semibold text-[#2E7D4F] text-center">Follow-up encerrado e desfecho salvo.</div>
+              <button onClick={onFechar} className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer" style={{ background: "#44606C", color: "#fff" }}>Fechar</button>
+            </div>
           ) : (
-            <div className="text-[12px] text-[#2E7D4F] font-semibold text-center">✓ Follow-up criado — copie as mensagens acima e envie pelo WhatsApp</div>
+            <>
+              <button
+                type="button"
+                onClick={salvarEEncerrar}
+                disabled={!desfecho.trim() || encerrando}
+                className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity"
+                style={{ background: "#BE6E4E", color: "#fff" }}
+              >
+                {encerrando ? "Salvando…" : "Salvar desfecho e encerrar follow-up"}
+              </button>
+              {!fup && (
+                <button
+                  type="button"
+                  onClick={() => criar()}
+                  disabled={criando}
+                  className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity border border-ardosia"
+                  style={{ background: "transparent", color: "#44606C" }}
+                >
+                  {criando ? "Criando…" : "Criar follow-up sem encerrar (gera link de avaliação)"}
+                </button>
+              )}
+              {fup && (
+                <div className="text-[11.5px] text-[#2E7D4F] text-center">Follow-up criado — copie as mensagens e envie pelo WhatsApp</div>
+              )}
+              <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
+            </>
           )}
-          <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
         </div>
       </div>
     </div>,

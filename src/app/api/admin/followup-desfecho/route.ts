@@ -16,7 +16,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Configuração incompleta" }, { status: 500 });
   }
 
-  const { followup_id, desfecho } = await request.json() as { followup_id: string; desfecho: string };
+  const { followup_id, desfecho, concluir } = await request.json() as {
+    followup_id: string;
+    desfecho: string;
+    concluir?: boolean;
+  };
+
+  const patch: Record<string, unknown> = { desfecho };
+  if (concluir) patch.concluido_em = new Date().toISOString();
 
   const res = await fetch(
     `${supabaseUrl}/rest/v1/followups?id=eq.${followup_id}`,
@@ -28,7 +35,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
         Prefer: "return=minimal",
       },
-      body: JSON.stringify({ desfecho }),
+      body: JSON.stringify(patch),
     }
   );
 
