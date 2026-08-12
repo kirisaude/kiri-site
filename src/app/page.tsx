@@ -1493,9 +1493,10 @@ function DesktopScrollRow({ pros }: { pros: Profissional[] }) {
 }
 
 function MiniCard({ profissional: p }: { profissional: Profissional }) {
-  const LIMITE = 3;
-  const areas = p.areas_atuacao.slice(0, LIMITE);
-  const resto = p.areas_atuacao.length - LIMITE;
+  const sorted = [...p.areas_atuacao].sort((a, b) => a.length - b.length);
+  const LIMITE = 2;
+  const areas = sorted.slice(0, LIMITE);
+  const resto = sorted.length - LIMITE;
 
   return (
     <Link
@@ -1522,18 +1523,22 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         </div>
       </div>
 
-      {/* Tags — altura fixa de 2 linhas para alinhar a localização em todos os cards */}
-      <div className="flex gap-1.5 flex-wrap mt-[11px] items-start overflow-hidden" style={{ minHeight: 46, maxHeight: 46 }}>
+      {/* Tags — máx 2, ordenadas por tamanho, altura fixa para alinhar rodapé */}
+      <div className="flex gap-1.5 flex-wrap mt-[11px] items-start" style={{ minHeight: 46, maxHeight: 46, overflow: "hidden" }}>
         {areas.map((area) => (
           <span
             key={area}
             className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
+            style={{ whiteSpace: "nowrap" }}
           >
             {area}
           </span>
         ))}
         {resto > 0 && (
-          <span className="text-[10.5px] md:text-[12px] font-semibold text-muted px-1.5 py-0.5">
+          <span
+            className="text-[10.5px] md:text-[12px] font-semibold text-muted px-1.5 py-0.5"
+            style={{ flexShrink: 0, whiteSpace: "nowrap" }}
+          >
             +{resto}
           </span>
         )}
