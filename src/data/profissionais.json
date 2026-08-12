@@ -159,11 +159,11 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
-        "Dificuldades de aprendizagem",
+        "Atraso de Desenvolvimento",
+        "Dificuldades de Aprendizagem",
         "Ansiedade",
         "Depressão",
-        "TOC"
+        "Toc"
       ],
       "modalidade": "Presencial e online",
       "cidade": "Salvador",
@@ -196,7 +196,7 @@
       "foto_url": "/fotos/kiri-024.jpg",
       "verificacao_data": "julho de 2026",
       "card_token": "08fbd90a61c14e73",
-      "tempo_atuacao": null,
+      "tempo_atuacao": "3 a 5 anos",
       "foto_posicao": "center top",
       "oculto": false,
       "registro_verificado": true,
@@ -207,7 +207,9 @@
       "valor_min_secundario": null,
       "valor_max_secundario": null,
       "valor_pacote": null,
-      "valor_pacote_obs": null
+      "valor_pacote_obs": null,
+      "experiencias_infantil": null,
+      "pasta_drive": null
     },
     {
       "id": "kiri-025",
