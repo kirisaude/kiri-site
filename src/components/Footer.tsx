@@ -64,9 +64,9 @@ export function Footer({ className = "" }: { className?: string }) {
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden flex flex-col items-center" style={{ paddingTop: 20, paddingBottom: 22, gap: 18 }}>
+      <div className="md:hidden flex flex-col items-center" style={{ paddingTop: 20, paddingBottom: 24 }}>
 
-        {/* Linha 1: Instagram centralizado */}
+        {/* Linha 1: Instagram */}
         <a
           href="https://www.instagram.com/kiri.saude"
           target="_blank"
@@ -75,21 +75,21 @@ export function Footer({ className = "" }: { className?: string }) {
           style={{ gap: 8 }}
         >
           <InstagramIcon size={15} />
-          <span className="text-[14px]" style={{ color: "#44606C" }}>Siga-nos no Instagram</span>
-          <span className="text-[14px] font-semibold" style={{ color: "#BE6E4E" }}>@kiri.saude</span>
+          <span style={{ fontSize: 14, color: "#44606C" }}>Siga-nos no Instagram</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: "#BE6E4E" }}>@kiri.saude</span>
         </a>
 
-        {/* Linha 2: logo centralizada */}
-        <Link href="/" className="flex items-center justify-center no-underline">
+        {/* Linha 2: links */}
+        <div className="flex items-center justify-center" style={{ gap: 14, marginTop: 18 }}>
+          <a href="/contato" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Fale conosco</a>
+          <a href="/termos" className="no-underline" style={{ fontSize: 13, color: "#8A7E6A" }}>Termos</a>
+          <a href="/politica-de-privacidade" className="no-underline" style={{ fontSize: 13, color: "#8A7E6A" }}>Privacidade</a>
+        </div>
+
+        {/* Linha 3: logo */}
+        <Link href="/" className="flex items-center justify-center no-underline" style={{ marginTop: 18 }}>
           <KiriLogoCompact height={22} />
         </Link>
-
-        {/* Linha 3: links centralizados */}
-        <div className="flex items-center justify-center" style={{ gap: 14, marginTop: 12 }}>
-          <a href="/contato" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Fale conosco</a>
-          <a href="/termos" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Termos</a>
-          <a href="/politica-de-privacidade" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Privacidade</a>
-        </div>
 
       </div>
 
