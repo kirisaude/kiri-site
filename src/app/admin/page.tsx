@@ -175,8 +175,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
     m1: `Olá, ${primeiro}! Tudo bem? 🌱 Aqui é Iohana, da equipe Kiri. Há alguns dias te indicamos ${profNome}. Você conseguiu entrar em contato com ela/ele?`,
     sim_contato: `Que bom, ${primeiro}! Você conseguiu agendar uma consulta com ${profPrimeiro}?`,
     sim_agendou: ratingUrl
-      ? `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar o atendimento de ${profPrimeiro} em 1 minuto? ${ratingUrl}`
-      : `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar o atendimento de ${profPrimeiro} em 1 minuto? [link gerado após criar]`,
+      ? `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? ${ratingUrl}`
+      : `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? [link gerado após criar]`,
     nao_agendou: `Entendemos, sem problemas. O que aconteceu? Podemos te ajudar a encontrar outro profissional, se precisar.`,
     nao_contato: `Tudo bem! O que aconteceu? Se quiser, podemos te indicar outro profissional ou tentar novamente com ${profPrimeiro}.`,
   };
@@ -257,7 +257,31 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
         {/* Mensagens scrolláveis */}
         <div className="flex-1 overflow-y-auto px-5 flex flex-col gap-4 pb-3">
 
-          <BolhaCopia chave="m1" texto={msgs.m1} label="Mensagem 1 — envie agora" />
+          <div className="flex flex-col gap-1">
+            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Mensagem 1 — envie agora</div>
+            <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]">{msgs.m1}</div>
+            <div className="flex items-center justify-between mt-0.5">
+              {isWa && (
+                <a
+                  href={buildWaUrl(encaminhamento.contato, msgs.m1)}
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 no-underline text-[11.5px] font-semibold hover:opacity-80 transition-opacity"
+                  style={{ color: "#25D366" }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
+                  Abrir WhatsApp
+                </a>
+              )}
+              <button
+                type="button"
+                onClick={() => copiar("m1", msgs.m1)}
+                className={`${isWa ? "" : "ml-auto"} text-[11.5px] font-semibold cursor-pointer transition-colors`}
+                style={{ color: copiado === "m1" ? "#2E7D4F" : "#44606C" }}
+              >
+                {copiado === "m1" ? "✓ Copiado!" : "Copiar"}
+              </button>
+            </div>
+          </div>
 
           <div className="flex flex-col gap-3">
             <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Se responder SIM (entrou em contato)</div>
@@ -298,17 +322,6 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
             </button>
           ) : (
             <div className="text-[12px] text-[#2E7D4F] font-semibold text-center">✓ Follow-up criado — copie as mensagens acima e envie pelo WhatsApp</div>
-          )}
-          {fup && isWa && (
-            <a
-              href={buildWaUrl(encaminhamento.contato, msgs.m1)}
-              target="_blank" rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 rounded-[12px] py-[12px] text-[14px] font-semibold no-underline cursor-pointer hover:opacity-90 transition-opacity"
-              style={{ background: "#25D366", color: "#fff" }}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fillOpacity="0.2"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
-              Abrir WhatsApp com Mensagem 1
-            </a>
           )}
           <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
         </div>

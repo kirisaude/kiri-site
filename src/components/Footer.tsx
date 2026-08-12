@@ -24,42 +24,42 @@ export function Footer({ className = "" }: { className?: string }) {
   return (
     <div className={`w-full border-t border-linha ${className}`}>
 
-      {/* Desktop */}
-      <div className="hidden md:flex flex-col" style={{ paddingTop: 24, paddingBottom: 26, gap: 22 }}>
+      {/* Desktop — linha única */}
+      <div className="hidden md:flex items-center justify-between" style={{ paddingTop: 24, paddingBottom: 26 }}>
 
-        {/* Linha 1: Instagram centralizado */}
+        {/* Esquerda: logo */}
+        <Link href="/" className="flex items-center no-underline flex-none">
+          <KiriLogoCompact height={24} />
+        </Link>
+
+        {/* Centro-direita: links nav + termos */}
+        <div className="flex items-center" style={{ gap: 24 }}>
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="no-underline hover:text-carvao transition-colors"
+              style={{ fontSize: 14, color: "#6E6457" }}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link href="/termos" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#9A8C78" }}>Termos de uso</Link>
+          <Link href="/politica-de-privacidade" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#9A8C78" }}>Privacidade</Link>
+        </div>
+
+        {/* Extrema direita: Instagram */}
         <a
           href="https://www.instagram.com/kiri.saude"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center no-underline"
-          style={{ gap: 8 }}
+          className="flex items-center no-underline flex-none"
+          style={{ gap: 7 }}
         >
-          <InstagramIcon size={15} />
-          <span style={{ fontSize: 15, color: "#44606C" }}>Siga-nos no Instagram</span>
-          <span style={{ fontSize: 15, color: "#BE6E4E", fontWeight: 600 }}>@kiri.saude</span>
+          <InstagramIcon size={14} />
+          <span style={{ fontSize: 14, color: "#44606C" }}>Siga-nos no Instagram</span>
+          <span style={{ fontSize: 14, color: "#BE6E4E", fontWeight: 600 }}>@kiri.saude</span>
         </a>
-
-        {/* Linha 2: logo esquerda, links direita */}
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center no-underline flex-none">
-            <KiriLogoCompact height={24} />
-          </Link>
-          <div className="flex items-center" style={{ gap: 22 }}>
-            {NAV_LINKS.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="no-underline hover:text-carvao transition-colors"
-                style={{ fontSize: 15, color: "#6E6457" }}
-              >
-                {label}
-              </Link>
-            ))}
-            <Link href="/termos" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 15, color: "#6E6457", marginLeft: 10 }}>Termos de uso</Link>
-            <Link href="/politica-de-privacidade" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 15, color: "#6E6457" }}>Privacidade</Link>
-          </div>
-        </div>
 
       </div>
 
