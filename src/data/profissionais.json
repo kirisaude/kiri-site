@@ -2841,6 +2841,61 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "0f847abf76044eeb"
+    },
+    {
+      "id": "kiri-071",
+      "inscricao_id": "943c2285-142e-4fae-be51-e557258a920e",
+      "nome": "Josiane Konrad",
+      "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicólogo",
+      "registro_conselho": "CRP 12/22540",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Depressão",
+        "Ansiedade",
+        "Altas habilidades e Super Dotação AH/SD",
+        "Transtorno de aprendizagem",
+        "Transtorno do neurodesenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São José",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Prazer, Josiane Konrad, psicóloga e neuropsicóloga , especialista em TDAH e me especializando em neurociência e autismo com o Dr. Thiago Castro.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Unisociesc Blumenau / Sc — 2022"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia — Ipog — 2025"
+        },
+        {
+          "curso": "Pós-doutorado",
+          "instituicao_ano": "Abordagem Integrativa da Neuroeducação e do TDAH — Anhanguera Pitágoras Unopar de Niterói — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 250,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(48) 99957-8818",
+      "tempo_atuacao": "3 a 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento em clínica - Psicoterapia (Tratamento) e Avaliação Neuropsicólogica (Diagnóstico)",
+          "tempo": "4 anos",
+          "faixa_etaria": "6 as 18 anos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "b09ec33db2324c13"
     }
   ]
 }
