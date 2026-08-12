@@ -25,39 +25,42 @@ export function Footer({ className = "" }: { className?: string }) {
     <div className={`w-full border-t border-linha ${className}`}>
 
       {/* Desktop */}
-      <div className="hidden md:flex items-center justify-between gap-6 py-4">
-        <div className="flex items-center gap-5 flex-none">
-          <Link href="/" className="flex items-center gap-2 no-underline">
+      <div className="hidden md:flex flex-col" style={{ paddingTop: 24, paddingBottom: 26, gap: 22 }}>
+
+        {/* Linha 1: Instagram centralizado */}
+        <a
+          href="https://www.instagram.com/kiri.saude"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center no-underline"
+          style={{ gap: 8 }}
+        >
+          <InstagramIcon size={15} />
+          <span style={{ fontSize: 15, color: "#44606C" }}>Siga-nos no Instagram</span>
+          <span style={{ fontSize: 15, color: "#BE6E4E", fontWeight: 600 }}>@kiri.saude</span>
+        </a>
+
+        {/* Linha 2: logo esquerda, links direita */}
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center no-underline flex-none">
             <KiriLogoCompact height={24} />
           </Link>
-          <a
-            href="https://www.instagram.com/kiri.saude"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 no-underline transition-colors"
-            style={{ color: "#9A8C78" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#44606C")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#9A8C78")}
-          >
-            <InstagramIcon size={14} />
-            <span className="text-[13px] font-medium">@kiri.saude</span>
-          </a>
+          <div className="flex items-center" style={{ gap: 22 }}>
+            {NAV_LINKS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="no-underline hover:text-carvao transition-colors"
+                style={{ fontSize: 15, color: "#6E6457" }}
+              >
+                {label}
+              </Link>
+            ))}
+            <Link href="/termos" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 15, color: "#6E6457", marginLeft: 10 }}>Termos de uso</Link>
+            <Link href="/politica-de-privacidade" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 15, color: "#6E6457" }}>Privacidade</Link>
+          </div>
         </div>
-        <div className="flex items-center gap-5">
-          {NAV_LINKS.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="text-[14px] font-medium no-underline hover:text-carvao transition-colors"
-              style={{ color: "#6E6457" }}
-            >
-              {label}
-            </Link>
-          ))}
-          <span className="text-[#D8C7B0] select-none">·</span>
-          <Link href="/termos" className="text-[12px] text-muted no-underline hover:text-cinza-texto transition-colors">Termos de uso</Link>
-          <Link href="/politica-de-privacidade" className="text-[12px] text-muted no-underline hover:text-cinza-texto transition-colors">Privacidade</Link>
-        </div>
+
       </div>
 
       {/* Mobile */}
@@ -76,15 +79,15 @@ export function Footer({ className = "" }: { className?: string }) {
           <span className="text-[14px] font-semibold" style={{ color: "#BE6E4E" }}>@kiri.saude</span>
         </a>
 
-        {/* Linha 2: logo à esquerda, links à direita */}
+        {/* Linha 2: logo esquerda, links direita */}
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center no-underline flex-none">
             <KiriLogoCompact height={22} />
           </Link>
           <div className="flex items-center" style={{ gap: 14 }}>
-            <a href="/contato" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
-            <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
-            <a href="/politica-de-privacidade" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
+            <a href="/contato" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Fale conosco</a>
+            <a href="/termos" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Termos</a>
+            <a href="/politica-de-privacidade" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Privacidade</a>
           </div>
         </div>
 

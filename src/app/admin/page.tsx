@@ -157,22 +157,38 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   onFechar: () => void;
   onEnviado: (fup: Followup) => void;
 }) {
-  const [etapa, setEtapa] = useState<"preview" | "criando" | "pronto">("preview");
+  const [criando, setCriando] = useState(false);
   const [fup, setFup] = useState<Followup | null>(null);
+  const [copiado, setCopiado] = useState<string | null>(null);
   const portalRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { portalRef.current = document.body; setMounted(true); }, []);
 
   const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
   const isWa = !encaminhamento.contato.includes("@");
-
   const profObj = profissionais.find((p) => p.id === encaminhamento.profissional_solicitado);
   const profNome = profObj ? titleCasePT(profObj.nome) : (encaminhamento.profissional_solicitado ?? "o profissional indicado");
-  const linkPlaceholder = "https://kirisaude.com.br/followup/[link]";
-  const msgTexto = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${fup ? `https://kirisaude.com.br/followup/${fup.token}` : linkPlaceholder}`;
+  const profPrimeiro = profNome.split(" ")[0];
+  const ratingUrl = fup ? `https://kirisaude.com.br/followup/${fup.token}` : null;
+
+  const msgs = {
+    m1: `Olá, ${primeiro}! Tudo bem? 🌱 Aqui é Iohana, da equipe Kiri. Há alguns dias te indicamos ${profNome}. Você conseguiu entrar em contato com ela/ele?`,
+    sim_contato: `Que bom, ${primeiro}! Você conseguiu agendar uma consulta com ${profPrimeiro}?`,
+    sim_agendou: ratingUrl
+      ? `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar o atendimento de ${profPrimeiro} em 1 minuto? ${ratingUrl}`
+      : `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar o atendimento de ${profPrimeiro} em 1 minuto? [link gerado após criar]`,
+    nao_agendou: `Entendemos, sem problemas. O que aconteceu? Podemos te ajudar a encontrar outro profissional, se precisar.`,
+    nao_contato: `Tudo bem! O que aconteceu? Se quiser, podemos te indicar outro profissional ou tentar novamente com ${profPrimeiro}.`,
+  };
+
+  function copiar(chave: string, texto: string) {
+    navigator.clipboard.writeText(texto).catch(() => {});
+    setCopiado(chave);
+    setTimeout(() => setCopiado(null), 2000);
+  }
 
   async function criar() {
-    setEtapa("criando");
+    setCriando(true);
     const res = await fetch("/api/admin/criar-followup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -182,111 +198,119 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
       const novo = await res.json() as Followup;
       setFup(novo);
       onEnviado(novo);
-      setEtapa("pronto");
-    } else {
-      setEtapa("preview");
     }
+    setCriando(false);
   }
 
-  const waMsg = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${fup ? `https://kirisaude.com.br/followup/${fup.token}` : "https://kirisaude.com.br/followup/[link]"}`;
+  function BolhaCopia({ chave, texto, label }: { chave: string; texto: string; label?: string }) {
+    const ok = copiado === chave;
+    return (
+      <div className="flex flex-col gap-1">
+        {label && <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">{label}</div>}
+        <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]">{texto}</div>
+        <button
+          type="button"
+          onClick={() => copiar(chave, texto)}
+          className="self-end text-[11.5px] font-semibold cursor-pointer transition-colors"
+          style={{ color: ok ? "#2E7D4F" : "#44606C" }}
+        >
+          {ok ? "✓ Copiado!" : "Copiar"}
+        </button>
+      </div>
+    );
+  }
 
   if (!mounted || !portalRef.current) return null;
 
   return createPortal(
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" style={{ backgroundColor: "rgba(44,39,34,0.55)" }}>
-      <div className="bg-creme w-full max-w-[480px] rounded-[20px] shadow-xl flex flex-col" style={{ maxHeight: "min(90vh, 680px)" }}>
+      <div className="bg-creme w-full max-w-[480px] rounded-[20px] shadow-xl flex flex-col" style={{ maxHeight: "min(92vh, 700px)" }}>
 
-        {/* Header — fixo */}
+        {/* Header */}
         <div className="flex items-start justify-between gap-2 px-5 pt-5 pb-3 flex-none">
           <div>
             <div className="text-[15px] font-semibold text-carvao">Enviar follow-up</div>
-            <div className="text-[12.5px] text-muted mt-0.5">
-              {encaminhamento.nome_responsavel} → {profNome}
-            </div>
+            <div className="text-[12.5px] text-muted mt-0.5">{encaminhamento.nome_responsavel} → {profNome}</div>
           </div>
           <button onClick={onFechar} className="text-muted hover:text-carvao cursor-pointer flex-none mt-0.5 p-1">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
           </button>
         </div>
 
-        {/* Conteúdo scrollável */}
-        <div className="flex-1 overflow-y-auto px-5 flex flex-col gap-3 pb-2">
-
-          {/* Canal */}
+        {/* Canal */}
+        <div className="px-5 pb-3 flex-none">
           <div className="flex items-center gap-2 px-3 py-2 rounded-[10px] bg-white border border-linha text-[13px]">
             {isWa ? (
               <>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
-                <span className="font-medium text-carvao">WhatsApp</span>
-                <span className="text-muted">· {encaminhamento.contato}</span>
+                <span className="font-medium text-carvao">WhatsApp · {encaminhamento.contato}</span>
               </>
             ) : (
               <>
                 <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2.5" stroke="#44606C" strokeWidth="1.5"/><path d="M2 7l8 5 8-5" stroke="#44606C" strokeWidth="1.5" strokeLinejoin="round"/></svg>
-                <span className="font-medium text-carvao">E-mail</span>
-                <span className="text-muted">· {encaminhamento.contato}</span>
+                <span className="font-medium text-carvao">E-mail · {encaminhamento.contato}</span>
               </>
             )}
           </div>
+        </div>
 
-          {/* Mensagem */}
-          <div className="flex flex-col gap-1">
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Mensagem 1 — enviada {isWa ? "via WhatsApp" : "por e-mail"}</div>
-            <div className="bg-white border border-linha rounded-[10px] px-3.5 py-3 text-[13px] text-carvao leading-[1.6]">{waMsg}</div>
-          </div>
+        {/* Mensagens scrolláveis */}
+        <div className="flex-1 overflow-y-auto px-5 flex flex-col gap-4 pb-3">
 
-          {/* Fluxo */}
-          <div className="flex flex-col gap-1">
-            <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Próximas perguntas (automáticas, via link)</div>
-            <div className="bg-white border border-linha rounded-[10px] px-3.5 py-3 text-[12.5px] flex flex-col gap-2.5">
-              <div className="font-semibold text-carvao">Você entrou em contato com {profNome}?</div>
-              <div className="pl-3 border-l-2 border-[#D8C7B0] flex flex-col gap-2">
-                <div>
-                  <span className="text-[#2E7D4F] font-semibold">✓ Sim</span>
-                  <span className="text-muted"> → Você agendou uma consulta?</span>
-                  <div className="pl-3 mt-1 flex flex-col gap-1 text-[12px]">
-                    <div><span className="text-[#2E7D4F] font-semibold">✓ Sim →</span><span className="text-muted"> Avaliação 1–5★ do profissional e da Kiri</span></div>
-                    <div><span className="text-ferrugem font-semibold">✗ Não →</span><span className="text-muted"> Motivo + opção de novo encaminhamento</span></div>
-                  </div>
-                </div>
-                <div>
-                  <span className="text-ferrugem font-semibold">✗ Não</span>
-                  <span className="text-muted"> → Motivo + opção de novo encaminhamento</span>
-                </div>
+          <BolhaCopia chave="m1" texto={msgs.m1} label="Mensagem 1 — envie agora" />
+
+          <div className="flex flex-col gap-3">
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Se responder SIM (entrou em contato)</div>
+            <div className="pl-3 border-l-2 border-[#B8D8C0] flex flex-col gap-3">
+              <BolhaCopia chave="sim_contato" texto={msgs.sim_contato} label="Mensagem 2a" />
+              <div className="pl-3 border-l-2 border-[#B8D8C0] flex flex-col gap-3">
+                <BolhaCopia chave="sim_agendou" texto={msgs.sim_agendou} label="Se SIM (agendou) — Mensagem 3a" />
+                <BolhaCopia chave="nao_agendou" texto={msgs.nao_agendou} label="Se NÃO (não agendou) — Mensagem 3b" />
               </div>
             </div>
           </div>
+
+          <div className="flex flex-col gap-3">
+            <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Se responder NÃO (não entrou em contato)</div>
+            <div className="pl-3 border-l-2 border-ferrugem/30 flex flex-col gap-3">
+              <BolhaCopia chave="nao_contato" texto={msgs.nao_contato} label="Mensagem 2b" />
+            </div>
+          </div>
+
+          {!fup && (
+            <div className="text-[11.5px] text-muted bg-[#FFF8E8] border border-[#E8C88A] rounded-[8px] px-3 py-2 leading-[1.5]">
+              💡 Crie o follow-up para gerar o link de avaliação (usado na mensagem 3a se a pessoa agendou).
+            </div>
+          )}
         </div>
 
-        {/* Botão — fixo na base */}
-        <div className="px-5 pt-3 pb-5 flex-none border-t border-linha">
-          {etapa === "pronto" && fup ? (
-            <div className="flex flex-col gap-2">
-              <div className="text-[12.5px] text-[#2E7D4F] font-semibold text-center">Follow-up criado! Agora abra o WhatsApp para enviar.</div>
-              {isWa && (
-                <a
-                  href={buildWaUrl(encaminhamento.contato, `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: https://kirisaude.com.br/followup/${fup.token}`)}
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 rounded-[12px] py-[13px] text-[14px] font-semibold no-underline cursor-pointer hover:opacity-90 transition-opacity"
-                  style={{ background: "#25D366", color: "#fff" }}
-                >
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fillOpacity="0.2"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
-                  Abrir WhatsApp
-                </a>
-              )}
-              <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
-            </div>
-          ) : (
+        {/* Base */}
+        <div className="px-5 pt-3 pb-5 flex-none border-t border-linha flex flex-col gap-2">
+          {!fup ? (
             <button
               type="button"
               onClick={criar}
-              disabled={etapa === "criando"}
-              className="w-full rounded-[12px] py-[13px] text-[14px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity"
-              style={{ background: isWa ? "#25D366" : "#44606C", color: "#fff" }}
+              disabled={criando}
+              className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity"
+              style={{ background: "#44606C", color: "#fff" }}
             >
-              {etapa === "criando" ? "Criando link…" : isWa ? "Criar link e abrir WhatsApp" : "Criar link e enviar e-mail"}
+              {criando ? "Criando…" : "Criar follow-up (gera link de avaliação)"}
             </button>
+          ) : (
+            <div className="text-[12px] text-[#2E7D4F] font-semibold text-center">✓ Follow-up criado — copie as mensagens acima e envie pelo WhatsApp</div>
           )}
+          {fup && isWa && (
+            <a
+              href={buildWaUrl(encaminhamento.contato, msgs.m1)}
+              target="_blank" rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 rounded-[12px] py-[12px] text-[14px] font-semibold no-underline cursor-pointer hover:opacity-90 transition-opacity"
+              style={{ background: "#25D366", color: "#fff" }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fillOpacity="0.2"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
+              Abrir WhatsApp com Mensagem 1
+            </a>
+          )}
+          <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
         </div>
       </div>
     </div>,
