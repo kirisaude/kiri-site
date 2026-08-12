@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import data from "@/data/profissionais.json";
@@ -158,6 +159,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 }) {
   const [etapa, setEtapa] = useState<"preview" | "criando" | "pronto">("preview");
   const [fup, setFup] = useState<Followup | null>(null);
+  const portalRef = useRef<HTMLElement | null>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { portalRef.current = document.body; setMounted(true); }, []);
 
   const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
   const isWa = !encaminhamento.contato.includes("@");
@@ -186,7 +190,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   const waMsg = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${fup ? `https://kirisaude.com.br/followup/${fup.token}` : "https://kirisaude.com.br/followup/[link]"}`;
 
-  return (
+  if (!mounted || !portalRef.current) return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-[200] flex items-center justify-center px-4" style={{ backgroundColor: "rgba(44,39,34,0.55)" }}>
       <div className="bg-creme w-full max-w-[480px] rounded-[20px] shadow-xl flex flex-col" style={{ maxHeight: "min(90vh, 680px)" }}>
 
@@ -283,7 +289,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    portalRef.current
   );
 }
 

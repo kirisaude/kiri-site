@@ -15,19 +15,24 @@ type Etapa = 1 | 2 | 3 | "nao-contato" | "nao-agendou" | "obrigada";
 
 function Estrelas({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-1.5">
       {[1, 2, 3, 4, 5].map((n) => (
         <button
           key={n}
           type="button"
           onClick={() => onChange(n)}
-          className={`w-12 h-12 rounded-full text-[20px] border-2 transition-all cursor-pointer font-semibold ${
-            value >= n
-              ? "bg-ferrugem border-ferrugem text-white"
-              : "bg-white border-linha text-muted hover:border-ferrugem"
-          }`}
+          className="cursor-pointer transition-transform hover:scale-110 active:scale-95 p-0.5"
+          aria-label={`${n} estrela${n > 1 ? "s" : ""}`}
         >
-          {n}
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 2l2.9 6.3L22 9.3l-5 4.9 1.2 6.8L12 17.8l-6.2 3.2L7 14.2 2 9.3l7.1-1z"
+              fill={value >= n ? "#BE6E4E" : "none"}
+              stroke={value >= n ? "#BE6E4E" : "#D8C7B0"}
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       ))}
     </div>
