@@ -60,8 +60,8 @@ export function Footer({ className = "" }: { className?: string }) {
         </div>
       </div>
 
-      {/* Mobile — linha 1: logo | instagram / linha 2: links */}
-      <div className="md:hidden flex flex-col" style={{ paddingTop: 24, paddingBottom: 24, gap: 16 }}>
+      {/* Mobile — linha 1: logo | instagram / linha 2: links alinhados à esquerda */}
+      <div className="md:hidden flex flex-col" style={{ paddingTop: 20, paddingBottom: 22, gap: 14 }}>
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center no-underline">
             <KiriLogoCompact height={24} />
@@ -77,10 +77,10 @@ export function Footer({ className = "" }: { className?: string }) {
             <span className="text-[15px] font-medium">@kiri.saude</span>
           </a>
         </div>
-        <div className="flex items-center justify-center gap-[18px]">
-          <a href="/contato" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
-          <a href="/termos" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
-          <a href="/politica-de-privacidade" className="text-[15px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
+        <div className="flex items-center gap-[16px]">
+          <a href="/contato" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
+          <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
+          <a href="/politica-de-privacidade" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
         </div>
       </div>
 
