@@ -82,6 +82,7 @@ interface Followup {
   nps_profissional: number | null;
   nps_plataforma: number | null;
   comentario: string | null;
+  desfecho: string | null;
   concluido_em: string | null;
   criado_em: string;
 }
@@ -211,16 +212,25 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   async function salvarEEncerrar() {
     setEncerrando(true);
+    // Cria follow-up diretamente sem notificar o pai ainda (evita desmonte do modal)
     let fupAtual = fup;
-    if (!fupAtual) fupAtual = await criar();
-    if (!fupAtual) { setEncerrando(false); return; }
+    if (!fupAtual) {
+      const res = await fetch("/api/admin/criar-followup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
+      });
+      if (!res.ok) { setEncerrando(false); return; }
+      fupAtual = await res.json() as Followup;
+    }
     await fetch("/api/admin/followup-desfecho", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
     });
-    setEncerrando(false);
-    setEncerrado(true);
+    // Notifica pai e fecha — em batch para evitar re-render intermediário
+    onEnviado(fupAtual);
+    onFechar();
   }
 
   function BolhaCopia({ chave, texto, label }: { chave: string; texto: string; label?: string }) {
@@ -445,6 +455,15 @@ function FollowupBadge({ followup, encaminhamento, onCriado }: {
   }
 
   const isWa = followup.contato_tipo === "whatsapp";
+
+  if (followup.concluido_em && !followup.nps_profissional) {
+    return (
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#D8C7B0] text-[#6E6457] bg-[#F5EFE6]">Follow-up encerrado</span>
+        {followup.desfecho && <span className="text-[11px] text-muted italic truncate max-w-[200px]">"{followup.desfecho}"</span>}
+      </div>
+    );
+  }
 
   if (followup.concluido_em && followup.nps_profissional) {
     return (
