@@ -60,28 +60,34 @@ export function Footer({ className = "" }: { className?: string }) {
         </div>
       </div>
 
-      {/* Mobile — linha 1: logo | instagram / linha 2: links alinhados à esquerda */}
-      <div className="md:hidden flex flex-col" style={{ paddingTop: 20, paddingBottom: 22, gap: 14 }}>
+      {/* Mobile */}
+      <div className="md:hidden flex flex-col" style={{ paddingTop: 20, paddingBottom: 22, gap: 18 }}>
+
+        {/* Linha 1: Instagram centralizado */}
+        <a
+          href="https://www.instagram.com/kiri.saude"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center no-underline"
+          style={{ gap: 8 }}
+        >
+          <InstagramIcon size={15} />
+          <span className="text-[14px]" style={{ color: "#44606C" }}>Siga-nos no Instagram</span>
+          <span className="text-[14px] font-semibold" style={{ color: "#BE6E4E" }}>@kiri.saude</span>
+        </a>
+
+        {/* Linha 2: logo à esquerda, links à direita */}
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center no-underline">
-            <KiriLogoCompact height={24} />
+          <Link href="/" className="flex items-center no-underline flex-none">
+            <KiriLogoCompact height={22} />
           </Link>
-          <a
-            href="https://www.instagram.com/kiri.saude"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 no-underline"
-            style={{ color: "#9A8C78" }}
-          >
-            <InstagramIcon size={14} />
-            <span className="text-[15px] font-medium">@kiri.saude</span>
-          </a>
+          <div className="flex items-center" style={{ gap: 14 }}>
+            <a href="/contato" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
+            <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
+            <a href="/politica-de-privacidade" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
+          </div>
         </div>
-        <div className="flex items-center gap-[16px]">
-          <a href="/contato" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
-          <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos de uso</a>
-          <a href="/politica-de-privacidade" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
-        </div>
+
       </div>
 
     </div>
