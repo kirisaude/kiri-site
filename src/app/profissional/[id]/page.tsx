@@ -33,6 +33,28 @@ export function generateStaticParams() {
   return profissionais.map((p) => ({ id: p.id }));
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const { id } = await params;
+  const p = profissionais.find((pro) => pro.id === id);
+  if (!p || p.oculto) return {};
+  const nome = titleCasePT(p.nome);
+  const titulo = p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao;
+  const cidade = titleCasePT(normalizarCidade(p.cidade));
+  const areas = p.areas_atuacao.slice(0, 3).join(", ");
+  return {
+    title: `${nome} — ${titulo} em ${cidade} | Kiri Saúde`,
+    description: `${nome} é ${titulo.toLowerCase()} em ${cidade}, verificada pela Kiri Saúde. Especialidades: ${areas}. Perfil completo com formação, registro e contato.`,
+    alternates: { canonical: `https://kirisaude.com.br/profissional/${id}` },
+    openGraph: {
+      title: `${nome} — ${titulo} | Kiri Saúde`,
+      description: `${titulo} em ${cidade}. Formação verificada. ${areas}.`,
+      url: `https://kirisaude.com.br/profissional/${id}`,
+      siteName: "Kiri Saúde",
+      ...(p.foto_url ? { images: [{ url: p.foto_url }] } : {}),
+    },
+  };
+}
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
@@ -189,8 +211,30 @@ export default async function PerfilPage({ params }: PageProps) {
       : [{ rotulo: "Área", valor: areaValor, detalhe: "" }]),
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": titleCasePT(p.nome),
+    "jobTitle": p.genero === "F" ? feminizarTitulo(p.titulo_exibicao) : p.titulo_exibicao,
+    ...(registroNorm ? { "identifier": registroNorm } : {}),
+    "knowsAbout": p.areas_atuacao,
+    "worksFor": {
+      "@type": "MedicalBusiness",
+      "name": "Kiri Saúde",
+      "url": "https://kirisaude.com.br",
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": titleCasePT(normalizarCidade(p.cidade)),
+      "addressCountry": "BR",
+    },
+    "url": `https://kirisaude.com.br/profissional/${p.id}`,
+    ...(p.foto_url ? { "image": p.foto_url } : {}),
+  };
+
   return (
     <div className="min-h-screen bg-creme overflow-x-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Nav */}
       <div className="w-full px-4 md:px-8 pt-4 pb-0">
         <div className="flex items-center pb-3">
