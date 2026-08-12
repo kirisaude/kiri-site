@@ -145,54 +145,187 @@ function buildWaFamilia(contato: string, nome: string, cardToken: string): strin
   return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
 }
 
+function buildWaUrl(numero: string, texto: string): string {
+  const digits = numero.replace(/\D/g, "");
+  const n = digits.startsWith("55") ? digits : `55${digits}`;
+  return `https://wa.me/${n}?text=${encodeURIComponent(texto)}`;
+}
+
+function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
+  encaminhamento: Encaminhamento;
+  onFechar: () => void;
+  onEnviado: (fup: Followup) => void;
+}) {
+  const [etapa, setEtapa] = useState<"preview" | "criando" | "pronto">("preview");
+  const [fup, setFup] = useState<Followup | null>(null);
+
+  const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
+  const isWa = !encaminhamento.contato.includes("@");
+
+  const profNome = encaminhamento.profissional_solicitado ?? "o profissional indicado";
+  const linkPlaceholder = "https://kirisaude.com.br/followup/[link]";
+  const msgTexto = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${fup ? `https://kirisaude.com.br/followup/${fup.token}` : linkPlaceholder}`;
+
+  async function criar() {
+    setEtapa("criando");
+    const res = await fetch("/api/admin/criar-followup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
+    });
+    if (res.ok) {
+      const novo = await res.json() as Followup;
+      setFup(novo);
+      onEnviado(novo);
+      setEtapa("pronto");
+    } else {
+      setEtapa("preview");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center" style={{ backgroundColor: "rgba(44,39,34,0.5)" }}>
+      <div className="bg-creme w-full md:max-w-[500px] md:rounded-[20px] rounded-t-[20px] px-5 py-6 shadow-xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+
+        {/* Header */}
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <div className="text-[15px] font-semibold text-carvao">Enviar follow-up</div>
+            <div className="text-[12.5px] text-muted mt-0.5">para {encaminhamento.nome_responsavel} → {profNome}</div>
+          </div>
+          <button onClick={onFechar} className="text-muted hover:text-carvao cursor-pointer flex-none mt-0.5">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+          </button>
+        </div>
+
+        {/* Canal */}
+        <div className="flex items-center gap-2 px-3 py-2 rounded-[10px] bg-white border border-linha text-[13px]">
+          {isWa ? (
+            <>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366" /><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
+              <span className="text-carvao font-medium">WhatsApp</span>
+              <span className="text-muted">· {encaminhamento.contato}</span>
+            </>
+          ) : (
+            <>
+              <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2.5" stroke="#44606C" strokeWidth="1.5"/><path d="M2 7l8 5 8-5" stroke="#44606C" strokeWidth="1.5" strokeLinejoin="round"/></svg>
+              <span className="text-carvao font-medium">E-mail</span>
+              <span className="text-muted">· {encaminhamento.contato}</span>
+            </>
+          )}
+        </div>
+
+        {/* Preview da mensagem */}
+        <div className="flex flex-col gap-1.5">
+          <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Mensagem 1 — enviada agora</div>
+          <div className="bg-white border border-linha rounded-[10px] px-3.5 py-3 text-[13px] text-carvao leading-[1.6] whitespace-pre-wrap">{msgTexto}</div>
+          {!isWa && <div className="text-[11.5px] text-muted">O link leva a família para uma página de perguntas.</div>}
+        </div>
+
+        {/* Fluxo de respostas */}
+        <div className="flex flex-col gap-2">
+          <div className="text-[11px] font-semibold text-muted uppercase tracking-wide">Fluxo de respostas (automático via link)</div>
+          <div className="bg-white border border-linha rounded-[10px] px-3.5 py-3 flex flex-col gap-3 text-[12.5px]">
+
+            {/* Passo 1 */}
+            <div>
+              <div className="font-semibold text-carvao mb-1">Pergunta 1: Você entrou em contato com {profNome}?</div>
+              <div className="flex flex-col gap-2 pl-3 border-l-2 border-[#D8C7B0]">
+
+                {/* Sim → contatou */}
+                <div>
+                  <div className="text-[#2E7D4F] font-semibold">✓ Sim</div>
+                  <div className="text-muted pl-3">Pergunta 2: Você agendou uma consulta?</div>
+                  <div className="flex flex-col gap-1.5 pl-6 mt-1 border-l border-[#E0E0D8]">
+                    <div>
+                      <span className="text-[#2E7D4F] font-semibold">✓ Sim → </span>
+                      <span className="text-muted">Avaliação (1–5 ★) do profissional e da Kiri + comentário</span>
+                    </div>
+                    <div>
+                      <span className="text-ferrugem font-semibold">✗ Não → </span>
+                      <span className="text-muted">Motivo + opção de pedir novo encaminhamento</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Não → não contatou */}
+                <div>
+                  <div className="text-ferrugem font-semibold">✗ Não</div>
+                  <div className="pl-3 text-muted">Motivo + opção de pedir novo encaminhamento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Ação */}
+        {etapa === "pronto" && fup ? (
+          <div className="flex flex-col gap-2">
+            <div className="text-[12.5px] text-[#2E7D4F] font-semibold">Follow-up criado! Abra o WhatsApp para enviar a mensagem.</div>
+            {isWa && (
+              <a
+                href={buildWaUrl(encaminhamento.contato, `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: https://kirisaude.com.br/followup/${fup.token}`)}
+                target="_blank" rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 rounded-[12px] py-[13px] text-[14px] font-semibold no-underline cursor-pointer transition-opacity hover:opacity-90"
+                style={{ background: "#25D366", color: "#fff" }}
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fillOpacity="0.2"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
+                Abrir WhatsApp
+              </a>
+            )}
+            <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao">Fechar</button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={criar}
+            disabled={etapa === "criando"}
+            className="w-full rounded-[12px] py-[13px] text-[14px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity"
+            style={{ background: isWa ? "#25D366" : "#44606C", color: "#fff" }}
+          >
+            {etapa === "criando" ? "Criando…" : isWa ? "Criar link e abrir WhatsApp" : "Criar link e enviar e-mail"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function FollowupBadge({ followup, encaminhamento, onCriado }: {
   followup: Followup | undefined;
   encaminhamento: Encaminhamento;
   onCriado: (fup: Followup) => void;
 }) {
-  const [criando, setCriando] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   function buildWaFollowup(fup: Followup): string {
-    const digits = encaminhamento.contato.replace(/\D/g, "");
-    const numero = digits.startsWith("55") ? digits : `55${digits}`;
     const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
     const profNome = fup.profissional_nome ?? "o profissional indicado";
     const url = `https://kirisaude.com.br/followup/${fup.token}`;
-    const msg = `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${url}`;
-    return `https://wa.me/${numero}?text=${encodeURIComponent(msg)}`;
-  }
-
-  async function criarEEnviar() {
-    setCriando(true);
-    try {
-      const res = await fetch("/api/admin/criar-followup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
-      });
-      if (res.ok) {
-        const fup = await res.json() as Followup;
-        onCriado(fup);
-        window.open(buildWaFollowup(fup), "_blank");
-      }
-    } finally {
-      setCriando(false);
-    }
+    return buildWaUrl(encaminhamento.contato, `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${url}`);
   }
 
   if (!followup) {
     return (
-      <div className="flex items-center gap-2 flex-wrap mt-1">
-        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#D8C7B0] text-muted bg-[#F5EFE6]">Follow-up pendente</span>
-        <button
-          type="button"
-          onClick={criarEEnviar}
-          disabled={criando}
-          className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full cursor-pointer hover:bg-[#E0F0E5] disabled:opacity-50 transition-colors"
-        >
-          {criando ? "Criando…" : "Enviar follow-up"}
-        </button>
-      </div>
+      <>
+        <div className="flex items-center gap-2 flex-wrap mt-1">
+          <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#D8C7B0] text-muted bg-[#F5EFE6]">Follow-up pendente</span>
+          <button
+            type="button"
+            onClick={() => setShowModal(true)}
+            className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full cursor-pointer hover:bg-[#E0F0E5] transition-colors"
+          >
+            Enviar follow-up →
+          </button>
+        </div>
+        {showModal && (
+          <FollowupModal
+            encaminhamento={encaminhamento}
+            onFechar={() => setShowModal(false)}
+            onEnviado={(fup) => { onCriado(fup); }}
+          />
+        )}
+      </>
     );
   }
 
@@ -239,11 +372,11 @@ function FollowupBadge({ followup, encaminhamento, onCriado }: {
     );
   }
 
-  // Aguardando resposta
+  // Aguardando resposta — já criado, mostra botão de abrir WA novamente
   return (
     <div className="flex items-center gap-2 flex-wrap mt-1">
       <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#E8C88A] text-[#8B6A1E] bg-[#FFF8E8]">
-        {isWa && !followup.email_enviado_em ? "Follow-up criado — envie o WA" : "Aguardando resposta"}
+        {isWa && !followup.email_enviado_em ? "Aguardando — WA não enviado ainda" : "Aguardando resposta"}
       </span>
       {isWa && (
         <a

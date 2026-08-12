@@ -1147,7 +1147,7 @@ export default function Home() {
             </button>
 
             {/* Rodapé */}
-            <Footer className="mt-12 md:mt-16 mb-12" />
+            <Footer className="mt-6 md:mt-16 mb-12" />
           </>
         )}
       </div>
