@@ -64,7 +64,7 @@ export function Footer({ className = "" }: { className?: string }) {
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden flex flex-col" style={{ paddingTop: 20, paddingBottom: 22, gap: 18 }}>
+      <div className="md:hidden flex flex-col items-center" style={{ paddingTop: 20, paddingBottom: 22, gap: 18 }}>
 
         {/* Linha 1: Instagram centralizado */}
         <a
@@ -79,16 +79,16 @@ export function Footer({ className = "" }: { className?: string }) {
           <span className="text-[14px] font-semibold" style={{ color: "#BE6E4E" }}>@kiri.saude</span>
         </a>
 
-        {/* Linha 2: logo esquerda, links direita */}
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center no-underline flex-none">
-            <KiriLogoCompact height={22} />
-          </Link>
-          <div className="flex items-center" style={{ gap: 14 }}>
-            <a href="/contato" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Fale conosco</a>
-            <a href="/termos" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Termos</a>
-            <a href="/politica-de-privacidade" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Privacidade</a>
-          </div>
+        {/* Linha 2: logo centralizada */}
+        <Link href="/" className="flex items-center justify-center no-underline">
+          <KiriLogoCompact height={22} />
+        </Link>
+
+        {/* Linha 3: links centralizados */}
+        <div className="flex items-center justify-center" style={{ gap: 14, marginTop: 12 }}>
+          <a href="/contato" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Fale conosco</a>
+          <a href="/termos" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Termos</a>
+          <a href="/politica-de-privacidade" className="no-underline" style={{ fontSize: 13, color: "#6E6457" }}>Privacidade</a>
         </div>
 
       </div>
