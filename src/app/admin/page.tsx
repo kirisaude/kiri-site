@@ -160,6 +160,10 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [criando, setCriando] = useState(false);
   const [fup, setFup] = useState<Followup | null>(null);
   const [copiado, setCopiado] = useState<string | null>(null);
+  const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
+  function toggleMarca(chave: string) {
+    setMarcadas(prev => { const s = new Set(prev); s.has(chave) ? s.delete(chave) : s.add(chave); return s; });
+  }
   const portalRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => { portalRef.current = document.body; setMounted(true); }, []);
@@ -172,11 +176,11 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const ratingUrl = fup ? `https://kirisaude.com.br/followup/${fup.token}` : null;
 
   const msgs = {
-    m1: `Olá, ${primeiro}! Tudo bem? 🌱 Aqui é Iohana, da equipe Kiri. Há alguns dias te indicamos ${profNome}. Você conseguiu entrar em contato com ela/ele?`,
+    m1: `Olá, ${primeiro}! Tudo bem? Aqui é Iohana, da equipe Kiri. Há alguns dias te indicamos ${profNome}. Você conseguiu entrar em contato com ela/ele?`,
     sim_contato: `Que bom, ${primeiro}! Você conseguiu agendar uma consulta com ${profPrimeiro}?`,
     sim_agendou: ratingUrl
-      ? `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? ${ratingUrl}`
-      : `Que ótimo! Ficamos muito felizes 🌱 Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? [link gerado após criar]`,
+      ? `Que ótimo! Ficamos muito felizes. Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? ${ratingUrl}`
+      : `Que ótimo! Ficamos muito felizes. Você toparia avaliar em 1 minuto o atendimento de ${profPrimeiro} e a experiência com a Kiri? [link gerado após criar]`,
     nao_agendou: `Entendemos, sem problemas. O que aconteceu? Podemos te ajudar a encontrar outro profissional, se precisar.`,
     nao_contato: `Tudo bem! O que aconteceu? Se quiser, podemos te indicar outro profissional ou tentar novamente com ${profPrimeiro}.`,
   };
@@ -204,10 +208,21 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   function BolhaCopia({ chave, texto, label }: { chave: string; texto: string; label?: string }) {
     const ok = copiado === chave;
+    const feita = marcadas.has(chave);
     return (
       <div className="flex flex-col gap-1">
-        {label && <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">{label}</div>}
-        <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]">{texto}</div>
+        {label && (
+          <label className="flex items-center gap-2 cursor-pointer select-none w-fit">
+            <input
+              type="checkbox"
+              checked={feita}
+              onChange={() => toggleMarca(chave)}
+              className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
+            />
+            <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: feita ? "#2E7D4F" : "#9A8C78", textDecoration: feita ? "line-through" : "none" }}>{label}</span>
+          </label>
+        )}
+        <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]" style={{ opacity: feita ? 0.5 : 1 }}>{texto}</div>
         <button
           type="button"
           onClick={() => copiar(chave, texto)}
@@ -258,8 +273,16 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
         <div className="flex-1 overflow-y-auto px-5 flex flex-col gap-4 pb-3">
 
           <div className="flex flex-col gap-1">
-            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Mensagem 1 — envie agora</div>
-            <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]">{msgs.m1}</div>
+            <label className="flex items-center gap-2 cursor-pointer select-none w-fit">
+              <input
+                type="checkbox"
+                checked={marcadas.has("m1")}
+                onChange={() => toggleMarca("m1")}
+                className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
+              />
+              <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: marcadas.has("m1") ? "#2E7D4F" : "#9A8C78", textDecoration: marcadas.has("m1") ? "line-through" : "none" }}>Mensagem 1 — envie agora</span>
+            </label>
+            <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]" style={{ opacity: marcadas.has("m1") ? 0.5 : 1 }}>{msgs.m1}</div>
             <div className="flex items-center justify-between mt-0.5">
               {isWa && (
                 <a
