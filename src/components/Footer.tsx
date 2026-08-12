@@ -61,7 +61,7 @@ export function Footer({ className = "" }: { className?: string }) {
       </div>
 
       {/* Mobile */}
-      <div className="md:hidden pt-7 pb-5 flex flex-col items-center gap-5">
+      <div className="md:hidden flex flex-col items-center" style={{ paddingTop: 28, paddingBottom: 28, gap: 20 }}>
         <Link href="/" className="flex items-center no-underline">
           <KiriLogoCompact height={24} />
         </Link>
@@ -78,7 +78,7 @@ export function Footer({ className = "" }: { className?: string }) {
           style={{ color: "#9A8C78" }}
         >
           <InstagramIcon size={14} />
-          <span className="text-[14px] font-medium">@kiri.saude</span>
+          <span className="text-[15px] font-medium">@kiri.saude</span>
         </a>
       </div>
 

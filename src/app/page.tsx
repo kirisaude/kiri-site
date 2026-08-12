@@ -1041,14 +1041,8 @@ export default function Home() {
                     ))}
                   </div>
 
-                  {/* Desktop: grid 2 linhas com scroll horizontal */}
-                  <div className="hidden md:block overflow-x-auto scrollbar-hide pb-1.5">
-                    <div className="grid gap-5" style={{ gridTemplateRows: "repeat(2, auto)", gridAutoFlow: "column", gridAutoColumns: "calc(25% - 15px)" }}>
-                      {sec.pros.map((p) => (
-                        <MiniCard key={p.id} profissional={p} />
-                      ))}
-                    </div>
-                  </div>
+                  {/* Desktop: grid 2 linhas com scroll horizontal e setas */}
+                  <DesktopScrollRow pros={sec.pros} />
                 </div>
               );
             })}
@@ -1415,11 +1409,93 @@ export default function Home() {
   );
 }
 
+function DesktopScrollRow({ pros }: { pros: Profissional[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+
+  function syncState() {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 4);
+    setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }
+
+  useEffect(() => {
+    syncState();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", syncState, { passive: true });
+    const ro = new ResizeObserver(syncState);
+    ro.observe(el);
+    return () => { el.removeEventListener("scroll", syncState); ro.disconnect(); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function slide(dir: "left" | "right") {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir === "right" ? el.clientWidth / 2 : -el.clientWidth / 2, behavior: "smooth" });
+  }
+
+  return (
+    <div className="relative hidden md:block">
+      <div ref={scrollRef} className="overflow-x-auto scrollbar-hide pb-1.5">
+        <div
+          className="grid gap-5"
+          style={{ gridTemplateRows: "repeat(2, auto)", gridAutoFlow: "column", gridAutoColumns: "calc(25% - 15px)" }}
+        >
+          {pros.map((p) => <MiniCard key={p.id} profissional={p} />)}
+        </div>
+      </div>
+
+      {/* Fades */}
+      {canLeft && (
+        <div className="absolute inset-y-0 left-0 w-14 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #F5EFE6, transparent)" }} />
+      )}
+      {canRight && (
+        <div className="absolute inset-y-0 right-0 w-14 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #F5EFE6, transparent)" }} />
+      )}
+
+      {/* Arrow left */}
+      {canLeft && (
+        <button
+          type="button"
+          aria-label="Rolar para a esquerda"
+          onClick={() => slide("left")}
+          className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer shadow-[0_2px_8px_rgba(60,55,45,0.14)] hover:shadow-[0_4px_14px_rgba(60,55,45,0.22)] transition-shadow"
+          style={{ border: "1px solid #D8C7B0" }}
+        >
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+            <path d="M12.5 5L7.5 10L12.5 15" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+
+      {/* Arrow right */}
+      {canRight && (
+        <button
+          type="button"
+          aria-label="Rolar para a direita"
+          onClick={() => slide("right")}
+          className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer shadow-[0_2px_8px_rgba(60,55,45,0.14)] hover:shadow-[0_4px_14px_rgba(60,55,45,0.22)] transition-shadow"
+          style={{ border: "1px solid #D8C7B0" }}
+        >
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 5L12.5 10L7.5 15" stroke="#44606C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+}
+
 function MiniCard({ profissional: p }: { profissional: Profissional }) {
-  const [expandido, setExpandido] = useState(false);
   const LIMITE = 3;
-  const temMais = p.areas_atuacao.length > LIMITE;
-  const areasVisiveis = expandido ? p.areas_atuacao : p.areas_atuacao.slice(0, LIMITE);
+  const areas = p.areas_atuacao.slice(0, LIMITE);
+  const resto = p.areas_atuacao.length - LIMITE;
 
   return (
     <Link
@@ -1446,8 +1522,9 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         </div>
       </div>
 
-      <div className="flex gap-1.5 flex-wrap mt-[11px] items-center">
-        {areasVisiveis.map((area) => (
+      {/* Tags — altura fixa de 2 linhas para alinhar a localização em todos os cards */}
+      <div className="flex gap-1.5 flex-wrap mt-[11px] items-start overflow-hidden" style={{ minHeight: 46, maxHeight: 46 }}>
+        {areas.map((area) => (
           <span
             key={area}
             className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
@@ -1455,14 +1532,10 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
             {area}
           </span>
         ))}
-        {temMais && (
-          <button
-            type="button"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setExpandido((v) => !v); }}
-            className="text-[10.5px] md:text-[12px] font-semibold text-muted px-1.5 py-0.5 cursor-pointer"
-          >
-            {expandido ? "←" : `+${p.areas_atuacao.length - LIMITE} →`}
-          </button>
+        {resto > 0 && (
+          <span className="text-[10.5px] md:text-[12px] font-semibold text-muted px-1.5 py-0.5">
+            +{resto}
+          </span>
         )}
       </div>
 
