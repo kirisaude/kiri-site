@@ -55,7 +55,7 @@ export function Footer({ className = "" }: { className?: string }) {
             </Link>
           ))}
           <span className="text-[#D8C7B0] select-none">·</span>
-          <Link href="/termos" className="text-[12px] text-muted no-underline hover:text-cinza-texto transition-colors">Termos</Link>
+          <Link href="/termos" className="text-[12px] text-muted no-underline hover:text-cinza-texto transition-colors">Termos de uso</Link>
           <Link href="/politica-de-privacidade" className="text-[12px] text-muted no-underline hover:text-cinza-texto transition-colors">Privacidade</Link>
         </div>
       </div>
@@ -79,7 +79,7 @@ export function Footer({ className = "" }: { className?: string }) {
         </div>
         <div className="flex items-center gap-[16px]">
           <a href="/contato" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Fale conosco</a>
-          <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos</a>
+          <a href="/termos" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Termos de uso</a>
           <a href="/politica-de-privacidade" className="text-[14px] no-underline" style={{ color: "#6E6457" }}>Privacidade</a>
         </div>
       </div>
