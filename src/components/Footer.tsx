@@ -44,8 +44,8 @@ export function Footer({ className = "" }: { className?: string }) {
               {label}
             </Link>
           ))}
-          <Link href="/termos" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#9A8C78" }}>Termos de uso</Link>
-          <Link href="/politica-de-privacidade" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#9A8C78" }}>Privacidade</Link>
+          <Link href="/termos" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#8A7E6A" }}>Termos de uso</Link>
+          <Link href="/politica-de-privacidade" className="no-underline hover:text-carvao transition-colors" style={{ fontSize: 14, color: "#8A7E6A" }}>Privacidade</Link>
         </div>
 
         {/* Extrema direita: Instagram */}
