@@ -161,6 +161,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [fup, setFup] = useState<Followup | null>(null);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
+  const [desfecho, setDesfecho] = useState("");
+  const [salvandoDesfecho, setSalvandoDesfecho] = useState(false);
+  const [desfechoSalvo, setDesfechoSalvo] = useState(false);
   function toggleMarca(chave: string) {
     setMarcadas(prev => { const s = new Set(prev); s.has(chave) ? s.delete(chave) : s.add(chave); return s; });
   }
@@ -326,9 +329,44 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
           {!fup && (
             <div className="text-[11.5px] text-muted bg-[#FFF8E8] border border-[#E8C88A] rounded-[8px] px-3 py-2 leading-[1.5]">
-              💡 Crie o follow-up para gerar o link de avaliação (usado na mensagem 3a se a pessoa agendou).
+              Crie o follow-up para gerar o link de avaliação (usado na mensagem 3a se a pessoa agendou).
             </div>
           )}
+
+          {/* Desfecho */}
+          <div className="flex flex-col gap-1.5 pt-1 border-t border-linha">
+            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Desfecho do contato</div>
+            <textarea
+              value={desfecho}
+              onChange={e => setDesfecho(e.target.value)}
+              rows={3}
+              placeholder="Ex: família agendou para setembro, aguardando confirmação. / Não quis mais, desistiu."
+              className="w-full border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao placeholder:text-muted outline-none resize-none leading-[1.55]"
+              style={{ background: "#fff" }}
+              onFocus={e => (e.currentTarget.style.borderColor = "#44606C")}
+              onBlur={e => (e.currentTarget.style.borderColor = "")}
+            />
+            <button
+              type="button"
+              disabled={!fup || !desfecho.trim() || salvandoDesfecho}
+              onClick={async () => {
+                if (!fup) return;
+                setSalvandoDesfecho(true);
+                await fetch("/api/admin/followup-desfecho", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ followup_id: fup.id, desfecho: desfecho.trim() }),
+                });
+                setSalvandoDesfecho(false);
+                setDesfechoSalvo(true);
+                setTimeout(() => setDesfechoSalvo(false), 3000);
+              }}
+              className="self-end text-[12px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-colors"
+              style={{ color: desfechoSalvo ? "#2E7D4F" : "#44606C" }}
+            >
+              {salvandoDesfecho ? "Salvando…" : desfechoSalvo ? "✓ Salvo!" : !fup ? "Crie o follow-up primeiro" : "Salvar anotação"}
+            </button>
+          </div>
         </div>
 
         {/* Base */}
