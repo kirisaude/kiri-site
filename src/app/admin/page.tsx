@@ -163,8 +163,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [copiado, setCopiado] = useState<string | null>(null);
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
   const [desfecho, setDesfecho] = useState("");
+  const [salvando, setSalvando] = useState(false);
+  const [anotacaoSalva, setAnotacaoSalva] = useState(false);
   const [encerrando, setEncerrando] = useState(false);
-  const [encerrado, setEncerrado] = useState(false);
   function toggleMarca(chave: string) {
     setMarcadas(prev => { const s = new Set(prev); s.has(chave) ? s.delete(chave) : s.add(chave); return s; });
   }
@@ -210,25 +211,47 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
     return novo;
   }
 
-  async function salvarEEncerrar() {
-    setEncerrando(true);
-    // Cria follow-up diretamente sem notificar o pai ainda (evita desmonte do modal)
+  async function criarSemNotificar(): Promise<Followup | null> {
+    const res = await fetch("/api/admin/criar-followup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
+    });
+    if (!res.ok) return null;
+    return await res.json() as Followup;
+  }
+
+  async function salvarAnotacao() {
+    if (!desfecho.trim()) return;
+    setSalvando(true);
     let fupAtual = fup;
     if (!fupAtual) {
-      const res = await fetch("/api/admin/criar-followup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
-      });
-      if (!res.ok) { setEncerrando(false); return; }
-      fupAtual = await res.json() as Followup;
+      fupAtual = await criarSemNotificar();
+      if (!fupAtual) { setSalvando(false); return; }
+      setFup(fupAtual);
+    }
+    await fetch("/api/admin/followup-desfecho", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim() }),
+    });
+    setSalvando(false);
+    setAnotacaoSalva(true);
+    setTimeout(() => setAnotacaoSalva(false), 2500);
+  }
+
+  async function salvarEEncerrar() {
+    setEncerrando(true);
+    let fupAtual = fup;
+    if (!fupAtual) {
+      fupAtual = await criarSemNotificar();
+      if (!fupAtual) { setEncerrando(false); return; }
     }
     await fetch("/api/admin/followup-desfecho", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
     });
-    // Notifica pai e fecha — em batch para evitar re-render intermediário
     onEnviado(fupAtual);
     onFechar();
   }
@@ -376,39 +399,36 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
         {/* Base */}
         <div className="px-5 pt-3 pb-5 flex-none border-t border-linha flex flex-col gap-2">
-          {encerrado ? (
-            <div className="flex flex-col items-center gap-3">
-              <div className="text-[13px] font-semibold text-[#2E7D4F] text-center">Follow-up encerrado e desfecho salvo.</div>
-              <button onClick={onFechar} className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer" style={{ background: "#44606C", color: "#fff" }}>Fechar</button>
-            </div>
-          ) : (
-            <>
-              <button
-                type="button"
-                onClick={salvarEEncerrar}
-                disabled={!desfecho.trim() || encerrando}
-                className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity"
-                style={{ background: "#BE6E4E", color: "#fff" }}
-              >
-                {encerrando ? "Salvando…" : "Salvar desfecho e encerrar follow-up"}
-              </button>
-              {!fup && (
-                <button
-                  type="button"
-                  onClick={() => criar()}
-                  disabled={criando}
-                  className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-50 transition-opacity border border-ardosia"
-                  style={{ background: "transparent", color: "#44606C" }}
-                >
-                  {criando ? "Criando…" : "Criar follow-up sem encerrar (gera link de avaliação)"}
-                </button>
-              )}
-              {fup && (
-                <div className="text-[11.5px] text-[#2E7D4F] text-center">Follow-up criado — copie as mensagens e envie pelo WhatsApp</div>
-              )}
-              <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
-            </>
+          <button
+            type="button"
+            onClick={salvarAnotacao}
+            disabled={!desfecho.trim() || salvando || encerrando}
+            className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity border"
+            style={{ background: "transparent", color: anotacaoSalva ? "#2E7D4F" : "#44606C", borderColor: anotacaoSalva ? "#2E7D4F" : "#44606C" }}
+          >
+            {salvando ? "Salvando…" : anotacaoSalva ? "✓ Anotação salva!" : "Salvar anotação (sem encerrar)"}
+          </button>
+          <button
+            type="button"
+            onClick={salvarEEncerrar}
+            disabled={!desfecho.trim() || encerrando || salvando}
+            className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity"
+            style={{ background: "#BE6E4E", color: "#fff" }}
+          >
+            {encerrando ? "Encerrando…" : "Salvar e encerrar follow-up"}
+          </button>
+          {!fup && (
+            <button
+              type="button"
+              onClick={() => criar()}
+              disabled={criando}
+              className="text-[12px] text-muted cursor-pointer hover:text-carvao disabled:opacity-40 text-center transition-colors"
+            >
+              {criando ? "Criando…" : "Só criar follow-up (gera link de avaliação, sem salvar anotação)"}
+            </button>
           )}
+          {fup && <div className="text-[11px] text-[#2E7D4F] text-center">Follow-up criado</div>}
+          <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
         </div>
       </div>
     </div>,
