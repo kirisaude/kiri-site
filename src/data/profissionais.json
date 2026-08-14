@@ -2814,6 +2814,65 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "b09ec33db2324c13"
+    },
+    {
+      "id": "kiri-072",
+      "inscricao_id": "85db3bc2-3404-4331-b02d-731558ecf897",
+      "nome": "Michelle Perenyi",
+      "profissao": "Nutricionista",
+      "titulo_exibicao": "Nutricionista",
+      "registro_conselho": "CRN-3 64774",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Transtornos alimentares"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São paulo, sp",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Oi! Sou Michelle nutricionista e atendo com a abordagem comportamental. Como funciona?\n\nÉ uma abordagem que vai além do cardápio. Em vez de focar apenas no “o que comer”, ela trabalha o como, o porquê e o para quê você come, considerando hábitos, emoções, rotina e relação com a comida.\n\n O objetivo é construir, junto com o paciente, uma alimentação mais consciente, prazerosa e sustentável a longo prazo. \n\nA consulta inicial tem duração mínima de 1h30, com escuta aprofundada, avaliação nutricional e definição do plano de tratamento (frequência semanal, quinzenal ou mensal, número de sessões e estratégias acordadas), conforme a abordagem comportamental e especificidade do caso.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Nutrição — Centro Universitário São Camilo — 2020"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Transtornos Alimentares — UNIFESP — 2024"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Doenças crônicas — Instituto Albert Einstein — 2023"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Transtornos alimentares — USP — 2021"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Comportamento Alimentar — IPGS — 2022"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 350,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 98975-6920",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento clinico com adolescentes - Espaço Transcender",
+          "tempo": "3 anos",
+          "faixa_etaria": "13-17"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "f5b67149fb144a14"
     }
   ]
 }
