@@ -2826,7 +2826,7 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Transtornos alimentares"
+        "Transtornos Alimentares"
       ],
       "modalidade": "Presencial e online",
       "cidade": "São paulo, sp",
@@ -2835,23 +2835,30 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Nutrição — Centro Universitário São Camilo — 2020"
+          "instituicao_ano": "Nutrição — Centro Universitário São Camilo — 2020",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Transtornos Alimentares — UNIFESP — 2024"
+          "instituicao_ano": "Transtornos Alimentares — UNIFESP — 2024",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Doenças crônicas — Instituto Albert Einstein — 2023"
+          "instituicao_ano": "Doenças crônicas — Instituto Albert Einstein — 2023",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Transtornos alimentares — USP — 2021"
+          "instituicao_ano": "Transtornos alimentares — USP — 2021",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Comportamento Alimentar — IPGS — 2022"
+          "instituicao_ano": "Comportamento Alimentar — IPGS — 2022",
+          "verificado": false,
+          "pendente": true,
+          "oculto": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2869,10 +2876,20 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "f5b67149fb144a14"
+      "card_token": "f5b67149fb144a14",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "pasta_drive": null
     }
   ]
 }
