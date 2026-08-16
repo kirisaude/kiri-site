@@ -2989,6 +2989,57 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "d89cf41467324d37"
+    },
+    {
+      "id": "kiri-075",
+      "inscricao_id": "8bc5a86b-8e2c-472f-93ce-5a9032fe5459",
+      "nome": "Dinara Cassia de Souza",
+      "profissao": "Terapeuta ocupacional",
+      "titulo_exibicao": "Terapeuta ocupacional",
+      "registro_conselho": "CREFITO 6360-T O",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "SAO PAULO",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou terapeuta ocupacional, com Mestraddo em Educação nas Profissões da Saúde e atualmente em doutoramento em Distúrbios da Comunicação Humana pela Unifesp. Sou especialista certificada internacionalmente em Integração Sensorial e também professora universitária na área.\n\nMeu trabalho é fundamentado na Ciência da Ocupação, na neurociência e neurobiologia, na Integração Sensorial e na reabilitação cognitiva da T.O. — ou seja, eu olho para a criança de forma integral: como o cérebro e o corpo processam as experiências do dia a dia, e como isso se reflete nas ocupações e na participação dela na vida.\n\nUm diferencial do meu trabalho é que eu elaboro um plano de intervenção completo, que vai além das sessões no consultório: acompanho a participação da criança na escola, no cotidiano familiar, faço visitas escolares e domiciliares quando necessário, e também penso em atividades extras de lazer que façam sentido para cada criança e família.\n\nTambém coordeno o núcleo de T.O. do ambulatório de autismo da Unifesp, então tenho bastante vivência tanto na prática clínica quanto na formação de outros terapeutas e na pesquisa da área.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Terapia Ocupacional — UNISO- Universidade de Sorocaba — 2001"
+        },
+        {
+          "curso": "Certificação",
+          "instituicao_ano": "INTEGRAÇÃO SENSORIAL — AISA- ASSOCIAÇÃO ARGENTINA DE INTEGRAÇÃO SENSORIAL — De 2001 a 2020"
+        },
+        {
+          "curso": "Doutorando",
+          "instituicao_ano": "Distúrbio da Comunicação Humana — UNIFESP — Em curso"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 450,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(15) 98117-6027",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Avaliação, intervenção, supervisão e Mentorias na área de Terapia Ocupacional e.os Trabstornos do Neurodesenvolvimento.  Utilizando a base epistemológica da Ciência da Ocupação, Neurociencia e neurobiologia, processamento sensorial e reabilitação cognitiva.",
+          "tempo": "Mais de 25 anos",
+          "faixa_etaria": ""
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "362bdfe8d6e94d1b"
     }
   ]
 }
