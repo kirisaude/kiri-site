@@ -2900,10 +2900,10 @@
       "registro_conselho": "17070",
       "rqe": "RQE Pediatria 12076 | RQE Neuropediatria 17362",
       "areas_atuacao": [
-        "Atraso de desenvolvimento",
+        "Atraso de Desenvolvimento",
         "TDAH",
         "TEA",
-        "Dificuldades de aprendizagem"
+        "Dificuldades de Aprendizagem"
       ],
       "modalidade": "Presencial e online",
       "cidade": "Salvador",
@@ -2912,11 +2912,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Universidade Estadual de Ciências da Saúde de Alagoas (UNCISAL) — 2004"
+          "instituicao_ano": "Medicina — Universidade Estadual de Ciências da Saúde de Alagoas (UNCISAL) — 2004",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Neurologia pediátrica — Obras Sociais Irmã Dulce - Hospital Santo Antônio — 2019"
+          "instituicao_ano": "Neurologia pediátrica — Obras Sociais Irmã Dulce - Hospital Santo Antônio — 2019",
+          "verificado": true
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Pediatria — Universidade Federal da Bahia (UFBA) — 2011",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2928,16 +2935,24 @@
       "tempo_atuacao": "Mais de 5 anos",
       "experiencias_infantil": [
         {
-          "descricao": "Como pediatra fiz Diagnóstico precoce de atraso do desenvolvimento da minha filha e",
-          "tempo": "",
-          "faixa_etaria": ""
+          "descricao": "Como pediatra fiz Diagnóstico precoce de atraso do desenvolvimento da minha filha e"
         }
       ],
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-073.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "f8148f4844d1423d"
+      "card_token": "f8148f4844d1423d",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "pasta_drive": null
     },
     {
       "id": "kiri-074",
