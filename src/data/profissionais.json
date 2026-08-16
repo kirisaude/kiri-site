@@ -2939,7 +2939,7 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-073.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "f8148f4844d1423d",
