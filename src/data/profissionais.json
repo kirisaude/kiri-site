@@ -2890,6 +2890,54 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-073",
+      "inscricao_id": "89bbb92c-a1c2-4a61-8a12-a85cc2cc3a4b",
+      "nome": "Fernanda Cristina Rodrigues Dubourg",
+      "profissao": "Neuropediatra",
+      "titulo_exibicao": "Neuropediatra",
+      "registro_conselho": "17070",
+      "rqe": "RQE Pediatria 12076 | RQE Neuropediatria 17362",
+      "areas_atuacao": [
+        "Atraso de desenvolvimento",
+        "TDAH",
+        "TEA",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Salvador",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou médica, com atuação dedicada ao neurodesenvolvimento, ao sono infantojuvenil e à políticas públicas de saúde. Possuo especialização em Pediatria e Neuropediatria, e formação internacional em sono e suas patologias pela Universidade de Nantes, França, e também equivalência ao grau de mestre em medicina em Portugal/ICBAS.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Universidade Estadual de Ciências da Saúde de Alagoas (UNCISAL) — 2004"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Neurologia pediátrica — Obras Sociais Irmã Dulce - Hospital Santo Antônio — 2019"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(71) 21327-529",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Como pediatra fiz Diagnóstico precoce de atraso do desenvolvimento da minha filha e",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "f8148f4844d1423d"
     }
   ]
 }
