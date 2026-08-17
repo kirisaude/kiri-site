@@ -3111,6 +3111,61 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "7c2c99f712244416"
+    },
+    {
+      "id": "kiri-077",
+      "inscricao_id": "eb3eebae-db59-4617-9621-70bbd39bd2f9",
+      "nome": "Fernanda Marques Saraiva",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "174058",
+      "rqe": "77486",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "TOC",
+        "Depressão",
+        "Ansiedade",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Atuo como psiquiatra da infância e adolescência, realizando avaliação, diagnóstico e acompanhamento de crianças e adolescentes com questões emocionais, comportamentais e do desenvolvimento. Meu trabalho é individualizado, considerando as características de cada paciente, seu contexto familiar e escolar, buscando compreender suas necessidades e construir, junto à família, estratégias de cuidado que favoreçam seu desenvolvimento, bem-estar e qualidade de vida.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — UFPI — 2010"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "PSIQUIATRIA — UFRJ — 2012"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "PSIQUIATRIA INFANTIL — USP — 2016"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 800,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 97055-8008",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Minha experiência com crianças inclui atuação em serviços de referência em saúde mental, hospitais e CAPS, além da formação especializada em Psiquiatria da Infância e Adolescência pela USP. Ao longo da minha trajetória, desenvolvi experiência na avaliação e acompanhamento de diferentes questões emocionais, comportamentais e do desenvolvimento infantil, sempre considerando a criança em seu contexto familiar e escolar.",
+          "tempo": "10 anos",
+          "faixa_etaria": "0-18 anos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "9055746450894a4e"
     }
   ]
 }
