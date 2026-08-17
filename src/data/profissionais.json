@@ -3055,6 +3055,62 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "362bdfe8d6e94d1b"
+    },
+    {
+      "id": "kiri-076",
+      "inscricao_id": "197a1eac-e993-422e-8f8b-26c91ddc2df9",
+      "nome": "Danielle Herszenhorn Admoni",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "101404",
+      "rqe": "972201",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Comunicação aumentativa"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Atendimento cuidadoso baseado na relação familiar e dificuldades que a criança/ adolescente vem apresentando \nBastante orientação e parceria",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Fcmscsp ( Santa casa ) — 2000"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria geral e da infância e adolescência — Unifesp — 2003"
+        },
+        {
+          "curso": "Mestrando",
+          "instituicao_ano": "Educação e saúde na adolescência — Unifesp — 2026"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 1000,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 93466-0055",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Preceptora da residência na Unifesp no NTu e no centro de aténcao ao adolescente ( pediatria)",
+          "tempo": "Ha 6 anos",
+          "faixa_etaria": ""
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "7c2c99f712244416"
     }
   ]
 }
