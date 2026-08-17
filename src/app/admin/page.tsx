@@ -272,7 +272,7 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
     });
-    onEnviado(fupAtual);
+    onEnviado({ ...fupAtual, concluido_em: new Date().toISOString(), desfecho: desfecho.trim() || null });
     onFechar();
   }
 
@@ -1648,6 +1648,12 @@ export default function AdminPage() {
         {aba === "encaminhamentos" && (
           <div className="flex flex-col gap-10">
 
+            <div className="flex justify-end">
+              <a href="/api/admin/exportar-encaminhamentos-csv" download className="text-[12.5px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 no-underline inline-flex items-center hover:text-carvao transition-colors">
+                ↓ Exportar planilha
+              </a>
+            </div>
+
             {/* Pedidos com profissional específico — pendentes */}
             <div>
               <div className="flex items-baseline gap-2 mb-1">
@@ -1717,6 +1723,11 @@ export default function AdminPage() {
         {/* ABA CURADORIA */}
         {aba === "curadoria" && (
           <div className="flex flex-col gap-8">
+            <div className="flex justify-end">
+              <a href="/api/admin/exportar-encaminhamentos-csv" download className="text-[12.5px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 no-underline inline-flex items-center hover:text-carvao transition-colors">
+                ↓ Exportar planilha
+              </a>
+            </div>
             <div>
               <div className="flex items-baseline gap-2 mb-1">
                 <h2 className="font-serif text-[18px] font-semibold text-carvao">Pedidos de curadoria</h2>

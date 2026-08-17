@@ -42,6 +42,7 @@ function FormularioContent() {
   const [convenioOutro, setConvenioOutro] = useState("");
   const [aceitaParticular, setAceitaParticular] = useState(false);
   const [opcoesBusca, setOpcoesBusca] = useState<string[]>([]);
+  const [tipoProfissional, setTipoProfissional] = useState<string[]>([]);
   const [detalhesBusca, setDetalhesBusca] = useState("");
   const [consentimento, setConsentimento] = useState(false);
   const [enviando, setEnviando] = useState(false);
@@ -86,6 +87,7 @@ function FormularioContent() {
         observacoes: [
           demandaPrincipal ? `Demanda: ${demandaPrincipal === "Outro" && demandaOutro.trim() ? demandaOutro.trim() : demandaPrincipal}` : "",
           idadeCrianca ? `Faixa etária: ${idadeCrianca}` : "",
+          tipoProfissional.length > 0 ? `Profissional: ${tipoProfissional.join("; ")}` : "",
           pagamento === "Convênio" ? `Convênio: ${convenioSelecionado === "Outro" ? convenioOutro.trim() : convenioSelecionado}${aceitaParticular ? " (aceita particular se não houver)" : ""}` : pagamento ? `Pagamento: ${pagamento}` : "",
           opcoesBusca.join(", "),
           detalhesBusca.trim() ? detalhesBusca.trim() : "",
@@ -465,6 +467,44 @@ function FormularioContent() {
               ))}
             </div>
           </div>
+
+          {!profissionalSolicitado && (
+            <div className="flex flex-col gap-2">
+              <label className="text-[15px] font-semibold text-carvao">Que tipo de profissional você procura?</label>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Psicólogo",
+                  "Fonoaudiólogo",
+                  "Terapeuta Ocupacional",
+                  "Psiquiatra Infantil",
+                  "Neuropediatra",
+                  "Neurologista",
+                  "Neuropsicólogo",
+                  "Fisioterapeuta",
+                  "Nutricionista",
+                  "Psicopedagogo",
+                  "Ainda não sei",
+                ].map((op) => (
+                  <button
+                    key={op}
+                    type="button"
+                    onClick={() =>
+                      setTipoProfissional((prev) =>
+                        prev.includes(op) ? prev.filter((o) => o !== op) : [...prev, op]
+                      )
+                    }
+                    className={`px-3.5 py-2 rounded-[10px] text-[14px] font-medium border transition-colors cursor-pointer ${
+                      tipoProfissional.includes(op)
+                        ? "bg-[#A07855] text-white border-[#A07855]"
+                        : "bg-white text-carvao border-[#C0B5A5]"
+                    }`}
+                  >
+                    {op}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col gap-2">
             <label className="text-[15px] font-semibold text-carvao">
