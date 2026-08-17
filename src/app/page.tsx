@@ -72,6 +72,8 @@ const CIDADE_ESTADO: Record<string, string> = {
   "limeira": "SP",
   "americana": "SP",
   "franca": "SP",
+  "dracena": "SP",
+  "sao jose": "SC",
 };
 
 function normCidade(s: string) {
