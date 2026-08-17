@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title: "Kiri — rede de cuidado ao neurodesenvolvimento",
     description:
       "Encontre profissionais com formação verificada que atuam com TEA, TDAH e neurodesenvolvimento infantil.",
-    url: "https://kirisaude.com.br",
+    url: "https://www.kirisaude.com.br",
     siteName: "Kiri",
     locale: "pt_BR",
     type: "website",

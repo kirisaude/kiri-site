@@ -44,11 +44,11 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${nome} — ${titulo} em ${cidade} | Kiri Saúde`,
     description: `${nome} é ${titulo.toLowerCase()} em ${cidade}, verificada pela Kiri Saúde. Especialidades: ${areas}. Perfil completo com formação, registro e contato.`,
-    alternates: { canonical: `https://kirisaude.com.br/profissional/${id}` },
+    alternates: { canonical: `https://www.kirisaude.com.br/profissional/${id}` },
     openGraph: {
       title: `${nome} — ${titulo} | Kiri Saúde`,
       description: `${titulo} em ${cidade}. Formação verificada. ${areas}.`,
-      url: `https://kirisaude.com.br/profissional/${id}`,
+      url: `https://www.kirisaude.com.br/profissional/${id}`,
       siteName: "Kiri Saúde",
       ...(p.foto_url ? { images: [{ url: p.foto_url }] } : {}),
     },
@@ -221,14 +221,14 @@ export default async function PerfilPage({ params }: PageProps) {
     "worksFor": {
       "@type": "MedicalBusiness",
       "name": "Kiri Saúde",
-      "url": "https://kirisaude.com.br",
+      "url": "https://www.kirisaude.com.br",
     },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": titleCasePT(normalizarCidade(p.cidade)),
       "addressCountry": "BR",
     },
-    "url": `https://kirisaude.com.br/profissional/${p.id}`,
+    "url": `https://www.kirisaude.com.br/profissional/${p.id}`,
     ...(p.foto_url ? { "image": p.foto_url } : {}),
   };
 

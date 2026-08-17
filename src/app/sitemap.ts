@@ -3,7 +3,7 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 
 const profissionais = data.profissionais as Profissional[];
-const BASE = "https://kirisaude.com.br";
+const BASE = "https://www.kirisaude.com.br";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

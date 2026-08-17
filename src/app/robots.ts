@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin", "/api/", "/card/", "/avaliar/", "/followup/"],
     },
-    sitemap: "https://kirisaude.com.br/sitemap.xml",
+    sitemap: "https://www.kirisaude.com.br/sitemap.xml",
   };
 }
