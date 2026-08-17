@@ -164,12 +164,70 @@ Certificados de especialização / residência / pós-graduação`;
     setEnviandoEmail(false);
   }
 
+  // Autentique
+  const [autentiqueDocId, setAutentiqueDocId] = useState<string | null>(null);
+  const [autentiqueEnviadoEm, setAutentiqueEnviadoEm] = useState<string | null>(null);
+  const [autentiqueStatusData, setAutentiqueStatusData] = useState<{
+    signed: boolean; signed_at: string | null; signer_email: string | null;
+  } | null>(null);
+  const [verificandoTermo, setVerificandoTermo] = useState(false);
+  const [enviandoTermo, setEnviandoTermo] = useState(false);
+  const [erroTermo, setErroTermo] = useState("");
+  const [termoAcao, setTermoAcao] = useState<"" | "enviado" | "verificado">("");
+
+  async function verificarTermo() {
+    if (!autentiqueDocId) return;
+    setVerificandoTermo(true); setErroTermo(""); setTermoAcao("");
+    const res = await fetch(`/api/admin/status-termo?document_id=${autentiqueDocId}`, { credentials: "include" });
+    if (res.ok) {
+      const d = await res.json();
+      setAutentiqueStatusData({ signed: d.signed, signed_at: d.signed_at, signer_email: d.signer_email });
+      setTermoAcao("verificado");
+    } else {
+      setErroTermo("Erro ao consultar Autentique");
+    }
+    setVerificandoTermo(false);
+  }
+
+  async function enviarTermo() {
+    if (!profOriginal?.inscricao_id) { setErroTermo("Sem inscricao_id"); return; }
+    setEnviandoTermo(true); setErroTermo(""); setTermoAcao("");
+    const res = await fetch("/api/admin/enviar-termo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ inscricao_id: profOriginal.inscricao_id }),
+    });
+    const d = await res.json();
+    if (res.ok && d.document_id) {
+      setAutentiqueDocId(d.document_id);
+      setAutentiqueEnviadoEm(new Date().toISOString());
+      setAutentiqueStatusData(null);
+      setTermoAcao("enviado");
+    } else {
+      setErroTermo(d.error ?? "Erro ao enviar termo");
+    }
+    setEnviandoTermo(false);
+  }
+
   useEffect(() => {
     fetch("/api/admin/inscricoes", { credentials: "include" }).then((r) => {
       if (r.ok) setAuthed(true);
       else setAuthed(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (!profOriginal?.inscricao_id) return;
+    fetch(`/api/admin/inscricoes?id=${profOriginal.inscricao_id}`, { credentials: "include" })
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => {
+        if (d?.autentique_document_id) setAutentiqueDocId(d.autentique_document_id);
+        if (d?.autentique_enviado_em) setAutentiqueEnviadoEm(d.autentique_enviado_em);
+      })
+      .catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profOriginal?.inscricao_id]);
 
   if (authed === null) {
     return (
@@ -1015,6 +1073,61 @@ Certificados de especialização / residência / pós-graduação`;
             </svg>
             Solicitar documentos pendentes por e-mail
           </button>
+
+          {/* Termo de adesão — Autentique */}
+          {profOriginal?.inscricao_id && (
+            <div className="border border-[#D8C7B0] rounded-[12px] p-4 bg-white">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[13px] font-semibold text-carvao">Termo de adesão</span>
+                {autentiqueDocId ? (
+                  autentiqueStatusData ? (
+                    autentiqueStatusData.signed ? (
+                      <span className="text-[11.5px] font-semibold text-verde-confirmacao bg-[#E8F5EE] px-2.5 py-0.5 rounded-full">✓ Assinado</span>
+                    ) : (
+                      <span className="text-[11.5px] font-semibold text-[#9A6A00] bg-[#FFF3CD] px-2.5 py-0.5 rounded-full">Aguardando assinatura</span>
+                    )
+                  ) : (
+                    <span className="text-[11.5px] font-semibold text-muted bg-wash px-2.5 py-0.5 rounded-full">Enviado</span>
+                  )
+                ) : (
+                  <span className="text-[11.5px] font-semibold text-ferrugem bg-[#FCF0EB] px-2.5 py-0.5 rounded-full">Não enviado</span>
+                )}
+              </div>
+
+              {autentiqueEnviadoEm && (
+                <p className="text-[11.5px] text-muted mb-2">
+                  Enviado em {new Date(autentiqueEnviadoEm).toLocaleDateString("pt-BR")}
+                  {autentiqueStatusData?.signed && autentiqueStatusData.signed_at && (
+                    <> · Assinado em {new Date(autentiqueStatusData.signed_at).toLocaleDateString("pt-BR")}</>
+                  )}
+                </p>
+              )}
+
+              {erroTermo && <p className="text-[11.5px] text-ferrugem mb-2">{erroTermo}</p>}
+              {termoAcao === "enviado" && <p className="text-[11.5px] text-verde-confirmacao font-semibold mb-2">Termo enviado com sucesso!</p>}
+
+              <div className="flex gap-2 flex-wrap">
+                {autentiqueDocId && (
+                  <button
+                    type="button"
+                    onClick={verificarTermo}
+                    disabled={verificandoTermo}
+                    className="flex-1 text-[12.5px] font-semibold text-ardosia border border-ardosia rounded-[9px] py-2 cursor-pointer hover:bg-wash transition-colors disabled:opacity-50"
+                  >
+                    {verificandoTermo ? "Verificando…" : "Verificar assinatura"}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={enviarTermo}
+                  disabled={enviandoTermo}
+                  className="flex-1 text-[12.5px] font-semibold text-white bg-ferrugem rounded-[9px] py-2 cursor-pointer hover:bg-[#A85C3E] transition-colors disabled:opacity-50"
+                >
+                  {enviandoTermo ? "Enviando…" : autentiqueDocId ? "Reenviar termo" : "Enviar termo"}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Modal email pendências */}

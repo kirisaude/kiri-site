@@ -17,22 +17,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Configuração incompleta" }, { status: 500 });
   }
 
-  const res = await fetch(
-    `${supabaseUrl}/rest/v1/inscricoes_profissionais?order=criado_em.desc&limit=100`,
-    {
-      headers: {
-        "apikey": supabaseKey,
-        "Authorization": `Bearer ${supabaseKey}`,
-      },
-    }
-  );
+  const { searchParams } = new URL(request.url);
+  const filterId = searchParams.get("id");
+  const url = filterId
+    ? `${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${filterId}&select=id,nome,email,profissao,autentique_document_id,autentique_enviado_em`
+    : `${supabaseUrl}/rest/v1/inscricoes_profissionais?order=criado_em.desc&limit=100`;
+
+  const res = await fetch(url, {
+    headers: {
+      "apikey": supabaseKey,
+      "Authorization": `Bearer ${supabaseKey}`,
+    },
+  });
 
   if (!res.ok) {
     return NextResponse.json({ error: "Erro ao buscar inscrições" }, { status: 502 });
   }
 
   const data = await res.json();
-  return NextResponse.json(data);
+  return NextResponse.json(filterId ? (data[0] ?? null) : data);
 }
 
 export async function PATCH(request: Request) {

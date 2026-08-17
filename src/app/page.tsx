@@ -582,11 +582,11 @@ export default function Home() {
                 key={cond}
                 onClick={() => toggleCond(cond)}
                 title={cond === "TEA" ? "Transtorno do Espectro Autista" : "Transtorno do Déficit de Atenção e Hiperatividade"}
-                className={`cursor-pointer transition-all border inline-flex items-center rounded-full px-[22px] py-2
-                  ${activeCond === cond
-                    ? "bg-ardosia-escura border-ardosia-escura"
-                    : "bg-ardosia border-ardosia"
-                  }`}
+                className="cursor-pointer transition-all border inline-flex items-center rounded-full px-[22px] py-2"
+                style={activeCond === cond
+                  ? { background: "#BE6E4E", borderColor: "#BE6E4E" }
+                  : { background: "#44606C", borderColor: "#44606C" }
+                }
               >
                 <span className="text-[15px] font-bold text-creme">
                   {cond}
@@ -1443,11 +1443,12 @@ function DesktopScrollRow({ pros }: { pros: Profissional[] }) {
   return (
     <div className="relative hidden md:block">
       <div ref={scrollRef} className="overflow-x-auto scrollbar-hide pb-1.5">
-        <div
-          className="grid gap-5"
-          style={{ gridTemplateRows: "repeat(2, auto)", gridAutoFlow: "column", gridAutoColumns: "calc(25% - 15px)" }}
-        >
-          {pros.map((p) => <MiniCard key={p.id} profissional={p} />)}
+        <div className="flex gap-5 items-stretch">
+          {pros.map((p) => (
+            <div key={p.id} className="flex flex-col" style={{ width: 300, flexShrink: 0 }}>
+              <MiniCard profissional={p} />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -1503,7 +1504,7 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
   return (
     <Link
       href={`/profissional/${p.id}`}
-      className="w-full h-full bg-white border border-linha rounded-[15px] p-3.5 md:p-5 shadow-[0_5px_16px_-11px_rgba(60,55,45,0.32)] cursor-pointer no-underline block hover:shadow-[0_8px_24px_-10px_rgba(60,55,45,0.4)] transition-shadow"
+      className="w-full bg-white border border-linha rounded-[15px] p-3.5 md:p-5 shadow-[0_5px_16px_-11px_rgba(60,55,45,0.32)] cursor-pointer no-underline flex flex-col flex-1 hover:shadow-[0_8px_24px_-10px_rgba(60,55,45,0.4)] transition-shadow"
     >
       <div className="flex items-center gap-[11px] md:gap-3.5">
         <PlaceholderPhoto size={46} radius={11} url={p.foto_url} posicao={p.foto_posicao} />
@@ -1525,15 +1526,15 @@ function MiniCard({ profissional: p }: { profissional: Profissional }) {
         </div>
       </div>
 
-      {/* Tags — máx 2, ordenadas por tamanho, altura fixa para alinhar rodapé */}
-      <div className="flex gap-1.5 flex-wrap mt-[11px] items-start" style={{ minHeight: 46, maxHeight: 46, overflow: "hidden" }}>
+      {/* Tags — máx 2, linha única, altura fixa para alinhar rodapé entre cards */}
+      <div className="flex gap-1.5 items-center mt-[11px]" style={{ height: 26, overflow: "hidden", flexWrap: "nowrap" }}>
         {areas.map((area) => (
           <span
             key={area}
             className="text-[10.5px] md:text-[12px] font-semibold text-ardosia-escura bg-wash-azulado border border-borda-azulada px-2 md:px-2.5 py-0.5 rounded-[6px]"
-            style={{ whiteSpace: "nowrap" }}
+            style={{ whiteSpace: "nowrap", flexShrink: 0 }}
           >
-            {area}
+            {titleCasePT(area)}
           </span>
         ))}
         {resto > 0 && (

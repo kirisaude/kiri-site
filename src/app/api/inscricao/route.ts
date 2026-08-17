@@ -169,7 +169,7 @@ export async function POST(request: Request) {
       "Content-Type": "application/json",
       "apikey": supabaseKey,
       "Authorization": `Bearer ${supabaseKey}`,
-      "Prefer": "return=minimal",
+      "Prefer": "return=representation",
     },
     body: JSON.stringify({
       nome,
@@ -209,6 +209,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ erro: `Falha ao registrar inscrição (${res.status}): ${erro}` }, { status: 500 });
   }
 
+  const [inscricao] = await res.json() as Array<{ id: string }>;
+  const inscricaoId = inscricao?.id;
+
   // Google Sheets
   const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheetsUrl) {
@@ -222,11 +225,27 @@ export async function POST(request: Request) {
     }).catch(() => {});
   }
 
-  // Autentique — gera PDF do termo e envia para assinatura digital ICP-Brasil
+  // Autentique — gera PDF do termo e envia para assinatura digital; salva o document_id de volta no Supabase
   const autentiqueToken = process.env.AUTENTIQUE_API_TOKEN;
-  if (autentiqueToken && email) {
+  if (autentiqueToken && email && inscricaoId) {
     gerarTermoPDF(nome, profissao)
       .then((pdfBytes) => criarDocumentoAutentique(autentiqueToken, pdfBytes, nome, email))
+      .then((doc) => {
+        if (!doc?.id) return;
+        return fetch(`${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${inscricaoId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify({
+            autentique_document_id: doc.id,
+            autentique_enviado_em: new Date().toISOString(),
+          }),
+        });
+      })
       .catch((err) => console.error("Erro Autentique:", err));
   }
 

@@ -166,6 +166,14 @@ export default function ProPage() {
     <div className="min-h-screen bg-creme overflow-x-hidden">
       <header className="sticky top-0 z-10 bg-creme/95 backdrop-blur-sm border-b border-linha px-6 py-3 flex items-center gap-3">
         <KiriLogoCompact height={28} />
+        <nav className="flex items-center gap-4 ml-4">
+          <span className="text-[13px] font-semibold text-ardosia-escura border-b-2 border-ardosia-escura pb-0.5">
+            Rede
+          </span>
+          <a href="/pro/entrar" className="text-[13px] text-muted hover:text-carvao transition-colors no-underline">
+            Meu painel
+          </a>
+        </nav>
         <span className="text-[12px] text-muted ml-auto">
           {filtrado.length}{temFiltro ? ` de ${profissionais.length}` : ""} profissionais
         </span>
