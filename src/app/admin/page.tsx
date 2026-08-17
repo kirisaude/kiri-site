@@ -1360,9 +1360,14 @@ export default function AdminPage() {
         <div className="flex items-center gap-2.5">
           <KiriLogoCompact height={28} />
         </div>
-        <button onClick={buscarDados} className="text-[13px] font-semibold text-ardosia cursor-pointer">
-          {buscando ? "Atualizando…" : "↻ Atualizar"}
-        </button>
+        <div className="flex items-center gap-4">
+          <Link href="/admin/termos" className="text-[13px] font-semibold text-muted hover:text-carvao no-underline transition-colors">
+            Termos
+          </Link>
+          <button onClick={buscarDados} className="text-[13px] font-semibold text-ardosia cursor-pointer">
+            {buscando ? "Atualizando…" : "↻ Atualizar"}
+          </button>
+        </div>
       </header>
 
       {/* Abas */}
