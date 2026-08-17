@@ -157,6 +157,28 @@ const CIDADES_DISPONIVEIS = (() => {
 })();
 
 
+// Shuffle determinístico com seed (Mulberry32) — mesma ordem o dia todo, diferente a cada dia
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed >>> 0;
+  function rand() {
+    s = (s + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const SEED_DIARIO = (() => {
+  const d = new Date();
+  return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+})();
+
 function EmBreve() {
   return (
     <div className="min-h-screen bg-creme flex flex-col items-center justify-center px-6 overflow-x-hidden">
@@ -298,9 +320,9 @@ export default function Home() {
   const valorAtivo = valorMin > 0 || valorMax < VALOR_TOTAL_MAX;
   const hasFilters = !!(activeCond || activeProfissao || activeModalidade || activeCidade || activeSPRegiao || activeFaixa || activePagamento || valorAtivo || search.trim());
 
-  const allSections = PROFISSOES_ORDENADAS.map((prof) => ({
+  const allSections = PROFISSOES_ORDENADAS.map((prof, idx) => ({
     nome: prof,
-    pros: filtered.filter((p) => p.profissao === prof),
+    pros: seededShuffle(filtered.filter((p) => p.profissao === prof), SEED_DIARIO + idx),
   }))
     .filter((s) => s.pros.length > 0)
     .sort((a, b) => b.pros.length - a.pros.length);
