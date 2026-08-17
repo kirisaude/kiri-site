@@ -87,7 +87,18 @@ interface Followup {
   criado_em: string;
 }
 
-type Aba = "inscricoes" | "encaminhamentos" | "reportes" | "profissionais" | "contatos" | "avaliacoes" | "instituicoes";
+type Aba = "inscricoes" | "encaminhamentos" | "curadoria" | "reportes" | "profissionais" | "contatos" | "avaliacoes" | "instituicoes";
+
+const STATUS_CURADORIA_TERMINAL = new Set(["respondido", "curadoria_enviada", "converteu", "nao_converteu"]);
+const isCuradoriaTerminal = (status: string | null) => STATUS_CURADORIA_TERMINAL.has(status ?? "");
+
+function statusCuradoriaBadge(status: string | null): { label: string; cls: string } {
+  if (status === "em_analise") return { label: "Em análise", cls: "text-[#8B6914] bg-[#FFF8E1] border-[#E0A55E]/70" };
+  if (status === "curadoria_enviada" || status === "respondido") return { label: "Curadoria enviada", cls: "text-ardosia bg-[#EEF2F4] border-ardosia/40" };
+  if (status === "converteu") return { label: "Converteu ✓", cls: "text-[#2E7D4F] bg-[#E8F5EC] border-[#B8D8C0]" };
+  if (status === "nao_converteu") return { label: "Não converteu", cls: "text-muted bg-[#F5F5F5] border-linha" };
+  return { label: "Novo", cls: "text-ferrugem bg-wash-quente border-borda-quente" };
+}
 
 function linkContato(contato: string | null): string | null {
   if (!contato) return null;
@@ -729,7 +740,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
   followup?: Followup;
   onFollowupCriado: (fup: Followup) => void;
 }) {
-  const respondido = e.status === "respondido";
+  const concluido = isCuradoriaTerminal(e.status);
   const [profSelecionados, setProfSelecionados] = useState<string[]>([]);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [filtroProf, setFiltroProf] = useState<string | null>(null);
@@ -849,7 +860,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
   }
 
   return (
-    <div className={`border rounded-[14px] overflow-hidden ${respondido ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-linha"}`}>
+    <div className={`border rounded-[14px] overflow-hidden ${concluido ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-linha"}`}>
       <button
         type="button"
         onClick={onToggle}
@@ -858,15 +869,9 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
-            {respondido ? (
-              <span className="text-[11px] font-semibold text-[#2E7D4F] bg-[#E8F5EC] border border-[#B8D8C0] px-2 py-0.5 rounded-[6px]">
-                respondido
-              </span>
-            ) : (
-              <span className="text-[11px] font-semibold text-ferrugem bg-wash-quente border border-borda-quente px-2 py-0.5 rounded-[6px]">
-                Busca geral
-              </span>
-            )}
+            {(() => { const b = statusCuradoriaBadge(e.status); return (
+              <span className={`text-[11px] font-semibold border px-2 py-0.5 rounded-[6px] ${b.cls}`}>{b.label}</span>
+            ); })()}
           </div>
           <div className="text-[13px] text-cinza-texto mt-0.5 flex items-center gap-1.5">
             <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-[5px] border shrink-0 ${e.contato?.includes("@") ? "text-ardosia border-ardosia/40 bg-ardosia/5" : "text-[#2E7D4F] border-[#B8D8C0] bg-[#F0F8F2]"}`}>
@@ -879,7 +884,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
             ) : e.contato}
             {" · "}{new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
-          {e.observacoes && !respondido && (
+          {e.observacoes && !concluido && (
             <div className="text-[12.5px] text-muted mt-0.5 truncate max-w-[320px]">
               {parseObs(e.observacoes).demanda ?? e.observacoes}
             </div>
@@ -906,7 +911,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
             </button>
           </div>
 
-          {!respondido && (
+          {!concluido && (
             <div className="pt-3.5 border-t border-linha-sutil flex flex-col gap-4">
               {/* Seletor de profissionais com pré-triagem e filtros */}
               <div>
@@ -1071,18 +1076,31 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
             </div>
           )}
 
-          {/* Checkbox respondido */}
-          <label className="flex items-center gap-2.5 cursor-pointer mt-3 pt-3.5 border-t border-linha-sutil">
-            <input
-              type="checkbox"
-              checked={respondido}
-              onChange={() => onResolver(e.id, respondido ? "pendente" : "respondido")}
-              className="w-4 h-4 accent-ardosia-escura cursor-pointer"
-            />
-            <span className={`text-[13px] font-medium ${respondido ? "text-[#2E7D4F]" : "text-cinza-texto"}`}>
-              {respondido ? "Respondido — clique para desfazer" : "Marcar como respondido"}
-            </span>
-          </label>
+          {/* Status da curadoria */}
+          <div className="flex items-center gap-2 flex-wrap mt-3 pt-3.5 border-t border-linha-sutil">
+            <span className="text-[11.5px] text-muted font-medium uppercase tracking-wide">Status:</span>
+            {(["em_analise", "curadoria_enviada", "converteu", "nao_converteu"] as const).map((s) => {
+              const labels: Record<string, string> = {
+                em_analise: "Em análise",
+                curadoria_enviada: "Curadoria enviada",
+                converteu: "Converteu",
+                nao_converteu: "Não converteu",
+              };
+              const ativo = e.status === s || (s === "curadoria_enviada" && e.status === "respondido");
+              return (
+                <button key={s} type="button"
+                  onClick={() => onResolver(e.id, ativo ? "novo" : s)}
+                  className={`text-[12px] font-semibold px-2.5 py-1 rounded-[7px] cursor-pointer transition-colors border ${
+                    ativo
+                      ? "bg-ardosia-escura text-white border-ardosia-escura"
+                      : "bg-white text-cinza-texto border-linha hover:border-ardosia"
+                  }`}
+                >
+                  {labels[s]}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -1256,7 +1274,7 @@ export default function AdminPage() {
     const statusAnterior = encaminhamentos.find((e) => e.id === id)?.status ?? null;
 
     setEncaminhamentos((prev) => prev.map((e) => e.id === id ? { ...e, status } : e));
-    if (status === "respondido") {
+    if (isCuradoriaTerminal(status)) {
       setExpandidos((prev) => { const next = new Set(prev); next.delete(id); return next; });
     }
 
@@ -1382,7 +1400,11 @@ export default function AdminPage() {
         </button>
         <button onClick={() => setAba("encaminhamentos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Encaminhamentos ({encaminhamentos.length}){(() => { const p = encaminhamentos.filter(e => e.status !== "encaminhado" && e.status !== "respondido").length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
+          Encaminhamentos{(() => { const p = comProfissional.filter(e => e.status !== "encaminhado").length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
+        </button>
+        <button onClick={() => setAba("curadoria")}
+          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "curadoria" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+          Curadoria{(() => { const p = semProfissional.filter(e => !isCuradoriaTerminal(e.status)).length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
         </button>
         <button onClick={() => setAba("avaliacoes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
@@ -1637,23 +1659,28 @@ export default function AdminPage() {
               )}
             </div>
 
-            {/* Busca geral */}
+          </div>
+        )}
+
+        {/* ABA CURADORIA */}
+        {aba === "curadoria" && (
+          <div className="flex flex-col gap-8">
             <div>
               <div className="flex items-baseline gap-2 mb-1">
-                <h2 className="font-serif text-[18px] font-semibold text-carvao">Busca geral</h2>
+                <h2 className="font-serif text-[18px] font-semibold text-carvao">Pedidos de curadoria</h2>
                 <span className="text-[14px] text-muted">
-                  ({semProfissional.filter((e) => e.status !== "respondido").length} pendentes)
+                  ({semProfissional.filter((e) => !isCuradoriaTerminal(e.status)).length} pendentes)
                 </span>
               </div>
               <p className="text-[13px] text-muted mb-4">
-                Família sem profissional escolhido. Requer análise antes de responder.
+                Família sem profissional escolhido. Analise o pedido e envie uma lista de até 3 indicações.
               </p>
-              {semProfissional.filter((e) => e.status !== "respondido").length === 0 ? (
-                <p className="text-[14px] text-muted">Nenhuma busca pendente.</p>
+              {semProfissional.filter((e) => !isCuradoriaTerminal(e.status)).length === 0 ? (
+                <p className="text-[14px] text-muted">Nenhum pedido pendente.</p>
               ) : (
                 <div className="flex flex-col gap-3">
                   {semProfissional
-                    .filter((e) => e.status !== "respondido")
+                    .filter((e) => !isCuradoriaTerminal(e.status))
                     .map((e) => (
                       <CardGeral
                         key={e.id}
@@ -1668,36 +1695,34 @@ export default function AdminPage() {
                     ))}
                 </div>
               )}
-
-              {/* Respondidos */}
-              {semProfissional.filter((e) => e.status === "respondido").length > 0 && (
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">Respondidos</span>
-                    <span className="text-[12px] text-muted">
-                      ({semProfissional.filter((e) => e.status === "respondido").length})
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {semProfissional
-                      .filter((e) => e.status === "respondido")
-                      .map((e) => (
-                        <CardGeral
-                          key={e.id}
-                          e={e}
-                          expandido={expandidos.has(e.id)}
-                          onToggle={() => toggleExpandido(e.id)}
-                          onExcluir={excluirEncaminhamento}
-                          onResolver={atualizarEncaminhamento}
-                          followup={followupsMap.get(e.id)}
-                          onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
-                        />
-                      ))}
-                  </div>
-                </div>
-              )}
             </div>
 
+            {semProfissional.filter((e) => isCuradoriaTerminal(e.status)).length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">Concluídos</span>
+                  <span className="text-[12px] text-muted">
+                    ({semProfissional.filter((e) => isCuradoriaTerminal(e.status)).length})
+                  </span>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {semProfissional
+                    .filter((e) => isCuradoriaTerminal(e.status))
+                    .map((e) => (
+                      <CardGeral
+                        key={e.id}
+                        e={e}
+                        expandido={expandidos.has(e.id)}
+                        onToggle={() => toggleExpandido(e.id)}
+                        onExcluir={excluirEncaminhamento}
+                        onResolver={atualizarEncaminhamento}
+                        followup={followupsMap.get(e.id)}
+                        onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
+                      />
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
