@@ -186,12 +186,21 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   const primeiro = encaminhamento.nome_responsavel.split(" ")[0];
   const isWa = !encaminhamento.contato.includes("@");
+  const isCuradoria = !encaminhamento.profissional_solicitado;
   const profObj = profissionais.find((p) => p.id === encaminhamento.profissional_solicitado);
   const profNome = profObj ? titleCasePT(profObj.nome) : (encaminhamento.profissional_solicitado ?? "o profissional indicado");
   const profPrimeiro = profNome.split(" ")[0];
   const ratingUrl = fup ? `https://kirisaude.com.br/followup/${fup.token}` : null;
 
-  const msgs = {
+  const msgs = isCuradoria ? {
+    m1: `Olá, ${primeiro}! Aqui é a Iohana, da equipe Kiri. Há alguns dias te enviamos indicações de profissionais. Você conseguiu entrar em contato com algum deles?`,
+    sim_contato: `Que bom! Você conseguiu agendar uma consulta?`,
+    sim_agendou: ratingUrl
+      ? `Que ótimo, ${primeiro}! Ficamos muito felizes. Você toparia avaliar em 1 minuto a sua experiência com a Kiri? ${ratingUrl}`
+      : `Que ótimo, ${primeiro}! Ficamos muito felizes. Você toparia avaliar em 1 minuto a sua experiência com a Kiri? [link gerado após criar]`,
+    nao_agendou: `Entendemos, sem problemas! O que aconteceu? Posso te ajudar a encontrar outra opção, se precisar.`,
+    nao_contato: `Tudo bem, sem pressa! Você ainda tem os contatos? Se quiser, posso te reenviar as indicações ou sugerir outras opções.`,
+  } : {
     m1: `Olá, ${primeiro}! Tudo bem? Aqui é Iohana, da equipe Kiri. Há alguns dias te indicamos ${profNome}. Você conseguiu entrar em contato com ela/ele?`,
     sim_contato: `Que bom, ${primeiro}! Você conseguiu agendar uma consulta com ${profPrimeiro}?`,
     sim_agendou: ratingUrl
@@ -306,7 +315,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
         <div className="flex items-start justify-between gap-2 px-5 pt-5 pb-3 flex-none">
           <div>
             <div className="text-[15px] font-semibold text-carvao">Enviar follow-up</div>
-            <div className="text-[12.5px] text-muted mt-0.5">{encaminhamento.nome_responsavel} → {profNome}</div>
+            <div className="text-[12.5px] text-muted mt-0.5">
+              {isCuradoria ? `Curadoria — ${encaminhamento.nome_responsavel}` : `${encaminhamento.nome_responsavel} → ${profNome}`}
+            </div>
           </div>
           <button onClick={onFechar} className="text-muted hover:text-carvao cursor-pointer flex-none mt-0.5 p-1">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
@@ -460,7 +471,48 @@ function FollowupBadge({ followup, encaminhamento, onCriado }: {
     return buildWaUrl(encaminhamento.contato, `Olá, ${primeiro}! Aqui é a equipe Kiri 🌱 Há alguns dias te indicamos ${profNome}. Tudo bem? Conta pra gente em 1 minuto: ${url}`);
   }
 
+  const isCuradoria = !encaminhamento.profissional_solicitado;
+
   if (!followup) {
+    if (isCuradoria) {
+      // Para curadoria só mostra follow-up depois que a curadoria foi enviada
+      const statusCuradoriaEnviada = encaminhamento.status === "curadoria_enviada" || encaminhamento.status === "respondido";
+      if (!statusCuradoriaEnviada) return null;
+
+      const diasDesde = Math.floor((Date.now() - new Date(encaminhamento.criado_em).getTime()) / 86400000);
+      const ehHora = diasDesde >= 7;
+
+      return (
+        <>
+          <div className="flex items-center gap-2 flex-wrap mt-1">
+            {ehHora ? (
+              <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#E0A55E]/70 text-[#8B6914] bg-[#FFF8E1]">
+                ⏱ há {diasDesde} dias — hora do follow-up
+              </span>
+            ) : (
+              <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#D8C7B0] text-muted bg-[#F5EFE6]">
+                há {diasDesde} dia{diasDesde !== 1 ? "s" : ""} — aguardar até 7 dias
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={() => setShowModal(true)}
+              className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full cursor-pointer hover:bg-[#E0F0E5] transition-colors"
+            >
+              Enviar follow-up →
+            </button>
+          </div>
+          {showModal && (
+            <FollowupModal
+              encaminhamento={encaminhamento}
+              onFechar={() => setShowModal(false)}
+              onEnviado={(fup) => { onCriado(fup); }}
+            />
+          )}
+        </>
+      );
+    }
+
     return (
       <>
         <div className="flex items-center gap-2 flex-wrap mt-1">
