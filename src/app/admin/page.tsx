@@ -404,12 +404,12 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
           {/* Desfecho */}
           <div className="flex flex-col gap-1.5 pt-1 border-t border-linha">
-            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Desfecho do contato</div>
+            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Anotação (opcional)</div>
             <textarea
               value={desfecho}
               onChange={e => setDesfecho(e.target.value)}
               rows={3}
-              placeholder="Ex: família agendou para setembro. / Não quis mais, desistiu. / Marcou com outro profissional."
+              placeholder="Ex: família agendou para setembro. Não quis mais. Marcou com outro profissional."
               className="w-full border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao placeholder:text-muted outline-none resize-none leading-[1.55] disabled:opacity-60"
               style={{ background: "#fff" }}
               onFocus={e => (e.currentTarget.style.borderColor = "#44606C")}
@@ -432,11 +432,11 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
           <button
             type="button"
             onClick={salvarEEncerrar}
-            disabled={!desfecho.trim() || encerrando || salvando}
+            disabled={encerrando || salvando}
             className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity"
             style={{ background: "#BE6E4E", color: "#fff" }}
           >
-            {encerrando ? "Encerrando…" : "Salvar e encerrar follow-up"}
+            {encerrando ? "Encerrando…" : "Encerrar follow-up"}
           </button>
           {!fup && (
             <button
