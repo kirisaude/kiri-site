@@ -1040,48 +1040,33 @@ Certificados de especialização / residência / pós-graduação`;
           {/* Rodapé compacto */}
           <div className="flex flex-col gap-2 pt-2 border-t border-linha">
 
-            {/* Linha 1: certidão + status + solicitar + termo */}
-            <div className="flex items-center gap-2 flex-wrap">
+            {/* Linha 1: certidão + solicitar + termo + status */}
+            <div className="flex items-stretch gap-2">
 
               {/* Certidão */}
               <button
                 type="button"
                 onClick={() => setCertidaoEnviadaEm(certidaoEnviadaEm ? null : new Date().toISOString())}
-                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border text-[11.5px] font-medium transition-colors cursor-pointer ${
+                className={`flex-1 flex items-center justify-center gap-2 px-3 py-[10px] rounded-[10px] border text-[13px] font-medium transition-colors cursor-pointer ${
                   certidaoEnviadaEm ? "bg-[#F0FAF3] border-[#B8D8C0] text-[#2E7D4F]" : "bg-white border-linha text-muted hover:border-ardosia"
                 }`}
               >
-                <span className={`flex-none w-[13px] h-[13px] rounded-[3px] border-2 flex items-center justify-center ${
+                <span className={`flex-none w-[15px] h-[15px] rounded-[4px] border-2 flex items-center justify-center ${
                   certidaoEnviadaEm ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-current"
                 }`}>
-                  {certidaoEnviadaEm && <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                  {certidaoEnviadaEm && <svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                 </span>
                 Certidão de regularidade enviada
-                {certidaoEnviadaEm && <span className="text-[10.5px] opacity-70 font-normal">· {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR")}</span>}
+                {certidaoEnviadaEm && <span className="text-[11.5px] opacity-70 font-normal">· {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR")}</span>}
               </button>
-
-              {/* Status */}
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-medium text-muted">Status:</span>
-                <div className="flex rounded-[7px] border border-linha overflow-hidden">
-                  <button type="button" onClick={() => setOculto(true)}
-                    className={`px-2.5 py-0.5 text-[11.5px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}>
-                    Oculto
-                  </button>
-                  <button type="button" onClick={() => setOculto(false)}
-                    className={`px-2.5 py-0.5 text-[11.5px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}>
-                    Visível
-                  </button>
-                </div>
-              </div>
 
               {/* Solicitar docs */}
               <button
                 type="button"
                 onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setEmailManual(""); setShowEmailModal(true); }}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border border-linha bg-white text-[11.5px] font-medium text-ardosia hover:bg-wash cursor-pointer transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-[10px] rounded-[10px] border border-linha bg-white text-[13px] font-medium text-ardosia hover:bg-wash cursor-pointer transition-colors"
               >
-                <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
                   <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
                   <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
                 </svg>
@@ -1090,29 +1075,44 @@ Certificados de especialização / residência / pós-graduação`;
 
               {/* Termo de adesão inline */}
               {profOriginal?.inscricao_id && (
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[11.5px] font-semibold text-carvao">Termo:</span>
+                <div className="flex items-center gap-1.5 px-3 py-[10px] rounded-[10px] border border-linha bg-white">
+                  <span className="text-[13px] font-semibold text-carvao">Termo:</span>
                   {autentiqueDocId ? (
                     autentiqueStatusData?.signed ? (
-                      <span className="text-[11px] font-semibold text-verde-confirmacao bg-[#E8F5EE] px-2 py-0.5 rounded-full">✓ Assinado</span>
+                      <span className="text-[11.5px] font-semibold text-verde-confirmacao bg-[#E8F5EE] px-2 py-0.5 rounded-full">✓ Assinado</span>
                     ) : (
-                      <span className="text-[11px] font-semibold text-[#9A6A00] bg-[#FFF3CD] px-2 py-0.5 rounded-full">Aguardando</span>
+                      <span className="text-[11.5px] font-semibold text-[#9A6A00] bg-[#FFF3CD] px-2 py-0.5 rounded-full">Aguardando</span>
                     )
                   ) : (
-                    <span className="text-[11px] font-semibold text-ferrugem bg-[#FCF0EB] px-2 py-0.5 rounded-full">Não enviado</span>
+                    <span className="text-[11.5px] font-semibold text-ferrugem bg-[#FCF0EB] px-2 py-0.5 rounded-full">Não enviado</span>
                   )}
                   {autentiqueDocId && (
                     <button type="button" onClick={verificarTermo} disabled={verificandoTermo}
-                      className="text-[11px] font-semibold text-ardosia border border-ardosia/50 rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-wash transition-colors disabled:opacity-50">
+                      className="text-[12px] font-semibold text-ardosia border border-ardosia/50 rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-wash transition-colors disabled:opacity-50">
                       {verificandoTermo ? "…" : "Verificar"}
                     </button>
                   )}
                   <button type="button" onClick={enviarTermo} disabled={enviandoTermo}
-                    className="text-[11px] font-semibold text-white bg-ferrugem rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-[#A85C3E] transition-colors disabled:opacity-50">
+                    className="text-[12px] font-semibold text-white bg-ferrugem rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-[#A85C3E] transition-colors disabled:opacity-50">
                     {enviandoTermo ? "…" : autentiqueDocId ? "Reenviar" : "Enviar termo"}
                   </button>
                 </div>
               )}
+
+              {/* Status — último item */}
+              <div className="flex items-center gap-1.5 flex-none">
+                <span className="text-[13px] font-medium text-muted">Status:</span>
+                <div className="flex rounded-[9px] border border-linha overflow-hidden">
+                  <button type="button" onClick={() => setOculto(true)}
+                    className={`px-3 py-[10px] text-[13px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    Oculto
+                  </button>
+                  <button type="button" onClick={() => setOculto(false)}
+                    className={`px-3 py-[10px] text-[13px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    Visível
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Avisos do termo */}
