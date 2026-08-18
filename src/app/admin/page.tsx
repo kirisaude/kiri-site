@@ -457,10 +457,11 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   );
 }
 
-function FollowupBadge({ followup, encaminhamento, onCriado }: {
+function FollowupBadge({ followup, encaminhamento, onCriado, onEncerrado }: {
   followup: Followup | undefined;
   encaminhamento: Encaminhamento;
   onCriado: (fup: Followup) => void;
+  onEncerrado?: () => void;
 }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -506,7 +507,7 @@ function FollowupBadge({ followup, encaminhamento, onCriado }: {
             <FollowupModal
               encaminhamento={encaminhamento}
               onFechar={() => setShowModal(false)}
-              onEnviado={(fup) => { onCriado(fup); }}
+              onEnviado={(fup) => { onCriado(fup); if (fup.concluido_em) onEncerrado?.(); }}
             />
           )}
         </>
@@ -619,6 +620,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
   const prof = profissionais.find((p) => p.id === e.profissional_solicitado);
   const temWa = pareceWhatsApp(e.contato);
   const encaminhado = e.status === "encaminhado";
+  const encerrado = !!followup?.concluido_em;
   const [copiado, setCopiado] = useState<string | null>(null);
 
   async function copiar(texto: string, chave: string) {
@@ -658,7 +660,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
   }
 
   return (
-    <div className={`border rounded-[14px] overflow-hidden ${encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
+    <div className={`border rounded-[14px] overflow-hidden ${encerrado ? "bg-[#F3F2F0] border-[#D0C8BE]" : encaminhado ? "bg-[#F7FAF7] border-[#B8D8C0] opacity-70" : "bg-white border-borda-azulada"}`}>
       {/* Cabeçalho sempre visível */}
       <button
         type="button"
@@ -668,7 +670,12 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
-            {encaminhado && (
+            {encerrado && (
+              <span className="text-[11px] font-semibold text-muted bg-[#EDEBE8] border border-[#D0C8BE] px-2 py-0.5 rounded-[6px]">
+                encerrado
+              </span>
+            )}
+            {encaminhado && !encerrado && (
               <span className="text-[11px] font-semibold text-[#2E7D4F] bg-[#E8F5EC] border border-[#B8D8C0] px-2 py-0.5 rounded-[6px]">
                 encaminhado
               </span>
@@ -693,7 +700,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
           {!prof && e.profissional_solicitado && (
             <div className="text-[13px] text-muted mt-0.5">→ ID: {e.profissional_solicitado}</div>
           )}
-          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} />
+          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} onEncerrado={() => { if (expandido) onToggle(); }} />
         </div>
         <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
       </button>
@@ -941,7 +948,7 @@ function CardGeral({ e, expandido, onToggle, onExcluir, onResolver, followup, on
               {parseObs(e.observacoes).demanda ?? e.observacoes}
             </div>
           )}
-          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} />
+          <FollowupBadge followup={followup} encaminhamento={e} onCriado={onFollowupCriado} onEncerrado={() => { if (expandido) onToggle(); }} />
         </div>
         <span className="text-[18px] text-muted flex-none mt-0.5">{expandido ? "▴" : "▾"}</span>
       </button>
@@ -1226,6 +1233,10 @@ export default function AdminPage() {
   const [emailDocsStatus, setEmailDocsStatus] = useState<"idle"|"ok"|"erro">("idle");
   const [syncStatus, setSyncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
   const [syncErro, setSyncErro] = useState("");
+  const [syncEncStatus, setSyncEncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
+  const [syncEncErro, setSyncEncErro] = useState("");
+  const [syncCurStatus, setSyncCurStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
+  const [syncCurErro, setSyncCurErro] = useState("");
 
   async function sincronizarSheets() {
     setSyncStatus("syncing");
@@ -1245,6 +1256,48 @@ export default function AdminPage() {
       setSyncErro(e instanceof Error ? e.message : "Erro de rede");
       setSyncStatus("erro");
       setTimeout(() => setSyncStatus("idle"), 8000);
+    }
+  }
+
+  async function sincronizarSheetsEnc() {
+    setSyncEncStatus("syncing");
+    setSyncEncErro("");
+    try {
+      const res = await fetch("/api/admin/sync-sheets-encaminhamentos", { method: "POST", credentials: "include" });
+      if (res.ok) {
+        setSyncEncStatus("ok");
+        setTimeout(() => setSyncEncStatus("idle"), 3000);
+      } else {
+        const d = await res.json().catch(() => ({}));
+        setSyncEncErro(d.error ?? `Erro ${res.status}`);
+        setSyncEncStatus("erro");
+        setTimeout(() => setSyncEncStatus("idle"), 8000);
+      }
+    } catch (e) {
+      setSyncEncErro(e instanceof Error ? e.message : "Erro de rede");
+      setSyncEncStatus("erro");
+      setTimeout(() => setSyncEncStatus("idle"), 8000);
+    }
+  }
+
+  async function sincronizarSheetsCur() {
+    setSyncCurStatus("syncing");
+    setSyncCurErro("");
+    try {
+      const res = await fetch("/api/admin/sync-sheets-curadoria", { method: "POST", credentials: "include" });
+      if (res.ok) {
+        setSyncCurStatus("ok");
+        setTimeout(() => setSyncCurStatus("idle"), 3000);
+      } else {
+        const d = await res.json().catch(() => ({}));
+        setSyncCurErro(d.error ?? `Erro ${res.status}`);
+        setSyncCurStatus("erro");
+        setTimeout(() => setSyncCurStatus("idle"), 8000);
+      }
+    } catch (e) {
+      setSyncCurErro(e instanceof Error ? e.message : "Erro de rede");
+      setSyncCurStatus("erro");
+      setTimeout(() => setSyncCurStatus("idle"), 8000);
     }
   }
 
@@ -1648,9 +1701,19 @@ export default function AdminPage() {
         {aba === "encaminhamentos" && (
           <div className="flex flex-col gap-10">
 
-            <div className="flex justify-end">
+            <div className="flex justify-end items-center gap-2">
+              <div className="flex flex-col items-end gap-1">
+                <button
+                  onClick={sincronizarSheetsEnc}
+                  disabled={syncEncStatus === "syncing"}
+                  className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-50 transition-colors ${syncEncStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : syncEncStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
+                >
+                  {syncEncStatus === "syncing" ? "Sincronizando…" : syncEncStatus === "ok" ? "✓ Planilha atualizada" : syncEncStatus === "erro" ? "Erro — tente novamente" : "↑ Sincronizar Google Sheets"}
+                </button>
+                {syncEncErro && <p className="text-[11px] text-ferrugem max-w-[280px] text-right">{syncEncErro}</p>}
+              </div>
               <a href="/api/admin/exportar-encaminhamentos-csv" download className="text-[12.5px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 no-underline inline-flex items-center hover:text-carvao transition-colors">
-                ↓ Exportar planilha
+                ↓ CSV
               </a>
             </div>
 
@@ -1686,20 +1749,50 @@ export default function AdminPage() {
                 </div>
               )}
 
-              {/* Subcategoria: encaminhados */}
-              {comProfissional.filter((e) => e.status === "encaminhado").length > 0 && (
+              {/* Subcategoria: encaminhados (sem follow-up encerrado) */}
+              {comProfissional.filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em).length > 0 && (
                 <div className="mt-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">
                       Encaminhados
                     </span>
                     <span className="text-[12px] text-muted">
-                      ({comProfissional.filter((e) => e.status === "encaminhado").length})
+                      ({comProfissional.filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em).length})
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     {comProfissional
-                      .filter((e) => e.status === "encaminhado")
+                      .filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em)
+                      .map((e) => (
+                        <CardEspecifico
+                          key={e.id}
+                          e={e}
+                          expandido={expandidos.has(e.id)}
+                          onToggle={() => toggleExpandido(e.id)}
+                          onEncaminhar={atualizarEncaminhamento}
+                          onExcluir={excluirEncaminhamento}
+                          followup={followupsMap.get(e.id)}
+                          onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
+                        />
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Subcategoria: encerrados (follow-up concluído) */}
+              {comProfissional.filter((e) => !!followupsMap.get(e.id)?.concluido_em).length > 0 && (
+                <div className="mt-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-[13px] font-semibold text-muted tracking-wide">
+                      Encerrados
+                    </span>
+                    <span className="text-[12px] text-muted">
+                      ({comProfissional.filter((e) => !!followupsMap.get(e.id)?.concluido_em).length})
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {comProfissional
+                      .filter((e) => !!followupsMap.get(e.id)?.concluido_em)
                       .map((e) => (
                         <CardEspecifico
                           key={e.id}
@@ -1723,9 +1816,19 @@ export default function AdminPage() {
         {/* ABA CURADORIA */}
         {aba === "curadoria" && (
           <div className="flex flex-col gap-8">
-            <div className="flex justify-end">
+            <div className="flex justify-end items-center gap-2">
+              <div className="flex flex-col items-end gap-1">
+                <button
+                  onClick={sincronizarSheetsCur}
+                  disabled={syncCurStatus === "syncing"}
+                  className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-50 transition-colors ${syncCurStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : syncCurStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
+                >
+                  {syncCurStatus === "syncing" ? "Sincronizando…" : syncCurStatus === "ok" ? "✓ Planilha atualizada" : syncCurStatus === "erro" ? "Erro — tente novamente" : "↑ Sincronizar Google Sheets"}
+                </button>
+                {syncCurErro && <p className="text-[11px] text-ferrugem max-w-[280px] text-right">{syncCurErro}</p>}
+              </div>
               <a href="/api/admin/exportar-encaminhamentos-csv" download className="text-[12.5px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 no-underline inline-flex items-center hover:text-carvao transition-colors">
-                ↓ Exportar planilha
+                ↓ CSV
               </a>
             </div>
             <div>
@@ -1881,7 +1984,11 @@ export default function AdminPage() {
                           </div>
                           <div className="text-[12px] text-muted mt-0.5">{p.profissao} · {p.cidade}</div>
                         </div>
-                        <a href={`/admin/profissionais/${p.id}`} className="flex-none text-[13px] font-semibold text-ardosia border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Editar</a>
+                        <div className="flex items-center gap-2 flex-none">
+                          <a href={`/profissional/${p.id}`} target="_blank" rel="noopener" className="text-[13px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Ver perfil</a>
+                          <a href={`/admin/profissionais/${p.id}`} className="text-[13px] font-semibold text-ardosia border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Editar</a>
+                          <button onClick={() => excluirProfissional(p.id, p.nome)} className="text-[13px] font-medium text-ferrugem border border-ferrugem/25 rounded-[9px] px-3 py-1.5 hover:bg-[#FDF2EF] transition-colors cursor-pointer">Excluir</button>
+                        </div>
                       </div>
                     ))}
                   </div>
