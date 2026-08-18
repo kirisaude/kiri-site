@@ -708,6 +708,15 @@ Certificados de especialização / residência / pós-graduação`;
                 required={required}
                 className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
               />
+              {label.includes("WhatsApp") && value.trim() && (
+                <button
+                  type="button"
+                  onClick={() => navigator.clipboard.writeText(value.trim())}
+                  className="self-start text-[12px] font-semibold text-ardosia cursor-pointer hover:opacity-70 transition-opacity"
+                >
+                  Copiar número
+                </button>
+              )}
             </div>
           ))}
 
@@ -875,18 +884,18 @@ Certificados de especialização / residência / pós-graduação`;
             </datalist>
             {formacao.map((f, i) => (
               <div key={i} className="flex flex-col gap-0.5">
-                <div className="flex gap-1.5 items-center">
+                <div className="flex flex-wrap gap-1.5 items-center">
                   <input list="tipos-formacao" placeholder="Tipo" value={f.tipo}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], tipo: e.target.value }; setFormacao(n); }}
                     className="w-[120px] flex-none border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
                   <input type="text" placeholder="Área" value={f.area}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], area: e.target.value }; setFormacao(n); }}
-                    className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                    className="flex-1 min-w-[130px] border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
                   <input type="text" placeholder="Instituição" value={f.instituicao}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], instituicao: e.target.value }; setFormacao(n); }}
-                    className="flex-1 border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
+                    className="flex-1 min-w-[130px] border border-linha rounded-[10px] px-2.5 py-[9px] text-[13px] text-carvao bg-white outline-none focus:border-ardosia placeholder:text-muted"
                   />
                   <input type="text" placeholder="Ano" value={f.ano}
                     onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], ano: e.target.value }; setFormacao(n); }}
@@ -1041,7 +1050,7 @@ Certificados de especialização / residência / pós-graduação`;
           <div className="flex flex-col gap-2 pt-2 border-t border-linha">
 
             {/* Linha 1: certidão + solicitar + termo + status */}
-            <div className="flex items-stretch gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-stretch gap-2">
 
               {/* Certidão */}
               <button
