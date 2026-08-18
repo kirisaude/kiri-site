@@ -1037,52 +1037,113 @@ Certificados de especialização / residência / pós-graduação`;
           </div>{/* /coluna direita */}
           </div>{/* /grid */}
 
-          {/* Certidão + Status + Botões — rodapé compacto */}
-          <div className="flex flex-col gap-3 pt-2 border-t border-linha">
+          {/* Rodapé compacto */}
+          <div className="flex flex-col gap-2 pt-2 border-t border-linha">
 
-            {/* Linha 1: certidão + status lado a lado */}
-            <div className="flex items-center gap-4 flex-wrap">
+            {/* Linha 1: certidão + status + solicitar + termo */}
+            <div className="flex items-center gap-2 flex-wrap">
+
+              {/* Certidão */}
               <button
                 type="button"
                 onClick={() => setCertidaoEnviadaEm(certidaoEnviadaEm ? null : new Date().toISOString())}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-[8px] border text-[12.5px] font-medium transition-colors cursor-pointer ${
-                  certidaoEnviadaEm
-                    ? "bg-[#F0FAF3] border-[#B8D8C0] text-[#2E7D4F]"
-                    : "bg-white border-linha text-muted hover:border-ardosia"
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border text-[11.5px] font-medium transition-colors cursor-pointer ${
+                  certidaoEnviadaEm ? "bg-[#F0FAF3] border-[#B8D8C0] text-[#2E7D4F]" : "bg-white border-linha text-muted hover:border-ardosia"
                 }`}
               >
-                <span className={`flex-none w-[14px] h-[14px] rounded-[3px] border-2 flex items-center justify-center ${
+                <span className={`flex-none w-[13px] h-[13px] rounded-[3px] border-2 flex items-center justify-center ${
                   certidaoEnviadaEm ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-current"
                 }`}>
-                  {certidaoEnviadaEm && <svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                  {certidaoEnviadaEm && <svg width="8" height="6" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                 </span>
-                Certidão enviada
-                {certidaoEnviadaEm && (
-                  <span className="text-[11px] text-muted font-normal">
-                    · {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR")}
-                  </span>
-                )}
+                Certidão de regularidade enviada
+                {certidaoEnviadaEm && <span className="text-[10.5px] opacity-70 font-normal">· {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR")}</span>}
               </button>
 
-              <div className="flex items-center gap-2">
-                <span className="text-[12px] font-medium text-muted">Status:</span>
-                <div className="flex rounded-[8px] border border-linha overflow-hidden">
+              {/* Status */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] font-medium text-muted">Status:</span>
+                <div className="flex rounded-[7px] border border-linha overflow-hidden">
                   <button type="button" onClick={() => setOculto(true)}
-                    className={`px-3 py-1 text-[12px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    className={`px-2.5 py-0.5 text-[11.5px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}>
                     Oculto
                   </button>
                   <button type="button" onClick={() => setOculto(false)}
-                    className={`px-3 py-1 text-[12px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    className={`px-2.5 py-0.5 text-[11.5px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}>
                     Visível
                   </button>
                 </div>
               </div>
+
+              {/* Solicitar docs */}
+              <button
+                type="button"
+                onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setEmailManual(""); setShowEmailModal(true); }}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border border-linha bg-white text-[11.5px] font-medium text-ardosia hover:bg-wash cursor-pointer transition-colors"
+              >
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none">
+                  <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+                </svg>
+                Solicitar documentos pendentes por e-mail
+              </button>
+
+              {/* Termo de adesão inline */}
+              {profOriginal?.inscricao_id && (
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[11.5px] font-semibold text-carvao">Termo:</span>
+                  {autentiqueDocId ? (
+                    autentiqueStatusData?.signed ? (
+                      <span className="text-[11px] font-semibold text-verde-confirmacao bg-[#E8F5EE] px-2 py-0.5 rounded-full">✓ Assinado</span>
+                    ) : (
+                      <span className="text-[11px] font-semibold text-[#9A6A00] bg-[#FFF3CD] px-2 py-0.5 rounded-full">Aguardando</span>
+                    )
+                  ) : (
+                    <span className="text-[11px] font-semibold text-ferrugem bg-[#FCF0EB] px-2 py-0.5 rounded-full">Não enviado</span>
+                  )}
+                  {autentiqueDocId && (
+                    <button type="button" onClick={verificarTermo} disabled={verificandoTermo}
+                      className="text-[11px] font-semibold text-ardosia border border-ardosia/50 rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-wash transition-colors disabled:opacity-50">
+                      {verificandoTermo ? "…" : "Verificar"}
+                    </button>
+                  )}
+                  <button type="button" onClick={enviarTermo} disabled={enviandoTermo}
+                    className="text-[11px] font-semibold text-white bg-ferrugem rounded-[6px] px-2 py-0.5 cursor-pointer hover:bg-[#A85C3E] transition-colors disabled:opacity-50">
+                    {enviandoTermo ? "…" : autentiqueDocId ? "Reenviar" : "Enviar termo"}
+                  </button>
+                </div>
+              )}
             </div>
 
-            {erro && <p className="text-[13px] text-ferrugem">{erro}</p>}
-            {sucesso && <p className="text-[13px] text-verde-confirmacao font-semibold">{sucesso}</p>}
+            {/* Avisos do termo */}
+            {erroTermo && <p className="text-[11px] text-ferrugem">{erroTermo}</p>}
+            {termoAcao === "enviado" && <p className="text-[11px] text-verde-confirmacao font-semibold">Termo enviado com sucesso!</p>}
+            {autentiqueEnviadoEm && (
+              <p className="text-[11px] text-muted">
+                Termo enviado em {new Date(autentiqueEnviadoEm).toLocaleDateString("pt-BR")}
+                {autentiqueStatusData?.signed && autentiqueStatusData.signed_at && <> · Assinado em {new Date(autentiqueStatusData.signed_at).toLocaleDateString("pt-BR")}</>}
+              </p>
+            )}
 
-            {/* Linha 2: botões lado a lado */}
+            {/* Linha 2: Drive */}
+            <div className="flex items-center gap-2">
+              <svg width="12" height="12" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M13 2h5v5M18 2l-8 8" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <input
+                type="url"
+                value={pastaDrive}
+                onChange={(e) => setPastaDrive(e.target.value)}
+                placeholder="Link da pasta do Drive (cole aqui)"
+                className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
+              />
+            </div>
+
+            {erro && <p className="text-[12px] text-ferrugem">{erro}</p>}
+            {sucesso && <p className="text-[12px] text-verde-confirmacao font-semibold">{sucesso}</p>}
+
+            {/* Linha 3: Salvar + Publicar */}
             <div className="flex gap-3">
               <button type="submit" disabled={salvando}
                 className="flex-1 bg-ardosia-escura text-white font-semibold text-[14px] rounded-[10px] py-[11px] cursor-pointer disabled:opacity-50">
@@ -1096,89 +1157,6 @@ Certificados de especialização / residência / pós-graduação`;
             </div>
           </div>
         </form>
-
-        {/* Drive + e-mail pendências — parte inferior */}
-        <div className="mt-6 flex flex-col gap-3 border-t border-linha pt-6">
-          <div className="flex items-center gap-2">
-            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" style={{ flexShrink: 0 }}>
-              <path d="M10 3H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M13 2h5v5M18 2l-8 8" stroke="#9A8C78" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <input
-              type="url"
-              value={pastaDrive}
-              onChange={(e) => setPastaDrive(e.target.value)}
-              placeholder="Link da pasta do Drive (cole aqui)"
-              className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() => { setPendenciasTexto(PENDENCIAS_PADRAO); setEmailEnviado(false); setErroEmail(""); setEmailManual(""); setShowEmailModal(true); }}
-            className="w-full flex items-center justify-center gap-2 border border-[#D8C7B0] rounded-[12px] py-[11px] text-[13.5px] font-semibold text-ardosia bg-white hover:bg-wash cursor-pointer transition-colors"
-          >
-            <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-              <rect x="2" y="4" width="16" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M2 7l8 5 8-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-            </svg>
-            Solicitar documentos pendentes por e-mail
-          </button>
-
-          {/* Termo de adesão — Autentique */}
-          {profOriginal?.inscricao_id && (
-            <div className="border border-[#D8C7B0] rounded-[12px] p-4 bg-white">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[13px] font-semibold text-carvao">Termo de adesão</span>
-                {autentiqueDocId ? (
-                  autentiqueStatusData ? (
-                    autentiqueStatusData.signed ? (
-                      <span className="text-[11.5px] font-semibold text-verde-confirmacao bg-[#E8F5EE] px-2.5 py-0.5 rounded-full">✓ Assinado</span>
-                    ) : (
-                      <span className="text-[11.5px] font-semibold text-[#9A6A00] bg-[#FFF3CD] px-2.5 py-0.5 rounded-full">Aguardando assinatura</span>
-                    )
-                  ) : (
-                    <span className="text-[11.5px] font-semibold text-muted bg-wash px-2.5 py-0.5 rounded-full">Enviado</span>
-                  )
-                ) : (
-                  <span className="text-[11.5px] font-semibold text-ferrugem bg-[#FCF0EB] px-2.5 py-0.5 rounded-full">Não enviado</span>
-                )}
-              </div>
-
-              {autentiqueEnviadoEm && (
-                <p className="text-[11.5px] text-muted mb-2">
-                  Enviado em {new Date(autentiqueEnviadoEm).toLocaleDateString("pt-BR")}
-                  {autentiqueStatusData?.signed && autentiqueStatusData.signed_at && (
-                    <> · Assinado em {new Date(autentiqueStatusData.signed_at).toLocaleDateString("pt-BR")}</>
-                  )}
-                </p>
-              )}
-
-              {erroTermo && <p className="text-[11.5px] text-ferrugem mb-2">{erroTermo}</p>}
-              {termoAcao === "enviado" && <p className="text-[11.5px] text-verde-confirmacao font-semibold mb-2">Termo enviado com sucesso!</p>}
-
-              <div className="flex gap-2 flex-wrap">
-                {autentiqueDocId && (
-                  <button
-                    type="button"
-                    onClick={verificarTermo}
-                    disabled={verificandoTermo}
-                    className="flex-1 text-[12.5px] font-semibold text-ardosia border border-ardosia rounded-[9px] py-2 cursor-pointer hover:bg-wash transition-colors disabled:opacity-50"
-                  >
-                    {verificandoTermo ? "Verificando…" : "Verificar assinatura"}
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={enviarTermo}
-                  disabled={enviandoTermo}
-                  className="flex-1 text-[12.5px] font-semibold text-white bg-ferrugem rounded-[9px] py-2 cursor-pointer hover:bg-[#A85C3E] transition-colors disabled:opacity-50"
-                >
-                  {enviandoTermo ? "Enviando…" : autentiqueDocId ? "Reenviar termo" : "Enviar termo"}
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
 
         {/* Modal email pendências */}
         {showEmailModal && (
