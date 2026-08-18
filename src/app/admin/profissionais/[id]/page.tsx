@@ -92,6 +92,7 @@ export default function EditarProfissionalPage() {
   const [valorMaxSec, setValorMaxSec] = useState(profOriginal?.valor_max_secundario ? String(profOriginal.valor_max_secundario) : "");
   const [valorPacote, setValorPacote] = useState(profOriginal?.valor_pacote ? String(profOriginal.valor_pacote) : "");
   const [valorPacoteObs, setValorPacoteObs] = useState(profOriginal?.valor_pacote_obs ?? "");
+  const [email, setEmail] = useState(profOriginal?.email ?? "");
   const [convenio, setConvenio] = useState(profOriginal?.convenio_info ?? "");
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
@@ -364,6 +365,7 @@ Certificados de especialização / residência / pós-graduação`;
       valor_max_secundario: (() => { const n = parseInt(valorMaxSec.replace(/\D/g, ""), 10); return profissaoSecundaria && valorFormatoSec === "faixa" && !isNaN(n) ? n : null; })(),
       valor_pacote: (() => { const n = parseInt(valorPacote.replace(/\D/g, ""), 10); return !isNaN(n) && n > 0 ? n : null; })(),
       valor_pacote_obs: valorPacoteObs.trim() || null,
+      email: email.trim() || null,
       convenio_info: convenio.trim(),
       convenios: convenios.length ? convenios : null,
       whatsapp_agendamento: whatsapp.trim() || null,
@@ -394,6 +396,14 @@ Certificados de especialização / residência / pós-graduação`;
       });
 
       if (res.ok) {
+        // Sincroniza email na inscrição do Supabase para aparecer na lista de termos
+        if (profOriginal?.inscricao_id && email.trim()) {
+          fetch("/api/admin/inscricoes", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: profOriginal.inscricao_id, status: undefined, email: email.trim() }),
+          }).catch(() => {});
+        }
         setSucesso(publicarSemPendentes ? "Publicado! Itens com verificação pendente foram ocultados. O site atualiza em ~1 min." : "Salvo! O site atualiza em ~1 min.");
         setTimeout(() => router.push("/admin?aba=profissionais"), 2500);
       } else {
@@ -695,6 +705,7 @@ Certificados de especialização / residência / pós-graduação`;
             { label: "Áreas de atuação (separadas por vírgula)", value: areas, set: setAreas, required: true },
             { label: "Modalidade", value: modalidade, set: setModalidade, required: true },
             { label: "Faixa etária", value: faixaEtaria, set: setFaixaEtaria, required: true },
+            { label: "E-mail (privado)", value: email, set: setEmail },
             { label: "Convênio e pagamento", value: convenio, set: setConvenio, required: true },
             { label: "WhatsApp para agendamento (privado)", value: whatsapp, set: setWhatsapp },
             { label: "Verificado em (ex: Junho de 2026)", value: verificacaoData, set: setVerificacaoData },

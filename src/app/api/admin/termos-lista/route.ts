@@ -29,20 +29,24 @@ export async function GET(request: Request) {
 
   const lista: Array<{ id: string; nome: string; email: string | null; profissao: string; autentique_document_id: string | null; autentique_enviado_em: string | null }> = await res.json();
 
-  // Monta mapa inscricao_id → profissional JSON id para link de edição correto
-  let inscricaoParaProfId: Record<string, string> = {};
+  // Monta mapa inscricao_id → { prof_id, email } para link de edição e fallback de email
+  let inscricaoMapa: Record<string, { prof_id: string; email?: string | null }> = {};
   try {
     const json = JSON.parse(readFileSync(join(process.cwd(), "src/data/profissionais.json"), "utf-8"));
     for (const p of json.profissionais ?? []) {
-      if (p.inscricao_id) inscricaoParaProfId[p.inscricao_id] = p.id;
+      if (p.inscricao_id) inscricaoMapa[p.inscricao_id] = { prof_id: p.id, email: p.email ?? null };
     }
   } catch { /* se falhar, segue sem o mapeamento */ }
 
   return NextResponse.json(
-    lista.map((i) => ({
-      ...i,
-      nome: titleCasePT(i.nome),
-      prof_id: inscricaoParaProfId[i.id] ?? null,
-    }))
+    lista.map((i) => {
+      const mapa = inscricaoMapa[i.id];
+      return {
+        ...i,
+        nome: titleCasePT(i.nome),
+        email: i.email || mapa?.email || null,
+        prof_id: mapa?.prof_id ?? null,
+      };
+    })
   );
 }

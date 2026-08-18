@@ -50,7 +50,12 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "Configuração incompleta" }, { status: 500 });
   }
 
-  const { id, status } = await request.json();
+  const body = await request.json();
+  const { id, status, email } = body;
+
+  const patch: Record<string, unknown> = {};
+  if (status !== undefined) patch.status = status;
+  if (email !== undefined) patch.email = email;
 
   const res = await fetch(
     `${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${id}`,
@@ -62,7 +67,7 @@ export async function PATCH(request: Request) {
         "Authorization": `Bearer ${supabaseKey}`,
         "Prefer": "return=minimal",
       },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify(patch),
     }
   );
 

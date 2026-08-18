@@ -51,6 +51,7 @@ export interface Profissional {
   sobre_pendente?: boolean;
   sobre_obs?: string;
   experiencias_infantil?: ExperienciaInfantil[] | null;
+  email?: string | null;
   whatsapp_agendamento: string | null;
   card_token: string;
   inscricao_id?: string | null;
