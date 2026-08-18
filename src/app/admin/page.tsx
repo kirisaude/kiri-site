@@ -1314,16 +1314,23 @@ export default function AdminPage() {
     }
   }
 
-  // Extrai todas as siglas (SIGLA) presentes nos campos formacao de todos os profissionais
+  // Extrai todas as siglas (SIGLA) e, quando disponível, o nome por extenso que aparece antes delas
   const detectedSiglas = useMemo(() => {
-    const map = new Map<string, string[]>();
+    const map = new Map<string, { profNames: string[]; nomeExterno?: string }>();
     for (const p of profPublicados) {
       for (const f of (p.formacao ?? [])) {
-        const matches = [...(f.instituicao_ano ?? "").matchAll(/\(([A-Za-z]{2,12})\)/g)];
-        for (const m of matches) {
-          const sigla = m[1].toUpperCase();
-          const prev = map.get(sigla) ?? [];
-          if (!prev.includes(p.nome)) map.set(sigla, [...prev, p.nome]);
+        // Cada parte do campo pode conter "Nome Completo (SIGLA)"
+        const partes = (f.instituicao_ano ?? "").split(" — ");
+        for (const parte of partes) {
+          const m = parte.match(/^(.*?)\s*\(([A-Za-z]{2,12})\)\s*$/);
+          if (!m) continue;
+          const nomeRaw = m[1].trim();
+          const sigla = m[2].toUpperCase();
+          const entry = map.get(sigla) ?? { profNames: [] };
+          if (!entry.profNames.includes(p.nome)) entry.profNames.push(p.nome);
+          // Guarda o nome por extenso se o texto antes da sigla for significativo
+          if (nomeRaw.length > 3 && !entry.nomeExterno) entry.nomeExterno = nomeRaw;
+          map.set(sigla, entry);
         }
       }
     }
@@ -2355,9 +2362,9 @@ export default function AdminPage() {
                 <h2 className="font-serif text-[19px] font-semibold text-carvao mb-1">Siglas detectadas nos perfis</h2>
                 <p className="text-[13px] text-muted leading-[1.5]">
                   {detectedSiglas.size} siglas encontradas automaticamente.{" "}
-                  {[...detectedSiglas.keys()].filter(s => !instituicoes.find(i => i.sigla === s)?.nome_extenso).length > 0
-                    ? <span className="text-[#BE8A3E] font-medium">{[...detectedSiglas.keys()].filter(s => !instituicoes.find(i => i.sigla === s)?.nome_extenso).length} sem nome por extenso.</span>
-                    : <span className="text-[#2E7D4F] font-medium">✓ Todas mapeadas.</span>
+                  {[...detectedSiglas.entries()].filter(([s, e]) => !instituicoes.find(i => i.sigla === s)?.nome_extenso && !e.nomeExterno).length > 0
+                    ? <span className="text-[#BE8A3E] font-medium">{[...detectedSiglas.entries()].filter(([s, e]) => !instituicoes.find(i => i.sigla === s)?.nome_extenso && !e.nomeExterno).length} ainda sem nome por extenso.</span>
+                    : <span className="text-[#2E7D4F] font-medium">✓ Todas com nome por extenso.</span>
                   }
                 </p>
               </div>
@@ -2369,32 +2376,39 @@ export default function AdminPage() {
                   </div>
                   {[...detectedSiglas.entries()]
                     .sort((a, b) => {
-                      const aMapped = !!instituicoes.find(i => i.sigla === a[0])?.nome_extenso;
-                      const bMapped = !!instituicoes.find(i => i.sigla === b[0])?.nome_extenso;
-                      if (aMapped !== bMapped) return aMapped ? 1 : -1;
+                      // Ordem: sem nome > tem sugestão > salvo no DB
+                      const score = ([sigla, e]: [string, { nomeExterno?: string }]) => {
+                        if (instituicoes.find(i => i.sigla === sigla)?.nome_extenso) return 2;
+                        if (e.nomeExterno) return 1;
+                        return 0;
+                      };
+                      const diff = score(a) - score(b);
+                      if (diff !== 0) return diff;
                       return a[0].localeCompare(b[0]);
                     })
-                    .map(([sigla, profNames]) => {
+                    .map(([sigla, entry]) => {
                       const saved = instituicoes.find(i => i.sigla === sigla);
                       const isMapped = !!saved?.nome_extenso;
+                      // Nome por extenso: DB salvo > detectado no próprio perfil > vazio
+                      const valorAtual = instEdits[sigla] ?? saved?.nome_extenso ?? entry.nomeExterno ?? "";
                       return (
                         <div key={sigla} className={`grid grid-cols-[100px_1fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] border ${
-                          isMapped ? "bg-[#F7FAF7] border-[#B8D8C0]" : "bg-white border-linha"
+                          isMapped ? "bg-[#F7FAF7] border-[#B8D8C0]" : entry.nomeExterno ? "bg-[#FAFFF8] border-[#C8DEC8]" : "bg-white border-linha"
                         }`}>
                           <div>
                             <div className="text-[13px] font-semibold text-carvao font-mono">{sigla}</div>
-                            <div className="text-[11px] text-muted leading-[1.3] mt-0.5">{profNames.join(", ")}</div>
+                            <div className="text-[11px] text-muted leading-[1.3] mt-0.5">{entry.profNames.join(", ")}</div>
                           </div>
                           <input
                             type="text"
-                            value={instEdits[sigla] ?? saved?.nome_extenso ?? ""}
+                            value={valorAtual}
                             onChange={(e) => setInstEdits((prev) => ({ ...prev, [sigla]: e.target.value }))}
                             placeholder="Nome por extenso"
-                            className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                            className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
                           />
                           <SalvarInstBtn
                             sigla={sigla}
-                            valor={instEdits[sigla] ?? saved?.nome_extenso ?? ""}
+                            valor={valorAtual}
                             onSalvo={(s, nome) => setInstituicoes((prev) => {
                               const exists = prev.some(x => x.sigla === s);
                               if (exists) return prev.map(x => x.sigla === s ? { ...x, nome_extenso: nome || null } : x);
