@@ -173,12 +173,22 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [fup, setFup] = useState<Followup | null>(null);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
+  const [datasEnvio, setDatasEnvio] = useState<Record<string, string>>({});
   const [desfecho, setDesfecho] = useState("");
   const [salvando, setSalvando] = useState(false);
   const [anotacaoSalva, setAnotacaoSalva] = useState(false);
   const [encerrando, setEncerrando] = useState(false);
   function toggleMarca(chave: string) {
-    setMarcadas(prev => { const s = new Set(prev); s.has(chave) ? s.delete(chave) : s.add(chave); return s; });
+    setMarcadas(prev => {
+      const s = new Set(prev);
+      if (s.has(chave)) {
+        s.delete(chave);
+      } else {
+        s.add(chave);
+        setDatasEnvio(d => d[chave] ? d : { ...d, [chave]: new Date().toISOString().slice(0, 10) });
+      }
+      return s;
+    });
   }
   const portalRef = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -293,15 +303,25 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
     return (
       <div className="flex flex-col gap-1">
         {label && (
-          <label className="flex items-center gap-2 cursor-pointer select-none w-fit">
-            <input
-              type="checkbox"
-              checked={feita}
-              onChange={() => toggleMarca(chave)}
-              className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
-            />
-            <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: feita ? "#2E7D4F" : "#9A8C78", textDecoration: feita ? "line-through" : "none" }}>{label}</span>
-          </label>
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={feita}
+                onChange={() => toggleMarca(chave)}
+                className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
+              />
+              <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: feita ? "#2E7D4F" : "#9A8C78", textDecoration: feita ? "line-through" : "none" }}>{label}</span>
+            </label>
+            {feita && (
+              <input
+                type="date"
+                value={datasEnvio[chave] ?? ""}
+                onChange={e => setDatasEnvio(d => ({ ...d, [chave]: e.target.value }))}
+                className="text-[11px] border border-linha rounded-[6px] px-1.5 py-0.5 text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+              />
+            )}
+          </div>
         )}
         <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]" style={{ opacity: feita ? 0.5 : 1 }}>{texto}</div>
         <button
@@ -356,15 +376,25 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
         <div className="flex-1 overflow-y-auto px-5 flex flex-col gap-4 pb-3">
 
           <div className="flex flex-col gap-1">
-            <label className="flex items-center gap-2 cursor-pointer select-none w-fit">
-              <input
-                type="checkbox"
-                checked={marcadas.has("m1")}
-                onChange={() => toggleMarca("m1")}
-                className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
-              />
-              <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: marcadas.has("m1") ? "#2E7D4F" : "#9A8C78", textDecoration: marcadas.has("m1") ? "line-through" : "none" }}>Mensagem 1 — envie agora</span>
-            </label>
+            <div className="flex items-center gap-2 flex-wrap">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={marcadas.has("m1")}
+                  onChange={() => toggleMarca("m1")}
+                  className="w-[15px] h-[15px] cursor-pointer accent-ardosia flex-none"
+                />
+                <span className="text-[10.5px] font-semibold uppercase tracking-wide" style={{ color: marcadas.has("m1") ? "#2E7D4F" : "#9A8C78", textDecoration: marcadas.has("m1") ? "line-through" : "none" }}>Mensagem 1 — envie agora</span>
+              </label>
+              {marcadas.has("m1") && (
+                <input
+                  type="date"
+                  value={datasEnvio["m1"] ?? ""}
+                  onChange={e => setDatasEnvio(d => ({ ...d, m1: e.target.value }))}
+                  className="text-[11px] border border-linha rounded-[6px] px-1.5 py-0.5 text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+                />
+              )}
+            </div>
             <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[13px] text-carvao leading-[1.55]" style={{ opacity: marcadas.has("m1") ? 0.5 : 1 }}>{msgs.m1}</div>
             <div className="flex items-center justify-between mt-0.5">
               {isWa && (

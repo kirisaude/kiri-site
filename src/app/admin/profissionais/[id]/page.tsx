@@ -114,6 +114,7 @@ export default function EditarProfissionalPage() {
   const [genero, setGenero] = useState<"F" | "M" | undefined>(profOriginal?.genero);
   const [convenios, setConvenios] = useState<string[]>(profOriginal?.convenios ?? []);
   const [convenioCustom, setConvenioCustom] = useState("");
+  const [showPresets, setShowPresets] = useState(false);
   const [fotoUrl, setFotoUrl] = useState(profOriginal?.foto_url ?? "");
   const [fotoPosicao, setFotoPosicao] = useState(profOriginal?.foto_posicao ?? "center top");
   const [fotoPreview, setFotoPreview] = useState<string | null>(profOriginal?.foto_url ?? null);
@@ -971,29 +972,41 @@ Certificados de especialização / residência / pós-graduação`;
             <label className="text-[12.5px] font-medium text-cinza-texto">
               Convênios atendidos <span className="text-[11px] text-muted">(opcional)</span>
             </label>
-            <div className="flex flex-wrap gap-2">
-              {CONVENIOS_COMUNS.map((conv) => (
-                <button
-                  key={conv}
-                  type="button"
-                  onClick={() => setConvenios((prev) => prev.includes(conv) ? prev.filter((c) => c !== conv) : [...prev, conv])}
-                  className={`px-3 py-1.5 rounded-[8px] text-[13px] font-medium border transition-colors cursor-pointer ${convenios.includes(conv) ? "bg-ardosia-escura text-white border-ardosia-escura" : "bg-white text-carvao border-linha"}`}
-                >
-                  {conv}
-                </button>
-              ))}
-              {convenios.filter((c) => !CONVENIOS_COMUNS.includes(c)).map((conv) => (
-                <button
-                  key={conv}
-                  type="button"
-                  onClick={() => setConvenios((prev) => prev.filter((c) => c !== conv))}
-                  className="px-3 py-1.5 rounded-[8px] text-[13px] font-medium border bg-ardosia-escura text-white border-ardosia-escura cursor-pointer flex items-center gap-1.5"
-                >
-                  {conv}
-                  <span className="text-white/70 text-[15px] leading-none">×</span>
-                </button>
-              ))}
-            </div>
+
+            {/* Chips dos selecionados */}
+            {convenios.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {convenios.map((conv) => (
+                  <button
+                    key={conv}
+                    type="button"
+                    onClick={() => setConvenios((prev) => prev.filter((c) => c !== conv))}
+                    className="px-3 py-1.5 rounded-[8px] text-[13px] font-medium border bg-ardosia-escura text-white border-ardosia-escura cursor-pointer flex items-center gap-1.5"
+                  >
+                    {conv}
+                    <span className="text-white/70 text-[15px] leading-none">×</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Predefinidos expandíveis */}
+            {showPresets && (
+              <div className="flex flex-wrap gap-2">
+                {CONVENIOS_COMUNS.filter((c) => !convenios.includes(c)).map((conv) => (
+                  <button
+                    key={conv}
+                    type="button"
+                    onClick={() => { setConvenios((prev) => [...prev, conv]); }}
+                    className="px-3 py-1.5 rounded-[8px] text-[13px] font-medium border bg-white text-carvao border-linha cursor-pointer hover:border-ardosia transition-colors"
+                  >
+                    {conv}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Input customizado + botão de expandir predefinidos */}
             <div className="flex gap-2">
               <input
                 type="text"
@@ -1012,78 +1025,76 @@ Certificados de especialização / residência / pós-graduação`;
                 + Adicionar
               </button>
             </div>
+            <button
+              type="button"
+              onClick={() => setShowPresets((v) => !v)}
+              className="text-[12px] text-ardosia font-medium text-left cursor-pointer w-fit"
+            >
+              {showPresets ? "▲ Ocultar opções comuns" : "▾ Selecionar convênio comum"}
+            </button>
           </div>
 
           </div>{/* /coluna direita */}
           </div>{/* /grid */}
 
-          {/* Certidão de regularidade no conselho */}
-          <div className={`flex items-start gap-3 p-3 rounded-[12px] border ${certidaoEnviadaEm ? "bg-[#F7FAF7] border-[#B8D8C0]" : "bg-white border-linha"}`}>
-            <button
-              type="button"
-              onClick={() => setCertidaoEnviadaEm(certidaoEnviadaEm ? null : new Date().toISOString())}
-              className={`flex-none mt-0.5 w-[18px] h-[18px] rounded-[4px] border-2 flex items-center justify-center cursor-pointer transition-colors ${
-                certidaoEnviadaEm ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-linha hover:border-ardosia"
-              }`}
-            >
-              {certidaoEnviadaEm && (
-                <svg width="11" height="9" viewBox="0 0 10 8" fill="none">
-                  <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              )}
-            </button>
-            <div className="flex-1 min-w-0">
-              <div className="text-[13px] font-semibold text-carvao">Certidão de regularidade no conselho enviada</div>
-              <div className="text-[11.5px] text-muted mt-0.5">
-                {certidaoEnviadaEm
-                  ? <>Recebida em {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })} · <button type="button" className="text-ferrugem underline cursor-pointer" onClick={() => setCertidaoEnviadaEm(null)}>Desmarcar</button></>
-                  : "Marque quando a certidão do conselho for enviada pela/o profissional. A data é registrada automaticamente."}
+          {/* Certidão + Status + Botões — rodapé compacto */}
+          <div className="flex flex-col gap-3 pt-2 border-t border-linha">
+
+            {/* Linha 1: certidão + status lado a lado */}
+            <div className="flex items-center gap-4 flex-wrap">
+              <button
+                type="button"
+                onClick={() => setCertidaoEnviadaEm(certidaoEnviadaEm ? null : new Date().toISOString())}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-[8px] border text-[12.5px] font-medium transition-colors cursor-pointer ${
+                  certidaoEnviadaEm
+                    ? "bg-[#F0FAF3] border-[#B8D8C0] text-[#2E7D4F]"
+                    : "bg-white border-linha text-muted hover:border-ardosia"
+                }`}
+              >
+                <span className={`flex-none w-[14px] h-[14px] rounded-[3px] border-2 flex items-center justify-center ${
+                  certidaoEnviadaEm ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-current"
+                }`}>
+                  {certidaoEnviadaEm && <svg width="9" height="7" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                </span>
+                Certidão enviada
+                {certidaoEnviadaEm && (
+                  <span className="text-[11px] text-muted font-normal">
+                    · {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR")}
+                  </span>
+                )}
+              </button>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[12px] font-medium text-muted">Status:</span>
+                <div className="flex rounded-[8px] border border-linha overflow-hidden">
+                  <button type="button" onClick={() => setOculto(true)}
+                    className={`px-3 py-1 text-[12px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    Oculto
+                  </button>
+                  <button type="button" onClick={() => setOculto(false)}
+                    className={`px-3 py-1 text-[12px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}>
+                    Visível
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {erro && <p className="text-[13px] text-ferrugem">{erro}</p>}
-          {sucesso && <p className="text-[13px] text-verde-confirmacao font-semibold">{sucesso}</p>}
+            {erro && <p className="text-[13px] text-ferrugem">{erro}</p>}
+            {sucesso && <p className="text-[13px] text-verde-confirmacao font-semibold">{sucesso}</p>}
 
-          {/* Status do perfil */}
-          <div className="flex flex-col gap-1.5 pt-1">
-            <div className="flex items-center gap-3">
-              <span className="text-[13px] font-medium text-muted flex-none">Status do perfil:</span>
-              <div className="flex rounded-[10px] border border-linha overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setOculto(true)}
-                  className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer ${oculto ? "bg-ferrugem text-white" : "bg-white text-muted hover:bg-wash"}`}
-                >
-                  Oculto
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setOculto(false)}
-                  className={`px-4 py-2 text-[13px] font-semibold transition-colors cursor-pointer border-l border-linha ${!oculto ? "bg-ardosia-escura text-white" : "bg-white text-muted hover:bg-wash"}`}
-                >
-                  Visível
-                </button>
-              </div>
+            {/* Linha 2: botões lado a lado */}
+            <div className="flex gap-3">
+              <button type="submit" disabled={salvando}
+                className="flex-1 bg-ardosia-escura text-white font-semibold text-[14px] rounded-[10px] py-[11px] cursor-pointer disabled:opacity-50">
+                {salvando ? "Salvando…" : "Salvar"}
+              </button>
+              <button type="button" disabled={salvando}
+                onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
+                className="flex-1 bg-white border border-ardosia text-ardosia font-semibold text-[13px] rounded-[10px] py-[11px] cursor-pointer disabled:opacity-50">
+                {salvando ? "Publicando…" : "Publicar (sem pendentes)"}
+              </button>
             </div>
-            <span className="text-[11.5px] text-muted leading-tight">Ambos os botões abaixo salvam esse status.</span>
           </div>
-
-          <button
-            type="submit"
-            disabled={salvando}
-            className="w-full bg-ardosia-escura text-white font-semibold text-[15px] rounded-[12px] py-[14px] cursor-pointer disabled:opacity-50 mt-2"
-          >
-            {salvando ? "Salvando…" : "Salvar alterações"}
-          </button>
-          <button
-            type="button"
-            disabled={salvando}
-            onClick={(e) => salvar(e as unknown as React.FormEvent, true)}
-            className="w-full bg-white border border-ardosia text-ardosia font-semibold text-[14px] rounded-[12px] py-[13px] cursor-pointer disabled:opacity-50"
-          >
-            {salvando ? "Publicando…" : "Publicar (ocultando itens com verificação pendente)"}
-          </button>
         </form>
 
         {/* Drive + e-mail pendências — parte inferior */}
