@@ -55,6 +55,7 @@ export interface Profissional {
   card_token: string;
   inscricao_id?: string | null;
   pasta_drive?: string | null;
+  certidao_enviada_em?: string | null;
 }
 
 export const PROFISSOES_ORDENADAS = [

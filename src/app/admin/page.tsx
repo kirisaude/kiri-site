@@ -1480,7 +1480,7 @@ export default function AdminPage() {
     const temCertificados = nonGrad.some(f => f.verificado === true) && !nonGrad.some(f => f.pendente === true);
     return {
       foto: !!p.foto_url,
-      certidao: p.registro_verificado === true,
+      certidao: !!p.certidao_enviada_em,
       diploma: temDiploma,
       certificados: temCertificados,
     };

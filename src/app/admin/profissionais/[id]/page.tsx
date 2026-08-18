@@ -121,6 +121,7 @@ export default function EditarProfissionalPage() {
   const [erroFoto, setErroFoto] = useState("");
 
   const [pastaDrive, setPastaDrive] = useState(profOriginal?.pasta_drive ?? "");
+  const [certidaoEnviadaEm, setCertidaoEnviadaEm] = useState<string | null>(profOriginal?.certidao_enviada_em ?? null);
   const [oculto, setOculto] = useState(profOriginal?.oculto ?? false);
   const [registroStatus, setRegistroStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.registro_verificado, profOriginal?.registro_pendente));
   const [registroObs, setRegistroObs] = useState(profOriginal?.registro_obs ?? "");
@@ -380,6 +381,7 @@ Certificados de especialização / residência / pós-graduação`;
         ? experienciasInfantil.filter(e => e.descricao.trim()).map(e => ({ descricao: e.descricao.trim(), tempo: e.tempo?.trim() || undefined, faixa_etaria: e.faixa_etaria?.trim() || undefined }))
         : null,
       pasta_drive: pastaDrive.trim() || null,
+      certidao_enviada_em: certidaoEnviadaEm || null,
     };
 
     try {
@@ -1000,6 +1002,31 @@ Certificados de especialização / residência / pós-graduação`;
               >
                 + Adicionar
               </button>
+            </div>
+          </div>
+
+          {/* Certidão de regularidade no conselho */}
+          <div className={`flex items-start gap-3 p-3 rounded-[12px] border ${certidaoEnviadaEm ? "bg-[#F7FAF7] border-[#B8D8C0]" : "bg-white border-linha"}`}>
+            <button
+              type="button"
+              onClick={() => setCertidaoEnviadaEm(certidaoEnviadaEm ? null : new Date().toISOString())}
+              className={`flex-none mt-0.5 w-[18px] h-[18px] rounded-[4px] border-2 flex items-center justify-center cursor-pointer transition-colors ${
+                certidaoEnviadaEm ? "bg-ardosia-escura border-ardosia-escura" : "bg-white border-linha hover:border-ardosia"
+              }`}
+            >
+              {certidaoEnviadaEm && (
+                <svg width="11" height="9" viewBox="0 0 10 8" fill="none">
+                  <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </button>
+            <div className="flex-1 min-w-0">
+              <div className="text-[13px] font-semibold text-carvao">Certidão de regularidade no conselho enviada</div>
+              <div className="text-[11.5px] text-muted mt-0.5">
+                {certidaoEnviadaEm
+                  ? <>Recebida em {new Date(certidaoEnviadaEm).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })} · <button type="button" className="text-ferrugem underline cursor-pointer" onClick={() => setCertidaoEnviadaEm(null)}>Desmarcar</button></>
+                  : "Marque quando a certidão do conselho for enviada pela/o profissional. A data é registrada automaticamente."}
+              </div>
             </div>
           </div>
 
