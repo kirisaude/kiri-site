@@ -430,7 +430,7 @@ Certificados de especialização / residência / pós-graduação`;
         </div>
       </header>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="mb-5 flex items-start gap-3">
           <div className="flex-1">
             <input
@@ -449,7 +449,11 @@ Certificados de especialização / residência / pós-graduação`;
             Ver perfil ↗
           </Link>
         </div>
-        <form onSubmit={salvar} className="flex flex-col gap-4">
+        <form onSubmit={salvar} className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 items-start">
+
+          {/* COLUNA ESQUERDA — identidade, credenciais, localização */}
+          <div className="flex flex-col gap-4">
 
           {/* Foto */}
           <div className="flex flex-col gap-2">
@@ -763,6 +767,11 @@ Certificados de especialização / residência / pós-graduação`;
             </div>
           </div>
 
+          </div>{/* /coluna esquerda */}
+
+          {/* COLUNA DIREITA — conteúdo, valor, formação */}
+          <div className="flex flex-col gap-4">
+
           {/* Valor */}
           <div className="flex flex-col gap-2">
             <label className="text-[12.5px] font-medium text-cinza-texto">Formato do valor <span className="font-normal text-muted">(clique novamente para remover)</span></label>
@@ -1004,6 +1013,9 @@ Certificados de especialização / residência / pós-graduação`;
               </button>
             </div>
           </div>
+
+          </div>{/* /coluna direita */}
+          </div>{/* /grid */}
 
           {/* Certidão de regularidade no conselho */}
           <div className={`flex items-start gap-3 p-3 rounded-[12px] border ${certidaoEnviadaEm ? "bg-[#F7FAF7] border-[#B8D8C0]" : "bg-white border-linha"}`}>
