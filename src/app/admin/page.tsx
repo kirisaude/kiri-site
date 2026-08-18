@@ -262,18 +262,29 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   async function salvarEEncerrar() {
     setEncerrando(true);
-    let fupAtual = fup;
-    if (!fupAtual) {
-      fupAtual = await criarSemNotificar();
-      if (!fupAtual) { setEncerrando(false); return; }
+    try {
+      let fupAtual = fup;
+      if (!fupAtual) {
+        fupAtual = await criarSemNotificar();
+        if (!fupAtual) { setEncerrando(false); return; }
+        setFup(fupAtual);
+      }
+      await fetch("/api/admin/followup-desfecho", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
+      });
+      const fupEncerrado: Followup = {
+        ...fupAtual,
+        encaminhamento_id: fupAtual.encaminhamento_id ?? encaminhamento.id,
+        concluido_em: new Date().toISOString(),
+        desfecho: desfecho.trim() || null,
+      };
+      onEnviado(fupEncerrado);
+      onFechar();
+    } catch {
+      setEncerrando(false);
     }
-    await fetch("/api/admin/followup-desfecho", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
-    });
-    onEnviado({ ...fupAtual, concluido_em: new Date().toISOString(), desfecho: desfecho.trim() || null });
-    onFechar();
   }
 
   function BolhaCopia({ chave, texto, label }: { chave: string; texto: string; label?: string }) {
