@@ -2514,8 +2514,7 @@
           "curso": "Mestrado",
           "instituicao_ano": "Ciência/psiquiatria — Universidade de São Paulo (USP) — 2004",
           "verificado": false,
-          "pendente": true,
-          "oculto": true
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2538,7 +2537,7 @@
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
       "registro_verificado": true,
-      "sobre_verificado": false,
+      "sobre_verificado": true,
       "experiencias_infantil": [
         {
           "descricao": "Com mais de 20 anos de experiência dedicada à saúde mental infanto-juvenil, construí minha trajetória acompanhando crianças e adolescentes em diferentes contextos de vida. Atuei no atendimento a jovens em situação de vulnerabilidade, lidando de perto com desafios de aprendizagem, impulsividade e comportamento. Atualmente, integro a equipe do Hospital das Clínicas, com foco no acompanhamento de adolescentes com desregulação emocional, e realizo atendimentos em consultório particular voltados para TDAH, ansiedade, depressão e desregulação emocionais. Além disso, sou sócia da Clínica Livaz, onde disponibilizamos o tratamento com Estimulação Magnética Transcraniana (EMT)",
