@@ -1487,7 +1487,7 @@ export default function AdminPage() {
   }
 
 
-  async function excluirProfissional(id: string, nome: string) {
+  async function excluirProfissional(id: string, nome: string, inscricaoId?: string | null) {
     if (!confirm(`Remover "${nome}" da plataforma? Esta ação não pode ser desfeita.`)) return;
     setExcluindo(id);
     const res = await fetch("/api/admin/profissionais", {
@@ -1497,6 +1497,14 @@ export default function AdminPage() {
     });
     if (res.ok) {
       setProfPublicados((prev) => prev.filter((p) => p.id !== id));
+      // Marca a inscrição como excluída para sumir do termos e de listas
+      if (inscricaoId) {
+        fetch("/api/admin/inscricoes", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: inscricaoId, status: "excluido" }),
+        }).catch(() => {});
+      }
     } else {
       alert("Erro ao excluir. Tente novamente.");
     }
@@ -1597,39 +1605,23 @@ export default function AdminPage() {
       </header>
 
       {/* Abas */}
-      <div className="border-b border-linha px-6 flex gap-6">
-        <button onClick={() => setAba("inscricoes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "inscricoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Inscrições ({pendentes.length})
-        </button>
-        <button onClick={() => setAba("profissionais")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Profissionais ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
-        </button>
-        <button onClick={() => setAba("encaminhamentos")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Encaminhamentos{(() => { const p = comProfissional.filter(e => e.status !== "encaminhado").length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
-        </button>
-        <button onClick={() => setAba("curadoria")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "curadoria" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Curadoria{(() => { const p = semProfissional.filter(e => !isCuradoriaTerminal(e.status)).length; return p > 0 ? <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{p}</span> : null; })()}
-        </button>
-        <button onClick={() => setAba("avaliacoes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "avaliacoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Experiências {experiencias.length > 0 && <span className="ml-1 bg-ardosia text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{experiencias.length}</span>}
-        </button>
-        <button onClick={() => setAba("contatos")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "contatos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Contatos {contatos.filter(c => !c.lido).length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{contatos.filter(c => !c.lido).length}</span>}
-        </button>
-        <button onClick={() => setAba("reportes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "reportes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Reportes {reportes.length > 0 && <span className="ml-1 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{reportes.length}</span>}
-        </button>
-        <button onClick={() => setAba("instituicoes")}
-          className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "instituicoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Instituições
-        </button>
+      <div className="border-b border-linha px-4 flex gap-4 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+        {([
+          { key: "inscricoes", label: `Inscrições (${pendentes.length})`, badge: null },
+          { key: "profissionais", label: `Profissionais (${visiveis.length}/${profPublicados.length})`, badge: naoVisiveis.length > 0 ? naoVisiveis.length : null },
+          { key: "encaminhamentos", label: "Encaminhamentos", badge: (() => { const p = comProfissional.filter(e => e.status !== "encaminhado").length; return p > 0 ? p : null; })() },
+          { key: "curadoria", label: "Curadoria", badge: (() => { const p = semProfissional.filter(e => !isCuradoriaTerminal(e.status)).length; return p > 0 ? p : null; })() },
+          { key: "avaliacoes", label: "Experiências", badge: experiencias.length > 0 ? experiencias.length : null },
+          { key: "contatos", label: "Contatos", badge: contatos.filter(c => !c.lido).length > 0 ? contatos.filter(c => !c.lido).length : null },
+          { key: "reportes", label: "Reportes", badge: reportes.length > 0 ? reportes.length : null },
+          { key: "instituicoes", label: "Instituições", badge: null },
+        ] as { key: Aba; label: string; badge: number | null }[]).map(({ key, label, badge }) => (
+          <button key={key} onClick={() => setAba(key)}
+            className={`flex-none py-3 text-[13px] font-semibold border-b-2 transition-colors cursor-pointer whitespace-nowrap flex items-center gap-1 ${aba === key ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
+            {label}
+            {badge !== null && <span className="bg-ferrugem text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{badge}</span>}
+          </button>
+        ))}
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -2090,7 +2082,7 @@ export default function AdminPage() {
                         <div className="flex items-center gap-2 flex-none">
                           <a href={`/profissional/${p.id}`} target="_blank" rel="noopener" className="text-[13px] font-medium text-muted border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Ver perfil</a>
                           <a href={`/admin/profissionais/${p.id}`} className="text-[13px] font-semibold text-ardosia border border-linha rounded-[9px] px-3 py-1.5 hover:bg-wash transition-colors no-underline">Editar</a>
-                          <button onClick={() => excluirProfissional(p.id, p.nome)} className="text-[13px] font-medium text-ferrugem border border-ferrugem/25 rounded-[9px] px-3 py-1.5 hover:bg-[#FDF2EF] transition-colors cursor-pointer">Excluir</button>
+                          <button onClick={() => excluirProfissional(p.id, p.nome, p.inscricao_id)} className="text-[13px] font-medium text-ferrugem border border-ferrugem/25 rounded-[9px] px-3 py-1.5 hover:bg-[#FDF2EF] transition-colors cursor-pointer">Excluir</button>
                         </div>
                       </div>
                     ))}
@@ -2147,7 +2139,7 @@ export default function AdminPage() {
                             <button
                               type="button"
                               disabled={excluindo === p.id}
-                              onClick={() => excluirProfissional(p.id, p.nome)}
+                              onClick={() => excluirProfissional(p.id, p.nome, p.inscricao_id)}
                               className="text-[12.5px] font-semibold text-ferrugem bg-white border border-ferrugem/40 rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50 hover:bg-[#FFF0EE] transition-colors"
                             >
                               {excluindo === p.id ? "Removendo…" : "Excluir"}
@@ -2232,7 +2224,7 @@ export default function AdminPage() {
                               <button
                                 type="button"
                                 disabled={excluindo === p.id}
-                                onClick={() => excluirProfissional(p.id, p.nome)}
+                                onClick={() => excluirProfissional(p.id, p.nome, p.inscricao_id)}
                                 className="text-[12.5px] font-semibold text-white bg-ferrugem rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50"
                               >
                                 {excluindo === p.id ? "Removendo…" : "Excluir"}

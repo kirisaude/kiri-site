@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import Link from "next/link";
+import { titleCasePT } from "@/lib/titleCase";
 
 type Inscricao = {
   id: string;
@@ -215,7 +216,7 @@ export default function TermosPage() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-[13.5px] font-semibold text-carvao truncate">{i.nome}</div>
+                    <div className="text-[13.5px] font-semibold text-carvao truncate">{titleCasePT(i.nome)}</div>
                     <div className="text-[11.5px] text-muted">{i.profissao} · {i.email}</div>
                   </div>
                   {enviando === i.id && (
@@ -246,7 +247,7 @@ export default function TermosPage() {
                 return (
                   <div key={i.id} className="flex items-center gap-3 bg-white border border-linha rounded-[12px] px-4 py-3">
                     <div className="flex-1 min-w-0">
-                      <div className="text-[13.5px] font-semibold text-carvao truncate">{i.nome}</div>
+                      <div className="text-[13.5px] font-semibold text-carvao truncate">{titleCasePT(i.nome)}</div>
                       <div className="text-[11.5px] text-muted">
                         {i.profissao}
                         {i.autentique_enviado_em && ` · Enviado em ${fmtData(i.autentique_enviado_em)}`}
@@ -289,7 +290,7 @@ export default function TermosPage() {
               {semEmail.map((i) => (
                 <div key={i.id} className="flex items-center gap-3 bg-white border border-linha rounded-[12px] px-4 py-3 opacity-60">
                   <div className="flex-1 min-w-0">
-                    <div className="text-[13.5px] font-semibold text-carvao truncate">{i.nome}</div>
+                    <div className="text-[13.5px] font-semibold text-carvao truncate">{titleCasePT(i.nome)}</div>
                     <div className="text-[11.5px] text-muted">{i.profissao} · sem e-mail</div>
                   </div>
                   <Link href={`/admin/profissionais/${i.id}`} className="text-[12px] text-ardosia no-underline hover:underline">

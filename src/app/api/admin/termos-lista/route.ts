@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { titleCasePT } from "@/lib/titleCase";
 
 function isAdminAuthed(request: Request) {
   const cookie = request.headers.get("cookie") ?? "";
@@ -18,12 +19,12 @@ export async function GET(request: Request) {
   }
 
   const res = await fetch(
-    `${supabaseUrl}/rest/v1/inscricoes_profissionais?select=id,nome,email,profissao,autentique_document_id,autentique_enviado_em&order=criado_em.desc`,
+    `${supabaseUrl}/rest/v1/inscricoes_profissionais?select=id,nome,email,profissao,autentique_document_id,autentique_enviado_em&status=neq.excluido&order=criado_em.desc`,
     { headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` } }
   );
 
   if (!res.ok) return NextResponse.json({ error: "Erro ao buscar dados" }, { status: 502 });
 
-  const lista = await res.json();
-  return NextResponse.json(lista);
+  const lista: Array<{ id: string; nome: string; email: string | null; profissao: string; autentique_document_id: string | null; autentique_enviado_em: string | null }> = await res.json();
+  return NextResponse.json(lista.map((i) => ({ ...i, nome: titleCasePT(i.nome) })));
 }

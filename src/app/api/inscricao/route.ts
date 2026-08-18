@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { titleCasePT } from "@/lib/titleCase";
 
 async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
@@ -163,6 +164,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ erro: "Dados obrigatórios ausentes ou sem consentimento" }, { status: 400 });
   }
 
+  const nomeNormalizado = titleCasePT(nome.trim());
+
   const res = await fetch(`${supabaseUrl}/rest/v1/inscricoes_profissionais`, {
     method: "POST",
     headers: {
@@ -172,7 +175,7 @@ export async function POST(request: Request) {
       "Prefer": "return=representation",
     },
     body: JSON.stringify({
-      nome,
+      nome: nomeNormalizado,
       email: email || null,
       genero: genero || null,
       profissao,
