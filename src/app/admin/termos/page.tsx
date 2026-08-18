@@ -12,6 +12,7 @@ type Inscricao = {
   profissao: string;
   autentique_document_id: string | null;
   autentique_enviado_em: string | null;
+  prof_id: string | null;
 };
 
 type StatusTermo = {
@@ -293,7 +294,10 @@ export default function TermosPage() {
                     <div className="text-[13.5px] font-semibold text-carvao truncate">{titleCasePT(i.nome)}</div>
                     <div className="text-[11.5px] text-muted">{i.profissao} · sem e-mail</div>
                   </div>
-                  <Link href={`/admin/profissionais/${i.id}`} className="text-[12px] text-ardosia no-underline hover:underline">
+                  <Link
+                    href={i.prof_id ? `/admin/profissionais/${i.prof_id}` : `/admin/revisar/${i.id}`}
+                    className="text-[12px] text-ardosia no-underline hover:underline"
+                  >
                     Editar
                   </Link>
                 </div>

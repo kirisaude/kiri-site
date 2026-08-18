@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { titleCasePT } from "@/lib/titleCase";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 function isAdminAuthed(request: Request) {
   const cookie = request.headers.get("cookie") ?? "";
@@ -26,5 +28,21 @@ export async function GET(request: Request) {
   if (!res.ok) return NextResponse.json({ error: "Erro ao buscar dados" }, { status: 502 });
 
   const lista: Array<{ id: string; nome: string; email: string | null; profissao: string; autentique_document_id: string | null; autentique_enviado_em: string | null }> = await res.json();
-  return NextResponse.json(lista.map((i) => ({ ...i, nome: titleCasePT(i.nome) })));
+
+  // Monta mapa inscricao_id → profissional JSON id para link de edição correto
+  let inscricaoParaProfId: Record<string, string> = {};
+  try {
+    const json = JSON.parse(readFileSync(join(process.cwd(), "src/data/profissionais.json"), "utf-8"));
+    for (const p of json.profissionais ?? []) {
+      if (p.inscricao_id) inscricaoParaProfId[p.inscricao_id] = p.id;
+    }
+  } catch { /* se falhar, segue sem o mapeamento */ }
+
+  return NextResponse.json(
+    lista.map((i) => ({
+      ...i,
+      nome: titleCasePT(i.nome),
+      prof_id: inscricaoParaProfId[i.id] ?? null,
+    }))
+  );
 }
