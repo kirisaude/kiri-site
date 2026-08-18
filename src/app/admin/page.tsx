@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { KiriLogoCompact } from "@/components/KiriLogoCompact";
@@ -1314,6 +1314,22 @@ export default function AdminPage() {
     }
   }
 
+  // Extrai todas as siglas (SIGLA) presentes nos campos formacao de todos os profissionais
+  const detectedSiglas = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const p of profPublicados) {
+      for (const f of (p.formacao ?? [])) {
+        const matches = [...(f.instituicao_ano ?? "").matchAll(/\(([A-Za-z]{2,12})\)/g)];
+        for (const m of matches) {
+          const sigla = m[1].toUpperCase();
+          const prev = map.get(sigla) ?? [];
+          if (!prev.includes(p.nome)) map.set(sigla, [...prev, p.nome]);
+        }
+      }
+    }
+    return map;
+  }, [profPublicados]);
+
   const buscarDados = useCallback(async () => {
     setBuscando(true);
     const [resI, resE, resR, resC, resExp, resInst] = await Promise.all([
@@ -2331,89 +2347,69 @@ export default function AdminPage() {
 
         {/* ABA INSTITUIÇÕES */}
         {aba === "instituicoes" && (
-          <div className="flex flex-col gap-4">
-            <div>
-              <h2 className="font-serif text-[19px] font-semibold text-carvao mb-1">Locais de formação</h2>
-              <p className="text-[13px] text-muted leading-[1.5]">
-                Siglas detectadas nos perfis. Preencha o nome por extenso para que apareça automaticamente nos perfis (ex: UFBA → Universidade Federal da Bahia).
-              </p>
-            </div>
+          <div className="flex flex-col gap-6">
 
-            {instituicoes.length === 0 ? (
-              <p className="text-[13.5px] text-muted">Nenhuma instituição cadastrada. Execute o SQL de criação da tabela no Supabase.</p>
-            ) : (() => {
-              const pendentes = instituicoes.filter(i => !i.nome_extenso);
-              const mapeadas = instituicoes.filter(i => !!i.nome_extenso);
-              return (
-                <div className="flex flex-col gap-4">
-                  {/* Pendentes: siglas sem nome */}
-                  {pendentes.length > 0 ? (
-                    <div className="flex flex-col gap-2">
-                      <p className="text-[12.5px] text-muted">Siglas ainda sem nome por extenso ({pendentes.length}):</p>
-                      <div className="grid grid-cols-[1fr_2fr_auto] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
-                        <span>Sigla</span><span>Nome por extenso</span><span></span>
-                      </div>
-                      {pendentes.map((inst) => (
-                        <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-white border border-linha">
-                          <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
+            {/* SIGLAS DETECTADAS */}
+            <div className="flex flex-col gap-3">
+              <div>
+                <h2 className="font-serif text-[19px] font-semibold text-carvao mb-1">Siglas detectadas nos perfis</h2>
+                <p className="text-[13px] text-muted leading-[1.5]">
+                  {detectedSiglas.size} siglas encontradas automaticamente.{" "}
+                  {[...detectedSiglas.keys()].filter(s => !instituicoes.find(i => i.sigla === s)?.nome_extenso).length > 0
+                    ? <span className="text-[#BE8A3E] font-medium">{[...detectedSiglas.keys()].filter(s => !instituicoes.find(i => i.sigla === s)?.nome_extenso).length} sem nome por extenso.</span>
+                    : <span className="text-[#2E7D4F] font-medium">✓ Todas mapeadas.</span>
+                  }
+                </p>
+              </div>
+
+              {detectedSiglas.size > 0 && (
+                <div className="flex flex-col gap-1.5">
+                  <div className="grid grid-cols-[100px_1fr_auto] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
+                    <span>Sigla</span><span>Nome por extenso</span><span></span>
+                  </div>
+                  {[...detectedSiglas.entries()]
+                    .sort((a, b) => {
+                      const aMapped = !!instituicoes.find(i => i.sigla === a[0])?.nome_extenso;
+                      const bMapped = !!instituicoes.find(i => i.sigla === b[0])?.nome_extenso;
+                      if (aMapped !== bMapped) return aMapped ? 1 : -1;
+                      return a[0].localeCompare(b[0]);
+                    })
+                    .map(([sigla, profNames]) => {
+                      const saved = instituicoes.find(i => i.sigla === sigla);
+                      const isMapped = !!saved?.nome_extenso;
+                      return (
+                        <div key={sigla} className={`grid grid-cols-[100px_1fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] border ${
+                          isMapped ? "bg-[#F7FAF7] border-[#B8D8C0]" : "bg-white border-linha"
+                        }`}>
+                          <div>
+                            <div className="text-[13px] font-semibold text-carvao font-mono">{sigla}</div>
+                            <div className="text-[11px] text-muted leading-[1.3] mt-0.5">{profNames.join(", ")}</div>
+                          </div>
                           <input
                             type="text"
-                            value={instEdits[inst.sigla] ?? ""}
-                            onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
-                            placeholder="Nome por extenso (deixe em branco se não souber)"
+                            value={instEdits[sigla] ?? saved?.nome_extenso ?? ""}
+                            onChange={(e) => setInstEdits((prev) => ({ ...prev, [sigla]: e.target.value }))}
+                            placeholder="Nome por extenso"
                             className="border border-linha rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-[#FAFAF8] outline-none focus:border-ardosia transition-colors placeholder:text-muted"
                           />
                           <SalvarInstBtn
-                            sigla={inst.sigla}
-                            valor={instEdits[inst.sigla] ?? ""}
-                            onSalvo={(sigla, nome) =>
-                              setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
-                            }
+                            sigla={sigla}
+                            valor={instEdits[sigla] ?? saved?.nome_extenso ?? ""}
+                            onSalvo={(s, nome) => setInstituicoes((prev) => {
+                              const exists = prev.some(x => x.sigla === s);
+                              if (exists) return prev.map(x => x.sigla === s ? { ...x, nome_extenso: nome || null } : x);
+                              return [...prev, { sigla: s, nome_extenso: nome || null }];
+                            })}
                           />
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-[13px] text-[#2E7D4F] font-semibold">✓ Todas as siglas mapeadas</p>
-                  )}
-
-                  {/* Mapeadas: compacto, editável */}
-                  {mapeadas.length > 0 && (
-                    <details className="group">
-                      <summary className="text-[12.5px] text-muted cursor-pointer select-none list-none flex items-center gap-1">
-                        <span className="group-open:hidden">▸</span>
-                        <span className="hidden group-open:inline">▾</span>
-                        {mapeadas.length} sigla{mapeadas.length !== 1 ? "s" : ""} já mapeada{mapeadas.length !== 1 ? "s" : ""} (clique para ver/editar)
-                      </summary>
-                      <div className="flex flex-col gap-1.5 mt-2">
-                        {mapeadas.map((inst) => (
-                          <div key={inst.sigla} className="grid grid-cols-[1fr_2fr_auto] gap-x-3 items-center px-3 py-2 rounded-[10px] bg-[#F7FAF7] border border-[#B8D8C0]">
-                            <span className="text-[13px] font-semibold text-carvao font-mono">{inst.sigla}</span>
-                            <input
-                              type="text"
-                              value={instEdits[inst.sigla] ?? inst.nome_extenso ?? ""}
-                              onChange={(e) => setInstEdits((prev) => ({ ...prev, [inst.sigla]: e.target.value }))}
-                              className="border border-[#B8D8C0] rounded-[8px] px-2.5 py-1.5 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
-                            />
-                            <SalvarInstBtn
-                              sigla={inst.sigla}
-                              valor={instEdits[inst.sigla] ?? inst.nome_extenso ?? ""}
-                              onSalvo={(sigla, nome) =>
-                                setInstituicoes((prev) => prev.map((x) => x.sigla === sigla ? { ...x, nome_extenso: nome || null } : x))
-                              }
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </details>
-                  )}
+                      );
+                    })}
                 </div>
-              );
-            })()}
+              )}
+            </div>
 
-            {/* Lista de todas as instituições citadas */}
+            {/* TODAS AS INSTITUIÇÕES CITADAS */}
             {(() => {
-              // Mapa de siglas já cadastradas pelo admin
               const siglasMap: Record<string, string> = {};
               for (const inst of instituicoes) {
                 if (inst.nome_extenso) siglasMap[inst.sigla.toUpperCase()] = inst.nome_extenso;
@@ -2422,12 +2418,10 @@ export default function AdminPage() {
               const naoEhInstEnsino = (s: string) =>
                 /^(conselho|crf|cfm|crm|cfp|crp|cff|crefito|coffito|coren|cfn|crbm|cro|cfo)/i.test(s);
 
-              // Formato do campo: "ÁREA — INSTITUIÇÃO — ANO" (3 partes) ou "ÁREA — INSTITUIÇÃO" (2) ou só nome da inst (1)
               function extrairInstituicao(campo: string): string | null {
                 const partes = campo.split(" — ").map(p => p.trim()).filter(Boolean);
                 const isAnoOuStatus = (s: string) =>
                   /^\d{4}(-\d{4})?$/.test(s) || /^(atual|em andamento)/i.test(s);
-
                 if (partes.length >= 3) {
                   const inst = partes[partes.length - 2];
                   if (!inst || inst.length < 3 || naoEhInstEnsino(inst)) return null;
@@ -2446,14 +2440,11 @@ export default function AdminPage() {
                 return null;
               }
 
-              // Resolve sigla pura para nome completo usando o mapa do admin
               function resolverSigla(inst: string): string {
-                // Sigla pura maiúscula: "UESB", "UFBA"
                 if (/^[A-Z]{2,12}$/.test(inst)) {
                   const nome = siglasMap[inst];
                   return nome ? `${nome} (${inst})` : inst;
                 }
-                // Sigla com capitalização mista sem espaço: "Unian", "FMU"
                 if (/^[A-Za-z]{2,12}$/.test(inst) && !inst.includes(" ")) {
                   const nome = siglasMap[inst.toUpperCase()];
                   return nome ? `${nome} (${inst.toUpperCase()})` : inst;
@@ -2463,6 +2454,11 @@ export default function AdminPage() {
 
               function chaveSemSigla(s: string) {
                 return s.replace(/\s*\([A-Za-z]{2,12}\)\s*$/, "").toLowerCase().trim();
+              }
+
+              // Entrada precisa de atenção: parece sigla (sem espaços, ≤15 chars) mas não foi expandida
+              function precisaAtencao(nome: string): boolean {
+                return /^[A-Za-z]{2,15}$/.test(nome);
               }
 
               const entradasComNome: { nome: string; nomes: string[] }[] = [];
@@ -2483,7 +2479,12 @@ export default function AdminPage() {
                   }
                 }
               }
-              entradasComNome.sort((a, b) => b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome));
+              entradasComNome.sort((a, b) => {
+                const aAtencao = precisaAtencao(a.nome);
+                const bAtencao = precisaAtencao(b.nome);
+                if (aAtencao !== bAtencao) return aAtencao ? -1 : 1;
+                return b.nomes.length - a.nomes.length || a.nome.localeCompare(b.nome);
+              });
 
               function formatarInst(nome: string) {
                 return titleCasePT(nome)
@@ -2499,18 +2500,23 @@ export default function AdminPage() {
                   )
                 : entradasComNome;
 
+              const atencaoCount = entradasComNome.filter(e => precisaAtencao(e.nome)).length;
+
               return (
-                <div className="mt-8 flex flex-col gap-3">
+                <div className="flex flex-col gap-3 pt-4 border-t border-linha">
                   <div>
                     <div className="text-[13px] font-semibold text-carvao mb-0.5">Todas as instituições citadas na rede</div>
-                    <p className="text-[12px] text-muted">Referência para classificação futura por qualificação institucional. {entradasComNome.length} entradas encontradas.</p>
+                    <p className="text-[12px] text-muted">
+                      {entradasComNome.length} entradas encontradas.{" "}
+                      {atencaoCount > 0 && <span className="text-[#BE8A3E] font-medium">{atencaoCount} parecem siglas não expandidas — verifique.</span>}
+                    </p>
                   </div>
                   <input
                     type="text"
                     value={instBusca}
                     onChange={e => setInstBusca(e.target.value)}
                     placeholder="Buscar instituição ou profissional…"
-                    className="border border-linha rounded-[10px] px-3 py-2 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted"
+                    className="border border-linha rounded-[10px] px-3 py-2 text-[13px] text-carvao bg-white outline-none focus:border-ardosia transition-colors placeholder:text-muted max-w-sm"
                   />
                   <div className="flex flex-col gap-1.5">
                     <div className="grid grid-cols-[2fr_1fr] gap-x-3 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted border-b border-linha">
@@ -2520,12 +2526,20 @@ export default function AdminPage() {
                     {visiveis.length === 0 && (
                       <p className="text-[13px] text-muted px-3 py-2">Nenhuma instituição encontrada.</p>
                     )}
-                    {visiveis.map((e) => (
-                      <div key={e.nome} className="grid grid-cols-[2fr_1fr] gap-x-3 items-start px-3 py-2 rounded-[10px] bg-white border border-linha">
-                        <span className="text-[13px] text-carvao">{formatarInst(e.nome)}</span>
-                        <span className="text-[12px] text-muted leading-[1.5]">{e.nomes.join(", ")}</span>
-                      </div>
-                    ))}
+                    {visiveis.map((e) => {
+                      const atencao = precisaAtencao(e.nome);
+                      return (
+                        <div key={e.nome} className={`grid grid-cols-[2fr_1fr] gap-x-3 items-start px-3 py-2 rounded-[10px] border ${
+                          atencao ? "bg-[#FFF7ED] border-[#E8C88A]" : "bg-white border-linha"
+                        }`}>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-[13px] text-carvao">{formatarInst(e.nome)}</span>
+                            {atencao && <span className="text-[10px] font-semibold text-[#BE8A3E] uppercase tracking-wide">verificar</span>}
+                          </div>
+                          <span className="text-[12px] text-muted leading-[1.5]">{e.nomes.join(", ")}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );

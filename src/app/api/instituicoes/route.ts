@@ -28,25 +28,21 @@ export async function PATCH(request: Request) {
   const { sigla, nome_extenso } = await request.json();
   if (!sigla) return NextResponse.json({ error: "sigla obrigatória" }, { status: 400 });
 
-  const res = await fetch(`${SUPABASE_URL()}/rest/v1/instituicoes?sigla=eq.${encodeURIComponent(sigla)}`, {
-    method: "PATCH",
+  // Upsert: cria se não existir, atualiza se existir
+  const res = await fetch(`${SUPABASE_URL()}/rest/v1/instituicoes`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       "apikey": SUPABASE_KEY(),
       "Authorization": `Bearer ${SUPABASE_KEY()}`,
-      "Prefer": "return=representation",
+      "Prefer": "resolution=merge-duplicates,return=representation",
     },
-    body: JSON.stringify({ nome_extenso: nome_extenso?.trim() || null }),
+    body: JSON.stringify({ sigla, nome_extenso: nome_extenso?.trim() || null }),
   });
 
   if (!res.ok) {
     const body = await res.text();
     return NextResponse.json({ error: `Supabase ${res.status}: ${body}` }, { status: 502 });
-  }
-
-  const updated = await res.json() as unknown[];
-  if (!Array.isArray(updated) || updated.length === 0) {
-    return NextResponse.json({ error: "Nenhuma linha atualizada — execute o GRANT no Supabase" }, { status: 409 });
   }
 
   return NextResponse.json({ ok: true });
