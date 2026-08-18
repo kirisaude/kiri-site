@@ -1231,6 +1231,8 @@ export default function AdminPage() {
   const [expandidos, setExpandidos] = useState<Set<string>>(new Set());
   const [enviandoEmailDocs, setEnviandoEmailDocs] = useState(false);
   const [emailDocsStatus, setEmailDocsStatus] = useState<"idle"|"ok"|"erro">("idle");
+  const [enviandoEmailProfId, setEnviandoEmailProfId] = useState<string | null>(null);
+  const [emailProfStatus, setEmailProfStatus] = useState<Record<string, "ok" | "erro">>({});
   const [syncStatus, setSyncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
   const [syncErro, setSyncErro] = useState("");
   const [syncEncStatus, setSyncEncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
@@ -1435,6 +1437,41 @@ export default function AdminPage() {
       alert("Erro ao excluir. Tente novamente.");
     }
     setExcluindo(null);
+  }
+
+  const DOCS_LISTA = [
+    { key: "foto", label: "Foto profissional" },
+    { key: "certidao", label: "Certidão de regularidade no conselho" },
+    { key: "diploma", label: "Diploma de graduação" },
+    { key: "certificados", label: "Certificados / especializações" },
+  ] as const;
+
+  function docStatus(p: Profissional): Record<string, boolean> {
+    const temDiploma = (p.formacao ?? []).some(f => /^graduaç/i.test(f.curso) && f.verificado === true);
+    const temCertificados = (p.formacao ?? []).some(f => !/^graduaç/i.test(f.curso) && f.verificado === true);
+    return {
+      foto: !!p.foto_url,
+      certidao: p.registro_verificado === true,
+      diploma: temDiploma,
+      certificados: temCertificados,
+    };
+  }
+
+  async function enviarEmailProfPendencias(p: Profissional) {
+    if (!p.inscricao_id) { alert("Este profissional não tem inscricao_id — não é possível enviar o e-mail."); return; }
+    const status = docStatus(p);
+    const pendentes = DOCS_LISTA.filter(d => !status[d.key]).map(d => d.label);
+    if (pendentes.length === 0) { alert("Nenhuma pendência de documentos detectada."); return; }
+    setEnviandoEmailProfId(p.id);
+    const res = await fetch("/api/admin/pendencias-email", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ inscricao_id: p.inscricao_id, pendencias: pendentes.join("\n") }),
+    });
+    setEnviandoEmailProfId(null);
+    setEmailProfStatus(prev => ({ ...prev, [p.id]: res.ok ? "ok" : "erro" }));
+    setTimeout(() => setEmailProfStatus(prev => { const n = { ...prev }; delete n[p.id]; return n; }), 4000);
   }
 
   useEffect(() => {
@@ -2027,33 +2064,63 @@ export default function AdminPage() {
                     if (p.oculto) tags.push({ label: "oculto", cls: "text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]" });
                     if (p.registro_verificado === false) tags.push({ label: "registro não verificado", cls: "text-ardosia bg-wash-azulado border-borda-azulada" });
                     if (p.sobre_verificado === false) tags.push({ label: "sobre não verificado", cls: "text-ardosia bg-wash-azulado border-borda-azulada" });
+                    const docs = docStatus(p);
+                    const emailStatus = emailProfStatus[p.id];
                     return (
-                      <div key={p.id} className="bg-white border border-ferrugem/20 rounded-[13px] px-4 py-3 flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
-                            <span className="text-[11px] text-muted font-mono">{p.id}</span>
-                            {tags.map((t) => (
-                              <span key={t.label} className={`text-[11px] font-semibold border px-2 py-0.5 rounded-[6px] ${t.cls}`}>{t.label}</span>
+                      <div key={p.id} className="bg-white border border-ferrugem/20 rounded-[13px] px-4 py-3 flex flex-col gap-2.5">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-serif text-[15px] font-semibold text-carvao leading-tight">{titleCasePT(p.nome)}</span>
+                              <span className="text-[11px] text-muted font-mono">{p.id}</span>
+                              {tags.map((t) => (
+                                <span key={t.label} className={`text-[11px] font-semibold border px-2 py-0.5 rounded-[6px] ${t.cls}`}>{t.label}</span>
+                              ))}
+                            </div>
+                            <div className="text-[12.5px] text-cinza-texto mt-0.5">{p.profissao} · {p.cidade}</div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-none">
+                            <Link
+                              href={`/admin/profissionais/${p.id}`}
+                              className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline"
+                            >
+                              Editar
+                            </Link>
+                            <button
+                              type="button"
+                              disabled={excluindo === p.id}
+                              onClick={() => excluirProfissional(p.id, p.nome)}
+                              className="text-[12.5px] font-semibold text-ferrugem bg-white border border-ferrugem/40 rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50 hover:bg-[#FFF0EE] transition-colors"
+                            >
+                              {excluindo === p.id ? "Removendo…" : "Excluir"}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Checklist de documentos + botão de e-mail */}
+                        <div className="flex items-start justify-between gap-3 pt-2 border-t border-linha-sutil">
+                          <div className="flex flex-wrap gap-x-4 gap-y-1">
+                            {DOCS_LISTA.map(d => (
+                              <label key={d.key} className="flex items-center gap-1.5 cursor-default select-none">
+                                <span className={`w-3.5 h-3.5 rounded-[3px] border flex items-center justify-center flex-none ${docs[d.key] ? "bg-ardosia border-ardosia" : "bg-white border-linha"}`}>
+                                  {docs[d.key] && (
+                                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none"><path d="M1 3l2 2 4-4" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                  )}
+                                </span>
+                                <span className={`text-[11.5px] ${docs[d.key] ? "text-muted line-through" : "text-carvao"}`}>{d.label}</span>
+                              </label>
                             ))}
                           </div>
-                          <div className="text-[12.5px] text-cinza-texto mt-0.5">{p.profissao} · {p.cidade}</div>
-                        </div>
-                        <div className="flex items-center gap-2 flex-none">
-                          <Link
-                            href={`/admin/profissionais/${p.id}`}
-                            className="text-[12.5px] font-semibold text-carvao bg-wash-quente border border-borda-quente rounded-[8px] px-3 py-1.5 no-underline"
-                          >
-                            Editar
-                          </Link>
-                          <button
-                            type="button"
-                            disabled={excluindo === p.id}
-                            onClick={() => excluirProfissional(p.id, p.nome)}
-                            className="text-[12.5px] font-semibold text-ferrugem bg-white border border-ferrugem/40 rounded-[8px] px-3 py-1.5 cursor-pointer disabled:opacity-50 hover:bg-[#FFF0EE] transition-colors"
-                          >
-                            {excluindo === p.id ? "Removendo…" : "Excluir"}
-                          </button>
+                          {p.inscricao_id && (
+                            <button
+                              type="button"
+                              onClick={() => enviarEmailProfPendencias(p)}
+                              disabled={enviandoEmailProfId === p.id}
+                              className={`flex-none text-[11.5px] font-semibold border rounded-[8px] px-2.5 py-1 cursor-pointer disabled:opacity-50 transition-colors whitespace-nowrap ${emailStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : emailStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
+                            >
+                              {enviandoEmailProfId === p.id ? "Enviando…" : emailStatus === "ok" ? "✓ Enviado" : emailStatus === "erro" ? "Erro" : "✉ Solicitar docs"}
+                            </button>
+                          )}
                         </div>
                       </div>
                     );
