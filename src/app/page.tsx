@@ -284,7 +284,7 @@ export default function Home() {
     return profissionais.filter((p) => {
       if (p.oculto) return false;
       if (!p.foto_url) return false;
-      if (activeCond && !p.areas_atuacao.includes(activeCond)) return false;
+      if (activeCond && !p.areas_atuacao.some(a => a.toLowerCase() === activeCond.toLowerCase())) return false;
       if (activeProfissao && p.profissao !== activeProfissao && p.profissao_secundaria !== activeProfissao) return false;
       if (activeModalidade && p.modalidade !== activeModalidade) return false;
       if (activeCidade) {

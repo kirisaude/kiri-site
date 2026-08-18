@@ -1458,8 +1458,10 @@ export default function AdminPage() {
   ] as const;
 
   function docStatus(p: Profissional): Record<string, boolean> {
-    const temDiploma = (p.formacao ?? []).some(f => /^graduaç/i.test(f.curso) && f.verificado === true);
-    const temCertificados = (p.formacao ?? []).some(f => !/^graduaç/i.test(f.curso) && f.verificado === true);
+    const grad = (p.formacao ?? []).filter(f => /^graduaç/i.test(f.curso));
+    const nonGrad = (p.formacao ?? []).filter(f => !/^graduaç/i.test(f.curso));
+    const temDiploma = grad.some(f => f.verificado === true) && !grad.some(f => f.pendente === true);
+    const temCertificados = nonGrad.some(f => f.verificado === true) && !nonGrad.some(f => f.pendente === true);
     return {
       foto: !!p.foto_url,
       certidao: p.registro_verificado === true,
@@ -1545,11 +1547,11 @@ export default function AdminPage() {
       <div className="border-b border-linha px-6 flex gap-6">
         <button onClick={() => setAba("inscricoes")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "inscricoes" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Profissionais ({pendentes.length})
+          Inscrições ({pendentes.length})
         </button>
         <button onClick={() => setAba("profissionais")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "profissionais" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
-          Plataforma ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
+          Profissionais ({visiveis.length}/{profPublicados.length}){naoVisiveis.length > 0 && <span className="ml-1.5 bg-ferrugem text-white text-[11px] font-bold px-1.5 py-0.5 rounded-full">{naoVisiveis.length}</span>}
         </button>
         <button onClick={() => setAba("encaminhamentos")}
           className={`py-3 text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${aba === "encaminhamentos" ? "border-ardosia-escura text-carvao" : "border-transparent text-muted"}`}>
@@ -2057,19 +2059,11 @@ export default function AdminPage() {
                 Profissionais inscritos que não aparecem na home ou têm dados incompletos.
               </p>
 
-              <input
-                type="text"
-                value={buscaPendentes}
-                onChange={(e) => setBuscaPendentes(e.target.value)}
-                placeholder="Buscar por nome…"
-                className="w-full max-w-sm mb-4 px-3 py-2 text-[14px] border border-linha rounded-[10px] bg-white placeholder:text-muted focus:outline-none focus:border-ardosia"
-              />
-
               {naoVisiveis.length === 0 ? (
                 <p className="text-[13px] text-muted">Nenhuma pendência encontrada.</p>
               ) : (
                 <div className="flex flex-col gap-2">
-                  {naoVisiveis.filter((p) => !buscaPendentes || semAcento(p.nome).includes(semAcento(buscaPendentes))).map((p) => {
+                  {naoVisiveis.filter((p) => !buscaGlobal || semAcento(p.nome).includes(semAcento(buscaGlobal))).map((p) => {
                     const tags: { label: string; cls: string }[] = [];
                     if (!p.foto_url) tags.push({ label: "sem foto", cls: "text-ferrugem bg-[#FFF0EE] border-ferrugem/25" });
                     if (p.oculto) tags.push({ label: "oculto", cls: "text-[#BE8A3E] bg-[#FFF0D0] border-[#E8C88A]" });
@@ -2149,16 +2143,8 @@ export default function AdminPage() {
                 {visiveis.length} visíveis na home · {profPublicados.length} no total. Exclusões entram em vigor após ~1 min (rebuild automático).
               </p>
 
-              <input
-                type="text"
-                value={buscaPlataforma}
-                onChange={(e) => setBuscaPlataforma(e.target.value)}
-                placeholder="Buscar por nome…"
-                className="w-full max-w-sm mb-5 px-3 py-2 text-[14px] border border-linha rounded-[10px] bg-white placeholder:text-muted focus:outline-none focus:border-ardosia"
-              />
-
               {PROFISSOES_ORDENADAS.map((prof) => {
-                const grupo = profPublicados.filter((p) => p.profissao === prof && (!buscaPlataforma || semAcento(p.nome).includes(semAcento(buscaPlataforma))));
+                const grupo = profPublicados.filter((p) => p.profissao === prof && (!buscaGlobal || semAcento(p.nome).includes(semAcento(buscaGlobal))));
                 if (grupo.length === 0) return null;
                 return (
                   <div key={prof} className="mb-6">
