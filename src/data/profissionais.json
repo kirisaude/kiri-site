@@ -2424,8 +2424,8 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
-        "Dificuldades de aprendizagem",
+        "Atraso de Desenvolvimento",
+        "Dificuldades de Aprendizagem",
         "TOC",
         "Ansiedade",
         "Depressão"
@@ -2454,7 +2454,7 @@
       "whatsapp_agendamento": "(11) 99645-7576",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-064.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "c0191b0fb9e540bf",
@@ -2469,12 +2469,11 @@
       "sobre_verificado": true,
       "experiencias_infantil": [
         {
-          "descricao": "Consulta psiquiátrica e investigação de marcos de desenvolvimento e atrasos",
-          "tempo": "",
-          "faixa_etaria": ""
+          "descricao": "Consulta psiquiátrica e investigação de marcos de desenvolvimento e atrasos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/u/0/folders/17TrD2xcN_vU4O9M5JtXiOArLTe2ogpmK"
+      "pasta_drive": "https://drive.google.com/drive/u/0/folders/17TrD2xcN_vU4O9M5JtXiOArLTe2ogpmK",
+      "certidao_enviada_em": "2026-08-18T17:21:08.023Z"
     },
     {
       "id": "kiri-065",
