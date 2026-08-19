@@ -3126,6 +3126,58 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "pasta_drive": null
+    },
+    {
+      "id": "kiri-078",
+      "inscricao_id": "c9c5bf0e-c7fd-463b-a2c5-ae3b8851a40a",
+      "nome": "Náthali Sampaio Costa",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "03/36321",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "TOC",
+        "Tod"
+      ],
+      "modalidade": "Online",
+      "cidade": "Barra do Rocha- Ba",
+      "faixa_etaria": "Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Atendimento personalizado para ajudar e compreender a demanda do seu filho.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Anhanguera — 2026"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Psicologia hospitalar — Faculdade Santa casa — Cursando"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(73) 98884-5211",
+      "tempo_atuacao": "Menos de 1 ano",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento clínico e escolar",
+          "tempo": "3meses",
+          "faixa_etaria": "3-18 anos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "0892a9a5aff94402"
     }
   ]
 }
