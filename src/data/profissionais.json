@@ -3178,6 +3178,56 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "0892a9a5aff94402"
+    },
+    {
+      "id": "kiri-079",
+      "inscricao_id": "990c3df3-a15f-4dca-b16d-6796a52ce83a",
+      "nome": "Jessica Fonseca Machado",
+      "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicólogo",
+      "registro_conselho": "06/170129",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Dificuldades de aprendizagem",
+        "Ansiedade",
+        "Depressão",
+        "Atraso de desenvolvimento"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou autora do Livro Infantil \"João Sente Emoção na Escola\". Atendo crianças de todas as idades em Terapia Cognitivo Comportamental, faço Estimulação Cognitiva para crianças com TDAH a partir dos 6 anos de idade, e Avaliação Neuropsicológica de crianças verbais a partir de 6 anos de idade. Atendo também adultos em psicoterapia e avaliação neuropsicológica.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Mackenzie — 2020"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Neuropsicologia — São Camilo — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 350,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 99728-1562",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Psicoterapia TCC para todas as idades, Avaliação Neuropsicológica para crianças verbais a partir de 6 anos e adultos.",
+          "tempo": "7 anos",
+          "faixa_etaria": "3-59"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "45c763be740e4099"
     }
   ]
 }
