@@ -3190,10 +3190,10 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Dificuldades de aprendizagem",
+        "Dificuldades de Aprendizagem",
         "Ansiedade",
         "Depressão",
-        "Atraso de desenvolvimento"
+        "Atraso de Desenvolvimento"
       ],
       "modalidade": "Presencial e online",
       "cidade": "São Paulo",
@@ -3202,11 +3202,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Mackenzie — 2020"
+          "instituicao_ano": "Psicologia — Mackenzie — 2020",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neuropsicologia — São Camilo — 2025"
+          "instituicao_ano": "Neuropsicologia — São Camilo — 2025",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3224,10 +3226,22 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-079.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "45c763be740e4099"
+      "card_token": "45c763be740e4099",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "pasta_drive": null,
+      "certidao_enviada_em": "2026-08-21T12:13:42.042Z"
     }
   ]
 }
