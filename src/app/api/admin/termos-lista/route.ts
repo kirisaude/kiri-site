@@ -38,15 +38,18 @@ export async function GET(request: Request) {
     }
   } catch { /* se falhar, segue sem o mapeamento */ }
 
+  // Só mostra inscrições de profissionais publicados no JSON (ocultos ou visíveis)
   return NextResponse.json(
-    lista.map((i) => {
-      const mapa = inscricaoMapa[i.id];
-      return {
-        ...i,
-        nome: titleCasePT(i.nome),
-        email: i.email || mapa?.email || null,
-        prof_id: mapa?.prof_id ?? null,
-      };
-    })
+    lista
+      .filter((i) => inscricaoMapa[i.id] !== undefined)
+      .map((i) => {
+        const mapa = inscricaoMapa[i.id];
+        return {
+          ...i,
+          nome: titleCasePT(i.nome),
+          email: i.email || mapa?.email || null,
+          prof_id: mapa?.prof_id ?? null,
+        };
+      })
   );
 }
