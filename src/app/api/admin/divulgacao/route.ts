@@ -55,7 +55,7 @@ export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
-  const { nome, email } = await request.json();
+  const { nome, email, cidade } = await request.json();
   if (!nome?.trim() || !email?.trim()) return NextResponse.json({ error: "nome e email obrigatórios" }, { status: 400 });
 
   const file = await getArquivo(token);
@@ -69,6 +69,7 @@ export async function POST(request: Request) {
     id: crypto.randomUUID(),
     nome: nome.trim(),
     email: email.toLowerCase().trim(),
+    cidade: cidade?.trim() || null,
     enviado_em: null as string | null,
     criado_em: new Date().toISOString(),
   };

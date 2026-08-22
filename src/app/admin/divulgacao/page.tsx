@@ -8,6 +8,7 @@ type Contato = {
   id: string;
   nome: string;
   email: string;
+  cidade: string | null;
   enviado_em: string | null;
   criado_em: string;
 };
@@ -108,6 +109,7 @@ export default function DivulgacaoPage() {
 
   const [novoNome, setNovoNome] = useState("");
   const [novoEmail, setNovoEmail] = useState("");
+  const [novaCidade, setNovaCidade] = useState("");
   const [adicionando, setAdicionando] = useState(false);
   const [erroAdd, setErroAdd] = useState("");
 
@@ -127,6 +129,7 @@ export default function DivulgacaoPage() {
     setErroAdd("");
     setNovoNome("");
     setNovoEmail("");
+    setNovaCidade("");
   }, [lista]);
 
   async function adicionar(e: React.FormEvent) {
@@ -137,7 +140,7 @@ export default function DivulgacaoPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ nome: toTitleCase(novoNome.trim()), email: novoEmail }),
+      body: JSON.stringify({ nome: toTitleCase(novoNome.trim()), email: novoEmail, cidade: novaCidade.trim() || null }),
     });
     const d = await res.json();
     setAdicionando(false);
@@ -145,6 +148,7 @@ export default function DivulgacaoPage() {
       setContatos((prev) => [...prev, d]);
       setNovoNome("");
       setNovoEmail("");
+      setNovaCidade("");
     } else {
       setErroAdd(d.error ?? "Erro ao adicionar");
     }
@@ -298,7 +302,7 @@ export default function DivulgacaoPage() {
                   onBlur={(e) => setNovoNome(toTitleCase(e.target.value.trim()))}
                   placeholder="Nome completo"
                   required
-                  className="flex-1 border border-linha rounded-[9px] px-3 py-2 text-[13px] outline-none focus:border-ardosia"
+                  className="flex-[2] border border-linha rounded-[9px] px-3 py-2 text-[13px] outline-none focus:border-ardosia"
                 />
                 <input
                   value={novoEmail}
@@ -306,6 +310,12 @@ export default function DivulgacaoPage() {
                   placeholder="E-mail"
                   type="email"
                   required
+                  className="flex-[2] border border-linha rounded-[9px] px-3 py-2 text-[13px] outline-none focus:border-ardosia"
+                />
+                <input
+                  value={novaCidade}
+                  onChange={(e) => setNovaCidade(e.target.value)}
+                  placeholder="Cidade"
                   className="flex-1 border border-linha rounded-[9px] px-3 py-2 text-[13px] outline-none focus:border-ardosia"
                 />
                 <button type="submit" disabled={adicionando}
@@ -345,7 +355,9 @@ export default function DivulgacaoPage() {
                       <div key={c.id} className="flex items-center gap-3 bg-white border border-linha rounded-[11px] px-4 py-3">
                         <div className="flex-1 min-w-0">
                           <p className="text-[13px] font-semibold text-carvao">{c.nome}</p>
-                          <p className="text-[11.5px] text-muted">{c.email}</p>
+                          <p className="text-[11.5px] text-muted">
+                            {c.email}{c.cidade ? ` · ${c.cidade}` : ""}
+                          </p>
                         </div>
                         <div className="flex items-center gap-2 flex-none">
                           {envioStatus[c.id] === "enviando" && <span className="text-[12px] text-ardosia">Enviando…</span>}
@@ -376,7 +388,9 @@ export default function DivulgacaoPage() {
                       <div key={c.id} className="flex items-center gap-3 bg-white border border-linha rounded-[11px] px-4 py-3 opacity-60">
                         <div className="flex-1 min-w-0">
                           <p className="text-[13px] font-semibold text-carvao">{c.nome}</p>
-                          <p className="text-[11.5px] text-muted">{c.email} · enviado em {fmtData(c.enviado_em!)}</p>
+                          <p className="text-[11.5px] text-muted">
+                            {c.email}{c.cidade ? ` · ${c.cidade}` : ""} · enviado em {fmtData(c.enviado_em!)}
+                          </p>
                         </div>
                         <button onClick={() => remover(c.id)}
                           className="text-[11px] text-muted hover:text-ferrugem transition-colors cursor-pointer flex-none">✕</button>
