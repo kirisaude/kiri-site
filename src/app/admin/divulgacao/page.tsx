@@ -13,6 +13,7 @@ type Contato = {
 };
 
 type EnvioStatus = "idle" | "enviando" | "ok" | "erro";
+type EnvioErro = Record<string, string>;
 
 const ASSUNTO_PADRAO = "Kiri Saúde — uma ferramenta para encaminhamentos em neurodesenvolvimento infantil";
 
@@ -51,6 +52,7 @@ export default function DivulgacaoPage() {
   const [assunto, setAssunto] = useState(ASSUNTO_PADRAO);
   const [corpo, setCorpo] = useState(CORPO_PADRAO);
   const [envioStatus, setEnvioStatus] = useState<Record<string, EnvioStatus>>({});
+  const [envioErros, setEnvioErros] = useState<EnvioErro>({});
   const [enviandoTodos, setEnviandoTodos] = useState(false);
   const [aba, setAba] = useState<"lista" | "template">("lista");
   const [loteProgresso, setLoteProgresso] = useState<{ ok: number; erro: number; total: number } | null>(null);
@@ -114,7 +116,10 @@ export default function DivulgacaoPage() {
       }).catch(() => {});
       return true;
     } else {
+      const d = await res.json().catch(() => ({}));
+      const msg = d.error ?? `HTTP ${res.status}`;
       setEnvioStatus((s) => ({ ...s, [contato.id]: "erro" }));
+      setEnvioErros((e) => ({ ...e, [contato.id]: msg }));
       return false;
     }
   }
@@ -222,7 +227,11 @@ export default function DivulgacaoPage() {
                         <div className="flex items-center gap-2 flex-none">
                           {envioStatus[c.id] === "enviando" && <span className="text-[12px] text-ardosia">Enviando…</span>}
                           {envioStatus[c.id] === "ok" && <span className="text-[12px] text-verde-confirmacao font-semibold">✓ Enviado</span>}
-                          {envioStatus[c.id] === "erro" && <span className="text-[12px] text-ferrugem">Erro</span>}
+                          {envioStatus[c.id] === "erro" && (
+                            <span className="text-[12px] text-ferrugem" title={envioErros[c.id]}>
+                              Erro{envioErros[c.id] ? `: ${envioErros[c.id].slice(0, 60)}` : ""}
+                            </span>
+                          )}
                           {!envioStatus[c.id] && (
                             <button onClick={() => enviarPara(c)} disabled={enviandoTodos}
                               className="text-[12px] font-semibold text-ardosia border border-ardosia/30 rounded-[7px] px-3 py-1 cursor-pointer hover:bg-[#EEF2F4] transition-colors disabled:opacity-40">

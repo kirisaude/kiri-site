@@ -8,15 +8,20 @@ function isAdminAuthed(request: Request) {
   return cookie.includes("kiri_admin=ok");
 }
 
-const transporter = nodemailer.createTransport({
-  host: "email.locaweb.com.br",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "contato@kirisaude.com.br",
-    pass: process.env.LOCAWEB_EMAIL_PASS,
-  },
-});
+function makeTransporter() {
+  return nodemailer.createTransport({
+    host: "email.locaweb.com.br",
+    port: 587,
+    secure: false,
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 30000,
+    auth: {
+      user: "contato@kirisaude.com.br",
+      pass: process.env.LOCAWEB_EMAIL_PASS,
+    },
+  });
+}
 
 export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
@@ -28,10 +33,15 @@ export async function POST(request: Request) {
 
   const corpoPersonalizado = corpo.replace(/\{nome\}/g, nome);
 
+  if (!process.env.LOCAWEB_EMAIL_PASS) {
+    return NextResponse.json({ error: "LOCAWEB_EMAIL_PASS não configurado no servidor" }, { status: 500 });
+  }
+
   try {
     const pdfFamilias = readFileSync(join(process.cwd(), "public/kiri-familias.pdf"));
     const pdfProfissionais = readFileSync(join(process.cwd(), "public/kiri-profissionais.pdf"));
 
+    const transporter = makeTransporter();
     await transporter.sendMail({
       from: `"Kiri Saúde" <contato@kirisaude.com.br>`,
       to: `${nome} <${email}>`,
