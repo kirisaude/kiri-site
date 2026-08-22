@@ -1622,6 +1622,9 @@ export default function AdminPage() {
           <Link href="/admin/termos" className="text-[13px] font-semibold text-muted hover:text-carvao no-underline transition-colors">
             Termos
           </Link>
+          <Link href="/admin/drive" className="text-[13px] font-semibold text-muted hover:text-carvao no-underline transition-colors">
+            Drive
+          </Link>
           <button onClick={buscarDados} className="text-[13px] font-semibold text-ardosia cursor-pointer">
             {buscando ? "Atualizando…" : "↻ Atualizar"}
           </button>
