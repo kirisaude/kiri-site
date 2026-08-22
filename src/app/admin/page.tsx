@@ -1276,10 +1276,34 @@ export default function AdminPage() {
   const [emailProfStatus, setEmailProfStatus] = useState<Record<string, "ok" | "erro">>({});
   const [syncStatus, setSyncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
   const [syncErro, setSyncErro] = useState("");
+  const [syncDriveStatus, setSyncDriveStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
+  const [syncDriveMsg, setSyncDriveMsg] = useState("");
   const [syncEncStatus, setSyncEncStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
   const [syncEncErro, setSyncEncErro] = useState("");
   const [syncCurStatus, setSyncCurStatus] = useState<"idle"|"syncing"|"ok"|"erro">("idle");
   const [syncCurErro, setSyncCurErro] = useState("");
+
+  async function sincronizarDriveFolders() {
+    setSyncDriveStatus("syncing");
+    setSyncDriveMsg("");
+    try {
+      const res = await fetch("/api/admin/sync-drive-folders", { method: "POST", credentials: "include" });
+      const d = await res.json();
+      if (res.ok) {
+        setSyncDriveStatus("ok");
+        setSyncDriveMsg(d.vinculados > 0 ? `${d.vinculados} nova(s) pasta(s) vinculada(s)` : "Nenhuma pasta nova");
+        setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 5000);
+      } else {
+        setSyncDriveStatus("erro");
+        setSyncDriveMsg(d.error ?? "Erro");
+        setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 8000);
+      }
+    } catch {
+      setSyncDriveStatus("erro");
+      setSyncDriveMsg("Erro de conexão");
+      setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 8000);
+    }
+  }
 
   async function sincronizarSheets() {
     setSyncStatus("syncing");
@@ -1657,6 +1681,13 @@ export default function AdminPage() {
                   </button>
                 )}
                 <div className="flex flex-col items-end gap-1">
+                  <button
+                    onClick={sincronizarDriveFolders}
+                    disabled={syncDriveStatus === "syncing"}
+                    className={`text-[12.5px] font-semibold border rounded-[9px] px-3 py-1.5 cursor-pointer disabled:opacity-50 transition-colors ${syncDriveStatus === "ok" ? "text-[#2E7D4F] border-[#B8D8C0]" : syncDriveStatus === "erro" ? "text-ferrugem border-ferrugem/30" : "text-ardosia border-ardosia/30 hover:bg-wash"}`}
+                  >
+                    {syncDriveStatus === "syncing" ? "Verificando…" : syncDriveStatus === "ok" ? `✓ ${syncDriveMsg}` : syncDriveStatus === "erro" ? `Erro: ${syncDriveMsg}` : "↺ Sync pastas Drive"}
+                  </button>
                   <button
                     onClick={sincronizarSheets}
                     disabled={syncStatus === "syncing"}
