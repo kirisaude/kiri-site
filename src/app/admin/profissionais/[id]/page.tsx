@@ -130,6 +130,11 @@ export default function EditarProfissionalPage() {
   const [sobreStatus, setSobreStatus] = useState<VerificacaoStatus>(toStatus(profOriginal?.sobre_verificado, profOriginal?.sobre_pendente));
   const [sobreObs, setSobreObs] = useState(profOriginal?.sobre_obs ?? "");
 
+  const [driveFiles, setDriveFiles] = useState<{ id: string; name: string; mimeType: string; createdTime: string; webViewLink: string }[] | null>(null);
+  const [driveCarregando, setDriveCarregando] = useState(false);
+  const [driveErro, setDriveErro] = useState("");
+  const [driveSetupNeeded, setDriveSetupNeeded] = useState(false);
+
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
@@ -145,6 +150,26 @@ Certificados de especialização / residência / pós-graduação`;
   const [emailEnviado, setEmailEnviado] = useState(false);
   const [erroEmail, setErroEmail] = useState("");
   const [emailManual, setEmailManual] = useState("");
+
+  function extractFolderId(url: string): string | null {
+    const m = url.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+    return m ? m[1] : null;
+  }
+
+  async function carregarArquivosDrive() {
+    const folderId = extractFolderId(pastaDrive);
+    if (!folderId) { setDriveErro("Link do Drive inválido ou sem ID de pasta."); return; }
+    setDriveCarregando(true);
+    setDriveErro("");
+    setDriveFiles(null);
+    setDriveSetupNeeded(false);
+    const res = await fetch(`/api/admin/drive-files?folder_id=${folderId}`, { credentials: "include" });
+    const data = await res.json();
+    setDriveCarregando(false);
+    if (data.setup_needed) { setDriveSetupNeeded(true); return; }
+    if (!res.ok) { setDriveErro(data.error ?? "Erro ao carregar arquivos"); return; }
+    setDriveFiles(data.files);
+  }
 
   async function enviarEmailPendencias() {
     if (!profOriginal?.inscricao_id) { setErroEmail("Sem inscricao_id — não é possível buscar o e-mail."); return; }
@@ -700,12 +725,24 @@ Certificados de especialização / residência / pós-graduação`;
             <VerificacaoRow status={registroStatus} onStatus={setRegistroStatus} obs={registroObs} onObs={setRegistroObs} />
           </div>
 
+          {/* E-mail — campo fixo para comunicações com o profissional */}
+          <div className="flex flex-col gap-1 p-3 rounded-[12px] bg-[#F5F8FA] border border-[#C8D8E0]">
+            <label className="text-[12px] font-semibold text-ardosia-escura">E-mail do profissional</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="email@profissional.com.br"
+              className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
+            />
+            <p className="text-[11px] text-muted">Usado para envio de documentação, termos e comunicações internas. Não é exibido publicamente.</p>
+          </div>
+
           {[
             { label: "RQE (só médicos — deixe vazio se não se aplica)", value: rqe, set: setRqe },
             { label: "Áreas de atuação (separadas por vírgula)", value: areas, set: setAreas, required: true },
             { label: "Modalidade", value: modalidade, set: setModalidade, required: true },
             { label: "Faixa etária", value: faixaEtaria, set: setFaixaEtaria, required: true },
-            { label: "E-mail (privado)", value: email, set: setEmail },
             { label: "Convênio e pagamento", value: convenio, set: setConvenio, required: true },
             { label: "WhatsApp para agendamento (privado)", value: whatsapp, set: setWhatsapp },
             { label: "Verificado em (ex: Junho de 2026)", value: verificacaoData, set: setVerificacaoData },
@@ -1159,6 +1196,60 @@ Certificados de especialização / residência / pós-graduação`;
                 className="flex-1 text-[12px] text-carvao placeholder:text-muted bg-transparent border-b border-linha outline-none focus:border-ardosia py-0.5"
               />
             </div>
+
+            {/* Documentos enviados via Drive */}
+            {pastaDrive && (
+              <div>
+                <button
+                  type="button"
+                  onClick={carregarArquivosDrive}
+                  disabled={driveCarregando}
+                  className="text-[12px] text-ardosia font-semibold cursor-pointer hover:opacity-70 transition-opacity disabled:opacity-50"
+                >
+                  {driveCarregando ? "Carregando…" : driveFiles !== null ? "↺ Atualizar documentos" : "Ver documentos enviados"}
+                </button>
+
+                {driveSetupNeeded && (
+                  <div className="mt-2 p-3 bg-[#FFF8EC] border border-[#E0C070] rounded-[10px] text-[12px] text-[#7A5500]">
+                    Drive não configurado ainda.{" "}
+                    <a href="/api/admin/drive-auth" target="_blank" className="font-semibold underline">
+                      Clique aqui para autorizar
+                    </a>
+                  </div>
+                )}
+
+                {driveErro && <p className="mt-1 text-[12px] text-ferrugem">{driveErro}</p>}
+
+                {driveFiles !== null && (
+                  <div className="mt-2 flex flex-col gap-1.5">
+                    {driveFiles.length === 0 ? (
+                      <p className="text-[12px] text-muted italic">Nenhum arquivo encontrado na pasta.</p>
+                    ) : (
+                      driveFiles.map((f) => (
+                        <a
+                          key={f.id}
+                          href={f.webViewLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-3 py-2 bg-white border border-linha rounded-[8px] hover:border-ardosia transition-colors no-underline group"
+                        >
+                          <span className="text-[11px] text-muted flex-none">
+                            {f.mimeType.includes("pdf") ? "📄" : f.mimeType.includes("image") ? "🖼️" : "📁"}
+                          </span>
+                          <span className="text-[12px] text-carvao flex-1 truncate group-hover:text-ardosia transition-colors">
+                            {f.name}
+                          </span>
+                          <span className="text-[10.5px] text-muted flex-none">
+                            {new Date(f.createdTime).toLocaleDateString("pt-BR")}
+                          </span>
+                        </a>
+                      ))
+                    )}
+                    <p className="text-[11px] text-muted">{driveFiles.length} arquivo{driveFiles.length !== 1 ? "s" : ""} na pasta</p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {erro && <p className="text-[12px] text-ferrugem">{erro}</p>}
             {sucesso && <p className="text-[12px] text-verde-confirmacao font-semibold">{sucesso}</p>}
