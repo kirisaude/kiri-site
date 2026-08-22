@@ -1,5 +1,5 @@
 {
-  "contatos": [
+  "pediatras": [
     {
       "id": "19e7b815-1d95-4d0a-b59c-93b67f458564",
       "nome": "Mariana Carvalho",
@@ -133,5 +133,6 @@
       "enviado_em": "2026-08-22T21:51:31.904Z",
       "criado_em": "2026-08-22T21:50:02.124Z"
     }
-  ]
+  ],
+  "profissionais": []
 }

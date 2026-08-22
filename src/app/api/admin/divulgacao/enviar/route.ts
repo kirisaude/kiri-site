@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
 function isAdminAuthed(request: Request) {
@@ -8,10 +8,21 @@ function isAdminAuthed(request: Request) {
   return cookie.includes("kiri_admin=ok");
 }
 
+const ANEXOS_POR_LISTA: Record<string, Array<{ filename: string; path: string }>> = {
+  pediatras: [
+    { filename: "Kiri Saúde — para profissionais.pdf", path: "public/kiri-profissionais.pdf" },
+    { filename: "Kiri Saúde — para famílias.pdf", path: "public/kiri-familias.pdf" },
+  ],
+  profissionais: [
+    { filename: "Kiri Saúde — para profissionais.pdf", path: "public/kiri-profissionais.pdf" },
+    { filename: "Termo de adesão — Kiri Saúde.pdf", path: "public/termo-de-adesao-kiri.pdf" },
+  ],
+};
+
 export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
 
-  const { nome, email, assunto, corpo } = await request.json();
+  const { nome, email, assunto, corpo, lista } = await request.json();
   if (!nome || !email || !assunto || !corpo) {
     return NextResponse.json({ error: "nome, email, assunto e corpo são obrigatórios" }, { status: 400 });
   }
@@ -22,11 +33,16 @@ export async function POST(request: Request) {
   }
 
   const corpoPersonalizado = corpo.replace(/\{nome\}/g, nome);
+  const configAnexos = ANEXOS_POR_LISTA[lista ?? "pediatras"] ?? ANEXOS_POR_LISTA.pediatras;
+
+  const attachments = configAnexos
+    .filter((a) => existsSync(join(process.cwd(), a.path)))
+    .map((a) => ({
+      filename: a.filename,
+      content: readFileSync(join(process.cwd(), a.path)),
+    }));
 
   try {
-    const pdfFamilias = readFileSync(join(process.cwd(), "public/kiri-familias.pdf"));
-    const pdfProfissionais = readFileSync(join(process.cwd(), "public/kiri-profissionais.pdf"));
-
     const resend = new Resend(resendKey);
     const { error } = await resend.emails.send({
       from: "Kiri Saúde <contato@kirisaude.com.br>",
@@ -34,16 +50,7 @@ export async function POST(request: Request) {
       cc: ["iohana.marques@unifesp.br"],
       subject: assunto,
       html: corpoPersonalizado,
-      attachments: [
-        {
-          filename: "Kiri Saúde — para profissionais.pdf",
-          content: pdfProfissionais,
-        },
-        {
-          filename: "Kiri Saúde — para famílias.pdf",
-          content: pdfFamilias,
-        },
-      ],
+      attachments,
     });
 
     if (error) {

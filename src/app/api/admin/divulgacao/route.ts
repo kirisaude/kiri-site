@@ -4,6 +4,8 @@ const GITHUB_REPO = "kirisaude/kiri-site";
 const GITHUB_FILE = "src/data/divulgacao.json";
 const GITHUB_BRANCH = "main";
 
+type Lista = "pediatras" | "profissionais";
+
 function isAdminAuthed(request: Request) {
   const cookie = request.headers.get("cookie") ?? "";
   return cookie.includes("kiri_admin=ok");
@@ -35,24 +37,32 @@ async function salvarArquivo(token: string, sha: string, json: object, mensagem:
   if (!res.ok) throw new Error("Erro ao salvar arquivo");
 }
 
+function getLista(url: string): Lista {
+  const lista = new URL(url).searchParams.get("lista");
+  return lista === "profissionais" ? "profissionais" : "pediatras";
+}
+
 export async function GET(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
-  return NextResponse.json(json.contatos ?? []);
+  return NextResponse.json(json[lista] ?? []);
 }
 
 export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
   const { nome, email } = await request.json();
   if (!nome?.trim() || !email?.trim()) return NextResponse.json({ error: "nome e email obrigatórios" }, { status: 400 });
 
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
+  if (!json[lista]) json[lista] = [];
 
-  const jaExiste = json.contatos.some((c: { email: string }) => c.email.toLowerCase() === email.toLowerCase().trim());
+  const jaExiste = json[lista].some((c: { email: string }) => c.email.toLowerCase() === email.toLowerCase().trim());
   if (jaExiste) return NextResponse.json({ error: "E-mail já cadastrado" }, { status: 409 });
 
   const novoContato = {
@@ -62,34 +72,36 @@ export async function POST(request: Request) {
     enviado_em: null as string | null,
     criado_em: new Date().toISOString(),
   };
-  json.contatos.push(novoContato);
-  await salvarArquivo(token, file.sha, json, `Divulgação: add ${novoContato.nome}`);
+  json[lista].push(novoContato);
+  await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): add ${novoContato.nome}`);
   return NextResponse.json(novoContato);
 }
 
 export async function PATCH(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
   const { id, enviado_em } = await request.json();
 
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
-  const contato = json.contatos.find((c: { id: string }) => c.id === id);
+  const contato = (json[lista] ?? []).find((c: { id: string }) => c.id === id);
   if (!contato) return NextResponse.json({ error: "Contato não encontrado" }, { status: 404 });
 
   contato.enviado_em = enviado_em;
-  await salvarArquivo(token, file.sha, json, `Divulgação: mark sent ${contato.nome}`);
+  await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): mark sent ${contato.nome}`);
   return NextResponse.json({ ok: true });
 }
 
 export async function DELETE(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+  const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
   const { id } = await request.json();
 
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
-  json.contatos = json.contatos.filter((c: { id: string }) => c.id !== id);
-  await salvarArquivo(token, file.sha, json, `Divulgação: remove contato`);
+  json[lista] = (json[lista] ?? []).filter((c: { id: string }) => c.id !== id);
+  await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): remove contato`);
   return NextResponse.json({ ok: true });
 }
