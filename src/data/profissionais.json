@@ -3255,6 +3255,59 @@
       "sobre_verificado": true,
       "pasta_drive": null,
       "certidao_enviada_em": "2026-08-21T12:13:42.042Z"
+    },
+    {
+      "id": "kiri-080",
+      "inscricao_id": "7f3d4f73-160b-4ff5-81ed-a01fb337f69e",
+      "nome": "Lilian Gabriela Oliveira Santana Mota",
+      "profissao": "Neuropsicólogo",
+      "titulo_exibicao": "Neuropsicólogo",
+      "registro_conselho": "CRP 03/20978",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Ansiedade",
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Feira de Santana",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou Lilian Mota, psicóloga e neuropsicóloga, apaixonada por compreender a singularidade de cada pessoa e ajudá-la a encontrar caminhos para uma vida com mais equilíbrio, autonomia e qualidade de vida.\nAcredito que cada história merece ser ouvida com atenção, respeito e sensibilidade. Por isso, meu atendimento é pautado na escuta acolhedora, na ética profissional e em práticas baseadas em evidências científicas.\nAtuo com crianças, adolescentes e adultos, realizando avaliações neuropsicológicas, psicoterapia e orientação familiar, sempre buscando compreender não apenas as dificuldades apresentadas, mas também as potencialidades de cada paciente.\nMeu objetivo é oferecer um cuidado individualizado, proporcionando um ambiente seguro, onde você e sua família se sintam acolhidos, compreendidos e orientados durante todo o processo.\nSerá um prazer caminhar ao seu lado nessa jornada de autoconhecimento, desenvolvimento e promoção da saúde mental.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Unex — 2016"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia — IPOG — 2021"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "ABA — IPOG — 2026"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 190,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(71) 99179-1777",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atuo com atendimento psicológico e acompanhamento de crianças em diferentes contextos, incluindo clínica e ambiente educacional. Possuo experiência com crianças em idade pré-escolar e escolar, trabalhando demandas relacionadas ao desenvolvimento infantil, dificuldades de aprendizagem, atenção, comportamento, regulação emocional e habilidades sociais. Também realizo avaliação neuropsicológica infantil, incluindo investigação do funcionamento cognitivo, emocional e comportamental, além de orientação a pais e diálogo com a escola e equipe multidisciplinar. Minha experiência abrange crianças com diferentes perfis de desenvolvimento e necessidades específicas, sempre considerando a singularidade de cada criança e de sua família.",
+          "tempo": "5 anos",
+          "faixa_etaria": "3-18"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "5d285187044d4570"
     }
   ]
 }
