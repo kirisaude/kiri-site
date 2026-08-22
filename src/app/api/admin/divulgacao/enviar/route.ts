@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 function isAdminAuthed(request: Request) {
   const cookie = request.headers.get("cookie") ?? "";
@@ -27,12 +29,19 @@ export async function POST(request: Request) {
   const corpoPersonalizado = corpo.replace(/\{nome\}/g, nome);
 
   try {
+    const pdfFamilias = readFileSync(join(process.cwd(), "public/kiri-familias.pdf"));
+    const pdfProfissionais = readFileSync(join(process.cwd(), "public/kiri-profissionais.pdf"));
+
     await transporter.sendMail({
       from: `"Kiri Saúde" <contato@kirisaude.com.br>`,
       to: `${nome} <${email}>`,
       cc: "iohana.marques@unifesp.br",
       subject: assunto,
       html: corpoPersonalizado,
+      attachments: [
+        { filename: "Kiri Saúde — para profissionais.pdf", content: pdfProfissionais, contentType: "application/pdf" },
+        { filename: "Kiri Saúde — para famílias.pdf", content: pdfFamilias, contentType: "application/pdf" },
+      ],
     });
     return NextResponse.json({ ok: true });
   } catch (e: unknown) {

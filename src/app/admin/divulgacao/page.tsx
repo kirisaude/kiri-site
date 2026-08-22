@@ -14,22 +14,26 @@ type Contato = {
 
 type EnvioStatus = "idle" | "enviando" | "ok" | "erro";
 
-const ASSUNTO_PADRAO = "Kiri Saúde — plataforma de saúde infantil e do neurodesenvolvimento";
+const ASSUNTO_PADRAO = "Kiri Saúde — uma ferramenta para encaminhamentos em neurodesenvolvimento infantil";
 
-const CORPO_PADRAO = `<p>Olá, Dr(a). {nome},</p>
+const CORPO_PADRAO = `<p>Olá, {nome},</p>
 
-<p>Me chamo Iohana Marques, sou médica pela UNIFESP e fundadora da <strong>Kiri Saúde</strong> — uma plataforma que conecta famílias de crianças com necessidades de saúde e desenvolvimento a profissionais especializados.</p>
+<p>Me chamo Iohana Marques, sou médica e residente de psiquiatria pela UNIFESP e fundei a <strong>Kiri Saúde</strong> — uma plataforma de curadoria que conecta famílias a profissionais verificados em neurodesenvolvimento infantil.</p>
 
-<p>Nosso objetivo é facilitar o acesso a psicólogos, fonoaudiólogos, terapeutas ocupacionais, neuropsicólogos e outros especialistas, com um olhar cuidadoso para o perfil e a abordagem de cada profissional.</p>
+<p>A ideia surgiu de uma dificuldade que conheço bem: quando a gente identifica um sinal de atenção na consulta e precisa indicar alguém com segurança — sem depender de indicação informal ou de diretórios genéricos sem verificação.</p>
 
-<p>Gostaríamos de convidá-lo(a) a conhecer a plataforma e, se fizer sentido, indicar a Kiri às famílias que acompanha.</p>
+<p>Na Kiri, cada profissional passa por conferência real de documentos antes de ficar visível. A busca cobre 11 especialidades (psicólogo, fonoaudiólogo, terapeuta ocupacional, neuropediatra, neuropsicólogo e outras) e reflete adequação clínica, não ranking pago.</p>
 
-<p>Acesse: <a href="https://kirisaude.com.br">kirisaude.com.br</a></p>
+<p>Para as famílias que você atende e precisam desse encaminhamento, o acesso é gratuito e sem cadastro em <a href="https://kirisaude.com.br">kirisaude.com.br</a>.</p>
 
-<p>Fico à disposição para qualquer dúvida.</p>
+<p>Envio em anexo dois materiais curtos — um para profissionais e um para famílias, caso queira compartilhar.</p>
+
+<p>Qualquer dúvida, fico à disposição.</p>
 
 <p>Atenciosamente,<br/>
 <strong>Iohana Marques</strong><br/>
+CRM SP 255630<br/>
+Médica e residente de psiquiatria — UNIFESP<br/>
 Fundadora — Kiri Saúde<br/>
 contato@kirisaude.com.br</p>`;
 
