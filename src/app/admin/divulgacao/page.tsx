@@ -18,7 +18,7 @@ const ASSUNTO_PADRAO = "Kiri Saúde — uma ferramenta para encaminhamentos em n
 
 const CORPO_PADRAO = `<p>Olá, {nome},</p>
 
-<p>Me chamo Iohana Marques, sou médica e residente de psiquiatria pela UNIFESP e fundei a <strong>Kiri Saúde</strong> — uma plataforma de curadoria que conecta famílias a profissionais verificados em neurodesenvolvimento infantil.</p>
+<p>Me chamo Iohana Marques, sou médica e residente de psiquiatria pela UNIFESP e fundei a <strong>Kiri Saúde</strong> — uma plataforma de curadoria que conecta famílias a profissionais que atuam na área de neurodesenvolvimento infantil.</p>
 
 <p>A ideia surgiu de uma dificuldade que conheço bem: quando a gente identifica um sinal de atenção na consulta e precisa indicar alguém com segurança — sem depender de indicação informal ou de diretórios genéricos sem verificação.</p>
 
