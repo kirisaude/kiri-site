@@ -22,7 +22,7 @@ const CORPO_PADRAO = `<p>Olá, {nome},</p>
 
 <p>A ideia surgiu de uma dificuldade que conheço bem: quando a gente identifica um sinal de atenção na consulta e precisa indicar alguém com segurança — sem depender de indicação informal ou de diretórios genéricos sem verificação.</p>
 
-<p>Na Kiri, cada profissional passa por conferência real de documentos antes de ficar visível. A busca cobre 11 especialidades (psicólogo, fonoaudiólogo, terapeuta ocupacional, neuropediatra, neuropsicólogo e outras) e reflete adequação clínica, não ranking pago.</p>
+<p>Na Kiri, cada profissional passa por conferência dos documentos que comprovam suas formações, além de verificação do registro no conselho, antes de serem publicados na plataforma. A busca cobre 11 especialidades (psicólogo, fonoaudiólogo, terapeuta ocupacional, neuropediatra, neuropsicólogo e outras) e reflete adequação clínica, não ranking pago.</p>
 
 <p>Para as famílias que você atende e precisam desse encaminhamento, o acesso é gratuito e sem cadastro em <a href="https://kirisaude.com.br">kirisaude.com.br</a>.</p>
 
