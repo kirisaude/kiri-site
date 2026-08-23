@@ -4,7 +4,7 @@ const GITHUB_REPO = "kirisaude/kiri-site";
 const GITHUB_FILE = "src/data/divulgacao.json";
 const GITHUB_BRANCH = "main";
 
-type Lista = "pediatras" | "profissionais";
+type Lista = "pediatras" | "profissionais" | "linkedin";
 
 function isAdminAuthed(request: Request) {
   const cookie = request.headers.get("cookie") ?? "";
@@ -39,7 +39,9 @@ async function salvarArquivo(token: string, sha: string, json: object, mensagem:
 
 function getLista(url: string): Lista {
   const lista = new URL(url).searchParams.get("lista");
-  return lista === "profissionais" ? "profissionais" : "pediatras";
+  if (lista === "profissionais") return "profissionais";
+  if (lista === "linkedin") return "linkedin";
+  return "pediatras";
 }
 
 export async function GET(request: Request) {
@@ -55,24 +57,42 @@ export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
-  const { nome, email, cidade } = await request.json();
-  if (!nome?.trim() || !email?.trim()) return NextResponse.json({ error: "nome e email obrigatórios" }, { status: 400 });
+  const body = await request.json();
+  const { nome, cidade } = body;
+  if (!nome?.trim()) return NextResponse.json({ error: "nome obrigatório" }, { status: 400 });
 
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
   if (!json[lista]) json[lista] = [];
 
-  const jaExiste = json[lista].some((c: { email: string }) => c.email.toLowerCase() === email.toLowerCase().trim());
-  if (jaExiste) return NextResponse.json({ error: "E-mail já cadastrado" }, { status: 409 });
+  let novoContato: Record<string, unknown>;
 
-  const novoContato = {
-    id: crypto.randomUUID(),
-    nome: nome.trim(),
-    email: email.toLowerCase().trim(),
-    cidade: cidade?.trim() || null,
-    enviado_em: null as string | null,
-    criado_em: new Date().toISOString(),
-  };
+  if (lista === "linkedin") {
+    const { perfil_url } = body;
+    if (!perfil_url?.trim()) return NextResponse.json({ error: "perfil_url obrigatório" }, { status: 400 });
+    novoContato = {
+      id: crypto.randomUUID(),
+      nome: nome.trim(),
+      perfil_url: perfil_url.trim(),
+      cidade: cidade?.trim() || null,
+      status: "pendente",
+      criado_em: new Date().toISOString(),
+    };
+  } else {
+    const { email } = body;
+    if (!email?.trim()) return NextResponse.json({ error: "email obrigatório" }, { status: 400 });
+    const jaExiste = json[lista].some((c: { email: string }) => c.email.toLowerCase() === email.toLowerCase().trim());
+    if (jaExiste) return NextResponse.json({ error: "E-mail já cadastrado" }, { status: 409 });
+    novoContato = {
+      id: crypto.randomUUID(),
+      nome: nome.trim(),
+      email: email.toLowerCase().trim(),
+      cidade: cidade?.trim() || null,
+      enviado_em: null,
+      criado_em: new Date().toISOString(),
+    };
+  }
+
   json[lista].push(novoContato);
   await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): add ${novoContato.nome}`);
   return NextResponse.json(novoContato);
@@ -82,15 +102,21 @@ export async function PATCH(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   const lista = getLista(request.url);
   const token = process.env.GITHUB_TOKEN!;
-  const { id, enviado_em } = await request.json();
+  const body = await request.json();
+  const { id } = body;
 
   const file = await getArquivo(token);
   const json = JSON.parse(Buffer.from(file.content, "base64").toString("utf-8"));
   const contato = (json[lista] ?? []).find((c: { id: string }) => c.id === id);
   if (!contato) return NextResponse.json({ error: "Contato não encontrado" }, { status: 404 });
 
-  contato.enviado_em = enviado_em;
-  await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): mark sent ${contato.nome}`);
+  if (lista === "linkedin") {
+    contato.status = body.status;
+    await salvarArquivo(token, file.sha, json, `Divulgação (linkedin): status ${body.status} — ${contato.nome}`);
+  } else {
+    contato.enviado_em = body.enviado_em;
+    await salvarArquivo(token, file.sha, json, `Divulgação (${lista}): mark sent ${contato.nome}`);
+  }
   return NextResponse.json({ ok: true });
 }
 
