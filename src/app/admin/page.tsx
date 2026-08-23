@@ -292,7 +292,7 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado, followupExistente 
       setFup(fupAtual);
       onEnviado(fupAtual);
     }
-    const link = `https://kirisaude.com.br/followup/${fupAtual.token}?plataforma=1`;
+    const link = `https://kirisaude.com.br/k/${fupAtual.token.slice(0, 8)}`;
     navigator.clipboard.writeText(link).catch(() => {});
     setCopiouPlataforma(true);
     setTimeout(() => setCopiouPlataforma(false), 2000);
@@ -526,30 +526,43 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado, followupExistente 
           <div className="flex flex-col gap-1.5">
             <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Avaliação da Kiri — envie antes de encerrar</div>
             {(() => {
-              const linkPlataforma = fup ? `https://kirisaude.com.br/followup/${fup.token}?plataforma=1` : null;
-              const msgAvaliacao = `Olá, ${primeiro}! Aqui é Iohana, da equipe Kiri. Independente do que aconteceu com o agendamento, a sua opinião é muito importante pra nós. Você toparia avaliar em 1 minuto a experiência com a Kiri? ${linkPlataforma ?? "[gere o link abaixo primeiro]"}`;
+              const shortLink = fup ? `https://kirisaude.com.br/k/${fup.token.slice(0, 8)}` : null;
+              const msgAvaliacao = `Olá, ${primeiro}! Aqui é Iohana, da equipe Kiri. Independente do que aconteceu com o agendamento, a sua opinião é muito importante pra nós. Você toparia avaliar em 1 minuto a experiência com a Kiri? ${shortLink ?? "[gere o link abaixo primeiro]"}`;
               const okMsg = copiado === "msg_avaliacao_plataforma";
               return (
                 <>
                   <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[12.5px] text-carvao leading-[1.55]">{msgAvaliacao}</div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-0.5">
                     <button
                       type="button"
-                      onClick={() => linkPlataforma ? copiar("msg_avaliacao_plataforma", msgAvaliacao) : copiarLinkPlataforma().then(() => copiar("msg_avaliacao_plataforma", msgAvaliacao))}
+                      onClick={() => shortLink ? copiar("msg_avaliacao_plataforma", msgAvaliacao) : copiarLinkPlataforma().then(() => copiar("msg_avaliacao_plataforma", msgAvaliacao))}
                       className="text-[11.5px] font-semibold cursor-pointer transition-colors"
                       style={{ color: okMsg ? "#2E7D4F" : "#44606C" }}
                     >
                       {okMsg ? "✓ Mensagem copiada!" : "Copiar mensagem"}
                     </button>
-                    <button
-                      type="button"
-                      onClick={copiarLinkPlataforma}
-                      disabled={salvando || encerrando}
-                      className="text-[11.5px] font-semibold cursor-pointer transition-colors disabled:opacity-40"
-                      style={{ color: copiouPlataforma ? "#2E7D4F" : "#9A8C78" }}
-                    >
-                      {copiouPlataforma ? "✓ Link copiado!" : "Copiar só o link"}
-                    </button>
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={copiarLinkPlataforma}
+                        disabled={salvando || encerrando}
+                        className="text-[11.5px] font-semibold cursor-pointer transition-colors disabled:opacity-40"
+                        style={{ color: copiouPlataforma ? "#2E7D4F" : "#9A8C78" }}
+                      >
+                        {copiouPlataforma ? "✓ Link copiado!" : "Copiar link"}
+                      </button>
+                      {isWa && (
+                        <a
+                          href={buildWaUrl(encaminhamento.contato, msgAvaliacao)}
+                          target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-1 no-underline text-[11.5px] font-semibold hover:opacity-80 transition-opacity"
+                          style={{ color: "#25D366" }}
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M17 14.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.1-2-.1-.5-.2-1.1-.4-1.9-.8-3.3-1.5-5.4-4.8-5.6-5.1-.2-.2-.8-1.1-.8-2.1s.5-1.5.7-1.7c.2-.2.5-.3.7-.3H6c.2 0 .4.1.5.3.2.3.7 1.7.7 1.8 0 .1 0 .3-.1.4l-.6.7c-.1.1-.1.3 0 .4.5.8 1.2 1.7 2.1 2.4.9.7 1.9 1.2 2.7 1.4.1 0 .3 0 .4-.1l.7-.7c.1-.1.3-.2.5-.2.1 0 .2 0 .3.1 1.3.6 1.6.8 1.8.9.2.1.3.4.2.8z" fill="white"/></svg>
+                          Abrir WA
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </>
               );
@@ -816,6 +829,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-serif text-[15px] font-semibold text-carvao">{e.nome_responsavel}</span>
+            <span className="text-[13px] text-muted">{new Date(e.criado_em).toLocaleDateString("pt-BR")}</span>
             {encerrado && (
               <span className="text-[11px] font-semibold text-muted bg-[#EDEBE8] border border-[#D0C8BE] px-2 py-0.5 rounded-[6px]">
                 encerrado
@@ -836,7 +850,6 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
                 {e.contato}
               </a>
             ) : e.contato}
-            {" · "}{new Date(e.criado_em).toLocaleDateString("pt-BR")}
           </div>
           {prof && (
             <div className="text-[13px] text-ardosia font-medium mt-0.5">
