@@ -502,6 +502,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
               {erroModal}
             </div>
           )}
+
+          {/* Salvar sem encerrar */}
           <button
             type="button"
             onClick={salvarAnotacao}
@@ -511,6 +513,49 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
           >
             {salvando ? "Salvando…" : "Salvar e fechar"}
           </button>
+
+          {/* Seção de encerramento */}
+          <div className="flex items-center gap-2 pt-1">
+            <div className="flex-1 h-px bg-linha" />
+            <span className="text-[10px] font-semibold text-muted uppercase tracking-wide">Encerramento</span>
+            <div className="flex-1 h-px bg-linha" />
+          </div>
+
+          {/* Avaliação da plataforma */}
+          <div className="flex flex-col gap-1.5">
+            <div className="text-[10.5px] font-semibold text-muted uppercase tracking-wide">Avaliação da Kiri — envie antes de encerrar</div>
+            {(() => {
+              const linkPlataforma = fup ? `https://kirisaude.com.br/followup/${fup.token}?plataforma=1` : null;
+              const msgAvaliacao = `Olá, ${primeiro}! Aqui é Iohana, da equipe Kiri. Independente do que aconteceu com o agendamento, a sua opinião é muito importante pra nós. Você toparia avaliar em 1 minuto a experiência com a Kiri? ${linkPlataforma ?? "[gere o link abaixo primeiro]"}`;
+              const okMsg = copiado === "msg_avaliacao_plataforma";
+              return (
+                <>
+                  <div className="bg-white border border-linha rounded-[10px] px-3 py-2.5 text-[12.5px] text-carvao leading-[1.55]">{msgAvaliacao}</div>
+                  <div className="flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => linkPlataforma ? copiar("msg_avaliacao_plataforma", msgAvaliacao) : copiarLinkPlataforma().then(() => copiar("msg_avaliacao_plataforma", msgAvaliacao))}
+                      className="text-[11.5px] font-semibold cursor-pointer transition-colors"
+                      style={{ color: okMsg ? "#2E7D4F" : "#44606C" }}
+                    >
+                      {okMsg ? "✓ Mensagem copiada!" : "Copiar mensagem"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={copiarLinkPlataforma}
+                      disabled={salvando || encerrando}
+                      className="text-[11.5px] font-semibold cursor-pointer transition-colors disabled:opacity-40"
+                      style={{ color: copiouPlataforma ? "#2E7D4F" : "#9A8C78" }}
+                    >
+                      {copiouPlataforma ? "✓ Link copiado!" : "Copiar só o link"}
+                    </button>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+
+          {/* Encerrar */}
           <button
             type="button"
             onClick={salvarEEncerrar}
@@ -518,17 +563,9 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
             className="w-full rounded-[12px] py-[12px] text-[14px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity"
             style={{ background: "#BE6E4E", color: "#fff" }}
           >
-            {encerrando ? "Encerrando…" : "Encerrar follow-up"}
+            {encerrando ? "Encerrando…" : "Salvar e encerrar follow-up"}
           </button>
-          <button
-            type="button"
-            onClick={copiarLinkPlataforma}
-            disabled={salvando || encerrando}
-            className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity border"
-            style={{ background: "transparent", color: copiouPlataforma ? "#2E7D4F" : "#9A8C78", borderColor: copiouPlataforma ? "#2E7D4F" : "#D8C7B0" }}
-          >
-            {copiouPlataforma ? "✓ Link copiado!" : "Copiar link — avaliação só da Kiri"}
-          </button>
+
           {!fup && (
             <button
               type="button"
@@ -539,7 +576,7 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
               {criando ? "Criando…" : "Só criar follow-up (gera link de avaliação, sem salvar anotação)"}
             </button>
           )}
-          {fup && <div className="text-[11px] text-[#2E7D4F] text-center">Follow-up criado</div>}
+          {fup && <div className="text-[11px] text-[#2E7D4F] text-center">Follow-up criado · link gerado</div>}
           <button onClick={onFechar} className="text-[13px] text-muted cursor-pointer hover:text-carvao text-center">Fechar</button>
         </div>
       </div>
