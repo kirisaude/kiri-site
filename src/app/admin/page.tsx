@@ -178,6 +178,7 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [salvando, setSalvando] = useState(false);
   const [encerrando, setEncerrando] = useState(false);
   const [copiouPlataforma, setCopiouPlataforma] = useState(false);
+  const [erroModal, setErroModal] = useState<string | null>(null);
   function toggleMarca(chave: string) {
     setMarcadas(prev => {
       const s = new Set(prev);
@@ -242,13 +243,23 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   }
 
   async function criarSemNotificar(): Promise<Followup | null> {
-    const res = await fetch("/api/admin/criar-followup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
-    });
-    if (!res.ok) return null;
-    return await res.json() as Followup;
+    setErroModal(null);
+    try {
+      const res = await fetch("/api/admin/criar-followup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ encaminhamento_id: encaminhamento.id }),
+      });
+      if (!res.ok) {
+        const body = await res.text().catch(() => "");
+        setErroModal(`Erro ${res.status} ao criar follow-up${body ? ": " + body : ""}`);
+        return null;
+      }
+      return await res.json() as Followup;
+    } catch (e) {
+      setErroModal(`Falha de rede: ${e instanceof Error ? e.message : String(e)}`);
+      return null;
+    }
   }
 
   async function salvarAnotacao() {
@@ -256,8 +267,12 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
     let fupAtual = fup;
     if (!fupAtual) {
       fupAtual = await criarSemNotificar();
-      if (!fupAtual) { setSalvando(false); return; }
+      if (!fupAtual) {
+        setSalvando(false);
+        return; // mantém modal aberto para mostrar o erro
+      }
       setFup(fupAtual);
+      onEnviado(fupAtual);
     }
     await fetch("/api/admin/followup-desfecho", {
       method: "POST",
@@ -284,18 +299,26 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
   async function salvarEEncerrar() {
     setEncerrando(true);
+    setErroModal(null);
     try {
       let fupAtual = fup;
       if (!fupAtual) {
         fupAtual = await criarSemNotificar();
         if (!fupAtual) { setEncerrando(false); return; }
         setFup(fupAtual);
+        onEnviado(fupAtual);
       }
-      await fetch("/api/admin/followup-desfecho", {
+      const res = await fetch("/api/admin/followup-desfecho", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim(), concluir: true }),
       });
+      if (!res.ok) {
+        const body = await res.text().catch(() => "");
+        setErroModal(`Erro ao encerrar${body ? ": " + body : ""}`);
+        setEncerrando(false);
+        return;
+      }
       const fupEncerrado: Followup = {
         ...fupAtual,
         encaminhamento_id: fupAtual.encaminhamento_id ?? encaminhamento.id,
@@ -304,7 +327,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
       };
       onEnviado(fupEncerrado);
       onFechar();
-    } catch {
+    } catch (e) {
+      setErroModal(`Falha: ${e instanceof Error ? e.message : String(e)}`);
       setEncerrando(false);
     }
   }
@@ -473,6 +497,11 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
 
         {/* Base */}
         <div className="px-5 pt-3 pb-5 flex-none border-t border-linha flex flex-col gap-2">
+          {erroModal && (
+            <div className="text-[11.5px] text-[#A63232] bg-[#FFF0F0] border border-[#F5C6C6] rounded-[8px] px-3 py-2 leading-[1.5]">
+              {erroModal}
+            </div>
+          )}
           <button
             type="button"
             onClick={salvarAnotacao}
