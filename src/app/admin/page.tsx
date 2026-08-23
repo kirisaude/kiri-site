@@ -176,8 +176,8 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   const [datasEnvio, setDatasEnvio] = useState<Record<string, string>>({});
   const [desfecho, setDesfecho] = useState("");
   const [salvando, setSalvando] = useState(false);
-  const [anotacaoSalva, setAnotacaoSalva] = useState(false);
   const [encerrando, setEncerrando] = useState(false);
+  const [copiouPlataforma, setCopiouPlataforma] = useState(false);
   function toggleMarca(chave: string) {
     setMarcadas(prev => {
       const s = new Set(prev);
@@ -252,7 +252,6 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
   }
 
   async function salvarAnotacao() {
-    if (!desfecho.trim()) return;
     setSalvando(true);
     let fupAtual = fup;
     if (!fupAtual) {
@@ -266,8 +265,21 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
       body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim() }),
     });
     setSalvando(false);
-    setAnotacaoSalva(true);
-    setTimeout(() => setAnotacaoSalva(false), 2500);
+    onFechar();
+  }
+
+  async function copiarLinkPlataforma() {
+    let fupAtual = fup;
+    if (!fupAtual) {
+      fupAtual = await criarSemNotificar();
+      if (!fupAtual) return;
+      setFup(fupAtual);
+      onEnviado(fupAtual);
+    }
+    const link = `https://kirisaude.com.br/followup/${fupAtual.token}?plataforma=1`;
+    navigator.clipboard.writeText(link).catch(() => {});
+    setCopiouPlataforma(true);
+    setTimeout(() => setCopiouPlataforma(false), 2000);
   }
 
   async function salvarEEncerrar() {
@@ -464,11 +476,11 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
           <button
             type="button"
             onClick={salvarAnotacao}
-            disabled={!desfecho.trim() || salvando || encerrando}
+            disabled={salvando || encerrando}
             className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity border"
-            style={{ background: "transparent", color: anotacaoSalva ? "#2E7D4F" : "#44606C", borderColor: anotacaoSalva ? "#2E7D4F" : "#44606C" }}
+            style={{ background: "transparent", color: "#44606C", borderColor: "#44606C" }}
           >
-            {salvando ? "Salvando…" : anotacaoSalva ? "✓ Anotação salva!" : "Salvar anotação (sem encerrar)"}
+            {salvando ? "Salvando…" : "Salvar e fechar"}
           </button>
           <button
             type="button"
@@ -478,6 +490,15 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
             style={{ background: "#BE6E4E", color: "#fff" }}
           >
             {encerrando ? "Encerrando…" : "Encerrar follow-up"}
+          </button>
+          <button
+            type="button"
+            onClick={copiarLinkPlataforma}
+            disabled={salvando || encerrando}
+            className="w-full rounded-[12px] py-[11px] text-[13.5px] font-semibold cursor-pointer disabled:opacity-40 disabled:cursor-default transition-opacity border"
+            style={{ background: "transparent", color: copiouPlataforma ? "#2E7D4F" : "#9A8C78", borderColor: copiouPlataforma ? "#2E7D4F" : "#D8C7B0" }}
+          >
+            {copiouPlataforma ? "✓ Link copiado!" : "Copiar link — avaliação só da Kiri"}
           </button>
           {!fup && (
             <button
@@ -1849,53 +1870,20 @@ export default function AdminPage() {
               </a>
             </div>
 
-            {/* Pedidos com profissional específico — pendentes */}
-            <div>
-              <div className="flex items-baseline gap-2 mb-1">
-                <h2 className="font-serif text-[18px] font-semibold text-carvao">Pedido específico</h2>
-                <span className="text-[14px] text-muted">
-                  ({comProfissional.filter((e) => e.status !== "encaminhado").length} pendentes)
-                </span>
-              </div>
-              <p className="text-[13px] text-muted mb-4">
-                Família solicitou um profissional da plataforma. Resposta: enviar o card.
-              </p>
-              {comProfissional.filter((e) => e.status !== "encaminhado").length === 0 ? (
-                <p className="text-[14px] text-muted">Nenhum pedido pendente.</p>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  {comProfissional
-                    .filter((e) => e.status !== "encaminhado")
-                    .map((e) => (
-                      <CardEspecifico
-                        key={e.id}
-                        e={e}
-                        expandido={expandidos.has(e.id)}
-                        onToggle={() => toggleExpandido(e.id)}
-                        onEncaminhar={atualizarEncaminhamento}
-                        onExcluir={excluirEncaminhamento}
-                        followup={followupsMap.get(e.id)}
-                        onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
-                      />
-                    ))}
-                </div>
-              )}
-
-              {/* Subcategoria: encaminhados (sem follow-up encerrado) */}
-              {comProfissional.filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em).length > 0 && (
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[13px] font-semibold text-[#2E7D4F] tracking-wide">
-                      Encaminhados
-                    </span>
-                    <span className="text-[12px] text-muted">
-                      ({comProfissional.filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em).length})
-                    </span>
+            {/* Encaminhamentos novos */}
+            {(() => {
+              const novos = comProfissional.filter((e) => e.status !== "encaminhado");
+              return (
+                <div>
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <h2 className="font-serif text-[18px] font-semibold text-carvao">Encaminhamentos novos</h2>
+                    <span className="text-[13px] text-muted">({novos.length})</span>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    {comProfissional
-                      .filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em)
-                      .map((e) => (
+                  {novos.length === 0 ? (
+                    <p className="text-[13px] text-muted">Nenhum pedido novo.</p>
+                  ) : (
+                    <div className="flex flex-col gap-3">
+                      {novos.map((e) => (
                         <CardEspecifico
                           key={e.id}
                           e={e}
@@ -1907,25 +1895,26 @@ export default function AdminPage() {
                           onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                         />
                       ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              );
+            })()}
 
-              {/* Subcategoria: encerrados (follow-up concluído) */}
-              {comProfissional.filter((e) => !!followupsMap.get(e.id)?.concluido_em).length > 0 && (
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[13px] font-semibold text-muted tracking-wide">
-                      Encerrados
-                    </span>
-                    <span className="text-[12px] text-muted">
-                      ({comProfissional.filter((e) => !!followupsMap.get(e.id)?.concluido_em).length})
-                    </span>
+            {/* Encaminhamentos em curso */}
+            {(() => {
+              const emCurso = comProfissional.filter((e) => e.status === "encaminhado" && !followupsMap.get(e.id)?.concluido_em);
+              return (
+                <div>
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <h2 className="font-serif text-[18px] font-semibold text-carvao">Encaminhamentos em curso</h2>
+                    <span className="text-[13px] text-muted">({emCurso.length})</span>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    {comProfissional
-                      .filter((e) => !!followupsMap.get(e.id)?.concluido_em)
-                      .map((e) => (
+                  {emCurso.length === 0 ? (
+                    <p className="text-[13px] text-muted">Nenhum em curso.</p>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      {emCurso.map((e) => (
                         <CardEspecifico
                           key={e.id}
                           e={e}
@@ -1937,10 +1926,42 @@ export default function AdminPage() {
                           onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
                         />
                       ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()}
+
+            {/* Encaminhamentos encerrados */}
+            {(() => {
+              const encerrados = comProfissional.filter((e) => !!followupsMap.get(e.id)?.concluido_em);
+              return (
+                <div>
+                  <div className="flex items-baseline gap-2 mb-3">
+                    <h2 className="font-serif text-[18px] font-semibold text-carvao">Encaminhamentos encerrados</h2>
+                    <span className="text-[13px] text-muted">({encerrados.length})</span>
+                  </div>
+                  {encerrados.length === 0 ? (
+                    <p className="text-[13px] text-muted">Nenhum encerrado ainda.</p>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      {encerrados.map((e) => (
+                        <CardEspecifico
+                          key={e.id}
+                          e={e}
+                          expandido={expandidos.has(e.id)}
+                          onToggle={() => toggleExpandido(e.id)}
+                          onEncaminhar={atualizarEncaminhamento}
+                          onExcluir={excluirEncaminhamento}
+                          followup={followupsMap.get(e.id)}
+                          onFollowupCriado={(fup) => setFollowupsMap(prev => new Map(prev).set(fup.encaminhamento_id, fup))}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
           </div>
         )}

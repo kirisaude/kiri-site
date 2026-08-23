@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 interface Followup {
   id: string;
@@ -11,7 +11,7 @@ interface Followup {
   concluido_em: string | null;
 }
 
-type Etapa = 1 | 2 | 3 | "nao-contato" | "nao-agendou" | "obrigada";
+type Etapa = 1 | 2 | 3 | "nao-contato" | "nao-agendou" | "plataforma" | "obrigada";
 
 function Estrelas({ value, onChange }: { value: number; onChange: (v: number) => void }) {
   return (
@@ -41,9 +41,11 @@ function Estrelas({ value, onChange }: { value: number; onChange: (v: number) =>
 
 export default function FollowupPage() {
   const { token } = useParams<{ token: string }>();
+  const searchParams = useSearchParams();
+  const modoPlataforma = searchParams.get("plataforma") === "1";
   const [followup, setFollowup] = useState<Followup | null>(null);
   const [erro, setErro] = useState("");
-  const [etapa, setEtapa] = useState<Etapa>(1);
+  const [etapa, setEtapa] = useState<Etapa>(modoPlataforma ? "plataforma" : 1);
   const [enviando, setEnviando] = useState(false);
 
   // Etapa nao-contato
@@ -66,9 +68,10 @@ export default function FollowupPage() {
         if (d.error) { setErro("Link inválido ou expirado."); return; }
         setFollowup(d);
         if (d.concluido_em) setEtapa("obrigada");
+        else if (modoPlataforma) setEtapa("plataforma");
       })
       .catch(() => setErro("Erro ao carregar. Tente novamente."));
-  }, [token]);
+  }, [token, modoPlataforma]);
 
   async function enviar(dados: Record<string, unknown>, proximaEtapa: Etapa) {
     setEnviando(true);
@@ -291,6 +294,50 @@ export default function FollowupPage() {
             </button>
             {(npsProfissional === 0 || npsPlataforma === 0) && (
               <p className="text-[12px] text-muted text-center mt-2">Selecione uma nota para cada item</p>
+            )}
+          </div>
+        )}
+
+        {etapa === "plataforma" && (
+          <div className="bg-white border border-linha rounded-[16px] px-6 py-7">
+            <h1 className="font-serif text-[20px] font-semibold text-carvao mb-2 leading-snug">
+              Como foi a experiência com a Kiri?
+            </h1>
+            <p className="text-[14px] text-muted mb-7">Leva menos de 1 minuto — sua resposta nos ajuda muito.</p>
+
+            <div className="mb-6">
+              <label className="block text-[14px] font-semibold text-carvao mb-3">
+                Avalie a Kiri como plataforma
+              </label>
+              <Estrelas value={npsPlataforma} onChange={setNpsPlataforma} />
+              <div className="flex justify-between mt-1 text-[11px] text-muted">
+                <span>Ruim</span><span>Excelente</span>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-[14px] font-semibold text-carvao mb-2">
+                Comentário <span className="font-normal text-muted">(opcional)</span>
+              </label>
+              <textarea
+                value={comentario}
+                onChange={e => setComentario(e.target.value)}
+                rows={3}
+                placeholder="Conte mais sobre sua experiência…"
+                className="w-full border border-linha rounded-[10px] px-4 py-3 text-[14px] text-carvao placeholder:text-muted outline-none focus:border-ardosia resize-none"
+              />
+            </div>
+
+            <button
+              type="button"
+              disabled={enviando || npsPlataforma === 0}
+              onClick={() => enviar({ nps_plataforma: npsPlataforma, comentario: comentario || null }, "obrigada")}
+              className="w-full py-4 rounded-[12px] bg-ferrugem text-white font-semibold text-[15px] cursor-pointer disabled:opacity-40"
+            >
+              {enviando ? "Enviando…" : "Enviar avaliação"}
+            </button>
+            {npsPlataforma === 0 && (
+              <p className="text-[12px] text-muted text-center mt-2">Selecione uma nota para enviar</p>
             )}
           </div>
         )}
