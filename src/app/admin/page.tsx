@@ -680,22 +680,38 @@ function FollowupBadge({ followup, encaminhamento, onCriado, onEncerrado }: {
     );
   }
 
-  // Aguardando resposta — já criado, mostra botão de abrir WA novamente
+  // Aguardando resposta — já criado, mostra botão de abrir WA + botão de abrir modal novamente
   return (
-    <div className="flex items-center gap-2 flex-wrap mt-1">
-      <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#E8C88A] text-[#8B6A1E] bg-[#FFF8E8]">
-        {isWa && !followup.email_enviado_em ? "Aguardando — WA não enviado ainda" : "Aguardando resposta"}
-      </span>
-      {isWa && (
-        <a
-          href={buildWaFollowup(followup)}
-          target="_blank" rel="noopener noreferrer"
-          className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full no-underline hover:bg-[#E0F0E5] transition-colors"
+    <>
+      <div className="flex items-center gap-2 flex-wrap mt-1">
+        <span className="text-[11px] px-2 py-0.5 rounded-full border border-[#E8C88A] text-[#8B6A1E] bg-[#FFF8E8]">
+          {isWa && !followup.email_enviado_em ? "Aguardando — WA não enviado ainda" : "Aguardando resposta"}
+        </span>
+        {isWa && (
+          <a
+            href={buildWaFollowup(followup)}
+            target="_blank" rel="noopener noreferrer"
+            className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full no-underline hover:bg-[#E0F0E5] transition-colors"
+          >
+            {followup.email_enviado_em ? "Reenviar WA" : "Abrir WA"}
+          </a>
+        )}
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="text-[11px] font-semibold text-[#2E7D4F] border border-[#B8D8C0] bg-[#F0F8F2] px-2 py-0.5 rounded-full cursor-pointer hover:bg-[#E0F0E5] transition-colors"
         >
-          {followup.email_enviado_em ? "Reenviar WA" : "Abrir WA"}
-        </a>
+          Enviar follow-up →
+        </button>
+      </div>
+      {showModal && (
+        <FollowupModal
+          encaminhamento={encaminhamento}
+          onFechar={() => setShowModal(false)}
+          onEnviado={(fup) => { onCriado(fup); if (fup.concluido_em) onEncerrado?.(); }}
+        />
       )}
-    </div>
+    </>
   );
 }
 
