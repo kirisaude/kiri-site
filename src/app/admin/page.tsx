@@ -164,17 +164,18 @@ function buildWaUrl(numero: string, texto: string): string {
   return `https://wa.me/${n}?text=${encodeURIComponent(texto)}`;
 }
 
-function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
+function FollowupModal({ encaminhamento, onFechar, onEnviado, followupExistente }: {
   encaminhamento: Encaminhamento;
   onFechar: () => void;
   onEnviado: (fup: Followup) => void;
+  followupExistente?: Followup;
 }) {
   const [criando, setCriando] = useState(false);
-  const [fup, setFup] = useState<Followup | null>(null);
+  const [fup, setFup] = useState<Followup | null>(followupExistente ?? null);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [marcadas, setMarcadas] = useState<Set<string>>(new Set());
   const [datasEnvio, setDatasEnvio] = useState<Record<string, string>>({});
-  const [desfecho, setDesfecho] = useState("");
+  const [desfecho, setDesfecho] = useState(followupExistente?.desfecho ?? "");
   const [salvando, setSalvando] = useState(false);
   const [encerrando, setEncerrando] = useState(false);
   const [copiouPlataforma, setCopiouPlataforma] = useState(false);
@@ -269,16 +270,16 @@ function FollowupModal({ encaminhamento, onFechar, onEnviado }: {
       fupAtual = await criarSemNotificar();
       if (!fupAtual) {
         setSalvando(false);
-        return; // mantém modal aberto para mostrar o erro
+        return;
       }
       setFup(fupAtual);
-      onEnviado(fupAtual);
     }
     await fetch("/api/admin/followup-desfecho", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ followup_id: fupAtual.id, desfecho: desfecho.trim() }),
     });
+    onEnviado({ ...fupAtual, desfecho: desfecho.trim() || null });
     setSalvando(false);
     onFechar();
   }
@@ -744,6 +745,7 @@ function FollowupBadge({ followup, encaminhamento, onCriado, onEncerrado }: {
       {showModal && (
         <FollowupModal
           encaminhamento={encaminhamento}
+          followupExistente={followup}
           onFechar={() => setShowModal(false)}
           onEnviado={(fup) => { onCriado(fup); if (fup.concluido_em) onEncerrado?.(); }}
         />
