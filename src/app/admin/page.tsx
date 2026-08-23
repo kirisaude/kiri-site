@@ -815,7 +815,7 @@ function CardEspecifico({ e, expandido, onToggle, onEncaminhar, onExcluir, follo
   function gerarMsgFamilia(): string {
     const primeiro = e.nome_responsavel.split(" ")[0];
     const cardUrl = prof ? `${window.location.origin}/card/${prof.card_token}` : "";
-    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nPreparamos o card com as informações e o contato para agendamento direto com ${prof?.nome ?? "o profissional"}. Segue o link:\n${cardUrl}\n\nQualquer dúvida é só falar — estamos à disposição!`;
+    return `Olá, ${primeiro}! Aqui é a equipe Kiri.\n\nPreparamos o card com as informações e o contato para agendamento direto com ${prof?.nome ?? "o profissional"}. Segue o link:\n${cardUrl}\n\nQualquer dúvida é só falar, estamos à disposição!`;
   }
 
   return (
