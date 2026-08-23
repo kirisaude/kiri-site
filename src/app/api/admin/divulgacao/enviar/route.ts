@@ -8,16 +8,17 @@ function isAdminAuthed(request: Request) {
   return cookie.includes("kiri_admin=ok");
 }
 
-const ANEXOS_POR_LISTA: Record<string, Array<{ filename: string; path: string }>> = {
-  pediatras: [
-    { filename: "Kiri Saúde — para profissionais.pdf", path: "public/kiri-profissionais.pdf" },
-    { filename: "Kiri Saúde — para famílias.pdf", path: "public/kiri-familias.pdf" },
-  ],
-  profissionais: [
-    { filename: "Kiri Saúde — para profissionais.pdf", path: "public/kiri-profissionais.pdf" },
-    { filename: "Termo de adesão — Kiri Saúde.pdf", path: "public/termo-de-adesao-kiri.pdf" },
-  ],
-};
+type Anexo = { filename: string; path: string };
+
+function getAnexosPorLista(lista: string): Anexo[] {
+  try {
+    const raw = readFileSync(join(process.cwd(), "src/data/divulgacao.json"), "utf-8");
+    const data = JSON.parse(raw) as { _anexos?: Record<string, Anexo[]> };
+    return data._anexos?.[lista] ?? [];
+  } catch {
+    return [];
+  }
+}
 
 export async function POST(request: Request) {
   if (!isAdminAuthed(request)) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
   }
 
   const corpoPersonalizado = corpo.replace(/\{nome\}/g, nome);
-  const configAnexos = ANEXOS_POR_LISTA[lista ?? "pediatras"] ?? ANEXOS_POR_LISTA.pediatras;
+  const configAnexos = getAnexosPorLista(lista ?? "pediatras");
 
   const attachments = configAnexos
     .filter((a) => existsSync(join(process.cwd(), a.path)))

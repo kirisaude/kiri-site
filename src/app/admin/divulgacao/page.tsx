@@ -90,16 +90,11 @@ Posso te contar mais?
 
 Iohana Marques — kirisaude.com.br`;
 
-const ANEXOS_INFO: Record<"pediatras" | "profissionais", Array<{ nome: string; url: string }>> = {
-  pediatras: [
-    { nome: "Kiri Saúde — para profissionais.pdf", url: "/kiri-profissionais.pdf" },
-    { nome: "Kiri Saúde — para famílias.pdf", url: "/kiri-familias.pdf" },
-  ],
-  profissionais: [
-    { nome: "Kiri Saúde — para profissionais.pdf", url: "/kiri-profissionais.pdf" },
-    { nome: "Termo de adesão — Kiri Saúde.pdf", url: "/termo-de-adesao-kiri.pdf" },
-  ],
-};
+type Anexo = { filename: string; path: string };
+
+function pathToUrl(path: string) {
+  return "/" + path.replace(/^public\//, "");
+}
 
 const STATUS_LI_LABEL: Record<ContatoLI["status"], string> = {
   pendente: "Pendente",
@@ -414,10 +409,55 @@ export default function DivulgacaoPage() {
   const [enviandoTodos, setEnviandoTodos] = useState(false);
   const [loteProgresso, setLoteProgresso] = useState<{ ok: number; erro: number; total: number } | null>(null);
 
+  const [anexos, setAnexos] = useState<Anexo[]>([]);
+  const [carregandoAnexos, setCarregandoAnexos] = useState(false);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
+  const [erroAnexo, setErroAnexo] = useState("");
+
   useEffect(() => {
     setEnvioStatus({}); setEnvioErros({}); setLoteProgresso(null);
     setErroAdd(""); setNovoNome(""); setNovoEmail(""); setNovaCidade("");
   }, [lista]);
+
+  useEffect(() => {
+    if (lista === "linkedin") return;
+    setCarregandoAnexos(true);
+    setErroAnexo("");
+    fetch(`/api/admin/divulgacao/anexos?lista=${lista}`, { credentials: "include" })
+      .then((r) => r.json())
+      .then((d) => { setAnexos(Array.isArray(d) ? d : []); setCarregandoAnexos(false); })
+      .catch(() => { setErroAnexo("Erro ao carregar anexos"); setCarregandoAnexos(false); });
+  }, [lista]);
+
+  async function removerAnexo(filename: string) {
+    if (!confirm(`Remover "${filename}" da lista de anexos?`)) return;
+    setErroAnexo("");
+    const res = await fetch(`/api/admin/divulgacao/anexos?lista=${lista}`, {
+      method: "DELETE", headers: { "Content-Type": "application/json" },
+      credentials: "include", body: JSON.stringify({ filename }),
+    });
+    if (res.ok) setAnexos((prev) => prev.filter((a) => a.filename !== filename));
+    else setErroAnexo("Erro ao remover anexo");
+  }
+
+  async function uploadAnexo(file: File) {
+    setUploadingPdf(true);
+    setErroAnexo("");
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const base64 = (reader.result as string).split(",")[1];
+      const res = await fetch(`/api/admin/divulgacao/anexos?lista=${lista}`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        credentials: "include", body: JSON.stringify({ filename: file.name, content_base64: base64 }),
+      });
+      const d = await res.json();
+      if (res.ok) setAnexos((prev) => [...prev.filter((a) => a.filename !== d.filename), d]);
+      else setErroAnexo(d.error ?? "Erro ao fazer upload");
+      setUploadingPdf(false);
+    };
+    reader.onerror = () => { setErroAnexo("Erro ao ler o arquivo"); setUploadingPdf(false); };
+    reader.readAsDataURL(file);
+  }
 
   async function adicionar(e: React.FormEvent) {
     e.preventDefault();
@@ -489,7 +529,6 @@ export default function DivulgacaoPage() {
   const pendentes = contatos.filter((c) => !c.enviado_em);
   const enviados = contatos.filter((c) => c.enviado_em);
   const l = lista as "pediatras" | "profissionais";
-  const anexos = lista !== "linkedin" ? ANEXOS_INFO[l] : [];
 
   return (
     <div className="min-h-screen bg-creme">
@@ -546,26 +585,43 @@ export default function DivulgacaoPage() {
                 {/* Arquivos em anexo */}
                 <div className="bg-white border border-linha rounded-[14px] p-4 flex flex-col gap-2.5">
                   <p className="text-[12.5px] font-semibold text-carvao">Arquivos enviados como anexo</p>
-                  <div className="flex flex-col gap-1.5">
-                    {anexos.map((a) => (
-                      <div key={a.url} className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <span className="text-[15px]">📎</span>
-                          <span className="text-[12.5px] text-carvao truncate">{a.nome}</span>
-                        </div>
-                        <div className="flex gap-2 flex-none">
-                          <a href={a.url} target="_blank" rel="noopener noreferrer"
-                            className="text-[11.5px] text-ardosia border border-ardosia/30 rounded-[6px] px-2.5 py-0.5 hover:bg-[#EEF2F4] transition-colors no-underline">
-                            Ver ↗
-                          </a>
-                          <a href={a.url} download
-                            className="text-[11.5px] text-ardosia border border-ardosia/30 rounded-[6px] px-2.5 py-0.5 hover:bg-[#EEF2F4] transition-colors no-underline">
-                            ↓ Baixar
-                          </a>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  {erroAnexo && <p className="text-[12px] text-ferrugem">{erroAnexo}</p>}
+                  {carregandoAnexos ? (
+                    <p className="text-[12px] text-muted">Carregando…</p>
+                  ) : (
+                    <div className="flex flex-col gap-1.5">
+                      {anexos.map((a) => {
+                        const url = pathToUrl(a.path);
+                        return (
+                          <div key={a.filename} className="flex items-center justify-between gap-3">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="text-[15px]">📎</span>
+                              <span className="text-[12.5px] text-carvao truncate">{a.filename}</span>
+                            </div>
+                            <div className="flex gap-2 flex-none">
+                              <a href={url} target="_blank" rel="noopener noreferrer"
+                                className="text-[11.5px] text-ardosia border border-ardosia/30 rounded-[6px] px-2.5 py-0.5 hover:bg-[#EEF2F4] transition-colors no-underline">
+                                Ver ↗
+                              </a>
+                              <a href={url} download
+                                className="text-[11.5px] text-ardosia border border-ardosia/30 rounded-[6px] px-2.5 py-0.5 hover:bg-[#EEF2F4] transition-colors no-underline">
+                                ↓ Baixar
+                              </a>
+                              <button onClick={() => removerAnexo(a.filename)}
+                                className="text-[11px] text-muted hover:text-ferrugem transition-colors cursor-pointer">✕</button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      {anexos.length === 0 && <p className="text-[12px] text-muted">Nenhum anexo configurado.</p>}
+                    </div>
+                  )}
+                  <label className={`flex items-center gap-2 cursor-pointer w-fit ${uploadingPdf ? "opacity-50 pointer-events-none" : ""}`}>
+                    <input type="file" accept=".pdf" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadAnexo(f); e.target.value = ""; }} />
+                    <span className="text-[11.5px] text-ardosia border border-ardosia/30 rounded-[6px] px-3 py-1 hover:bg-[#EEF2F4] transition-colors">
+                      {uploadingPdf ? "Enviando…" : "+ Adicionar PDF"}
+                    </span>
+                  </label>
                 </div>
 
                 {/* Adicionar */}

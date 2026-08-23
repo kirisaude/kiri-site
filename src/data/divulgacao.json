@@ -1923,5 +1923,27 @@
       "criado_em": "2026-08-22T23:38:12.086Z"
     }
   ],
-  "linkedin": []
+  "linkedin": [],
+  "_anexos": {
+    "pediatras": [
+      {
+        "filename": "Kiri Saúde — para profissionais.pdf",
+        "path": "public/kiri-profissionais.pdf"
+      },
+      {
+        "filename": "Kiri Saúde — para famílias.pdf",
+        "path": "public/kiri-familias.pdf"
+      }
+    ],
+    "profissionais": [
+      {
+        "filename": "Kiri Saúde — para profissionais.pdf",
+        "path": "public/kiri-profissionais.pdf"
+      },
+      {
+        "filename": "Termo de adesão — Kiri Saúde.pdf",
+        "path": "public/termo-de-adesao-kiri.pdf"
+      }
+    ]
+  }
 }
