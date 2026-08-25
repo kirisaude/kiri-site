@@ -3326,6 +3326,89 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "5d285187044d4570"
+    },
+    {
+      "id": "kiri-081",
+      "inscricao_id": "15a92002-f6a1-4926-ba65-a4a0e96a7a45",
+      "nome": "Maria Claudia Arvigo",
+      "profissao": "Fonoaudiólogo",
+      "titulo_exibicao": "Fonoaudiólogo",
+      "registro_conselho": "CRfa 2.14545",
+      "rqe": null,
+      "areas_atuacao": [
+        "TEA",
+        "Atraso de desenvolvimento",
+        "Comunicação aumentativa",
+        "Dificuldades de aprendizagem",
+        "TDAH",
+        "Transtornos Motores de Fala",
+        "Transtorno do Desenvolvimento da Linguagem",
+        "Síndromes"
+      ],
+      "modalidade": "Presencial",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou Maria Claudia Arvigo, fonoaudióloga com atuação voltada ao desenvolvimento da linguagem e da comunicação de crianças e adolescentes, especialmente nos transtornos do neurodesenvolvimento. Minha formação integra Fonoaudiologia, Linguística e Neuropsicologia, e isso me permite olhar para cada criança de forma ampla, considerando não apenas a fala, mas também a compreensão, a comunicação, a aprendizagem e a participação nos diferentes ambientes em que ela vive.\nAs famílias podem esperar um atendimento cuidadoso, individualizado e baseado em evidências, com escuta atenta às suas preocupações e às necessidades da criança. Meu objetivo é compreender o perfil de desenvolvimento, identificar potencialidades e dificuldades e, a partir disso, construir caminhos terapêuticos possíveis e funcionais. Valorizo muito a parceria com a família, com a escola e com os demais profissionais envolvidos, porque acredito que o desenvolvimento acontece de forma mais consistente quando todos conseguem caminhar na mesma direção.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Fonoaudiologia — Unifesp — 2004"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuropsicologia — Unicamp — 2008"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Linguística — Unicamp — 2011"
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Linguística — Unicamp — 2015"
+        },
+        {
+          "curso": "Pós-doutorado",
+          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2023"
+        },
+        {
+          "curso": "Pós-doutorado",
+          "instituicao_ano": "Fonoaudiologia — USP/Bauru — 2025"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 91037-9136",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Minha experiência com crianças de 0 a 3 anos é marcada pela atuação clínica no acompanhamento do desenvolvimento da comunicação e da linguagem, especialmente em bebês e crianças pequenas com atraso no desenvolvimento e condições do neurodesenvolvimento. Ao longo da minha trajetória, desenvolvi trabalho voltado à identificação precoce de sinais de risco, avaliação do desenvolvimento comunicativo-linguístico, orientação parental e intervenção precoce, sempre considerando a criança em seu contexto familiar e cotidiano. Essa atuação inclui também o trabalho em equipe multiprofissional, a discussão diagnóstica e a construção de estratégias que favoreçam a comunicação, a interação social e a participação da criança em diferentes ambientes de desenvolvimento.",
+          "tempo": "+20 anos",
+          "faixa_etaria": "0 a 3 anos"
+        },
+        {
+          "descricao": "Minha experiência com crianças de 4 a 7 anos concentra-se na avaliação e intervenção em linguagem, comunicação e habilidades relacionadas à aprendizagem, especialmente em crianças com transtornos do neurodesenvolvimento. Nessa faixa etária, meu trabalho envolve a análise de aspectos fonológicos, semânticos, morfossintáticos e pragmáticos, além de habilidades discursivas, consciência fonológica e competências iniciais de leitura e escrita. A atuação também contempla diagnóstico diferencial, orientação à família e à escola e trabalho articulado com equipes multiprofissionais, buscando favorecer não apenas o desenvolvimento linguístico, mas também a participação social, a adaptação às demandas escolares e a progressiva autonomia comunicativa da criança.",
+          "tempo": "+20 anos",
+          "faixa_etaria": "4 aos 7 anos"
+        },
+        {
+          "descricao": "Minha experiência com crianças a partir dos 8 anos e pré-adolescentes concentra-se na avaliação e intervenção em linguagem oral e escrita, com atenção especial às demandas linguísticas mais complexas que acompanham o avanço da escolarização. O trabalho envolve habilidades discursivas, compreensão e produção de narrativas, inferências, linguagem figurada, pragmática, consciência sintática, leitura e compreensão textual, além da investigação de dificuldades relacionadas aos transtornos do neurodesenvolvimento e da aprendizagem. A atuação inclui diagnóstico diferencial, orientação à família e à escola e articulação com equipes multiprofissionais, buscando favorecer não apenas o desempenho acadêmico, mas também a autonomia comunicativa, a participação social e o uso funcional da linguagem em diferentes contextos.",
+          "tempo": "+20 anos",
+          "faixa_etaria": "8 a 13 anos"
+        },
+        {
+          "descricao": "Minha experiência com adolescentes e adultos concentra-se na avaliação e intervenção em linguagem de maior complexidade, especialmente em pessoas com transtornos do neurodesenvolvimento, dificuldades de aprendizagem e alterações persistentes de comunicação. O trabalho envolve habilidades pragmáticas avançadas, compreensão de inferências e linguagem figurada, organização discursiva, leitura, compreensão textual e comunicação em contextos acadêmicos, sociais e profissionais. A atuação também contempla diagnóstico diferencial, orientação ao próprio paciente e à família e articulação com outros profissionais, com o objetivo de ampliar a autonomia comunicativa, a participação social e o uso funcional da linguagem nas diferentes demandas da vida cotidiana.",
+          "tempo": "+ 20 anos",
+          "faixa_etaria": "14 anos - adultos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "verificacao_data": "agosto de 2026",
+      "card_token": "dffed4a9dfec4c24"
     }
   ]
 }
