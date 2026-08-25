@@ -2391,8 +2391,8 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
-        "Dificuldades de aprendizagem",
+        "Atraso de Desenvolvimento",
+        "Dificuldades de Aprendizagem",
         "Ansiedade",
         "Depressão",
         "TOC"
@@ -2404,23 +2404,29 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Faculdade de Medicina de Catanduva — 2014"
+          "instituicao_ano": "Medicina — Faculdade de Medicina de Catanduva — 2014",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — Instituto Bairral de Psiquiatria — 2018"
+          "instituicao_ano": "Psiquiatria — Instituto Bairral de Psiquiatria — 2018",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESP — 2019"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESP — 2019",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psicopatologia Fenomenológica — Santa Casa de São Paulo — 2020"
+          "instituicao_ano": "Psicopatologia Fenomenológica — Santa Casa de São Paulo — 2020",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neurodesenvolvimento — Unilavras — Em curso"
+          "instituicao_ano": "Neurodesenvolvimento — Unilavras — Em curso",
+          "verificado": false,
+          "pendente": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2431,8 +2437,8 @@
       "whatsapp_agendamento": "(19) 99602-6050",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-062.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "d85a456606e54cd0",
       "experiencias_infantil": [
@@ -2441,7 +2447,19 @@
           "tempo": "07 anos",
           "faixa_etaria": "01-18"
         }
-      ]
+      ],
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "pasta_drive": null,
+      "certidao_enviada_em": "2026-08-25T20:18:37.734Z"
     },
     {
       "id": "kiri-064",
