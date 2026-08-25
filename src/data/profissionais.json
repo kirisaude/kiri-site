@@ -2283,7 +2283,7 @@
       "whatsapp_agendamento": "(27) 99775-6600",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-060.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "77a94153680e4089",
