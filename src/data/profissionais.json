@@ -3352,9 +3352,9 @@
       "rqe": null,
       "areas_atuacao": [
         "TEA",
-        "Atraso de desenvolvimento",
-        "Comunicação aumentativa",
-        "Dificuldades de aprendizagem",
+        "Atraso de Desenvolvimento",
+        "Comunicação Aumentativa",
+        "Dificuldades de Aprendizagem",
         "TDAH",
         "Transtornos Motores de Fala",
         "Transtorno do Desenvolvimento da Linguagem",
@@ -3367,27 +3367,33 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Fonoaudiologia — Unifesp — 2004"
+          "instituicao_ano": "Fonoaudiologia — Unifesp — 2004",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuropsicologia — Unicamp — 2008"
+          "instituicao_ano": "Neuropsicologia — Unicamp — 2008",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Linguística — Unicamp — 2011"
+          "instituicao_ano": "Linguística — Unicamp — 2011",
+          "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Linguística — Unicamp — 2015"
+          "instituicao_ano": "Linguística — Unicamp — 2015",
+          "verificado": true
         },
         {
           "curso": "Pós-doutorado",
-          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2023"
+          "instituicao_ano": "Distúrbios do Desenvolvimento — Mackenzie — 2023",
+          "verificado": true
         },
         {
           "curso": "Pós-doutorado",
-          "instituicao_ano": "Fonoaudiologia — USP/Bauru — 2025"
+          "instituicao_ano": "Fonoaudiologia — USP/Bauru — 2025",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3420,10 +3426,22 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-081.jpg",
       "verificacao_data": "agosto de 2026",
-      "card_token": "dffed4a9dfec4c24"
+      "card_token": "dffed4a9dfec4c24",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "pasta_drive": null,
+      "certidao_enviada_em": null
     }
   ]
 }
