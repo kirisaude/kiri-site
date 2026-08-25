@@ -3285,9 +3285,9 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
+        "Atraso de Desenvolvimento",
         "Ansiedade",
-        "Dificuldades de aprendizagem"
+        "Dificuldades de Aprendizagem"
       ],
       "modalidade": "Presencial e online",
       "cidade": "Feira de Santana",
@@ -3296,15 +3296,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Unex — 2016"
+          "instituicao_ano": "Psicologia — Unex — 2016",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuropsicologia — IPOG — 2021"
+          "instituicao_ano": "Neuropsicologia — IPOG — 2021",
+          "verificado": false
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "ABA — IPOG — 2026"
+          "instituicao_ano": "ABA — IPOG — 2026",
+          "verificado": false
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3325,7 +3328,19 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "5d285187044d4570"
+      "card_token": "5d285187044d4570",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": "lilian.mota@ymail.com",
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": false,
+      "pasta_drive": null,
+      "certidao_enviada_em": null
     },
     {
       "id": "kiri-081",
