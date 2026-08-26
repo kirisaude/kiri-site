@@ -7,7 +7,7 @@ import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
 
 const profissionais = (data.profissionais as Profissional[])
-  .filter((p) => p.pasta_drive)
+  .filter((p) => p.verificado)
   .sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
 
 function extractFolderId(url: string): string | null {
