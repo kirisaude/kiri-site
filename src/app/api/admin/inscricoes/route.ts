@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const filterId = searchParams.get("id");
   const url = filterId
-    ? `${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${filterId}&select=id,nome,email,profissao,autentique_document_id,autentique_enviado_em`
+    ? `${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${filterId}&select=id,nome,email,profissao,autentique_document_id,autentique_enviado_em,pasta_drive`
     : `${supabaseUrl}/rest/v1/inscricoes_profissionais?order=criado_em.desc&limit=100`;
 
   const res = await fetch(url, {

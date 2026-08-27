@@ -28,6 +28,7 @@ interface Inscricao {
   whatsapp_agendamento: string | null;
   grupo_whatsapp?: boolean | null;
   experiencia_infantil?: string | null;
+  pasta_drive?: string | null;
 }
 
 export default function RevisarPage() {
@@ -163,6 +164,7 @@ export default function RevisarPage() {
       verificado: true,
       oculto: true,
       foto_url: null,
+      pasta_drive: inscricao?.pasta_drive ?? null,
       verificacao_data: new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" }).toLowerCase(),
     };
 

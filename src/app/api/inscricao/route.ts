@@ -3,6 +3,53 @@ import { Resend } from "resend";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { titleCasePT } from "@/lib/titleCase";
 
+async function getGoogleAccessToken() {
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: process.env.GOOGLE_CLIENT_ID!,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN!,
+      grant_type: "refresh_token",
+    }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error_description ?? "Erro ao obter token Google");
+  return data.access_token as string;
+}
+
+async function criarPastaDrive(nome: string): Promise<string | null> {
+  const parentId = process.env.DRIVE_INSCRICOES_FOLDER_ID;
+  if (!parentId || !process.env.GOOGLE_REFRESH_TOKEN) return null;
+  try {
+    const token = await getGoogleAccessToken();
+    const createRes = await fetch(
+      "https://www.googleapis.com/drive/v3/files?fields=id,webViewLink",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: nome,
+          mimeType: "application/vnd.google-apps.folder",
+          parents: [parentId],
+        }),
+      }
+    );
+    if (!createRes.ok) return null;
+    const folder = await createRes.json() as { id: string; webViewLink: string };
+    // Qualquer pessoa com o link pode fazer upload
+    await fetch(`https://www.googleapis.com/drive/v3/files/${folder.id}/permissions`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "anyone", role: "writer" }),
+    });
+    return folder.webViewLink;
+  } catch {
+    return null;
+  }
+}
+
 async function gerarTermoPDF(nome: string, profissao: string): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const fontReg = await doc.embedFont(StandardFonts.Helvetica);
@@ -215,6 +262,21 @@ export async function POST(request: Request) {
   const [inscricao] = await res.json() as Array<{ id: string }>;
   const inscricaoId = inscricao?.id;
 
+  // Drive — cria pasta individual do profissional
+  const pastaDrive = await criarPastaDrive(nomeNormalizado);
+  if (pastaDrive && inscricaoId) {
+    fetch(`${supabaseUrl}/rest/v1/inscricoes_profissionais?id=eq.${inscricaoId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({ pasta_drive: pastaDrive }),
+    }).catch(() => {});
+  }
+
   // Google Sheets
   const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (sheetsUrl) {
@@ -252,11 +314,13 @@ export async function POST(request: Request) {
       .catch((err) => console.error("Erro Autentique:", err));
   }
 
-  // E-mail automático com link de documentação
+  // E-mail automático com link da pasta de documentação
   const resendKey = process.env.RESEND_API_KEY;
   if (resendKey && email) {
     const resend = new Resend(resendKey);
     const primeiroNome = nome.split(" ")[0];
+    const linkDocs = pastaDrive ?? "https://forms.gle/p4dptue63CP5Gt5Y8";
+    const labelBtn = pastaDrive ? "Acessar minha pasta de documentos →" : "Enviar documentação →";
     resend.emails.send({
       from: "Kiri <contato@kirisaude.com.br>",
       to: email,
@@ -268,12 +332,12 @@ export async function POST(request: Request) {
           </div>
           <h1 style="font-size: 22px; font-weight: 600; margin: 0 0 12px 0; color: #2C2722;">Olá, ${primeiroNome}!</h1>
           <p style="font-size: 15px; line-height: 1.65; margin: 0 0 16px 0; color: #4A4038;">
-            Recebemos sua inscrição na rede Kiri. Para concluir o processo, precisamos que você envie sua documentação pelo link abaixo.
+            Recebemos sua inscrição na rede Kiri. Para concluir o processo, precisamos que você envie sua documentação${pastaDrive ? " diretamente na sua pasta pessoal no Google Drive" : " pelo link abaixo"}.
           </p>
           <div style="margin: 24px 0;">
-            <a href="https://forms.gle/p4dptue63CP5Gt5Y8"
+            <a href="${linkDocs}"
                style="display: inline-block; background: #44606C; color: #ffffff; text-decoration: none; font-family: Arial, sans-serif; font-size: 15px; font-weight: 600; padding: 14px 28px; border-radius: 10px;">
-              Enviar documentação →
+              ${labelBtn}
             </a>
           </div>
           <p style="font-size: 13px; line-height: 1.6; color: #6E6055; margin: 0 0 8px 0;"><strong>O que enviar:</strong></p>
@@ -291,5 +355,5 @@ export async function POST(request: Request) {
     }).catch(() => {});
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, pasta_drive: pastaDrive ?? null });
 }

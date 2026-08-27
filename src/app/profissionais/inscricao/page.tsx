@@ -74,6 +74,7 @@ export default function InscricaoProfissionalPage() {
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
   const [enviado, setEnviado] = useState(false);
+  const [driveLink, setDriveLink] = useState<string | null>(null);
 
   const [areaCustom, setAreaCustom] = useState("");
 
@@ -197,6 +198,8 @@ export default function InscricaoProfissionalPage() {
       });
 
       if (res.ok) {
+        const data = await res.json().catch(() => ({})) as { pasta_drive?: string | null };
+        setDriveLink(data.pasta_drive ?? null);
         setEnviado(true);
       } else {
         let mensagem = "Ocorreu um erro. Tente novamente.";
@@ -281,16 +284,18 @@ export default function InscricaoProfissionalPage() {
 
           {/* CTA principal */}
           <a
-            href="https://forms.gle/p4dptue63CP5Gt5Y8"
+            href={driveLink ?? "https://forms.gle/p4dptue63CP5Gt5Y8"}
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full text-center font-semibold text-[16px] text-white bg-ferrugem rounded-[13px] py-[15px] no-underline shadow-[0_8px_20px_-10px_rgba(190,110,78,0.45)]"
           >
-            Enviar documentação →
+            {driveLink ? "Acessar minha pasta de documentos →" : "Enviar documentação →"}
           </a>
 
           <p className="text-[12.5px] text-muted text-center leading-[1.6]">
-            O link também será enviado para o e-mail cadastrado caso precise acessar depois.
+            {driveLink
+              ? "Uma pasta pessoal no Google Drive foi criada para você. O link também foi enviado para o seu e-mail."
+              : "O link também será enviado para o e-mail cadastrado caso precise acessar depois."}
           </p>
 
           <button
