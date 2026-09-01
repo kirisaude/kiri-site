@@ -5,9 +5,11 @@ import { KiriLogoCompact } from "@/components/KiriLogoCompact";
 import Link from "next/link";
 import data from "@/data/profissionais.json";
 import type { Profissional } from "@/types";
+import { titleCasePT } from "@/lib/titleCase";
 
 const profissionais = (data.profissionais as Profissional[])
   .filter((p) => p.verificado)
+  .map((p) => ({ ...p, nome: titleCasePT(p.nome.toLowerCase()) }))
   .sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
 
 function extractFolderId(url: string): string | null {
