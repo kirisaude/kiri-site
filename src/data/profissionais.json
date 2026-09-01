@@ -2301,7 +2301,7 @@
       "email": "renzorr@gmail.com",
       "foto_posicao": "center center",
       "registro_verificado": true,
-      "sobre_verificado": false,
+      "sobre_verificado": true,
       "pasta_drive": "https://drive.google.com/drive/folders/1FAep6ZjK9v2ZYI7Wd4uE4rSmmdbYsflW",
       "certidao_enviada_em": "2026-08-21T17:33:55.942Z"
     },
