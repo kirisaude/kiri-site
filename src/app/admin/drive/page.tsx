@@ -109,6 +109,12 @@ export default function DriveUploadPage() {
           ← Admin
         </Link>
         <span className="text-[13px] font-semibold text-carvao ml-1">/ Enviar documentos ao Drive</span>
+        <a
+          href="/api/admin/drive-auth"
+          className="ml-auto text-[11.5px] text-muted hover:text-carvao no-underline transition-colors"
+        >
+          Re-autorizar Drive ↗
+        </a>
       </header>
 
       <div className="max-w-xl mx-auto px-4 py-8 flex flex-col gap-6">
