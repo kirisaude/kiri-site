@@ -23,10 +23,38 @@ export default function DriveUploadPage() {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [dragging, setDragging] = useState(false);
   const [enviando, setEnviando] = useState(false);
+  const [criandoPasta, setCriandoPasta] = useState(false);
+  const [pastaLocal, setPastaLocal] = useState<string | null>(null);
+  const [erroPasta, setErroPasta] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const prof = profissionais.find((p) => p.id === profId);
-  const folderId = prof?.pasta_drive ? extractFolderId(prof.pasta_drive) : null;
+  const pastaDrive = pastaLocal ?? prof?.pasta_drive ?? null;
+  const folderId = pastaDrive ? extractFolderId(pastaDrive) : null;
+
+  async function criarPasta() {
+    if (!prof) return;
+    setCriandoPasta(true);
+    setErroPasta("");
+    try {
+      const res = await fetch("/api/admin/criar-pasta-drive", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prof_id: prof.id, nome: prof.nome }),
+      });
+      const d = await res.json().catch(() => ({ error: `Erro HTTP ${res.status}` }));
+      if (res.ok) {
+        setPastaLocal(d.pasta_drive);
+      } else {
+        setErroPasta(d.error ?? "Erro ao criar pasta");
+      }
+    } catch (e) {
+      setErroPasta(e instanceof Error ? e.message : "Erro de conexão");
+    } finally {
+      setCriandoPasta(false);
+    }
+  }
 
   function addFiles(newFiles: FileList | File[]) {
     const arr = Array.from(newFiles).map((f) => ({ file: f, status: "pending" as FileStatus }));
@@ -90,7 +118,7 @@ export default function DriveUploadPage() {
           <label className="text-[13px] font-semibold text-carvao">Profissional</label>
           <select
             value={profId}
-            onChange={(e) => setProfId(e.target.value)}
+            onChange={(e) => { setProfId(e.target.value); setPastaLocal(null); setErroPasta(""); }}
             className="border border-linha rounded-[10px] px-3.5 py-[10px] text-[14px] text-carvao bg-white outline-none focus:border-ardosia transition-colors"
           >
             <option value="">Selecione o profissional…</option>
@@ -98,8 +126,8 @@ export default function DriveUploadPage() {
               <option key={p.id} value={p.id}>{p.nome}</option>
             ))}
           </select>
-          {prof && (
-            <a href={prof.pasta_drive!} target="_blank" rel="noopener noreferrer"
+          {prof && pastaDrive && (
+            <a href={pastaDrive} target="_blank" rel="noopener noreferrer"
               className="text-[12px] text-ardosia hover:underline">
               Ver pasta no Drive ↗
             </a>
@@ -172,8 +200,19 @@ export default function DriveUploadPage() {
           </button>
         )}
 
-        {!folderId && profId && (
-          <p className="text-[12.5px] text-ferrugem">Este profissional não tem pasta do Drive vinculada.</p>
+        {!folderId && prof && (
+          <div className="flex flex-col gap-2">
+            <p className="text-[12.5px] text-ferrugem">Este profissional não tem pasta do Drive vinculada.</p>
+            <button
+              type="button"
+              onClick={criarPasta}
+              disabled={criandoPasta}
+              className="self-start text-[12.5px] font-semibold border border-ardosia/40 text-ardosia rounded-[9px] px-4 py-2 cursor-pointer hover:bg-ardosia/5 disabled:opacity-50 transition-colors"
+            >
+              {criandoPasta ? "Criando pasta…" : "＋ Criar pasta no Drive"}
+            </button>
+            {erroPasta && <p className="text-[12px] text-ferrugem">{erroPasta}</p>}
+          </div>
         )}
       </div>
     </div>
