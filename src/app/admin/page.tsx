@@ -1406,19 +1406,19 @@ export default function AdminPage() {
     setSyncDriveMsg("");
     try {
       const res = await fetch("/api/admin/sync-drive-folders", { method: "POST", credentials: "include" });
-      const d = await res.json();
+      const d = await res.json().catch(() => ({ error: `Erro HTTP ${res.status}` }));
       if (res.ok) {
         setSyncDriveStatus("ok");
         setSyncDriveMsg(d.vinculados > 0 ? `${d.vinculados} nova(s) pasta(s) vinculada(s)` : "Nenhuma pasta nova");
         setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 5000);
       } else {
         setSyncDriveStatus("erro");
-        setSyncDriveMsg(d.error ?? "Erro");
+        setSyncDriveMsg(d.error ?? `Erro ${res.status}`);
         setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 8000);
       }
-    } catch {
+    } catch (e) {
       setSyncDriveStatus("erro");
-      setSyncDriveMsg("Erro de conexão");
+      setSyncDriveMsg(e instanceof Error ? e.message : "Erro de conexão");
       setTimeout(() => { setSyncDriveStatus("idle"); setSyncDriveMsg(""); }, 8000);
     }
   }

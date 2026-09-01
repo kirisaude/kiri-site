@@ -54,21 +54,33 @@ export async function POST(request: Request) {
   if (!githubToken) return NextResponse.json({ error: "GITHUB_TOKEN não configurado" }, { status: 500 });
   if (!process.env.GOOGLE_REFRESH_TOKEN) return NextResponse.json({ error: "Drive não configurado" }, { status: 503 });
 
-  // Busca arquivo atual do GitHub
-  const fileRes = await fetch(
-    `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}?ref=${GITHUB_BRANCH}`,
-    { headers: { Authorization: `Bearer ${githubToken}`, Accept: "application/vnd.github+json" }, cache: "no-store" }
-  );
+  // Busca arquivo do GitHub e token Google em paralelo
+  let fileRes: Response, accessToken: string;
+  try {
+    [fileRes, accessToken] = await Promise.all([
+      fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}?ref=${GITHUB_BRANCH}`,
+        { headers: { Authorization: `Bearer ${githubToken}`, Accept: "application/vnd.github+json" }, cache: "no-store" }
+      ),
+      getAccessToken(),
+    ]);
+  } catch (e) {
+    return NextResponse.json({ error: `Falha ao conectar: ${e instanceof Error ? e.message : e}` }, { status: 502 });
+  }
   if (!fileRes.ok) return NextResponse.json({ error: "Erro ao buscar JSON do GitHub" }, { status: 502 });
   const fileData = await fileRes.json();
   const json = JSON.parse(Buffer.from(fileData.content, "base64").toString("utf-8"));
 
   // Lista subpastas do Drive
-  const accessToken = await getAccessToken();
-  const [pastas1, pastas2] = await Promise.all([
-    listarSubpastas(accessToken, PASTA_PRINCIPAL),
-    listarSubpastas(accessToken, PASTA_SECUNDARIA),
-  ]);
+  let pastas1: { id: string; name: string; webViewLink: string }[], pastas2: typeof pastas1;
+  try {
+    [pastas1, pastas2] = await Promise.all([
+      listarSubpastas(accessToken, PASTA_PRINCIPAL),
+      listarSubpastas(accessToken, PASTA_SECUNDARIA),
+    ]);
+  } catch (e) {
+    return NextResponse.json({ error: `Erro ao listar pastas do Drive: ${e instanceof Error ? e.message : e}` }, { status: 502 });
+  }
   const todasPastas = [...pastas1, ...pastas2];
 
   // Mapeia profissionais sem pasta_drive
