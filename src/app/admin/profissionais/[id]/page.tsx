@@ -97,10 +97,10 @@ export default function EditarProfissionalPage() {
   const [whatsapp, setWhatsapp] = useState(profOriginal?.whatsapp_agendamento ?? "");
   const [verificacaoData, setVerificacaoData] = useState(profOriginal?.verificacao_data ?? "");
   const toStatus = (v?: boolean, p?: boolean): VerificacaoStatus => v ? "verificado" : p ? "pendente" : null;
-  type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; status?: VerificacaoStatus; obs?: string };
-  const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; pendente?: boolean; obs?: string }): FormacaoEdit => {
+  type FormacaoEdit = { tipo: string; area: string; instituicao: string; ano: string; em_andamento?: boolean; status?: VerificacaoStatus; obs?: string };
+  const parseFormacaoEdit = (f: { curso: string; instituicao_ano: string; verificado?: boolean; pendente?: boolean; em_andamento?: boolean; obs?: string }): FormacaoEdit => {
     const partes = f.instituicao_ano.split(" — ");
-    return { tipo: f.curso, area: partes[0] ?? "", instituicao: partes[1] ?? "", ano: partes[2] ?? "", status: toStatus(f.verificado, f.pendente), obs: f.obs };
+    return { tipo: f.curso, area: partes[0] ?? "", instituicao: partes[1] ?? "", ano: partes[2] ?? "", em_andamento: f.em_andamento, status: toStatus(f.verificado, f.pendente), obs: f.obs };
   };
   const [formacao, setFormacao] = useState<FormacaoEdit[]>(
     profOriginal?.formacao.length
@@ -381,6 +381,7 @@ Certificados de especialização / residência / pós-graduação`;
           verificado: f.status === "verificado",
           pendente: f.status === "pendente" || undefined,
           oculto: (publicarSemPendentes && f.status === "pendente") || undefined,
+          em_andamento: f.em_andamento || undefined,
           obs: f.obs,
         })),
       valor_formato: valorFormato ?? "a_partir_de",
@@ -960,12 +961,23 @@ Certificados de especialização / residência / pós-graduação`;
                     ⚠ Sigla sem nome completo — especifique a instituição, ex: &quot;Faculdade X ({f.instituicao.trim().toUpperCase()})&quot;
                   </p>
                 )}
-                <VerificacaoRow
-                  status={f.status ?? null}
-                  onStatus={(v) => { const n = [...formacao]; n[i] = { ...n[i], status: v }; setFormacao(n); }}
-                  obs={f.obs ?? ""}
-                  onObs={(v) => { const n = [...formacao]; n[i] = { ...n[i], obs: v }; setFormacao(n); }}
-                />
+                <div className="flex items-center gap-4 mt-0.5">
+                  <VerificacaoRow
+                    status={f.status ?? null}
+                    onStatus={(v) => { const n = [...formacao]; n[i] = { ...n[i], status: v }; setFormacao(n); }}
+                    obs={f.obs ?? ""}
+                    onObs={(v) => { const n = [...formacao]; n[i] = { ...n[i], obs: v }; setFormacao(n); }}
+                  />
+                  <label className="flex items-center gap-1.5 cursor-pointer flex-none">
+                    <input
+                      type="checkbox"
+                      checked={!!f.em_andamento}
+                      onChange={(e) => { const n = [...formacao]; n[i] = { ...n[i], em_andamento: e.target.checked }; setFormacao(n); }}
+                      className="w-[14px] h-[14px] accent-ardosia cursor-pointer"
+                    />
+                    <span className="text-[11.5px] font-medium text-muted">Em andamento</span>
+                  </label>
+                </div>
               </div>
             ))}
             <button

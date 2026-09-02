@@ -58,8 +58,8 @@ export default function InscricaoProfissionalPage() {
   const [graduacaoCurso, setGraduacaoCurso] = useState("");
   const [graduacaoInstituicao, setGraduacaoInstituicao] = useState("");
   const [graduacaoAno, setGraduacaoAno] = useState("");
-  const [posGraduacoes, setPosGraduacoes] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "" }]);
-  const [mestrados, setMestrados] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "" }]);
+  const [posGraduacoes, setPosGraduacoes] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "", em_andamento: false }]);
+  const [mestrados, setMestrados] = useState([{ tipo: "", titulo: "", instituicao: "", ano: "", em_andamento: false }]);
   const [apresentacao, setApresentacao] = useState("");
   const [sitePerfil, setSitePerfil] = useState("");
   const [lattes, setLattes] = useState("");
@@ -180,8 +180,14 @@ export default function InscricaoProfissionalPage() {
           })(),
           graduacao: [graduacaoCurso.trim(), graduacaoInstituicao.trim(), graduacaoAno.trim()].filter(Boolean).join(" — ") || null,
           pos_graduacao: [
-            ...posGraduacoes.filter((p) => p.titulo.trim() || p.instituicao.trim()).map((p) => [p.tipo.trim(), p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ")),
-            ...mestrados.filter((m) => m.titulo.trim() || m.tipo.trim()).map((m) => [m.tipo.trim(), m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ")),
+            ...posGraduacoes.filter((p) => p.titulo.trim() || p.instituicao.trim()).map((p) => {
+              const linha = [p.tipo.trim(), p.titulo.trim(), p.instituicao.trim(), p.ano.trim()].filter(Boolean).join(" — ");
+              return p.em_andamento ? `${linha} — em andamento` : linha;
+            }),
+            ...mestrados.filter((m) => m.titulo.trim() || m.tipo.trim()).map((m) => {
+              const linha = [m.tipo.trim(), m.titulo.trim(), m.instituicao.trim(), m.ano.trim()].filter(Boolean).join(" — ");
+              return m.em_andamento ? `${linha} — em andamento` : linha;
+            }),
           ].filter(Boolean).join("\n") || null,
           apresentacao: apresentacao.trim() || null,
           site_perfil: sitePerfil.trim() || null,
@@ -584,9 +590,18 @@ export default function InscricaoProfissionalPage() {
                       onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], ano: e.target.value }; setPosGraduacoes(n); }}
                       placeholder="Ex: 2022" className={inputClass} />
                   </div>
+                  <div className="flex flex-col gap-1 justify-end">
+                    {i === 0 && <span className="text-[11.5px] font-medium text-muted invisible">x</span>}
+                    <label className="flex items-center gap-1.5 cursor-pointer h-[46px]">
+                      <input type="checkbox" checked={!!p.em_andamento}
+                        onChange={(e) => { const n = [...posGraduacoes]; n[i] = { ...n[i], em_andamento: e.target.checked }; setPosGraduacoes(n); }}
+                        className="w-[14px] h-[14px] accent-ardosia cursor-pointer flex-none" />
+                      <span className="text-[13px] text-carvao">Em andamento</span>
+                    </label>
+                  </div>
                 </div>
               ))}
-              <button type="button" onClick={() => setPosGraduacoes([...posGraduacoes, { tipo: "", titulo: "", instituicao: "", ano: "" }])}
+              <button type="button" onClick={() => setPosGraduacoes([...posGraduacoes, { tipo: "", titulo: "", instituicao: "", ano: "", em_andamento: false }])}
                 className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
                 + Adicionar outra
               </button>
@@ -627,9 +642,18 @@ export default function InscricaoProfissionalPage() {
                       onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], ano: e.target.value }; setMestrados(n); }}
                       placeholder="Ex: 2018" className={inputClass} />
                   </div>
+                  <div className="flex flex-col gap-1 justify-end">
+                    {i === 0 && <span className="text-[11.5px] font-medium text-muted invisible">x</span>}
+                    <label className="flex items-center gap-1.5 cursor-pointer h-[46px]">
+                      <input type="checkbox" checked={!!m.em_andamento}
+                        onChange={(e) => { const n = [...mestrados]; n[i] = { ...n[i], em_andamento: e.target.checked }; setMestrados(n); }}
+                        className="w-[14px] h-[14px] accent-ardosia cursor-pointer flex-none" />
+                      <span className="text-[13px] text-carvao">Em andamento</span>
+                    </label>
+                  </div>
                 </div>
               ))}
-              <button type="button" onClick={() => setMestrados([...mestrados, { tipo: "", titulo: "", instituicao: "", ano: "" }])}
+              <button type="button" onClick={() => setMestrados([...mestrados, { tipo: "", titulo: "", instituicao: "", ano: "", em_andamento: false }])}
                 className="text-[13px] text-ardosia font-semibold text-left cursor-pointer w-fit">
                 + Adicionar outro
               </button>

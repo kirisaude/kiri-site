@@ -10,6 +10,7 @@ export interface Formacao {
   verificado?: boolean;
   pendente?: boolean;
   oculto?: boolean;
+  em_andamento?: boolean;
   obs?: string;
 }
 

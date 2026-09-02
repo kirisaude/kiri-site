@@ -398,15 +398,13 @@ export default async function PerfilPage({ params }: PageProps) {
                     const m = f.instituicao_ano.match(/\b(\d{4})\b/g);
                     return m ? parseInt(m[m.length - 1]) : null;
                   })();
-                  const emAndamento = ultimoAno !== null && ultimoAno > anoAtual;
+                  const emAndamento = !!f.em_andamento || (ultimoAno !== null && ultimoAno > anoAtual);
 
                   // Substitui o ano futuro por indicação de andamento no local
                   const resolverParte = (parte: string) => {
+                    if (/^em andamento/i.test(parte.trim())) return "em andamento";
                     if (emAndamento && /^\d{4}$/.test(parte.trim()) && parseInt(parte.trim()) > anoAtual) {
                       return `em andamento · previsão de conclusão em ${parte.trim()}`;
-                    }
-                    if (/^em andamento/i.test(parte.trim())) {
-                      return parte.trim().toLowerCase();
                     }
                     return resolveInstituicao(parte, instituicoesMap);
                   };
@@ -421,6 +419,10 @@ export default async function PerfilPage({ params }: PageProps) {
                     const area = partes[0]?.trim() ?? "";
                     local = partes.slice(1).filter(Boolean).map(resolverParte).join(" · ");
                     titulo = titleCasePT((f.curso + (area ? " em " + area : "")).toLowerCase());
+                  }
+                  // Se em_andamento mas sem indicação visível no local, acrescenta ao final
+                  if (f.em_andamento && !/em andamento/i.test(local)) {
+                    local = local ? `${local} · em andamento` : "em andamento";
                   }
                   return (
                     <div key={i} className="flex gap-3">
