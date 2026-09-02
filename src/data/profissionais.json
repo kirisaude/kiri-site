@@ -54,9 +54,10 @@
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "ABA para Autismo e Deficiência Intelectual — Primum Faculdade  — atual",
+          "instituicao_ano": "ABA para Autismo e Deficiência Intelectual — Primum Faculdade",
           "verificado": true,
-          "obs": "em andamento "
+          "obs": "em andamento ",
+          "em_andamento": true
         },
         {
           "curso": "Doutorado",
@@ -123,8 +124,9 @@
         },
         {
           "curso": "Mestranda",
-          "instituicao_ano": "Educação Especial — Universidade Federal de São Carlos (UFSCar) — atual",
-          "verificado": true
+          "instituicao_ano": "Educação Especial — Universidade Federal de São Carlos (UFSCar)",
+          "verificado": true,
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -960,9 +962,10 @@
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESP — Em andamento (conclusão 2027)",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — UNIFESP — 2027",
           "verificado": true,
-          "obs": "Atual"
+          "obs": "Atual",
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -1341,8 +1344,9 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psiquiatria Perinatal — USP — 2026 (previsto)",
-          "verificado": false
+          "instituicao_ano": "Psiquiatria Perinatal — USP — 2026",
+          "verificado": false,
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -2444,9 +2448,10 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Neurodesenvolvimento — Unilavras — Em curso",
+          "instituicao_ano": "Neurodesenvolvimento — Unilavras",
           "verificado": false,
-          "pendente": true
+          "pendente": true,
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3071,7 +3076,8 @@
         },
         {
           "curso": "Doutorando",
-          "instituicao_ano": "Distúrbio da Comunicação Humana — UNIFESP — Em curso"
+          "instituicao_ano": "Distúrbio da Comunicação Humana — UNIFESP",
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3250,7 +3256,8 @@
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Psicologia hospitalar — Faculdade Santa casa — Cursando"
+          "instituicao_ano": "Psicologia hospitalar — Faculdade Santa Casa",
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
