@@ -3368,18 +3368,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Unex — 2016",
-          "verificado": false
+          "instituicao_ano": "Psicologia — Centro Universitário de Excelência (Unex) — 2016",
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "Neuropsicologia — IPOG — 2021",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Especialização",
           "instituicao_ano": "ABA — IPOG — 2026",
-          "verificado": false
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3398,7 +3398,7 @@
       ],
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-080.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "5d285187044d4570",
       "profissao_secundaria": null,
@@ -3408,11 +3408,11 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "email": "lilian.mota@ymail.com",
-      "foto_posicao": "center top",
+      "foto_posicao": "center 20%",
       "registro_verificado": true,
-      "sobre_verificado": false,
+      "sobre_verificado": true,
       "pasta_drive": "https://drive.google.com/drive/folders/1C1PDmzN5BXImewje5ZR31-xThHS6Kf3B",
-      "certidao_enviada_em": null
+      "certidao_enviada_em": "2026-09-02T13:51:08.584Z"
     },
     {
       "id": "kiri-081",
