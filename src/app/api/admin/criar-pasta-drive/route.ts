@@ -76,23 +76,45 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `Erro ao criar pasta: ${folder.error?.message ?? "desconhecido"}` }, { status: 502 });
   }
 
-  // Salva o link no JSON e envia ao GitHub
-  prof.pasta_drive = folder.webViewLink;
-  const novoConteudo = Buffer.from(JSON.stringify(json, null, 2)).toString("base64");
-  const putRes = await fetch(
-    `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`,
-    {
+  // Salva o link no JSON — tenta até 3 vezes buscando SHA atualizado em caso de conflito
+  const githubBase = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+  const githubHeaders = { Authorization: `Bearer ${githubToken}`, Accept: "application/vnd.github+json", "Content-Type": "application/json" };
+
+  let currentSha = fileData.sha;
+  let currentJson = json;
+  let saved = false;
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const profEntry = currentJson.profissionais.find((p: { id: string }) => p.id === prof_id);
+    if (!profEntry) break;
+    profEntry.pasta_drive = folder.webViewLink;
+
+    const putRes = await fetch(githubBase, {
       method: "PUT",
-      headers: { Authorization: `Bearer ${githubToken}`, Accept: "application/vnd.github+json", "Content-Type": "application/json" },
+      headers: githubHeaders,
       body: JSON.stringify({
         message: `Drive: cria pasta para ${nome}`,
-        content: novoConteudo,
-        sha: fileData.sha,
+        content: Buffer.from(JSON.stringify(currentJson, null, 2)).toString("base64"),
+        sha: currentSha,
         branch: GITHUB_BRANCH,
       }),
-    }
-  );
-  if (!putRes.ok) return NextResponse.json({ error: "Pasta criada no Drive mas falha ao salvar no GitHub" }, { status: 502 });
+    });
+
+    if (putRes.ok) { saved = true; break; }
+
+    // Conflito de SHA (409/422) — busca versão atual e tenta novamente
+    const putErr = await putRes.json().catch(() => ({})) as { message?: string };
+    const isConflict = putRes.status === 409 || putRes.status === 422 || /sha/i.test(putErr.message ?? "");
+    if (!isConflict) break;
+
+    const freshRes = await fetch(`${githubBase}?ref=${GITHUB_BRANCH}`, { headers: githubHeaders, cache: "no-store" });
+    if (!freshRes.ok) break;
+    const freshData = await freshRes.json();
+    currentSha = freshData.sha;
+    currentJson = JSON.parse(Buffer.from(freshData.content, "base64").toString("utf-8"));
+  }
+
+  if (!saved) return NextResponse.json({ error: "Pasta criada no Drive mas falha ao salvar no GitHub — tente novamente" }, { status: 502 });
 
   return NextResponse.json({ ok: true, pasta_drive: folder.webViewLink, folder_id: folder.id });
 }
