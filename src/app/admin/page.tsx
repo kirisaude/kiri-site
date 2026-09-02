@@ -1755,8 +1755,8 @@ export default function AdminPage() {
       {/* Abas */}
       <div className="border-b border-linha px-4 flex gap-4 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
         {([
-          { key: "inscricoes", label: `Inscrições (${pendentes.length})`, badge: null },
           { key: "profissionais", label: `Profissionais (${visiveis.length}/${profPublicados.length})`, badge: naoVisiveis.length > 0 ? naoVisiveis.length : null },
+          { key: "inscricoes", label: `Inscrições (${pendentes.length})`, badge: null },
           { key: "encaminhamentos", label: "Encaminhamentos", badge: (() => { const p = comProfissional.filter(e => e.status !== "encaminhado").length; return p > 0 ? p : null; })() },
           { key: "curadoria", label: "Curadoria", badge: (() => { const p = semProfissional.filter(e => !isCuradoriaTerminal(e.status)).length; return p > 0 ? p : null; })() },
           { key: "avaliacoes", label: "Experiências", badge: experiencias.length > 0 ? experiencias.length : null },
