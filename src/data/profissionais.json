@@ -3476,6 +3476,79 @@
       "sobre_verificado": true,
       "pasta_drive": null,
       "certidao_enviada_em": null
+    },
+    {
+      "id": "kiri-082",
+      "inscricao_id": "f27ae8bd-e87b-4a43-8191-fdaed8270b23",
+      "nome": "Marcelle Sanjuan Ganem Prado",
+      "profissao": "Neurologista",
+      "titulo_exibicao": "Neurologista",
+      "registro_conselho": "CRM 209818",
+      "rqe": "125804",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Atraso de desenvolvimento",
+        "Ansiedade",
+        "Esclerose múltipla",
+        "Neuromielite optica",
+        "Cefaléia"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo",
+      "faixa_etaria": "Bebês (0–2 anos), Pré-escola (3–5 anos), Crianças (6–12 anos), Adolescentes (13–18 anos)",
+      "sobre": "Olá, meu nome é Marcelle Sanjuan, sou médica neurologista , mas, antes de tudo, sou alguém que acredita profundamente na importância de olhar para cada criança com carinho, atenção e respeito à sua história.\nSei que chegar até uma consulta com um neurologista pediátrico nem sempre é fácil. Muitas vezes, esse caminho vem acompanhado de dúvidas, medos, inseguranças e inúmeras perguntas. E é justamente por isso que acredito que cuidar também é acolher.\n\nMeu compromisso é ouvir com calma, olhar além dos diagnósticos e compreender cada criança como única — com sua personalidade, suas conquistas, seus desafios e seu próprio tempo. Acredito que cada pequeno passo merece ser valorizado e que a família precisa se sentir segura e acolhida durante toda essa caminhada.\n\nAqui, vocês encontrarão um espaço para conversar, tirar dúvidas e construir, juntos, o melhor caminho para o desenvolvimento e o bem-estar do seu filho(a).\n\nSerá uma alegria conhecer sua família e caminhar ao lado de vocês nessa jornada.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — Universidade Estadual de Santa Cuz- Bahia — 2019"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Neurologia — Santa Casa de Misericordia de São Paulo — 2023"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Neuroimunologia — Santa Casa de Misericordia de São Paulo — 2025"
+        },
+        {
+          "curso": "Aperfeiçoamento",
+          "instituicao_ano": "Neuropediatria — USP-SP — 2026"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Ciências da saúde — Universidade Estadual de Santa Cuz- Bahia — 2018"
+        },
+        {
+          "curso": "Doutorado",
+          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 750,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 94054-7667",
+      "tempo_atuacao": "3 a 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento de neurologia infantil",
+          "tempo": "2 anos",
+          "faixa_etaria": "0-18 anos"
+        },
+        {
+          "descricao": "Visita hospitalar como neurologista infantil",
+          "tempo": "2 anos",
+          "faixa_etaria": "0-18 anos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "pasta_drive": null,
+      "verificacao_data": "setembro de 2026",
+      "card_token": "7ba5894db11a4fd0"
     }
   ]
 }
