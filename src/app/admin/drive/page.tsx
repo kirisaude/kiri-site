@@ -75,26 +75,43 @@ export default function DriveUploadPage() {
 
     for (let i = 0; i < files.length; i++) {
       if (files[i].status === "ok") continue;
+      const fileObj = files[i].file;
       setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "uploading" } : f));
 
-      const form = new FormData();
-      form.append("folder_id", folderId);
-      form.append("file", files[i].file);
-
       try {
-        const res = await fetch("/api/admin/drive-upload", {
+        // 1. Pede URL de upload resumível (request pequena, sem dados do arquivo)
+        const urlRes = await fetch("/api/admin/drive-upload-url", {
           method: "POST",
           credentials: "include",
-          body: form,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            folder_id: folderId,
+            name: fileObj.name,
+            mime_type: fileObj.type || "application/octet-stream",
+            size: fileObj.size,
+          }),
         });
-        const d = await res.json();
-        if (res.ok) {
-          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "ok", link: d.file?.webViewLink } : f));
-        } else {
-          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: d.error } : f));
+        const urlData = await urlRes.json().catch(() => ({ error: `Erro HTTP ${urlRes.status}` }));
+        if (!urlRes.ok) {
+          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: urlData.error ?? "Erro ao obter URL" } : f));
+          continue;
         }
-      } catch {
-        setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: "Erro de conexão" } : f));
+
+        // 2. Upload direto do browser → Google Drive (sem passar pelo Vercel)
+        const uploadRes = await fetch(urlData.upload_url, {
+          method: "PUT",
+          headers: { "Content-Type": fileObj.type || "application/octet-stream" },
+          body: fileObj,
+        });
+        if (!uploadRes.ok) {
+          const errText = await uploadRes.text().catch(() => "");
+          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: `Erro no upload (${uploadRes.status})${errText ? ": " + errText.slice(0, 120) : ""}` } : f));
+          continue;
+        }
+        const fileData = await uploadRes.json().catch(() => ({})) as { webViewLink?: string };
+        setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "ok", link: fileData.webViewLink } : f));
+      } catch (e) {
+        setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: e instanceof Error ? e.message : "Erro de conexão" } : f));
       }
     }
 
