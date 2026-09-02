@@ -97,19 +97,42 @@ export default function DriveUploadPage() {
           continue;
         }
 
-        // 2. Upload direto do browser → Google Drive (sem passar pelo Vercel)
-        const uploadRes = await fetch(urlData.upload_url, {
-          method: "PUT",
-          headers: { "Content-Type": fileObj.type || "application/octet-stream" },
-          body: fileObj,
-        });
-        if (!uploadRes.ok) {
-          const errText = await uploadRes.text().catch(() => "");
-          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: `Erro no upload (${uploadRes.status})${errText ? ": " + errText.slice(0, 120) : ""}` } : f));
+        // 2. Upload em chunks via servidor → Google Drive (evita CORS e limite de 4.5MB do Vercel)
+        const CHUNK_SIZE = 3 * 1024 * 1024;
+        const fileBuffer = await fileObj.arrayBuffer();
+        const total = fileBuffer.byteLength;
+        let webViewLink: string | undefined;
+        let chunkError: string | undefined;
+
+        for (let start = 0; start < total; start += CHUNK_SIZE) {
+          const chunkEnd = Math.min(start + CHUNK_SIZE, total);
+          const chunk = fileBuffer.slice(start, chunkEnd);
+
+          const chunkRes = await fetch("/api/admin/drive-upload-chunk", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "x-upload-url": urlData.upload_url,
+              "x-upload-start": String(start),
+              "x-upload-total": String(total),
+              "x-file-type": fileObj.type || "application/octet-stream",
+            },
+            body: chunk,
+          });
+          const chunkData = await chunkRes.json().catch(() => ({ error: `Erro HTTP ${chunkRes.status}` }));
+          if (!chunkRes.ok) {
+            chunkError = chunkData.error ?? "Erro no upload";
+            break;
+          }
+          if (chunkData.webViewLink) webViewLink = chunkData.webViewLink;
+        }
+
+        if (chunkError) {
+          const err = chunkError;
+          setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: err } : f));
           continue;
         }
-        const fileData = await uploadRes.json().catch(() => ({})) as { webViewLink?: string };
-        setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "ok", link: fileData.webViewLink } : f));
+        setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "ok", link: webViewLink } : f));
       } catch (e) {
         setFiles((prev) => prev.map((f, idx) => idx === i ? { ...f, status: "erro", erro: e instanceof Error ? e.message : "Erro de conexão" } : f));
       }
