@@ -3397,7 +3397,7 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
+      "oculto": false,
       "foto_url": "/fotos/kiri-080.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "5d285187044d4570",
