@@ -3532,7 +3532,7 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Universidade Estadual de Santa Cuz- Bahia — 2019",
+          "instituicao_ano": "Medicina — UESC — 2019",
           "verificado": true
         },
         {
@@ -3553,12 +3553,12 @@
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Ciências da saúde — Universidade Estadual de Santa Cuz- Bahia — 2018",
+          "instituicao_ano": "Ciências da Saúde — UESC — 2018",
           "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026",
+          "instituicao_ano": "Ciências da Saúde — Santa Casa de Misericordia de São Paulo — 2026",
           "verificado": true,
           "em_andamento": true
         }
