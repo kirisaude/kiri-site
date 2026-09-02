@@ -3519,10 +3519,10 @@
       "areas_atuacao": [
         "TEA",
         "TDAH",
-        "Atraso de desenvolvimento",
+        "Atraso de Desenvolvimento",
         "Ansiedade",
-        "Esclerose múltipla",
-        "Neuromielite optica",
+        "Esclerose Múltipla",
+        "Neuromielite Optica",
         "Cefaléia"
       ],
       "modalidade": "Presencial e online",
@@ -3532,27 +3532,34 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — Universidade Estadual de Santa Cuz- Bahia — 2019"
+          "instituicao_ano": "Medicina — Universidade Estadual de Santa Cuz- Bahia — 2019",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Neurologia — Santa Casa de Misericordia de São Paulo — 2023"
+          "instituicao_ano": "Neurologia — Santa Casa de Misericordia de São Paulo — 2023",
+          "verificado": true
         },
         {
           "curso": "Especialização",
-          "instituicao_ano": "Neuroimunologia — Santa Casa de Misericordia de São Paulo — 2025"
+          "instituicao_ano": "Neuroimunologia — Santa Casa de Misericordia de São Paulo — 2025",
+          "verificado": false,
+          "pendente": true
         },
         {
           "curso": "Aperfeiçoamento",
-          "instituicao_ano": "Neuropediatria — USP-SP — 2026"
+          "instituicao_ano": "Neurologia Infantil — USP-SP — 2026",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Ciências da saúde — Universidade Estadual de Santa Cuz- Bahia — 2018"
+          "instituicao_ano": "Ciências da saúde — Universidade Estadual de Santa Cuz- Bahia — 2018",
+          "verificado": true
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026"
+          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026 (emn andamento)",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3575,12 +3582,22 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-082.jpg",
       "pasta_drive": null,
       "verificacao_data": "setembro de 2026",
       "card_token": "7ba5894db11a4fd0",
-      "email": "dramarcellesanjuan@gmail.com"
+      "email": null,
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": false,
+      "certidao_enviada_em": "2026-09-02T13:26:10.105Z"
     }
   ]
 }
