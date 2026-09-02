@@ -3558,8 +3558,9 @@
         },
         {
           "curso": "Doutorado",
-          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026 (emn andamento)",
-          "verificado": true
+          "instituicao_ano": "Ciências da saúde — Santa Casa de Misericordia de São Paulo — 2026",
+          "verificado": true,
+          "em_andamento": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3587,7 +3588,7 @@
       "pasta_drive": null,
       "verificacao_data": "setembro de 2026",
       "card_token": "7ba5894db11a4fd0",
-      "email": null,
+      "email": "dramarcellesanjuan@gmail.com",
       "profissao_secundaria": null,
       "valor_formato_secundario": null,
       "valor_min_secundario": null,
