@@ -305,12 +305,13 @@ export default function Home() {
       }
       if (search.trim()) {
         const sem = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-        const q = sem(search);
+        const words = sem(search).split(/\s+/).filter(Boolean);
+        const allIn = (haystack: string) => words.every(w => sem(haystack).includes(w));
         const match =
-          sem(p.nome).includes(q) ||
-          sem(p.titulo_exibicao).includes(q) ||
-          sem(p.areas_atuacao.join(" ")).includes(q) ||
-          sem(p.cidade).includes(q);
+          allIn(p.nome) ||
+          allIn(p.titulo_exibicao) ||
+          allIn(p.areas_atuacao.join(" ")) ||
+          allIn(p.cidade);
         if (!match) return false;
       }
       return true;
