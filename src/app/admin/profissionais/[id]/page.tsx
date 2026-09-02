@@ -252,6 +252,7 @@ Certificados de especialização / residência / pós-graduação`;
       .then((d) => {
         if (d?.autentique_document_id) setAutentiqueDocId(d.autentique_document_id);
         if (d?.autentique_enviado_em) setAutentiqueEnviadoEm(d.autentique_enviado_em);
+        if (d?.email && !profOriginal?.email) setEmail(d.email);
       })
       .catch(() => {});
   // eslint-disable-next-line react-hooks/exhaustive-deps
