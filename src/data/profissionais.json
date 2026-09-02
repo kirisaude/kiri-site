@@ -987,7 +987,8 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "genero": "M",
-      "pasta_drive": "https://drive.google.com/drive/folders/1chnDkkF3THlRD3HZHFPVK25FGsn0jpJU"
+      "pasta_drive": "https://drive.google.com/drive/folders/1chnDkkF3THlRD3HZHFPVK25FGsn0jpJU",
+      "email": "gabriel.feitosa@unifesp.br"
     },
     {
       "id": "kiri-041",
@@ -1039,7 +1040,8 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null,
-      "pasta_drive": "https://drive.google.com/drive/folders/1J7UWYZxTCHx2fzYezl5LVJhTrUUC5NZn"
+      "pasta_drive": "https://drive.google.com/drive/folders/1J7UWYZxTCHx2fzYezl5LVJhTrUUC5NZn",
+      "email": "ranyvieira0@gmail.com"
     },
     {
       "id": "kiri-042",
@@ -1096,7 +1098,8 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null,
-      "pasta_drive": "https://drive.google.com/drive/folders/1JeLUMcZCQ2Y9y5IC8Yu295LTPYQVH-AE"
+      "pasta_drive": "https://drive.google.com/drive/folders/1JeLUMcZCQ2Y9y5IC8Yu295LTPYQVH-AE",
+      "email": "giulianabldc@outlook.com"
     },
     {
       "id": "kiri-043",
@@ -1156,7 +1159,8 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "experiencias_infantil": null,
-      "pasta_drive": "https://drive.google.com/drive/folders/1c9T1TC10dT-id0RpwGW0PHedCzyegYtp"
+      "pasta_drive": "https://drive.google.com/drive/folders/1c9T1TC10dT-id0RpwGW0PHedCzyegYtp",
+      "email": "psi.gabrielamartins@outlook.com"
     },
     {
       "id": "kiri-044",
@@ -1229,7 +1233,8 @@
           "faixa_etaria": "6-18 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/u/0/folders/1-r72UfMjg4UfbRBzJeBHILgo1UdlHU5W"
+      "pasta_drive": "https://drive.google.com/drive/u/0/folders/1-r72UfMjg4UfbRBzJeBHILgo1UdlHU5W",
+      "email": "gabrielferriolli23@gmail.com"
     },
     {
       "id": "kiri-045",
@@ -1291,7 +1296,8 @@
           "faixa_etaria": ""
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1d7FyY5aBeDvdQQx73E3WUpKAFdfO2xGO"
+      "pasta_drive": "https://drive.google.com/drive/folders/1d7FyY5aBeDvdQQx73E3WUpKAFdfO2xGO",
+      "email": "hercules.makio@gmail.com"
     },
     {
       "id": "kiri-046",
@@ -1377,7 +1383,8 @@
           "faixa_etaria": "6-17 anos"
         }
       ],
-      "pasta_drive": null
+      "pasta_drive": null,
+      "email": "kerner.mariana@gmail.com"
     },
     {
       "id": "kiri-047",
@@ -1434,7 +1441,8 @@
           "faixa_etaria": ""
         }
       ],
-      "pasta_drive": null
+      "pasta_drive": null,
+      "email": "marcellesd.nutri@gmail.com"
     },
     {
       "id": "kiri-048",
@@ -1525,7 +1533,8 @@
           "faixa_etaria": "16 a 18"
         }
       ],
-      "pasta_drive": null
+      "pasta_drive": null,
+      "email": "mpradoamorim@gmail.com"
     },
     {
       "id": "kiri-049",
@@ -1604,7 +1613,8 @@
           "faixa_etaria": "Bebês, crianças e adolescentes"
         }
       ],
-      "pasta_drive": null
+      "pasta_drive": null,
+      "email": "rejokas@gmail.com"
     },
     {
       "id": "kiri-050",
@@ -1695,7 +1705,8 @@
           "faixa_etaria": "7-21"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1DZVMEOsqgoJoH-Kd0_5MkS3ugBFsMobn"
+      "pasta_drive": "https://drive.google.com/drive/folders/1DZVMEOsqgoJoH-Kd0_5MkS3ugBFsMobn",
+      "email": "marcelladeribani@gmail.com"
     },
     {
       "id": "kiri-051",
@@ -1760,7 +1771,8 @@
           "faixa_etaria": ""
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1htFhh-y2wS7fRrHcYwKFXSHYIytl9f9T"
+      "pasta_drive": "https://drive.google.com/drive/folders/1htFhh-y2wS7fRrHcYwKFXSHYIytl9f9T",
+      "email": "pamellacafe.psi@gmail.com"
     },
     {
       "id": "kiri-052",
@@ -1819,7 +1831,8 @@
           "faixa_etaria": "4 a 15 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1DwOasl-02jBtJwBZPqoXRt1Z6lrtUcBJ"
+      "pasta_drive": "https://drive.google.com/drive/folders/1DwOasl-02jBtJwBZPqoXRt1Z6lrtUcBJ",
+      "email": "barrosjessica.psi@gmail.com"
     },
     {
       "id": "kiri-053",
@@ -1896,7 +1909,8 @@
           "faixa_etaria": "4-10"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1JVZT88hN3OXRPhFgWbrRLcjAs8AEU6CJ"
+      "pasta_drive": "https://drive.google.com/drive/folders/1JVZT88hN3OXRPhFgWbrRLcjAs8AEU6CJ",
+      "email": "luizam@gmail.com"
     },
     {
       "id": "kiri-054",
@@ -1966,7 +1980,8 @@
           "faixa_etaria": "Faixa etária (2-18 anos)"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1P0zSVpoqjGNkMuEItzszvQ5QOtI1miHy"
+      "pasta_drive": "https://drive.google.com/drive/folders/1P0zSVpoqjGNkMuEItzszvQ5QOtI1miHy",
+      "email": "rafaelbaloni@gmail.com"
     },
     {
       "id": "kiri-056",
@@ -2032,7 +2047,8 @@
           "tempo": "6 meses",
           "faixa_etaria": "2 anos a 18 anos"
         }
-      ]
+      ],
+      "email": "ghdircksen@gmail.com"
     },
     {
       "id": "kiri-057",
@@ -2089,7 +2105,8 @@
           "tempo": "2 anos",
           "faixa_etaria": "3-18 anos"
         }
-      ]
+      ],
+      "email": "ndia.nagano@hotmail.com"
     },
     {
       "id": "kiri-058",
@@ -2169,7 +2186,8 @@
           "faixa_etaria": "a partir de 3 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1wmodjQpKxuNfUXYVFeqDGQfSIApgTG9w"
+      "pasta_drive": "https://drive.google.com/drive/folders/1wmodjQpKxuNfUXYVFeqDGQfSIApgTG9w",
+      "email": "ana.hounie@gmail.com"
     },
     {
       "id": "kiri-059",
@@ -2233,7 +2251,8 @@
           "faixa_etaria": ""
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1d7nLpFdP5EhZv23E9C_BKe1lUZUeR1ne"
+      "pasta_drive": "https://drive.google.com/drive/folders/1d7nLpFdP5EhZv23E9C_BKe1lUZUeR1ne",
+      "email": "consultoriovi@gmail.com"
     },
     {
       "id": "kiri-060",
@@ -2378,7 +2397,8 @@
           "faixa_etaria": "Todas"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1Mp9tyyPoD0G4ZUFiVK79dLsmV7P1xODq"
+      "pasta_drive": "https://drive.google.com/drive/folders/1Mp9tyyPoD0G4ZUFiVK79dLsmV7P1xODq",
+      "email": "marcelocrfloripa@gmail.com"
     },
     {
       "id": "kiri-062",
@@ -2454,7 +2474,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "email": null,
+      "email": "alfredo.piacentin@gmail.com",
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
@@ -2521,7 +2541,8 @@
         }
       ],
       "pasta_drive": "https://drive.google.com/drive/u/0/folders/17TrD2xcN_vU4O9M5JtXiOArLTe2ogpmK",
-      "certidao_enviada_em": "2026-08-18T17:21:08.023Z"
+      "certidao_enviada_em": "2026-08-18T17:21:08.023Z",
+      "email": "marcelobiondo@yahoo.com.br"
     },
     {
       "id": "kiri-065",
@@ -2592,7 +2613,8 @@
           "faixa_etaria": "7 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/12BNs3Lo_uZStjUDfhpIRbvw_pll2D5y4"
+      "pasta_drive": "https://drive.google.com/drive/folders/12BNs3Lo_uZStjUDfhpIRbvw_pll2D5y4",
+      "email": "jsgiusti@gmail.com"
     },
     {
       "id": "kiri-066",
@@ -2676,7 +2698,8 @@
           "faixa_etaria": "De 0 a 17 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1AqVqVM5Cjj9mVYzJsT35j9V5FLLZBE9x"
+      "pasta_drive": "https://drive.google.com/drive/folders/1AqVqVM5Cjj9mVYzJsT35j9V5FLLZBE9x",
+      "email": "danieldesousafilho@gmail.com"
     },
     {
       "id": "kiri-067",
@@ -2754,7 +2777,8 @@
           "faixa_etaria": "15-18 anos"
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/1gVcf6y4kyAumbxlvZpGgWqnPceHHlhRa"
+      "pasta_drive": "https://drive.google.com/drive/folders/1gVcf6y4kyAumbxlvZpGgWqnPceHHlhRa",
+      "email": "flaviavillaboy@gmail.com"
     },
     {
       "id": "kiri-068",
@@ -2805,7 +2829,8 @@
           "faixa_etaria": ""
         }
       ],
-      "pasta_drive": "https://drive.google.com/drive/folders/164BJ8lkUAQPMr2Byag6xOS8UpouukR0T"
+      "pasta_drive": "https://drive.google.com/drive/folders/164BJ8lkUAQPMr2Byag6xOS8UpouukR0T",
+      "email": "dra.janainalpires@gmail.com"
     },
     {
       "id": "kiri-071",
@@ -2870,7 +2895,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "email": null,
+      "email": "psi.josianekonrad@gmail.com",
       "foto_posicao": "center center",
       "registro_verificado": true,
       "sobre_verificado": false,
@@ -2951,7 +2976,8 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "pasta_drive": "https://drive.google.com/drive/folders/1sdc6zTdg4xzEEegphNB80AHvJLYjK0Zv"
+      "pasta_drive": "https://drive.google.com/drive/folders/1sdc6zTdg4xzEEegphNB80AHvJLYjK0Zv",
+      "email": "nutrimichelleperenyi@gmail.com"
     },
     {
       "id": "kiri-073",
@@ -3014,7 +3040,8 @@
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "pasta_drive": "https://drive.google.com/drive/folders/1YlZ2QnL2wtB26ew31BN2MnmF1yzG37oX"
+      "pasta_drive": "https://drive.google.com/drive/folders/1YlZ2QnL2wtB26ew31BN2MnmF1yzG37oX",
+      "email": "dubourgfernanda@gmail.com"
     },
     {
       "id": "kiri-074",
@@ -3065,7 +3092,8 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "d89cf41467324d37"
+      "card_token": "d89cf41467324d37",
+      "email": "dinara.souza@unifesp.br"
     },
     {
       "id": "kiri-076",
@@ -3121,7 +3149,8 @@
       "oculto": true,
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
-      "card_token": "7c2c99f712244416"
+      "card_token": "7c2c99f712244416",
+      "email": "danielle12@gmail.com"
     },
     {
       "id": "kiri-077",
@@ -3189,7 +3218,8 @@
       "foto_posicao": "center center",
       "registro_verificado": true,
       "sobre_verificado": true,
-      "pasta_drive": "https://drive.google.com/drive/folders/1ZpEYEH3MmWKWQtP56jbmE5MqJGF6PkT3"
+      "pasta_drive": "https://drive.google.com/drive/folders/1ZpEYEH3MmWKWQtP56jbmE5MqJGF6PkT3",
+      "email": "drafernandapsiquiatra@gmail.com"
     },
     {
       "id": "kiri-078",
@@ -3242,7 +3272,8 @@
       "foto_url": null,
       "verificacao_data": "agosto de 2026",
       "card_token": "0892a9a5aff94402",
-      "pasta_drive": "https://drive.google.com/drive/folders/1iQUHY0ZZSyVnQpXrsZLW8UmoEUo7J03d"
+      "pasta_drive": "https://drive.google.com/drive/folders/1iQUHY0ZZSyVnQpXrsZLW8UmoEUo7J03d",
+      "email": "nathycosta401@gmail.com"
     },
     {
       "id": "kiri-079",
@@ -3301,7 +3332,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "email": null,
+      "email": "psico.jessicamachado@outlook.com",
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
@@ -3470,7 +3501,7 @@
       "valor_max_secundario": null,
       "valor_pacote": null,
       "valor_pacote_obs": null,
-      "email": null,
+      "email": "mariacarvigo@gmail.com",
       "foto_posicao": "center top",
       "registro_verificado": true,
       "sobre_verificado": true,
@@ -3548,7 +3579,8 @@
       "foto_url": null,
       "pasta_drive": null,
       "verificacao_data": "setembro de 2026",
-      "card_token": "7ba5894db11a4fd0"
+      "card_token": "7ba5894db11a4fd0",
+      "email": "dramarcellesanjuan@gmail.com"
     }
   ]
 }
