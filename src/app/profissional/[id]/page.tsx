@@ -117,6 +117,7 @@ const ALIASES_INSTITUICOES: Record<string, string> = {
   "hc fmusp": "Hospital das Clínicas da Faculdade de Medicina da USP",
   "hcfmusp": "Hospital das Clínicas da Faculdade de Medicina da USP",
   "ipog": "Instituto de Pós-Graduação e Graduação (IPOG)",
+  "hjm": "Hospital Juliano Moreira (HJM)",
 };
 
 function resolveInstituicao(parte: string, map: Record<string, string>): string {
