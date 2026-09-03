@@ -1325,27 +1325,31 @@
         {
           "curso": "Graduação",
           "instituicao_ano": "Medicina — EBMSP — 2006",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
           "instituicao_ano": "Psiquiatria — HJM — 2012",
-          "verificado": false
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Osiquiatria da infância e adolescência — HJM — 2014",
-          "verificado": false
+          "instituicao_ano": "Psiquiatria da infância e adolescência — HJM — 2014",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
           "instituicao_ano": "Sexualidade — USP — 2019",
-          "verificado": false
+          "verificado": false,
+          "pendente": true,
+          "oculto": true
         },
         {
           "curso": "Pós-graduação",
           "instituicao_ano": "Psiquiatria Perinatal — USP — 2026",
           "verificado": false,
+          "pendente": true,
+          "oculto": true,
           "em_andamento": true
         }
       ],
@@ -1357,7 +1361,7 @@
       "whatsapp_agendamento": "(71) 99955-3005",
       "tempo_atuacao": "Mais de 5 anos",
       "verificado": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-046.jpg",
       "verificacao_data": "agosto de 2026",
       "card_token": "c4eea8600d3549ad",
       "profissao_secundaria": null,
@@ -1367,9 +1371,9 @@
       "valor_pacote": null,
       "valor_pacote_obs": null,
       "foto_posicao": "center top",
-      "oculto": true,
-      "registro_verificado": false,
-      "sobre_verificado": false,
+      "oculto": false,
+      "registro_verificado": true,
+      "sobre_verificado": true,
       "experiencias_infantil": [
         {
           "descricao": "Atendimento em crianças com TEA/TDAH",
@@ -1388,7 +1392,8 @@
         }
       ],
       "pasta_drive": null,
-      "email": "kerner.mariana@gmail.com"
+      "email": "kerner.mariana@gmail.com",
+      "certidao_enviada_em": "2026-09-03T00:45:37.018Z"
     },
     {
       "id": "kiri-047",
