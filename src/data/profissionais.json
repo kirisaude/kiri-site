@@ -3007,7 +3007,8 @@
         "Atraso de Desenvolvimento",
         "TDAH",
         "TEA",
-        "Dificuldades de Aprendizagem"
+        "Dificuldades de Aprendizagem",
+        "Sono"
       ],
       "modalidade": "Presencial e online",
       "cidade": "Salvador",
@@ -3057,7 +3058,8 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "pasta_drive": "https://drive.google.com/drive/folders/1YlZ2QnL2wtB26ew31BN2MnmF1yzG37oX",
-      "email": "dubourgfernanda@gmail.com"
+      "email": "dubourgfernanda@gmail.com",
+      "certidao_enviada_em": null
     },
     {
       "id": "kiri-074",
