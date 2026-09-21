@@ -3619,6 +3619,60 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "certidao_enviada_em": "2026-09-02T13:26:10.105Z"
+    },
+    {
+      "id": "kiri-083",
+      "inscricao_id": "d45db369-a8d3-4a79-8da7-d1523cb80e4f",
+      "nome": "Julia Elisa Silva Nunes Pais",
+      "profissao": "Psiquiatra da infância e adolescência",
+      "titulo_exibicao": "Psiquiatra da infância e adolescência",
+      "registro_conselho": "CRM 231002-SP",
+      "rqe": "231002",
+      "areas_atuacao": [
+        "TEA",
+        "TDAH",
+        "Ansiedade",
+        "Depressão",
+        "TOC"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Paulo, SP",
+      "faixa_etaria": "Crianças (6–12 anos), Adolescentes (13–18 anos), Pré-escola (3–5 anos)",
+      "sobre": "Cuidar da saúde mental de uma criança ou adolescente exige atenção àquilo que aparece nos sintomas, mas também à história, à rotina, aos vínculos e aos ambientes em que esse paciente vive.\nComo psiquiatra da infância e adolescência, meu trabalho é avaliar cada caso com cuidado, escuta e responsabilidade técnica, ajudando a família a compreender o que pode estar acontecendo e quais caminhos de cuidado fazem sentido para aquele momento.\nAtendo crianças e adolescentes com dificuldades emocionais, comportamentais, escolares, relacionais e do desenvolvimento. A avaliação pode envolver questões como ansiedade, alterações de humor, irritabilidade, desatenção, impulsividade, dificuldades de aprendizagem, TDAH, autismo e outras condições que impactam o bem-estar e o desenvolvimento.\nO acompanhamento é construído de forma singular, respeitando a idade, a personalidade, a história e as necessidades de cada paciente. Além da escuta clínica, podem fazer parte do cuidado as orientações aos pais, o diálogo com a escola, a articulação com psicólogos, terapeutas ocupacionais, fonoaudiólogos e outros profissionais, além do uso de medicação quando houver indicação.\nEntendo que procurar um psiquiatra para um filho pode trazer dúvidas e inseguranças. Por isso, busco oferecer um atendimento claro, acolhedor e cuidadoso, em que a família se sinta orientada e participe ativamente das decisões.\nMeu objetivo é ajudar crianças e adolescentes a se desenvolverem com mais saúde, equilíbrio e qualidade de vida, oferecendo às famílias um acompanhamento sério, humano e baseado em conhecimento científico.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Medicina — UFG — 2021"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria — USP — 2025"
+        },
+        {
+          "curso": "Residência Médica",
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — USP — 2026"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": null,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 91824-8272",
+      "tempo_atuacao": "1 a 3 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Preceptora da Residência de Psiquiatria da Infância e Adolescência do IPq HCFMUSP",
+          "tempo": "1 ano",
+          "faixa_etaria": ""
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "pasta_drive": null,
+      "verificacao_data": "setembro de 2026",
+      "card_token": "3a59bf6bd1964391"
     }
   ]
 }
