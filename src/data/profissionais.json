@@ -3642,15 +3642,18 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Medicina — UFG — 2021"
+          "instituicao_ano": "Medicina — UFG — 2021",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria — USP — 2025"
+          "instituicao_ano": "Psiquiatria — USP — 2025",
+          "verificado": true
         },
         {
           "curso": "Residência Médica",
-          "instituicao_ano": "Psiquiatria da Infância e Adolescência — USP — 2026"
+          "instituicao_ano": "Psiquiatria da Infância e Adolescência — USP — 2026",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3663,16 +3666,26 @@
       "experiencias_infantil": [
         {
           "descricao": "Preceptora da Residência de Psiquiatria da Infância e Adolescência do IPq HCFMUSP",
-          "tempo": "1 ano",
-          "faixa_etaria": ""
+          "tempo": "1 ano"
         }
       ],
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-083.jpg",
       "pasta_drive": null,
       "verificacao_data": "setembro de 2026",
-      "card_token": "3a59bf6bd1964391"
+      "card_token": "3a59bf6bd1964391",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": "paisjulia@gmail.com",
+      "foto_posicao": "center top",
+      "registro_verificado": true,
+      "sobre_verificado": true,
+      "certidao_enviada_em": "2026-09-23T02:54:58.422Z"
     }
   ]
 }
