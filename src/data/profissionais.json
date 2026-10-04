@@ -3686,6 +3686,62 @@
       "registro_verificado": true,
       "sobre_verificado": true,
       "certidao_enviada_em": "2026-09-23T02:54:58.422Z"
+    },
+    {
+      "id": "kiri-084",
+      "inscricao_id": "b94e3f78-6a25-4d23-b73d-4d2ff6208433",
+      "nome": "Aline Monteiro dos Santos Ruas",
+      "profissao": "Nutricionista",
+      "titulo_exibicao": "Nutricionista",
+      "registro_conselho": "5297",
+      "rqe": null,
+      "areas_atuacao": [
+        "Ansiedade",
+        "Depressão",
+        "TDAH"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "Salvador",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Sou nutricionista há 14 anos, com experiência ampla no cuidado nutricional de adolescentes e adultos. A abordagem Nutrição Comportamental e a formação em Transtornos Alimentares são a base dos meus atendimentos, para pessoas que sofrem com a comida e o corpo, com ou sem excesso de peso.\n\nO acompanhamento nutricional inicia-se na primeira consulta, que dura 01h-01:30h. No primeiro momento, converso com os pais/ responsáveis, e depois convido a paciente para entrar (a ordem pode ser invertida, a depender da idade do adolescente). Os momentos separados são essenciais para respeitar a privacidade dos pais, e do paciente, de modo que sintam-se confortáveis para compartilhar o que desejarem.  Faço a anamnese nutricional completa, para colher informações a história de vida e de saúde do paciente, ver exames, entender o histórico familiar e como funciona a dinâmica familiar no contexto do comportamento e dos hábitos alimentares.\n\nNesta consulta, definimos a frequência das sessões, que a depender da necessidade, são semanais/ quinzenais e depois, conforme a evolução, espaçamos para mensais, até a alta. É uma terapia nutricional, por isso a frequência costuma ser maior que atendimentos nutricionais tradicionais!\n\nO acompanhamento é constituído de metas e combinados e planejamento alimentar, que são construídos com o paciente e os responsáveis, gradualmente. \nA depender da idade do adolescente, trabalhamos com o modelo de divisão de responsabilidades, em que cada membro da família participa ativamente do processo de mudança de comportamento alimentar do paciente.\n\nSe o caso for relacionado à obesidade - a  ideia é trabalhar não somente a rotina alimentar, mas também a relação do paciente com a comida e o corpo.  Sendo assim, utilizo ferramentas do comer intuitivo, mindful eating e outras ferramentas da Nutrição Comportamental. O foco é na mudança de comportamento alimentar, e mudança de peso pode ser uma consequência. No caso dos transtornos alimentares que tem relação com imagem corporal (anorexia nervosa, bulimia nervosa e transtorno de compulsão alimentar), utilizo protocolos específicos para cada caso. Se o caso envolver seletividade alimentar ou TARE já diagnosticado: o tratamento é baseado na terapia de exposição e manejo das motivações que levam  às dificuldades alimentares decorrentes disso. O objetivo principal do tratamento é corrigir deficiências nutricionais, estabelecer um crescimento e desenvolvimento adequados durante a adolescência, e aumentar o repertório (variedade) alimentar, de maneira individualizada, e auxiliar o paciente a lidar melhor com situações sociais que envolvam comida (escola, festas, viagens, etc). Ao longo das sessões, vamos checar como tem sido a alimentação e a realização das tarefas combinadas - de acordo com a demanda apresentada, fazemos tarefas de exposição/ dessensibilização com alimentos, gradualmente, respeitando uma escala de tolerância individualizada. \n\nSe for necessário, solicito exames e prescrevo suplementos nutricionais. Além disso, estou sempre disponível para tirar dúvidas pelo whatsapp, e me coloco à disposição para conversar com demais profissionais que acompanham o paciente (terapeutas, médicos, etc).",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Nutrição — UNEB — 2012"
+        },
+        {
+          "curso": "Aperfeiçoamento",
+          "instituicao_ano": "Aprimoramento em Transtornos Alimentares — AMBULIM (Instituto de Psiquiatria da USP) — 2021"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Nutrição esportiva funcional — VP-UnicSul — 2018"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Alimentos, Nutrição e Saúde — UFBA — 2018"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 242,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(71) 99101-5406",
+      "tempo_atuacao": "Mais de 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento nutricional a adolescentes com 12 anos ou mais, com diagnóstico ou suspeita de Transtornos Alimentares, obesidade, e que possuem, simultaneamente, TDAH, depressão, ansiedade etc.",
+          "tempo": "Formada há 14 anos, porém atendo esse público há 5 anos.",
+          "faixa_etaria": "12 anos ou mais"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "pasta_drive": null,
+      "verificacao_data": "outubro de 2026",
+      "card_token": "be1d7f6538d34f4a"
     }
   ]
 }
