@@ -3742,6 +3742,56 @@
       "pasta_drive": null,
       "verificacao_data": "outubro de 2026",
       "card_token": "be1d7f6538d34f4a"
+    },
+    {
+      "id": "kiri-085",
+      "inscricao_id": "28140d43-bacc-4a98-adf3-2b6b4e683638",
+      "nome": "Maria Silveira",
+      "profissao": "Psicopedagogo",
+      "titulo_exibicao": "Psicopedagogo",
+      "registro_conselho": "ABPp 1172 Seção São Paulo",
+      "rqe": null,
+      "areas_atuacao": [
+        "Dificuldades de aprendizagem"
+      ],
+      "modalidade": "Presencial e online",
+      "cidade": "São Bernardo do Campo - SP",
+      "faixa_etaria": "Crianças (6–12 anos), Pré-escola (3–5 anos), Adolescentes (13–18 anos)",
+      "sobre": "Sou Psicopedagoga Clínica e Institucional, Neuropsicopedagoga e Educadora Parental . Mestre em Educação e Especialista em Educação Especial.\n\nAtuo na identificação e intervenção das dificuldades de aprendizagem por meio de planos individualizados, com escuta ativa e anamnese detalhada junto à família. Também sou Educadora Parental, orientando famílias com estratégias práticas que promovem desenvolvimento infantil, diálogo e harmonia no ambiente familiar.\n\nPalestrante na área de aprendizagem e neuro aprendizagem, desenvolvendo um trabalho integrado entre criança, família e escola, com foco em resultados consistentes.",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Licenciatura Plena em História — UNIFAI — 1984"
+        },
+        {
+          "curso": "Especialização",
+          "instituicao_ano": "Psicopedagogia Clínica e Institucional — Centro Universitário São Camilo — 2022"
+        },
+        {
+          "curso": "Mestrado",
+          "instituicao_ano": "Educação — Universidade metodista de São Paulo — 2007"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 150,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(11) 99701-1933",
+      "tempo_atuacao": "1 a 3 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento a crianças com Transtornos do Neurodesenvolvimento, dificuldades de aprendizagem, avaliação Psicopedagógica",
+          "tempo": "",
+          "faixa_etaria": ""
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "pasta_drive": null,
+      "verificacao_data": "outubro de 2026",
+      "card_token": "e1c67cb881554cf5"
     }
   ]
 }
