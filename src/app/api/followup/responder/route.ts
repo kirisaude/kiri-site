@@ -30,15 +30,16 @@ export async function POST(request: Request) {
 
   // Busca o followup
   const busca = await fetch(
-    `${SUPABASE_URL}/rest/v1/followups?token=eq.${token}&select=id,concluido_em&limit=1`,
+    `${SUPABASE_URL}/rest/v1/followups?token=eq.${token}&select=id,concluido_em,nps_profissional&limit=1`,
     { headers: headers() }
   );
   if (!busca.ok) return NextResponse.json({ error: "Erro interno" }, { status: 502 });
-  const rows = await busca.json() as { id: string; concluido_em: string | null }[];
+  const rows = await busca.json() as { id: string; concluido_em: string | null; nps_profissional: number | null }[];
   if (!rows.length) return NextResponse.json({ error: "Token inválido" }, { status: 404 });
-  const { id, concluido_em } = rows[0];
+  const { id, concluido_em, nps_profissional } = rows[0];
 
-  if (concluido_em) return NextResponse.json({ ok: true, jaRespondido: true });
+  // Bloqueia só se já avaliou; follow-up encerrado pelo admin ainda permite avaliação
+  if (concluido_em && nps_profissional) return NextResponse.json({ ok: true, jaRespondido: true });
 
   const deveConcluir = campos.contatou === false || "nps_plataforma" in campos;
   const update = {

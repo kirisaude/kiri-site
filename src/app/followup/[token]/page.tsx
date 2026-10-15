@@ -9,6 +9,7 @@ interface Followup {
   profissional_nome: string | null;
   responsavel_nome: string | null;
   concluido_em: string | null;
+  nps_profissional: number | null;
 }
 
 type Etapa = 1 | 2 | 3 | "nao-contato" | "nao-agendou" | "plataforma" | "obrigada";
@@ -67,7 +68,7 @@ export default function FollowupPage() {
       .then((d: Followup & { error?: string }) => {
         if (d.error) { setErro("Link inválido ou expirado."); return; }
         setFollowup(d);
-        if (d.concluido_em) setEtapa("obrigada");
+        if (d.concluido_em && d.nps_profissional) setEtapa("obrigada");
         else if (modoPlataforma) setEtapa("plataforma");
       })
       .catch(() => setErro("Erro ao carregar. Tente novamente."));
