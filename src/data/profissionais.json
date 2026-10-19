@@ -3810,6 +3810,53 @@
       "sobre_verificado": true,
       "certidao_enviada_em": "2026-10-17T14:14:47.043Z",
       "registro_obs": "Associação Brasileira de Psicopedagogia – ABPp - Seção São Paulo"
+    },
+    {
+      "id": "kiri-086",
+      "inscricao_id": "754ed33d-61aa-44ef-98e3-450c58421ef6",
+      "nome": "Mônica Fioreti Porto Dantas",
+      "profissao": "Psicólogo",
+      "titulo_exibicao": "Psicólogo",
+      "registro_conselho": "CRP 05/73868",
+      "rqe": null,
+      "areas_atuacao": [
+        "Ansiedade",
+        "Depressão"
+      ],
+      "modalidade": "Online",
+      "cidade": "Rio de Janeiro",
+      "faixa_etaria": "Adolescentes (13–18 anos)",
+      "sobre": "Olá, sou a Mônica Fioreti, Psicóloga Clínica Humanista, do Rio de Janeiro. Especialista em Transtornos da Ansiedade e Depressão. Seja muito bem-vindo (a) ao meu consultório online, onde atendo adolescentes e jovens adultos do Brasil e do exterior. \nAcredito no potencial único de cada pessoa e na importância da Psicologia como uma ferramenta imprescindível de libertação, promovendo autonomia, autoestima e autoconhecimento.\nA Psicoterapia é um processo de autoconhecimento onde encontramos a possibilidade de ser livre, compreendendo sentimentos, emoções, impressões e questões inerentes ao ser humano, ajustando e promovendo escolhas mais assertivas para uma saúde mental e global, valorizando a história singular de cada um. \nVamos juntos (as) percorrer esse caminho incrível e cuidar de quem se ama?",
+      "formacao": [
+        {
+          "curso": "Graduação",
+          "instituicao_ano": "Psicologia — Unisuam — 2023"
+        },
+        {
+          "curso": "Pós-graduação",
+          "instituicao_ano": "Transtornos Ansiosos e Depressivos — Unyleya — 2024"
+        }
+      ],
+      "valor_formato": "a_partir_de",
+      "valor_min": 180,
+      "valor_max": null,
+      "convenio_info": "Particular · emite recibo para reembolso",
+      "convenios": null,
+      "whatsapp_agendamento": "(21) 99615-9061",
+      "tempo_atuacao": "3 a 5 anos",
+      "experiencias_infantil": [
+        {
+          "descricao": "Atendimento a adolescente com transtorno de ansiedade e luto por morte do avô, ocasionando baixo rendimento escolar.",
+          "tempo": "6 meses até o momento",
+          "faixa_etaria": "13 anos"
+        }
+      ],
+      "verificado": true,
+      "oculto": true,
+      "foto_url": null,
+      "pasta_drive": null,
+      "verificacao_data": "outubro de 2026",
+      "card_token": "24a725a1e6df4b29"
     }
   ]
 }
