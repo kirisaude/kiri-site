@@ -3707,19 +3707,23 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Nutrição — UNEB — 2012"
+          "instituicao_ano": "Nutrição — UNEB — 2012",
+          "verificado": true
         },
         {
           "curso": "Aperfeiçoamento",
-          "instituicao_ano": "Aprimoramento em Transtornos Alimentares — AMBULIM (Instituto de Psiquiatria da USP) — 2021"
+          "instituicao_ano": "Aprimoramento em Transtornos Alimentares — AMBULIM (Instituto de Psiquiatria da USP) — 2021",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Nutrição esportiva funcional — VP-UnicSul — 2018"
+          "instituicao_ano": "Nutrição esportiva funcional — VP-UnicSul — 2018",
+          "verificado": true
         },
         {
           "curso": "Mestrado",
-          "instituicao_ano": "Alimentos, Nutrição e Saúde — UFBA — 2018"
+          "instituicao_ano": "Alimentos, Nutrição e Saúde — UFBA — 2018",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3737,11 +3741,23 @@
         }
       ],
       "verificado": true,
-      "oculto": true,
-      "foto_url": null,
+      "oculto": false,
+      "foto_url": "/fotos/kiri-084.jpg",
       "pasta_drive": null,
       "verificacao_data": "outubro de 2026",
-      "card_token": "be1d7f6538d34f4a"
+      "card_token": "be1d7f6538d34f4a",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": "consultorioalinemonteiro@gmail.com",
+      "foto_posicao": "center center",
+      "registro_verificado": false,
+      "registro_pendente": true,
+      "sobre_verificado": true,
+      "certidao_enviada_em": null
     },
     {
       "id": "kiri-085",
