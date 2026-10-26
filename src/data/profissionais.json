@@ -3846,11 +3846,13 @@
       "formacao": [
         {
           "curso": "Graduação",
-          "instituicao_ano": "Psicologia — Unisuam — 2023"
+          "instituicao_ano": "Psicologia — Unisuam — 2023",
+          "verificado": true
         },
         {
           "curso": "Pós-graduação",
-          "instituicao_ano": "Transtornos Ansiosos e Depressivos — Unyleya — 2024"
+          "instituicao_ano": "Transtornos Ansiosos e Depressivos — Unyleya — 2024",
+          "verificado": true
         }
       ],
       "valor_formato": "a_partir_de",
@@ -3869,10 +3871,22 @@
       ],
       "verificado": true,
       "oculto": true,
-      "foto_url": null,
+      "foto_url": "/fotos/kiri-086.jpg",
       "pasta_drive": null,
       "verificacao_data": "outubro de 2026",
-      "card_token": "24a725a1e6df4b29"
+      "card_token": "24a725a1e6df4b29",
+      "profissao_secundaria": null,
+      "valor_formato_secundario": null,
+      "valor_min_secundario": null,
+      "valor_max_secundario": null,
+      "valor_pacote": null,
+      "valor_pacote_obs": null,
+      "email": "monicafioreti@icloud.com",
+      "foto_posicao": "center center",
+      "registro_verificado": false,
+      "registro_pendente": true,
+      "sobre_verificado": true,
+      "certidao_enviada_em": null
     }
   ]
 }
